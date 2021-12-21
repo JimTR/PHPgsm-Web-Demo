@@ -1,18 +1,46 @@
 <?php
 include 'inc/master.inc.php';
+require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
+	use xPaw\SourceQuery\SourceQuery;
+	define( 'SQ_TIMEOUT',     $settings['SQ_TIMEOUT'] );
+	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
+	define( 'LOG',	'logs/ajax.log');
+
 $template = new template;
 $sql = "select * from server1 order by `host_name` ASC";
 $sidebar_data = array();
 $sidebar_data['smenu'] = '';
+$xpaw = new SourceQuery( );
 $servers = $database->get_results($sql);
 foreach ($servers as $server) {
 $sidebar_data['smenu'] .='<li><a class="" href="#"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
-	
+	try
+			{
+				$xpaw->Connect( $server['host'], $server['port'], SQ_TIMEOUT, SQ_ENGINE );
+				$sub_cmd = 'GetInfo';
+				$info = $xpaw->GetInfo();
+			}
+	catch( Exception $e )
+										{
+												$Exception = $e;
+												if (strpos($Exception,'Failed to read any data from socket')) {
+														$Exception = 'Failed to read any data from socket Module (Ajax - Game Detail '.$sub_cmd.')';
+												}
+						
+														
+									}
+	$xpaw->Disconnect();
+	if (isset ($info['Players']) or $info['Players'] >0) {
+		//
+		// add them up here
+		$page['players'] += ($info['Players']-$info['Bots']);
+	}	
 }
+
 $sql = "select * from base_servers where `enabled` = '1' and `extraip` = '0' ";
 $base_servers = $database->get_results($sql);
 foreach ($base_servers as $server) {
-$sidebar_data['bmenu'] .='<li><a class="" href="#"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
+$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
 
 }
 $sql = "SELECT sum(players) as player_tot, count(country) as countries, sum(logins) as tot_logins, (select count(*) from servers) as game_tot, (select count(*) from servers where running = 1) as run_tot  FROM `logins` WHERE 1";
