@@ -18,7 +18,7 @@ $sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server[
 if ($server['fname'] === $bserver) {
 	// get the stuff
 	$url = $server['url'].':'.$server['port'].'/ajax_send.php?url='.$server['url'].':'.$server['port'].'/ajaxv2.php&query=action=all';
-	$page = json_decode(geturl($url),true);
+	$sdata = json_decode(geturl($url),true);
 	//print_r($sdata);
 	//die();
 	$sdata1= print_r($sdata,true);
@@ -43,8 +43,9 @@ $page['bserver'] = $bserver;
 $page['data'] = $data;
 $page['url'] = $sdata1;
 //print_r($page);
+$sdata['g_pc'] = ($sdata['live_servers'] / $sdata['total_servers'])*100;
 $template->load('templates/baseserver.html');
 $template->replace_vars($page);
-//$template->replace_vars($sdata);
+$template->replace_vars($sdata);
 $template->publish();
 ?>

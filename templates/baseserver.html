@@ -95,13 +95,26 @@
 <div class="card">
             <div class="card-body">
               <h5 class="card-title">Memory</h5>
-                <table>
-			<tr><th></th><th>Total</th><th>Free</th><th>Cached</th><th>Free</th></tr>
-                        <tr><td>Memory</td><td><!--#MemTotal#--></td><td style="width:30%;"><!--#MemFree#--></td><td><!--#Active#--></td></tr>
-                        <tr><td style="width:30%;">Mount Point</td><td><!--#root_mount#--></td></tr>
-                        <tr><td style="width:30%;">Disk Size</td><td><!--#root_size#--></td></tr>
-                        <tr><td style="width:30%;">Disk Used</td><td><!--#root_used#--> (<!--#root_pc#-->)</td></tr>
-                        <tr><td>Disk Free</td><td><!--#root_free#--></td></tr>
+                <table style="width:100%;">
+			<tr><th></th><th>Total</th><th>Free</th><th>Cached</th><th>Active</th></tr>
+                        <tr>
+							<td style="width:20%;">Memory</td>
+							<td style="width:22%;"><!--#MemTotal#--></td>
+							<td style="width:23%;"><!--#MemFree#--></td>
+							<td  style="width:23%;"><!--#Cached#--></td>
+							<td  style="width:23%;"><!--#MemAvailable#--></td>
+						</tr>
+						 <tr>
+							<td style="width:20%;">Swap</td>
+							<td style="width:22%;"><!--#SwapTotal#--></td>
+							<td style="width:23%;"><!--#SwapFree#--></td>
+							<td  style="width:23%;"></td>
+							<td  style="width:23%;"></td>
+						</tr>
+                        <!--<tr><td style="width:25%;">Mount Point</td><td><!--#root_mount#</td></tr>
+                        <tr><td style="width:25%;">Disk Size</td><td><!--#root_size#></td></tr>
+                        <tr><td style="width:25%;">Disk Used</td><td><!--#root_used# (<!--#root_pc#)</td></tr>
+                        <tr><td style="width:25%;">Disk Free</td><td><!--#root_free#</td></tr> -->
                 </table>
             </div>
           </div>
@@ -112,12 +125,20 @@
 	<div class="card">
             <div class="card-body">
               <h5 class="card-title">Software</h5>
-                <table>
-                        <tr><td>File System</td><td><!--#root_filesystem#--></td></tr>
-                        <tr><td style="width:30%;">Mount Point</td><td><!--#root_mount#--></td></tr>
-                        <tr><td style="width:30%;">Disk Size</td><td><!--#root_size#--></td></tr>
-                        <tr><td>Disk Used</td><td><!--#root_used#--> (<!--#root_pc#-->)</td></tr>
-                        <tr><td>Disk Free</td><td><!--#root_free#--></td></tr>
+                <table style="width:100%;">
+                        <tr><td style="width:20%;">Host Name</td><td><!--#host#--></td></tr>
+                        <tr><td>Server OS</td><td><!--#os#--></td></tr>
+                        <tr><td>Kernel Version</td><td><!--#k_ver#--></td></tr>
+                        <tr><td>Processes</td><td><!--#process#--></td></tr>
+                        <tr><td>PHP Version</td><td><!--#php#--></td></tr>
+                        <tr><td>Screen Version</td><td><!--#screen#--></td></tr>
+                        <tr><td>GlibC Version</td><td><!--#glibc#--></td></tr>
+                        <tr><td>MySql Version</td><td><!--#mysql#--></td></tr>
+                        <tr><td>Apache Version</td><td><!--#apache#--></td></tr>
+                        <tr><td>Curl Version</td><td><!--#curl#--></td></tr>
+                        <tr><td>NginX Version</td><td><!--#nginx#--></td></tr>
+                        <tr><td>Quota Version</td><td><!--#quotav#--></td></tr>
+                        <tr><td>Postfix Version</td><td><!--#postfix#--></td></tr>
                 </table>
             </div>
           </div>
@@ -126,7 +147,49 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Game Server Statistics</h5>
-              <p><!--#url#--></p>
+              <table style="width:100%;padding:4px;">
+                        <tr>
+							<td style="width:20%;">Online Games</td>
+							<td  style="padding:1%;">
+								<div class="progress" style="height:2rem;">
+									<div class="progress-bar" role="progressbar" style="width: <!--#g_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->"><!--#live_servers#-->/<!--#total_servers#--></div>
+								</div>
+							</td>
+						</tr>
+                    <tr>
+							<td style="width:20%;">Disk Space Used</td>
+							<td style="padding:1%;">
+								<div class="progress" style="height:2rem;">
+									<div class="progress-bar" role="progressbar" style="width: <!--#g_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->"><!--#live_servers#-->/<!--#total_servers#--></div>
+								</div>
+							</td>
+						</tr>    
+						<tr>
+							<td style="width:20%;">Memory Load</td>
+							<td style="padding:1%;">
+								<div class="progress" style="height:2rem;">
+									<div class="progress-bar" role="progressbar" style="width: <!--#g_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->"><!--#live_servers#-->/<!--#total_servers#--></div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="width:20%;">CPU Load</td>
+							<td style="padding:1%;">
+								<div class="progress" style="height:2rem;">
+									<div class="progress-bar" role="progressbar" style="width: <!--#g_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->"><!--#live_servers#-->/<!--#total_servers#--></div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="width:20%;">Slots Used</td>
+							<td style="padding:1%;">
+								<div class="progress" style="height:2rem;">
+									<div class="progress-bar" role="progressbar" style="width: <!--#g_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->"><!--#live_servers#-->/<!--#total_servers#--></div>
+								</div>
+							</td>
+						</tr>            
+                </table>
+              
             </div>
           </div>
 
