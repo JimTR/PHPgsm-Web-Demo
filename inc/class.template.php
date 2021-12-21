@@ -120,7 +120,14 @@ class Template {
 		 */
 		 foreach ($vars as $k => $v) {
 			 //echo "\$k = $k \$v = $v<br>";
-			 if (is_array($v)){ continue;}
+			 if (is_array($v)){
+				// foreach($v as $k1 => $v1) {
+					//	$this->template = str_replace("<!--#$k1#-->", $v1, $this->template); // adds hidden stuff
+						//$this->template = str_replace("#$k1#", $v1, $this->template);
+				 
+			 //}
+			 continue;
+				 }
 			 $this->template = str_replace("<!--#$k#-->", $v, $this->template); // adds hidden stuff
 			 $this->template = str_replace("#$k#", $v, $this->template);
 		 } 
