@@ -152,7 +152,9 @@
 							<td style="width:20%;">Online Games</td>
 							<td  style="padding:1%;">
 								<div class="progress" style="height:2rem;">
-									<div class="progress-bar" role="progressbar" style="width: <!--#g_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->"><!--#live_servers#-->/<!--#total_servers#--></div>
+									<div class="progress-bar" role="progressbar" style="width: <!--#g_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->">
+										<div id="gs_pbsemma" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#live_servers#-->/<!--#total_servers#--></div> 
+									</div>
 								</div>
 							</td>
 						</tr>
@@ -160,7 +162,9 @@
 							<td style="width:20%;">Disk Space Used</td>
 							<td style="padding:1%;">
 								<div class="progress" style="height:2rem;">
-									<div class="progress-bar" role="progressbar" style="width: <!--#g_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->"><!--#live_servers#-->/<!--#total_servers#--></div>
+									<div class="progress-bar" role="progressbar" style="width: <!--#quota_pc#-->%" aria-valuenow="<!--#quota#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->">
+										<div id="gs_pbsemma" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#total_size#--></div> 
+									</div>
 								</div>
 							</td>
 						</tr>    
@@ -168,28 +172,37 @@
 							<td style="width:20%;">Memory Load</td>
 							<td style="padding:1%;">
 								<div class="progress" style="height:2rem;">
-									<div class="progress-bar" role="progressbar" style="width: <!--#g_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->"><!--#live_servers#-->/<!--#total_servers#--></div>
+									<div class="progress-bar" role="progressbar" style="width: <!--#total_mem#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->">
+									
+									<div id="gs_pbsemma" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#total_mem#-->%</div> 
+									</div>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td style="width:20%;">CPU Load</td>
 							<td style="padding:1%;">
-								<div class="progress" style="height:2rem;">
-									<div class="progress-bar" role="progressbar" style="width: <!--#g_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->"><!--#live_servers#-->/<!--#total_servers#--></div>
+								<div class="progress" style="height:2rem;width:100%;">
+									<div class="progress-bar" role="progressbar" style="width: <!--#total_cpu#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->">
+									
+									<div id="gs_pbsemma" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#total_cpu#-->%</div> 
+									</div>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td style="width:20%;">Slots Used</td>
 							<td style="padding:1%;">
-								<div class="progress" style="height:2rem;">
-									<div class="progress-bar" role="progressbar" style="width: <!--#g_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->"><!--#live_servers#-->/<!--#total_servers#--></div>
+								<div class="progress" style="height:2rem;width:100%;">
+									
+									<div class="progress-bar" role="progressbar" style="width: <!--#player_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_slots#-->">
+										<div id="gs_pbsemma" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#total_players#-->/<!--#total_bots#-->/<!--#total_slots#--></div> 
+									</div>
 								</div>
 							</td>
 						</tr>            
                 </table>
-              
+             <!-- <p><!--#url#--</p>-->
             </div>
           </div>
 

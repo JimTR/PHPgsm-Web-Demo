@@ -24,7 +24,11 @@ if ($server['fname'] === $bserver) {
 	$sdata1= print_r($sdata,true);
 }
 }
-
+$x =$sdata['total_size_raw']/1000000;
+$sdata['quota_pc'] = $x* (100/$sdata['quota']);
+$sdata['player_pc'] = round($sdata['used_slots']/$sdata['total_slots']*100,2);
+//if ($sdata['player_pc'] == 0) { $sdata['player_pc'] = 100;}
+ 
 $data = print_r($sdata,true);
 $sidebar_data['servers'] = 'Game Servers';
 $sidebar_data['base_servers'] = 'Base Servers';
@@ -41,6 +45,7 @@ $page['bserver'] = $bserver;
 //$page['model_name'] = $sdata['model_name'];
 //$page['uptime'] = $sdata['boot_time'];
 $page['data'] = $data;
+$sdata1= print_r($sdata,true);
 $page['url'] = $sdata1;
 //print_r($page);
 $sdata['g_pc'] = ($sdata['live_servers'] / $sdata['total_servers'])*100;
