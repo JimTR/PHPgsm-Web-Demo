@@ -18,7 +18,7 @@ $sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server[
 if ($server['fname'] === $bserver) {
 	// get the stuff
 	$url = $server['url'].':'.$server['port'].'/ajax_send.php?url='.$server['url'].':'.$server['port'].'/ajaxv2.php&query=action=all';
-	$sdata = json_decode(geturl($url),true);
+	$page = json_decode(geturl($url),true);
 	//print_r($sdata);
 	//die();
 	$sdata1= print_r($sdata,true);
@@ -38,12 +38,13 @@ $page['sidebar'] =$template->get_template();
 $template->load('templates/subtemplates/footer.html');
 $page['footer'] = $template->get_template();
 $page['bserver'] = $bserver;
-$page['model_name'] = $sdata['model_name'];
-$page['uptime'] = $sdata['boot_time'];
+//$page['model_name'] = $sdata['model_name'];
+//$page['uptime'] = $sdata['boot_time'];
 $page['data'] = $data;
 $page['url'] = $sdata1;
+//print_r($page);
 $template->load('templates/baseserver.html');
 $template->replace_vars($page);
-$template->replace_vars($sdata);
+//$template->replace_vars($sdata);
 $template->publish();
 ?>

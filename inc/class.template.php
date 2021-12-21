@@ -119,6 +119,8 @@ class Template {
 		 * simular to listv but uses an array rather than a file
 		 */
 		 foreach ($vars as $k => $v) {
+			 //echo "\$k = $k \$v = $v<br>";
+			 if (is_array($v)){ continue;}
 			 $this->template = str_replace("<!--#$k#-->", $v, $this->template); // adds hidden stuff
 			 $this->template = str_replace("#$k#", $v, $this->template);
 		 } 
