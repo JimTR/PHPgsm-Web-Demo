@@ -66,15 +66,15 @@
             <div class="card-body">
               <h5 class="card-title">Hardware</h5>
               	<table>
-                        <tr><td>Uptime</td><td><!--#boot_time#--></td></tr>
-			<tr><td style="width:32%;">CPU Model</td><td><!--#model_name#--></td></tr>
-                        <tr><td>CPU Processors</td><td><!--#processors#--></td></tr>
-			<tr><td>CPU Cores</td><td><!--#cpu_cores#--></td></tr>
-			<tr><td>CPU Speed</td><td><!--#cpu_MHz#--></td></tr>
-			<tr><td>CPU Load</td><td><!--#load#--></td></tr>
-			<tr><td>CPU Cache</td><td><!--#cache_size#--></td></tr>
-			<tr><td>IP Address(es)</td><td><!--#ips#--></td></tr>
-			<tr><td>Reboot Required</td><td><!--#reboot#--></td></tr>
+                        <tr><td>Uptime</td><td id="boot"><!--#boot_time#--></td></tr>
+						<tr><td style="width:32%;">CPU Model</td><td id="model"><!--#model_name#--></td></tr>
+						<tr><td>CPU Processors</td><td id="processors"><!--#processors#--></td></tr>
+						<tr><td>CPU Cores</td><td id="cores"><!--#cpu_cores#--></td></tr>
+						<tr><td>CPU Speed</td><td id="speed"><!--#cpu_MHz#--></td></tr>
+						<tr><td>CPU Load</td><td id="load"><!--#load#--></td></tr>
+						<tr><td>CPU Cache</td><td id = "cache"><!--#cache_size#--></td></tr>
+						<tr><td>IP Address(es)</td><td id="ip"><!--#ips#--></td></tr>
+						<tr><td>Reboot Required</td><td id="reboot"><!--#reboot#--></td></tr>
 		 </table>
             </div>
           </div>
@@ -99,10 +99,10 @@
 			<tr><th></th><th>Total</th><th>Free</th><th>Cached</th><th>Active</th></tr>
                         <tr>
 							<td style="width:20%;">Memory</td>
-							<td style="width:22%;"><!--#MemTotal#--></td>
-							<td style="width:23%;"><!--#MemFree#--></td>
-							<td  style="width:23%;"><!--#Cached#--></td>
-							<td  style="width:23%;"><!--#MemAvailable#--></td>
+							<td id="memtotal" style="width:22%;"><!--#MemTotal#--></td>
+							<td id="memfree" style="width:23%;"><!--#MemFree#--></td>
+							<td  id ="memcached" style="width:23%;"><!--#Cached#--></td>
+							<td  id ="memactive" style="width:23%;"><!--#MemAvailable#--></td>
 						</tr>
 						 <tr>
 							<td style="width:20%;">Swap</td>
@@ -152,8 +152,8 @@
 							<td style="width:20%;">Online Games</td>
 							<td  style="padding:1%;">
 								<div class="progress" style="height:2rem;">
-									<div class="progress-bar" role="progressbar" style="width: <!--#g_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->">
-										<div id="gs_pbsemma" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#live_servers#-->/<!--#total_servers#--></div> 
+									<div id="gs_pb" class="progress-bar" role="progressbar" style="width: <!--#g_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->">
+										<div id="gs_pbs" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#live_servers#-->/<!--#total_servers#--></div> 
 									</div>
 								</div>
 							</td>
@@ -162,8 +162,8 @@
 							<td style="width:20%;">Disk Space Used</td>
 							<td style="padding:1%;">
 								<div class="progress" style="height:2rem;">
-									<div class="progress-bar" role="progressbar" style="width: <!--#quota_pc#-->%" aria-valuenow="<!--#quota#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->">
-										<div id="gs_pbsemma" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#total_size#--></div> 
+									<div   id ="ud_pb" class="progress-bar" role="progressbar" style="width: <!--#quota_pc#-->%" aria-valuenow="<!--#quota#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->">
+										<div id="ud_pbs" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#total_size#--></div> 
 									</div>
 								</div>
 							</td>
@@ -171,10 +171,10 @@
 						<tr>
 							<td style="width:20%;">Memory Load</td>
 							<td style="padding:1%;">
-								<div class="progress" style="height:2rem;">
-									<div class="progress-bar" role="progressbar" style="width: <!--#total_mem#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->">
+								<div id="" class="progress" style="height:2rem;">
+									<div id= "mem_pb" class="progress-bar" role="progressbar" style="width: <!--#total_mem#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->">
 									
-									<div id="gs_pbsemma" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#total_mem#-->%</div> 
+									<div id="mem_pbs" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#total_mem#-->%</div> 
 									</div>
 								</div>
 							</td>
@@ -183,9 +183,9 @@
 							<td style="width:20%;">CPU Load</td>
 							<td style="padding:1%;">
 								<div class="progress" style="height:2rem;width:100%;">
-									<div class="progress-bar" role="progressbar" style="width: <!--#total_cpu#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->">
+									<div id="cpu_pb" class="progress-bar" role="progressbar" style="width: <!--#total_cpu#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->">
 									
-									<div id="gs_pbsemma" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#total_cpu#-->%</div> 
+									<div id="cpu_pbs" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#total_cpu#-->%</div> 
 									</div>
 								</div>
 							</td>
@@ -195,8 +195,8 @@
 							<td style="padding:1%;">
 								<div class="progress" style="height:2rem;width:100%;">
 									
-									<div class="progress-bar" role="progressbar" style="width: <!--#player_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_slots#-->">
-										<div id="gs_pbsemma" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#total_players#-->/<!--#total_bots#-->/<!--#total_slots#--></div> 
+									<div id="op_pb" class="progress-bar" role="progressbar" style="width: <!--#player_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_slots#-->">
+										<div id="op_pbs" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#total_players#-->/<!--#total_bots#-->/<!--#total_slots#--></div> 
 									</div>
 								</div>
 							</td>
@@ -240,7 +240,18 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
+<script src="js/baseserver.js"></script>
+<script src = "js/jquery-1.8.3.min.js"></script>
+<script>
+	jQuery(document).ready(function(){
+    
+    //updateClock();
+    //setInterval('updateClock()', 1000);
+    var url = "<!--#url#-->";
+    console.log(url);
+    base_servers(url)
+});
+</script>
 </body>
 
 </html>

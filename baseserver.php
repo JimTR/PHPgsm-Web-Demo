@@ -1,6 +1,7 @@
 <?php
 include 'inc/master.inc.php';
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
+
 $bserver = trim($bserver[1]);
 $template = new template;
 $sidebar_data = array();
@@ -46,7 +47,8 @@ $page['bserver'] = $bserver;
 //$page['uptime'] = $sdata['boot_time'];
 $page['data'] = $data;
 $sdata1= print_r($sdata,true);
-$page['url'] = $sdata1;
+//$page['url'] =dirname($_SERVER['PHP_SELF'])."/ajax.php?".$_SERVER['QUERY_STRING']."&module=baseserver&url=$url";
+$page['url'] = $url;
 //print_r($page);
 $sdata['g_pc'] = ($sdata['live_servers'] / $sdata['total_servers'])*100;
 $template->load('templates/baseserver.html');

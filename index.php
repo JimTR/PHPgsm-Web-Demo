@@ -12,6 +12,7 @@ $sidebar_data = array();
 $sidebar_data['smenu'] = '';
 $xpaw = new SourceQuery( );
 $servers = $database->get_results($sql);
+
 foreach ($servers as $server) {
 $sidebar_data['smenu'] .='<li><a class="" href="#"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 	try
@@ -33,7 +34,8 @@ $sidebar_data['smenu'] .='<li><a class="" href="#"><img style="width:16px;" src=
 	if (isset ($info['Players']) or $info['Players'] >0) {
 		//
 		// add them up here
-		$page['players'] += ($info['Players']-$info['Bots']);
+		$players = $info['Players']-$info['Bots'];
+		$page['players'] += $players;
 	}	
 }
 
