@@ -8,7 +8,7 @@
   <title>Dashboard - <!--#title#--></title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-  <meta http-equiv="refresh" content="30">
+  <!--<meta http-equiv="refresh" content="30"> -->
 
   <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
@@ -78,7 +78,7 @@
                       <i class="fa fa-gamepad"></i>
                     </div>
                     <div class="ps-3">
-                      <h6><!--#player_tot#--></h6>
+                      <h6 id="player_tot"><!--#player_tot#--></h6>
                       
                     </div>
                   </div>
@@ -100,7 +100,7 @@
                       <i class="fas fa-sign-in-alt"></i>
                     </div>
                     <div class="ps-3">
-                      <h6><!--#logins_tot#--></h6>
+                      <h6 id="logins_tot"><!--#logins_tot#--></h6>
                      
 
                     </div>
@@ -195,7 +195,7 @@
                      <i class="bi bi-check-circle-fill"></i>
                     </div>
                     <div class="ps-3">
-                      <h6><!--#players#--></h6>
+                      <h6 id="players"><!--#players#--></h6>
                       
                     </div>
                   </div>
@@ -333,7 +333,7 @@
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/chart.js/chart.min.js"></script>
-  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <!--<script src="assets/vendor/echarts/echarts.min.js"></script>-->
   <script src="assets/vendor/quill/quill.min.js"></script>
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
@@ -341,7 +341,18 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
+	<script src="js/pindex.js"></script>
+	<script src = "js/jquery-1.8.3.min.js"></script>
+	<script>
+	jQuery(document).ready(function(){
+    
+    //updateClock();
+    //setInterval('updateClock()', 1000);
+    var url = "<!--#url#-->";
+    console.log(url);
+    index(url)
+});
+</script>
 </body>
 
 </html>
