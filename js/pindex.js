@@ -11,6 +11,7 @@ function index(url) {
 			$('#player_tot').text(data1.player_tot);
 			$('#logins_tot').text(data1.logins_tot);
 			$('#players').text(data1.players);
+			$('#run_tot').text(data1.run_tot);
 			//alert (data1.players);
 		},
         complete:function(data1){
