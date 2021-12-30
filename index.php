@@ -77,7 +77,7 @@ $template->replace_vars($sidebar_data);
 $page['sidebar'] =$template->get_template();
 $template->load('templates/subtemplates/footer.html');
 $page['footer'] = $template->get_template();
-$page['url'] = '/phpgsmdemo/ajax.php';
+$page['url'] = DOC_ROOT.'/ajax.php';
 $template->load('templates/index.html');
 $template->replace_vars($page);
 $template->publish();
