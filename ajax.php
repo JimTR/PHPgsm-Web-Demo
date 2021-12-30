@@ -19,7 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
- *  jquery back end for the demo project
+ *  jquery back end for the demo project perhaps
  */
 
 include "inc/master.inc.php"; // get set up
