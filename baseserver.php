@@ -6,7 +6,8 @@ $bserver = trim($bserver[1]);
 $template = new template;
 $sidebar_data = array();
 $header_vars['title'] = "Server $bserver";
-$sql = "select * from server1 order by `host_name` ASC";$sidebar_data['smenu'] = '';
+$sql = "select * from server1 order by `host_name` ASC";
+$sidebar_data['smenu'] = '';
 $servers = $database->get_results($sql);
 foreach ($servers as $server) {
 $sidebar_data['smenu'] .='<li><a class="" href="#"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';

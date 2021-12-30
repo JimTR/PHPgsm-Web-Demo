@@ -48,11 +48,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Base Server Information</h1>
+      <h1>Game Server Information</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item">Base Servers</li>
+          <li class="breadcrumb-item">Game Servers</li>
           <li class="breadcrumb-item active"><!--#bserver#--></li>
         </ol>
       </nav>
@@ -64,17 +64,16 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Hardware</h5>
+              <h5 class="card-title">Start Up</h5>
               	<table>
-                        <tr><td>Uptime</td><td id="boot"><!--#boot_time#--></td></tr>
-						<tr><td style="width:32%;">CPU Model</td><td id="model"><!--#model_name#--></td></tr>
-						<tr><td>CPU Processors</td><td id="processors"><!--#processors#--></td></tr>
-						<tr><td>CPU Cores</td><td id="cores"><!--#cpu_cores#--></td></tr>
-						<tr><td>CPU Speed</td><td id="speed"><!--#cpu_MHz#--></td></tr>
-						<tr><td>CPU Load</td><td id="load"><!--#load#--></td></tr>
-						<tr><td>CPU Cache</td><td id = "cache"><!--#cache_size#--></td></tr>
-						<tr><td>IP Address(es)</td><td id="ip"><!--#ips#--></td></tr>
-						<tr><td>Reboot Required</td><td id="reboot"><!--#reboot#--></td></tr>
+                        <tr><td style="width:50%;">Host Name</td><td><!--#host_name#--></td></tr>
+                        <tr><td>Broadcast Name</td><td id="broadcast_name"><!--#server_name#--></td></tr>
+                        <tr><td>Default Map</td><td id="default_map"><!--#default_map#--></td></tr>
+                        <tr><td>Game Port</td><td id="port"><!--#port#--></td></tr>
+                        <tr><td>Client Port</td><td id="client_port"><!--#client_port#--></td></tr>
+                        <tr><td>Tv Port</td><td id="source_port"><!--#source_port#--></td></tr>
+                        <tr><td>Game Tags</td><td id="gametags"><!--#gametags#--></td></tr>
+						
 		 </table>
             </div>
           </div>
@@ -84,11 +83,11 @@
             <div class="card-body">
               <h5 class="card-title">Disk</h5>
                 <table>
-                        <tr><td style="width:40%;">File System</td><td><!--#root_filesystem#--></td></tr>
-                        <tr><td>Mount Point</td><td><!--#root_mount#--></td></tr>
-                        <tr><td>Disk Size</td><td><!--#root_size#--></td></tr>
-                        <tr><td>Disk Used</td><td><!--#root_used#--> (<!--#root_pc#-->)</td></tr>
-                        <tr><td>Disk Free</td><td><!--#root_free#--></td></tr>
+                        <tr><td style="width:45%;">Instance Folder</td><td id="location"><!--#location#--></td></tr>
+                        <tr><td>Instance Size</td><td id="disk_space"><!--#disk_space#--></td></tr>
+                        <tr><td>Install Folder</td><td id="install_dir"><!--#install_dir#--></td></tr>
+                        <tr><td>Install Size</td><td id="install_size"><!--#install_size#--></td></tr>
+                        <!--<tr><td>Disk Free</td><td><!--#root_free#-></td></tr>-->
                 </table>
             </div>
           </div>
@@ -124,14 +123,15 @@
         <div class="col-lg-6">
 	<div class="card">
             <div class="card-body">
-              <h5 class="card-title">Software</h5>
+              <h5 class="card-title">Current Status</h5>
                 <table style="width:100%;">
-                        <tr><td style="width:20%;">Host Name</td><td><!--#host#--></td></tr>
-                        <tr><td>Server OS</td><td><!--#os#--></td></tr>
-                        <tr><td>Kernel Version</td><td><!--#k_ver#--></td></tr>
-                        <tr><td>Processes</td><td><!--#process#--></td></tr>
-                        <tr><td>PHP Version</td><td><!--#php#--></td></tr>
-                        <tr><td>Screen Version</td><td><!--#screen#--></td></tr>
+                        <tr><td style="width:25%;">Broadcast Name</td><td id="hostname"><!--#hostname#--></td></tr>
+                        <tr><td>Current Map</td><td id="map"><!--#map#--></td></tr>
+                        <tr><td>Players Online</td><td id="players"><!--#players#--></td></tr>
+                        <tr><td>Bots Online</td><td id="bots"><!--#bots#--></td></tr>
+                        <tr><td>Max Players</td id="maxplayers"><td><!--#maxplayers#--></td></tr>
+                        <tr><td>Secure</td><td ="secure"><!--#secure#--></td></tr>
+                        
                         <tr><td>Tmux Version</td><td><!--#tmux#--></td></tr>
                         <tr><td>GlibC Version</td><td><!--#glibc#--></td></tr>
                         <tr><td>MySql Version</td><td><!--#mysql#--></td></tr>
@@ -204,7 +204,7 @@
 							</td>
 						</tr>            
                 </table>
-             <!-- <p><!--#url#--</p>-->
+             <p><!--#url#--></p>
             </div>
           </div>
 
@@ -242,16 +242,16 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-<script src="js/baseserver.js"></script>
+<script src="js/pindex.js"></script>
 <script src = "js/jquery-1.8.3.min.js"></script>
 <script>
 	jQuery(document).ready(function(){
     
     //updateClock();
     //setInterval('updateClock()', 1000);
-    var url = "<!--#url#-->";
-    console.log(url);
-    base_servers(url)
+    //var url = "<!--#url#-->";
+    //console.log(url);
+    //base_servers(url)
 });
 </script>
 </body>
