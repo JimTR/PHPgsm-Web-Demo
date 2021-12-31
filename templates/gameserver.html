@@ -66,7 +66,8 @@
             <div class="card-body">
               <h5 class="card-title">Start Up</h5>
               	<table>
-                        <tr><td style="width:50%;">Host Name</td><td><!--#host_name#--></td></tr>
+						<tr><td style="width:50%;">Managed By</td><td><!--#managed_by#--></td></tr>
+                        <tr><td>Host Name</td><td><!--#host_name#--></td></tr>
                         <tr><td>Broadcast Name</td><td id="broadcast_name"><!--#server_name#--></td></tr>
                         <tr><td>Default Map</td><td id="default_map"><!--#default_map#--></td></tr>
                         <tr><td>Game Port</td><td id="port"><!--#port#--></td></tr>
@@ -123,8 +124,9 @@
         <div class="col-lg-6">
 	<div class="card">
             <div class="card-body">
-              <h5 class="card-title">Current Status</h5>
+              <h5 class="card-title">Current Status <!--#l_status#--></h5>
                 <table style="width:100%;">
+						<tr><td style="width:25%;">Steam ID</td><td id="steamid"><!--#steamid#--></td></tr>
                         <tr><td style="width:25%;">Broadcast Name</td><td id="hostname"><!--#hostname#--></td></tr>
                         <tr><td>Current Map</td><td id="map"><!--#map#--></td></tr>
                         <tr><td>Players Online</td><td id="players"><!--#players#--></td></tr>
@@ -148,7 +150,7 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Game Server Statistics</h5>
+              <h5 class="card-title">Console</h5>
               <table style="width:100%;padding:4px;">
                         <tr>
 							<td style="width:20%;">Online Servers</td>

@@ -25,6 +25,7 @@
 include 'inc/master.inc.php';
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
 $we_are_here = $settings['url'];
+$is[0] = 'N/A';
 require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 use xPaw\SourceQuery\SourceQuery;
 		define( 'SQ_TIMEOUT',     $settings['SQ_TIMEOUT'] );
@@ -88,11 +89,15 @@ function get_server_info($server) {
 												if (strpos($Exception,'Failed to read any data from socket')) {
 														$Exception = 'Failed to read any data from socket Module (Ajax - get_server_info '.$sub_cmd.')';
 														file_put_contents(LOG,$Exception,PHP_EOL,FILE_APPEND);
+														$info['l_status'] = 'offline';
+														$xpaw->Disconnect();
+														return $info;
 												}
 						
 														
 									}
+	$info['l_status'] = 'online';								
 	$xpaw->Disconnect();
-	return($info);
+	return $info;
 }
 ?>
