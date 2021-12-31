@@ -48,7 +48,9 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
+		
 		<div style="float:right;width:5%;margin-top:-1%;"><img style="float:right;width:100%;" src="<!--#logo#-->" /></div>
+		<div style="float:right;padding-right:2%;padding-top:1%;"><!--#moddesc#--></div>
       <h1>Game Server Information</h1>
       <nav>
         <ol class="breadcrumb">
@@ -93,61 +95,6 @@
                 </table>
             </div>
           </div>
-<div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Memory</h5>
-                <table style="width:100%;">
-			<tr><th></th><th>Total</th><th>Free</th><th>Cached</th><th>Active</th></tr>
-                        <tr>
-							<td style="width:20%;">Memory</td>
-							<td id="memtotal" style="width:22%;"><!--#MemTotal#--></td>
-							<td id="memfree" style="width:23%;"><!--#MemFree#--></td>
-							<td  id ="memcached" style="width:23%;"><!--#Cached#--></td>
-							<td  id ="memactive" style="width:23%;"><!--#MemAvailable#--></td>
-						</tr>
-						 <tr>
-							<td style="width:20%;">Swap</td>
-							<td style="width:22%;"><!--#SwapTotal#--></td>
-							<td style="width:23%;"><!--#SwapFree#--></td>
-							<td  style="width:23%;"></td>
-							<td  style="width:23%;"></td>
-						</tr>
-                        <!--<tr><td style="width:25%;">Mount Point</td><td><!--#root_mount#</td></tr>
-                        <tr><td style="width:25%;">Disk Size</td><td><!--#root_size#></td></tr>
-                        <tr><td style="width:25%;">Disk Used</td><td><!--#root_used# (<!--#root_pc#)</td></tr>
-                        <tr><td style="width:25%;">Disk Free</td><td><!--#root_free#</td></tr> -->
-                </table>
-            </div>
-          </div>
-
-	</div>
-
-        <div class="col-lg-6">
-	<div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Current Status <!--#l_status#--></h5>
-                <table style="width:100%;">
-						<tr><td style="width:25%;">Steam ID</td><td id="steamid"><!--#steamid#--></td></tr>
-                        <tr><td style="width:25%;">Broadcast Name</td><td id="hostname"><!--#hostname#--></td></tr>
-                        <tr><td>Current Map</td><td id="map"><!--#map#--></td></tr>
-                        <tr><td>Players Online</td><td id="players"><!--#players#--></td></tr>
-                        <tr><td>Bots Online</td><td id="bots"><!--#bots#--></td></tr>
-                        <tr><td>Max Players</td id="maxplayers"><td><!--#maxplayers#--></td></tr>
-                        <tr><td>Secure</td><td ="secure"><!--#secure#--></td></tr>
-                        
-                        <tr><td>Tmux Version</td><td><!--#tmux#--></td></tr>
-                        <tr><td>GlibC Version</td><td><!--#glibc#--></td></tr>
-                        <tr><td>MySql Version</td><td><!--#mysql#--></td></tr>
-                        <tr><td>Apache Version</td><td><!--#apache#--></td></tr>
-                        <tr><td>Curl Version</td><td><!--#curl#--></td></tr>
-                        <tr><td>NginX Version</td><td><!--#nginx#--></td></tr>
-                        <tr><td>Quota Version</td><td><!--#quotav#--></td></tr>
-                        <tr><td>Postfix Version</td><td><!--#postfix#--></td></tr>
-                        <tr><td>Git Version</td><td><!--#git#--></td></tr>
-                </table>
-            </div>
-          </div>
-
 
           <div class="card">
             <div class="card-body">
@@ -208,7 +155,63 @@
 						</tr>            
                 </table>
              <p><!--#url#--></p>
+            </div>   
+	</div>
+</div>
+        <div class="col-lg-6">
+	<div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Current Status <!--#l_status#--></h5>
+                <table style="width:100%;">
+						<tr><td style="width:25%;">Steam ID</td><td id="steamid"><!--#steamid#--></td></tr>
+                        <tr><td style="width:25%;">Broadcast Name</td><td id="hostname"><!--#hostname#--></td></tr>
+                        <tr><td>Current Map</td><td id="map"><!--#map#--></td></tr>
+                        <tr><td>Players Online</td><td id="players"><!--#players#--></td></tr>
+                        <tr><td>Bots Online</td><td id="bots"><!--#bots#--></td></tr>
+                        <tr><td>Max Players</td id="maxplayers"><td><!--#maxplayers#--></td></tr>
+                        <tr><td>Secure</td><td ="secure"><!--#secure#--></td></tr>
+                        
+                        <tr><td>Client Software ID</td><td><!--#gameid#--></td></tr>
+                        <tr><td>Server Software ID</td><td><!--#server_id#--></td></tr>
+                        <tr><td>Server Build</td><td><!--#rbuildid#--></td></tr>
+                        <tr><td>Last Update</td><td><!--#rserver_update#--></td></tr>
+                        <tr><td>Curl Version</td><td><!--#curl#--></td></tr>
+                        <tr><td>NginX Version</td><td><!--#nginx#--></td></tr>
+                        <tr><td>Quota Version</td><td><!--#quotav#--></td></tr>
+                        <tr><td>Postfix Version</td><td><!--#postfix#--></td></tr>
+                        <tr><td>Git Version</td><td><!--#git#--></td></tr>
+                         
+                </table>
             </div>
+          </div>
+
+           <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Controls</h5>
+                <table style="width:100%;">
+			<tr><th></th><th>Total</th><th>Free</th><th>Cached</th><th>Active</th></tr>
+                        <tr>
+							<td style="width:20%;">Memory</td>
+							<td id="memtotal" style="width:22%;"><!--#MemTotal#--></td>
+							<td id="memfree" style="width:23%;"><!--#MemFree#--></td>
+							<td  id ="memcached" style="width:23%;"><!--#Cached#--></td>
+							<td  id ="memactive" style="width:23%;"><!--#MemAvailable#--></td>
+						</tr>
+						 <tr>
+							<td style="width:20%;">Swap</td>
+							<td style="width:22%;"><!--#SwapTotal#--></td>
+							<td style="width:23%;"><!--#SwapFree#--></td>
+							<td  style="width:23%;"></td>
+							<td  style="width:23%;"></td>
+						</tr>
+                        <!--<tr><td style="width:25%;">Mount Point</td><td><!--#root_mount#</td></tr>
+                        <tr><td style="width:25%;">Disk Size</td><td><!--#root_size#></td></tr>
+                        <tr><td style="width:25%;">Disk Used</td><td><!--#root_used# (<!--#root_pc#)</td></tr>
+                        <tr><td style="width:25%;">Disk Free</td><td><!--#root_free#</td></tr> -->
+                </table>
+            </div>
+          </div> 
+         
           </div>
 
         </div>
@@ -250,8 +253,8 @@
 <script>
 	jQuery(document).ready(function(){
     
-    //updateClock();
-    //setInterval('updateClock()', 1000);
+    updateClock();
+    setInterval('updateClock()', 1000);
     //var url = "<!--#url#-->";
     //console.log(url);
     //base_servers(url)

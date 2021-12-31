@@ -52,6 +52,8 @@ $sql = "select * from server1 where host_name = '$bserver'";
 $this_server =  $database->get_row($sql);
 $info = get_server_info($this_server);
 $this_server = array_change_key_case(array_merge_recursive($this_server,$info));
+$this_server['players'] -= $this_server['bots'];
+$this_server['rserver_update'] = date('d-m-y h: i:s a',$this_server['rserver_update']);
 $is = explode("\t",trim(shell_exec('du -hs '.$this_server['install_dir'])));
 $this_server['install_size'] = $is[0];
 $x = json_encode($this_server);
@@ -88,10 +90,13 @@ function get_server_info($server) {
 												$Exception = $e;
 												if (strpos($Exception,'Failed to read any data from socket')) {
 														$Exception = 'Failed to read any data from socket Module (Ajax - get_server_info '.$sub_cmd.')';
-														file_put_contents(LOG,$Exception,PHP_EOL,FILE_APPEND);
+														//file_put_contents(LOG,$Exception,PHP_EOL,FILE_APPEND);
 														
 												}
 										$info['l_status'] = 'offline';
+										$info['steamid'] = 'N/A';
+										$info['map'] = 'N/A';
+										$info['hostname'] = 'N/A';
 														$xpaw->Disconnect();
 														return $info;
 														

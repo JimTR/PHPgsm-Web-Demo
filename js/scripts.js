@@ -88,6 +88,9 @@ function initializeJS() {
 
 }
 
+     
 jQuery(document).ready(function(){
     initializeJS();
+    updateClock();
+    setInterval('updateClock()', 1000);
 });
