@@ -24,7 +24,7 @@
 //echo "hello there <br>";
 include 'inc/master.inc.php';
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
-$we_are_here = dirname($_SERVER['SCRIPT_NAME']);
+$we_are_here = $settings['url'];
 require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 use xPaw\SourceQuery\SourceQuery;
 		define( 'SQ_TIMEOUT',     $settings['SQ_TIMEOUT'] );

@@ -7,7 +7,7 @@ $template = new template;
 $sidebar_data = array();
 $header_vars['title'] = "Server $bserver";
 $sql = "select * from server1 order by `host_name` ASC";
-$we_are_here = dirname($_SERVER['SCRIPT_NAME']);
+$we_are_here = $settings['url'];
 $sidebar_data['smenu'] = '';
 $servers = $database->get_results($sql);
 foreach ($servers as $server) {
