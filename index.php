@@ -14,7 +14,8 @@ $xpaw = new SourceQuery( );
 $servers = $database->get_results($sql);
 
 foreach ($servers as $server) {
-$sidebar_data['smenu'] .='<li><a class="" href="#"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
+	$href = $we_are_here.'/gameserver.php?server='.$server['host_name'];
+$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 	try
 			{
 				$xpaw->Connect( $server['host'], $server['port'], SQ_TIMEOUT, SQ_ENGINE );

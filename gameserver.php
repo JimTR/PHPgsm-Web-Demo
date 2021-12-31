@@ -24,7 +24,7 @@
 //echo "hello there <br>";
 include 'inc/master.inc.php';
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
-//print_r($bserver);
+$we_are_here = dirname($_SERVER['SCRIPT_NAME']);
 require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 use xPaw\SourceQuery\SourceQuery;
 		define( 'SQ_TIMEOUT',     $settings['SQ_TIMEOUT'] );
@@ -39,7 +39,8 @@ $sql = "select * from server1 order by `host_name` ASC";
 $sidebar_data['smenu'] = '';
 $servers = $database->get_results($sql);
 foreach ($servers as $server) {
-	$sidebar_data['smenu'] .='<li><a class="" href="#"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
+	$href = $we_are_here.'/gameserver.php?server='.$server['host_name'];
+	$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 }
 $sql = "select * from base_servers where `enabled` = '1' and `extraip` = '0' ";
 $base_servers = $database->get_results($sql);
