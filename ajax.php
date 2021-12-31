@@ -35,7 +35,7 @@ switch ($module) {
 		//echo "module = $module";
 		
 		//echo LOG;
-		$sql = "select * from server1 order by `host_name` ASC";
+		$sql = "select * from server1  where running = 1 order by `host_name` ASC";
 		$xpaw = new SourceQuery( );
 		$servers = $database->get_results($sql);
 		//file_put_contents(LOG,'start'.PHP_EOL,FILE_APPEND);
