@@ -89,11 +89,11 @@ function get_server_info($server) {
 												if (strpos($Exception,'Failed to read any data from socket')) {
 														$Exception = 'Failed to read any data from socket Module (Ajax - get_server_info '.$sub_cmd.')';
 														file_put_contents(LOG,$Exception,PHP_EOL,FILE_APPEND);
-														$info['l_status'] = 'offline';
+														
+												}
+										$info['l_status'] = 'offline';
 														$xpaw->Disconnect();
 														return $info;
-												}
-						
 														
 									}
 	$info['l_status'] = 'online';								
