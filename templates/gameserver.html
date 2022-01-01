@@ -28,7 +28,24 @@
   <script src="https://kit.fontawesome.com/08a3755b76.js" crossorigin="anonymous"></script>
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
+<style>
+	.flag {
+  width:17%;
+  padding-right:5%;
+   vertical-align: middle;
+   }
+.frag {
+  width:5%;
+   text-align:right;
+    }
+.time {
+    width:15%;
+  text-align:right;
+ }
+   .tpButton{
+		  cursor: pointer;
+	}
+ </style>
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.2.0
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -69,24 +86,27 @@
 			 <div class="card">
             <div class="card-body">
               <h5 class="card-title">Console</h5>
-              <table style="width:100%;padding:4px;">
+              <!--<table style="width:100%;padding:4px;">
                         <tr style="border-bottom: 12px solid transparent;">
-							<td colspan="2" >
-								<div id ="log" style="background:#000;color:#fff;width:100%;max-height:520px !important;min-height:520px;height:520px;overflow:scroll;padding:1%;float:left;white-space: nowrap;border-style:double;text-align:left;"></div>
-							</td>
+							<td colspan="2" >-->
+								<div id ="log" style="background:#000;color:#fff;width:100%;max-height:520px !important;min-height:520px;height:520px;overflow:scroll;padding:1%;float:left;white-space: nowrap;border-style:double;text-align:left;font-size:smaller;"></div>
+							<!--</td>
 						</tr>
-						<tr>
-							<td style="width:80%;">
-								<form id="sendcmd"  style ="width:100%;float:left;" action="<!--#url#-->/ajaxv2.php" method="get">
-									<input type="text" class="form-control" placeholder="Enter Server Command">
+						<tr>-->
+							<div style="width:100%;padding-top:10px;">
+								<form id="sendcmd"  style ="width:80%;float:left;padding-top:2%;" action="<!--#url#-->/ajaxv2.php" method="get">
+									<input type="text" class="form-control" placeholder="Enter Server Command" name="text" id="text">
 									 <input type="hidden" id="action" name="action" value="exescreen">
 									<input type="hidden" id="server" name="server" value="<!--#host_name#-->">
 									<input type="hidden" id="cmd" name="cmd" value="c">
-									<input type="hidden" id="key" name="key" value="{$key}">	   
-							</td>
-							<td style="padding-right:5%;"><button  style="float:right;" type="button" class="btn btn-info"><i class="bx bxs-send"></i> Send</button></td>
-							</form>
-						</tr>
+									<input type="hidden" id="key" name="key" value="{$key}">
+									 
+								</form>
+								
+							      <button  id="send" style="float:right;clear:none;margin-top:2%;margin-right:5%;" type="button" class="btn btn-info"><i class="bx bxs-send"></i> Send</button>
+									
+							</div>
+						<!--</tr>
                     
                 </table>
              <!--<p><!--#url#-></p>-->
@@ -113,7 +133,7 @@
        
 <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Disk</h5>
+              <h5 class="card-title">Disk Usage</h5>
                 <table>
                         <tr><td style="width:45%;">Instance Folder</td><td id="location"><!--#location#--></td></tr>
                         <tr><td>Instance Size</td><td id="disk_space"><!--#disk_space#--></td></tr>
@@ -133,11 +153,11 @@
                 <table style="width:100%;">
 					
 			     <tr style="border-bottom: 12px solid transparent;">
-					 <td><button type="button" class="btn btn-danger"><i class="bi bi-exclamation-octagon"></i> Stop Server</button></td>
+					 <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit"><i class="bi bi-exclamation-octagon"></i> Stop Server</button></td>
 					<td><button type="button" class="btn btn-warning"><i class="ri-restart-line"></i> Restart Server</button></td>
-					<td><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> Join Game</button></td>
+					<td><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->"> Join Server</a></button></td>
 				
-					<td><button type="button" class="btn btn-info"><i class="ri-booklet-line"></i> View C Vars</button></td>
+					<td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> View C Vars</button></td>
 					<td><button type="button" class="btn btn-primary"><i class="ri-edit-2-line"></i> Settings</button></td>
 				</tr>
                 </table>
@@ -150,9 +170,10 @@
                 <table style="width:100%;">
 					<!--<caption>Current Map</caption>-->
 			     <tr style="border-bottom: 12px solid transparent;">
-					<th style="width:35%;">Name</th><th>Location</th><th>Score</th><th>Time Online</th>
+					<th style="width:35%;">Name</th><th>Location</th><th style="padding-left:2%;">Score</th><th style="float:right;">Time Online</th>
 				</tr>
-				<tr><td>name</td><td>Location</td><td>Score</td><td>time</td></tr>
+				
+				<tbody id="pbody"></tbody>
                 </table>
                 </div>
             </div>
@@ -188,6 +209,43 @@
           </div>
 
         </div>
+      
+              <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
+                <div class="modal-dialog modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Current Cvars</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="rule">
+                      Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequa>
+                      <br><br><br><br><br><br><br><br><br>jim<br>bow<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                      This content should appear at the bottom after you scroll.
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>
+               <div class="modal fade" id="quit" tabindex="-1" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Stop Server</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Stop Server, are you sure ?
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" id="quit">Do It</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
       </div>
      
     </section>
@@ -222,24 +280,33 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="js/pindex.js"></script>
-  <script src = "js/jquery-1.8.3.min.js"></script>
+  <script src = "js/jquery.js"></script>
 <script>
+	var a_href=0;
+		var url='';
+		var id='';
+		var path='';
+		var type='Source';
+		var host= '';
 	jQuery(document).ready(function(){
     updateClock();
     setInterval('updateClock()', 1000);
    
-    var url = "<!--#url#-->";
-    var id = "<!--#host_name#-->";
-    var port = 0;
+     url = "<!--#url#-->";
+     id = "<!--#host_name#-->";
+     port = 0;
      fetchlog(port,id,url);
+      setInterval(fetchlog, 5000);
+     players(port,id,url);
+     setInterval(players, 7000);
     //console.log(url);
     //base_servers(url)
-});
 
-function fetchlog(port,id,url) {
-	alert(url+"  "+id);
+
+function fetchlog() {
+	//alert(url+"  "+id);
 	rows = 0;
-	cmd = url+'/ajax_send.php?url='+url+'/ajaxv21.php&query=action=console:server='+id+':rows='+rows;
+	cmd = url+'/ajax_send.php?url='+url+'/ajaxv21.php&query=action=console:server='+id+':rows='+rows+':output=json';
 	//alert (cmd);
 	var items='';
          console.log(cmd);
@@ -260,13 +327,13 @@ function fetchlog(port,id,url) {
 
         },
         complete:function(data){
-                         console.log(data);
-                         alert(data[0]);
+                         //console.log(data);
+                        
 $.each(data.responseJSON, function(i, item) {
-    alert(item);
+    //alert(item);
 items = items+item;
 });
-
+			//setInterval(fetchlog(port,id,url), 5000);
 			var element = document.getElementById("log");
 			if (element.scrollHeight - element.scrollTop === element.clientHeight)
     		{
@@ -284,6 +351,88 @@ $("#log").html(items);
     });
 
 };
+function players() {
+	 //get player functions
+	//alert ('Players ! '+url+' '+id);
+        var items='';
+		var cerror=false;
+	cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=viewserver:id='+id;
+	//alert(cmd);
+         console.log(cmd);
+          $.ajax({
+		
+		type: 'GET',
+        url: cmd,
+        dataType: "json",
+        success: function (data) {
+                       console.log('got data - viewplayers');
+					 //info = data.responseJSON.info;
+             		//console.log('current data - '+info);	
+
+        },
+        complete:function(data){
+                       // console.log(data);
+						//setInterval(players(port,id,url), 5000);
+                        info = data.responseJSON.info;
+                        player = data.responseJSON.players;
+			             if(typeof(info.Map) == 'undefined') {
+				  			console.log('no map !');
+				  			return 0;
+			  			}
+						else {
+							$('#player_title').html('Current Map&nbsp;'+info.Map);
+						}
+						if(typeof(player) == "null") { 
+							console.log('returning empty from players function');
+   							 return 0;
+						} 
+						//pno = player.length;
+						
+                       
+			
+$.each(player, function(i, item) {
+    //alert(item);
+items = items+'<tr id="'+item.steam_id+'"style="width:100%;"><td class="tpButton">'+item.Name+'</td><td id="'+item.ip+'"><img class="flag" '+item.flag+'/>'+item.country+'</td><td style="text-align:right;padding-right:7%;">'+item.Frags+'</td><td style="text-align:right;padding-right:2%;">'+item.TimeF+'</td></tr>';
+});
+
+$("#pbody").html(items);
+items='<div style="width:100%;position:relative;text-align:center;top:5;">Current Rule Set</div><br>';
+			items='';
+			 rules = data.responseJSON.rules;
+$.each(rules, function(i, item2) {
+    //alert(item);
+items = items+'<div style="clear:both;padding:5px;"><div style="padding-right:10px;width:30%;text-align:left;float:left;">'+i+'</div><div style="width:60%;clear:none;text-align:right;float:left;">'+item2+'</div></div>';
+});
+$("#rule").html(items);
+                }
+    });
+
+};
+				 $('#send').click(function() {
+        //e.preventDefault();
+        //alert('send command');
+      // $("#sendcmd").submit();
+     
+        $.ajax({
+            type: $("#sendcmd").attr('method'),
+            url: $("#sendcmd").attr('action'),
+            data: $("#sendcmd").serialize(),
+            success: function(data) {
+                //alert(data);
+                $('#ajax-response').html(data);
+                $("#ajax-response").show();
+                $('#text').val(""); 
+                $("#send").blur(); 
+                $('#ajax-response').delay(3000).fadeOut('slow');
+            }
+        });
+
+    });
+    $('#quit').click(function() {
+		// pressed quit
+		alert ('hit quit');
+	});
+});
 </script>
 </body>
 
