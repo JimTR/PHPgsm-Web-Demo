@@ -54,6 +54,8 @@ $info = get_server_info($this_server);
 $this_server = array_change_key_case(array_merge_recursive($this_server,$info));
 $this_server['players'] -= $this_server['bots'];
 $this_server['rserver_update'] = date('d-m-y h: i:s a',$this_server['rserver_update']);
+if ($this_server['secure']) {$this_server['secure'] = 'true';} else {$this_server['secure'] = 'false';}
+$page['host_url'] = 
 $is = explode("\t",trim(shell_exec('du -hs '.$this_server['install_dir'])));
 $this_server['install_size'] = $is[0];
 $x = json_encode($this_server);
@@ -69,7 +71,7 @@ $page['sidebar'] =$template->get_template();
 $template->load('templates/subtemplates/footer.html');
 $page['footer'] = $template->get_template();
 $page['bserver'] = $bserver;
-$page['url'] = $x;
+//$page['url'] = $x;
 $template->load('templates/gameserver.html');
 $template->replace_vars($page);
 $template->replace_vars($this_server);
@@ -84,6 +86,13 @@ function get_server_info($server) {
 				$xpaw->Connect( $server['host'], $server['port'], SQ_TIMEOUT, SQ_ENGINE );
 				$sub_cmd = 'GetInfo';
 				$info = $xpaw->GetInfo();
+				if ($info['Players'] > 0) {
+					// get player list
+					$players = $xpaw->GetPlayers();
+					if(!empty($players)) {$info['player_list'] = $players;}
+				}
+				$rules = $xpaw->GetRules();
+				$info['vars'] = $rules;
 			}
 	catch( Exception $e )
 										{

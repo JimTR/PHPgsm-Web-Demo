@@ -17,14 +17,18 @@ foreach ($servers as $server) {
 $sql = "select * from base_servers where `enabled` = '1' and `extraip` = '0' ";
 $base_servers = $database->get_results($sql);
 foreach ($base_servers as $server) {
-$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
+
 if ($server['fname'] === $bserver) {
 	// get the stuff
 	$url = $server['url'].':'.$server['port'].'/ajax_send.php?url='.$server['url'].':'.$server['port'].'/ajaxv2.php&query=action=all';
 	$sdata = json_decode(geturl($url),true);
+	$sidebar_data['bmenu'] .='<li><a class="active" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
 	//print_r($sdata);
 	//die();
 	$sdata1= print_r($sdata,true);
+}
+else {
+	$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
 }
 }
 $x =$sdata['total_size_raw']/1000000;

@@ -6,7 +6,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title><!--#title#--></title>
-  <meta content="" name="description">
+  <meta content="Steam Game Controler" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
@@ -25,7 +25,7 @@
   <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
+  <script src="https://kit.fontawesome.com/08a3755b76.js" crossorigin="anonymous"></script>
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
@@ -62,8 +62,36 @@
     </div><!-- End Page Title -->
 
     <section class="section">
+		
       <div class="row">
         <div class="col-lg-6">
+		
+			 <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Console</h5>
+              <table style="width:100%;padding:4px;">
+                        <tr style="border-bottom: 12px solid transparent;">
+							<td colspan="2" >
+								<div id ="log" style="background:#000;color:#fff;width:100%;max-height:520px !important;min-height:520px;height:520px;overflow:scroll;padding:1%;float:left;white-space: nowrap;border-style:double;text-align:left;"></div>
+							</td>
+						</tr>
+						<tr>
+							<td style="width:80%;">
+								<form id="sendcmd"  style ="width:100%;float:left;" action="<!--#url#-->/ajaxv2.php" method="get">
+									<input type="text" class="form-control" placeholder="Enter Server Command">
+									 <input type="hidden" id="action" name="action" value="exescreen">
+									<input type="hidden" id="server" name="server" value="<!--#host_name#-->">
+									<input type="hidden" id="cmd" name="cmd" value="c">
+									<input type="hidden" id="key" name="key" value="{$key}">	   
+							</td>
+							<td style="padding-right:5%;"><button  style="float:right;" type="button" class="btn btn-info"><i class="bx bxs-send"></i> Send</button></td>
+							</form>
+						</tr>
+                    
+                </table>
+             <!--<p><!--#url#-></p>-->
+            </div>   
+	</div>
 
           <div class="card">
             <div class="card-body">
@@ -96,69 +124,39 @@
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Console</h5>
-              <table style="width:100%;padding:4px;">
-                        <tr>
-							<td style="width:20%;">Online Servers</td>
-							<td  style="padding:1%;">
-								<div class="progress" style="height:2rem;">
-									<div id="gs_pb" class="progress-bar" role="progressbar" style="width: <!--#g_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->">
-										<div id="gs_pbs" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#live_servers#-->/<!--#total_servers#--></div> 
-									</div>
-								</div>
-							</td>
-						</tr>
-                    <tr>
-							<td style="width:20%;">Disk Space Used</td>
-							<td style="padding:1%;">
-								<div class="progress" style="height:2rem;">
-									<div   id ="ud_pb" class="progress-bar" role="progressbar" style="width: <!--#quota_pc#-->%" aria-valuenow="<!--#quota#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->">
-										<div id="ud_pbs" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#total_size#--></div> 
-									</div>
-								</div>
-							</td>
-						</tr>    
-						<tr>
-							<td style="width:20%;">Memory Load</td>
-							<td style="padding:1%;">
-								<div id="" class="progress" style="height:2rem;">
-									<div id= "mem_pb" class="progress-bar" role="progressbar" style="width: <!--#total_mem#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->">
-									
-									<div id="mem_pbs" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#total_mem#-->%</div> 
-									</div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td style="width:20%;">CPU Load</td>
-							<td style="padding:1%;">
-								<div class="progress" style="height:2rem;width:100%;">
-									<div id="cpu_pb" class="progress-bar" role="progressbar" style="width: <!--#total_cpu#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_servers#-->">
-									
-									<div id="cpu_pbs" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#total_cpu#-->%</div> 
-									</div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td style="width:20%;">Slots Used</td>
-							<td style="padding:1%;">
-								<div class="progress" style="height:2rem;width:100%;">
-									
-									<div id="op_pb" class="progress-bar" role="progressbar" style="width: <!--#player_pc#-->%" aria-valuenow="<!--#live_servers#-->" aria-valuemin="0" aria-valuemax="<!--#total_slots#-->">
-										<div id="op_pbs" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"><!--#total_players#-->/<!--#total_bots#-->/<!--#total_slots#--></div> 
-									</div>
-								</div>
-							</td>
-						</tr>            
-                </table>
-             <p><!--#url#--></p>
-            </div>   
-	</div>
+         
 </div>
         <div class="col-lg-6">
+				<div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Controls</h5>
+                <table style="width:100%;">
+					
+			     <tr style="border-bottom: 12px solid transparent;">
+					 <td><button type="button" class="btn btn-danger"><i class="bi bi-exclamation-octagon"></i> Stop Server</button></td>
+					<td><button type="button" class="btn btn-warning"><i class="ri-restart-line"></i> Restart Server</button></td>
+					<td><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> Join Game</button></td>
+				
+					<td><button type="button" class="btn btn-info"><i class="ri-booklet-line"></i> View C Vars</button></td>
+					<td><button type="button" class="btn btn-primary"><i class="ri-edit-2-line"></i> Settings</button></td>
+				</tr>
+                </table>
+            </div>
+          </div> 
+          				<div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Players</h5>
+              <div style ="height:406px;">
+                <table style="width:100%;">
+					<!--<caption>Current Map</caption>-->
+			     <tr style="border-bottom: 12px solid transparent;">
+					<th style="width:35%;">Name</th><th>Location</th><th>Score</th><th>Time Online</th>
+				</tr>
+				<tr><td>name</td><td>Location</td><td>Score</td><td>time</td></tr>
+                </table>
+                </div>
+            </div>
+          </div> 
 	<div class="card">
             <div class="card-body">
               <h5 class="card-title">Current Status <!--#l_status#--></h5>
@@ -179,43 +177,19 @@
                         <tr><td>NginX Version</td><td><!--#nginx#--></td></tr>
                         <tr><td>Quota Version</td><td><!--#quotav#--></td></tr>
                         <tr><td>Postfix Version</td><td><!--#postfix#--></td></tr>
-                        <tr><td>Git Version</td><td><!--#git#--></td></tr>
+                        <tr><td>Git Version</td><td><!--#url#--></td></tr>
                          
                 </table>
             </div>
           </div>
 
-           <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Controls</h5>
-                <table style="width:100%;">
-			<tr><th></th><th>Total</th><th>Free</th><th>Cached</th><th>Active</th></tr>
-                        <tr>
-							<td style="width:20%;">Memory</td>
-							<td id="memtotal" style="width:22%;"><!--#MemTotal#--></td>
-							<td id="memfree" style="width:23%;"><!--#MemFree#--></td>
-							<td  id ="memcached" style="width:23%;"><!--#Cached#--></td>
-							<td  id ="memactive" style="width:23%;"><!--#MemAvailable#--></td>
-						</tr>
-						 <tr>
-							<td style="width:20%;">Swap</td>
-							<td style="width:22%;"><!--#SwapTotal#--></td>
-							<td style="width:23%;"><!--#SwapFree#--></td>
-							<td  style="width:23%;"></td>
-							<td  style="width:23%;"></td>
-						</tr>
-                        <!--<tr><td style="width:25%;">Mount Point</td><td><!--#root_mount#</td></tr>
-                        <tr><td style="width:25%;">Disk Size</td><td><!--#root_size#></td></tr>
-                        <tr><td style="width:25%;">Disk Used</td><td><!--#root_used# (<!--#root_pc#)</td></tr>
-                        <tr><td style="width:25%;">Disk Free</td><td><!--#root_free#</td></tr> -->
-                </table>
-            </div>
-          </div> 
+           
          
           </div>
 
         </div>
       </div>
+     
     </section>
 
   </main><!-- End #main -->
@@ -244,21 +218,72 @@
   <script src="assets/vendor/quill/quill.min.js"></script>
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-
+ 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-<script src="js/pindex.js"></script>
-<script src = "js/jquery-1.8.3.min.js"></script>
+  <script src="js/pindex.js"></script>
+  <script src = "js/jquery-1.8.3.min.js"></script>
 <script>
 	jQuery(document).ready(function(){
-    
     updateClock();
     setInterval('updateClock()', 1000);
-    //var url = "<!--#url#-->";
+   
+    var url = "<!--#url#-->";
+    var id = "<!--#host_name#-->";
+    var port = 0;
+     fetchlog(port,id,url);
     //console.log(url);
     //base_servers(url)
 });
+
+function fetchlog(port,id,url) {
+	alert(url+"  "+id);
+	rows = 0;
+	cmd = url+'/ajax_send.php?url='+url+'/ajaxv21.php&query=action=console:server='+id+':rows='+rows;
+	//alert (cmd);
+	var items='';
+         console.log(cmd);
+          $.ajax({
+			
+        type: 'GET',
+        url: cmd,
+        dataType: "json",
+			    statusCode: {
+        500: function() {
+          alert("Script exhausted");
+			return;
+        }
+      },
+        success: function (data) {
+                        console.log('got data - fetchlog');
+						//console.log(data);
+
+        },
+        complete:function(data){
+                         console.log(data);
+                         alert(data[0]);
+$.each(data.responseJSON, function(i, item) {
+    alert(item);
+items = items+item;
+});
+
+			var element = document.getElementById("log");
+			if (element.scrollHeight - element.scrollTop === element.clientHeight)
+    		{
+				var bottom = true;
+			}
+			else {
+				var bottom =false;
+			}
+$("#log").html(items);
+			       if (bottom == true) {
+     				element.scrollTop = element.scrollHeight;
+					console.log('top = '+element.scrollTop);
+				   }
+                }
+    });
+
+};
 </script>
 </body>
 
