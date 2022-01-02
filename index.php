@@ -30,7 +30,7 @@ foreach ($servers as $server) {
 		$start = date("d-m-y  h:i:s a",$server['starttime']);
 	     $fname = $server['host_name'];
 		$disp ='style="display:none;"';
-		$gd .='<tr id="'.$fname.'" '.$disp.'><td><span  id="host'.$fname.'" class="span_black">'.$server['server_name'].'</span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'" style="float:right;padding-right:35%;"></span></td><td  style="text-align:center;" id="gdate'.$fname.'">'.$start.'</td></tr>'; 
+		$gd .='<tr id="'.$fname.'" '.$disp.'><td><span  id="host'.$fname.'">'.$server['server_name'].'</span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="gdate'.$fname.'">'.$start.'</td></tr>'; 
 		$href = $we_are_here.'/gameserver.php?server='.$server['host_name'];
 		$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 	try

@@ -68,7 +68,7 @@ for (var i in data1) {
 	}	
    for (var j in data1[i]) {
 	// we have the individal server
-	console.log('Processing '+j);
+	//console.log('Processing '+j);
 	 if (typeof serverlength === 0) {
 						   console.log('server not set');
 						   			return;
@@ -85,7 +85,7 @@ for (var i in data1) {
 	 //console.log(playern);
 	  $('#pl'+server_id).html(playern); 
 	 //alert(server_id);
-     	console.log(server.server_name);
+     	//console.log(server.server_name);
 	                  $("#"+server_id).show();
 	                   var start_date = timeConverter(parseFloat(server.starttime));
 					//console.log(start_date);
