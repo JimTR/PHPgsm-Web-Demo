@@ -23,8 +23,17 @@
  */
 //echo "hello there <br>";
 include 'inc/master.inc.php';
+   $Auth = new Auth ();
+        $user = $Auth->getAuth();
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
 $we_are_here = $settings['url'];
+if($user->loggedIn()) {
+		//set the sidebar option to logout;
+   	}
+   	else {
+		redirect('login.php');
+		
+	}
 $is[0] = 'N/A';
 require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 use xPaw\SourceQuery\SourceQuery;

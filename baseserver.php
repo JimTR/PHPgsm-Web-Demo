@@ -1,7 +1,15 @@
 <?php
 include 'inc/master.inc.php';
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
-
+    $Auth = new Auth ();
+        $user = $Auth->getAuth();
+if($user->loggedIn()) {
+		// set sidebar
+   	}
+   	else {
+		redirect('login.php');
+		//die ('not logged in');
+	}        
 $bserver = trim($bserver[1]);
 $template = new template;
 $sidebar_data = array();

@@ -52,39 +52,37 @@ $time = "1639128588";
         public function login($username, $password)
         {
             $this->loggedIn = false;
-
+			global $database;
             //$db = Database::getDatabase();
             $hashed_password = self::hashedPassword($password);
-            $database = new db;
+            //$database = new db;
             $row = $database->get_Row("SELECT * FROM users WHERE username = '" . $username . "' AND password = '" . $hashed_password."'");
-            //print_r ($row);
-              
-            if(!$row)
-                return false;
             
+            if(!$row) {
+                return false;
+            }
             $this->id       = $row['id'];
             $this->nid      = $row['nid'];
             $this->username = $row['username'];
             $this->email =    $row['email'];
-            $this->currentip = getip();
+            //$this->currentip = $row['currentip'];
             $this->level = $row['level'];
-            $this->postnum = $row['postnum'];
+            //$this->postnum = $row['postnum'];
             $this->regdate = $row['regdate'];
-            $this->dob = $row['dob'];
-            $this->nick =  $row['nick'];
-            $this->priv = $row['b_priv'];
-            $this->sig = $row['sig'];
-            // send a simple cookie
-			//setcookie("TestCookie",$value);
-			 //* $update = array( 'name' => 'Not bennett', 'email' => 'someotheremail@email.com' );
-			 //* $update_where = array( 'user_id' => 44, 'name' => 'Bennett' );
-			 //* $database->update( 'users_table', $update, $update_where, 1 );
-			 $update = array( 'currentip' => $this->currentip, 'lastseen' => time());
+            $update = array( 'currentip' => $this->currentip);
 			 $update_where = array( 'id' => $row['id']);
-			 $database->update( 'users', $update, $update_where, 1 );
-			setcookie("yse",$this->nid,$this->expiryDate,"/");
-			setcookie("userid",$this->id,$this->expiryDate,"/");
-            $this->loggedIn = true;
+			 $database->update( 'users', $update, $update_where);
+			 $this->loggedIn = true;
+			 $cookie_options = array (
+                'expires' => $this->expiryDate,
+                'path' => '/',
+                'domain' => '', // leading dot for compatibility or use subdomain
+                'secure' => true,     // or false
+                'httponly' => true,    // or false
+                'samesite' => 'Lax' // None || Lax  || Strict
+                );
+			 setcookie("userid",$this->id,$cookie_options);
+             setcookie("phpgsm",$this->nid,$cookie_options);
 			//$_SESSION['userid'] = $row['id'];
             return true;
         }
@@ -93,14 +91,17 @@ $time = "1639128588";
         {
             $this->loggedIn = false;
             $this->clearCookies();
-            session_destroy();
+            //session_destroy();
         }
 
         public function loggedIn()
         {
-			if (isset($_COOKIE["yse"]))
+			global $database;
+			//echo $this->nid;
+			$sql = "select * from sessions where ";
+			if (isset($_COOKIE["phpgsm"]))
 			{
-              //$this->loggedIn = true;
+              $this->loggedIn = true;
             }
             return $this->loggedIn;
             
@@ -267,12 +268,13 @@ $time = "1639128588";
         private function attemptCookieLogin()
         {
             
-			if(!isset($_COOKIE['yse'])) 
+			if(!isset($_COOKIE['phpgsm']))
+			{ 
 				return false;
-				
+			}
             
-            $database = new db;
-			$nid = $_COOKIE["yse"]; // get the user
+             global $database;
+			 $nid = $_COOKIE["phpgsm"]; // get the user
             // We SELECT * so we can load the full user record into the user DBObject later (no longer used 20-10-14)
             
             $row = $database->get_Row('SELECT * FROM users WHERE nid = "' . $nid.'"');
@@ -284,12 +286,20 @@ $time = "1639128588";
 					$this->$key = $val;
 					}
 				}
-            setcookie("userid",$this->id,$this->expiryDate,"/");
-            setcookie("yse",$this->nid,$this->expiryDate,'/');
-             $update = array( 'currentip' => $this->currentip, 'lastseen' => time()); // update last movement
+				 $cookie_options = array (
+                'expires' => $this->expiryDate,
+                'path' => '/',
+                'domain' => '', // leading dot for compatibility or use subdomain
+                'secure' => true,     // or false
+                'httponly' => true,    // or false
+                'samesite' => 'Lax' // None || Lax  || Strict
+                );
+            setcookie("userid",$this->id,$cookie_options);
+            setcookie("phpgsm",$this->nid,$cookie_options);
+             $update = array( 'currentip' => $this->currentip); // update last movement
 			 $update_where = array( 'id' => $row['id']);
 			 $database->update( 'users', $update, $update_where, 1 );
-			 $database->disconnect();
+			 //$database->disconnect();
             //$_SESSION['userid'] = $row['id'];
             return true;
         }
@@ -325,8 +335,16 @@ $time = "1639128588";
         private function clearCookies()
         {
 			//die ("auth dom ".Config::get('authDomain'));
-            setcookie ("yse", "", time() - 3600,'/');
-            setcookie('userid', '', time() - 3600, '/');
+			 $cookie_options = array (
+                'expires' => time()-3600,
+                'path' => '/',
+                'domain' => '', // leading dot for compatibility or use subdomain
+                'secure' => true,     // or false
+                'httponly' => true,    // or false
+                'samesite' => 'Lax' // None || Lax  || Strict
+                );
+            setcookie ("phpgsm", "", $cookie_options);
+            setcookie('userid', '', $cookie_options);
         }
 
         private function sendToLoginPage()

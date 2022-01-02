@@ -5,8 +5,20 @@ require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 	define( 'SQ_TIMEOUT',     $settings['SQ_TIMEOUT'] );
 	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
 	define( 'LOG',	'logs/ajax.log');
-
+    $Auth = new Auth ();
+        $user = $Auth->getAuth();
 $we_are_here = $settings['url'];
+if($user->loggedIn()) {
+		// set sidebar
+   	}
+   	else {
+		redirect('login.php');
+		//die ('not logged in');
+	}
+	//print_r($user);
+	
+//$user->logout();
+//die();
 $template = new template;
 $sql = "select * from server1 order by `host_name` ASC";
 $sidebar_data = array();
