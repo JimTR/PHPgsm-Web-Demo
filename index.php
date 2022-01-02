@@ -10,25 +10,29 @@ require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 $we_are_here = $settings['url'];
 if($user->loggedIn()) {
 		// set sidebar
+		// allow user to use the api (ready for v3)
    	}
    	else {
 		redirect('login.php');
-		//die ('not logged in');
+		
 	}
-	//print_r($user);
-	
-//$user->logout();
-//die();
+
 $template = new template;
 $sql = "select * from server1 order by `host_name` ASC";
 $sidebar_data = array();
+$page = array();
 $sidebar_data['smenu'] = '';
 $xpaw = new SourceQuery( );
 $servers = $database->get_results($sql);
-
+$gd ='';
 foreach ($servers as $server) {
-	$href = $we_are_here.'/gameserver.php?server='.$server['host_name'];
-$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
+		if(empty($server['starttime'])) { $server['starttime']=0;}
+		$start = date("d-m-y  h:i:s a",$server['starttime']);
+	     $fname = $server['host_name'];
+		$disp ='style="display:none;"';
+		$gd .='<tr id="'.$fname.'" '.$disp.'><td><span  id="host'.$fname.'" class="span_black">'.$server['server_name'].'</span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'" style="float:right;padding-right:35%;"></span></td><td  style="text-align:center;" id="gdate'.$fname.'">'.$start.'</td></tr>'; 
+		$href = $we_are_here.'/gameserver.php?server='.$server['host_name'];
+		$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 	try
 			{
 				$xpaw->Connect( $server['host'], $server['port'], SQ_TIMEOUT, SQ_ENGINE );
@@ -52,13 +56,22 @@ $sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16p
 		$page['players'] += $players;
 	}	
 }
-
+$page['gd']= $gd;
+$jsa ='';
 $sql = "select * from base_servers where `enabled` = '1' and `extraip` = '0' ";
 $base_servers = $database->get_results($sql);
+//https://api.noideersoftware.co.uk/ajax_send.php?url=https://api.noideersoftware.co.uk/ajaxv2.php&query=action=game_detail
 foreach ($base_servers as $server) {
 $sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
-
+$jsa .= '"'.$server['url'].'/ajax_send.php?url='.$server['url'].'/ajaxv2.php&query=action=game_detail",';
 }
+
+if (endsWith($jsa, ',')) {
+	//die($jsa);
+	// chop comma
+	$jsa = rtrim($jsa,",");
+}
+
 $sql = "SELECT sum(players) as player_tot, count(country) as countries, sum(logins) as tot_logins, (select count(*) from servers) as game_tot, (select count(*) from servers where running = 1) as run_tot  FROM `logins` WHERE 1";
 $qstat = $database->get_row($sql);
 $page['player_tot'] =  $qstat['player_tot'];
@@ -83,6 +96,7 @@ $header_vars['gsm'] = "gsm";
 $sidebar_data['servers'] = 'Game Servers';
 $sidebar_data['base_servers'] = 'Base Servers';
 $page['title'] = 'PHPgsm Demo';
+$page['jsa'] = $jsa;
 $template->load('templates/subtemplates/header.html'); // load header
 $template->replace_vars($header_vars);
 $page['header'] = $template->get_template();
@@ -96,3 +110,10 @@ $template->load('templates/index.html');
 $template->replace_vars($page);
 $template->publish();
 //print_r($settings);
+function endsWith( $haystack, $needle ) {
+    $length = strlen( $needle );
+    if( !$length ) {
+        return true;
+    }
+    return substr( $haystack, -$length ) === $needle;
+}

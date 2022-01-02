@@ -213,9 +213,37 @@
               <div class="card top-selling">
            
                 <div class="card-body pb-0">
-                  <h5 class="card-title">Top Countries</h5>
-
-                  <table class="table table-borderless" style="background:#e1e1dd;" >
+					<div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Online Game Servers
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                     <div  style="width:100%;border-radius: 5px 5px 0 0;">
+						<table style="width:100%;padding:6px;" class="table">
+							<thead style="background:cornflowerblue;">
+								<tr style="font-weight:bold;"><th style="width:30%;">Name</th><th>Current Map</th><th style="text-align:center;">Players</th><th style="text-align:center;">Start Time</th></tr>
+							</thead>
+							<tbody>
+								<!--#gd#-->
+							</tbody>
+						</table>		
+				</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Top Countries
+                    </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                       <table class="table table-borderless" style="background:#e1e1dd;" >
                     <thead style="background:cornflowerblue;">
                       <tr>
                         <th scope="col"></th>
@@ -229,6 +257,24 @@
                         <!--#country_data#-->  
                     </tbody>
                   </table>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Accordion Item #3
+                    </button>
+                  </h2>
+                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <!--#jsa#-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+                 
 
                 </div>
 
@@ -265,12 +311,17 @@
 	<script src = "js/jquery.js"></script>
 	<script>
 	jQuery(document).ready(function(){
-    
+    const servers = [<!--#jsa#-->];
     updateClock();
     setInterval('updateClock()', 1000);
     var url = "<!--#url#-->";
     console.log(url);
     index(url)
+    jQuery.each( servers, function( i, val ) {
+		//
+		console.log(val);
+		online(val);
+	});
 });
 </script>
 </body>

@@ -61,7 +61,7 @@ setcookie("redirect",$_SERVER['HTTP_REFFERER'],3600,'/');
 	if (@!$_COOKIE['redirect']) {setcookie('redirect',$job, time() + (60 * 5),'/');} // make sure we go back
 	$template = new Template;
 	
-	$template->load('pages-login.html');
+	$template->load('templates/login.html');
 	
 
       
