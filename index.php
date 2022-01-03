@@ -88,6 +88,37 @@ $country['flag'] = 'https://ipdata.co/flags/'.trim(strtolower($country['country_
 $template->replace_vars($country);
 $page['country_data'] .= $template->get_template();
 }
+$sql = "select servers.server_name,player_history.*,players.name,players.country_code from player_history left join players on `steam_id` = players.steam_id64 left join servers on player_history.`game` = servers.host_name  ORDER BY `player_history`.`log_ons` DESC LIMIT 10";
+	$players = $database->get_results($sql);
+	$pd = '';
+	foreach ($players as $player) {
+		// top 10 players server
+		$playerN2 = Emoji::Decode($player['name']);
+		//$player['last_play'] = date('d-m-Y H:i:s',$player['last_play']);
+                $player['last_play'] = time2str($player['last_play']);
+		if ($player['last_play'] == "1 weeks ago") {$player['last_play'] = 'a week ago';}
+                //if ($player['log_ons'] < 100) {$player['log_ons'] =' '.$player['log_ons'];}
+		$map = '<img style="width:5%;vertical-align: middle;" src="https://ipdata.co/flags/'.trim(strtolower($player['country_code'])).'.png">';
+		$pd.='<tr><td style="vertical-align: middle;">'.$map.'  '.$playerN2.'</td><td>'.$player['server_name'].'</td><td><span style="">'.$player['log_ons'].'</span></td><td style="text-align:left;padding-right:6%;">'.$player['last_play'].'</td></tr>';
+	}
+	$sql = "select players.name,players.country_code,players.log_ons,players.last_log_on,players.first_log_on from players ORDER BY `players`.`log_ons` DESC LIMIT 10";
+	$fpd = '';
+	$players = $database->get_results($sql);
+	foreach ($players as $player) {
+		// top 10 players
+		$playerN2 = Emoji::Decode($player['name']);
+		$player['last_log_on'] = time2str($player['last_log_on']);
+                if ($player['last_log_on'] == "1 weeks ago") {$player['last_log_on'] = 'a week ago';}
+		//if ($player['log_ons'] < 100) {$player['log_ons'] =' '.$player['log_ons'];}
+		if ($player['first_log_on'] >0 ) {
+			$player['first_log_on'] = time2str($player['first_log_on']);
+		}
+		else {
+			$player['first_log_on'] = 'N/A';
+		}
+		$map = '<img style="width:5%;vertical-align: middle;" src="https://ipdata.co/flags/'.trim(strtolower($player['country_code'])).'.png">';
+		$fpd.='<tr><td style="vertical-align: middle;"><span class="span_black">'.$map.'  '.$playerN2.'</span></td><td><span class="span_black">'.$player['first_log_on'].'</span></td><td><span>'.$player['log_ons'].'</span></td><td><span>'.$player['last_log_on'].'</span></td></tr>';
+	}
 //print_r($countries);
 //die();
 //$template = new template;
@@ -97,6 +128,8 @@ $sidebar_data['servers'] = 'Game Servers';
 $sidebar_data['base_servers'] = 'Base Servers';
 $page['title'] = 'PHPgsm Demo';
 $page['jsa'] = $jsa;
+$page['pd'] = $pd;
+$page['fpd'] = $fpd;
 $template->load('templates/subtemplates/header.html'); // load header
 $template->replace_vars($header_vars);
 $page['header'] = $template->get_template();

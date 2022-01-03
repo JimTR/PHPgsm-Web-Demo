@@ -1,4 +1,3 @@
-<script>
 		var a_href=0;
 		var url='';
 		var id='';
@@ -155,7 +154,7 @@ function players() {
 			
 $.each(player, function(i, item) {
     //alert(item);
-items = items+'<tr id="'+item.steam_id+'"style="width:100%;"><td class="tpButton">'+item.Name+'</td><td id="'+item.ip+'"><img class="flag" '+item.flag+'/>'+item.country+'</td><td style="text-align:right;padding-right:7%;">'+item.Frags+'</td><td style="text-align:right;padding-right:2%;">'+item.TimeF+'</td></tr>';
+items = items+'<tr id="'+item.steam_id+'"style="width:100%;"><td class="tpButton">'+item.Name+'</td><td id="'+item.ip+'"><img class="flag" '+item.flag+'/>'+item.country+'</td><td>'+item.Frags+'</td><td>'+item.TimeF+'</td></tr>';
 });
 $("#pbody").html(items);
 //items='<div style="width:100%;position:relative;text-align:center;top:5;">Current Rule Set</div><br>';
@@ -253,7 +252,7 @@ $("#player td").click(function() {
 					//alert('we need to set the correct options here');
 					$('#sendcmd').submit();
                  }
-                dialog = $( "#dialog-form" ).dialog({
+                dialog = jQuery( "#dialog-form" ).dialog({
                     autoOpen: false,
                     height: 340,
                     width: 375,
@@ -285,4 +284,3 @@ $("#player td").click(function() {
 
 
 
-	</script>
