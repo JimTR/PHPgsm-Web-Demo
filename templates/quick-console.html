@@ -25,44 +25,10 @@
   <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
+ <script src="https://kit.fontawesome.com/08a3755b76.js" crossorigin="anonymous"></script>
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-<style>
 
-	.flag {
-
-  width:17%;
-
-  padding-right:5%;
-
-   vertical-align: middle;
-
-   }
-
-.frag {
-
-  width:5%;
-
-   text-align:right;
-
-    }
-
-.time {
-
-    width:15%;
-
-  text-align:right;
-
- }
-
-   .tpButton{
-
-		  cursor: pointer;
-
-	}
-
- </style>
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.2.0
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -135,7 +101,7 @@
 		<div>
              
 			
-			<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> View C Vars</button>			
+			<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#cvars"><i class="ri-booklet-line"></i> View C Vars</button>			
 			<button id="create-user" style="display:none;" class="btn">Ban user</button>
 
 			
@@ -160,6 +126,76 @@
 
   </main><!-- End #main -->
 
+				
+			<div class="modal fade" id="ban_user" tabindex="-1" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ban User</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+						<form>
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-3 col-form-label"l>Name</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="name" readonly="">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-3 col-form-label">IP Address</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="ip" readonly="">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputPassword3" class="col-sm-3 col-form-label">Steam ID</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="steam_id" readonly="">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-form-label col-sm-3">Ban Period</label>
+                 <div class="col-sm-8">
+                    <select id="period" class="form-select">
+						<option value="0">Permanent</option>
+						<option value="5">5 Mins</option>	
+						<option value="10">10 Mins</option>
+						<option value="20">20 Mins</option>
+						<option value="30">30 Mins</option>
+						<option value="60">1 Hour</option>
+                  </select>
+                  </div>
+                </div>
+                
+               
+              </form>
+			
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary" id="ban">Do It</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             <div class="modal fade" id="cvars" tabindex="-1">
+                <div class="modal-dialog modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Current Cvars</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="rule">
+                     
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>
   <!--#footer#-->
  <!-- End Footer -->
 
@@ -172,7 +208,7 @@
     <script src="assets/vendor/echarts/echarts.min.js"></script>
     <script src="assets/vendor/quill/quill.min.js"></script>
     <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <!--<script src="assets/vendor/tinymce/tinymce.min.js"></script>-->
+    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
 
  
 

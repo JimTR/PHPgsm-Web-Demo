@@ -1082,3 +1082,24 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 13px;
   color: #012970;
 }
+
+/*--------------------------------------------------------------
+# Custom
+--------------------------------------------------------------*/
+.flag {
+  width:17%;
+  padding-right:5%;
+  vertical-align: middle;
+}
+.frag {
+  width:5%;
+  text-align:right;
+}
+.time {
+  width:15%;
+  text-align:right;
+}
+.tpButton{
+  cursor: pointer;
+}
+

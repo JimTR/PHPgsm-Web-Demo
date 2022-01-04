@@ -196,91 +196,48 @@ $('#player').on('click','.tpButton', function(event) {
         var href = $(this).closest('tr').attr("id");
 	    var ip =$ ("#"+href).find("td:eq(1)").attr("id");
 	    //var user =$(this).text;
+	    //alert ("href = "+href);
 	    var user = $("#"+href).find("td:first").text();
-	   // alert(ip);
+	    //alert(ip);
 	
         if(href) {
-         //alert('ban user '+href+'  '+user+' '+ip+' ?' );
+         alert('ban user '+href+'  '+user+' '+ip+' ?' );
 			 //dialog.dialog( "open" );
 			//$("input.name").val(user)
 			$('#name').attr('value',user)
 			$('#ip').attr('value',ip)
 			$('#steam_id').attr('value',href)
-			$("#create-user").click();
+			//$("#create-user").click();
+			 $('#ban_user').modal('show');
 			//$('#ex1').modal();
        }
 	 console.log( "click players");
     });
-$("#player td").click(function() {
-     alert($(this).html());
-     });
-				
-		// var dialog, form;	
-		 $( function(){
-           var dialog, form, 
-                // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
-                emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
-                name = $( "#name" ),
-                email = $( "#ip" ),
-                steam_id  = $( "#steam_id" ),
-                period = $( "#period" ),
-                kick = $( "#kick" ),
-                allFields = $( [] ).add( name ).add( email ).add( steam_id ).add( period ).add( kick ),
-                tips = $( ".validateTips" );
-                function updateTips( t ) {
-                    tips
-                    .text( t )
-                    .addClass( "ui-state-highlight" );
-                        setTimeout(function() {
-                        tips.removeClass( "ui-state-highlight", 1500 );
-                    }, 500 );
-                }
 
-                   
-
-               
+		            
                 function ban_user() {
 					var ban_cmd  = "addip "+$("#period").val()+" "+$("#ip").val();
 					$("#text").val(ban_cmd);
-                   // alert($('form').serialize());
+                    alert($('form').serialize());
 					
 					var txt  =$( 'form' ).serializeArray();
 					console.log( "txt = "+txt );
-					//txt[0].text "new string";
-					//alert(txt..serialize());
-                    dialog.dialog( "close" );
-					//alert('we need to set the correct options here');
-					$('#sendcmd').submit();
-                 }
-                dialog = jQuery( "#dialog-form" ).dialog({
-                    autoOpen: false,
-                    height: 340,
-                    width: 375,
-                    modal: true,
-                    buttons: {
-                    "Ban User": ban_user,
-                    Cancel: function() {
-                        dialog.dialog( "close" );
-                    }
-              },
-                close: function() {
-                    form[ 0 ].reset();
-                    allFields.removeClass( "ui-state-error" );
-                }
-            });
-
-            form = dialog.find( "form" ).on( "submit", function( event ) {
-                event.preventDefault();
-                alert ("event triggered");
-                //addUser();
-            });
+					
+					//$('#sendcmd').submit();
+					$('#ban_user').modal('hide');
+                 };
+                      
 
             $( "#create-user" ).button().on( "click", function() {
-                dialog.dialog( "open" );
+                 $('#ban_user').modal('show');
+            });
+             $( "#ban" ).click (function() {
+                 //$('#ban_user').modal('show');
+                 ban_user();
             });
 
         });
-			});
+			
 
 
 

@@ -153,8 +153,8 @@
                 <table style="width:100%;">
 					
 			     <tr style="border-bottom: 12px solid transparent;">
-					 <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit"><i class="bi bi-exclamation-octagon"></i> Stop Server</button></td>
-					<td><button type="button" class="btn btn-warning"><i class="ri-restart-line"></i> Restart Server</button></td>
+					 <td><button id="stop_server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Stop Server</button></td>
+					<td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ban_user"><i class="ri-restart-line"></i> Restart Server</button></td>
 					<td><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->"> Join Server</a></button></td>
 				
 					<td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> View C Vars</button></td>
@@ -229,19 +229,67 @@
                   </div>
                 </div>
               </div>
-               <div class="modal fade" id="quit" tabindex="-1" aria-hidden="true" style="display: none;">
+               <div class="modal fade" id="quit_game" tabindex="-1" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">Stop Server</h5>
+                      <h5 class="modal-title">Stop <!--#bserver#--></h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                       Stop Server, are you sure ?<br>This will stop the sever directly with no warning to online players
                     </div>
                     <div class="modal-footer">
-                      <button class="btn btn-secondary" onclick="$('#quit').modal('hide');" id="dismiss_quit">Close</button>
-                      <button type="button" class="btn btn-primary" id="quit">Do It</button>
+                      <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary" id="quit">Do It</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade" id="ban_user" tabindex="-1" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ban User</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+						<form>
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-3 col-form-label"l>Name</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="name" readonly="">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-3 col-form-label">IP Address</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="ip" readonly="">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputPassword3" class="col-sm-3 col-form-label">Steam ID</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="steam_id" readonly="">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-form-label col-sm-3">Ban Period</label>
+                 <div class="col-sm-8">
+                    <select id="inputState" class="form-select">
+                    <option selected="">Choose...</option>
+                    <!--#sbox#-->
+                  </select>
+                  </div>
+                </div>
+                
+               
+              </form>
+			
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary" id="ban">Do It</button>
                     </div>
                   </div>
                 </div>
@@ -430,8 +478,25 @@ $("#rule").html(items);
     });
     $('#quit').click(function() {
 		// pressed quit
-		alert ('hit quit');
+		cmd = url+'/ajaxv2.php?action=version';
+		alert ('hit quit '+url);
+		 $('#quit_game').modal('hide');
+		  $.ajax({
+            type: 'GET',
+            url: cmd,
+            //data: $("#sendcmd").serialize(),
+            success: function(data) {
+                console.log(data);
+                //$('#ajax-response').html(data);
+                //$("#ajax-response").show();
+                //$('#text').val(""); 
+                $("#stop_server").blur(); 
+                //$('#ajax-response').delay(3000).fadeOut('slow');
+            }
+        });
+
 	});
+	
 });
 </script>
 </body>
