@@ -59,6 +59,7 @@ foreach ($base_servers as $server) {
 }
 $sql = "select * from server1 where host_name = '$bserver'";
 $this_server =  $database->get_row($sql);
+$this_server['server_update'] = date("d-m-Y H:i:s a",$this_server['server_update']);
 $info = get_server_info($this_server);
 $this_server = array_change_key_case(array_merge_recursive($this_server,$info));
 $this_server['players'] -= $this_server['bots'];

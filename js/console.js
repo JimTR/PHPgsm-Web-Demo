@@ -190,27 +190,16 @@ $("#rule").html(items);
 
     });
 $('#player').on('click','.tpButton', function(event) {				
-// $('tr').click(function() {
-	//alert( $('#players_table tr').length )
-	    //event.preventDefault();
         var href = $(this).closest('tr').attr("id");
 	    var ip =$ ("#"+href).find("td:eq(1)").attr("id");
-	    //var user =$(this).text;
-	    //alert ("href = "+href);
 	    var user = $("#"+href).find("td:first").text();
-	    //alert(ip);
-	
+	    	
         if(href) {
-         alert('ban user '+href+'  '+user+' '+ip+' ?' );
-			 //dialog.dialog( "open" );
-			//$("input.name").val(user)
-			$('#name').attr('value',user)
+        	$('#name').attr('value',user)
 			$('#ip').attr('value',ip)
 			$('#steam_id').attr('value',href)
-			//$("#create-user").click();
-			 $('#ban_user').modal('show');
-			//$('#ex1').modal();
-       }
+			$('#ban_user').modal('show');
+		}
 	 console.log( "click players");
     });
 
@@ -218,22 +207,17 @@ $('#player').on('click','.tpButton', function(event) {
                 function ban_user() {
 					var ban_cmd  = "addip "+$("#period").val()+" "+$("#ip").val();
 					$("#text").val(ban_cmd);
-                    alert($('form').serialize());
+                    //alert($('form').serialize());
 					
-					var txt  =$( 'form' ).serializeArray();
+					var txt = $( 'form' ).serializeArray();
 					console.log( "txt = "+txt );
 					
-					//$('#sendcmd').submit();
+					$('#sendcmd').submit();
 					$('#ban_user').modal('hide');
                  };
-                      
-
-            $( "#create-user" ).button().on( "click", function() {
-                 $('#ban_user').modal('show');
-            });
+                 
              $( "#ban" ).click (function() {
-                 //$('#ban_user').modal('show');
-                 ban_user();
+                ban_user();
             });
 
         });
