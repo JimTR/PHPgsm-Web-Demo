@@ -21,7 +21,7 @@ if($user->loggedIn()) {
 		'ip' =>  ip2long($_SERVER['REMOTE_ADDR']),
 		'time' => time() 
 		) ;
-		//print_r($user_data);
+		print_r($user_data);
 		$database->insert('allowed_users',$user_data);
 		//die();
    	}
@@ -76,7 +76,7 @@ $base_servers = $database->get_results($sql);
 //https://api.noideersoftware.co.uk/ajax_send.php?url=https://api.noideersoftware.co.uk/ajaxv2.php&query=action=game_detail
 foreach ($base_servers as $server) {
 $sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
-$jsa .= '"'.$server['url'].'/ajax_send.php?url='.$server['url'].'/ajaxv2.php&query=action=game_detail",';
+$jsa .= '"'.$server['url'].'/ajax_send.php?url='.$server['url'].'/ajaxv2.php&query=action=game_detail:server='.$server['fname'].'",';
 }
 
 if (endsWith($jsa, ',')) {

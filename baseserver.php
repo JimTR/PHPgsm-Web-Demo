@@ -28,7 +28,7 @@ foreach ($base_servers as $server) {
 
 if ($server['fname'] === $bserver) {
 	// get the stuff
-	$url = $server['url'].':'.$server['port'].'/ajax_send.php?url='.$server['url'].':'.$server['port'].'/ajaxv2.php&query=action=all';
+	$url = $server['url'].':'.$server['port'].'/ajax_send.php?url='.$server['url'].':'.$server['port'].'/ajaxv2.php&query=action=all:server='.$bserver;
 	$sdata = json_decode(geturl($url),true);
 	$sidebar_data['bmenu'] .='<li><a class="active" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
 	//print_r($sdata);
@@ -43,7 +43,7 @@ $x =$sdata['total_size_raw']/1000000;
 $sdata['quota_pc'] = $x* (100/$sdata['quota']);
 $sdata['player_pc'] = round($sdata['used_slots']/$sdata['total_slots']*100,2);
 //if ($sdata['player_pc'] == 0) { $sdata['player_pc'] = 100;}
- 
+ if ($sdata['reboot'] == 'yes' ) {$sdata['rebooot'] = 'rebooot';}
 $data = print_r($sdata,true);
 $sidebar_data['servers'] = 'Game Servers';
 $sidebar_data['base_servers'] = 'Base Servers';

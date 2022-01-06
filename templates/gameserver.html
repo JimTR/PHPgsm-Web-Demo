@@ -136,12 +136,14 @@
                 <table style="width:100%;">
 					
 			     <tr style="border-bottom: 12px solid transparent;">
-					 <td><button id="stop_server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Stop Server</button></td>
-					<td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ban_user"><i class="ri-restart-line"></i> Restart Server</button></td>
-					<td><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->"> Join Server</a></button></td>
+					 <!--#buttons#-->
+					<!-- <td class="" id="stop"><button id="stop_server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Stop Server</button></td>
+					  <td class=""  id="start"><button id="stop_server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Start Server</button></td>
+					<td class="" id="restart"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ban_user"><i class="ri-restart-line"></i> Restart Server</button></td>
+					<td class="" id="join"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#->"> Join Server</a></button></td>
 				
-					<td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> View C Vars</button></td>
-					<td><button type="button" class="btn btn-primary"><i class="ri-edit-2-line"></i> Settings</button></td>
+					<td class="" id="cvar"><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> View C Vars</button></td>
+					<td id="settings"><button type="button" class="btn btn-primary"><i class="ri-edit-2-line"></i> Settings</button></td>-->
 				</tr>
                 </table>
             </div>
@@ -177,11 +179,11 @@
                         <tr><td>Server Software ID</td><td><!--#server_id#--></td></tr>
                         <tr><td>Server Build</td><td><!--#rbuildid#--></td></tr>
                         <tr><td>Last Update</td><td><!--#server_update#--></td></tr>
-                        <tr><td>Curl Version</td><td><!--#curl#--></td></tr>
-                        <tr><td>NginX Version</td><td><!--#nginx#--></td></tr>
-                        <tr><td>Quota Version</td><td><!--#quotav#--></td></tr>
-                        <tr><td>Postfix Version</td><td><!--#vdf_file#--></td></tr>
-                        <tr><td>Git Version</td><td><!--#url#--></td></tr>
+                        <tr><td>Started</td><td><!--#starttime#--></td></tr>
+                        <tr><td>CPU use</td><td><!--#cpu#-->%</td></tr>
+                        <tr><td>Memory use</td><td><!--#mem#-->%</td></tr>
+                        <tr><td>Game Tags</td><td><!--#gametags#--></td></tr>
+                        <tr><td>API location</td><td><!--#url#--></td></tr>
                          
                 </table>
             </div>
@@ -273,6 +275,23 @@
                     <div class="modal-footer">
                       <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                       <button type="submit" class="btn btn-primary" id="ban">Do It</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+			<div class="modal fade" id="edit" tabindex="-1">
+                <div class="modal-dialog modal-fullscreen">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Edit <!--#bserver#--></h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequatur nemo amet incidunt est facilis. Dolorem neque recusandae quo sit molestias sint dignissimos.
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                   </div>
                 </div>

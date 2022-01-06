@@ -60,7 +60,23 @@ foreach ($base_servers as $server) {
 $sql = "select * from server1 where host_name = '$bserver'";
 $this_server =  $database->get_row($sql);
 $this_server['server_update'] = date("d-m-Y H:i:s a",$this_server['server_update']);
+$this_server['starttime'] = date("d-m-Y H:i:s a",$this_server['starttime']);
 $info = get_server_info($this_server);
+$v = json_decode(geturl($this_server['url'].'/ajaxv2.php?action=game_detail&filter='.$bserver),true);
+//$info = array_merge($info,array_change_key_case($v[$bserver]));
+if ($info['l_status'] == 'offline') {
+	$page['display'] = 'hidden';
+	$page['buttons'] =  '<td  id="start"><button id="stop_server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Start Server</button></td>';
+	$page['buttons'] .= '<td id="settings"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit"><i class="ri-edit-2-line"></i> Settings</button></td>';
+	}
+else {
+	$page['buttons'] = ' <td class="<!--#display#-->" id="stop"><button id="stop_server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Stop Server</button></td>
+					  					<td class="<!--#display#-->" id="restart"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ban_user"><i class="ri-restart-line"></i> Restart Server</button></td>
+					<td class="<!--#display#-->" id="join"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->"> Join Server</a></button></td>
+				
+					<td class="<!--#display#-->" id="cvar"><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> View C Vars</button></td>
+					<td id="settings"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit"><i class="ri-edit-2-line"></i> Settings</button></td>';
+}	
 $this_server = array_change_key_case(array_merge_recursive($this_server,$info));
 $this_server['players'] -= $this_server['bots'];
 $this_server['rserver_update'] = date('d-m-y h: i:s a',$this_server['rserver_update']);
@@ -82,9 +98,13 @@ $template->load('templates/subtemplates/footer.html');
 $page['footer'] = $template->get_template();
 $page['bserver'] = $bserver;
 //$page['url'] = $x;
+//$v = json_decode(geturl($this_server['url'].'/ajaxv2.php?action=game_detail&filter='.$bserver),true);
+//$v[$bserver] = array_change_key_case($v[$bserver]);
+//die(print_r($v,true));
 $template->load('templates/gameserver.html');
 $template->replace_vars($page);
 $template->replace_vars($this_server);
+$template->replace_vars($v[$bserver]);
 $template->publish();
 
 function get_server_info($server) {
