@@ -60,7 +60,7 @@ foreach ($base_servers as $server) {
 $sql = "select * from server1 where host_name = '$bserver'";
 $this_server =  $database->get_row($sql);
 $this_server['server_update'] = date("d-m-Y H:i:s a",$this_server['server_update']);
-$this_server['starttime'] = date("d-m-Y H:i:s a",$this_server['starttime']);
+if ($this_server['starttime']) {$this_server['starttime'] = date("d-m-Y H:i:s a",$this_server['starttime']);}
 $info = get_server_info($this_server);
 $v = json_decode(geturl($this_server['url'].'/ajaxv2.php?action=game_detail&filter='.$bserver),true);
 //$info = array_merge($info,array_change_key_case($v[$bserver]));
