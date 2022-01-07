@@ -8,10 +8,6 @@ require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
     $Auth = new Auth ();
         $user = $Auth->getAuth();
 $we_are_here = $settings['url'];
-//print_r($user);
-//print_r($_SERVER);
-
-//die();
 if($user->loggedIn()) {
 		// set sidebar
 		// allow user to use the api (ready for v3)
@@ -21,9 +17,14 @@ if($user->loggedIn()) {
 		'ip' =>  ip2long($_SERVER['REMOTE_ADDR']),
 		'start_time' => time() 
 		) ;
-		print_r($user_data);
-		$database->insert('allowed_users',$user_data);
-		//die();
+		if ($database->get_row('select * from allowed_users where user_id = '.$user->id)) {
+			$where = array('user_id' => $user->id);
+			unset($user_data['user_id']);
+			$database->update('allowed_users',$user_data,$where);
+		} 
+		else {
+			$database->insert('allowed_users',$user_data);
+		}
    	}
    	else {
 		redirect('login.php');
