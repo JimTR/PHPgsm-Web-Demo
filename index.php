@@ -19,7 +19,7 @@ if($user->loggedIn()) {
 		'user_id' => $user->id,
 		'user_name' => $user->username,
 		'ip' =>  ip2long($_SERVER['REMOTE_ADDR']),
-		'time' => time() 
+		'start_time' => time() 
 		) ;
 		print_r($user_data);
 		$database->insert('allowed_users',$user_data);
