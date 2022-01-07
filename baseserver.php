@@ -41,7 +41,7 @@ else {
 }
 $x =$sdata['total_size_raw']/1000000;
 $sdata['quota_pc'] = $x* (100/$sdata['quota']);
-$sdata['player_pc'] = round($sdata['used_slots']/$sdata['total_slots']*100,2);
+//$sdata['player_pc'] = round($sdata['used_slots']/$sdata['total_slots']*100,2);
 //if ($sdata['player_pc'] == 0) { $sdata['player_pc'] = 100;}
  if ($sdata['reboot'] == 'yes' ) {$sdata['rebooot'] = 'rebooot';}
 $data = print_r($sdata,true);

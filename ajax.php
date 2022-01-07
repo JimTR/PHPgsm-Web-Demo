@@ -51,7 +51,7 @@ switch ($module) {
 												$Exception = $e;
 												if (strpos($Exception,'Failed to read any data from socket')) {
 														$Exception = 'Failed to read any data from socket Module (Ajax - Game Detail '.$sub_cmd.')';
-														file_put_contents(LOG,$Exception,PHP_EOL,FILE_APPEND);
+														//file_put_contents(LOG,$Exception,PHP_EOL,FILE_APPEND);
 												}
 						
 														
