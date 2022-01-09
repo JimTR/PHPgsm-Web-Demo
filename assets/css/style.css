@@ -1115,3 +1115,25 @@ h1, h2, h3, h4, h5, h6 {
   color : red;
   font-weight : bold;
 }
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.ajax_response {
+    /* clear: none; */
+    margin-left: 38%;
+    margin-top: -4.2%;
+    float: left;
+    color: green;
+    font-weight: bold;
+    z-index: 1000;
+    display: none; 
+    position: relative;
+}

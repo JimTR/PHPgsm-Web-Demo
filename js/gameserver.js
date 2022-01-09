@@ -34,14 +34,13 @@ cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=game_detail:server
 var players_online = serverd.Players-serverd.Bots
 
     if(isNaN(players_online)) {
-		players_online = 'N/A';
 		$('#status').text('Offline');
 		$('#mem').text("");
 		$('#cpu').text("");
 		$('#gametags').text("");
 		$('#hostname').text("");
 		$('#map').text('');
-		$('#players').text(players_online);
+		$('#players').text('');
 		$('#bots').text('');
 		$('#maxplayers').text('');
 		$('#items').html(items);
@@ -50,6 +49,9 @@ var players_online = serverd.Players-serverd.Bots
 		$('#maxplayers').text('');
 		$('#start').text('');
 		$('#update').text('');
+		$('#build').text('');
+		$('#server_id').text('');
+		$('#gameid').text('');
 		// buttons 
 		//$('#'+server_id+'qbutton').removeClass('btn-primary').addClass('btn-danger');
 		$('#stop_server').addClass('hidden');
@@ -57,11 +59,11 @@ var players_online = serverd.Players-serverd.Bots
 		$('#start_server').removeClass('hidden');
 		$('#cvar').addClass('hidden');
 		$('#join_server').addClass('hidden');
+		$('#send').prop('disabled', true);
 		
 		
 	}
 	else {
-			var st =  serverd.starttime;
 			console.log ('got to html mangle');
 			$('#status').text(serverd.online);
 			$('#mem').text(serverd.mem+"%");
@@ -79,13 +81,15 @@ var players_online = serverd.Players-serverd.Bots
 			$('#maxplayers').text(serverd.MaxPlayers);
 			$('#start').text(date_format(serverd.starttime));
 			$('#update').text(date_format(serverd.server_update));
+			$('#build').text(serverd.Version);
+			$('#server_id').text(serverd.server_id);
 			//buttons
 			$('#stop_server').removeClass('hidden');
 			$('#restart_server').removeClass('hidden');
 			$('#cvar').removeClass('hidden');
 			$('#start_server').addClass('hidden');
 			$('#join_server').removeClass('hidden');
-			
+			$('#send').prop('disabled', false);
 		}
 		}
     });
@@ -211,4 +215,41 @@ function date_format( timestamp) {
 	var date = new Date(timestampInMilliSeconds);
 	var formatted_date = date.format('d-m-Y \\a\\t h:i a');
 	return (formatted_date);
+}
+function start_server() {
+	//starts the server
+	cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=exescreen:server='+id+':cmd=s';
+	//alert(cmd);
+	$.get(cmd, function(data, status){
+		//alert("Data: " + data + "\nStatus: " + status);
+		if(status == "success" ) {
+			//$("#"+id).blur();
+			console.log(data);
+		 }
+	});
+}
+
+function stop_server() {
+	//starts the server
+	cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=exescreen:server='+id+':cmd=q';
+	//alert(cmd);
+	$.get(cmd, function(data, status){
+		//alert("Data: " + data + "\nStatus: " + status);
+		if(status == "success" ) {
+			//$("#"+id).blur();
+			console.log(data);
+		 }
+	});
+}
+function restart_server() {
+	//starts the server
+	cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=exescreen:server='+id+':cmd=r';
+	//alert(cmd);
+	$.get(cmd, function(data, status){
+		//alert("Data: " + data + "\nStatus: " + status);
+		if(status == "success" ) {
+			//$("#"+id).blur();
+			console.log(data);
+		 }
+	});
 }

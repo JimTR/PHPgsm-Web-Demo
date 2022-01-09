@@ -77,16 +77,19 @@
 						</tr>
 						<tr>-->
 							<div style="width:100%;padding-top:10px;">
-								<form id="sendcmd"  style ="width:80%;float:left;padding-top:2%;" action="<!--#url#-->/ajaxv2.php" method="get">
+								<form id="sendcmd"  style ="width:100%;float:left;padding-top:2%;" action="<!--#url#-->/ajaxv2.php" method="get">
+								<div class="input-group">
 									<input type="text" class="form-control" placeholder="Enter Server Command" name="text" id="text">
 									 <input type="hidden" id="action" name="action" value="exescreen">
 									<input type="hidden" id="server" name="server" value="<!--#host_name#-->">
 									<input type="hidden" id="cmd" name="cmd" value="c">
 									<input type="hidden" id="key" name="key" value="{$key}">
-									 
+								   <input  type="submit" id="send"  class="hidden" value="do this">
+								    <label for="send" class="btn btn-info">Send <i class="bx bxs-send"></i></label>
+								</div>
 								</form>
-								
-							      <button  id="send" style="float:right;clear:none;margin-top:2%;margin-right:5%;" type="button" class="btn btn-info"><i class="bx bxs-send"></i> Send</button>
+								<div class ="ajax_response" id="ajax-response"></div>
+							      
 									
 							</div>
 						<!--</tr>
@@ -103,11 +106,12 @@
 						<tr><td style="width:50%;">Managed By</td><td><!--#managed_by#--></td></tr>
                         <tr><td>Host Name</td><td><!--#host_name#--></td></tr>
                         <tr><td>Broadcast Name</td><td id="broadcast_name"><!--#server_name#--></td></tr>
-                        <tr><td>Default Map</td><td id="default_map"><!--#default_map#--></td></tr>
+                        <tr><td>Start Up Map</td><td id="default_map"><!--#default_map#--></td></tr>
                         <tr><td>Game Port</td><td id="port"><!--#port#--></td></tr>
                         <tr><td>Client Port</td><td id="client_port"><!--#client_port#--></td></tr>
                         <tr><td>Tv Port</td><td id="source_port"><!--#source_port#--></td></tr>
                         <tr><td>Game Tags</td><td id = "start_tags"><!--#gametags#--></td></tr>
+                        <tr><td>Started</td><td id="start"></td></tr>
 						
 		 </table>
             </div>
@@ -138,12 +142,11 @@
 			     <tr style="border-bottom: 12px solid transparent;">
 					 <!--#buttons#-->
 					<td class="hidden pad_right"   id="stop_server"><button id="stop_serverd" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Stop Server</button></td>
-					  <td class="hidden pad_right"   id="start_server"><button id="start_serverd" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="far fa-play-circle"></i> Start Server</button></td>
-					<td class="hidden pad_right"   id="restart_server"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ban_user"><i class="ri-restart-line"></i> Restart Server</button></td>
+					<td class="hidden pad_right"   id="start_server"><button class="btn btn-success"  onclick="start_server()"><i class="far fa-play-circle"></i> Start Server</button></td>
+					<td class="hidden pad_right"   id="restart_server"><button class="btn btn-warning" onclick="restart_server()"><i class="ri-restart-line"></i> Restart Server</button></td>
 					<td class="hidden pad_right"   id="join_server"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->"> Join Server</a></button></td>
-				
-					<td class="hidden pad_right"   id="cvar"><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> View C Vars</button></td>
-					<td id="settings"  ><button type="button" class="btn btn-primary"><i class="ri-edit-2-line"></i> Settings</button></td>
+					<td class="hidden pad_right"   id="cvar"><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> View C Vars</button></td>
+					<td id="settings"><button class="btn btn-primary"><i class="ri-edit-2-line"></i> Settings</button></td>
 				</tr>
                 </table>
             </div>
@@ -175,10 +178,10 @@
                         <tr><td>Max Players</td><td id="maxplayers"></td></tr>
                         <tr><td>Secure</td><td id="secure"></td></tr>
                         <tr><td>Client Software ID</td><td id="gameid"></td></tr>
-                        <tr><td>Server Software ID</td><td id="server"><!--#server_id#--></td></tr>
-                        <tr><td>Server Build</td><td id="build"></td></tr>
+                        <tr><td>Server Software ID</td><td id="server_id"></td></tr>
+                        <tr><td>Server Version</td><td id="build"></td></tr>
                         <tr><td>Last Update</td><td id="update"><!--#server_update#--></td></tr>
-                        <tr><td>Started</td><td id="start"></td></tr>
+                        
                         <tr><td>CPU use</td><td id="cpu"></td></tr>
                         <tr><td>Memory use</td><td id="mem"></td></tr>
                         <tr><td>Game Tags</td><td id="gametags"><!--#gametags#--></td></tr>
@@ -359,17 +362,17 @@
     //console.log(url);
     //base_servers(url)
 
- $('#send').click(function() {
-        //e.preventDefault();
+ 	$('#sendcmd').on('submit', function(e) {
+        e.preventDefault();
         //alert('send command');
-      // $("#sendcmd").submit();
-     
+       console.log( $(this).attr('action'));
+        
         $.ajax({
-            type: $("#sendcmd").attr('method'),
-            url: $("#sendcmd").attr('action'),
-            data: $("#sendcmd").serialize(),
+            type: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
             success: function(data) {
-                //alert(data);
+            
                 $('#ajax-response').html(data);
                 $("#ajax-response").show();
                 $('#text').val(""); 
@@ -379,25 +382,12 @@
         });
 
     });
-
     $('#quit').click(function() {
 		// pressed quit
 		cmd = url+'/ajaxv2.php?action=version';
 		alert ('hit quit '+url);
 		 $('#quit_game').modal('hide');
-		  $.ajax({
-            type: 'GET',
-            url: cmd,
-            //data: $("#sendcmd").serialize(),
-            success: function(data) {
-                console.log(data);
-                //$('#ajax-response').html(data);
-                //$("#ajax-response").show();
-                //$('#text').val(""); 
-                $("#stop_server").blur(); 
-                //$('#ajax-response').delay(3000).fadeOut('slow');
-            }
-        });
+		 stop_server(); 
 
 	});
 	
