@@ -66,21 +66,27 @@ $v = json_decode(geturl($this_server['url'].'/ajaxv2.php?action=game_detail&filt
 //$info = array_merge($info,array_change_key_case($v[$bserver]));
 if ($info['l_status'] == 'offline') {
 	$page['display'] = 'hidden';
-	$page['buttons'] =  '<td  id="start"><button id="stop_server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Start Server</button></td>';
-	$page['buttons'] .= '<td id="settings"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit"><i class="ri-edit-2-line"></i> Settings</button></td>';
+	//$page['buttons'] =  '<td  id="start"><button id="stop_server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Start Server</button></td>';
+	//$page['buttons'] .= '<td id="settings"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit"><i class="ri-edit-2-line"></i> Settings</button></td>';
 	}
 else {
-	$page['buttons'] = ' <td class="<!--#display#-->" id="stop"><button id="stop_server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Stop Server</button></td>
-					  					<td class="<!--#display#-->" id="restart"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ban_user"><i class="ri-restart-line"></i> Restart Server</button></td>
-					<td class="<!--#display#-->" id="join"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->"> Join Server</a></button></td>
-				
-					<td class="<!--#display#-->" id="cvar"><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> View C Vars</button></td>
-					<td id="settings"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit"><i class="ri-edit-2-line"></i> Settings</button></td>';
+	//$page['buttons'] = ' <td class="<!--#display#-->" id="stop"><button id="stop_server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Stop Server</button></td>
+	//				  					<td class="<!--#display#-->" id="restart"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ban_user"><i class="ri-restart-line"></i> Restart Server</button></td>
+	//				<td class="<!--#display#-->" id="join"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->"> Join Server</a></button></td>
+	//			
+	//				<td class="<!--#display#-->" id="cvar"><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> View C Vars</button></td>
+	//				<td id="settings"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit"><i class="ri-edit-2-line"></i> Settings</button></td>';
 }	
 $this_server = array_change_key_case(array_merge_recursive($this_server,$info));
 $this_server['players'] -= $this_server['bots'];
 //$this_server['rserver_update'] = date('d-m-y h: i:s a',$this_server['rserver_update']);
 if ($this_server['secure']) {$this_server['secure'] = 'true';} else {$this_server['secure'] = 'false';}
+
+//if(!empty($this_server['mem'])) {
+//	print_r($this_server);
+//	$this_server['mem'] .="%";
+//	$this_server['cpu'] .="%";
+//} 
 $page['join_link'] = 'steam://connect/'.$this_server['host'].':'.$this_server['port'].'/'; 
 $is = explode("\t",trim(shell_exec('du -hs '.$this_server['install_dir'])));
 $this_server['install_size'] = $is[0];

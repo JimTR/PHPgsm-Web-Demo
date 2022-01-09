@@ -1105,8 +1105,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .hidden {
   display: none;
+  width: 0px;
 }
 
+.pad_right {
+  padding-right: 6px;
+}
 .rebooot {
   color : red;
   font-weight : bold;

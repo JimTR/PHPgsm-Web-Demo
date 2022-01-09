@@ -133,17 +133,17 @@
 				<div class="card">
             <div class="card-body">
               <h5 class="card-title">Controls</h5>
-                <table style="width:100%;">
+                <table>
 					
 			     <tr style="border-bottom: 12px solid transparent;">
 					 <!--#buttons#-->
-					<!-- <td class="" id="stop"><button id="stop_server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Stop Server</button></td>
-					  <td class=""  id="start"><button id="stop_server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Start Server</button></td>
-					<td class="" id="restart"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ban_user"><i class="ri-restart-line"></i> Restart Server</button></td>
-					<td class="" id="join"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#->"> Join Server</a></button></td>
+					<td class="hidden pad_right"   id="stop_server"><button id="stop_serverd" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Stop Server</button></td>
+					  <td class="hidden pad_right"   id="start_server"><button id="start_serverd" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="far fa-play-circle"></i> Start Server</button></td>
+					<td class="hidden pad_right"   id="restart_server"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ban_user"><i class="ri-restart-line"></i> Restart Server</button></td>
+					<td class="hidden pad_right"   id="join_server"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->"> Join Server</a></button></td>
 				
-					<td class="" id="cvar"><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> View C Vars</button></td>
-					<td id="settings"><button type="button" class="btn btn-primary"><i class="ri-edit-2-line"></i> Settings</button></td>-->
+					<td class="hidden pad_right"   id="cvar"><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> View C Vars</button></td>
+					<td id="settings"  ><button type="button" class="btn btn-primary"><i class="ri-edit-2-line"></i> Settings</button></td>
 				</tr>
                 </table>
             </div>
@@ -165,23 +165,22 @@
           </div> 
 	<div class="card">
             <div class="card-body">
-              <h5 class="card-title">Current Status <!--#l_status#--></h5>
+              <h5 class="card-title">Current Status <span id="status" class="card-title" style="font-size:18px;color:#012970;font-weight: 500;"><!--#l_status#--></span></h5>
                 <table style="width:100%;" class="table">
-						<tr><td style="width:25%;">Steam ID</td><td id="steamid"><!--#steamid#--></td></tr>
-                        <tr><td style="width:25%;">Broadcast Name</td><td id="hostname"><!--#hostname#--></td></tr>
-                        <tr><td>Current Map</td><td id="map"><!--#map#--></td></tr>
-                        <tr><td>Players Online</td><td id="players"><!--#players#--></td></tr>
-                        <tr><td>Bots Online</td><td id="bots"><!--#bots#--></td></tr>
-                        <tr><td>Max Players</td id="maxplayers"><td><!--#maxplayers#--></td></tr>
-                        <tr><td>Secure</td><td ="secure"><!--#secure#--></td></tr>
-                        
-                        <tr><td>Client Software ID</td><td><!--#gameid#--></td></tr>
-                        <tr><td>Server Software ID</td><td><!--#server_id#--></td></tr>
-                        <tr><td>Server Build</td><td><!--#rbuildid#--></td></tr>
-                        <tr><td>Last Update</td><td><!--#server_update#--></td></tr>
-                        <tr><td>Started</td><td><!--#starttime#--></td></tr>
-                        <tr><td>CPU use</td><td id="cpu"><!--#cpu#-->%</td></tr>
-                        <tr><td>Memory use</td><td id="mem"><!--#mem#-->%</td></tr>
+						<tr><td style="width:25%;">Steam ID</td><td id="steamid"></td></tr>
+                        <tr><td style="width:25%;">Broadcast Name</td><td id="hostname"></td></tr>
+                        <tr><td>Current Map</td><td id="map"></td></tr>
+                        <tr><td>Players Online</td><td id="players"></td></tr>
+                        <tr><td>Bots Online</td><td id="bots"></td></tr>
+                        <tr><td>Max Players</td><td id="maxplayers"></td></tr>
+                        <tr><td>Secure</td><td id="secure"></td></tr>
+                        <tr><td>Client Software ID</td><td id="gameid"></td></tr>
+                        <tr><td>Server Software ID</td><td id="server"><!--#server_id#--></td></tr>
+                        <tr><td>Server Build</td><td id="build"></td></tr>
+                        <tr><td>Last Update</td><td id="update"><!--#server_update#--></td></tr>
+                        <tr><td>Started</td><td id="start"></td></tr>
+                        <tr><td>CPU use</td><td id="cpu"></td></tr>
+                        <tr><td>Memory use</td><td id="mem"></td></tr>
                         <tr><td>Game Tags</td><td id="gametags"><!--#gametags#--></td></tr>
                         <tr><td>API location</td><td><!--#url#--></td></tr>
                          
@@ -287,7 +286,9 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequatur nemo amet incidunt est facilis. Dolorem neque recusandae quo sit molestias sint dignissimos.
+                     <table class="table">
+						 <tbody id="items"></tbody>
+                     </table>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -331,6 +332,7 @@
   <script src="assets/js/main.js"></script>
   <script src="js/pindex.js"></script>
   <script src="js/gameserver.js"></script>
+  <script src="js/date_format.js"></script>
   <script src = "js/jquery.js"></script>
 <script>
 	var a_href=0;
@@ -349,7 +351,7 @@
      server ="<!--#fname#-->";
      port = 0;
      fetchlog(port,id,url);
-      setInterval(fetchlog, 5000);
+      setInterval(fetchlog, 2000);
      players(port,id,url);
      setInterval(players, 7000);
      get_game(url,server,id);
@@ -357,113 +359,7 @@
     //console.log(url);
     //base_servers(url)
 
-
-function fetchlog() {
-	//alert(url+"  "+id);
-	rows = 0;
-	cmd = url+'/ajax_send.php?url='+url+'/ajaxv21.php&query=action=console:server='+id+':rows='+rows+':output=json';
-	//alert (cmd);
-	var items='';
-         console.log(cmd);
-          $.ajax({
-			
-        type: 'GET',
-        url: cmd,
-        dataType: "json",
-			    statusCode: {
-        500: function() {
-          alert("Script exhausted");
-			return;
-        }
-      },
-        success: function (data) {
-                        console.log('got data - fetchlog');
-						//console.log(data);
-
-        },
-        complete:function(data){
-                         //console.log(data);
-                        
-$.each(data.responseJSON, function(i, item) {
-    //alert(item);
-items = items+item;
-});
-			//setInterval(fetchlog(port,id,url), 5000);
-			var element = document.getElementById("log");
-			if (element.scrollHeight - element.scrollTop === element.clientHeight)
-    		{
-				var bottom = true;
-			}
-			else {
-				var bottom =false;
-			}
-$("#log").html(items);
-			       if (bottom == true) {
-     				element.scrollTop = element.scrollHeight;
-					console.log('top = '+element.scrollTop);
-				   }
-                }
-    });
-
-};
-function players() {
-	 //get player functions
-	//alert ('Players ! '+url+' '+id);
-        var items='';
-		var cerror=false;
-	cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=viewserver:id='+id;
-	//alert(cmd);
-         console.log(cmd);
-          $.ajax({
-		
-		type: 'GET',
-        url: cmd,
-        dataType: "json",
-        success: function (data) {
-                       console.log('got data - viewplayers');
-					 //info = data.responseJSON.info;
-             		//console.log('current data - '+info);	
-
-        },
-        complete:function(data){
-                       // console.log(data);
-						//setInterval(players(port,id,url), 5000);
-                        info = data.responseJSON.info;
-                        player = data.responseJSON.players;
-			             if(typeof(info.Map) == 'undefined') {
-				  			console.log('no map !');
-				  			return 0;
-			  			}
-						else {
-							$('#player_title').html('Current Map&nbsp;'+info.Map);
-						}
-						if(typeof(player) == "null") { 
-							console.log('returning empty from players function');
-   							 return 0;
-						} 
-						//pno = player.length;
-						
-                       
-			
-$.each(player, function(i, item) {
-    //alert(item);
-items = items+'<tr id="'+item.steam_id+'"style="width:100%;"><td class="tpButton">'+item.Name+'</td><td id="'+item.ip+'"><img class="flag" '+item.flag+'/>'+item.country+'</td><td style="text-align:right;">'+item.Frags+'</td><td style="text-align:right;padding-right:2%;">'+item.TimeF+'</td></tr>';
-});
-
-$("#pbody").html(items);
-items='<div style="width:100%;position:relative;text-align:center;top:5;">Current Rule Set</div><br>';
-			items='';
-			 rules = data.responseJSON.rules;
-$.each(rules, function(i, item2) {
-    //alert(item);
-items = items+'<div style="clear:both;padding:5px;"><div style="padding-right:10px;width:30%;text-align:left;float:left;">'+i+'</div><div style="width:60%;clear:none;text-align:right;float:left;">'+item2+'</div></div>';
-});
-$("#rule").html(items);
-                }
-    });
-
-};
-				 $('#send').click(function() {
+ $('#send').click(function() {
         //e.preventDefault();
         //alert('send command');
       // $("#sendcmd").submit();
@@ -483,6 +379,7 @@ $("#rule").html(items);
         });
 
     });
+
     $('#quit').click(function() {
 		// pressed quit
 		cmd = url+'/ajaxv2.php?action=version';
