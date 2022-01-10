@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Quick Console</title>
+  <title>Console</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -46,52 +46,53 @@
   <!--#sidebar#-->
   <!-- ======= End Sidebar-->
 
-  <main id="main" class="main">
+  <main id="main">
 
     <div class="pagetitle">
-      <h1>Quick Console</h1>
+      <h1>Console</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item active">Quick Console</li>
+          <li class="breadcrumb-item active">Console</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section">
-      <div class="row">
+<section class="section">
+	 <div class="row">
         <div class="col-lg-12">
-
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title" style="font-size:14px">Choose Server&nbsp;<select id="servers"><!--#sbox#--></select></h5>
-              <div id="log" style="padding:0.5%;background:#000;color:#fff;width:60%;max-height:520px !important;min-height:520px;height:520px;overflow:scroll;float:left;white-space: nowrap;border-style:double;text-align:left;"></div>
-              <div id="player" style="clear:none;width:37%;float:right;margin-right:1%;">
-		<div class="card-title" style="text-align:center;font-size:14px;" id="player_title">Choose Game</div>
-		<table class="table table-sml" id="players_table">
-                 <thead>
-			<tr style="padding-bottom:6px;">
-			<th>Name</th>
-			<th>Location</th>
-			<th>Score</th>
-			<th>Time</th>
-			</tr>
-			</thead>	
-			<tbody id="pbody"></tbody>
-		</table>
-		<div id="player_rows"></div>
-	</div>
-	<div style="clear:both;padding:2%;">
+              <h5 class="card-title" style="font-size:14px"><span style="padding-right:1%;color:#000;">Choose Server</span><select id="servers"><!--#sbox#--></select></h5>
+              <div id="log"  class="gameserver_log" style="font-size:14px;width:60%;"></div>
+				<div id="player" style="clear:none;width:37%;float:right;margin-right:1%;">
+					<div class="card-title" style="text-align:center;font-size:14px;" id="player_title">Choose Game</div>
+						<table class="table table-sml" id="players_table">
+							<thead>
+								<tr style="padding-bottom:6px;">
+									<th>Name</th>
+									<th>Location</th>
+									<th>Score</th>
+									<th>Time</th>
+								</tr>
+							</thead>	
+							<tbody id="pbody"></tbody>
+						</table>
+					<div id="player_rows"></div>
+				</div>
+			<div style="clear:both;padding:2%;">
 		<div>	   
-	   <form id="sendcmd" style="width:auto;float:left;" action="/ajaxv2.php" method="get">
-       
-    <input style="float:left;margin-right:7px;margin-top:4px;" name="text" type="text" id="text" size="50" placeholder="Enter Server Command">
-		   <input type="hidden" id="action" name="action" value="exescreen">
-    <input type="hidden" id="server" name="server" value="">
-    <input type="hidden" id="cmd" name="cmd" value="c">
-	<input type="hidden" id="key" name="key" value="">	   
-    <input class="btn btn-primary" type="submit" value="send" id="send">
-    </form>
+		<form id="sendcmd" style="width:60%;float:left;" action="/ajaxv2.php" method="get">
+			<div class="input-group">
+				<input class="form-control"name="text" type="text" id="text" size="50" placeholder="Enter Server Command">
+				<input type="hidden" id="action" name="action" value="exescreen">
+				<input type="hidden" id="server" name="server" value="">
+				<input type="hidden" id="cmd" name="cmd" value="c">
+				<input type="hidden" id="key" name="key" value="">
+				<label for="send" class="btn btn-info">Send <i class="bx bxs-send"></i></label>	   
+				<input class="hidden" type="submit" value="send" id="send">
+			</div>	
+		</form>
 			<div style="clear:none;margin-left:1%;margin-top:0.5%;float:left;color:green;font-weight:bold;" id="ajax-response"></div>
 		</div>		
 

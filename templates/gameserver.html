@@ -69,28 +69,20 @@
 			 <div class="card">
             <div class="card-body">
               <h5 class="card-title">Console</h5>
-              <!--<table style="width:100%;padding:4px;">
-                        <tr style="border-bottom: 12px solid transparent;">
-							<td colspan="2" >-->
-								<div id ="log" style="background:#000;color:#fff;width:100%;max-height:520px !important;min-height:520px;height:520px;overflow:scroll;padding:1%;float:left;white-space: nowrap;border-style:double;text-align:left;font-size:smaller;"></div>
-							<!--</td>
-						</tr>
-						<tr>-->
+					<div id ="log" class="gameserver_log"></div>
 							<div style="width:100%;padding-top:10px;">
 								<form id="sendcmd"  style ="width:100%;float:left;padding-top:2%;" action="<!--#url#-->/ajaxv2.php" method="get">
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Enter Server Command" name="text" id="text">
-									 <input type="hidden" id="action" name="action" value="exescreen">
-									<input type="hidden" id="server" name="server" value="<!--#host_name#-->">
-									<input type="hidden" id="cmd" name="cmd" value="c">
-									<input type="hidden" id="key" name="key" value="{$key}">
-								   <input  type="submit" id="send"  class="hidden" value="do this">
-								    <label for="send" class="btn btn-info">Send <i class="bx bxs-send"></i></label>
-								</div>
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="Enter Server Command" name="text" id="text">
+										<input type="hidden" id="action" name="action" value="exescreen">
+										<input type="hidden" id="server" name="server" value="<!--#host_name#-->">
+										<input type="hidden" id="cmd" name="cmd" value="c">
+										<input type="hidden" id="key" name="key" value="{$key}">
+										<input  type="submit" id="send"  class="hidden" value="do this">
+										<label for="send" class="btn btn-info">Send <i class="bx bxs-send"></i></label>
+									</div>
 								</form>
 								<div class ="ajax_response" id="ajax-response"></div>
-							      
-									
 							</div>
 						<!--</tr>
                     
@@ -146,7 +138,7 @@
 					<td class="hidden pad_right"   id="restart_server"><button class="btn btn-warning" onclick="restart_server()"><i class="ri-restart-line"></i> Restart Server</button></td>
 					<td class="hidden pad_right"   id="join_server"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->"> Join Server</a></button></td>
 					<td class="hidden pad_right"   id="cvar"><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> View C Vars</button></td>
-					<td id="settings"><button class="btn btn-primary"><i class="ri-edit-2-line"></i> Settings</button></td>
+					<td id="settings"><button class="btn btn-primary" onclick"$('body').toggleClass('light dark')"><i class="ri-edit-2-line"></i> Settings</button></td>
 				</tr>
                 </table>
             </div>
