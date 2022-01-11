@@ -324,16 +324,21 @@
 	<script src = "js/jquery.js"></script>
 	<script>
 	jQuery(document).ready(function(){
+	sessionStorage.clear();	
     const servers = [<!--#jsa#-->];
     updateClock();
     setInterval('updateClock()', 1000);
     var url = "<!--#url#-->";
-    console.log(url);
+    var jim = '';
+    //console.log(url);
     index(url)
     jQuery.each( servers, function( i, val ) {
 		//
 		console.log(val);
+		
 		online(val);
+		setInterval( function() { online(val); }, 5000 );
+		//setInterval('online()', 8000);
 	});
 });
 </script>

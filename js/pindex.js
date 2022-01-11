@@ -15,7 +15,7 @@ function index(url) {
 			//alert (data1.players);
 		},
         complete:function(data1){
-			    setTimeout(index(url),3000);
+			    setTimeout(index(url),7000);
 				
 		}
     });
@@ -30,7 +30,7 @@ function game_server(url,server) {
         dataType: "json", 
         success: function (data1) {
 			// got data
-			console.log(data1);
+			//console.log(data1);
 			//$('#player_tot').text(data1.player_tot);
 			//$('#logins_tot').text(data1.logins_tot);
 			//$('#players').text(data1.players);
@@ -44,7 +44,8 @@ function game_server(url,server) {
 });
 }
 function online(url){
-        console.log('Welcome to online using '+url);
+        var timer =sessionStorage.getItem(url);
+       // console.log(timer);
 	 $.ajax({
      url: url,
    type: 'post',
@@ -92,7 +93,7 @@ for (var i in data1) {
 					   var logo  =server.url+':'+server.bport+'/'+server.logo;
 					  //console.log('server.Players = '+server.Players );
 					   if (typeof server.Players === "undefined") {
-						   console.log('Players not set '+server.server_name);
+						   //console.log('Players not set '+server.server_name);
 						   			//return true;
 						   			server.Players = 0;
 								}   
@@ -143,12 +144,15 @@ for (var i in data1) {
           fail: function() {
             //Something went wrong. Inform user/try again as appropriate
             alert('Failed');
-            setTimeout('Update()', 2000);
+            //setTimeout('Update()', 2000);
         },
   complete:function(data,data1){
-	 
-    // console.log('hide loading '); 
-	setTimeout(online(url),5000);
+if(timer === null){ console.log('timer not set')};
+//else { console.log('timer set')};	 
+     //console.log('setting next respone time for '+url); 
+	//setTimeout(online(url),8000);
+        sessionStorage.setItem(url, "value");
+        
 	//if (hide == 1 ) {
 		//$('#loading').hide();
 		//$('#game_block').show();
@@ -174,7 +178,7 @@ function timeConverter(UNIX_timestamp){
   //var date = dateOrdinal(date);
   var d = a.getDate();
 	var d1 =a.getHours();
-console.log(currentHours);
+//console.log(currentHours);
 var d = ('0'+d).slice(-2);
 	var m = a.getMonth()+1;
 var m = ('0'+m).slice(-2);
