@@ -90,7 +90,7 @@
            
         },
         complete:function(data,data1){
-			    setTimeout(base_servers(url),3000);
+			    //setTimeout(base_servers(url),3000);
 				$('#games').show();
 				$('#loading').hide();
 				$("div").removeClass("active");

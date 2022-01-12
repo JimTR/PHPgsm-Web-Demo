@@ -252,6 +252,7 @@
     var url = "<!--#url#-->";
     console.log(url);
     base_servers(url)
+    setInterval( function() { base_servers(url); }, 5000 );
 });
 </script>
 </body>
