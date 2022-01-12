@@ -1158,3 +1158,19 @@ h1, h2, h3, h4, h5, h6 {
   color:green;
   font-weight:bold;
 }
+
+.invert_link {
+  background: #fff;
+  color: #000;
+  padding: 9px 10px;
+}
+
+.invert_link:hover {
+  background: #000;
+  color: #fff;
+  padding: 9px 10px;
+}
+
+a.invert:hover {
+  color:red;
+} 
