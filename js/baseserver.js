@@ -24,12 +24,13 @@
 				$('#root').removeClass('hidden');
 				$('#user').removeClass('hidden');
 				console.log(data.dir);
-				$('#u_fs').addClass('hidden');
-				$('#user').width('40%');
+				//$('#u_fs').addClass('hidden');
+				//$('#user').width('40%');
 			}
 			else {
 				$('#user').removeClass('hidden');
-				$('#u_fs').removeClass('hidden');
+				$('#root').addClass('hidden');
+				//$('#u_fs').removeClass('hidden');
 			}	
             $('#boot_mount').text(data.root_mount);
 		    $('#boot_size').text(data.root_size);

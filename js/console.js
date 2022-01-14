@@ -169,7 +169,7 @@ $("#rule").html(items);
     });
 
 };
-				 $('#sendcmd').on('submit', function(e) {
+$('#sendcmd').on('submit', function(e) {
         e.preventDefault();
         //alert('send command');
        console.log( $(this).attr('action'));
@@ -195,13 +195,20 @@ $('#player').on('click','.tpButton', function(event) {
 	    var user = $("#"+href).find("td:first").text();
 	    	
         if(href) {
+			if(href == 'undefined') {
+				//alert('can not ban an unknown user');
+				$('#error_action').text('Invalid User');
+				$('#error_text').text('can not ban an unknown user or bot');
+				$('#error').modal('show');
+				return ;
+				}
         	$('#name').attr('value',user)
 			$('#ip').attr('value',ip)
 			$('#steam_id').attr('value',href)
 			$('#ban_user').modal('show');
 		}
 	 console.log( "click players");
-    });
+	});
 
 		            
                 function ban_user() {

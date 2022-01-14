@@ -48,11 +48,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Base Server Information</h1>
+      <h1>API Server Information</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item">Base Servers</li>
+          <li class="breadcrumb-item">API Servers</li>
           <li class="breadcrumb-item active"><!--#bserver#--></li>
         </ol>
       </nav>
@@ -65,7 +65,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Hardware</h5>
-              	<table>
+              	<table class="table">
                         <tr><td>Uptime</td><td id="boot"><!--#boot_time#--></td></tr>
 						<tr><td style="width:32%;">CPU Model</td><td id="model"><!--#model_name#--></td></tr>
 						<tr><td>CPU Processors</td><td id="processors"><!--#processors#--></td></tr>
@@ -83,26 +83,30 @@
 <div class="card">
             <div class="card-body">
               <h5 class="card-title">Disk</h5>
-                <table id="root" class="hidden">
-                        <tr><td style="width:40%;">File System</td><td><!--#root_filesystem#--></td></tr>
+                <table class="table">
+						<tbody id="root" class="hidden" style="border-top:0px;">
+                        <tr><td style="width:31%;">File System</td><td><!--#root_filesystem#--></td></tr>
                         <tr><td>Mount Point</td><td id="boot_mount"><!--#root_mount#--></td></tr>
                         <tr><td>Disk Size</td><td id="boot_size"><!--#root_size#--></td></tr>
                         <tr><td>Disk Used</td><td id="boot_used"><!--#root_used#--> (<!--#root_pc#-->)</td></tr>
                         <tr><td>Disk Free</td><td id="boot_free"><!--#root_free#--></td></tr>
-                </table>
-                 <table id="user" class="hidden">
-                        <tr id="u_fs" class="hidden"><td style="width:40%;">File System</td><td><!--#root_filesystem#--></td></tr>
-                        <tr><td>Quota Folder</td><td id="u_mount"></td></tr>
+                        </tbody>
+                <!--</table>
+                 <table id="user" class="table hidden">-->
+					<tbody id="user" style="border-top: 0px;">
+                        <tr id="u_fs"><td>Home File System</td><td><!--#home_filesystem#--></td></tr>
+                        <tr><td style="width:31%;">Home Folder</td><td id="u_mount"></td></tr>
                         <tr><td>Quota Size</td><td id="u_size"></td></tr>
                         <tr><td>Quota Used</td><td id="u_used"></td></tr>
                         <tr><td>Quota Free</td><td id="u_free"></td></tr>
+                     </tbody>   
                 </table>
             </div>
           </div>
 <div class="card">
             <div class="card-body">
               <h5 class="card-title">Memory</h5>
-                <table style="width:100%;">
+                <table class="table">
 			<tr><th></th><th>Total</th><th>Free</th><th>Cached</th><th>Active</th></tr>
                         <tr>
 							<td style="width:20%;">Memory</td>
@@ -132,7 +136,7 @@
 	<div class="card">
             <div class="card-body">
               <h5 class="card-title">Software</h5>
-                <table style="width:100%;">
+                <table class="table">
                         <tr><td style="width:20%;">Host Name</td><td><!--#host#--></td></tr>
                         <tr><td>Server OS</td><td><!--#os#--></td></tr>
                         <tr><td>Kernel Version</td><td><!--#k_ver#--></td></tr>
@@ -156,7 +160,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Game Server Statistics</h5>
-              <table style="width:100%;padding:4px;">
+              <table class="table">
                         <tr>
 							<td style="width:20%;">Online Servers</td>
 							<td  style="padding:1%;">
