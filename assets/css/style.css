@@ -1088,8 +1088,9 @@ h1, h2, h3, h4, h5, h6 {
 --------------------------------------------------------------*/
 .flag {
   width:17%;
-  padding-right:5%;
+  padding-right:0%;
   vertical-align: middle;
+  border: 1px solid #000;
 }
 .frag {
   width:5%;
