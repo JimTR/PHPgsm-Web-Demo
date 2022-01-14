@@ -6,8 +6,8 @@ require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
 	define( 'LOG',	'logs/ajax.log');
     $Auth = new Auth ();
-        $user = $Auth->getAuth();
-$we_are_here = $settings['url'];
+    $user = $Auth->getAuth();
+	$we_are_here = $settings['url'];
 if($user->loggedIn()) {
 		// set sidebar
 		// allow user to use the api (ready for v3)
@@ -44,8 +44,8 @@ foreach ($servers as $server) {
 		$start = date("d-m-y  h:i:s a",$server['starttime']);
 	     $fname = $server['host_name'];
 	     $disp ='style="display:none;"';
-		 $href = $we_are_here.'/gameserver.php?server='.$server['host_name'];
-		 $gd .='<tr id="'.$fname.'" '.$disp.'><td><span class="invert_link"><a href="'.$href.'" class="invert_link">'.$server['server_name'].'</a></span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="gdate'.$fname.'">'.$start.'</td></tr>'; 
+		 $href = 'gameserver.php?server='.$server['host_name'];
+		 $gd .='<tr id="'.$fname.'" '.$disp.'><td><span class="invert_link"><a href="'.$href1.'" class="invert_link">'.$server['server_name'].'</a></span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="gdate'.$fname.'">'.$start.'</td></tr>'; 
 		 $sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 	try
 			{
