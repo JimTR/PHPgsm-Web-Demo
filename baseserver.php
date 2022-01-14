@@ -20,7 +20,7 @@ $we_are_here = $settings['url'];
 $sidebar_data['smenu'] = '';
 $servers = $database->get_results($sql);
 foreach ($servers as $server) {
-	$href = $we_are_here.'/gameserver.php?server='.$server['host_name'];
+	$href = 'gameserver.php?server='.$server['host_name'];
 	$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 }
 $sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `fname` ASC";
