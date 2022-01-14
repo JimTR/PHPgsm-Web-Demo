@@ -7,6 +7,8 @@
         success: function (data) {
 	    var server_id = data.server_id; 
             //console.log(server_id);
+            if ($('#level').text() == 'admin') {var level = 1;} 
+            else { var level = 0;}
             $('#boot').text(data.boot_time);
             $('#model').text(data.model_name);
             $('#processors').text(data.processors);
@@ -17,8 +19,20 @@
             $('#ip').text(data.ips);
             $('#reboot').text(data.reboot);
             $('#boot_filesystem').text(data.root_filesystem);
+            if (level == 1) {
+				console.log('here we go');
+				$('#root').removeClass('hidden');
+				$('#user').removeClass('hidden');
+				console.log(data.dir);
+				$('#u_fs').addClass('hidden');
+				$('#user').width('40%');
+			}
+			else {
+				$('#user').removeClass('hidden');
+				$('#u_fs').removeClass('hidden');
+			}	
             $('#boot_mount').text(data.root_mount);
-            $('#boot_size').text(data.root_size);
+		    $('#boot_size').text(data.root_size);
             $('#boot_used').text(data.root_used+' ('+data.root_pc+')');
             $('#boot_free').text(data.root_free);
             $('#memtotal').text(data.MemTotal);
@@ -27,6 +41,13 @@
             $('#memactive').text(data.MemAvailable);
             $('#swaptotal').text(data.SwapTotal);
             $('#swapfree').text(data.SwapFree); 
+            $('#u_mount').text(data.dir);
+            $('#u_size').text(data.quota);
+            var qpc_rounded = Math.round(data.quota_pc * 10) / 10
+            $('#u_used').text(data.quota_used+' ('+qpc_rounded+'%)');
+            $('#u_free').text(data.quota_free);
+            if (data.reboot == 'yes') {$('#reboot').addClass('rebooot');}
+            else {$('#reboot').removeClass('rebooot');}
             // mem graphs
             var tmem =Math.round(100-(parseInt(data.MemFree_raw)/parseInt(data.MemTotal_raw))*100)
             //mem graph
@@ -55,7 +76,7 @@
             $('#quota').text(data.quotav);
             $('#postfix').text(data.postfix);
              var x =  parseFloat(data.total_size_raw.toFixed(2))/1000000;
-             var quota_pc = x* (100/parseFloat(data.quota));
+             //var quota_pc = x* (100/parseFloat(data.quota));
              // game graph
             $("#gs_pb").attr('aria-valuenow',data.live_servers);
             $("#gs_pbs").text(data.live_servers+'/'+data.total_servers);
@@ -65,11 +86,12 @@
             
             changeClass('gs_pb',gs_width);
             // disk used graph
-            $("#ud_pb").attr('aria-valuemax',data.total_servers);
-            $("#ud_pbs").text(data.total_size);
+            $("#ud_pb").attr('aria-valuemax',data.quota);
+            $("#ud_pbs").text(data.quota_size);
             $('#ud_pbs').width($('#ud_pb').parent().width());
-            $("#ud_pb").css('width',quota_pc+'%');
-             changeClass('ud_pb',quota_pc);
+            $("#ud_pb").css('width',data.quota_pc+'%');
+            //var rounded = Math.round(number * 10) / 10
+             changeClass('ud_pb',data.quota_pc);
             // mem used graph
             //$('#mem_pbs').width($('#mem_pb').parent().width());
             $("#mem_pbs").text(data.total_mem+'%');

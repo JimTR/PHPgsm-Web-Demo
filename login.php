@@ -7,21 +7,21 @@
 	$start = $time;
 	  $Auth = new Auth ();
         $user = $Auth->getAuth();
-	//print_r($_SERVER);
+	print_r($user);
 	//die();
 if (!isset($_SERVER['HTTP_REFERER'])) 
 { 
 	$_SERVER['HTTP_REFERER'] = "index.php";
 	} 
 //die();
-    if($Auth->id > 0) 
+    if($user->id > 0) 
            {
 			   // already logged in default to the main index
 			   $goto = ($_SERVER['HTTP_REFERER']);
 			   if ($goto <> $_SERVER['PHP_SELF']) 
 				{
 					//die ($goto.' and '.$_SERVER['PHP_SELF']);
-					//redirect($site->settings['url'].'/index.php');
+					redirect('index.php');
 					die ("user");
 				}
 			

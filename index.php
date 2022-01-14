@@ -72,7 +72,7 @@ foreach ($servers as $server) {
 }
 $page['gd']= $gd;
 $jsa ='';
-$sql = "select * from base_servers where `enabled` = '1' and `extraip` = '0' ";
+$sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `fname` ASC";
 $base_servers = $database->get_results($sql);
 //https://api.noideersoftware.co.uk/ajax_send.php?url=https://api.noideersoftware.co.uk/ajaxv2.php&query=action=game_detail
 foreach ($base_servers as $server) {

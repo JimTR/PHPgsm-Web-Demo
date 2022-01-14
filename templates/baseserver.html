@@ -38,7 +38,7 @@
 </head>
 
 <body>
-
+  <span id = "level" class="hidden"><!--#level#--></span>
   <!--#header#-->
   <!-- End Header -->
 
@@ -83,12 +83,19 @@
 <div class="card">
             <div class="card-body">
               <h5 class="card-title">Disk</h5>
-                <table>
+                <table id="root" class="hidden">
                         <tr><td style="width:40%;">File System</td><td><!--#root_filesystem#--></td></tr>
-                        <tr><td>Mount Point</td><td><!--#root_mount#--></td></tr>
-                        <tr><td>Disk Size</td><td><!--#root_size#--></td></tr>
-                        <tr><td>Disk Used</td><td><!--#root_used#--> (<!--#root_pc#-->)</td></tr>
-                        <tr><td>Disk Free</td><td><!--#root_free#--></td></tr>
+                        <tr><td>Mount Point</td><td id="boot_mount"><!--#root_mount#--></td></tr>
+                        <tr><td>Disk Size</td><td id="boot_size"><!--#root_size#--></td></tr>
+                        <tr><td>Disk Used</td><td id="boot_used"><!--#root_used#--> (<!--#root_pc#-->)</td></tr>
+                        <tr><td>Disk Free</td><td id="boot_free"><!--#root_free#--></td></tr>
+                </table>
+                 <table id="user" class="hidden">
+                        <tr id="u_fs" class="hidden"><td style="width:40%;">File System</td><td><!--#root_filesystem#--></td></tr>
+                        <tr><td>Quota Folder</td><td id="u_mount"></td></tr>
+                        <tr><td>Quota Size</td><td id="u_size"></td></tr>
+                        <tr><td>Quota Used</td><td id="u_used"></td></tr>
+                        <tr><td>Quota Free</td><td id="u_free"></td></tr>
                 </table>
             </div>
           </div>
@@ -204,7 +211,7 @@
 							</td>
 						</tr>            
                 </table>
-             <!-- <p><!--#url#--</p>-->
+              <!--<p><!--#level#-></p>-->
             </div>
           </div>
 
