@@ -325,6 +325,7 @@
     var jim = '';
     //console.log(url);
     index(url)
+    setInterval(function() { index(url);},5000);
     jQuery.each( servers, function( i, val ) {
 		//
 		console.log(val);

@@ -29,6 +29,20 @@ $bserver = explode('=',$_SERVER['QUERY_STRING']);
 $we_are_here = $settings['url'];
 if($user->loggedIn()) {
 		//set the sidebar option to logout;
+		$user_data = array (
+		'user_id' => $user->id,
+		'user_name' => $user->username,
+		'ip' =>  ip2long($_SERVER['REMOTE_ADDR']),
+		'start_time' => time() 
+		) ;
+		if ($database->get_row('select * from allowed_users where user_id = '.$user->id)) {
+			$where = array('user_id' => $user->id);
+			unset($user_data['user_id']);
+			$database->update('allowed_users',$user_data,$where);
+		} 
+		else {
+			$database->insert('allowed_users',$user_data);
+		}
    	}
    	else {
 		redirect('login.php');
@@ -62,21 +76,8 @@ $this_server =  $database->get_row($sql);
 $this_server['server_update'] = date("d-m-Y H:i:s a",$this_server['server_update']);
 if ($this_server['starttime']) {$this_server['starttime'] = date("d-m-Y H:i:s a",$this_server['starttime']);}
 $info = get_server_info($this_server);
-$v = json_decode(geturl($this_server['url'].'/ajaxv2.php?action=game_detail&filter='.$bserver),true);
+$v = json_decode(geturl($this_server['url'].'/ajaxv2.php?action=game_detail&filter='.$bserver),true); //needs replacing with ajax_send
 //$info = array_merge($info,array_change_key_case($v[$bserver]));
-if ($info['l_status'] == 'offline') {
-	$page['display'] = 'hidden';
-	//$page['buttons'] =  '<td  id="start"><button id="stop_server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Start Server</button></td>';
-	//$page['buttons'] .= '<td id="settings"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit"><i class="ri-edit-2-line"></i> Settings</button></td>';
-	}
-else {
-	//$page['buttons'] = ' <td class="<!--#display#-->" id="stop"><button id="stop_server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Stop Server</button></td>
-	//				  					<td class="<!--#display#-->" id="restart"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ban_user"><i class="ri-restart-line"></i> Restart Server</button></td>
-	//				<td class="<!--#display#-->" id="join"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->"> Join Server</a></button></td>
-	//			
-	//				<td class="<!--#display#-->" id="cvar"><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> View C Vars</button></td>
-	//				<td id="settings"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit"><i class="ri-edit-2-line"></i> Settings</button></td>';
-}	
 $this_server = array_change_key_case(array_merge_recursive($this_server,$info));
 $this_server['players'] -= $this_server['bots'];
 //$this_server['rserver_update'] = date('d-m-y h: i:s a',$this_server['rserver_update']);

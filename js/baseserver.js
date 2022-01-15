@@ -5,7 +5,7 @@
         url: url, 
         dataType: "json", 
         success: function (data) {
-	    var server_id = data.server_id; 
+			var server_id = data.server_id; 
             //console.log(server_id);
             if ($('#level').text() == 'admin') {var level = 1;} 
             else { var level = 0;}
@@ -20,17 +20,12 @@
             $('#reboot').text(data.reboot);
             $('#boot_filesystem').text(data.root_filesystem);
             if (level == 1) {
-				console.log('here we go');
 				$('#root').removeClass('hidden');
 				$('#user').removeClass('hidden');
-				console.log(data.dir);
-				//$('#u_fs').addClass('hidden');
-				//$('#user').width('40%');
 			}
 			else {
 				$('#user').removeClass('hidden');
 				$('#root').addClass('hidden');
-				//$('#u_fs').removeClass('hidden');
 			}	
             $('#boot_mount').text(data.root_mount);
 		    $('#boot_size').text(data.root_size);
@@ -76,7 +71,7 @@
             $('#nginx').text(data.nginx);
             $('#quota').text(data.quotav);
             $('#postfix').text(data.postfix);
-             var x =  parseFloat(data.total_size_raw.toFixed(2))/1000000;
+            var x =  parseFloat(data.total_size_raw.toFixed(2))/1000000;
              //var quota_pc = x* (100/parseFloat(data.quota));
              // game graph
             $("#gs_pb").attr('aria-valuenow',data.live_servers);
@@ -84,7 +79,6 @@
             $('#gs_pbs').width($('#gs_pb').parent().width());
             var gs_width = parseInt(data.live_servers) / parseInt(data.total_servers)*100;
             $('#gs_pb').css('width',gs_width+'%');
-            
             changeClass('gs_pb',gs_width);
             // disk used graph
             $("#ud_pb").attr('aria-valuemax',data.quota);
@@ -97,12 +91,12 @@
             //$('#mem_pbs').width($('#mem_pb').parent().width());
             $("#mem_pbs").text(data.total_mem+'%');
             $("#mem_pb").css('width',data.total_mem+'%');
-              changeClass('mem_pb',parseInt(data.total_mem));
+            changeClass('mem_pb',parseInt(data.total_mem));
             //cpu graph
              $('#cpu_pbs').width($('#cpu_pb').parent().width());
              $("#cpu_pbs").text(data.total_cpu+'%');
              $("#cpu_pb").css('width',data.total_cpu+'%');
-              changeClass('cpu_pb',parseInt(data.total_cpu));
+             changeClass('cpu_pb',parseInt(data.total_cpu));
              // slots graph
              $('#op_pbs').width($('#op_pb').parent().width());
              $("#op_pbs").text(data.total_players+'/'+data.total_bots+'/'+data.total_slots);
@@ -126,18 +120,14 @@
 	
 if ( $( "#"+id ).length ) {	
      var classList = document.getElementById(id).className.split(/\s+/);
-     //console.log(classList+' '+rate);
-     //$('#').width($('#object').parent().width());
      for (var i = 0; i < classList.length; i++) {
-		 
-    if (classList[i] !== 'progress-bar') {
+		if (classList[i] !== 'progress-bar') {
           $('#'+id).removeClass(classList[i]);
-	  }
-	 
-	  color = percentToRGB(rate);
-	  $('#'+id).css('background-color',color); 
 		}
-	} 
+		color = percentToRGB(rate);
+		$('#'+id).css('background-color',color); 
+	}
+} 
 }
 
 function percentToRGB(percent) {
@@ -145,18 +135,16 @@ function percentToRGB(percent) {
         percent = 99
     }
     var r, g, b;
-
     if (percent < 50) {
         // green to yellow
         r = Math.floor(255 * (percent / 50));
         g = 255;
-
-    } else {
+    } 
+    else {
         // yellow to red
         r = 255;
         g = Math.floor(255 * ((50 - percent % 50) / 50));
     }
     b = 0;
-
     return "rgb(" + r + "," + g + "," + b + ")";
 }
