@@ -1090,7 +1090,7 @@ h1, h2, h3, h4, h5, h6 {
   width:17%;
   padding-right:0%;
   vertical-align: middle;
-  border: 1px solid #000;
+  /*border: 1px solid #000;*/
 }
 .frag {
   width:5%;
@@ -1175,3 +1175,31 @@ h1, h2, h3, h4, h5, h6 {
 a.invert:hover {
   color:red;
 } 
+
+.table-wrapper {
+  max-height: 455px;
+  overflow: auto;
+  display: inline-block;
+  width: 100%;	
+}
+.table-scroll {
+  height:150px;
+  overflow:auto;  
+  margin-top:20px;
+}
+.table-wrapper table {
+  width:100%;
+
+}
+.table-wrapper table th {
+  background:#F3F5F6;
+  color:black;
+}
+.table-wrapper table thead th .text {
+  position:absolute;   
+  top:-20px;
+  z-index:2;
+  height:20px;
+  width:35%;
+  border:1px solid red;
+}
