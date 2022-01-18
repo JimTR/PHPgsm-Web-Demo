@@ -20,6 +20,7 @@ function index(url) {
 		}
     });
 }
+
 function game_server(url,server) {
 	// get game server info
 	$.ajax({ 
