@@ -39,6 +39,10 @@
             $('#swapfree').text(data.SwapFree); 
             $('#u_mount').text(data.dir);
             $('#u_size').text(data.quota);
+            if (data.hypervisor_vendor !==undefined){
+				console.log(data.hypervisor_vendor);
+				$('#ctype').text(data.hypervisor_vendor);
+			}
             var qpc_rounded = Math.round(data.quota_pc * 10) / 10
             $('#u_used').text(data.quota_used+' ('+qpc_rounded+'%)');
             $('#u_free').text(data.quota_free);

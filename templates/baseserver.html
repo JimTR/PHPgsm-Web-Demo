@@ -64,12 +64,12 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Hardware</h5>
+              <h5 class="card-title" id="ctype">Hardware</span></h5>
               	<table class="table">
                         <tr><td>Uptime</td><td id="boot"><!--#boot_time#--></td></tr>
 						<tr><td style="width:32%;">CPU Model</td><td id="model"><!--#model_name#--></td></tr>
 						<tr><td>CPU Processors</td><td id="processors"><!--#processors#--></td></tr>
-						<tr><td>CPU Cores</td><td id="cores"><!--#cpu_cores#--></td></tr>
+						<tr><td>CPU Cores Per Processor</td><td id="cores"><!--#cpu_cores#--></td></tr>
 						<tr><td>CPU Speed</td><td id="speed"><!--#cpu_MHz#--></td></tr>
 						<tr><td>CPU Load</td><td id="load"><!--#load#--></td></tr>
 						<tr><td>CPU Cache</td><td id = "cache"><!--#cache_size#--></td></tr>
@@ -107,20 +107,20 @@
             <div class="card-body">
               <h5 class="card-title">Memory</h5>
                 <table class="table">
-			<tr><th></th><th>Total</th><th>Free</th><th>Cached</th><th>Active</th></tr>
+			<tr><th style="width:20%;"></th><th style="width:20%;">Total</th><th style="width:20%;">Free</th><th style="width:20%;">Cached</th style="width:20%;"><th>Active</th></tr>
                         <tr>
 							<td style="width:20%;">Memory</td>
-							<td id="memtotal" style="width:22%;"><!--#MemTotal#--></td>
-							<td id="memfree" style="width:23%;"><!--#MemFree#--></td>
-							<td  id ="memcached" style="width:23%;"><!--#Cached#--></td>
-							<td  id ="memactive" style="width:23%;"><!--#MemAvailable#--></td>
+							<td id="memtotal"><!--#MemTotal#--></td>
+							<td id="memfree"><!--#MemFree#--></td>
+							<td  id ="memcached"><!--#Cached#--></td>
+							<td  id ="memactive"><!--#MemAvailable#--></td>
 						</tr>
 						 <tr>
 							<td style="width:20%;">Swap</td>
-							<td style="width:22%;"><!--#SwapTotal#--></td>
-							<td style="width:23%;"><!--#SwapFree#--></td>
-							<td  style="width:23%;"></td>
-							<td  style="width:23%;"></td>
+							<td><!--#SwapTotal#--></td>
+							<td><!--#SwapFree#--></td>
+							<td></td>
+							<td></td>
 						</tr>
                         <!--<tr><td style="width:25%;">Mount Point</td><td><!--#root_mount#</td></tr>
                         <tr><td style="width:25%;">Disk Size</td><td><!--#root_size#></td></tr>
