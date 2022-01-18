@@ -21,6 +21,8 @@ cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=game_detail:server
 			var general = data.responseJSON.general;
 			var serverd = data.responseJSON.server;
 			var people = serverd.players;
+			var vdf = serverd.vdf_data;
+			//console.log(print_r(vdf));
 			var items = '';
 			//sorted=$(people).sort(sortLastNameDesc);  
 			//console.log(general);
@@ -83,6 +85,7 @@ var players_online = serverd.Players-serverd.Bots
 			$('#update').text(date_format(serverd.server_update));
 			$('#build').text(serverd.Version);
 			$('#server_id').text(serverd.server_id);
+			
 			//buttons
 			$('#stop_server').removeClass('hidden');
 			$('#restart_server').removeClass('hidden');
@@ -91,6 +94,10 @@ var players_online = serverd.Players-serverd.Bots
 			$('#join_server').removeClass('hidden');
 			$('#send').prop('disabled', false);
 		}
+			$('#install_dir').text(vdf.installdir);
+			$('#install_size').text(formatBytes(vdf.SizeOnDisk,1));
+			$('#update').text(date_format(vdf.LastUpdated));
+			$('#disk_space').text(formatBytes(serverd.disk_space)); 
 		}
     });
 }
@@ -252,4 +259,18 @@ function restart_server() {
 			console.log(data);
 		 }
 	});
+}
+function print_r(o){
+	return JSON.stringify(o,null,'\t');
+}
+function formatBytes(bytes, decimals = 2) {
+    if (bytes === 0) return '0 B';
+
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
