@@ -1,8 +1,9 @@
-function index(url) {
+function index() {
 	// read data use simular to loading the index file
+         console.log('started index');
 	 $.ajax({ 
         type: 'GET', 
-        url: url, 
+        url: 'ajax.php', 
         data    : { module: 'index' },
         dataType: "json", 
         success: function (data1) {
@@ -15,7 +16,7 @@ function index(url) {
 			//alert (data1.players);
 		},
         complete:function(data1){
-			    setTimeout(index(url),7000);
+			    //setTimeout(index(url),7000);
 				
 		}
     });

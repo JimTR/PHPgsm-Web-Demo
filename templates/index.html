@@ -342,9 +342,10 @@
     setInterval('updateClock()', 1000);
     var url = "";
     var jim = '';
-    //console.log(url);
-    index(url)
-    setInterval(function() { index(url);},5000);
+    console.log(url);
+    index();
+    setInterval( function() { index(); },7000);
+    console.log('set interval for index'); 	
     jQuery.each( servers, function( i, val ) {
 		//
 		console.log(val);
