@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="visibility:hidden;">
 
 <head>
   <meta charset="utf-8">
@@ -207,7 +207,7 @@
                      <i class="ri-base-station-line"></i>
                     </div>
                     <div class="ps-3">
-                      <h6 id="players"><!--#players#--></h6>
+                      <h6 id="players"></h6>
                       
                     </div>
                   </div>
@@ -225,7 +225,7 @@
               <div class="card top-selling">
            
                 <div class="card-body">
-					<div class="accordion" id="accordionExample">
+					<div class="accordion" id="accordionExample" style="margin-top:1.5%;">
                 <div class="accordion-item">
                   <h5 class="accordion-header" id="headingOne">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -352,6 +352,7 @@
 		
 		online(val);
 		setInterval( function() { online(val); }, 5000 );
+		document.getElementsByTagName("html")[0].style.visibility = "visible";
 		//setInterval('online()', 8000);
 	});
 });
