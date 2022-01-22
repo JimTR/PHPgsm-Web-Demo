@@ -25,7 +25,6 @@
 	$Auth = new Auth ();
     $user = $Auth->getAuth();
 	$we_are_here = $settings['url'];
-	$page = array();
 	$tmp='';
 	if($user->loggedIn()) {
 		// set sidebar

@@ -7,6 +7,9 @@
         success: function (data) {
 			var server_id = data.server_id; 
             //console.log(server_id);
+            //document.cookie = "favorite_food=tripe; SameSite=None; Secure";
+            var oldCookieValue = getCookie('phpgsm_theme');
+            console.log(oldCookieValue);
             if ($('#level').text() == 'admin') {var level = 1;} 
             else { var level = 0;}
             $('#boot').text(data.boot_time);
@@ -39,8 +42,14 @@
             $('#swapfree').text(data.SwapFree); 
             $('#u_mount').text(data.dir);
             $('#u_size').text(data.quota);
+            $('#load_1').text(data.load_1_min);
+            $('#load_10').text(data.load_10_min);
+            $('#load_15').text(data.load_15_min);
+            changeforeground('load_1',data.load_1_min_pc);
+			changeforeground('load_10',data.load_10_min_pc);
+			changeforeground('load_15',data.load_15_min_pc);
             if (data.hypervisor_vendor !==undefined){
-				console.log(data.hypervisor_vendor);
+				//console.log(data.hypervisor_vendor);
 				$('#ctype').text(data.hypervisor_vendor);
 			}
             var qpc_rounded = Math.round(data.quota_pc * 10) / 10
@@ -120,6 +129,14 @@
     });
 
  }
+ 
+ function changeforeground(id,rate) {
+	 // change colours
+	 color = percentToRGB(rate);
+	 //console.log(id);
+	 $('#'+id).css('color',color);
+ }
+ 
  function changeClass(id,rate) {
 	
 if ( $( "#"+id ).length ) {	
@@ -152,3 +169,4 @@ function percentToRGB(percent) {
     b = 0;
     return "rgb(" + r + "," + g + "," + b + ")";
 }
+// $.cookie('phpgsm_theme', id); // ready for theme change ?

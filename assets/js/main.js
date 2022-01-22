@@ -346,3 +346,44 @@ function updateClock ()
   }
 
 })();
+
+function setCookie(cName, cValue, expDays) {
+        let date = new Date();
+        date.setTime(date.getTime() + (expDays * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + date.toUTCString();
+        document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
+}
+
+function getCookie(cname) {
+	//document.cookie = cname;
+	//console.log(document.cookie);
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "poo";
+}
+$('#themeswitch').click(function()
+ {
+	  var oldCookieValue = getCookie('phpgsm_theme');
+       		
+		switch (oldCookieValue) {
+			case '411811':
+				console.log('dark to light');
+				setCookie('phpgsm_theme', '1297820',30);
+				break;
+			case '1297820':
+				console.log('light to dark');
+				setCookie('phpgsm_theme', '411811',30);
+				break;
+			}
+			location.reload();
+});

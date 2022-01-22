@@ -34,7 +34,7 @@ if($user->loggedIn()) {
 $template = new template;
 $sql = "select * from server1 order by `host_name` ASC";
 $sidebar_data = array();
-$page = array();
+//$page = array();
 $sidebar_data['smenu'] = '';
 $xpaw = new SourceQuery( );
 $servers = $database->get_results($sql);
@@ -150,8 +150,6 @@ $page['header'] = $template->get_template();
 $template->load('templates/subtemplates/sidebar.html'); //sidebar
 $template->replace_vars($sidebar_data);
 $page['sidebar'] =$template->get_template();
-$template->load('templates/subtemplates/footer.html');
-$page['footer'] = $template->get_template();
 $page['url'] = $we_are_here.'/ajax.php';
 $template->load('templates/index.html');
 $template->replace_vars($page);

@@ -17,17 +17,7 @@
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/08a3755b76.js" crossorigin="anonymous"></script>	
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+ <!--#include#-->
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.2.0
@@ -37,7 +27,7 @@
   ======================================================== -->
 </head>
 
-<body>
+<body class="">
   <span id = "level" class="hidden"><!--#level#--></span>
   <!--#header#-->
   <!-- End Header -->
@@ -66,13 +56,14 @@
              <h5 class="card-title" id="ctype">Hardware</span></h5>
               	<table class="table">
                         <tr><td>Uptime</td><td id="boot"><!--#boot_time#--></td></tr>
+                        <tr><td>IP Address(es)</td><td id="ip"><!--#ips#--></td></tr>
 						<tr><td style="width:32%;">CPU Model</td><td id="model"><!--#model_name#--></td></tr>
 						<tr><td>CPU Processors</td><td id="processors"><!--#processors#--></td></tr>
-						<tr><td>Cores Per Processor</td><td id="cores"><!--#cpu_cores#--></td></tr>
+						<tr class=""><td>Cores Per Processor</td><td id=""><span id="load_1"></span> (1 Min) <span id="load_10"></span> (10 Mins) <span id="load_15"></span> (15 Mins)</td></tr>
 						<tr><td>CPU Speed</td><td><span id="speed"><!--#cpu_MHz#--></span> Mhz</td></tr>
 						<tr><td>CPU Load</td><td id="load"><!--#load#--></td></tr>
 						<tr><td>CPU Cache</td><td id = "cache"><!--#cache_size#--></td></tr>
-						<tr><td>IP Address(es)</td><td id="ip"><!--#ips#--></td></tr>
+						
 						<tr><td>Reboot Required</td><td id="reboot"class="<!--#rebooot#-->"><!--#reboot#--></td></tr>
 				</table>
             </div>
@@ -211,18 +202,7 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>NoIdeer Software</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-    </div>
-  </footer><!-- End Footer -->
+ <!--#footer#-->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -237,9 +217,9 @@
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
+  <script src = "js/jquery-1.8.3.min.js"></script>
   <script src="assets/js/main.js"></script>
-<script src="js/baseserver.js"></script>
-<script src = "js/jquery-1.8.3.min.js"></script>
+  <script src="js/baseserver.js"></script>
 <script>
 	jQuery(document).ready(function(){
     
