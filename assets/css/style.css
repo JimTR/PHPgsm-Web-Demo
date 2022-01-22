@@ -1248,3 +1248,7 @@ a.invert:hover {
   font-size: 14px !important;
   margin-right: 3%;
 }
+
+.dark-cpu {
+  display: none;
+}

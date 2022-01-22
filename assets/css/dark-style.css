@@ -1082,13 +1082,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 .footer .copyright {
   text-align: center;
-  color: #012970;
+  /*color: #012970;*/
 }
 .footer .credits {
   padding-top: 5px;
   text-align: center;
   font-size: 13px;
-  color: #012970;
+  /*color: #012970;*/
 }
 
 /*--------------------------------------------------------------
@@ -1208,7 +1208,8 @@ a.invert:hover {
   max-height: 455px;
   overflow: auto;
   display: inline-block;
-  width: 100%;	
+  width: 100%;
+  min-height: 40px;	
 }
 .table-scroll {
   height:150px;
@@ -1220,8 +1221,8 @@ a.invert:hover {
 
 }
 .table-wrapper table th {
-  background:#F3F5F6;
-  color:black;
+  /*background:#F3F5F6;
+  color:black;*/
 }
 .table-wrapper table thead th .text {
   position:absolute;   
@@ -1321,4 +1322,12 @@ a.invert:hover {
     background-repeat: no-repeat;
     background-size: 1.25rem;
     transition: transform .2s ease-in-out;
+}
+
+.light-cpu{
+  display:none;
+}
+
+.dark-img {
+  margin-top: 10%;
 }
