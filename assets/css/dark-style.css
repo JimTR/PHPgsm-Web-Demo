@@ -1183,6 +1183,13 @@ h1, h2, h3, h4, h5, h6 {
   background: #b30000; 
 }
 
+.gameserver-cmd{
+  max-height: 200px !important;
+  height :200px !important;
+  min-height: 200px !important;
+  display: none;
+  padding-bottom: 2%;
+}
 .p_count {
   color:green;
   font-weight:bold;

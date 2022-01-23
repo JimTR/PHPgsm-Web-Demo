@@ -187,7 +187,7 @@ function players() {
 				  			return 0;
 			  			}
 						else {
-							$('#player_title').html('Current Map&nbsp;'+info.Map);
+							$('#player_title').html(info.Map);
 						}
 						if(typeof(player) == "null") { 
 							console.log('returning empty from players function');

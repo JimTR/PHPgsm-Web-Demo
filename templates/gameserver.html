@@ -2,175 +2,143 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title><!--#title#--></title>
-  <meta content="Steam Game Controler" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-<!--#include#-->
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title><!--#title#--></title>
+	<meta content="Steam Game Controler" name="description">
+	<meta content="" name="keywords">
+	<!-- Favicons -->
+	<link href="img/favicon.png" rel="icon">
+	<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+	<!-- Google Fonts -->
+	<link href="https://fonts.gstatic.com" rel="preconnect">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<!--#include#-->
 </head>
 
 <body>
-
-  <!--#header#-->
-  <!-- End Header -->
-
-  <!--#sidebar#-->
- <!-- End Sidebar-->
-
-  <main id="main" class="main">
-
-    <div class="pagetitle">
-		
-		<div style="float:right;width:5%;margin-top:-1%;"><img class="dark-img" style="float:right;width:100%;" src="<!--#logo#-->" /></div>
-		<div style="float:right;padding-right:2%;padding-top:1%;"><!--#moddesc#--></div>
-      <h1>Game Server Information</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item">Game Servers</li>
-          <li class="breadcrumb-item active"><!--#bserver#--></li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-
-    <section class="section">
-		
-      <div class="row">
-        <div class="col-lg-6">
-		
-			 <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Console</h5>
-					<div id ="log" class="gameserver_log"></div>
-							<div style="width:100%;padding-top:10px;">
-								<form id="sendcmd"  style ="width:100%;float:left;padding-top:2%;" action="<!--#url#-->/ajaxv2.php" method="get">
-									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Enter Server Command" name="text" id="text">
-										<input type="hidden" id="action" name="action" value="exescreen">
-										<input type="hidden" id="server" name="server" value="<!--#host_name#-->">
-										<input type="hidden" id="cmd" name="cmd" value="c">
-										<input type="hidden" id="key" name="key" value="{$key}">
-										<input  type="submit" id="send"  class="hidden" value="do this">
-										<label for="send" class="btn btn-info">Send <i class="bx bxs-send"></i></label>
-									</div>
-								</form>
-								<div class ="ajax_response" id="ajax-response"></div>
-							</div>
-						<!--</tr>
-                    
-                </table>
-             <!--<p><!--#url#-></p>-->
-            </div>   
-	</div>
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Start Up</h5>
-              	<table class="table">
-						<tr><td style="width:50%;">Managed By</td><td><!--#managed_by#--></td></tr>
-                        <tr><td>Host Name</td><td><!--#host_name#--></td></tr>
-                        <tr><td>Broadcast Name</td><td id="broadcast_name"><!--#server_name#--></td></tr>
-                        <tr><td>Start Up Map</td><td id="default_map"><!--#default_map#--></td></tr>
-                        <tr><td>Game Port</td><td id="port"><!--#port#--></td></tr>
-                        <tr><td>Client Port</td><td id="client_port"><!--#client_port#--></td></tr>
-                        <tr><td>Tv Port</td><td id="source_port"><!--#source_port#--></td></tr>
-                        <tr><td>Game Tags</td><td id = "start_tags"><!--#gametags#--></td></tr>
-                        <tr><td>Started</td><td id="start"></td></tr>
-						
-		 </table>
-            </div>
-          </div>
-
-       
-<div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Disk Usage</h5>
-                <table class="table">
-                        <tr><td style="width:45%;">Instance Folder</td><td id="location"><!--#location#--></td></tr>
-                        <tr><td>Instance Size</td><td id="disk_space"><!--#disk_space#--></td></tr>
-                        <tr><td>Install Folder</td><td id="install_dir"><!--#install_dir#--></td></tr>
-                        <tr><td>Install Size</td><td id="install_size"><!--#install_size#--></td></tr>
-                        <!--<tr><td>Disk Free</td><td><!--#root_free#-></td></tr>-->
-                </table>
-            </div>
-          </div>
-
-         
-</div>
-        <div class="col-lg-6">
+	<!--#header#-->
+	<!--#sidebar#-->
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<div style="float:right;width:5%;margin-top:-1%;"><img class="dark-img" style="float:right;width:100%;" src="<!--#logo#-->" /></div>
+			<div style="float:right;padding-right:2%;padding-top:1%;"><!--#moddesc#--></div>
+			<h1>Game Server Information</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.php">Home</a></li>
+					<li class="breadcrumb-item">Game Servers</li>
+					<li class="breadcrumb-item active"><!--#bserver#--></li>
+				</ol>
+			</nav>
+		</div>
+		<section class="section">
+		<div class="row">
+			<div class="col-lg-6">
 				<div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Controls</h5>
-                <table>
-					
-			     <tr style="border-bottom: 12px solid transparent;">
-					 <!--#buttons#-->
-					<td class="hidden pad_right"   id="stop_server"><button id="stop_serverd" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Stop Server</button></td>
-					<td class="hidden pad_right"   id="start_server"><button class="btn btn-success"  onclick="start_server()"><i class="far fa-play-circle"></i> Start Server</button></td>
-					<td class="hidden pad_right"   id="restart_server"><button class="btn btn-warning" onclick="restart_server()"><i class="ri-restart-line"></i> Restart Server</button></td>
-					<td class="hidden pad_right"   id="join_server"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->"> Join Server</a></button></td>
-					<td class="hidden pad_right"   id="cvar"><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> View C Vars</button></td>
-					<td id="settings"><button class="btn btn-primary" onclick"$('body').toggleClass('light dark')"><i class="ri-edit-2-line"></i> Settings</button></td>
-				</tr>
-                </table>
-            </div>
-          </div> 
-          				<div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Players<div id="player_title" ></div></h5>
-              
-              <div class="table-wrapper" style ="height:406px;"> 
-                <table style="width:100%;" class="table table-sm">
-					
-					<thead>
-			     <tr>
-					<th style="width:35%;">Name</th><th>Location</th><th style="padding-left:2%;">Score</th><th style="text-align:center;">Time Online</th>
-				</tr>
-				</thead>
-				<tbody id="pbody"></tbody>
-                </table>
-                </div>
-            </div>
+					<div class="card-body">
+						<h5 class="card-title">Status <span id="status" class="card-title" style="font-size:18px;font-weight: 500;"><!--#l_status#--></span></h5>
+						<table style="width:100%;" class="table">
+							<tr><td style="width:25%;">Steam ID</td><td id="steamid"></td></tr>
+							<tr><td style="width:25%;">Host Name</td><td id="hostname"></td></tr>
+							<tr><td>Players Online</td><td id="players"></td></tr>
+							<tr><td>Bots Online</td><td id="bots"></td></tr>
+							<tr><td>Max Players</td><td id="maxplayers"></td></tr>
+							<tr><td>Client Software ID</td><td id="gameid"></td></tr>
+							<tr><td>Server Software ID</td><td id="server_id"></td></tr>
+							<tr><td>Server Version</td><td id="build"></td></tr>
+							<tr><td>Last Update</td><td id="update"><!--#server_update#--></td></tr>
+							<tr><td>CPU use</td><td id="cpu"></td></tr>
+							<tr><td>Memory use</td><td id="mem"></td></tr>
+							<tr><td>Game Tags</td><td id="gametags"><!--#gametags#--></td></tr>
+						</table>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title" id="showlog" style="cursor:pointer;">Send Command</h5>
+						<div id ="log"  class="gameserver_log gameserver-cmd"></div>
+						<div style="width:100%;">
+							<form id="sendcmd"  style ="width:100%;float:left;padding-top:2%;" action="<!--#url#-->/ajaxv2.php" method="get">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="Enter Server Command" name="text" id="text">
+									<input type="hidden" id="action" name="action" value="exescreen">
+									<input type="hidden" id="server" name="server" value="<!--#host_name#-->">
+									<input type="hidden" id="cmd" name="cmd" value="c">
+									<input type="hidden" id="key" name="key" value="{$key}">
+									<input  type="submit" id="send"  class="hidden" value="do this">
+									<label for="send" class="btn btn-info">Send <i class="bx bxs-send"></i></label>
+								</div>
+							</form>
+							<div class ="ajax_response" id="ajax-response"></div>
+						</div>
+					</div>   
+				</div>
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Start Up</h5>
+						<table class="table">
+							<tr><td style="width:50%;">Managed By</td><td style="text-transform: uppercase;"><!--#managed_by#--></td></tr>
+							<tr><td>Host Name</td><td><!--#host_name#--></td></tr>
+							<tr><td>Broadcast Name</td><td id="broadcast_name"><!--#server_name#--></td></tr>
+							<tr><td>Secure</td><td id="secure"></td></tr>
+							<tr><td>Start Up Map</td><td id="default_map"><!--#default_map#--></td></tr>
+							<tr><td>Game Port</td><td id="port"><!--#port#--></td></tr>
+							<tr><td>Client Port</td><td id="client_port"><!--#client_port#--></td></tr>
+							<tr><td>Tv Port</td><td id="source_port"><!--#source_port#--></td></tr>
+							<tr><td>Game Tags</td><td id = "start_tags"><!--#gametags#--></td></tr>
+							<tr><td>Started</td><td id="start"></td></tr>
+							<tr><td>API location</td><td><!--#url#--></td></tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Players
+							<span style="float:right;clear:none;" id="player_title" ></span>
+							<span style="float:right;padding-right:1%;">Map</span>
+						</h5>
+						<div class="table-wrapper" style ="height:391px;"> 
+							<table style="width:100%;" class="table table-sm">
+								<thead>
+								<tr>
+									<th style="width:35%;">Name</th><th>Location</th><th style="padding-left:2%;">Score</th><th style="text-align:center;">Time Online</th>
+								</tr>
+								</thead>
+								<tbody id="pbody"></tbody>
+							</table>
+						</div>
+					</div>
+				</div> 
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Controls</h5>
+						<table>
+							<tr style="border-bottom: 12px solid transparent;">
+								<td class="hidden pad_right"   id="stop_server"><button id="stop_serverd" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Stop</button></td>
+								<td class="hidden pad_right"   id="start_server"><button class="btn btn-success"  onclick="start_server()"><i class="far fa-play-circle"></i> Start</button></td>
+								<td class="hidden pad_right"   id="restart_server"><button class="btn btn-warning" onclick="restart_server()"><i class="ri-restart-line"></i> Restart</button></td>
+								<td class="hidden pad_right"   id="join_server"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->">Join</a></button></td>
+								<td class="hidden pad_right"   id="cvar"><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> C Vars</button></td>
+								<td id="settings"><button class="btn btn-primary" onclick"$('body').toggleClass('light dark')"><i class="ri-edit-2-line"></i> Settings</button></td>
+							</tr>
+						</table>
+					</div>
           </div> 
 	<div class="card">
             <div class="card-body">
-              <h5 class="card-title">Current Status <span id="status" class="card-title" style="font-size:18px;font-weight: 500;"><!--#l_status#--></span></h5>
-                <table style="width:100%;" class="table">
-						<tr><td style="width:25%;">Steam ID</td><td id="steamid"></td></tr>
-                        <tr><td style="width:25%;">Broadcast Name</td><td id="hostname"></td></tr>
-                        <tr><td>Current Map</td><td id="map"></td></tr>
-                        <tr><td>Players Online</td><td id="players"></td></tr>
-                        <tr><td>Bots Online</td><td id="bots"></td></tr>
-                        <tr><td>Max Players</td><td id="maxplayers"></td></tr>
-                        <tr><td>Secure</td><td id="secure"></td></tr>
-                        <tr><td>Client Software ID</td><td id="gameid"></td></tr>
-                        <tr><td>Server Software ID</td><td id="server_id"></td></tr>
-                        <tr><td>Server Version</td><td id="build"></td></tr>
-                        <tr><td>Last Update</td><td id="update"><!--#server_update#--></td></tr>
-                        
-                        <tr><td>CPU use</td><td id="cpu"></td></tr>
-                        <tr><td>Memory use</td><td id="mem"></td></tr>
-                        <tr><td>Game Tags</td><td id="gametags"><!--#gametags#--></td></tr>
-                        <tr><td>API location</td><td><!--#url#--></td></tr>
-                         
-                </table>
+              <h5 class="card-title">Disk Usage</h5>
+                <table class="table">
+					<tr><td style="width:45%;">Instance Folder</td><td id="location"><!--#location#--></td></tr>
+					<tr><td>Instance Size</td><td id="disk_space"><!--#disk_space#--></td></tr>
+					<tr><td>Install Folder</td><td id="install_dir"><!--#install_dir#--></td></tr>
+					<tr><td>Install Size</td><td id="install_size"><!--#install_size#--></td></tr>
+                 </table>
             </div>
           </div>
-
-           
-         
           </div>
-
         </div>
       
               <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
@@ -354,7 +322,10 @@
 		 stop_server(); 
 
 	});
-	
+	$('#showlog').click(function() {
+		$('#log').toggle();
+		$('#log').scrollTop($('#log')[0].scrollHeight);
+	});
 });
 </script>
 </body>
