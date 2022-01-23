@@ -7,7 +7,7 @@
 	$start = $time;
 	  $Auth = new Auth ();
         $user = $Auth->getAuth();
-	print_r($user);
+	//print_r($user);
 	//die();
 if (!isset($_SERVER['HTTP_REFERER'])) 
 { 
