@@ -17,9 +17,9 @@ if($user->loggedIn()) {
 		'ip' =>  ip2long($_SERVER['REMOTE_ADDR']),
 		'start_time' => time() 
 		) ;
-		if ($database->get_row('select * from allowed_users where user_id = '.$user->id)) {
-			$where = array('user_id' => $user->id);
-			unset($user_data['user_id']);
+		if ($database->get_row('select * from allowed_users where ip = '.$user_data['ip'])) {
+			$where = array('user_id' => $user->ip);
+			unset($user_data['user_ip']);
 			$database->update('allowed_users',$user_data,$where);
 		} 
 		else {
@@ -30,7 +30,9 @@ if($user->loggedIn()) {
 		redirect('login.php');
 		
 	}
-
+	$a = print_r($user_data,true);
+file_put_contents(DOC_ROOT.'/xyzzy.php',$a);
+   
 $template = new template;
 $sql = "select * from server1 order by `host_name` ASC";
 $sidebar_data = array();
