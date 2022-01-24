@@ -27,7 +27,7 @@
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="index.php">Home</a></li>
-					<li class="breadcrumb-item">Game Servers</li>
+					<li class="breadcrumb-item" id="toggle">Game Servers</li>
 					<li class="breadcrumb-item active"><!--#bserver#--></li>
 				</ol>
 			</nav>
@@ -265,7 +265,7 @@
   <!-- Template Main JS File -->
   <script src = "js/jquery.js"></script>
   <script src="assets/js/main.js"></script>
-  <script src="js/pindex.js"></script>
+  <script src="js/index.js"></script>
   <script src="js/gameserver.js"></script>
   <script src="js/date_format.js"></script>
   
@@ -277,20 +277,18 @@
 		var type='Source';
 		var host= '';
 	jQuery(document).ready(function(){
-    updateClock();
-    setInterval('updateClock()', 1000);
-   
-     url = "<!--#url#-->";
-     id = "<!--#host_name#-->";
-     game = "<!--#bserver#-->"
-     server ="<!--#fname#-->";
-     port = 0;
-     fetchlog(port,id,url);
-      setInterval(fetchlog, 2000);
-     players(port,id,url);
-     setInterval(players, 7000);
-     get_game(url,server,id);
-     setInterval(get_game,4000);
+		$('#gameservers-nav').toggleClass("show");
+	  	url = "<!--#url#-->";
+		id = "<!--#host_name#-->";
+		game = "<!--#bserver#-->"
+		server ="<!--#fname#-->";
+		port = 0;
+		fetchlog(port,id,url);
+		setInterval(fetchlog, 2000);
+		players(port,id,url);
+		setInterval(players, 7000);
+		get_game(url,server,id);
+		setInterval(get_game,4000);
     //console.log(url);
     //base_servers(url)
 
@@ -326,7 +324,14 @@
 		$('#log').toggle();
 		$('#log').scrollTop($('#log')[0].scrollHeight);
 	});
+	
+	$('#toggle').click(function() {
+		$('#gameservers').toggleClass('collapsed');
+		$('#gameservers-nav').toggleClass('show');
+	});
+	
 });
+
 </script>
 </body>
 

@@ -2,12 +2,12 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
 		<li class="nav-item">
-        <a class="nav-link " href="index.php">
+        <a class="nav-link collapsed" id="dashboard" href="index.php">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
-      <li class="nav-heading">Servers</li>
+      <li class="nav-heading"><i class="bi bi-hdd-rack"></i> Servers</li>
 		<li class="nav-item">
 			<a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
 				<i class="bi bi-server"></i><span>API Servers</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -18,10 +18,10 @@
 		</li>      
 			
 			<li class="nav-item">
-				<a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+				<a class="nav-link collapsed" id="gameservers" data-bs-target="#gameservers-nav" data-bs-toggle="collapse" href="#">
 					<i class="bx bxl-steam"></i><span>Game Servers</span><i class="bi bi-chevron-down ms-auto"></i>
 				</a>
-				<ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+				<ul id="gameservers-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 					<!--#smenu#-->
 				</ul>
          	</li>	
@@ -34,7 +34,7 @@
 			</a>
         </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="quick_console.php">
+        <a class="nav-link collapsed" id="console" href="console.php">
           <i class="bx bxs-terminal"></i>
           <span>Console</span>
         </a>
@@ -52,7 +52,7 @@
         </a>
       </li><!-- End Profile Page Nav -->
         <li class="nav-item">
-        <a class="nav-link collapsed"  href="#">
+        <a class="nav-link collapsed"  id="updates" href="updates.php">
           <i class="ri-arrow-up-down-line"></i>
           <span>Updates</span>
         </a>

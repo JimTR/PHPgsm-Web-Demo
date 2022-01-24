@@ -78,4 +78,6 @@ $template = new template;
 	}
 $template->load('templates/subtemplates/footer.html');
 $page['footer'] = $template->get_template();
+$template->load('templates/subtemplates/header.html');
+$page['header'] = $template->get_template();
 ?>

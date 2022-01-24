@@ -63,7 +63,7 @@
                 $sbox .='<option id ="'.$server['host_name'].'" value="'.$server['url'].':'.$server['bport'].'" path="'.$server['location'].'" host ="'.$server['host'].':'.$server['port'].'">'.$server['server_name'].'</option>';
         }
 	$page['sbox'] = $sbox;
-	$template->load('templates/quick-console.html');
+	$template->load('templates/console.html');
 	
 	//echo $template->get_template();
 	//die();

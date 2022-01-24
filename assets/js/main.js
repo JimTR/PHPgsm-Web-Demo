@@ -4,6 +4,11 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+jQuery(document).ready(function(){
+sessionStorage.clear();	
+updateClock();
+setInterval('updateClock()', 1000);
+});
 
 function updateClock ()
     {

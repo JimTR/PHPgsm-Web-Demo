@@ -324,13 +324,11 @@
   <!-- Template Main JS File -->
   <script src = "js/jquery.js"></script>
   <script src="assets/js/main.js"></script>
-<script src="js/pindex.js"></script>
+<script src="js/index.js"></script>
 <script>
 	jQuery(document).ready(function(){
 	sessionStorage.clear();	
     const servers = [<!--#jsa#-->];
-    updateClock();
-    setInterval('updateClock()', 1000);
     var url = "";
     var jim = '';
     console.log(url);
@@ -340,7 +338,7 @@
     jQuery.each( servers, function( i, val ) {
 		//
 		console.log(val);
-		
+		$('#dashboard').toggleClass("collapsed");
 		online(val);
 		setInterval( function() { online(val); }, 5000 );
 		document.getElementsByTagName("html")[0].style.visibility = "visible";
