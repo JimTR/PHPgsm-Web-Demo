@@ -4,11 +4,20 @@
 		var path='';
 		var type='Source';
 		var host= '';
-			$(document).ready(function() {
-		$( "#buttonr" ).click(function() {
-        $("#buttonr").blur();   
-		$("#rules").toggle();
-});
+		$(document).ready(function() {
+			console.log('hit this');
+			 $('#console').toggleClass("collapsed");
+			var options =$('#servers option').length;
+			if (options == 2){
+             selectOption(1,'servers');
+             $('#server-select').toggle();
+             $('#log').css("margin-top", "3.3%");
+			}
+			$( "#buttonr" ).click(function() {
+			$("#buttonr").blur();   
+			$("#rules").toggle();
+			
+		});
 			$("#quick").click(function() {
 				$("#extended").toggle();
 			});
@@ -229,6 +238,13 @@ $('#player').on('click','.tpButton', function(event) {
 
         });
 			
+function selectOption(nr,element) {
+    var select = $("#"+element);
+    if (select.children().length >= nr) {
+        let value = select.find('option:eq(' + nr + ')').val();
+        select.val(value).change();
+    }
+}
 
 
 

@@ -220,25 +220,7 @@
    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <script src = "assets/js/main.js"></script>
    <script src = "js/console.js"></script>
-<script>
-jQuery(document).ready(function(){
-        $('#console').toggleClass("collapsed");
-        var options =$('#servers option').length;
-        if (options == 2){
-             selectOption(1,'servers');
-             $('#server-select').toggle();
-             $('#log').css("margin-top", "3.3%");
-        }
-});
-function selectOption(nr,element) {
-    var select = $("#"+element);
-    if (select.children().length >= nr) {
-        let value = select.find('option:eq(' + nr + ')').val();
-        select.val(value).change();
-    }
-}
-
-</script>	
+	
 </body>
 
 </html>
