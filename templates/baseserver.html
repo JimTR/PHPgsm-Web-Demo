@@ -221,9 +221,11 @@
   <script src="js/baseserver.js"></script>
 <script>
 	jQuery(document).ready(function(){
-    
-    updateClock();
-    setInterval('updateClock()', 1000);
+    $('#baseservers-nav').toggleClass("show");
+   $('#toggle').click(function() {
+		$('#gameservers').toggleClass('collapsed');
+		$('#gameservers-nav').toggleClass('show');
+	});
     var url = "<!--#url#-->";
     console.log(url);
     base_servers(url)
