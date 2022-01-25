@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta content="width=device-width, initial-scale=1.0" name="viewport">
-		<title>Blank Page</title>
+		<title><!--#page-title#--></title>
 		<meta content="" name="description">
 		<meta content="" name="keywords">
 		<!-- Favicons -->
@@ -32,9 +32,28 @@
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-body">
-								<h5 class="card-title">Example Card</h5>
-								<p>This is an example page with no content. You can use it as a starter for your custom pages.</p>
-								<p>Dropbox Id :<!--#dropbox_id#--></p>
+								<ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist" style="margin-top:2%;">
+									<li class="nav-item" role="presentation">
+										<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+									</li>
+									<li class="nav-item" role="presentation">
+										<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+									</li>
+									<li class="nav-item" role="presentation">
+										<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+									</li>
+								</ul>
+								<div class="tab-content pt-2" id="borderedTabContent">
+									<div class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
+										<!--#dropbox_id#-->
+									</div>
+									<div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
+										Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Volupt>
+									</div>
+									<div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
+										Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qu>
+									</div>
+								</div><!-- End Bordered Tabs -->
 							</div>
 						</div>
 					</div>
