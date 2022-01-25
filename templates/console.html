@@ -220,7 +220,18 @@
    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <script src = "assets/js/main.js"></script>
    <script src = "js/console.js"></script>
-	
+<script>
+ $(document).ready(function() {
+                        console.log('hit this');
+                         $('#console').toggleClass("collapsed");
+                        var options =$('#servers option').length;
+                        if (options == 2){
+             selectOption(1,'#servers');
+             $('#server-select').toggle();
+             $('#log').css("margin-top", "3.3%");
+                        }
+});
+</script>	
 </body>
 
 </html>
