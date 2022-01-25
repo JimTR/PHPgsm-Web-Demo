@@ -46,10 +46,21 @@ if($user->loggedIn()) {
 else {
 	redirect('login.php');
 }
+$sql = "select * from server1 order by `host_name` ASC";
+$servers = $database->get_results($sql);
+foreach ($servers as $server) {
+		if(empty($server['starttime'])) { $server['starttime']=0;}
+		$start = date("d-m-y  h:i:s a",$server['starttime']);
+	     $fname = $server['host_name'];
+	     $disp ='style="display:none;"';
+		 $href = 'gameserver.php?server='.$server['host_name'];
+		 $gd .='<tr id="'.$fname.'" '.$disp.'><td><span class="invert_link"><a href="'.$href.'" class="invert_link">'.$server['server_name'].'</a></span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="gdate'.$fname.'">'.$start.'</td></tr>'; 
+		 $page['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
+	 }
 $page['page-title'] = ucfirst(basename($_SERVER['SCRIPT_NAME'], ".php"));
 $template = new template;
 $sidebar_data = array();
-$sidebar_data['smenu'] = '';
+//$sidebar_data['smenu'] = '';
 $sidebar_data['bmenu']= '';
 $dropbox_id = $user->dropbox_id;
 if (empty(trim($dropbox_id))) {
@@ -63,6 +74,7 @@ if($_GET or $_POST) {
 }
 $page['dropbox_id'] = print_r($_SERVER,true);
 $template->load('templates/subtemplates/sidebar.html');
+$template->replace_vars($page);
 //menu_item($template->get_template());
 $page['sidebar'] = $template->get_template();
 $template->load('templates/updates.html');

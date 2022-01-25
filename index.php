@@ -49,28 +49,6 @@ foreach ($servers as $server) {
 		 $href = 'gameserver.php?server='.$server['host_name'];
 		 $gd .='<tr id="'.$fname.'" '.$disp.'><td><span class="invert_link"><a href="'.$href.'" class="invert_link">'.$server['server_name'].'</a></span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="gdate'.$fname.'">'.$start.'</td></tr>'; 
 		 $sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
-	try
-			{
-				$xpaw->Connect( $server['host'], $server['port'], SQ_TIMEOUT, SQ_ENGINE );
-				$sub_cmd = 'GetInfo';
-				$info = $xpaw->GetInfo();
-			}
-	catch( Exception $e )
-										{
-												$Exception = $e;
-												if (strpos($Exception,'Failed to read any data from socket')) {
-														$Exception = 'Failed to read any data from socket Module (Ajax - Game Detail '.$sub_cmd.')';
-												}
-						
-														
-									}
-	$xpaw->Disconnect();
-	if (isset ($info['Players']) or $info['Players'] >0) {
-		//
-		// add them up here
-		$players = $info['Players']-$info['Bots'];
-		$page['players'] += $players;
-	}	
 }
 $page['gd']= $gd;
 $jsa ='';
