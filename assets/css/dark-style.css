@@ -1358,3 +1358,11 @@ a.invert:hover {
 .dark-img {
   margin-top: 10%;
 }
+
+.panel {
+   /* border-left: 1px solid;
+    border-bottom: 1px solid;
+    border-right: 1px solid;*/
+    margin-top: -8px;
+    padding: 1%;
+} 
