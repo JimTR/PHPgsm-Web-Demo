@@ -332,17 +332,16 @@
     var url = "";
     var jim = '';
     console.log(url);
+    $('#dashboard').toggleClass("collapsed");
+    document.getElementsByTagName("html")[0].style.visibility = "visible";
     index();
     setInterval( function() { index(); },7000);
     console.log('set interval for index'); 	
     jQuery.each( servers, function( i, val ) {
-		//
-		console.log(val);
-		$('#dashboard').toggleClass("collapsed");
 		online(val);
 		setInterval( function() { online(val); }, 5000 );
-		document.getElementsByTagName("html")[0].style.visibility = "visible";
 		//setInterval('online()', 8000);
+		
 	});
 });
 

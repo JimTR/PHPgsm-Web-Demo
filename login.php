@@ -62,9 +62,7 @@ setcookie("redirect",$_SERVER['HTTP_REFFERER'],3600,'/');
 	$template = new Template;
 	
 	$template->load('templates/login.html');
-	
-
-      
+	$template->replace_vars($page);    
    
 	$template->publish();
 	
