@@ -22,9 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "11770-2938813957";
+$build = "11793-272341437";
 $version = "1.002";
-$time = "1643290591";
+$time = "1643293968";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
 $user = $Auth->getAuth();
@@ -73,7 +73,7 @@ $template->replace_vars($page);
 $table_row='';
 foreach (glob("*.php") as $filename) {
 	$check = check_file($filename);
-	$table_row .='<tr><td>'.pathinfo($check['file_name'],PATHINFO_FILENAME).'</td><td>'.$check['full_version'].'</td><td>'.$check['reason'].'</td><td>'.$check['time'].'</td><td>'.$check['git_version'].'</td></tr>';
+	$table_row .='<tr><td>'.pathinfo($check['file_name'],PATHINFO_FILENAME).'</td><td>'.$check['full_version'].'</td><td>'.$check['reason'].'</td><td>'.$check['time'].'</td><td style="color:#5769C7;">'.$check['git_version'].'</td></tr>';
 }
 //print_r($check);
 //die();
