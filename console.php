@@ -1,4 +1,7 @@
 <?php
+$build = "2964-1644497683";
+$version = "1.000";
+$time = "1643274462";
 /*
  * quick_console.php
  * 
