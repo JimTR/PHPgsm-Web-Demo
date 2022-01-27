@@ -22,9 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "11045-979320884";
-$version = "1.002";
-$time = "1643267241";
+$build = "11360-4010998028";
+$version = "1.001";
+$time = "1643270084";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
 $user = $Auth->getAuth();
@@ -75,7 +75,7 @@ foreach (glob("*.php") as $filename) {
 	$check = check_file($filename);
 	//echo pathinfo('/www/htdocs/index.html', PATHINFO_EXTENSION);
 	//$table->addRow(array($check['file_name'],$check['symbol'],$check['reason'],$check['full_version']));
-	$table_row .='<tr><td>'.pathinfo($check['file_name'],PATHINFO_FILENAME).'</td><td>'.$check['full_version'].'</td><td>'.$check['reason'].'</td><td>'.$check['time'].'</td><td></td></tr>';
+	$table_row .='<tr><td>'.pathinfo($check['file_name'],PATHINFO_FILENAME).'</td><td>'.$check['full_version'].'</td><td>'.$check['reason'].'</td><td>'.$check['time'].'</td><td>'.$check['version'].'</td></tr>';
 }
 //print_r($check);
 //die();
@@ -109,7 +109,7 @@ function check_file($file_name) {
 	if (!empty($matches)){$t_match =$matches[0];} else{ $t_match = '';}
 	$nf = remove_item($nf,$b_match); // build info
 	$nf = remove_item($nf,$v_match); // duplet
-	$nf = remove_item($nf,$v1_match); //triplet
+	//$nf = remove_item($nf,$v1_match); //triplet
 	$nf = remove_item($nf,$t_match); // time string
 	$length = strlen(implode(cr,$nf)); // string length
 	$crc = crc32(implode(cr,$nf)); // crc the remaining
@@ -147,6 +147,7 @@ function check_file($file_name) {
 	$build = str_replace('";','',$build);
 	$b_detail = explode('-',$build);
     $remote_file = check_remote_file($file_name); // see if there's an update
+    file_put_contents('debug.txt',"Local Version $version \n".print_r($remote_file,true).cr,FILE_APPEND);
 	if (!empty($version) and $b_match == '' ) {
 		
 		if ($remote_file['version'] === $version) {
@@ -159,7 +160,7 @@ function check_file($file_name) {
 			$return['full_version'] = "$version-$fsize-$crc";
 			$return['time'] = date ("d-m-Y H:i:s", filectime($file_name));
 		}
-		elseif ( $remote_file['version'] > $version){
+		if ( floatval($remote_file['version']) > floatval($version)){
 			$return['reason'] = 'Update Available';
 			$return['symbol'] = " ";
 			$return['file_name'] = $file_name;
@@ -167,6 +168,7 @@ function check_file($file_name) {
 			$return['builld'] = '';
 			$return['fsize'] = $length;
 			$return['time'] = date ("d-m-Y H:i:s", filectime($file_name));
+			return $return;
 		}
 	elseif ( $remote_file['version'] < $version and !empty($remote_file['version'])){
 			$return['reason'] = "Local file is newer than Source";
@@ -207,10 +209,10 @@ function check_file($file_name) {
 			 }
 		elseif ($remote_file['time'] < $t) 
 		{
-			 $return['reason'] = "Warning, local file is newer than source";
+			 $return['reason'] = "Warning, local file is newer than source !";
 			 $return['symbol'] = ""; 
 			 $file_name = $file_name;
-			 $d_version = $version-$length-$crc;
+			 $d_version = "$version-$length-$crc";
 			 $time  = $time;
 			 			 		 }
 		elseif ($remote_file['time'] > $t) 
@@ -241,7 +243,7 @@ function check_file($file_name) {
 		$return['status'] = 2;
 		$return['fsize'] = $fsize;
 		$return['build'] = $crc;
-		$return['version'] = $version;
+		$return['version'] = $remote_file['version'];
 		$return['full_version'] = "$version-$length-$crc";
 		$return['time'] = $time;
 		return $return;
@@ -296,10 +298,12 @@ function check_remote_file($file_name) {
 	$version = trim(str_replace('";','',$version));
 	$build = str_replace('$build = "','',$b_match);
 	$build = str_replace('";','',$build);
+	$return['file_name'] = $file_name;
 	$return['build'] = $build;
 	$return['time'] = $time;
 	$return['version'] = $version;
-	//print_r($return);
+	$return['full_version'] ="$version-$build";
+	//file_put_contents('debug.txt',print_r($return,true).cr,FILE_APPEND);
 	return $return;
 }
 
