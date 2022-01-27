@@ -25,8 +25,8 @@
 include 'inc/master.inc.php';
    $Auth = new Auth ();
 $build = "6179-3824370815";
-$version = "1.010";
-$time = "1643294834";
+$version = "1.001";
+$time = "1643297033";
 $module = "Game Server";
         $user = $Auth->getAuth();
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
