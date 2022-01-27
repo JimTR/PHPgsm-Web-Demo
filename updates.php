@@ -73,8 +73,6 @@ $template->replace_vars($page);
 $table_row='';
 foreach (glob("*.php") as $filename) {
 	$check = check_file($filename);
-	//echo pathinfo('/www/htdocs/index.html', PATHINFO_EXTENSION);
-	//$table->addRow(array($check['file_name'],$check['symbol'],$check['reason'],$check['full_version']));
 	$table_row .='<tr><td>'.pathinfo($check['file_name'],PATHINFO_FILENAME).'</td><td>'.$check['full_version'].'</td><td>'.$check['reason'].'</td><td>'.$check['time'].'</td><td>'.$check['git_version'].'</td></tr>';
 }
 //print_r($check);
