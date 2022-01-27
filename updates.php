@@ -22,9 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "12002-3725082378";
+$build = "12032-3303729517";
 $version = "1.002";
-$time = "1643279173";
+$time = "1643280247";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
 $user = $Auth->getAuth();
@@ -225,7 +225,7 @@ function check_file($file_name) {
 		elseif ($remote_file['time'] > $t) 
 		{ 
 			$return['reason'] = "Update Available";
-			$return['symbol'] = " ";
+			$return['git_version'] = $remote_file['full_version'];
 			$file_name = $file_name;
 			$d_version = "$version-$length-$crc";
 			$time  =  date("d-m-Y H:i:s",$remote_file['time']);
