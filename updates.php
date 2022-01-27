@@ -22,9 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "11945-731072694";
+$build = "11938-2282666234";
 $version = "1.002";
-$time = "1643280956";
+$time = "1643284375";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
 $user = $Auth->getAuth();
@@ -205,7 +205,7 @@ function check_file($file_name) {
 			 $file_name = $file_name;
 			 $d_version = "$version-$length-$crc";
 			 $sx = strcmp($remote_file['full_version'] ,$d_version);
-			 if ( $sx ==0) {
+			 if ( $sx !==0) {
 				$return['git_version'] = $remote_file['full_version'];
 			}
 			else {
@@ -314,7 +314,7 @@ function check_remote_file($file_name) {
 	$return['build'] = $build;
 	$return['time'] = $time;
 	$return['version'] = $version;
-	$return['full_version'] ="$version-$length-$build";
+	$return['full_version'] ="$version-$build";
 	//file_put_contents('debug.txt',print_r($return,true).cr,FILE_APPEND);
 	return $return;
 }
