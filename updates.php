@@ -22,9 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "11400-2231064323";
+$build = "11451-4183665507";
 $version = "1.002";
-$time = "1643271042";
+$time = "1643271588";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
 $user = $Auth->getAuth();
@@ -194,7 +194,7 @@ function check_file($file_name) {
 	if ($b_detail[0] == $length and $crc == $b_detail[1]) {
 		
 		if (empty($remote_file['time'])) { 
-			$return['reason'] = "File not found 2";
+			$return['reason'] = "File not found (2)";
 			$return['symbol'] = '';
 			$file_name= $file_name;
 			$d_version = "$version-$fsize-$crc";
@@ -205,7 +205,7 @@ function check_file($file_name) {
 			 $return['symbol'] = ''; 
 			 $file_name = $file_name;
 			 $d_version = "$version-$length-$crc";
-			 //$time  = $cc->convert("%G$time%n");
+			 $time  =  date("d-m-Y H:i:s",$remote_file['time']);
 			 }
 		elseif ($remote_file['time'] < $t) 
 		{
@@ -213,7 +213,7 @@ function check_file($file_name) {
 			 $return['symbol'] = ""; 
 			 $file_name = $file_name;
 			 $d_version = "$version-$length-$crc";
-			 $time  = $time;
+			$time  =  date("d-m-Y H:i:s",$remote_file['time']);
 			 			 		 }
 		elseif ($remote_file['time'] > $t) 
 		{ 
