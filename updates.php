@@ -22,9 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "11938-2282666234";
+$build = "11770-2938813957";
 $version = "1.002";
-$time = "1643284375";
+$time = "1643290591";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
 $user = $Auth->getAuth();
