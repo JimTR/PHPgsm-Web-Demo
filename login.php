@@ -2,8 +2,8 @@
 
     require 'inc/master.inc.php'; // load required files
 $build = "1888-294676103";
-$version = "1.01";
-$time = "1643205955";
+$version = "1.001";
+$time = "1643282591";
 	$time = microtime();
 	$time = explode(' ', $time);
 	$time = $time[1] + $time[0];
