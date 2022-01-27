@@ -22,9 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "11805-2573259919";
+$build = "11615-2672776076";
 $version = "1.002";
-$time = "1643298664";
+$time = "1643301793";
 $module = "Update";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
@@ -239,11 +239,8 @@ function check_file($file_name) {
 		return $return;
 	}
 	else {
-		//echo $file_name.' has an error !, it\'s not as we coded it  '.cr;
-		//echo 'have you editied the file ? If so you need to re install a correct copy.'.cr;
-		//$cross = $cc->convert("%R  ✖%n");
 		$return['file_name'] = $file_name;
-		$return['reason'] = "Warning File has altered";
+		$return['reason'] = "Warning local module has altered";
 		$return['symbol'] = '';
 		$return['status'] = 2;
 		$return['fsize'] = $fsize;
