@@ -1,11 +1,12 @@
 <?php
 include 'inc/master.inc.php';
 $version = "1.000";
-$time = "1643273620";
+$time = "1643294987";
+$module = "API Server";
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
-$build = "3403-231195292";
     $Auth = new Auth ();
         $user = $Auth->getAuth();
+$build = "3427-326769863";
 if($user->loggedIn()) {
 		// set sidebar
 		$page['level'] = $user->level; //user is an object
