@@ -1,4 +1,7 @@
 <?PHP
+$build = "672-2441115016";
+$version = "1.000";
+$time = "1643265477";
     require 'inc/master.inc.php';
     $template = new Template;
 $Auth = new Auth ();
