@@ -22,9 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "8263-966391347";
+$build = "11045-979320884";
 $version = "2.071";
-$time = "1643206975";
+$time = "1643264896";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
 $user = $Auth->getAuth();
@@ -75,7 +75,7 @@ foreach (glob("*.php") as $filename) {
 	$check = check_file($filename);
 	//echo pathinfo('/www/htdocs/index.html', PATHINFO_EXTENSION);
 	//$table->addRow(array($check['file_name'],$check['symbol'],$check['reason'],$check['full_version']));
-	$table_row .='<tr><td>'.pathinfo($check['file_name'],PATHINFO_FILENAME).'</td><td>'.$check['full_version'].'</td><td>'.$check['reason'].'</td><td></td></tr>';
+	$table_row .='<tr><td>'.pathinfo($check['file_name'],PATHINFO_FILENAME).'</td><td>'.$check['full_version'].'</td><td>'.$check['reason'].'</td><td>'.$check['time'].'</td><td></td></tr>';
 }
 //print_r($check);
 //die();
@@ -86,110 +86,168 @@ $template->replace_vars($page);
 $template->publish();
 
 function check_file($file_name) {
+	  // test file
 	$return=array();
-	global $page;
 	if(is_file($file_name) == false){
+		echo error.' Could not find '.$file_name.cr;
 		$return['reason'] = ' Could not find ';
 		$return['symbol'] = $cross;
 		$return['status'] = false;
 		return $return;
 	}
 	
-	$file = file_get_contents($file_name);
-	$fsize = filesize($file_name)+1;
-	$nf = explode(cr,$file);
-	$matches = array_values(preg_grep('/^\$build = "\d+-\d+";/', $nf));
-	$v = array_values(preg_grep('/^\$version = "\d+.\d+"/', $nf));
-	$v1 = array_values(preg_grep('/^\$version = "\d+.\d+.\d+"/', $nf));
-	if (!empty($v)) {
-	$version = trim(str_replace('$version = "','',$v[0]));
-	$version = trim(str_replace('";','',$version));
-	$page['debug'] .= "version = $version<br>";
-	}
-	if (!empty($v1)) {
-	//print_r($v);
-	$version = trim(str_replace('$version = "','',$v1[0]));
-	$version = trim(str_replace('";','',$version));
-	//echo $version.cr;
-	//print_r($matches);
-	}
-$o_length = strlen($file);
-$matches = array_values(preg_grep('/\$build = "\d+-\d+"/', $nf));
-if (!empty($matches)){$b_match =$matches[0];} else{ $b_match = '';}
-$matches = array_values(preg_grep('/\$version = "\d+.\d+"/', $nf));
-if (!empty($matches)){$v_match =$matches[0];} else{ $v_match = '';}
-$matches = array_values(preg_grep('/\$version = "\d+.\d+.\d+"/', $nf));
-if (!empty($matches)){$v1_match =$matches[0];} else{ $v1_match = '';}
-$matches = array_values(preg_grep('/\$time = "\d+"/', $nf));
-if (!empty($matches)){$t_match =$matches[0];} else{ $t_match = '';}
-$b_pos = array_search_partial($nf,$b_match);
-$v_pos = array_search_partial($nf,$v_match);
-$v1_pos = array_search_partial($nf,$v1_match);
-$t_pos = array_search_partial($nf,$t_match);
-
+	$file = file_get_contents($file_name); // got the file
+	$fsize = filesize($file_name); // not sure with this
+	$nf = explode(cr,$file);// turn file to array
+	$matches = array_values(preg_grep('/\$build = "\d+-\d+"/', $nf));
+	if (!empty($matches)){$b_match =$matches[0];} else{ $b_match = '';} 
+	$matches = array_values(preg_grep('/\$version = "\d+.\d+"/', $nf));
+	if (!empty($matches)){$v_match =$matches[0];} else{ $v_match = '';} 
+	$matches = array_values(preg_grep('/\$version = "\d+.\d+.\d+"/', $nf));
+	if (!empty($matches)){$v1_match =$matches[0];} else{ $v1_match = '';} 
+	$matches = array_values(preg_grep('/\$time = "\d+"/', $nf));
+	if (!empty($matches)){$t_match =$matches[0];} else{ $t_match = '';}
 	$nf = remove_item($nf,$b_match); // build info
 	$nf = remove_item($nf,$v_match); // duplet
+	$nf = remove_item($nf,$v1_match); //triplet
 	$nf = remove_item($nf,$t_match); // time string
+	$length = strlen(implode(cr,$nf)); // string length
+	$crc = crc32(implode(cr,$nf)); // crc the remaining
+	if (!empty($t_match)) {
+		$t = trim(str_replace('$time = "','',$t_match));
+		$t = trim(str_replace('";','',$t));
+		$time = date("d-m-Y H:i:s",$t);
+	}
+	else {$time='0';}
+	if (!empty($v_match)) {
+	//print_r($v);
+	$version = trim(str_replace('$version = "','',$v_match));
+	$version = trim(str_replace('";','',$version));
+	}
+	if (!empty($v1_match)) {
+	//print_r($v);
+	$version = trim(str_replace('$version = "','',$v1_match));
+	$version = trim(str_replace('";','',$version));
 
-	if (empty($matches) and empty($version)) {
+	}
+	if ($b_match=='' and empty($version)) {
+		$version = '';
 	//echo error.' unable to check '.$file_name.' file structure is incorrect'.$cross.cr;
 	$return['file_name'] = $file_name;
-	$return['reason'] = "File structure is incorrect";
-	$return['symbol'] = $cross;
+	$return['reason'] = 'File structure is incorrect';
+	$return['symbol'] = '';
 	$return['status'] = false;
-	$return['fsize'] = $fsize;
+	$return['fsize'] = $length;
 	$return['build'] ='';
 	$return['full_version'] = $version;
+	//$return['time'] = 0;
 	return $return;
 	}
-	$oldbp = strpos($file,'$build');
-	$eol = strpos($file,';',$oldbp)+1;
-	$build = substr($file,$oldbp,$eol-$oldbp);
-	$a_length = strlen(implode(cr,$nf));
-	$crc = crc32(implode(cr,$nf)); // crc the remaining
-    //echo 'file '.$file_name.' - '.$tmp.' '.$ns.cr;
-	//$build = trim($matches[0]);
-	$build = str_replace('$build = "','',$build);
-	$build = str_replace('"','',$build);
+	$build = str_replace('$build = "','',$b_match);
+	$build = str_replace('";','',$build);
 	$b_detail = explode('-',$build);
-	//echo "\$fsize = $fsize \$ns = $ns strlen = $length".cr;
-	if (!empty($version) and empty($matches)) {
-		$return['file_name'] = $file_name;
-		$return['reason'] = "user configured file";
-		$return['color'] = 'green';
-		$return['status'] = true;
-		$return['fsize'] = $fsize;
-		$return['build'] ='';
-		$return['full_version'] = "$version-$fsize-$ns";
-		return $return;
-	}	
-	if ($b_detail[0] == $a_length and $crc == $b_detail[1]) {
+    $remote_file = check_remote_file($file_name); // see if there's an update
+	if (!empty($version) and $b_match == '' ) {
 		
-		//echo advice.' '.$file_name.$tick.cr;
+		if ($remote_file['version'] === $version) {
+			$return['file_name'] = $file_name;
+			$return['reason'] = "user configured file";
+			$return['symbol'] = '';
+			$return['status'] = true;
+			$return['fsize'] = $length;
+			$return['build'] ='';
+			$return['full_version'] = "$version-$fsize-$crc";
+			$return['time'] = date ("d-m-Y H:i:s", filectime($file_name));
+		}
+		elseif ( $remote_file['version'] > $version){
+			$return['reason'] = 'Update Available';
+			$return['symbol'] = " ";
+			$return['file_name'] = $file_name;
+			$return['full_version'] = "$version-$fsize-$crc";
+			$return['builld'] = '';
+			$return['fsize'] = $length;
+			$return['time'] = date ("d-m-Y H:i:s", filectime($file_name));
+		}
+	elseif ( $remote_file['version'] < $version and !empty($remote_file['version'])){
+			$return['reason'] = "Local file is newer than Source";
+			$return['symbol'] = "";
+			$return['file_name'] = $file_name;
+			$return['full_version'] = "$version-$fsize-$crc";
+			$return['builld'] = '';
+			$return['fsize'] = $length;
+			$return['time'] = date ("d-m-Y H:i:s", filectime($file_name));
+		}
+	elseif (empty($remote_file['version'])) {
+		// not in
+		$return['reason'] = "File not found 1";
+		$return['symbol'] = "";
 		$return['file_name'] = $file_name;
-		$return['reason'] = "File structure is correct";
-		$return['color'] = 'green';
+		$return['full_version'] = "$version-$fsize-$crc";
+		$return['builld'] = '';
+		$return['fsize'] = $length;
+		$return['time'] = date ("d-m-Y H:i:s", filectime($file_name));
+	}		
+	return $return;
+	}	
+	if ($b_detail[0] == $length and $crc == $b_detail[1]) {
+		
+		if (empty($remote_file['time'])) { 
+			$return['reason'] = "File not found 2";
+			$return['symbol'] = '';
+			$file_name= $file_name;
+			$d_version = "$version-$fsize-$crc";
+			$time  = $time;
+			}
+		elseif ($remote_file['time'] == $t) {
+			 $return['reason'] = "File is up to date"; 
+			 $return['symbol'] = ''; 
+			 $file_name = $file_name;
+			 $d_version = "$version-$length-$crc";
+			 //$time  = $cc->convert("%G$time%n");
+			 }
+		elseif ($remote_file['time'] < $t) 
+		{
+			 $return['reason'] = "Warning, local file is newer than source";
+			 $return['symbol'] = ""; 
+			 $file_name = $file_name;
+			 $d_version = $version-$length-$crc;
+			 $time  = $time;
+			 			 		 }
+		elseif ($remote_file['time'] > $t) 
+		{ 
+			$return['reason'] = "Update Available";
+			$return['symbol'] = " ";
+			$file_name = $file_name;
+			$d_version = $version-$length-$crc;
+			$time  = $time;
+			}
+		
+		$return['file_name'] = $file_name;
 		$return['status'] = 1;
 		$return['fsize'] = $fsize;
-		$return['build'] = $ns;
+		$return['build'] = $crc;
 		$return['version'] = $version;
-		$return['full_version'] = "$version-$fsize-$crc";
+		$return['full_version'] = $d_version;
+		$return['time'] = $time;
 		return $return;
 	}
 	else {
 		//echo $file_name.' has an error !, it\'s not as we coded it  '.cr;
 		//echo 'have you editied the file ? If so you need to re install a correct copy.'.cr;
+		//$cross = $cc->convert("%R  ✖%n");
 		$return['file_name'] = $file_name;
-		$return['reason'] = "File stucture has altered !";
-		$return['color'] = 'yellow';
+		$return['reason'] = "Warning File has altered";
+		$return['symbol'] = '';
 		$return['status'] = 2;
 		$return['fsize'] = $fsize;
-		$return['build'] = $ns;
+		$return['build'] = $crc;
 		$return['version'] = $version;
-		$return['full_version'] = "$version-$fsize-$crc";
+		$return['full_version'] = "$version-$length-$crc";
+		$return['time'] = $time;
 		return $return;
 	}
 }
+
 function remove_item($array,$value) {
         // remove item from array
         $remove = array_search_partial($array,$value);
@@ -220,7 +278,7 @@ function arrayInsert($array, $position, $insertArray)
 }
 
 function check_remote_file($file_name) {
-	$file ="https://raw.githubusercontent.com/JimTR/phpgsmdemo//main/$file_name"; // need to have this as a branch setting
+	$file ="https://raw.githubusercontent.com/JimTR/phpgsmdemo/main/$file_name"; // need to have this as a branch setting
 	//echo "file = $file".cr;
 	$raw = geturl($file);
 	$nf = explode(cr,$raw);// turn file to array
@@ -241,6 +299,7 @@ function check_remote_file($file_name) {
 	$return['build'] = $build;
 	$return['time'] = $time;
 	$return['version'] = $version;
+	//print_r($return);
 	return $return;
 }
 
