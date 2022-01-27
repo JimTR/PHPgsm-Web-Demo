@@ -22,9 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "11447-870077386";
+$build = "12002-3725082378";
 $version = "1.002";
-$time = "1643273821";
+$time = "1643279173";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
 $user = $Auth->getAuth();
@@ -75,7 +75,7 @@ foreach (glob("*.php") as $filename) {
 	$check = check_file($filename);
 	//echo pathinfo('/www/htdocs/index.html', PATHINFO_EXTENSION);
 	//$table->addRow(array($check['file_name'],$check['symbol'],$check['reason'],$check['full_version']));
-	$table_row .='<tr><td>'.pathinfo($check['file_name'],PATHINFO_FILENAME).'</td><td>'.$check['full_version'].'</td><td>'.$check['reason'].'</td><td>'.$check['time'].'</td><td>'.$check['version'].'</td></tr>';
+	$table_row .='<tr><td>'.pathinfo($check['file_name'],PATHINFO_FILENAME).'</td><td>'.$check['full_version'].'</td><td>'.$check['reason'].'</td><td>'.$check['time'].'</td><td>'.$check['git_version'].'</td></tr>';
 }
 //print_r($check);
 //die();
@@ -202,9 +202,16 @@ function check_file($file_name) {
 			}
 		elseif ($remote_file['time'] == $t) {
 			 $return['reason'] = "File is up to date"; 
-			 $return['symbol'] = ''; 
 			 $file_name = $file_name;
 			 $d_version = "$version-$length-$crc";
+			 $sx = strcmp($remote_file['full_version'] ,$d_version);
+			  if ( $sx ==0) {
+				  //echo "$sx in strcmp ".$remote_file['full_version']. '  -  '."$d_version<br>";
+				$return['git_version'] = $remote_file['full_version'];
+			}
+			else {
+				$return['git_version'] = '';
+			} 
 			 $time  =  date("d-m-Y H:i:s",$remote_file['time']);
 			 }
 		elseif ($remote_file['time'] < $t) 
@@ -292,6 +299,12 @@ function check_remote_file($file_name) {
 	if (!empty($matches)){$v1_match =$matches[0];} else{ $v1_match = '';} 
 	$matches = array_values(preg_grep('/\$time = "\d+"/', $nf));
 	if (!empty($matches)){$t_match =$matches[0];} else{ $t_match = '';}
+	$nf = remove_item($nf,$b_match); // build info
+	$nf = remove_item($nf,$v_match); // duplet
+	$nf = remove_item($nf,$v1_match); //triplet
+	$nf = remove_item($nf,$t_match); // time string
+	$length = strlen(implode(cr,$nf)); // string length
+	$crc = crc32(implode(cr,$nf)); // crc the remaining
 	$time = trim(str_replace('$time = "','',$t_match));
 	$time = trim(str_replace('";','',$time));
 	$version = trim(str_replace('$version = "','',$v_match));
@@ -302,7 +315,7 @@ function check_remote_file($file_name) {
 	$return['build'] = $build;
 	$return['time'] = $time;
 	$return['version'] = $version;
-	$return['full_version'] ="$version-$build";
+	$return['full_version'] ="$version-$length-$build";
 	//file_put_contents('debug.txt',print_r($return,true).cr,FILE_APPEND);
 	return $return;
 }
