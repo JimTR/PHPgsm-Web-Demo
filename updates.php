@@ -23,8 +23,8 @@
  */
 include 'inc/master.inc.php';
 $build = "11045-979320884";
-$version = "1.001";
-$time = "1643266708";
+$version = "1.002";
+$time = "1643267241";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
 $user = $Auth->getAuth();
