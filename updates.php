@@ -22,9 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "11364-1368448935";
+$build = "11400-2231064323";
 $version = "1.002";
-$time = "1643270592";
+$time = "1643271042";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
 $user = $Auth->getAuth();
@@ -221,7 +221,7 @@ function check_file($file_name) {
 			$return['symbol'] = " ";
 			$file_name = $file_name;
 			$d_version = "$version-$length-$crc";
-			$time  = $time;
+			$time  =  date("d-m-Y H:i:s",$remote_file['time']);
 			}
 		
 		$return['file_name'] = $file_name;
