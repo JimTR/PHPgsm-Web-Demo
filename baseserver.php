@@ -1,6 +1,9 @@
 <?php
 include 'inc/master.inc.php';
+$version = "1.000";
+$time = "1643273620";
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
+$build = "3403-231195292";
     $Auth = new Auth ();
         $user = $Auth->getAuth();
 if($user->loggedIn()) {
