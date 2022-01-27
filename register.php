@@ -4,7 +4,9 @@
  * reworked 8-1-15
  *  
  */
- 
+$build = "6550-1473980254";
+$version = "1.000";
+$time = "1643265620";
  require 'inc/master.inc.php'; // do login or not
  $template = new Template;
 if (!is_cli()) {
