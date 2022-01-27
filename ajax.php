@@ -21,7 +21,9 @@
  * 
  *  jquery back end for the demo project perhaps
  */
-
+$build = "4376-2059858442";
+$version = "1.000";
+$time = "1643265107";
 include "inc/master.inc.php"; // get set up
 require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 use xPaw\SourceQuery\SourceQuery;
