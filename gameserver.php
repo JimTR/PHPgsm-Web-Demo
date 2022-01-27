@@ -24,6 +24,9 @@
 //echo "hello there <br>";
 include 'inc/master.inc.php';
    $Auth = new Auth ();
+$build = "6154-2024654386";
+$version = "1.010";
+$time = "1643203695";
         $user = $Auth->getAuth();
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
 $we_are_here = $settings['url'];

@@ -37,7 +37,7 @@
 										<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true">Servers</button>
 									</li>
 									<li class="nav-item" role="presentation">
-										<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">API</button>
+										<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Site</button>
 									</li>
 									<li class="nav-item" role="presentation">
 										<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Spare</button>
@@ -59,7 +59,17 @@
 									</div>
 									<div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
 										<div class="panel">
-											Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Volupt
+											<div style="width:75%;margin:auto;">
+												<table class="table">
+													<thead>
+														<tr><th>Module</th><th>Version</th><th>Status</th><th>Update Available</th></tr>
+													</thead>
+													<tbody>
+														<!--#sw_table#-->
+													</tbody>
+												</table>
+												<!--<p><!--#debug#-></p>-->
+											</div>
 										</div>
 									</div>
 									<div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">

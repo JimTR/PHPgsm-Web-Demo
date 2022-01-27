@@ -77,16 +77,9 @@
 
                 </div>
               </div>
-
-              <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-              </div>
-
-            </div>
+			</div>
+		</div>
+              <!--#footer#-->
           </div>
         </div>
 
@@ -103,7 +96,15 @@
   <!-- Template Main JS File -->
   <script src="js/jquery.js"></script>
   <script src="assets/js/main.js"></script>
+  <script>
+	  jQuery(document).ready(function(){
+		sessionStorage.clear();	
+		document.getElementsByTagName("html")[0].style.visibility = "visible";
+		$('#footer').css("margin-left","0");
+		
+    });
 
+  </script>	
 </body>
 
 </html>
