@@ -22,9 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "11451-4183665507";
+$build = "11447-870077386";
 $version = "1.002";
-$time = "1643271588";
+$time = "1643273821";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
 $user = $Auth->getAuth();
@@ -181,7 +181,7 @@ function check_file($file_name) {
 		}
 	elseif (empty($remote_file['version'])) {
 		// not in
-		$return['reason'] = "File not found 1";
+		$return['reason'] = "Unknown File";
 		$return['symbol'] = "";
 		$return['file_name'] = $file_name;
 		$return['full_version'] = "$version-$fsize-$crc";
