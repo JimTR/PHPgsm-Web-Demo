@@ -22,9 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "11360-4010998028";
+$build = "11364-1368448935";
 $version = "1.002";
-$time = "1643270329";
+$time = "1643270592";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
 $user = $Auth->getAuth();
@@ -147,7 +147,7 @@ function check_file($file_name) {
 	$build = str_replace('";','',$build);
 	$b_detail = explode('-',$build);
     $remote_file = check_remote_file($file_name); // see if there's an update
-    file_put_contents('debug.txt',"Local Version $version \n".print_r($remote_file,true).cr,FILE_APPEND);
+    //file_put_contents('debug.txt',"Local Version $version \n".print_r($remote_file,true).cr,FILE_APPEND);
 	if (!empty($version) and $b_match == '' ) {
 		
 		if ($remote_file['version'] === $version) {
@@ -220,7 +220,7 @@ function check_file($file_name) {
 			$return['reason'] = "Update Available";
 			$return['symbol'] = " ";
 			$file_name = $file_name;
-			$d_version = $version-$length-$crc;
+			$d_version = "$version-$length-$crc";
 			$time  = $time;
 			}
 		
