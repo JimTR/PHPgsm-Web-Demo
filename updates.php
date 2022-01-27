@@ -22,9 +22,10 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "11793-272341437";
+$build = "11805-2573259919";
 $version = "1.002";
-$time = "1643293968";
+$time = "1643298664";
+$module = "Update";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
 $user = $Auth->getAuth();
@@ -199,7 +200,7 @@ function check_file($file_name) {
 			$time  = $time;
 			}
 		elseif ($remote_file['time'] == $t) {
-			 $return['reason'] = "File is up to date"; 
+			 $return['reason'] = "Up to date"; 
 			 $file_name = $file_name;
 			 $d_version = "$version-$length-$crc";
 			 $sx = strcmp($remote_file['full_version'] ,$d_version);
