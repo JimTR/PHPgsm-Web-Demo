@@ -22,9 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "12376-2603899367";
+$build = "12373-943908028";
 $version = "1.002";
-$time = "1643351431";
+$time = "1643355678";
 $module = "Update";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
@@ -144,7 +144,7 @@ function check_file($file_name) {
 		$version = '';
 	//echo error.' unable to check '.$file_name.' file structure is incorrect'.$cross.cr;
 	$return['file_name'] = $file_name;
-	$return['reason'] = 'File structure is incorrect';
+	$return['reason'] = 'Unknown module';
 	$return['symbol'] = '';
 	$return['status'] = false;
 	$return['fsize'] = $length;
@@ -195,7 +195,7 @@ function check_file($file_name) {
 		}
 	elseif (empty($remote_file['version'])) {
 		// not in
-		$return['reason'] = "Unknown File";
+		$return['reason'] = "User Configured Module";
 		$return['symbol'] = "";
 		$return['file_name'] = $file_name;
 		$return['full_version'] = "$version-$fsize-$crc";
