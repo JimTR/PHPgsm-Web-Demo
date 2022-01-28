@@ -5,9 +5,10 @@ require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 	define( 'SQ_TIMEOUT',     $settings['SQ_TIMEOUT'] );
 	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
 	define( 'LOG',	'logs/ajax.log');
-$build = "6861-3620247590";
+$module = "Home_Page";	
+$build = "6885-2408469918";
 $version = "1.010";
-$time = "1643213842";
+$time = "1643354358";
     $Auth = new Auth ();
     $user = $Auth->getAuth();
 	$we_are_here = $settings['url'];
