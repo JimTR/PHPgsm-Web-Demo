@@ -4,9 +4,10 @@
  * reworked 8-1-15
  *  
  */
-$build = "6550-1473980254";
+$build = "6572-1408588099";
 $version = "1.000";
-$time = "1643265620";
+$time = "1643351306";
+$module = "Register";
  require 'inc/master.inc.php'; // do login or not
  $template = new Template;
 if (!is_cli()) {

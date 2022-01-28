@@ -24,10 +24,10 @@
 //echo "hello there <br>";
 include 'inc/master.inc.php';
    $Auth = new Auth ();
-$build = "6179-3824370815";
+$build = "6179-3952740374";
 $version = "1.001";
-$time = "1643297033";
-$module = "Game Server";
+$time = "1643351341";
+$module = "Game_Server";
         $user = $Auth->getAuth();
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
 $we_are_here = $settings['url'];
