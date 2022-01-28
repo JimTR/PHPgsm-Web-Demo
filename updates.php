@@ -22,9 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "11615-2672776076";
+$build = "12376-2603899367";
 $version = "1.002";
-$time = "1643301793";
+$time = "1643351431";
 $module = "Update";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
@@ -74,7 +74,11 @@ $template->replace_vars($page);
 $table_row='';
 foreach (glob("*.php") as $filename) {
 	$check = check_file($filename);
-	$table_row .='<tr><td>'.pathinfo($check['file_name'],PATHINFO_FILENAME).'</td><td>'.$check['full_version'].'</td><td>'.$check['reason'].'</td><td>'.$check['time'].'</td><td style="color:#5769C7;">'.$check['git_version'].'</td></tr>';
+	if(empty($check['module'] )) {
+		//echo 'hit empty<br>';
+		$check['module'] = pathinfo($check['file_name'],PATHINFO_FILENAME);
+	}
+	$table_row .='<tr><td>'.$check['module'].'</td><td>'.$check['full_version'].'</td><td>'.$check['reason'].'</td><td>'.$check['time'].'</td><td style="color:#5769C7;">'.$check['git_version'].'</td></tr>';
 }
 //print_r($check);
 //die();
@@ -106,6 +110,8 @@ function check_file($file_name) {
 	if (!empty($matches)){$v1_match =$matches[0];} else{ $v1_match = '';} 
 	$matches = array_values(preg_grep('/\$time = "\d+"/', $nf));
 	if (!empty($matches)){$t_match =$matches[0];} else{ $t_match = '';}
+	$matches = array_values(preg_grep('/\$module = "\w+"/', $nf));
+	if (!empty($matches)){$module =$matches[0];} else{ $module = '';}
 	$nf = remove_item($nf,$b_match); // build info
 	$nf = remove_item($nf,$v_match); // duplet
 	//$nf = remove_item($nf,$v1_match); //triplet
@@ -118,6 +124,11 @@ function check_file($file_name) {
 		$time = date("d-m-Y H:i:s",$t);
 	}
 	else {$time='0';}
+	if (!empty($module)) {
+		$module = trim(str_replace('$module = "','',$module));
+		$module = trim(str_replace('";','',$module));
+		$module = trim(str_replace('_',' ',$module));
+	}
 	if (!empty($v_match)) {
 	//print_r($v);
 	$version = trim(str_replace('$version = "','',$v_match));
@@ -139,6 +150,7 @@ function check_file($file_name) {
 	$return['fsize'] = $length;
 	$return['build'] ='';
 	$return['full_version'] = $version;
+	$return['module'] = $module;
 	//$return['time'] = 0;
 	return $return;
 	}
@@ -158,6 +170,7 @@ function check_file($file_name) {
 			$return['build'] ='';
 			$return['full_version'] = "$version-$fsize-$crc";
 			$return['time'] = date ("d-m-Y H:i:s", filectime($file_name));
+			$return['module'] = $module;
 		}
 		if ( floatval($remote_file['version']) > floatval($version)){
 			$return['reason'] = 'Update Available';
@@ -167,6 +180,7 @@ function check_file($file_name) {
 			$return['builld'] = '';
 			$return['fsize'] = $length;
 			$return['time'] = date ("d-m-Y H:i:s", filectime($file_name));
+			$return['module'] = $module;
 			return $return;
 		}
 	elseif ( $remote_file['version'] < $version and !empty($remote_file['version'])){
@@ -177,6 +191,7 @@ function check_file($file_name) {
 			$return['builld'] = '';
 			$return['fsize'] = $length;
 			$return['time'] = date ("d-m-Y H:i:s", filectime($file_name));
+			$return['module'] = $module;
 		}
 	elseif (empty($remote_file['version'])) {
 		// not in
@@ -187,6 +202,7 @@ function check_file($file_name) {
 		$return['builld'] = '';
 		$return['fsize'] = $length;
 		$return['time'] = date ("d-m-Y H:i:s", filectime($file_name));
+		$return['module'] = $module;
 	}		
 	return $return;
 	}	
@@ -198,11 +214,13 @@ function check_file($file_name) {
 			$file_name= $file_name;
 			$d_version = "$version-$fsize-$crc";
 			$time  = $time;
+			$return['module'] = $module;
 			}
 		elseif ($remote_file['time'] == $t) {
 			 $return['reason'] = "Up to date"; 
 			 $file_name = $file_name;
 			 $d_version = "$version-$length-$crc";
+			 $return['module'] = $module;
 			 $sx = strcmp($remote_file['full_version'] ,$d_version);
 			 if ( $sx !==0) {
 				$return['git_version'] = $remote_file['full_version'];
@@ -218,7 +236,8 @@ function check_file($file_name) {
 			 $return['symbol'] = ""; 
 			 $file_name = $file_name;
 			 $d_version = "$version-$length-$crc";
-			$time  =  date("d-m-Y H:i:s",$remote_file['time']);
+			 $time  =  date("d-m-Y H:i:s",$remote_file['time']);
+			 $return['module'] = $module;
 			 			 		 }
 		elseif ($remote_file['time'] > $t) 
 		{ 
@@ -227,6 +246,7 @@ function check_file($file_name) {
 			$file_name = $file_name;
 			$d_version = "$version-$length-$crc";
 			$time  =  date("d-m-Y H:i:s",$remote_file['time']);
+			$return['module'] = $module;
 			}
 		
 		$return['file_name'] = $file_name;
@@ -236,6 +256,7 @@ function check_file($file_name) {
 		$return['version'] = $version;
 		$return['full_version'] = $d_version;
 		$return['time'] = $time;
+		$return['module'] = $module;
 		return $return;
 	}
 	else {
@@ -248,6 +269,7 @@ function check_file($file_name) {
 		$return['version'] = $remote_file['version'];
 		$return['full_version'] = "$version-$length-$crc";
 		$return['time'] = $time;
+		$return['module'] = $module;
 		return $return;
 	}
 }
