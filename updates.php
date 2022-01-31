@@ -22,9 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "12373-943908028";
+$build = "12373-3330493461";
 $version = "1.002";
-$time = "1643355678";
+$time = "1643606595";
 $module = "Update";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
@@ -71,6 +71,7 @@ $page['page-title'] = ucfirst(basename($_SERVER['SCRIPT_NAME'], ".php"));
 $template = new template;
 $template->load('templates/subtemplates/sidebar.html');
 $template->replace_vars($page);
+$page['sidebar'] = $template->get_template();
 $table_row='';
 foreach (glob("*.php") as $filename) {
 	$check = check_file($filename);
@@ -83,7 +84,6 @@ foreach (glob("*.php") as $filename) {
 //print_r($check);
 //die();
 $page['sw_table'] = $table_row;
-$page['sidebar'] = $template->get_template();
 $template->load('templates/updates.html');
 $template->replace_vars($page);
 $template->publish();

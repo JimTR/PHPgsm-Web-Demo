@@ -1113,7 +1113,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
   /*width: 0px;*/
 }
 
@@ -1288,6 +1288,11 @@ a.invert:hover {
   font-size: 14px !important;
   margin-right: 1%;
 }
+
+.clock a {
+  color:#cccccc;
+}
+
 .col-md-6{
     -ms-flex: 0 0 50%;
     flex: 0 0;
