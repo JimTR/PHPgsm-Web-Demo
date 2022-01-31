@@ -6,9 +6,9 @@ require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
 	define( 'LOG',	'logs/ajax.log');
 $module = "Dashboard";	
-$build = "6885-4223913501";
+$build = "7042-1373634926";
 $version = "1.010";
-$time = "1643356008";
+$time = "1643618471";
     $Auth = new Auth ();
     $user = $Auth->getAuth();
 	$we_are_here = $settings['url'];
@@ -72,6 +72,7 @@ if (endsWith($jsa, ',')) {
 
 $sql = "SELECT sum(players) as player_tot, count(country) as countries, sum(logins) as tot_logins, (select count(*) from servers) as game_tot, (select count(*) from servers where running = 1) as run_tot  FROM `logins` WHERE 1";
 $qstat = $database->get_row($sql);
+$page['percent'] = ($qstat['player_tot']/$qstat['tot_logins'])*100;
 $page['player_tot'] =  $qstat['player_tot'];
 $page['logins_tot'] = $qstat['tot_logins'];
 $page['country_tot'] = $qstat['countries'];
@@ -82,6 +83,7 @@ $countries = $database->get_results($sql);
 foreach ($countries as $country) {
 // do stats
 $template->load('templates/subtemplates/country_table.html');
+$country['percent'] = number_format(($country['logins']/$page['logins_tot'])*100,2).'%';
 $country['flag'] = 'https://ipdata.co/flags/'.trim(strtolower($country['country_code'])).'.png';
 $template->replace_vars($country);
 $page['country_data'] .= $template->get_template();
