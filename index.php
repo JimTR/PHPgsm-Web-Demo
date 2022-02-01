@@ -6,9 +6,9 @@ require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
 	define( 'LOG',	'logs/ajax.log');
 $module = "Dashboard";	
-$build = "7042-1373634926";
+$build = "7134-555150218";
 $version = "1.010";
-$time = "1643618471";
+$time = "1643622942";
     $Auth = new Auth ();
     $user = $Auth->getAuth();
 	$we_are_here = $settings['url'];
@@ -84,6 +84,7 @@ foreach ($countries as $country) {
 // do stats
 $template->load('templates/subtemplates/country_table.html');
 $country['percent'] = number_format(($country['logins']/$page['logins_tot'])*100,2).'%';
+$country['p_percent'] = number_format(($country['players']/$page['player_tot'])*100,2).'%';
 $country['flag'] = 'https://ipdata.co/flags/'.trim(strtolower($country['country_code'])).'.png';
 $template->replace_vars($country);
 $page['country_data'] .= $template->get_template();
