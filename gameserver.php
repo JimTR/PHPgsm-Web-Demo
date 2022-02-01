@@ -24,9 +24,9 @@
 //echo "hello there <br>";
 include 'inc/master.inc.php';
    $Auth = new Auth ();
-$build = "6179-3952740374";
+$build = "6183-2540845501";
 $version = "1.001";
-$time = "1643351341";
+$time = "1643699346";
 $module = "Game_Server";
         $user = $Auth->getAuth();
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
@@ -81,7 +81,10 @@ $this_server =  $database->get_row($sql);
 $this_server['server_update'] = date("d-m-Y H:i:s a",$this_server['server_update']);
 if ($this_server['starttime']) {$this_server['starttime'] = date("d-m-Y H:i:s a",$this_server['starttime']);}
 $info = get_server_info($this_server);
-$v = json_decode(geturl($this_server['url'].'/ajaxv2.php?action=game_detail&filter='.$bserver),true); //needs replacing with ajax_send
+$v = json_decode(geturl($this_server['url'].'/ajaxv2.php?action=game_detail&filter='.$bserver.'&server='.$this_server['fname']),true); //needs replacing with ajax_send
+//echo $this_server['url'].'/ajaxv2.php?action=game_detail&filter='.$bserver.'<br>';
+//print_r($v);
+//die();
 //$info = array_merge($info,array_change_key_case($v[$bserver]));
 $this_server = array_change_key_case(array_merge_recursive($this_server,$info));
 $this_server['players'] -= $this_server['bots'];
@@ -137,21 +140,20 @@ function get_server_info($server) {
 				$info['vars'] = $rules;
 			}
 	catch( Exception $e )
-										{
-												$Exception = $e;
-												if (strpos($Exception,'Failed to read any data from socket')) {
-														$Exception = 'Failed to read any data from socket Module (Ajax - get_server_info '.$sub_cmd.')';
-														//file_put_contents(LOG,$Exception,PHP_EOL,FILE_APPEND);
-														
-												}
-										$info['l_status'] = 'offline';
-										$info['steamid'] = 'N/A';
-										$info['map'] = 'N/A';
-										$info['hostname'] = 'N/A';
-														$xpaw->Disconnect();
-														return $info;
-														
-									}
+		{
+			$Exception = $e;
+			if (strpos($Exception,'Failed to read any data from socket')) 
+			{
+				$Exception = 'Failed to read any data from socket Module (Ajax - get_server_info '.$sub_cmd.')';
+				//file_put_contents(LOG,$Exception,PHP_EOL,FILE_APPEND);
+			}
+			$info['l_status'] = 'offline';
+			$info['steamid'] = 'N/A';
+			$info['map'] = 'N/A';
+			$info['hostname'] = 'N/A';
+			$xpaw->Disconnect();
+			return $info;
+		}
 	$info['l_status'] = 'online';								
 	$xpaw->Disconnect();
 	return $info;
