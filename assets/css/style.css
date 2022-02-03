@@ -1287,3 +1287,22 @@ a.invert:hover {
     margin-top: -8px;
     padding: 1%; 
 } 
+
+.dot {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  display: flex;
+  text-align:center;
+}
+
+.sml_icon {
+  width: 40px !important;
+  height: 40px !important;
+  font-size: 24px !important;
+}
+
+.auto-fit {
+  margin: auto auto;
+  width: fit-content;
+}

@@ -1,7 +1,6 @@
 function index() {
 	// read data use simular to loading the index file
-         console.log('started index');
-	 $.ajax({ 
+     $.ajax({ 
         type: 'GET', 
         url: 'ajax.php', 
         data    : { module: 'index' },
@@ -40,7 +39,7 @@ function game_server(url,server) {
 			//alert (data1.players);
 		},
         complete:function(data1){
-			    setTimeout(index(url),3000);
+			    //setTimeout(index(url),3000);
 				
 		}
 });
@@ -68,7 +67,7 @@ function online(url){
 			for (var j in data1[i]) {
 			// we have the individal server
 			if (typeof serverlength === 0) {
-				console.log('server not set');
+				//console.log('server not set');
 				return;
 			}   
 			var server = data1[i][j]; // got server id
@@ -124,7 +123,7 @@ function online(url){
         //setTimeout('Update()', 2000);
     },
 	complete:function(data,data1){
-		if(timer === null){ console.log('timer not set')};
+		//if(timer === null){ console.log('timer not set')};
 		sessionStorage.setItem(url, "value");
   }
   });

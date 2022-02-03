@@ -1,352 +1,242 @@
 <!DOCTYPE html>
 <html lang="en" style="visibility:hidden;">
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1.0" name="viewport">
+		<title><!--#title#--></title>
+		<meta content="" name="description">
+		<meta content="" name="keywords">
+		<!-- Favicons -->
+		<link href="img/favicon.png" rel="icon">
+		<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+		<!-- Google Fonts -->
+		<link href="https://fonts.gstatic.com" rel="preconnect">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+		<!--#include#-->
+ 	</head>
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Dashboard - <!--#title#--></title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-  <!--<meta http-equiv="refresh" content="30"> -->
-
-  <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
- <!--#include#-->
-  
- <style> 
-.dot {
-  height: 200px;
-  width: 200px;
-  border-radius: 50%;
-  display: flex;
-  text-align:center;
- 
-}
-.sml_icon {
-	width: 40px !important;
-	height: 40px !important;
-	font-size: 24px !important;
-}
-.auto-fit {
-	margin: auto auto;
-	width: fit-content;
-}
-</style>
-  </head>
-
-<body>
-
-  <!--#header#-->
-
-  <!--#sidebar#-->
-  <!-- End Sidebar-->
-
-  <main id="main" class="main">
-
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-
-    <section class="section dashboard">
-      <div class="row">
-
-        <!-- Left side columns -->
-        <div class="col-lg-12">
-          <div class="row">
-
-            <!-- Sales Card -->
-            <div class="col-xxl-2 col-md-6">
-              <div class="card info-card sales-card dot"> <!-- here -->
-
-                
-
-                <div class="card-body">
-                  <h5 class="card-title" style="margin-top:25%;padding-bottom:0px;">Players</h5>
-
-                  <div class="d-flex align-items-center auto-fit">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center sml_icon">
-                      <i class="fa fa-gamepad"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6 id="player_tot"><!--#player_tot#--></h6>
-                      
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Sales Card -->
-
-            <!-- Revenue Card -->
-            <div class="col-xxl-2 col-md-6">
-              <div class="card info-card revenue-card dot">
-
-               
-                <div class="card-body">
-                  <h5 class="card-title" style="margin-top:25%;padding-bottom:0px;">Logins</h5>
-
-                  <div class="d-flex align-items-center auto-fit">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center sml_icon">
-                      <i class="fas fa-sign-in-alt"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6 id="logins_tot"><!--#logins_tot#--></h6>
-                     
-
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Revenue Card -->
-
-            <!-- Customers Card -->
-            <div class="col-xxl-2 col-md-6">
-
-              <div class="card info-card customers-card dot">
-
-              
-                <div class="card-body">
-                  <h5 class="card-title" style="margin-top:25%;padding-bottom:0px;">Countries</h5>
-
-                  <div class="d-flex align-items-center auto-fit">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center sml_icon">
-                     <i class="bx bx-world"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6><!--#country_tot#--></h6>
-                      
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div><!-- End Customers Card -->
-            
-            <!-- Customers Card -->
-            <div class="col-xxl-2 col-md-6">
-
-              <div class="card info-card sales-card dot">
-
-              
-                <div class="card-body">
-                  <h5 class="card-title" style="margin-top:25%;padding-bottom:0px;">Installed Servers</h5>
-
-                  <div class="d-flex align-items-center auto-fit">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center sml_icon">
-                     <i class="fab fa-steam"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6><!--#game_tot#--></h6>
-                      
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div><!-- End Customers Card -->
-
-            <!-- Customers Card -->
-            <div class="col-xxl-2 col-md-6">
-
-              <div class="card info-card  revenue-card dot">
-
-              
-                <div class="card-body">
-                  <h5 class="card-title" style="margin-top:25%;padding-bottom:0px;">Online Servers</h5>
-
-                  <div class="d-flex align-items-center auto-fit">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center sml_icon">
-                     <i class="bi bi-check-circle-fill"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6 id="run_tot"><!--#run_tot#--></h6>
-                       
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div><!-- End Customers Card -->
-              <!-- Customers Card -->
-            <div class="col-xxl-2 col-md-6">
-
-              <div class="card info-card  customers-card dot">
-
-              
-                <div class="card-body">
-                  <h5 class="card-title" style="margin-top:25%;padding-bottom:0px;">Online Players</h5>
-
-                  <div class="d-flex align-items-center auto-fit">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center sml_icon">
-                     <i class="ri-base-station-line"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6 id="players">0</h6>
-                      
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div><!-- End Customers Card -->
-           
-
-           
-
-            <!-- Top Selling -->
-            <div class="col-lg-12">
-              <div class="card top-selling">
-           
-                <div class="card-body">
-					<div class="accordion" id="accordionExample" style="margin-top:1.5%;">
-                <div class="accordion-item">
-                  <h5 class="accordion-header" id="headingOne">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                      <span class="card-title">Online Game Servers</span>
-                    </button>
-                  </h5>
-                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                     <div  style="width:100%;border-radius: 5px 5px 0 0;">
-						<table style="width:100%;padding:6px;" class="table">
-							<thead style="background:cornflowerblue;">
-								<tr style="font-weight:bold;"><th style="width:30%;">Name</th><th>Current Map</th><th style="text-align:center;">Players</th><th style="text-align:center;">Start Time</th></tr>
-							</thead>
-							<tbody>
-								<!--#gd#-->
-							</tbody>
-						</table>		
+	<body>
+		<!--#header#-->
+		<!--#sidebar#-->
+		<main id="main" class="main">
+			<div class="pagetitle">
+				<h1>Dashboard</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="index.php">Home</a></li>
+						<li class="breadcrumb-item active">Dashboard</li>
+					</ol>
+				</nav>
+			</div>
+			<section class="section dashboard">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row">
+							<div class="col-xxl-2 col-md-6">
+								<div class="card info-card sales-card dot">
+									<div class="card-body">
+										<h5 class="card-title" style="margin-top:25%;padding-bottom:0px;">Players</h5>
+										<div class="d-flex align-items-center auto-fit">
+											<div class="card-icon rounded-circle d-flex align-items-center justify-content-center sml_icon">
+												<i class="fa fa-gamepad"></i>
+											</div>
+											<div class="ps-3">
+												<h6 id="player_tot"><!--#player_tot#--></h6>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xxl-2 col-md-6">
+								<div class="card info-card revenue-card dot">
+									<div class="card-body">
+										<h5 class="card-title" style="margin-top:25%;padding-bottom:0px;">Logins</h5>
+										<div class="d-flex align-items-center auto-fit">
+											<div class="card-icon rounded-circle d-flex align-items-center justify-content-center sml_icon">
+												<i class="fas fa-sign-in-alt"></i>
+											</div>
+											<div class="ps-3">
+												<h6 id="logins_tot"><!--#logins_tot#--></h6>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xxl-2 col-md-6">
+								<div class="card info-card customers-card dot">
+									<div class="card-body">
+										<h5 class="card-title" style="margin-top:25%;padding-bottom:0px;">Countries</h5>
+										<div class="d-flex align-items-center auto-fit">
+											<div class="card-icon rounded-circle d-flex align-items-center justify-content-center sml_icon">
+												<i class="bx bx-world"></i>
+											</div>
+											<div class="ps-3">
+												<h6><!--#country_tot#--></h6>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xxl-2 col-md-6">
+								<div class="card info-card sales-card dot">
+									<div class="card-body">
+										<h5 class="card-title" style="margin-top:25%;padding-bottom:0px;">Installed Servers</h5>
+										<div class="d-flex align-items-center auto-fit">
+											<div class="card-icon rounded-circle d-flex align-items-center justify-content-center sml_icon">
+												<i class="fab fa-steam"></i>
+											</div>
+											<div class="ps-3">
+												<h6><!--#game_tot#--></h6>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xxl-2 col-md-6">
+								<div class="card info-card  revenue-card dot">
+									<div class="card-body">
+										<h5 class="card-title" style="margin-top:25%;padding-bottom:0px;">Online Servers</h5>
+										<div class="d-flex align-items-center auto-fit">
+											<div class="card-icon rounded-circle d-flex align-items-center justify-content-center sml_icon">
+												<i class="bi bi-check-circle-fill"></i>
+											</div>
+											<div class="ps-3">
+												<h6 id="run_tot"><!--#run_tot#--></h6>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xxl-2 col-md-6">
+								<div class="card info-card  customers-card dot">
+									<div class="card-body">
+										<h5 class="card-title" style="margin-top:25%;padding-bottom:0px;">Online Players</h5>
+										<div class="d-flex align-items-center auto-fit">
+											<div class="card-icon rounded-circle d-flex align-items-center justify-content-center sml_icon">
+												<i class="ri-base-station-line"></i>
+											</div>
+											<div class="ps-3">
+												<h6 id="players">0</h6>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="card top-selling">
+									<div class="card-body">
+										<div class="accordion" id="accordionExample" style="margin-top:1.5%;">
+											<div class="accordion-item">
+												<h5 class="accordion-header" id="headingOne">
+													<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+														<span class="card-title">Online Game Servers</span>
+													</button>
+												</h5>
+												<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+													<div class="accordion-body">
+														<div  style="width:100%;border-radius: 5px 5px 0 0;">
+															<table style="width:100%;padding:6px;" class="table">
+																<thead style="background:cornflowerblue;">
+																	<tr style="font-weight:bold;">
+																		<th style="width:30%;">Name</th>
+																		<th>Current Map</th>
+																		<th style="text-align:center;">Players</th>
+																		<th style="text-align:center;">Start Time</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<!--#gd#-->
+																</tbody>
+															</table>		
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="accordion-item">
+												<h2 class="accordion-header" id="headingTwo">
+													<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+														<span class="card-title">Top Countries</span>
+													</button>
+												</h2>
+												<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+													<div class="accordion-body">
+														<table class="table">
+															<thead style="background:cornflowerblue;">
+																<tr>
+																	<th scope="col"></th>
+																	<th scope="col">Country</th>
+																	<th scope="col">Players</th>
+																	<th scope="col">Logins</th>
+																	<th scope="col">Player Percentage</th>
+																	<th scope="col">Login Percentage</th>
+																	<th scope="col"></th>
+																</tr>
+															</thead>
+															<tbody>
+																<!--#country_data#-->  
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+											<div class="accordion-item">
+												<h2 class="accordion-header" id="headingThree">
+													<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+														<span class="card-title">Top Players</span>
+													</button>
+												</h2>
+												<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+													<div class="accordion-body">
+														<table class="table">
+															<thead style="background:cornflowerblue;">
+																<tr>
+																	<th scope="col">Player</th>
+																	<th scope="col">Player Since</th>
+																	<th scope="col">Logins</th>
+																	<th scope="col">Last Login</th>
+																</tr>
+															</thead>
+															<tbody>
+																<!--#fpd#-->  
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      <span class="card-title">Top Countries</span>
-                    </button>
-                  </h2>
-                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                       <table class="table">
-                    <thead style="background:cornflowerblue;">
-                      <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Country</th>
-                        <th scope="col">Players</th>
-                        <th scope="col">Logins</th>
-                        <th scope="col">Player Percentage</th>
-                        <th scope="col">Login Percentage</th>
-                        <th scope="col"></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <!--#country_data#-->  
-                    </tbody>
-                  </table>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      <span class="card-title">Top Players</span>
-                    </button>
-                  </h2>
-                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <table class="table">
-                    <thead style="background:cornflowerblue;">
-                      <tr>
-                        <th scope="col">Player</th>
-                        <th scope="col">Player Since</th>
-                        <th scope="col">Logins</th>
-                        <th scope="col">Last Login</th>
-                        
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <!--#fpd#-->  
-                    </tbody>
-                  </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-                 
-
-                </div>
-
-              </div>
-            </div><!-- End Top Selling -->
-
-          </div>
-        </div><!-- End Left side columns -->
-
-
-
-      </div>
-    </section>
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <!--#footer#-->
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/chart.js/chart.min.js"></script>
-  <!--<script src="assets/vendor/echarts/echarts.min.js"></script>-->
-  <script src="assets/vendor/quill/quill.min.js"></script>
-  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
- 
-  <!-- Template Main JS File -->
-  <script src = "js/jquery.js"></script>
-  <script src="assets/js/main.js"></script>
-<script src="js/index.js"></script>
-<script>
-	jQuery(document).ready(function(){
-	sessionStorage.clear();	
-    const servers = [<!--#jsa#-->];
-    var url = "";
-    var jim = '';
-    console.log(url);
-    $('#dashboard').toggleClass("collapsed");
-    document.getElementsByTagName("html")[0].style.visibility = "visible";
-    index();
-    setInterval( function() { index(); },7000);
-    console.log('set interval for index'); 	
-    jQuery.each( servers, function( i, val ) {
-		online(val);
-		setInterval( function() { online(val); }, 5000 );
-		//setInterval('online()', 8000);
-		
-	});
-});
-
-</script>
-</body>
-
+			</section>
+		</main>
+		<!--#footer#-->
+		<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+		<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+		<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/vendor/chart.js/chart.min.js"></script>
+		<script src="assets/vendor/quill/quill.min.js"></script>
+		<script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+		<script src = "js/jquery.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script src="js/index.js"></script>
+		<script>
+			jQuery(document).ready(function(){
+				sessionStorage.clear();	
+				const servers = [<!--#jsa#-->];
+				var url = "";
+				var jim = '';
+				$('#dashboard').toggleClass("collapsed");
+				document.getElementsByTagName("html")[0].style.visibility = "visible";
+				index();
+				setInterval( function() { index(); },7000);
+				jQuery.each( servers, function( i, val ) {
+					online(val);
+					setInterval( function() { online(val); }, 5000 );
+				});
+			});
+		</script>
+	</body>
 </html>
