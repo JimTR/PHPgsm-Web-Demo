@@ -550,11 +550,20 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 996;
   transition: all 0.3s;
   padding: 20px;
-  overflow-y: auto;
+  overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: #cccccc transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
   /*background-color: #fff;*/
+}
+
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 @media (max-width: 1199px) {
   .sidebar {
