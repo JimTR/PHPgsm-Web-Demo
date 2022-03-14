@@ -24,9 +24,9 @@
 //echo "hello there <br>";
 include 'inc/master.inc.php';
    $Auth = new Auth ();
-$build = "6186-1666490274";
+$build = "6209-2416640325";
 $version = "1.001";
-$time = "1643892996";
+$time = "1647242825";
 $module = "Game_Server";
         $user = $Auth->getAuth();
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
@@ -55,9 +55,9 @@ if($user->loggedIn()) {
 $is[0] = 'N/A';
 require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 use xPaw\SourceQuery\SourceQuery;
-		define( 'SQ_TIMEOUT',     $settings['SQ_TIMEOUT'] );
-		define( 'SQ_ENGINE',      SourceQuery::SOURCE );
-		define( 'LOG',	DOC_ROOT.'/logs/ajax.log');
+	define( 'SQ_TIMEOUT',     $settings['SQ_TIMEOUT'] );
+	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
+	define( 'LOG',	DOC_ROOT.'/logs/ajax.log');
 $bserver = trim($bserver[1]);
 //echo "$bserver<br>";
 $template = new template;
@@ -81,10 +81,9 @@ $this_server =  $database->get_row($sql);
 $this_server['server_update'] = date("d-m-Y H:i:s a",$this_server['server_update']);
 if ($this_server['starttime']) {$this_server['starttime'] = date("d-m-Y H:i:s a",$this_server['starttime']);}
 $info = get_server_info($this_server);
-$v = json_decode(geturl($this_server['url'].'/ajaxv2.php?action=game_detail&filter='.$bserver.'&server='.$this_server['fname']),true); //needs replacing with ajax_send
-//echo $this_server['url'].'/ajaxv2.php?action=game_detail&filter='.$bserver.'<br>';
-//print_r($v);
-//die();
+$uri = parse_url($this_server['url']);
+$url = $uri['scheme']."://".$uri['host'].':'.$this_server['bport'].$uri['path'];
+$v = json_decode(geturl("$url/ajaxv2.php?action=game_detail&filter=$bserver&server=".$this_server['fname']),true); //needs replacing with ajax_send
 //$info = array_merge($info,array_change_key_case($v[$bserver]));
 $this_server = array_change_key_case(array_merge_recursive($this_server,$info));
 $this_server['players'] -= $this_server['bots'];
@@ -96,6 +95,7 @@ if ($this_server['secure']) {$this_server['secure'] = 'true';} else {$this_serve
 //	$this_server['mem'] .="%";
 //	$this_server['cpu'] .="%";
 //} 
+
 $page['join_link'] = 'steam://connect/'.$this_server['host'].':'.$this_server['port'].'/'; 
 $is = explode("\t",trim(shell_exec('du -hs '.$this_server['install_dir'])));
 $this_server['install_size'] = $is[0];
@@ -112,14 +112,17 @@ $page['sidebar'] =$template->get_template();
 $template->load('templates/subtemplates/footer.html');
 $page['footer'] = $template->get_template();
 $page['bserver'] = $bserver;
-//$page['url'] = $x;
+
+$page['url'] = $url;
 //$v = json_decode(geturl($this_server['url'].'/ajaxv2.php?action=game_detail&filter='.$bserver),true);
 //$v[$bserver] = array_change_key_case($v[$bserver]);
 //die(print_r($v,true));
 $template->load('templates/gameserver.html');
 $template->replace_vars($page);
 $template->replace_vars($this_server);
+//die('just about to publish');
 $template->replace_vars($v[$bserver]);
+
 $template->publish();
 
 function get_server_info($server) {
