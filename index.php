@@ -6,12 +6,14 @@ require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
 	define( 'LOG',	'logs/ajax.log');
 $module = "Dashboard";	
-$build = "7128-391349453";
+$build = "7953-1574912657";
 $version = "1.010";
-$time = "1643892940";
+$time = "1647242024";
+
     $Auth = new Auth ();
     $user = $Auth->getAuth();
 	$we_are_here = $settings['url'];
+
 if($user->loggedIn()) {
 		// set sidebar
 		// allow user to use the api (ready for v3)
@@ -25,6 +27,7 @@ if($user->loggedIn()) {
 			$where = array('user_id' => $user->ip);
 			unset($user_data['user_ip']);
 			$database->update('allowed_users',$user_data,$where);
+	
 		} 
 		else {
 			$database->insert('allowed_users',$user_data);
@@ -35,35 +38,55 @@ if($user->loggedIn()) {
 		
 	}
 	$a = print_r($user_data,true);
-file_put_contents(DOC_ROOT.'/xyzzy.php',$a);
-   
+//file_put_contents(DOC_ROOT.'/xyzzy.php',$a);
+$sql = "SELECT game as server,count(*) as today FROM player_history WHERE FROM_UNIXTIME(last_play,'%Y-%m-%d') = CURDATE() group by game";
+$todays_players = $database->get_results($sql);   
+
 $template = new template;
 $sql = "select * from server1 order by `host_name` ASC";
 $sidebar_data = array();
 //$page = array();
 $sidebar_data['smenu'] = '';
 $xpaw = new SourceQuery( );
+	
 $servers = $database->get_results($sql);
+
 $gd ='';
 foreach ($servers as $server) {
 		if(empty($server['starttime'])) { $server['starttime']=0;}
 		$start = date("d-m-y  h:i:s a",$server['starttime']);
-	     $fname = $server['host_name'];
-	     $disp ='style="display:none;"';
-		 $href = 'gameserver.php?server='.$server['host_name'];
-		 $gd .='<tr id="'.$fname.'" '.$disp.'><td><span class="invert_link"><a href="'.$href.'" class="invert_link">'.$server['server_name'].'</a></span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="gdate'.$fname.'">'.$start.'</td></tr>'; 
+	     $fname = trim($server['host_name']);
+	     $key = searchforkey($fname, $todays_players);
+
+	     if ($key === false) {
+			 $player_tot = 0;
+		 }
+		 else {
+			 $player_tot = $todays_players[$key]['today'];
+		 }
+		 $disp ='style="display:none;"';
+		 $href = "gameserver.php?server=$fname";
+		 $gd .='<tr id="'.$fname.'" '.$disp.'><td><span class="invert_link"><a href="'.$href.'" class="invert_link">'.$server['server_name'].'</a></span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="gdate'.$fname.'">'.$start.'</td><td id="pt'.$fname.'" style="text-align:center;">'.$player_tot.'</td></tr>'; 
 		 $sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 }
+
 $page['gd']= $gd;
+
 $jsa ='';
 $sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `fname` ASC";
 $base_servers = $database->get_results($sql);
+
 //https://api.noideersoftware.co.uk/ajax_send.php?url=https://api.noideersoftware.co.uk/ajaxv2.php&query=action=game_detail
 foreach ($base_servers as $server) {
+	//print_r($server);
+		$uri = parse_url($server['url']);
+		$url = $uri['scheme']."://".$uri['host'].':'.$server['port'].$uri['path'];
+		//echo "$url<br>";
 $sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
-$jsa .= '"'.$server['url'].'/ajax_send.php?url='.$server['url'].'/ajaxv2.php&query=action=game_detail:server='.$server['fname'].'",';
+$jsa .= '"'.$url.'/ajax_send.php?url='.$url.'/ajaxv2.php&query=action=game_detail:server='.$server['fname'].'",';
 }
 
+//die();	
 if (endsWith($jsa, ',')) {
 	//die($jsa);
 	// chop comma
@@ -72,7 +95,8 @@ if (endsWith($jsa, ',')) {
 
 $sql = "SELECT sum(players) as player_tot, count(country) as countries, sum(logins) as tot_logins, (select count(*) from servers) as game_tot, (select count(*) from servers where running = 1) as run_tot  FROM `logins` WHERE 1";
 $qstat = $database->get_row($sql);
-$page['percent'] = ($qstat['player_tot']/$qstat['tot_logins'])*100;
+
+//$page['percent'] = ($qstat['player_tot']/$qstat['tot_logins'])*100; fix this !!!
 $page['player_tot'] =  $qstat['player_tot'];
 $page['logins_tot'] = $qstat['tot_logins'];
 $page['country_tot'] = $qstat['countries'];
@@ -80,6 +104,8 @@ $page['game_tot'] = $qstat['game_tot'];
 $page['run_tot'] = $qstat['run_tot'];
 $sql = "SELECT * FROM `logins` limit 10";
 $countries = $database->get_results($sql);
+//echo "$module has got this far bserver loop done";
+	//die($sql);
 foreach ($countries as $country) {
 // do stats
 $template->load('templates/subtemplates/country_table.html');
@@ -142,6 +168,15 @@ $template->load('templates/index.html');
 $template->replace_vars($page);
 $template->publish();
 //print_r($settings);
+
+function searchforkey($id, $array) {
+   foreach ($array as $key => $val) {
+       if ($val['server'] === $id) {
+           return $key;
+       }
+   }
+   return false;
+}
 function endsWith( $haystack, $needle ) {
     $length = strlen( $needle );
     if( !$length ) {

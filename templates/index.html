@@ -142,6 +142,7 @@
 																		<th>Current Map</th>
 																		<th style="text-align:center;">Players</th>
 																		<th style="text-align:center;">Start Time</th>
+																		<th style="text-align:center;">Players Today</th>
 																	</tr>
 																</thead>
 																<tbody>
@@ -160,7 +161,7 @@
 												</h2>
 												<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 													<div class="accordion-body">
-														<table class="table">
+														<table class="table" style="width:100%;">
 															<thead style="background:cornflowerblue;">
 																<tr>
 																	<th scope="col"></th>
@@ -169,7 +170,7 @@
 																	<th scope="col">Logins</th>
 																	<th scope="col">Player Percentage</th>
 																	<th scope="col">Login Percentage</th>
-																	<th scope="col"></th>
+																	
 																</tr>
 															</thead>
 															<tbody>
@@ -228,6 +229,7 @@
 				const servers = [<!--#jsa#-->];
 				var url = "";
 				var jim = '';
+				console.log(servers);
 				$('#dashboard').toggleClass("collapsed");
 				document.getElementsByTagName("html")[0].style.visibility = "visible";
 				index();
