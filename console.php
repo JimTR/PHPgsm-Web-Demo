@@ -1,7 +1,7 @@
 <?php
-$build = "2985-2098997614";
+$build = "3111-1104993299";
 $version = "1.000";
-$time = "1643354387";
+$time = "1647243709";
 $module = "Console";
 /*
  * quick_console.php
@@ -64,7 +64,11 @@ $module = "Console";
     $sbox ='<option id ="" value="" path="" host ="">Choose Server</option>';
     foreach ($servers as $server) {
                 //fill select box
-                $sbox .='<option id ="'.$server['host_name'].'" value="'.$server['url'].':'.$server['bport'].'" path="'.$server['location'].'" host ="'.$server['host'].':'.$server['port'].'">'.$server['server_name'].'</option>';
+		$uri = parse_url($server['url']);
+		$url = $uri['scheme']."://".$uri['host'].':'.$server['bport'].$uri['path'];
+		//echo "$url<br>";
+		//print_r($server);
+                $sbox .='<option id ="'.$server['host_name'].'" value="'.$url.'" path="'.$server['location'].'" host ="'.$server['host'].':'.$server['port'].'">'.$server['server_name'].'</option>';
         }
 	$page['sbox'] = $sbox;
 	$template->load('templates/console.html');

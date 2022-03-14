@@ -1,8 +1,8 @@
 <?php
 include 'inc/master.inc.php';
-$build = "3427-3841920536";
+$build = "3525-853152434";
 $version = "1.000";
-$time = "1643699356";
+$time = "1647243699";
 $module = "API_Server";
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
     $Auth = new Auth ();
@@ -33,7 +33,13 @@ foreach ($base_servers as $server) {
 
 if ($server['fname'] === $bserver) {
 	// get the stuff
-	$url = $server['url'].':'.$server['port'].'/ajax_send.php?url='.$server['url'].':'.$server['port'].'/ajaxv2.php&query=action=all:server='.$bserver;
+$uri = parse_url($server['url']);
+//print_r($uri);
+$url = $uri['scheme']."://".$uri['host'].':'.$server['port'].$uri['path'];
+//echo "$url<br>";	
+	$url .="/ajax_send.php?url=$url/ajaxv2.php&query=action=all:server=$bserver";
+//echo $url;
+//die();
 	$sdata = json_decode(geturl($url),true);
 	$sidebar_data['bmenu'] .='<li><a class="active" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
 	//print_r($sdata);
