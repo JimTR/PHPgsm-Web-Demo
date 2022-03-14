@@ -1,7 +1,9 @@
 // gameserver.js
 function get_game() {
+	console.log(url);
+	var offline = 0;
 cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=game_detail:server='+server+':filter='+game;
-//alert (cmd);
+console.log (cmd);
          $.ajax({
 			
         type: 'GET',
@@ -18,10 +20,21 @@ cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=game_detail:server
             //alert ('success game_detail')
         },
         complete:function(data){
+		if(typeof data.responseJSON.general != 'undefined') {
 			var general = data.responseJSON.general;
+		}
+		if(typeof data.responseJSON.server != 'undefined') {
+			//alert('online');
 			var serverd = data.responseJSON.server;
 			var people = serverd.players;
 			var vdf = serverd.vdf_data;
+			console.log(serverd);
+			offline = 1;
+		}	
+			//if(typeof serverd.players != 'undefined') {
+				
+			//}
+			
 			//console.log(print_r(vdf));
 			var items = '';
 			//sorted=$(people).sort(sortLastNameDesc);  
@@ -33,9 +46,12 @@ cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=game_detail:server
 					items = items+'<tr id="'+item.steam_id+'"style="width:100%;"><td class="tpButton">'+item.Name+'</td><td id="'+item.ip+'"><img class="flag" '+item.flag+'/>'+item.country+'</td><td style="text-align:right;">'+item.Frags+'</td><td style="text-align:right;padding-right:2%;">'+item.TimeF+'</td></tr>';
 				});
 			}
+if (offline == 1) {			
 var players_online = serverd.Players-serverd.Bots
-
+console.log(players_online);
+}
     if(isNaN(players_online)) {
+		console.log('running ??');
 		$('#status').text('Offline');
 		$('#mem').text("");
 		$('#cpu').text("");
@@ -97,6 +113,7 @@ var players_online = serverd.Players-serverd.Bots
 			$('#install_dir').text(vdf.installdir);
 			$('#install_size').text(formatBytes(vdf.SizeOnDisk,1));
 			$('#update').text(date_format(vdf.LastUpdated));
+			console.log(serverd.disk_space);
 			$('#disk_space').text(formatBytes(serverd.disk_space)); 
 		}
     });
@@ -225,8 +242,10 @@ function date_format( timestamp) {
 }
 function start_server() {
 	//starts the server
-	cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=exescreen:server='+id+':cmd=s';
+	cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=exetmux:server='+id+':cmd=s';
+	console.log(cmd);
 	//alert(cmd);
+	
 	$.get(cmd, function(data, status){
 		//alert("Data: " + data + "\nStatus: " + status);
 		if(status == "success" ) {
@@ -238,8 +257,8 @@ function start_server() {
 
 function stop_server() {
 	//starts the server
-	cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=exescreen:server='+id+':cmd=q';
-	//alert(cmd);
+	cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=exetmux:server='+id+':cmd=q';
+	console.log(cmd);
 	$.get(cmd, function(data, status){
 		//alert("Data: " + data + "\nStatus: " + status);
 		if(status == "success" ) {
@@ -250,8 +269,8 @@ function stop_server() {
 }
 function restart_server() {
 	//starts the server
-	cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=exescreen:server='+id+':cmd=r';
-	//alert(cmd);
+	cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=exetmux:server='+id+':cmd=r';
+	alert(cmd);
 	$.get(cmd, function(data, status){
 		//alert("Data: " + data + "\nStatus: " + status);
 		if(status == "success" ) {

@@ -6,9 +6,9 @@ require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
 	define( 'LOG',	'logs/ajax.log');
 $module = "Dashboard";	
-$build = "7128-391349453";
+$build = "7939-567994613";
 $version = "1.010";
-$time = "1643892940";
+$time = "1647244017";
 
     $Auth = new Auth ();
     $user = $Auth->getAuth();
@@ -105,7 +105,6 @@ $page['run_tot'] = $qstat['run_tot'];
 $sql = "SELECT * FROM `logins` limit 10";
 $countries = $database->get_results($sql);
 //echo "$module has got this far bserver loop done";
-	//die($sql);
 foreach ($countries as $country) {
 // do stats
 $template->load('templates/subtemplates/country_table.html');
