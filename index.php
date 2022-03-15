@@ -6,9 +6,9 @@ require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
 	define( 'LOG',	'logs/ajax.log');
 $module = "Dashboard";	
-$build = "7939-567994613";
+$build = "8038-3050661292";
 $version = "1.010";
-$time = "1647244017";
+$time = "1647338390";
 
     $Auth = new Auth ();
     $user = $Auth->getAuth();
