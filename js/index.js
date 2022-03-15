@@ -46,7 +46,7 @@ function game_server(url,server) {
 }
 function online(url){
         var timer =sessionStorage.getItem(url);
-       // console.log(timer);
+        //console.log("enter online");
 	 $.ajax({
 		url: url,
 		type: 'post',
@@ -86,6 +86,7 @@ function online(url){
 					$('#host'+server_id).html(server.server_name);
 					$('#gdate'+server_id).html(start_date);
 					$('#gol'+server_id).html(server.Players+'/'+server.max_players);
+					$('#pt'+server_id).html(server.player_tot);
 						 
 					if (server.Players ==0 ) {
 						//console.log ('should be nowt '+server.Players);

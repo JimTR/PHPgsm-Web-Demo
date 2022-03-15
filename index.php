@@ -66,7 +66,7 @@ foreach ($servers as $server) {
 		 }
 		 $disp ='style="display:none;"';
 		 $href = "gameserver.php?server=$fname";
-		 $gd .='<tr id="'.$fname.'" '.$disp.'><td><span class="invert_link"><a href="'.$href.'" class="invert_link">'.$server['server_name'].'</a></span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="gdate'.$fname.'">'.$start.'</td><td id="pt'.$fname.'" style="text-align:center;">'.$player_tot.'</td></tr>'; 
+		 $gd .='<tr id="'.$fname.'" '.$disp.'><td><span class="invert_link"><a href="'.$href.'" class="invert_link">'.$server['server_name'].'</a></span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="pt'.$fname.'">'.$player_tot.'</td><td id="gdate'.$fname.'" style="text-align:center;">'.$start.'</td></tr>'; 
 		 $sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 }
 
@@ -111,6 +111,7 @@ $template->load('templates/subtemplates/country_table.html');
 $country['percent'] = number_format(($country['logins']/$page['logins_tot'])*100,2).'%';
 $country['p_percent'] = number_format(($country['players']/$page['player_tot'])*100,2).'%';
 $country['flag'] = 'https://ipdata.co/flags/'.trim(strtolower($country['country_code'])).'.png';
+$country['title'] = $country['country'];
 $template->replace_vars($country);
 $page['country_data'] .= $template->get_template();
 }
@@ -127,7 +128,7 @@ $sql = "select servers.server_name,player_history.*,players.name,players.country
 		$map = '<img style="width:5%;vertical-align: middle;" src="https://ipdata.co/flags/'.trim(strtolower($player['country_code'])).'.png">';
 		$pd.='<tr><td style="vertical-align: middle;">'.$map.'  '.$playerN2.'</td><td>'.$player['server_name'].'</td><td><span style="">'.$player['log_ons'].'</span></td><td style="text-align:left;padding-right:6%;">'.$player['last_play'].'</td></tr>';
 	}
-	$sql = "select players.name,players.country_code,players.log_ons,players.last_log_on,players.first_log_on from players ORDER BY `players`.`log_ons` DESC LIMIT 10";
+	$sql = "select players.name,players.country,players.country_code,players.log_ons,players.last_log_on,players.first_log_on from players ORDER BY `players`.`log_ons` DESC LIMIT 10";
 	$fpd = '';
 	$players = $database->get_results($sql);
 	foreach ($players as $player) {
@@ -143,7 +144,7 @@ $sql = "select servers.server_name,player_history.*,players.name,players.country
 			$player['first_log_on'] = 'N/A';
 		}
 		$map = '<img style="width:5%;vertical-align: middle;" src="https://ipdata.co/flags/'.trim(strtolower($player['country_code'])).'.png">';
-		$fpd.='<tr><td style="vertical-align: middle;"><span class="span_black">'.$map.'  '.$playerN2.'</span></td><td><span class="span_black">'.$player['first_log_on'].'</span></td><td><span>'.$player['log_ons'].'</span></td><td><span>'.$player['last_log_on'].'</span></td></tr>';
+		$fpd.='<tr title="'.$player['country'].'"><td style="vertical-align: middle;"><span class="span_black">'.$map.'&nbsp;&nbsp;'.$playerN2.'</span></td><td><span class="span_black">'.$player['first_log_on'].'</span></td><td><span>'.$player['log_ons'].'</span></td><td><span>'.$player['last_log_on'].'</span></td></tr>';
 	}
 //print_r($countries);
 //die();
