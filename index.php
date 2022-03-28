@@ -6,9 +6,9 @@ require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
 	define( 'LOG',	'logs/ajax.log');
 $module = "Dashboard";	
-$build = "8038-3050661292";
+$build = "8628-17971559";
 $version = "1.010";
-$time = "1647338390";
+$time = "1648452322";
 
     $Auth = new Auth ();
     $user = $Auth->getAuth();
@@ -23,7 +23,7 @@ if($user->loggedIn()) {
 		'ip' =>  ip2long($_SERVER['REMOTE_ADDR']),
 		'start_time' => time() 
 		) ;
-		if ($database->get_row('select * from allowed_users where ip = '.$user_data['ip'])) {
+		if ($database->get_row('select * from allowed_users where ip = "'.$user_data['ip'].'"')) {
 			$where = array('user_id' => $user->ip);
 			unset($user_data['user_ip']);
 			$database->update('allowed_users',$user_data,$where);
@@ -37,11 +37,13 @@ if($user->loggedIn()) {
 		redirect('login.php');
 		
 	}
+	 
 	$a = print_r($user_data,true);
 //file_put_contents(DOC_ROOT.'/xyzzy.php',$a);
 $sql = "SELECT game as server,count(*) as today FROM player_history WHERE FROM_UNIXTIME(last_play,'%Y-%m-%d') = CURDATE() group by game";
 $todays_players = $database->get_results($sql);   
-
+$sql = 'SELECT `country`,country_code, count(*) as today FROM players WHERE FROM_UNIXTIME(last_log_on,"%Y-%m-%d") = CURDATE() group by country_code order by today desc;';
+$todays_countries = $database->get_results($sql);
 $template = new template;
 $sql = "select * from server1 order by `host_name` ASC";
 $sidebar_data = array();
@@ -56,7 +58,7 @@ foreach ($servers as $server) {
 		if(empty($server['starttime'])) { $server['starttime']=0;}
 		$start = date("d-m-y  h:i:s a",$server['starttime']);
 	     $fname = trim($server['host_name']);
-	     $key = searchforkey($fname, $todays_players);
+	     $key = searchforkey($fname, $todays_players,'server');
 
 	     if ($key === false) {
 			 $player_tot = 0;
@@ -108,10 +110,19 @@ $countries = $database->get_results($sql);
 foreach ($countries as $country) {
 // do stats
 $template->load('templates/subtemplates/country_table.html');
+$cname = trim($country['country']);
+$key = searchforkey($cname, $todays_countries,'country');
+		if ($key === false) {
+			 $cplayers = 0;
+		 }
+		 else {
+			 $cplayers = $todays_countries[$key]['today'];
+		 }
 $country['percent'] = number_format(($country['logins']/$page['logins_tot'])*100,2).'%';
 $country['p_percent'] = number_format(($country['players']/$page['player_tot'])*100,2).'%';
 $country['flag'] = 'https://ipdata.co/flags/'.trim(strtolower($country['country_code'])).'.png';
 $country['title'] = $country['country'];
+$country['cplayers'] = $cplayers;
 $template->replace_vars($country);
 $page['country_data'] .= $template->get_template();
 }
@@ -169,9 +180,12 @@ $template->replace_vars($page);
 $template->publish();
 //print_r($settings);
 
-function searchforkey($id, $array) {
+function searchforkey($id, $array,$col) {
+	//echo "looking for $id with a key of $col in<br>";
+	//print_r($array); 
    foreach ($array as $key => $val) {
-       if ($val['server'] === $id) {
+       if ($val[$col] === $id) {
+		   //echo "found $id in $col<br>";
            return $key;
        }
    }
