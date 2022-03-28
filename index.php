@@ -107,6 +107,7 @@ $page['run_tot'] = $qstat['run_tot'];
 $sql = "SELECT * FROM `logins` limit 10";
 $countries = $database->get_results($sql);
 //echo "$module has got this far bserver loop done";
+$i=0;
 foreach ($countries as $country) {
 // do stats
 $template->load('templates/subtemplates/country_table.html');
@@ -118,6 +119,7 @@ $key = searchforkey($cname, $todays_countries,'country');
 		 else {
 			 $cplayers = $todays_countries[$key]['today'];
 		 }
+$country['row_id'] = $i;
 $country['percent'] = number_format(($country['logins']/$page['logins_tot'])*100,2).'%';
 $country['p_percent'] = number_format(($country['players']/$page['player_tot'])*100,2).'%';
 $country['flag'] = 'https://ipdata.co/flags/'.trim(strtolower($country['country_code'])).'.png';
@@ -125,6 +127,7 @@ $country['title'] = $country['country'];
 $country['cplayers'] = $cplayers;
 $template->replace_vars($country);
 $page['country_data'] .= $template->get_template();
+$i++;
 }
 $sql = "select servers.server_name,player_history.*,players.name,players.country_code from player_history left join players on `steam_id` = players.steam_id64 left join servers on player_history.`game` = servers.host_name  ORDER BY `player_history`.`log_ons` DESC LIMIT 10";
 	$players = $database->get_results($sql);
