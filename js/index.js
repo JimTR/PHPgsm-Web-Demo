@@ -54,7 +54,7 @@ function online(url){
 		success: function(xml,status){
 			var data1 = xml;
 			for (var i in data1) {
-				//console.log(i);
+				//console.log(data1);
 				var fname = i; // got the base server
 				if( i =='general' ) {
 					var general = data1[i];
@@ -62,16 +62,18 @@ function online(url){
 					for (g in general) {
 						if( g =='countries') {
 							var country_data = general['countries'];  
-							
 						}
-							//$('#demo').append('<p>'+g+' '+general[g]+'</p>');
+						//if(g == 'top_players') {
+						//	var top_players = general['top_players'];
+						//}
 					} 
-				//return;
 				}
-				//$("#country_table").empty();
-				var table ='';
+				if (i =='top_players') {
+					var top_players=data1[i];
+				}
+				//console.log(country_data);
 				for (var j in country_data) {
-					var td_title = '<tr id="'+j+'"><td id="row_'+j+'" title = "'+country_data[j]['country']+'"><img src="'+country_data[j]['flag']+'" style="height:18px;margin-top:-2px;"></td>';
+					var td_title = '<tr id="country_'+j+'"><td id="country_row_'+j+'" title = "'+country_data[j]['country']+'"><img src="'+country_data[j]['flag']+'" style="height:18px;margin-top:-2px;"></td>';
 					var td_country = '<td>'+country_data[j]['country']+'</td>';
 					var td_players = '<td>'+country_data[j]['players']+'</td>';
 					var td_logins = '<td>'+country_data[j]['logins']+'</td>';
@@ -79,24 +81,30 @@ function online(url){
 					var td_percent =  '<td>'+country_data[j]['percent']+'</td>';
 					var td_today =  '<td  style="text-align:right;padding-right:16%;">'+country_data[j]['today']+'</td>';
 					var tr = td_title+td_country+td_players+td_logins+td_ppercent+td_percent+td_today+"</tr>";
+					//console.log(tr);
 					//console.log(country_data[j]['country'])
-					table += tr;
-					$("td#row_"+j).parent().replaceWith(tr);   
-					//$("#country_table").append(tr);
+					$("td#country_row_"+j).parent().replaceWith(tr);   
 				}
-				console.log(table);
-				//$("#country_table").html(table);
-				 //$("#country_table").append("<tr><td>Test Row Append</td><td></td></tr>");
-			//console.log(country_data);
-			for (var j in data1[i]) {
-			// we have the individal server
-			if (typeof serverlength === 0) {
-				//console.log('server not set');
-				return;
-			}   
-			var server = data1[i][j]; // got server id
-			var server_id = j;	
-			if (server.running == 1 ) {
+				for (var j in  top_players) {
+					// read in players
+					var td_title = '<tr id="playerrow_'+j+'" title ="'+top_players[j]['country']+'"><td id="player_row_'+j+'"><img src="'+top_players[j]['flag']+'" style ="width:5%;vertical-align: middle;">&nbsp;&nbsp;'+top_players[j]['name']+'</td>';
+					var td_first_logon = '<td>'+top_players[j]['first_log_on']+'</td>';
+					var td_logons = '<td>'+top_players[j]['log_ons']+'</td>';
+					var td_last_logon = '<td>'+top_players[j]['last_log_on']+'</td></tr>';
+					var tr = td_title+td_first_logon+td_logons+td_last_logon;
+					$("td#player_row_"+j).parent().replaceWith(tr);   
+					//console.log(tr);
+					
+				}
+				for (var j in data1[i]) {
+				// we have the individal server
+				if (typeof serverlength === 0) {
+					//console.log('server not set');
+					return;
+				}   
+				var server = data1[i][j]; // got server id
+				var server_id = j;	
+				if (server.running == 1 ) {
 					var playern = server.Players;
 					$('#pl'+server_id).html(playern); 
 					$("#"+server_id).show();
@@ -130,14 +138,14 @@ function online(url){
 					var players = players.sort((b, a) => (a.Frags > b.Frags) ? 1 : -1)
 					//console.log(players);
 					for (p in players) {
-						newRowContent='<tr style="font-size:14px;"><td style="width:60% !important;"><i class="p_name">'+players[p].Name+'</i></td><td style="text-align:right;width:15%; !important;padding-right:14%" class="p_score">'+players[p].Frags+'</td><td style=text-align:right;padding-right:3%;width:20%" class="p_time">'+players[p].TimeF+'</td></tr>'; 
-						$("#pbody"+server_id).append(newRowContent);
+							newRowContent='<tr style="font-size:14px;"><td style="width:60% !important;"><i class="p_name">'+players[p].Name+'</i></td><td style="text-align:right;width:15%; !important;padding-right:14%" class="p_score">'+players[p].Frags+'</td><td style=text-align:right;padding-right:3%;width:20%" class="p_time">'+players[p].TimeF+'</td></tr>'; 
+							$("#pbody"+server_id).append(newRowContent);
+						}
 					}
 				}
-			}
-			else {
-				$('#'+server_id).hide(); // hide the server
-			}					
+				else {
+					$('#'+server_id).hide(); // hide the server
+				}					
 			}	
 	}
 	    

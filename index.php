@@ -145,6 +145,7 @@ $sql = "select servers.server_name,player_history.*,players.name,players.country
 	$sql = "select players.name,players.country,players.country_code,players.log_ons,players.last_log_on,players.first_log_on from players ORDER BY `players`.`log_ons` DESC LIMIT 10";
 	$fpd = '';
 	$players = $database->get_results($sql);
+	$i=0;
 	foreach ($players as $player) {
 		// top 10 players
 		$playerN2 = Emoji::Decode($player['name']);
@@ -158,7 +159,8 @@ $sql = "select servers.server_name,player_history.*,players.name,players.country
 			$player['first_log_on'] = 'N/A';
 		}
 		$map = '<img style="width:5%;vertical-align: middle;" src="https://ipdata.co/flags/'.trim(strtolower($player['country_code'])).'.png">';
-		$fpd.='<tr title="'.$player['country'].'"><td style="vertical-align: middle;"><span class="span_black">'.$map.'&nbsp;&nbsp;'.$playerN2.'</span></td><td><span class="span_black">'.$player['first_log_on'].'</span></td><td><span>'.$player['log_ons'].'</span></td><td><span>'.$player['last_log_on'].'</span></td></tr>';
+		$fpd.='<tr title="'.$player['country'].'" id="playerrow_'.$i.'"><td  id="player_row_'.$i.'" style="vertical-align: middle;"><span class="span_black">'.$map.'&nbsp;&nbsp;'.$playerN2.'</span></td><td><span class="span_black">'.$player['first_log_on'].'</span></td><td><span>'.$player['log_ons'].'</span></td><td><span>'.$player['last_log_on'].'</span></td></tr>';
+		$i++;
 	}
 //print_r($countries);
 //die();
