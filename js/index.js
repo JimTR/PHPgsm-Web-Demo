@@ -68,7 +68,8 @@ function online(url){
 					} 
 				//return;
 				}
-				$("#country_table").empty();
+				//$("#country_table").empty();
+				var table ='';
 				for (var j in country_data) {
 					var td_title = '<tr><td title = "'+country_data[j]['country']+'"><img src="'+country_data[j]['flag']+'" style="height:18px;margin-top:-2px;"></td>';
 					var td_country = '<td>'+country_data[j]['country']+'</td>';
@@ -79,13 +80,12 @@ function online(url){
 					var td_today =  '<td  style="text-align:right;padding-right:16%;">'+country_data[j]['today']+'</td>';
 					var tr = td_title+td_country+td_players+td_logins+td_ppercent+td_percent+td_today+"</tr>";
 					//console.log(country_data[j]['country'])
-					$('#'+country_data[j]['country']+'_today').html(country_data[j]['today']);
-					$('#'+country_data[j]['country']+'_players').html(country_data[j]['players']);
-					$('#'+country_data[j]['country']+'_logins').html(country_data[j]['logins']);
-					$('#'+country_data[j]['country']+'_ppercent').html(country_data[j]['ppercent']);
-					$('#'+country_data[j]['country']+'_percent').html(country_data[j]['percent']);
-					$("#country_table").append(tr);
+					table += tr;
+					
+					//$("#country_table").append(tr);
 				}
+				console.log(table);
+				$("#country_table").html(table);
 				 //$("#country_table").append("<tr><td>Test Row Append</td><td></td></tr>");
 			//console.log(country_data);
 			for (var j in data1[i]) {
