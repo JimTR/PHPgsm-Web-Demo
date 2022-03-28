@@ -21,9 +21,9 @@
  * 
  *  jquery back end for the demo project perhaps
  */
-$build = "4402-974199548";
+$build = "4464-1701218109";
 $version = "1.000";
-$time = "1643296733";
+$time = "1648452191";
 $module = "Comunication";
 include "inc/master.inc.php"; // get set up
 require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
@@ -60,6 +60,7 @@ switch ($module) {
 														
 									}
 	$xpaw->Disconnect();
+	
 	if (isset ($info['Players']) and $info['Players'] >0) {
 		//
 		// add them up here
@@ -88,7 +89,9 @@ switch ($module) {
 			// do stats
 		$country['flag'] = 'https://ipdata.co/flags/'.trim(strtolower($country['country_code'])).'.png';
 	}
-	    echo json_encode($page);
+		//print_r($page);
+		$qstat['players']= $page['players'];
+	    echo json_encode($qstat);
 		break;
 		case 'gameserver' :
 			if (isset($_GET['server'])) {
