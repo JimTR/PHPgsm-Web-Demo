@@ -8,10 +8,10 @@ function index() {
         success: function (data1) {
 			// got data
 			//console.log(data1);
-			$('#player_tot').text(data1.player_tot);
-			$('#logins_tot').text(data1.logins_tot);
-			$('#players').text(data1.players);
-			$('#run_tot').text(data1.run_tot);
+			//$('#player_tot').text(data1.player_tot);
+			//$('#logins_tot').text(data1.logins_tot);
+			//$('#players').text(data1.players);
+			//$('#run_tot').text(data1.run_tot);
 			//alert (data1.players);
 		},
         complete:function(data1){
@@ -61,9 +61,24 @@ function online(url){
 					for (g in general) {
 					//console.log (general[g]+' '+g );
 					//$('#demo').append('<p>'+g+' '+general[g]+'</p>');
+					if( g =='players') {
+							var player_tots = general['players'];  
+						}
 				} 
-				return;
-			}	
+				//return;
+			}
+			//console.log(player_tots);
+			if(typeof player_tots != 'undefined'){
+				$('#player_tot').text(player_tots.player_tot);
+				$('#tplayers').text(data1.general.total_players);
+				$('#logins_tot').text(player_tots.tot_logins);
+				$('#tcountries').text(player_tots.countries);
+				$('#tinstalled').text(player_tots.game_tot);
+				$('#run_tot').text(player_tots.run_tot);
+			}
+			//$('#logins_tot').text(player_tots.tot_logins);
+			
+			//$('#run_tot').text(data1.general.players.run_tot);	
 			for (var j in data1[i]) {
 			// we have the individal server
 			if (typeof serverlength === 0) {

@@ -23,7 +23,7 @@ if($user->loggedIn()) {
 		'ip' =>  ip2long($_SERVER['REMOTE_ADDR']),
 		'start_time' => time() 
 		) ;
-		if ($database->get_row('select * from allowed_users where ip = '.$user_data['ip'])) {
+		if ($database->get_row('select * from allowed_users where ip = "'.$user_data['ip'].'"')) {
 			$where = array('user_id' => $user->ip);
 			unset($user_data['user_ip']);
 			$database->update('allowed_users',$user_data,$where);

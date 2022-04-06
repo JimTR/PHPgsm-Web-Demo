@@ -71,7 +71,7 @@
 												<i class="bx bx-world"></i>
 											</div>
 											<div class="ps-3">
-												<h6><!--#country_tot#--></h6>
+												<h6 id="tcountries"><!--#country_tot#--></h6>
 											</div>
 										</div>
 									</div>
@@ -86,7 +86,7 @@
 												<i class="fab fa-steam"></i>
 											</div>
 											<div class="ps-3">
-												<h6><!--#game_tot#--></h6>
+												<h6 id="tinstalled"><!--#game_tot#--></h6>
 											</div>
 										</div>
 									</div>
@@ -116,7 +116,7 @@
 												<i class="ri-base-station-line"></i>
 											</div>
 											<div class="ps-3">
-												<h6 id="players">0</h6>
+												<h6 id="tplayers">0</h6>
 											</div>
 										</div>
 									</div>
@@ -229,14 +229,14 @@
 				const servers = [<!--#jsa#-->];
 				var url = "";
 				var jim = '';
-				console.log(servers);
+				//console.log(servers);
 				$('#dashboard').toggleClass("collapsed");
 				document.getElementsByTagName("html")[0].style.visibility = "visible";
-				index();
-				setInterval( function() { index(); },7000);
+				//index();
+				//setInterval( function() { index(); },7000);
 				jQuery.each( servers, function( i, val ) {
 					online(val);
-					setInterval( function() { online(val); }, 5000 );
+					setInterval( function() { online(val); }, 7000 );
 				});
 			});
 		</script>
