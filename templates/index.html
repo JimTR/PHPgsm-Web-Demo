@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" style="visibility:hidden;">
+<html lang="en">
 	<head>
-		<meta charset="utf-8">
+		<meta charset="utf-8"/>
 		<meta content="width=device-width, initial-scale=1.0" name="viewport">
 		<title><!--#title#--></title>
 		<meta content="" name="description">
@@ -71,7 +71,7 @@
 												<i class="bx bx-world"></i>
 											</div>
 											<div class="ps-3">
-												<h6 id="tcountries"><!--#country_tot#--></h6>
+												<h6><!--#country_tot#--></h6>
 											</div>
 										</div>
 									</div>
@@ -86,7 +86,7 @@
 												<i class="fab fa-steam"></i>
 											</div>
 											<div class="ps-3">
-												<h6 id="tinstalled"><!--#game_tot#--></h6>
+												<h6><!--#game_tot#--></h6>
 											</div>
 										</div>
 									</div>
@@ -116,7 +116,7 @@
 												<i class="ri-base-station-line"></i>
 											</div>
 											<div class="ps-3">
-												<h6 id="tplayers">0</h6>
+												<h6 id="player">0</h6>
 											</div>
 										</div>
 									</div>
@@ -141,8 +141,8 @@
 																		<th style="width:30%;">Name</th>
 																		<th>Current Map</th>
 																		<th style="text-align:center;">Players</th>
-																		<th style="text-align:center;">Start Time</th>
 																		<th style="text-align:center;">Players Today</th>
+																		<th style="text-align:center;">Started</th>
 																	</tr>
 																</thead>
 																<tbody>
@@ -168,12 +168,12 @@
 																	<th scope="col">Country</th>
 																	<th scope="col">Players</th>
 																	<th scope="col">Logins</th>
-																	<th scope="col">Player Percentage</th>
-																	<th scope="col">Login Percentage</th>
-																	
+																	<th scope="col">Player %</th>
+																	<th scope="col">Login %</th>
+																	<th scope="col">Players Today</th>
 																</tr>
 															</thead>
-															<tbody>
+															<tbody id="country_table">
 																<!--#country_data#-->  
 															</tbody>
 														</table>
@@ -197,7 +197,7 @@
 																	<th scope="col">Last Login</th>
 																</tr>
 															</thead>
-															<tbody>
+															<tbody id="player_table">
 																<!--#fpd#-->  
 															</tbody>
 														</table>
@@ -229,14 +229,14 @@
 				const servers = [<!--#jsa#-->];
 				var url = "";
 				var jim = '';
-				//console.log(servers);
+				console.log(servers);
 				$('#dashboard').toggleClass("collapsed");
-				document.getElementsByTagName("html")[0].style.visibility = "visible";
-				//index();
-				//setInterval( function() { index(); },7000);
+				//document.getElementsByTagName("html")[0].style.visibility = "visible";
+				index();
+				setInterval( function() { index(); },7000);
 				jQuery.each( servers, function( i, val ) {
 					online(val);
-					setInterval( function() { online(val); }, 7000 );
+					setInterval( function() { online(val); }, 5000 );
 				});
 			});
 		</script>
