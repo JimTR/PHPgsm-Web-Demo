@@ -6,9 +6,9 @@ require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
 	define( 'LOG',	'logs/ajax.log');
 $module = "Dashboard";	
-$build = "7128-391349453";
+$build = "8628-17971559";
 $version = "1.010";
-$time = "1643892940";
+$time = "1648452322";
 
     $Auth = new Auth ();
     $user = $Auth->getAuth();
@@ -37,11 +37,13 @@ if($user->loggedIn()) {
 		redirect('login.php');
 		
 	}
+	 
 	$a = print_r($user_data,true);
 //file_put_contents(DOC_ROOT.'/xyzzy.php',$a);
 $sql = "SELECT game as server,count(*) as today FROM player_history WHERE FROM_UNIXTIME(last_play,'%Y-%m-%d') = CURDATE() group by game";
 $todays_players = $database->get_results($sql);   
-
+$sql = 'SELECT `country`,country_code, count(*) as today FROM players WHERE FROM_UNIXTIME(last_log_on,"%Y-%m-%d") = CURDATE() group by country_code order by today desc;';
+$todays_countries = $database->get_results($sql);
 $template = new template;
 $sql = "select * from server1 order by `host_name` ASC";
 $sidebar_data = array();
@@ -56,7 +58,7 @@ foreach ($servers as $server) {
 		if(empty($server['starttime'])) { $server['starttime']=0;}
 		$start = date("d-m-y  h:i:s a",$server['starttime']);
 	     $fname = trim($server['host_name']);
-	     $key = searchforkey($fname, $todays_players);
+	     $key = searchforkey($fname, $todays_players,'server');
 
 	     if ($key === false) {
 			 $player_tot = 0;
@@ -66,7 +68,7 @@ foreach ($servers as $server) {
 		 }
 		 $disp ='style="display:none;"';
 		 $href = "gameserver.php?server=$fname";
-		 $gd .='<tr id="'.$fname.'" '.$disp.'><td><span class="invert_link"><a href="'.$href.'" class="invert_link">'.$server['server_name'].'</a></span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="gdate'.$fname.'">'.$start.'</td><td id="pt'.$fname.'" style="text-align:center;">'.$player_tot.'</td></tr>'; 
+		 $gd .='<tr id="'.$fname.'" '.$disp.'><td><span class="invert_link"><a href="'.$href.'" class="invert_link">'.$server['server_name'].'</a></span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="pt'.$fname.'">'.$player_tot.'</td><td id="gdate'.$fname.'" style="text-align:center;">'.$start.'</td></tr>'; 
 		 $sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 }
 
@@ -105,15 +107,27 @@ $page['run_tot'] = $qstat['run_tot'];
 $sql = "SELECT * FROM `logins` limit 10";
 $countries = $database->get_results($sql);
 //echo "$module has got this far bserver loop done";
-	//die($sql);
+$i=0;
 foreach ($countries as $country) {
 // do stats
 $template->load('templates/subtemplates/country_table.html');
+$cname = trim($country['country']);
+$key = searchforkey($cname, $todays_countries,'country');
+		if ($key === false) {
+			 $cplayers = 0;
+		 }
+		 else {
+			 $cplayers = $todays_countries[$key]['today'];
+		 }
+$country['row_id'] = $i;
 $country['percent'] = number_format(($country['logins']/$page['logins_tot'])*100,2).'%';
 $country['p_percent'] = number_format(($country['players']/$page['player_tot'])*100,2).'%';
 $country['flag'] = 'https://ipdata.co/flags/'.trim(strtolower($country['country_code'])).'.png';
+$country['title'] = $country['country'];
+$country['cplayers'] = $cplayers;
 $template->replace_vars($country);
 $page['country_data'] .= $template->get_template();
+$i++;
 }
 $sql = "select servers.server_name,player_history.*,players.name,players.country_code from player_history left join players on `steam_id` = players.steam_id64 left join servers on player_history.`game` = servers.host_name  ORDER BY `player_history`.`log_ons` DESC LIMIT 10";
 	$players = $database->get_results($sql);
@@ -128,9 +142,10 @@ $sql = "select servers.server_name,player_history.*,players.name,players.country
 		$map = '<img style="width:5%;vertical-align: middle;" src="https://ipdata.co/flags/'.trim(strtolower($player['country_code'])).'.png">';
 		$pd.='<tr><td style="vertical-align: middle;">'.$map.'  '.$playerN2.'</td><td>'.$player['server_name'].'</td><td><span style="">'.$player['log_ons'].'</span></td><td style="text-align:left;padding-right:6%;">'.$player['last_play'].'</td></tr>';
 	}
-	$sql = "select players.name,players.country_code,players.log_ons,players.last_log_on,players.first_log_on from players ORDER BY `players`.`log_ons` DESC LIMIT 10";
+	$sql = "select players.name,players.country,players.country_code,players.log_ons,players.last_log_on,players.first_log_on from players ORDER BY `players`.`log_ons` DESC LIMIT 10";
 	$fpd = '';
 	$players = $database->get_results($sql);
+	$i=0;
 	foreach ($players as $player) {
 		// top 10 players
 		$playerN2 = Emoji::Decode($player['name']);
@@ -144,7 +159,8 @@ $sql = "select servers.server_name,player_history.*,players.name,players.country
 			$player['first_log_on'] = 'N/A';
 		}
 		$map = '<img style="width:5%;vertical-align: middle;" src="https://ipdata.co/flags/'.trim(strtolower($player['country_code'])).'.png">';
-		$fpd.='<tr><td style="vertical-align: middle;"><span class="span_black">'.$map.'  '.$playerN2.'</span></td><td><span class="span_black">'.$player['first_log_on'].'</span></td><td><span>'.$player['log_ons'].'</span></td><td><span>'.$player['last_log_on'].'</span></td></tr>';
+		$fpd.='<tr title="'.$player['country'].'" id="playerrow_'.$i.'"><td  id="player_row_'.$i.'" style="vertical-align: middle;"><span class="span_black">'.$map.'&nbsp;&nbsp;'.$playerN2.'</span></td><td><span class="span_black">'.$player['first_log_on'].'</span></td><td><span>'.$player['log_ons'].'</span></td><td><span>'.$player['last_log_on'].'</span></td></tr>';
+		$i++;
 	}
 //print_r($countries);
 //die();
@@ -169,9 +185,12 @@ $template->replace_vars($page);
 $template->publish();
 //print_r($settings);
 
-function searchforkey($id, $array) {
+function searchforkey($id, $array,$col) {
+	//echo "looking for $id with a key of $col in<br>";
+	//print_r($array); 
    foreach ($array as $key => $val) {
-       if ($val['server'] === $id) {
+       if ($val[$col] === $id) {
+		   //echo "found $id in $col<br>";
            return $key;
        }
    }
