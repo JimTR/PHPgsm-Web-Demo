@@ -8,17 +8,14 @@ function index() {
         success: function (data1) {
 			// got data
 			//console.log(data1);
-<<<<<<< HEAD
 			$('#player_tot').text(data1.player_tot);
 			$('#logins_tot').text(data1.logins_tot);
 			$('#player').text(data1.players);
 			$('#run_tot').text(data1.run_tot);
-=======
 			//$('#player_tot').text(data1.player_tot);
 			//$('#logins_tot').text(data1.logins_tot);
 			//$('#players').text(data1.players);
 			//$('#run_tot').text(data1.run_tot);
->>>>>>> 41936fe644a3e82904e244561fdb74103cb5999e
 			//alert (data1.players);
 		},
         complete:function(data1){
@@ -65,9 +62,8 @@ function online(url){
 				var fname = i; // got the base server
 				if( i =='general' ) {
 					var general = data1[i];
-					//console.log(general);
+					console.log(general);
 					for (g in general) {
-<<<<<<< HEAD
 						if( g =='countries') {
 							var country_data = general['countries'];  
 						}
@@ -113,12 +109,11 @@ function online(url){
 				var server = data1[i][j]; // got server id
 				var server_id = j;	
 				if (server.running == 1 ) {
-=======
 					//console.log (general[g]+' '+g );
 					//$('#demo').append('<p>'+g+' '+general[g]+'</p>');
-					if( g =='players') {
-							var player_tots = general['players'];  
-						}
+					//if( g =='players') {
+					//		var player_tots = general['players'];  
+					//	}
 				} 
 				//return;
 			}
@@ -143,7 +138,6 @@ function online(url){
 			var server = data1[i][j]; // got server id
 			var server_id = j;	
 			if (server.running == 1 ) {
->>>>>>> 41936fe644a3e82904e244561fdb74103cb5999e
 					var playern = server.Players;
 					$('#pl'+server_id).html(playern); 
 					$("#"+server_id).show();
