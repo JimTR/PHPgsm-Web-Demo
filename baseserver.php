@@ -5,6 +5,7 @@ $version = "1.000";
 $time = "1647243699";
 $module = "API_Server";
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
+//print_r($bserver);
     $Auth = new Auth ();
         $user = $Auth->getAuth();
 if($user->loggedIn()) {
@@ -16,6 +17,7 @@ if($user->loggedIn()) {
 		//die ('not logged in');
 	}        
 $bserver = trim($bserver[1]);
+//echo "$bserver<br>";
 $template = new template;
 $sidebar_data = array();
 $header_vars['title'] = "Server $bserver";
@@ -23,18 +25,22 @@ $sql = "select * from server1 order by `host_name` ASC";
 $we_are_here = $settings['url'];
 $sidebar_data['smenu'] = '';
 $servers = $database->get_results($sql);
+//echo print_r($servers,true)."<br>";
 foreach ($servers as $server) {
 	$href = 'gameserver.php?server='.$server['host_name'];
 	$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 }
+//echo print_r($sidebar_data,true)."<br>";
 $sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `fname` ASC";
 $base_servers = $database->get_results($sql);
+//echo print_r($base_servers,true)."<br>";
+
 foreach ($base_servers as $server) {
 
 if ($server['fname'] === $bserver) {
 	// get the stuff
 $uri = parse_url($server['url']);
-//print_r($uri);
+echo print_r($uri,true)."<br>";
 $url = $uri['scheme']."://".$uri['host'].':'.$server['port'].$uri['path'];
 //echo "$url<br>";	
 	$url .="/ajax_send.php?url=$url/ajaxv2.php&query=action=all:server=$bserver";
