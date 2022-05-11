@@ -67,7 +67,7 @@
 		
 function fetchlog() {
 	//alert(port+' '+id+' '+url);
-	rows = 0;
+	rows = 100;
 	cmd = url+'/ajax_send.php?url='+url+'/ajaxv21.php&query=action=console:server='+id+':rows='+rows;
 	//alert (cmd);
 	var items='';

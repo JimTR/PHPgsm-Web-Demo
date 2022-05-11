@@ -20,6 +20,7 @@ $bserver = trim($bserver[1]);
 //echo "$bserver<br>";
 $template = new template;
 $sidebar_data = array();
+$sidebar_data['bmenu'] = '';
 $header_vars['title'] = "Server $bserver";
 $sql = "select * from server1 order by `host_name` ASC";
 $we_are_here = $settings['url'];
@@ -41,7 +42,8 @@ if ($server['fname'] === $bserver) {
 	// get the stuff
 $uri = parse_url($server['url']);
 echo print_r($uri,true)."<br>";
-$url = $uri['scheme']."://".$uri['host'].':'.$server['port'].$uri['path'];
+$url = $uri['scheme']."://".$uri['host'].':'.$server['port'];
+if (isset($uri['path'])) {$url .= $uri['path'];}
 //echo "$url<br>";	
 	$url .="/ajax_send.php?url=$url/ajaxv2.php&query=action=all:server=$bserver";
 //echo $url;
@@ -56,8 +58,8 @@ else {
 	$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
 }
 }
-$x =$sdata['total_size_raw']/1000000;
-$sdata['quota_pc'] = $x* (100/$sdata['quota']);
+$x =intval($sdata['total_size_raw'])/1000000;
+$sdata['quota_pc'] = $x* (100/intval($sdata['quota']));
 //$sdata['player_pc'] = round($sdata['used_slots']/$sdata['total_slots']*100,2);
 //if ($sdata['player_pc'] == 0) { $sdata['player_pc'] = 100;}
  if ($sdata['reboot'] == 'yes' ) {$sdata['rebooot'] = 'rebooot';}

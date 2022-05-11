@@ -55,7 +55,14 @@ $servers = $database->get_results($sql);
 
 $gd ='';
 foreach ($servers as $server) {
-		if(empty($server['starttime'])) { $server['starttime']=0;}
+	$fname = trim($server['host_name']);
+	$href = "gameserver.php?server=$fname";
+		if(!$server['enabled']) {
+			$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'" style="color:red;"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
+			continue;
+		}
+		$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
+		if(empty($server['starttime'])) { $server['starttime']= 0;}
 		$start = date("d-m-y  h:i:s a",$server['starttime']);
 	     $fname = trim($server['host_name']);
 	     $key = searchforkey($fname, $todays_players,'server');
@@ -67,9 +74,9 @@ foreach ($servers as $server) {
 			 $player_tot = $todays_players[$key]['today'];
 		 }
 		 $disp ='style="display:none;"';
-		 $href = "gameserver.php?server=$fname";
+		 //$href = "gameserver.php?server=$fname";
 		 $gd .='<tr id="'.$fname.'" '.$disp.'><td><span class="invert_link"><a href="'.$href.'" class="invert_link">'.$server['server_name'].'</a></span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="pt'.$fname.'">'.$player_tot.'</td><td id="gdate'.$fname.'" style="text-align:center;">'.$start.'</td></tr>'; 
-		 $sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
+		 //$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 }
 
 $page['gd']= $gd;
@@ -77,12 +84,15 @@ $page['gd']= $gd;
 $jsa ='';
 $sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `fname` ASC";
 $base_servers = $database->get_results($sql);
-
+$sidebar_data['bmenu'] ='';
 //https://api.noideersoftware.co.uk/ajax_send.php?url=https://api.noideersoftware.co.uk/ajaxv2.php&query=action=game_detail
 foreach ($base_servers as $server) {
 	//print_r($server);
 		$uri = parse_url($server['url']);
-		$url = $uri['scheme']."://".$uri['host'].':'.$server['port'].$uri['path'];
+		$url = $uri['scheme']."://".$uri['host'].':'.$server['port'];
+		if(isset($uri['path'])) {
+			$url .= "/".$uri['path'];
+		}
 		//echo "$url<br>";
 $sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
 $jsa .= '"'.$url.'/ajax_send.php?url='.$url.'/ajaxv2.php&query=action=game_detail:server='.$server['fname'].'",';
@@ -108,6 +118,7 @@ $sql = "SELECT * FROM `logins` limit 10";
 $countries = $database->get_results($sql);
 //echo "$module has got this far bserver loop done";
 $i=0;
+$page['country_data'] = "";
 foreach ($countries as $country) {
 // do stats
 $template->load('templates/subtemplates/country_table.html');

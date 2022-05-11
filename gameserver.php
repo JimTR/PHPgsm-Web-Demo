@@ -64,6 +64,7 @@ $template = new template;
 $sidebar_data = array();
 $header_vars['title'] = "$module - $bserver";
 $sql = "select * from server1 order by `host_name` ASC";
+$sidebar_data['bmenu'] = '';
 $sidebar_data['smenu'] = '';
 $servers = $database->get_results($sql);
 foreach ($servers as $server) {
@@ -82,7 +83,8 @@ $this_server['server_update'] = date("d-m-Y H:i:s a",$this_server['server_update
 if ($this_server['starttime']) {$this_server['starttime'] = date("d-m-Y H:i:s a",$this_server['starttime']);}
 $info = get_server_info($this_server);
 $uri = parse_url($this_server['url']);
-$url = $uri['scheme']."://".$uri['host'].':'.$this_server['bport'].$uri['path'];
+$url = $uri['scheme']."://".$uri['host'].':'.$this_server['bport'];
+if(isset($uri['path'])){ $url .= $uri['path'];}
 $v = json_decode(geturl("$url/ajaxv2.php?action=game_detail&filter=$bserver&server=".$this_server['fname']),true); //needs replacing with ajax_send
 //$info = array_merge($info,array_change_key_case($v[$bserver]));
 $this_server = array_change_key_case(array_merge_recursive($this_server,$info));
@@ -121,7 +123,7 @@ $template->load('templates/gameserver.html');
 $template->replace_vars($page);
 $template->replace_vars($this_server);
 //die('just about to publish');
-$template->replace_vars($v[$bserver]);
+//$template->replace_vars($v[$bserver]);
 
 $template->publish();
 

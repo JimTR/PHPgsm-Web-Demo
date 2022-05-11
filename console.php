@@ -44,6 +44,8 @@ $module = "Console";
 	$page['footer'] = $template->get_template();
 	$template->load('templates/subtemplates/sidebar.html');
 	$page['sidebar'] = $template->get_template();
+	$page['bmenu'] = '';
+	$page['smenu'] = '';
 	//  sidebar
 	$sql = "select * from server1 order by `host_name` ASC";
 	$servers = $database->get_results($sql);
@@ -65,7 +67,8 @@ $module = "Console";
     foreach ($servers as $server) {
                 //fill select box
 		$uri = parse_url($server['url']);
-		$url = $uri['scheme']."://".$uri['host'].':'.$server['bport'].$uri['path'];
+		$url = $uri['scheme']."://".$uri['host'].':'.$server['bport'];
+		if (isset($uri['path'])) {$url .= $uri['path'];}
 		//echo "$url<br>";
 		//print_r($server);
                 $sbox .='<option id ="'.$server['host_name'].'" value="'.$url.'" path="'.$server['location'].'" host ="'.$server['host'].':'.$server['port'].'">'.$server['server_name'].'</option>';
