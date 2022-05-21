@@ -24,9 +24,9 @@
 //echo "hello there <br>";
 include 'inc/master.inc.php';
    $Auth = new Auth ();
-$build = "6209-2416640325";
+$build = "6620-2864687030";
 $version = "1.001";
-$time = "1647242825";
+$time = "1653110483";
 $module = "Game_Server";
         $user = $Auth->getAuth();
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
@@ -68,6 +68,13 @@ $sidebar_data['bmenu'] = '';
 $sidebar_data['smenu'] = '';
 $servers = $database->get_results($sql);
 foreach ($servers as $server) {
+	$fname = trim($server['host_name']);
+        $href = "gameserver.php?server=$fname";
+        if(!$server['enabled']) {
+             $sidebar_data['smenu'] .='<li><a class="" href="'.$href.'" style="color:red;"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
+             continue;
+       }
+
 	$href = 'gameserver.php?server='.$server['host_name'];
 	if ($bserver == $server['host_name'] ) {$class = 'active';} else {$class='';}
 	$sidebar_data['smenu'] .='<li><a class="'.$class.'" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';

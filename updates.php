@@ -22,9 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-$build = "12373-3330493461";
+$build = "12412-433334213";
 $version = "1.002";
-$time = "1643606595";
+$time = "1653110566";
 $module = "Update";
 define('cr',PHP_EOL);
 $Auth = new Auth ();
@@ -51,6 +51,8 @@ if($user->loggedIn()) {
 else {
 	redirect('login.php');
 }
+$page['bmenu']='';
+$page['smenu'] ='';
 $sql = "select * from server1 order by `host_name` ASC";
 $servers = $database->get_results($sql);
 foreach ($servers as $server) {

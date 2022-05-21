@@ -1,8 +1,8 @@
 <?php
 include 'inc/master.inc.php';
-$build = "3525-853152434";
+$build = "4142-3255204870";
 $version = "1.000";
-$time = "1647243699";
+$time = "1653110467";
 $module = "API_Server";
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
 //print_r($bserver);
@@ -27,7 +27,14 @@ $we_are_here = $settings['url'];
 $sidebar_data['smenu'] = '';
 $servers = $database->get_results($sql);
 //echo print_r($servers,true)."<br>";
+//die();
 foreach ($servers as $server) {
+	$fname = trim($server['host_name']);
+        $href = "gameserver.php?server=$fname";
+        if(!$server['enabled']) {
+           $sidebar_data['smenu'] .='<li><a class="" href="'.$href.'" style="color:red;"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
+           continue;
+        }
 	$href = 'gameserver.php?server='.$server['host_name'];
 	$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 }
@@ -41,7 +48,7 @@ foreach ($base_servers as $server) {
 if ($server['fname'] === $bserver) {
 	// get the stuff
 $uri = parse_url($server['url']);
-echo print_r($uri,true)."<br>";
+//echo print_r($uri,true)."<br>";
 $url = $uri['scheme']."://".$uri['host'].':'.$server['port'];
 if (isset($uri['path'])) {$url .= $uri['path'];}
 //echo "$url<br>";	
