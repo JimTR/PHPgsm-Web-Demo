@@ -107,9 +107,9 @@
             changeClass('mem_pb',parseInt(data.total_mem));
             //cpu graph
              $('#cpu_pbs').width($('#cpu_pb').parent().width());
-             $("#cpu_pbs").text(data.total_cpu+'%');
-             $("#cpu_pb").css('width',data.total_cpu+'%');
-             changeClass('cpu_pb',parseInt(data.total_cpu));
+             $("#cpu_pbs").text(data.game_cpu+'%');
+             $("#cpu_pb").css('width',data.game_cpu+'%');
+             changeClass('cpu_pb',parseInt(data.game_cpu));
              // slots graph
              $('#op_pbs').width($('#op_pb').parent().width());
              $("#op_pbs").text(data.total_players+'/'+data.total_bots+'/'+data.total_slots);
