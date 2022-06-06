@@ -92,7 +92,7 @@ $info = get_server_info($this_server);
 $uri = parse_url($this_server['url']);
 $url = $uri['scheme']."://".$uri['host'].':'.$this_server['bport'];
 if(isset($uri['path'])){ $url .= $uri['path'];}
-$v = json_decode(geturl("$url/ajaxv2.php?action=game_detail&filter=$bserver&server=".$this_server['fname']),true); //needs replacing with ajax_send
+$v = json_decode(geturl("$url/api.php?action=game_detail&filter=$bserver&server=".$this_server['fname']),true); //needs replacing with ajax_send
 //$info = array_merge($info,array_change_key_case($v[$bserver]));
 $this_server = array_change_key_case(array_merge_recursive($this_server,$info));
 $this_server['players'] -= $this_server['bots'];

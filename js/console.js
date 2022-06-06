@@ -43,7 +43,7 @@
 					console.log('ht = '+element.scrollTop);
 					var currentId = url;
 					console.log(url);
-					$('#sendcmd').attr('action',url+ '/ajaxv2.php');
+					$('#sendcmd').attr('action',url+ '/api.php');
 					$('#server').attr('value',id);
 					//setTimeout(function() { startTimer(parm1); }, startInterval);
 					 //a_href = setTimeout(FetchLog, 1000);
@@ -68,7 +68,7 @@
 function fetchlog() {
 	//alert(port+' '+id+' '+url);
 	rows = 100;
-	cmd = url+'/ajax_send.php?url='+url+'/ajaxv21.php&query=action=console:server='+id+':rows='+rows;
+	cmd = url+'/api.php?action=console&server='+id+'&rows='+rows;
 	//alert (cmd);
 	var items='';
          //console.log(cmd);
@@ -116,9 +116,10 @@ function players() {
 	//alert ('Players ! '+url+' '+id);
         var items='';
 		var cerror=false;
-	cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=viewserver:id='+id;
+	cmd = url+'/api.php?action=viewserver&server='+id;
 	
-         //console.log(cmd);
+         console.log(cmd);
+	
           $.ajax({
 			      statusCode: {
         500: function() {
@@ -135,7 +136,7 @@ function players() {
 
         },
         complete:function(data){
-                       // console.log(data);
+                       console.log(data);
 						
                         info = data.responseJSON.info;
                         player = data.responseJSON.players;
@@ -156,7 +157,7 @@ function players() {
 			
 $.each(player, function(i, item) {
     //alert(item);
-items = items+'<tr id="'+item.steam_id+'"style="width:100%;"><td class="tpButton">'+item.Name+'</td><td id="'+item.ip+'"><img class="flag" '+item.flag+'/><span style=padding-left:5%;">'+item.country+'</span></td><td>'+item.Frags+'</td><td>'+item.TimeF+'</td></tr>';
+items = items+'<tr id="'+item.steam_id+'" style="width:100%;"><td class="tpButton" log="'+item.logons+'">'+item.Name+'</td><td title="'+item.country+'" id="'+item.ip+'"><img class="flag" '+item.flag+'/></td><td>'+item.Frags+'</td><td>'+item.TimeF+'</td></tr>';
 });
 $("#pbody").html(items);
 //items='<div style="width:100%;position:relative;text-align:center;top:5;">Current Rule Set</div><br>';
@@ -192,9 +193,10 @@ $('#sendcmd').on('submit', function(e) {
 
     });
 $('#player').on('click','.tpButton', function(event) {				
-        var href = $(this).closest('tr').attr("id");
-	    var ip =$ ("#"+href).find("td:eq(1)").attr("id");
+            var href = $(this).closest('tr').attr("id");
+	    var ip = $("#"+href).find("td:eq(1)").attr("id");
 	    var user = $("#"+href).find("td:first").text();
+	    var login = $("#"+href).find("td:eq(0)").attr("log");
 	    	
         if(href) {
 			if(href == 'undefined') {
@@ -204,8 +206,9 @@ $('#player').on('click','.tpButton', function(event) {
 				$('#error').modal('show');
 				return ;
 				}
-        	$('#name').attr('value',user)
+        		$('#name').attr('value',user)
 			$('#ip').attr('value',ip)
+			$('#logins').attr('value',login)
 			$('#steam_id').attr('value',href)
 			$('#ban_user').modal('show');
 		}

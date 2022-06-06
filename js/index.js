@@ -161,13 +161,14 @@ function online(url){
 					}
 					else if (server.Players >0) {
 						if (typeof server.players === "undefined") {
-							console.log('players array not set '+server.server_name);
+							console.log('no need players array not set '+server.server_name);
 							return;
 					}   
 					$('#op1'+server_id).css('cursor','pointer');
 					$('#gol'+server_id).addClass('p_count');	
 					$("#pbody"+server_id).empty();
-					var players = server.players;
+					//var players = server.players;
+					var players = $.map(server.players, function(value, index) { return [value]; });
 					var players = players.sort((b, a) => (a.Frags > b.Frags) ? 1 : -1)
 					//console.log(players);
 					for (p in players) {

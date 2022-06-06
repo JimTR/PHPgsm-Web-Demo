@@ -2,7 +2,7 @@
 function get_game() {
 	console.log(url);
 	var offline = 0;
-cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=game_detail:server='+server+':filter='+game;
+cmd = url+'/api.php?action=game_detail&server='+server+'&filter='+game;
 console.log (cmd);
          $.ajax({
 			
@@ -121,11 +121,11 @@ console.log(players_online);
 
 function fetchlog() {
 	//alert(url+"  "+id);
-	rows = 0;
-	cmd = url+'/ajax_send.php?url='+url+'/ajaxv21.php&query=action=console:server='+id+':rows='+rows+':output=json';
+	rows = 100;
+	cmd = url+'/api.php?action=console&server='+id+'&rows='+rows+'&output=json';
 	//alert (cmd);
 	var items='';
-         //console.log(cmd);
+         console.log(cmd);
           $.ajax({
 			
         type: 'GET',
@@ -171,11 +171,12 @@ $("#log").html(items);
 function players() {
 	 //get player functions
 	//alert ('Players ! '+url+' '+id);
+	//return;
         var items='';
 		var cerror=false;
-	cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=viewserver:id='+id;
+	cmd = url+'/api.php?action=viewserver&server='+id;
 	//alert(cmd);
-         //console.log(cmd);
+         console.log(cmd);
           $.ajax({
 		
 		type: 'GET',
@@ -183,6 +184,7 @@ function players() {
         dataType: "json",
         success: function (data) {
                        console.log('got data - viewplayers');
+                      // console.log(data);
 					 //info = data.responseJSON.info;
              		//console.log('current data - '+info);	
 
@@ -216,7 +218,7 @@ function players() {
 			
 $.each(player, function(i, item) {
     //alert(item);
-items = items+'<tr id="'+item.steam_id+'"style="width:100%;"><td class="tpButton">'+item.Name+'</td><td id="'+item.ip+'"><img class="flag" '+item.flag+'/><span style=padding-left:5%;">'+item.country+'</span></td><td style="text-align:right;">'+item.Frags+'</td><td style="text-align:right;padding-right:2%;">'+item.TimeF+'</td></tr>';
+items = items+'<tr id="'+item.steam_id+'"style="width:100%;"><td class="tpButton">'+item.Name+'</td><td title="'+item.country+'" id="'+item.ip+'"><img class="flag" '+item.flag+'/></td><td style="text-align:right;">'+item.Frags+'</td><td style="text-align:right;padding-right:2%;">'+item.TimeF+'</td></tr>';
 });
 
 $("#pbody").html(items);
@@ -242,7 +244,7 @@ function date_format( timestamp) {
 }
 function start_server() {
 	//starts the server
-	cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=exetmux:server='+id+':cmd=s';
+	cmd = url+'/api.php?action=exe_tmux&server='+id+'&cmd=s';
 	console.log(cmd);
 	//alert(cmd);
 	
@@ -257,7 +259,7 @@ function start_server() {
 
 function stop_server() {
 	//starts the server
-	cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=exetmux:server='+id+':cmd=q';
+	cmd = url+'/api.php?action=exe_tmux&server='+id+'&cmd=q';
 	console.log(cmd);
 	$.get(cmd, function(data, status){
 		//alert("Data: " + data + "\nStatus: " + status);
@@ -269,7 +271,7 @@ function stop_server() {
 }
 function restart_server() {
 	//starts the server
-	cmd = url+'/ajax_send.php?url='+url+'/ajaxv2.php&query=action=exetmux:server='+id+':cmd=r';
+	cmd = url+'/api.php?action=exe_tmux&server='+id+'&cmd=r';
 	alert(cmd);
 	$.get(cmd, function(data, status){
 		//alert("Data: " + data + "\nStatus: " + status);

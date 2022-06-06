@@ -95,7 +95,7 @@ foreach ($base_servers as $server) {
 		}
 		//echo "$url<br>";
 $sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
-$jsa .= '"'.$url.'/ajax_send.php?url='.$url.'/ajaxv2.php&query=action=game_detail:server='.$server['fname'].'",';
+$jsa .= '"'.$url.'/api.php?action=game_detail&server='.$server['fname'].'",';
 }
 
 //die();	
@@ -105,7 +105,7 @@ if (endsWith($jsa, ',')) {
 	$jsa = rtrim($jsa,",");
 }
 
-$sql = "SELECT sum(players) as player_tot, count(country) as countries, sum(logins) as tot_logins, (select count(*) from servers) as game_tot, (select count(*) from servers where running = 1) as run_tot  FROM `logins` WHERE 1";
+$sql = "SELECT sum(players) as player_tot, count(country) as countries, sum(logins) as tot_logins, (select count(*) from servers) as game_tot, (select count(*) from servers where running = 1 and enabled = 1) as run_tot  FROM `logins` WHERE 1";
 $qstat = $database->get_row($sql);
 
 //$page['percent'] = ($qstat['player_tot']/$qstat['tot_logins'])*100; fix this !!!

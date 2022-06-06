@@ -31,7 +31,7 @@
 				$('#root').addClass('hidden');
 			}	
             $('#boot_mount').text(data.root_mount);
-		    $('#boot_size').text(data.root_size);
+	    $('#boot_size').text(data.root_size);
             $('#boot_used').text(data.root_used+' ('+data.root_pc+')');
             $('#boot_free').text(data.root_free);
             $('#memtotal').text(data.MemTotal);
@@ -41,7 +41,7 @@
             $('#swaptotal').text(data.SwapTotal);
             $('#swapfree').text(data.SwapFree); 
             $('#u_mount').text(data.dir);
-            $('#u_size').text(data.quota);
+            $('#u_size').text(data.home_size);
             $('#load_1').text(data.load_1_min_pc);
             $('#load_10').text(data.load_10_min_pc);
             $('#load_15').text(data.load_15_min_pc);
@@ -53,8 +53,8 @@
 				$('#ctype').text(data.hypervisor_vendor);
 			}
             var qpc_rounded = Math.round(data.quota_pc * 10) / 10
-            $('#u_used').text(data.quota_used+' ('+qpc_rounded+'%)');
-            $('#u_free').text(data.quota_free);
+            $('#u_used').text(data.home_used+' ('+qpc_rounded+'%)');
+            $('#u_free').text(data.home_free);
             if (data.reboot == 'Yes') {$('#reboot').addClass('rebooot');}
             else {$('#reboot').removeClass('rebooot');}
             // mem graphs

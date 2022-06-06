@@ -76,7 +76,7 @@ switch ($module) {
 }
 //file_put_contents(LOG,'end'.PHP_EOL,FILE_APPEND);
 
-		$sql = "SELECT sum(players) as player_tot, count(country) as countries, sum(logins) as tot_logins, (select count(*) from servers) as game_tot, (select count(*) from servers where running = 1) as run_tot  FROM `logins` WHERE 1";
+		$sql = "SELECT sum(players) as player_tot, count(country) as countries, sum(logins) as tot_logins, (select count(*) from servers) as game_tot, (select count(*) from servers where running = 1 and enabled = 1) as run_tot  FROM `logins` WHERE 1";
 		$qstat = $database->get_row($sql);
 		$page['player_tot'] =  $qstat['player_tot'];
 		$page['logins_tot'] = $qstat['tot_logins'];
