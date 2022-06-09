@@ -56,9 +56,9 @@
 								<thead>
 									<tr style="padding-bottom:6px;">
 										<th>Name</th>
-										<th>Location</th>
-										<th>Score</th>
-										<th>Time</th>
+										<th style="text-align:center;">Location</th>
+										<th style="text-align:center;">Score</th>
+										<th style="padding-left:5%;">Time</th>
 									</tr>
 								</thead>	
 								<tbody id="pbody"></tbody>
@@ -132,19 +132,18 @@
              <!--ban user-->     			
 			<div class="modal fade" id="ban_user" tabindex="-1" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">User Information</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">User Information</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
                     <div class="modal-body">
-						<form>
-                <div class="row mb-3">
-                  <label for="inputEmail3" class="col-sm-3 col-form-label"l>Name</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" id="name" readonly="">
-                  </div>
-                </div>
+					    <div class="row mb-3">
+							<label for="inputEmail3" class="col-sm-3 col-form-label"l>Name</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="name" readonly="">
+							</div>
+						</div>
                 <div class="row mb-3">
                   <label for="inputEmail3" class="col-sm-3 col-form-label">IP Address</label>
                   <div class="col-sm-8">
@@ -168,8 +167,12 @@
                       <h5 class="modal-title">Ban User</h5>
 		</div>
 		<div class="model-body">
-                <div class="row mb-3" style="margin-top:1rem;">
+			<form>
+				<div class="row mb-3" style="margin-top:1rem;">
                   <label class="col-form-label col-sm-3" style="padding-left:6%;">Ban Period</label>
+                   <input type="hidden" id="nameb" name="nameb" value="">
+                    <input type="hidden" id="ipb" name="ipb" value="">
+                     <input type="hidden" id="steam_idb" name="steam_idb" value="3487">
                  <div class="col-sm-8">
                     <select id="period" class="form-select">
 						<option value="0">Permanent</option>

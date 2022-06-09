@@ -157,7 +157,7 @@ function players() {
 			
 $.each(player, function(i, item) {
     //alert(item);
-items = items+'<tr id="'+item.steam_id+'" style="width:100%;"><td class="tpButton" log="'+item.logons+'">'+item.Name+'</td><td title="'+item.country+'" id="'+item.ip+'"><img class="flag" '+item.flag+'/></td><td>'+item.Frags+'</td><td>'+item.TimeF+'</td></tr>';
+items = items+'<tr id="'+item.steam_id+'" style="width:100%;"><td class="tpButton" log="'+item.logons+'">'+item.Name+'</td><td style="text-align:center;" title="'+item.country+'" id="'+item.ip+'"><img class="flag" '+item.flag+'/></td><td style="text-align:center;">'+item.Frags+'</td><td style="text-align:right;padding-right:8%;">'+item.TimeF+'</td></tr>';
 });
 $("#pbody").html(items);
 //items='<div style="width:100%;position:relative;text-align:center;top:5;">Current Rule Set</div><br>';
@@ -202,14 +202,16 @@ $('#player').on('click','.tpButton', function(event) {
 			if(href == 'undefined') {
 				//alert('can not ban an unknown user');
 				$('#error_action').text('Invalid User');
-				$('#error_text').text('can not ban an unknown user or bot');
+				$('#error_text').text('You can not view an unknown user<br>This maybe a bot or a user that is curently unknown');
 				$('#error').modal('show');
 				return ;
 				}
-        		$('#name').attr('value',user)
+        	$('#name').attr('value',user)
 			$('#ip').attr('value',ip)
 			$('#logins').attr('value',login)
 			$('#steam_id').attr('value',href)
+			$('#ipb').attr('value',ip)
+			$('#steam_idb').attr('value',href)
 			$('#ban_user').modal('show');
 		}
 	 console.log( "click players");
@@ -217,7 +219,7 @@ $('#player').on('click','.tpButton', function(event) {
 
 		            
                 function ban_user() {
-					var ban_cmd  = "addip "+$("#period").val()+" "+$("#ip").val();
+					var ban_cmd  = "addip "+$("#period").val()+" "+$("#ipb").val();
 					$("#text").val(ban_cmd);
                     //alert($('form').serialize());
 					
