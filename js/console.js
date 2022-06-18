@@ -233,6 +233,12 @@ $('#player').on('click','.tpButton', function(event) {
              $( "#ban" ).click (function() {
                 ban_user();
             });
+			$( "#kick" ).click (function() {
+                var kick_cmd  = "kick "+$("#name").val();
+                $("#text").val(kick_cmd);
+                $('#sendcmd').submit();
+				$('#ban_user').modal('hide');
+            });	
 
         });
 			

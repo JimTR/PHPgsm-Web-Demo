@@ -58,7 +58,7 @@
 										<th>Name</th>
 										<th style="text-align:center;">Location</th>
 										<th style="text-align:center;">Score</th>
-										<th style="padding-left:5%;">Time</th>
+										<th style="padding-left:2%;">Time</th>
 									</tr>
 								</thead>	
 								<tbody id="pbody"></tbody>
@@ -166,14 +166,14 @@
 		
 		<div class="model-body">
 			<div class="modal-header" style="border-bottom:none;border-top:1px solid #495057;">
-                      <h5 class="modal-title">Ban User</h5>
+                      <h5 class="modal-title">User Actions</h5>
 			</div>
 			<form>
 				<div class="row mb-3" style="margin-top:1rem;">
                   <label class="col-form-label col-sm-3" style="padding-left:6%;">Ban Period</label>
                    <input type="hidden" id="nameb" name="nameb" value="">
                     <input type="hidden" id="ipb" name="ipb" value="">
-                     <input type="hidden" id="steam_idb" name="steam_idb" value="3487">
+                     <input type="hidden" id="steam_idb" name="steam_idb" value="">
                  <div class="col-sm-8">
                     <select id="period" class="form-select">
 						<option value="0">Permanent</option>
@@ -185,14 +185,14 @@
                   </select>
                   </div>
                 </div>
-                
-               
+                            
               </form>
-			
-                    </div>
+			</div>
                     <div class="modal-footer" style="border:none">
+                      
+                      <button type="submit" class="btn btn-primary" id="ban">Ban User</button>
+                      <button type="submit" class="btn btn-primary" id="kick">Kick User</button>
                       <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary" id="ban">Do It</button>
                     </div>
                   </div>
                 </div>
