@@ -259,6 +259,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Close Button */
 .btn-close {
   background-size: 25%;
+  filter: invert(1);
+  background-color: #7fffd4;
 }
 .btn-close:focus {
   outline: 0;
