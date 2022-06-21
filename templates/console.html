@@ -82,33 +82,14 @@
 			<div style="clear:none;margin-left:1%;margin-top:0.5%;float:left;color:green;font-weight:bold;" id="ajax-response"></div>
 		</div>		
 
-		<div style="float:right;">
-			<div style="display:;clear:none;">
-		
-		<div>
-             
-			
+		<div id="cmd_buttons" style="float:right;display:none;">
 			<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#cvars"><i class="ri-booklet-line"></i> View C Vars</button>			
 			<button id="create-user" style="display:none;" class="btn">Ban user</button>
-
-			
-			
-</div>
-			
-			</div>
-		</div>	
-		<div style="float:right;clear:none;padding-right:5px;">
-			
-                          <button id="quick" class="btn btn-primary" name="quick"><i class="fas fa-tachometer-alt"></i> Quick Commands</button>
-			<!--<button class="button2"  id="create-user">Ban user</button>-->
-    		</div>	</div>
-            </div>
-          </div>
-
-        </div>
-
-        
-      </div>
+			<span style="float:right;clear:none;padding-left:5px;">
+			    <button id="quick" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#quick_cmds"><i class="fas fa-tachometer-alt"></i> Quick Commands</button>
+			</span>
+		 </div>
+  
     </section>
 
   </main><!-- End #main -->
@@ -202,6 +183,27 @@
                   </div>
                 </div>
               </div>
+              <div class="modal fade" id="quick_cmds" tabindex="-1" aria-hidden="true" style="display: none;">
+					<div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Quick Commands</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body" id="q_cmds">
+						<div style="height:50px;">Change to next map<button style="float:right;clear:none;" class="btn btn-primary" id="next_level">Go</button></div>
+						<div style="height:50px;">List Banned IP's <button style="float:right;" class="btn btn-primary" id="ip_list_banned">Go</button></div>
+						<div style="height:50px;">Write Banned IP's <button style="float:right;" class="btn btn-primary" id="ip_write_banned">Go</button></div>
+						<div style="height:50px;">List Banned ID's  <button style="float:right;" class="btn btn-primary" id="id_list_banned">Go</button></div>
+						<div style="height:50px;">Write Banned ID's <button style="float:right;" class="btn btn-primary" id="id_write_banned">Go</button></div>		
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                     
+                    </div>
+                  </div>
+                </div>
+			</div>	  
              <div class="modal fade" id="cvars" tabindex="-1">
                 <div class="modal-dialog modal-dialog-scrollable">
                   <div class="modal-content">

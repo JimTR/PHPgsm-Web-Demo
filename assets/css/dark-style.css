@@ -1401,3 +1401,9 @@ a.invert:hover {
     margin-top: -8px;
     padding: 1%;
 } 
+
+.modal-fullscreen {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+}	

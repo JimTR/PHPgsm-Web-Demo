@@ -86,6 +86,8 @@ foreach ($base_servers as $server) {
 }
 $sql = "select * from server1 where host_name = '$bserver'";
 $this_server =  $database->get_row($sql);
+//print_r($this_server);
+$this_server['cfg_file'] = str_replace(PHP_EOL,'<br>',file_get_contents($this_server['location'].'/'.$this_server['game'].'/cfg/'.$this_server['host_name'].'.cfg'));
 $this_server['server_update'] = date("d-m-Y H:i:s a",$this_server['server_update']);
 if ($this_server['starttime']) {$this_server['starttime'] = date("d-m-Y H:i:s a",$this_server['starttime']);}
 $info = get_server_info($this_server);

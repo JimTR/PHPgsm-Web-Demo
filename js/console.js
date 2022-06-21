@@ -23,13 +23,22 @@
 			});	
 			
 				$("#servers").change(function(){
+				$("#cmd_buttons").show();	
 				if(!typeof(logi) == 'undefined') {	
 				clearInterval(logi); // stop old stuff
 				clearInterval(playi);
 				}
 				 url = this.value;
-				 id = $(this).children(":selected").attr("id");	
-				 path = $(this).children(":selected").attr("path");
+				 id = $(this).children(":selected").attr("id");
+				 if(id === ''){ 
+					 $("#log").empty();
+					 $("#pbody").empty();
+					 $("#cmd_buttons").hide();
+					ClearAllIntervals();
+					 $('#player_title').html('Choose Game');
+					 return;
+				};	
+				path = $(this).children(":selected").attr("path");
 				host = $(this).children(":selected").attr("host");
 				port =$(this).children(":selected").attr("port");	
 			   	console.log('going for fetch');	
@@ -249,6 +258,11 @@ function selectOption(nr,element) {
         select.val(value).change();
 	console.log(select.val(value));
     }
+}
+
+function ClearAllIntervals() {
+    for (var i = 1; i < 99999; i++)
+        window.clearInterval(i);
 }
 
 
