@@ -228,14 +228,23 @@ $('#player').on('click','.tpButton', function(event) {
 
 		            
                 function ban_user() {
-					var ban_cmd  = "addip "+$("#period").val()+" "+$("#ipb").val();
-					$("#text").val(ban_cmd);
-                    //alert($('form').serialize());
-					
-					var txt = $( 'form' ).serializeArray();
+					//alert($('form').serialize());
+                    if($("#ban_ip").is(':checked')) {
+						var ban_ip_cmd  = "addip "+$("#period").val()+" "+$("#ipb").val();
+						alert (ban_ip_cmd);
+						$("#text").val(ban_ip_cmd);
+						$('#sendcmd').submit();
+					}
+					 if($("#ban_id").is(':checked')) {
+						var ban_id_cmd  = "addid "+$("#period").val()+" "+$("#steam_idb").val();
+						alert (ban_id_cmd);
+						$("#text").val(ban_id_cmd);
+						$('#sendcmd').submit();
+					}
+					//var txt = $( 'form' ).serializeArray();
 					console.log( "txt = "+ban_cmd );
 					
-					$('#sendcmd').submit();
+					//$('#sendcmd').submit();
 					$('#ban_user').modal('hide');
                  };
                  
