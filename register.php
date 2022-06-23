@@ -4,6 +4,7 @@
  * reworked 8-1-15
  *  
  */
+define('cr',PHP_EOL);
 $build = "6572-1408588099";
 $version = "1.000";
 $time = "1643351306";
@@ -27,6 +28,7 @@ $template->publish();
 			die ();
 			}
  $nid = getnid();
+echo "nid = $nid".cr;
  $validemail=valid_email($email, true);
 		              if(!$validemail)
 		              { 
@@ -34,6 +36,7 @@ $template->publish();
 						 die();
 			}
 	$password = md5($password.SALT);
+	echo "password = $password".cr;
 	echo "password = $password    nid = $nid".PHP_EOL;
 		$newuser['nid'] = $nid;
 		$newuser['username']= $username;
