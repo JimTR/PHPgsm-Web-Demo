@@ -262,9 +262,39 @@ $('#player').on('click','.tpButton', function(event) {
                 $("#text").val(change_cmd);
                 $('#sendcmd').submit();
 				$('#quick_cmds').modal('hide');
-            });	
+            });
+            $( "#maps" ).click (function() {
+                var change_cmd  = "maps *";
+                $("#text").val(change_cmd);
+                $('#sendcmd').submit();
+				$('#quick_cmds').modal('hide');
+            });
+            $( "#ip_list_banned" ).click (function() {
+                var change_cmd  = "listip";
+                $("#text").val(change_cmd);
+                $('#sendcmd').submit();
+				$('#quick_cmds').modal('hide');
+            });		
+             $( "#id_list_banned" ).click (function() {
+                var change_cmd  = "listid";
+                $("#text").val(change_cmd);
+                $('#sendcmd').submit();
+				$('#quick_cmds').modal('hide');
+            });
+             $( "#ip_write_banned" ).click (function() {
+                var change_cmd  = "writeip";
+                $("#text").val(change_cmd);
+                $('#sendcmd').submit();
+				$('#quick_cmds').modal('hide');
+            });
+            $( "#id_write_banned" ).click (function() {
+                var change_cmd  = "writeid";
+                $("#text").val(change_cmd);
+                $('#sendcmd').submit();
+				$('#quick_cmds').modal('hide');
+            });											
         });
-			
+			//"ip_list_banned"
 function selectOption(nr,element) {
     var select = $(element);
     if (select.children().length >= nr) {

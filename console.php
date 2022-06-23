@@ -72,8 +72,10 @@ $module = "Console";
 		//echo "$url<br>";
 		//print_r($server);
                 $sbox .='<option id ="'.$server['host_name'].'" value="'.$url.'" path="'.$server['location'].'" host ="'.$server['host'].':'.$server['port'].'">'.$server['server_name'].'</option>';
+                //get_maps($server);
         }
 	$page['sbox'] = $sbox;
+	//we need to fill the map select some how  
 	$template->load('templates/console.html');
 	
 	//echo $template->get_template();
@@ -81,4 +83,17 @@ $module = "Console";
 	$template->replace_vars($page);
 	$template->publish();
 
+function get_maps($server) {
+	// get the option list of maps
+	$file = $server['location'].'/'.$server['game'].'/cfg/mapcycle.txt'; // work out file we need a fall back
+	$map_list = explode(cr,file_get_contents($file)); // get the file & array it
+	$box = '<select class="form-control" style="width:227px;display:none;" id="map_change_'.$server['host_name.'].'" >'; // split the server id so the change fuction will work use server var
+	//now loop
+	foreach ($map_list as $map) {
+		// think ! add to box
+	}
+	$box .= '</select>';
+	//<option id="test" value="http://localhost:80/ajaxv2.5" path="/home/jim/games/bb2" host="81.132.54.204:27015">Brainbread II</option>
+	//</select>
+}
 ?>

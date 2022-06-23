@@ -48,8 +48,8 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title" style="font-size:14px;display:none;" id="server-select"><span style="padding-right:1%;">Choose Server</span><select id="servers"><!--#sbox#--></select></h5>
-              <div id="log"  class="gameserver_log" style="font-size:14px;width:60%;margin-top:3.3%;"></div>
-				<div id="player" style="clear:none;width:37%;float:right;margin-right:1%;">
+              <div id="log"  class="gameserver_log" style="font-size:14px;width:55%;margin-top:3.3%;"></div>
+				<div id="player" style="clear:none;width:42%;float:right;margin-right:1%;">
 					<div class="card-title" style="text-align:center;font-size:14px;" id="player_title">Choose Game</div>
 						<div class="table-wrapper">	
 							<table class="table table-sml" id="players_table">
@@ -66,9 +66,9 @@
 						</div>
 					<div id="player_rows"></div>
 				</div>
-			<div style="clear:both;padding:2%;">
+			<div style="clear:both;padding-top:1%;">
 		<div>	   
-		<form id="sendcmd" style="width:60%;float:left;" action="/api.php" method="get">
+		<form id="sendcmd" style="width:55%;float:left;" action="/api.php" method="get">
 			<div class="input-group">
 				<input class="form-control"name="text" type="text" id="text" size="50" placeholder="Enter Server Command">
 				<input type="hidden" id="action" name="action" value="exe_tmux">
@@ -184,18 +184,74 @@
                 </div>
               </div>
               <div class="modal fade" id="quick_cmds" tabindex="-1" aria-hidden="true" style="display: none;">
-					<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-dialog modal-dialog-centered" style="max-width:600px">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title">Quick Commands</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                      </div>
-                     <div class="modal-body" id="q_cmds">
-						<div style="height:50px;">Change to next map<button style="float:right;clear:none;" class="btn btn-primary" id="next_level">Go</button></div>
-						<div style="height:50px;">List Banned IP's <button style="float:right;" class="btn btn-primary" id="ip_list_banned">Go</button></div>
-						<div style="height:50px;">Write Banned IP's <button style="float:right;" class="btn btn-primary" id="ip_write_banned">Go</button></div>
-						<div style="height:50px;">List Banned ID's  <button style="float:right;" class="btn btn-primary" id="id_list_banned">Go</button></div>
-						<div style="height:50px;">Write Banned ID's <button style="float:right;" class="btn btn-primary" id="id_write_banned">Go</button></div>		
+                     <div class="modal-body"  id="q_cmds">
+						 <div class="form-inline">
+							 <form class="form-inline">
+								<div class="form-group mb-2">
+									<label class="sr-only">Email</label>
+									<input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Force Map">
+								</div>
+								<div class="form-group mx-sm-3 mb-2">
+									<label for="inputPassword2" class="sr-only">Password</label>
+									<select class="form-control" style="width:227px;" id="map_change" >
+										<option id="test" value="http://localhost:80/ajaxv2.5" path="/home/jim/games/bb2" host="81.132.54.204:27015">Brainbread II</option>
+									</select>	
+								</div>
+								<span style="float:right;padding-left:36px;">
+								<button type="submit" class="btn btn-primary mb-2">Go</button></span>
+								
+							</form>
+						 <div class="form-group mx-sm-3 mb-3">
+							 <div class="form-group mb-3">
+									<label class="sr-only">Email</label>
+									<input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="List Maps">
+								</div>
+								<button style="float:right;clear:none;" class="btn btn-primary" id="maps">Go</button>
+							 </div>
+						<div class="form-group mx-sm-3 mb-2">
+							<div class="form-group mb-3">
+									<label class="sr-only">Email</label>
+									<input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Next Map">
+								</div>
+							<button style="float:right;clear:none;" class="btn btn-primary" id="next_level">Go</button>
+							</div>
+								
+						<div class="form-group mx-sm-3 mb-2">
+							
+							<div class="form-group mb-3">
+									<label class="sr-only">Email</label>
+									<input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="List Banned IP's ">
+								</div>
+							<button style="float:right;" class="btn btn-primary" id="ip_list_banned">Go</button>
+							</div>
+						<div class="form-group mx-sm-3 mb-2">	
+							<div class="form-group mb-3">
+								<label class="sr-only">Email</label>
+								<input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Write Banned IP's ">
+							</div>	
+								<button style="float:right;" class="btn btn-primary" id="ip_write_banned">Go</button>
+							</div>
+							
+						<div class="form-group mx-sm-3 mb-2">	
+							<div class="form-group mb-3">
+								<label class="sr-only">Email</label>
+								<input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="List Banned ID's ">
+							</div>	
+							<button style="float:right;" class="btn btn-primary" id="id_list_banned">Go</button>
+							</div>
+						<div class="form-group mx-sm-3 mb-2">	
+							<div class="form-group mb-3">
+								<label class="sr-only">Email</label>
+								<input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Write Banned Id's ">
+							</div>
+							<button  type="submit"  class="btn btn-primary" id="id_write_banned">Go</button>
+							</div>		
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -203,7 +259,8 @@
                     </div>
                   </div>
                 </div>
-			</div>	  
+			</div>	 
+			</div> 
              <div class="modal fade" id="cvars" tabindex="-1">
                 <div class="modal-dialog modal-dialog-scrollable">
                   <div class="modal-content">
