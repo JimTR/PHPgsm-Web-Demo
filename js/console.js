@@ -236,7 +236,7 @@ $('#player').on('click','.tpButton', function(event) {
 						$('#sendcmd').submit();
 					}
 					 if($("#ban_id").is(':checked')) {
-						var ban_id_cmd  = "addid "+$("#period").val()+" "+$("#steam_idb").val();
+						var ban_id_cmd  = "banid "+$("#period").val()+" "+$("#steam_idb").val();
 						alert (ban_id_cmd);
 						$("#text").val(ban_id_cmd);
 						$('#sendcmd').submit();
@@ -257,7 +257,12 @@ $('#player').on('click','.tpButton', function(event) {
                 $('#sendcmd').submit();
 				$('#ban_user').modal('hide');
             });	
-
+			$( "#next_level" ).click (function() {
+                var change_cmd  = "changelevel_next";
+                $("#text").val(change_cmd);
+                $('#sendcmd').submit();
+				$('#quick_cmds').modal('hide');
+            });	
         });
 			
 function selectOption(nr,element) {
@@ -273,6 +278,5 @@ function ClearAllIntervals() {
     for (var i = 1; i < 99999; i++)
         window.clearInterval(i);
 }
-
 
 
