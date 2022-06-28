@@ -35,7 +35,9 @@
 					 $("#pbody").empty();
 					 $("#cmd_buttons").hide();
 					ClearAllIntervals();
+					setInterval('updateClock()', 1000);
 					 $('#player_title').html('Choose Game');
+					 $("#servers").blur(); 
 					 return;
 				};	
 				path = $(this).children(":selected").attr("path");
@@ -61,6 +63,7 @@
 					 var element = document.getElementById("log");
      				element.scrollTop = element.scrollHeight;
 					console.log('top = '+element.scrollTop);
+					$("#servers").blur(); 
 					//FetchPlayers();
 					//a_href = setTimeout(function(){FetchLog(url,id,path);},1000);
 					//console.log('in change '+currentId);
