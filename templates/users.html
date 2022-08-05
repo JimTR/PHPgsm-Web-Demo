@@ -170,10 +170,13 @@
 		}
 			
         //alert("Updated "+noe);
+        var uni= '';
         players = data.data;
         $.each(players, function(i, item) {
+		if (item.steam_id64 == uni) {return true;}
 		var last_log = timeConverter(item.last_log_on);
 		items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'" flag="'+item.flag+'"><a href="#">'+item.name+'</a></td><td>'+last_log+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">'+item.steam_id64+'</a></td></tr>';
+		uni = item.steam_id64;
 		
 		});
 $("#data_table").html(items);
