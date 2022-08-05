@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1.0" name="viewport">
+		<title><!--#page-title#--></title>
+		<meta content="" name="description">
+		<meta content="" name="keywords">
+		<!-- Favicons -->
+		<link href="img/favicon.png" rel="icon">
+		<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+		<!-- Google Fonts -->
+		<link href="https://fonts.gstatic.com" rel="preconnect">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+		<!--#include#-->
+	</head>
+	<body>
+		<!--#header#-->
+		<!--#sidebar#-->
+		<main id="main" class="main">
+			<div class="pagetitle">
+				<h1><!--#page-title#--></h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="index.php">Home</a></li>
+						<li class="breadcrumb-item active"><!--#page-title#--></li>
+					</ol>
+				</nav>
+			</div><!-- End Page Title -->
+		<section class="section">
+			<div class="col-lg12">
+				<div class="card">
+					<div class="card-body">
+			<div class="row">
+				<div class="col-lg-6" id="searchbox">
+					<h5 class="card-title">Search Players</h5>
+					<form id="sendcmd" style="width:75%;float:left;" action="<!--#url#-->/search.php" method="get">
+					<div class="input-group">
+						<input class="form-control"name="text" type="text" id="text" size="70" placeholder="Player name, steam id or IP">
+						<input type="hidden" id="action" name="action" value="search">
+						<label for="send" class="btn btn-info">Search<i class="bx bxs-send"></i></label>	   
+						<input class="hidden" type="submit" value="send" id="send">
+					</div>	
+					<div class="form-check" style="padding-left:6%;">
+						 <input class="form-check-input" type="radio" name="type" id="gridRadios3" value="fuzzy" checked>
+                      <label class="form-check-label" for="gridRadios3"  style="padding-right:6%;">Name</label>
+						<input class="form-check-input" type="radio" name="type" id="gridRadios1" value="id">
+                      <label class="form-check-label" for="gridRadios1"  style="padding-right:6%;">Steam ID</label>
+                     
+                      <input class="form-check-input" type="radio" name="type" id="gridRadios4" value="ip">
+                      <label class="form-check-label" for="gridRadios4">IP</label>
+                    </div>
+				</form>
+				</div>
+				<div class="col-lg-6" style="display:none;" id="results">
+					<h5 class="card-title">Results</h5>
+					<div class="table-wrapper" style="max-height:200px;">
+					<table class="table table-sml">
+						<tbody id="data_table">
+							<tr><td>hello</td><td>there</td></tr>
+						</tbody>
+					</table>
+					</div>
+				 </div> <!-- end row 1 -->
+			<!-- new row -->
+			<div id="editor" class="col-lg-12" style="display:none">
+				<h5 class="card-title">Details For <span id="un"></span></h5>
+				<div class="row">
+				<div class="col-lg-6">
+					<h5>General Details</h5>
+					<table class="table"><tbody id="gen"><tr><td>hello</td><td>me</td></tr></tbody></table>
+				</div>
+				<div class="col-lg-6">
+					<h5>Server Details</h5>
+					<table class="table">
+						<thead>
+							<tr style="padding-bottom:6px;">
+								<th>Server</th>
+								<th style="text-align:left;">Total Log ons</th>
+								<th style="text-align:left;">Latest Log on</th>
+							</tr>
+						</thead>	
+						<tbody id="gd1"></tbody></table>
+				</div>
+				</div>
+				<div class="modal-footer" style="text-align:center;"><button id="go_back" type="button" class="btn btn-success">Go Back</button></div>
+				
+			</div>
+			</div> <!-- card-body -->
+			</div> <!-- card -->
+			</div>	
+			</section>
+	</main>
+	<div class="modal fade" id="error" tabindex="-1" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title"><span id="error_action"></span></h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+						<p id="error_text"></p>
+				</div>
+			 <div class="modal-footer">
+                      <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+             </div>
+                  </div>
+                 </div>
+                 </div>              
+  <!--#footer#-->
+ <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+   <!-- <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>-->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!--<script src="assets/vendor/chart.js/chart.min.js"></script>
+    <script src="assets/vendor/echarts/echarts.min.js"></script>
+    <script src="assets/vendor/quill/quill.min.js"></script>
+    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/vendor/tinymce/tinymce.min.js"></script>-->
+
+ 
+
+  <!-- Template Main JS File -->
+   <script src = "js/jquery.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script src = "assets/js/main.js"></script>
+   <!--<script src = "js/console.js"></script>-->
+<script>
+	var gdetail='';
+	var gendetail ='';
+	var item='';
+ $(document).ready(function() {
+     console.log('hit this');
+    
+	});
+	$('#sendcmd').on('submit', function(e) {
+    e.preventDefault();
+    var items='';
+    var url = $(this).attr('action');
+    $("#data_table").html(items);
+    var sndData = $('#sendcmd input').serialize();
+    console.log(sndData);
+    $.ajax({
+    type: $(this).attr('method'),
+    url: $(this).attr('action'),
+    data: sndData,
+    //cache: false,
+    dataType: "json",
+    //contentType: false,
+    //processData: false,
+    success:  function(data){
+		var noe = data.data.length;
+		$('#editor').hide();
+		if (typeof(noe) == 'undefined') {
+			$('#results').hide();
+			$('#error_action').text('Invalid Search');
+			$('#error_text').html('Can not find '+data.text);
+			$('#error').modal('show');
+			return;
+		}
+			
+        //alert("Updated "+noe);
+        players = data.data;
+        $.each(players, function(i, item) {
+		//alert(item);
+		//var all='{"real_ip": "'+item.real_ip+'", "id": 1, "color": "#69F"}'
+		//var all='{"type": "page", "id": 1, "color": "#69F"}'
+		var all = JSON.stringify(item);
+		items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'" flag="'+item.flag+'">'+item.name+'</td><td>'+item.country+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">View Profile</a></td></tr>';
+		
+		});
+$("#data_table").html(items);
+$('#results').show();
+        console.log(data);
+        }
+    });
+});
+$('#data_table').on('click','.tpButton', function(event) {
+	console.log("clicked data table");				
+        var href = $(this).closest('tr').attr("id");
+		console.log(href);        
+	    var ip = $("#"+href).find("td:eq(0)").attr("ip");
+	    console.log( "ip should be "+ip);
+	    var user = $("#"+href).find("td:first").text();
+	    var login = $("#"+href).find("td:eq(0)").attr("flag");
+	    var url = $('#sendcmd').attr('action')+"?action=search&type=id&text="+href;
+			console.log(url);
+			console.log("login should be "+login);	
+        if(href) {
+			if(href == 'undefined') {
+				//alert('can not ban an unknown user');
+				$('#error_action').text('Invalid User');
+				$('#error_text').html('You can not view an unknown user<br>This maybe a bot or a user that is curently unknown');
+				$('#error').modal('show');
+				return ;
+			}
+				
+			$.ajax({
+				type: 'GET',
+				url: url,
+				//data: sndData,
+				//cache: false,
+				dataType: "json",
+				//contentType: false,
+				//processData: false,
+				success:function(data){
+					var noe = data.data.length;
+					
+					console.log("found "+noe+" records");
+					//$('#editor').hide();
+					players = data.data;
+					$.each(players, function(i, item) {
+						if (item.server_name == null) {
+							console.log ("no longer with us");
+							return true;
+						}
+						else {
+							console.log(item.server_name+" is valid");
+							var timestamp =  timeConverter(item.last_play);
+							//return(myDate.toLocaleString());
+							gdetail += "<tr><td>"+item.server_name+"</td><td>"+item.log_ons+"</td><td>"+timestamp+"</td></tr>";
+							
+							
+						}	
+						//console.log(item.name_c);
+						man=item.name_c;
+						
+					});
+					console.log(data);
+					//console.log(man);
+					gen_data =players[0];
+					gendetail += '<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;"  src="'+gen_data.flag+'"></td></tr>'
+					gendetail += "<tr><td>Last Known IP</td><td>"+gen_data.real_ip+"</td></tr>";
+					first_log_on =  timeConverter(gen_data.first_log_on);
+					gendetail +="<tr><td>First Log on</td><td>"+first_log_on+"</td></tr>";
+					first_log_on =  timeConverter(gen_data.last_log_on);
+					gendetail +="<tr><td>Latest Log on</td><td>"+first_log_on+"</td></tr>";
+					gendetail +="<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>";
+					gendetail +='<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>';
+				},
+				 complete:function(data){
+					//setTimeout(index(url),7000);
+					//console.log("complete "+man);
+					console.log(gendetail);
+					$("#gd1").html(gdetail);
+					$("#gen").html(gendetail);
+					//$('#cflag').attr('src',login)
+					$('#un').html(user)
+					$('#results').hide();	
+					$('#editor').show();
+					$('#searchbox').hide();
+				}
+				
+			});	
+			//console.log("end name set to "+man);
+			
+        	$('#name').attr('value',user)
+			//$('#ip').attr('value',ip)
+			//un = un+" !";
+			$('#un').html(user)
+			$('#steam_id').attr('text',href)
+			//$('#ipb').attr('value',ip)
+			$('#steam_idb').attr('value',href)
+			
+		}
+		$('#results').hide();	
+		$('#editor').show();
+		console.log("done");
+	});
+	
+	function timeConverter(UNIX_timestamp){
+  var a = new Date(UNIX_timestamp * 1000);
+  var months = ['January','Febuary','March','April','May','June','July','August','September','October','November','December'];
+  var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var day = weekday[a.getDay()];
+  var date = a.getDate();
+  var hour = a.getHours();
+  var timeOfDay = ( hour < 12 ) ? "am" : "pm"; 
+  currentHours = ( hour > 12 ) ? hour - 12 : hour;
+     // Convert an hours component of "0" to "12"
+    
+  //hour = ( currentHours == 0 ) ? 12 : currentHours;
+ 
+  //var date = dateOrdinal(date);
+  var d = a.getDate();
+	var d1 =a.getHours();
+//console.log(currentHours);
+var d = ('0'+d).slice(-2);
+	var m = a.getMonth()+1;
+var m = ('0'+m).slice(-2);
+
+var hour =('0'+hour).slice(-2);
+        //m += 1;  // JavaScript months are 0-11
+	var y = a.getFullYear();
+  var min = ('0'+a.getMinutes()).slice(-2);
+  var sec = a.getSeconds();
+
+  var time = d+ '-' + m + '-' + y + ' ' + hour + ':' + min ;
+  return time;
+}
+$( "#go_back" ).click (function() {
+                console.log("go back");
+                $('#editor').hide();
+                $('#searchbox').show();
+                $('#text').val("");
+                $("#gd1").empty();
+				$("#gen").empty();
+				gendetail="";
+				gdetail="";
+            });	
+</script>	
+</body>
+
+</html>
