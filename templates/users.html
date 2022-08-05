@@ -169,7 +169,7 @@
 		//var all='{"real_ip": "'+item.real_ip+'", "id": 1, "color": "#69F"}'
 		//var all='{"type": "page", "id": 1, "color": "#69F"}'
 		var all = JSON.stringify(item);
-		items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'" flag="'+item.flag+'">'+item.name+'</td><td>'+item.country+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">View Profile</a></td></tr>';
+		items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'" flag="'+item.flag+'"><a href="#">'+item.name+'</a></td><td>'+item.country+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">View Profile</a></td></tr>';
 		
 		});
 $("#data_table").html(items);
