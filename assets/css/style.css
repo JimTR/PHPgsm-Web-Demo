@@ -1317,3 +1317,8 @@ a.invert:hover {
   margin: auto auto;
   width: fit-content;
 }
+.form-check .form-check-input {
+    float: none;
+    margin-left: -1.5em;
+    padding-top: 0em;
+}
