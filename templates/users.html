@@ -228,7 +228,7 @@ $('#data_table').on('click','.tpButton', function(event) {
 							console.log(item.server_name+" is valid");
 							var timestamp =  timeConverter(item.last_play);
 							//return(myDate.toLocaleString());
-							gdetail += "<tr><td>"+item.server_name+"</td><td>"+item.log_ons+"</td><td>"+timestamp+"</td></tr>";
+							gdetail += "<tr><td>"+item.server_name+"</td><td style='text-align:right;padding-right:16%;'>"+item.log_ons+"</td><td>"+timestamp+"</td></tr>";
 							
 							
 						}	
