@@ -56,6 +56,13 @@
 					<h5 class="card-title">Results</h5>
 					<div class="table-wrapper" style="max-height:200px;">
 					<table class="table table-sml">
+						<thead>
+							<tr style="padding-bottom:6px;">
+								<th>User</th>
+								<th style="text-align:left;">Last Log On</th>
+								<th style="text-align:left;">Profile Link</th>
+							</tr>
+						</thead>	
 						<tbody id="data_table">
 							<tr><td>hello</td><td>there</td></tr>
 						</tbody>
@@ -165,11 +172,8 @@
         //alert("Updated "+noe);
         players = data.data;
         $.each(players, function(i, item) {
-		//alert(item);
-		//var all='{"real_ip": "'+item.real_ip+'", "id": 1, "color": "#69F"}'
-		//var all='{"type": "page", "id": 1, "color": "#69F"}'
-		var all = JSON.stringify(item);
-		items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'" flag="'+item.flag+'"><a href="#">'+item.name+'</a></td><td>'+item.country+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">View Profile</a></td></tr>';
+		var last_log = timeConverter(item.last_log_on);
+		items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'" flag="'+item.flag+'"><a href="#">'+item.name+'</a></td><td>'+last_log+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">'+item.steam_id64+'</a></td></tr>';
 		
 		});
 $("#data_table").html(items);
@@ -307,6 +311,7 @@ $( "#go_back" ).click (function() {
                 console.log("go back");
                 $('#editor').hide();
                 $('#searchbox').show();
+                //$('#results').show();
                 $('#text').val("");
                 $("#gd1").empty();
 				$("#gen").empty();
