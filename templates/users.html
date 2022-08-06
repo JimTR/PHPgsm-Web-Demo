@@ -246,6 +246,7 @@ $('#data_table').on('click','.tpButton', function(event) {
 					first_log_on =  timeConverter(gen_data.last_log_on);
 					gendetail +="<tr><td>Latest Log on</td><td>"+first_log_on+"</td></tr>";
 					gendetail +="<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>";
+					gendetail +="<tr><td>Steam Id (old)</td><td>"+gen_data.steam_id+"</td></tr>";
 					gendetail +='<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>';
 				},
 				 complete:function(data){
