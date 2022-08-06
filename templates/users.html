@@ -90,7 +90,10 @@
 						<tbody id="gd1"></tbody></table>
 				</div>
 				</div>
-				<div class="modal-footer" style="text-align:center;"><button id="go_back" type="button" class="btn btn-success">Go Back</button></div>
+				<div class="modal-footer" style="text-align:center;">
+					<button id="bans" type="button" class="btn btn-danger">View Source Bans</button>
+					<button id="go_back" type="button" class="btn btn-success">Go Back</button>
+				</div>
 				
 			</div>
 			</div> <!-- card-body -->
@@ -174,6 +177,10 @@
         players = data.data;
         $.each(players, function(i, item) {
 		if (item.steam_id64 == uni) {return true;}
+		if(item.banned == 1) { 
+			console.log("banned "+item.name);
+			item.name = '<span style="text-decoration: line-through;">'+item.name+'</span>';
+		}
 		var last_log = timeConverter(item.last_log_on);
 		items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'" flag="'+item.flag+'"><a href="#">'+item.name+'</a></td><td>'+last_log+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">'+item.steam_id64+'</a></td></tr>';
 		uni = item.steam_id64;
@@ -239,6 +246,9 @@ $('#data_table').on('click','.tpButton', function(event) {
 					console.log(data);
 					//console.log(man);
 					gen_data =players[0];
+					if(gen_data.banned == 1) {
+						gendetail += '<tr><td>User Status</td><td style="color:red">Banned</td></tr>';
+					}
 					gendetail += '<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;"  src="'+gen_data.flag+'"></td></tr>'
 					gendetail += "<tr><td>Last Known IP</td><td>"+gen_data.real_ip+"</td></tr>";
 					first_log_on =  timeConverter(gen_data.first_log_on);
