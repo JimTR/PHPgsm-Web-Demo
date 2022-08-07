@@ -42,9 +42,9 @@
 						<input class="hidden" type="submit" value="send" id="send">
 					</div>	
 					<div class="form-check" style="padding-left:6%;">
-						 <input class="form-check-input" type="radio" name="type" id="gridRadios3" value="fuzzy" checked>
+					 <input class="form-check-input" type="radio" name="type" id="gridRadios3" value="fuzzy" checked>
                       <label class="form-check-label" for="gridRadios3"  style="padding-right:6%;">Name</label>
-						<input class="form-check-input" type="radio" name="type" id="gridRadios1" value="id">
+					<input class="form-check-input" type="radio" name="type" id="gridRadios1" value="id">
                       <label class="form-check-label" for="gridRadios1"  style="padding-right:6%;">Steam ID</label>
                      
                       <input class="form-check-input" type="radio" name="type" id="gridRadios4" value="ip">
@@ -91,7 +91,8 @@
 				</div>
 				</div>
 				<div class="modal-footer" style="text-align:center;">
-					<button id="bans" type="button" class="btn btn-danger">Ban History</button>
+					<button id="ban" type="button" class="btn btn-danger">Ban Now</button>
+					<button id="bans" type="button" class="btn btn-warning">Ban History</button>
 					<button id="go_back" type="button" class="btn btn-success">Go Back</button>
 				</div>
 				
@@ -332,6 +333,22 @@ $( "#go_back" ).click (function() {
 				gendetail="";
 				gdetail="";
             });	
+ $('#sendcmd').change(function(){
+            selected_value = $("input[name='type']:checked").val();
+            console.log(selected_value);
+            switch(selected_value) {
+  case 'fuzzy':
+    // code block
+    $("#text").attr('placeholder','Enter User Name');
+    break;
+  case 'id':
+    // code block
+     $("#text").attr('placeholder','Enter Steam ID in any format');
+    break;
+  default:
+     $("#text").attr('placeholder','Enter IP to search for');
+}
+        });
 </script>	
 </body>
 
