@@ -91,7 +91,7 @@
 				</div>
 				</div>
 				<div class="modal-footer" style="text-align:center;">
-					<button id="bans" type="button" class="btn btn-danger">View Source Bans</button>
+					<button id="bans" type="button" class="btn btn-danger">Ban History</button>
 					<button id="go_back" type="button" class="btn btn-success">Go Back</button>
 				</div>
 				
@@ -247,7 +247,7 @@ $('#data_table').on('click','.tpButton', function(event) {
 					//console.log(man);
 					gen_data =players[0];
 					if(gen_data.banned == 1) {
-						gendetail += '<tr><td>User Status</td><td style="color:red">Banned</td></tr>';
+						gendetail += '<tr><td>User Status</td><td><span style="color:red;">Banned </span><span style="padding-right:20%;float:right;">Reason '+gen_data.reason+'</span></td></tr>';
 					}
 					gendetail += '<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;"  src="'+gen_data.flag+'"></td></tr>'
 					gendetail += "<tr><td>Last Known IP</td><td>"+gen_data.real_ip+"</td></tr>";
