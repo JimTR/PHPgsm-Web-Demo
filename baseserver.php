@@ -1,8 +1,8 @@
 <?php
 include 'inc/master.inc.php';
-$build = "4142-3255204870";
+$build = "4605-162186749";
 $version = "1.000";
-$time = "1653110467";
+$time = "1660628972";
 $module = "API_Server";
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
 //print_r($bserver);
@@ -11,6 +11,22 @@ $bserver = explode('=',$_SERVER['QUERY_STRING']);
 if($user->loggedIn()) {
 		// set sidebar
 		$page['level'] = $user->level; //user is an object
+		$user_data = array (
+		'user_id' => $user->id,
+		'user_name' => $user->username,
+		'ip' =>  ip2long($_SERVER['REMOTE_ADDR']),
+		'start_time' => time(),
+		'nid' => $user->nid 
+		) ;
+		if ($database->get_row('select * from allowed_users where ip = "'.$user_data['ip'].'"')) {
+			$where = array('user_id' => $user->ip);
+			unset($user_data['user_ip']);
+			$database->update('allowed_users',$user_data,$where);
+	
+		} 
+		else {
+			$database->insert('allowed_users',$user_data);
+		}
    	}
    	else {
 		redirect('login.php');
