@@ -21,7 +21,8 @@ if($user->loggedIn()) {
 		'user_id' => $user->id,
 		'user_name' => $user->username,
 		'ip' =>  ip2long($_SERVER['REMOTE_ADDR']),
-		'start_time' => time() 
+		'start_time' => time(),
+		'nid' => $user->nid 
 		) ;
 		if ($database->get_row('select * from allowed_users where ip = "'.$user_data['ip'].'"')) {
 			$where = array('user_id' => $user->ip);
