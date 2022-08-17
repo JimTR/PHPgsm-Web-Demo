@@ -248,14 +248,31 @@
      <div class="modal fade" id="mod_settings" tabindex="-1">
                 <div class="modal-dialog modal-fullscreen">
                   <div class="modal-content">
-                    <div class="modal-header" style="border-bottom:none;">
+                  
+                    <div class="modal-body">
+					<div class="col-lg-12">
+						  <div class="modal-header" style="border-bottom:none;">
                       <h5 class="modal-title">Settings for <!--#host_name#--></h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                     <div><span><!--#startcmd#--></span></div>
+						<div class="row">	
+						<div class="col-lg-6"><span><!--#startcmd#--></span>
                      <div><span>Game Port</span><span><!--#port#--></span></div>
-                     <div><!--#cfg_file#--></div>
+                     </div>
+                     <div class="col-lg-6">
+						 <h5 class="card-title">Config Files</h5>
+						 <select name="files" id="files">
+							<!--#file_select#-->
+						</select>
+					<div style="margin-top:1%;">	
+                     <textarea id="fileview" name="fileview" rows="20" cols="80"><!--#cfg_file#--></textarea>
+                     <br>
+                     <button id ="save-file" class="btn btn-success" style="float:right;margin-right:17%;">Save File</button>
+                                         
+						</div>
+                     </div>
+                    </div>
+                    </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -288,14 +305,15 @@
   
 <script>
 	var a_href=0;
-		var url='';
+		url = '<!--#url#-->';
 		var id='';
 		var path='';
 		var type='Source';
 		var host= '';
+		var file ="";
 	jQuery(document).ready(function(){
 		$('#gameservers-nav').toggleClass("show");
-	  	url = "<!--#url#-->";
+	  	
 		id = "<!--#host_name#-->";
 		game = "<!--#bserver#-->"
 		server ="<!--#fname#-->";
@@ -348,7 +366,69 @@
 	});
 	
 });
-
+ $('#files').change(function(){
+            selected_value = $('#files').val()
+            console.log("triggerd change");
+            //alert(selected_value);
+            var sendurl = url+"/api.php?action=get_file&cmd=view&n="+selected_value;
+            alert(sendurl);
+            $.ajax({
+            type: 'GET',
+            url: sendurl,
+            dataType: 'text',
+            //data: $(this).serialize(),
+            success: function(data) {
+			alert(data);
+            //alert("data back");
+            $("#fileview").val(data);
+            var $textarea = $('#fileview');
+			$textarea.scrollTop(0);    
+            }
+        });
+    
+        });
+       $('#save-file').click(function() {
+		   console.log("saving file");
+		    selected_value = $('#files').val();
+		    console.log(selected_value);
+		    var sendurl = url+"/api.php";
+		    //file = $('#fileview').val();
+		    file = $('#fileview').val().replace(/"/gi, "/#/");
+		    //file = JSON.stringify($('#fileview').val());
+		   alert(file);
+		    console.log(sendurl);
+		    //var formData = new FormData();
+			//formData.append('file', $('#fileview');
+		    $.ajax({
+				type: 'POST',
+				url: sendurl,
+				dataType: 'text',
+				data: { 'import': file,
+				'action': 'get_file' ,
+				'cmd': 'save' ,
+				'n': selected_value },
+				//processData: true,
+				//contentType: "application/json; charset=UTF-8",
+				//data: $(this).serialize(),
+				success: function(data) {
+					console.log(data);
+					alert("data back");
+					//$("#fileview").html(data);
+					var $textarea = $('#fileview');
+					$textarea.scrollTop(0);
+					sendurl='';    
+				}
+			});
+	   }); 
+	   $('#fileview').change(function(){
+		   console.log ("fileview changed");
+		   alert ($('#fileview').val());
+		   //result = $('#fileview').val().replace(/"/gi, "/#/");
+		   //alert (result);
+		   //res = $('#fileview').val();
+		   //let file = JSON.stringify(res);
+		   //alert (file);
+	   });
 </script>
 </body>
 

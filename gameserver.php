@@ -37,7 +37,8 @@ if($user->loggedIn()) {
 		'user_id' => $user->id,
 		'user_name' => $user->username,
 		'ip' =>  ip2long($_SERVER['REMOTE_ADDR']),
-		'start_time' => time() 
+		'start_time' => time(),
+		'nid' => $user->nid  
 		) ;
 		if ($database->get_row('select * from allowed_users where user_id = '.$user->id)) {
 			$where = array('user_id' => $user->id);
@@ -87,7 +88,15 @@ foreach ($base_servers as $server) {
 $sql = "select * from server1 where host_name = '$bserver'";
 $this_server =  $database->get_row($sql);
 //print_r($this_server);
-$this_server['cfg_file'] = str_replace(PHP_EOL,'<br>',file_get_contents($this_server['location'].'/'.$this_server['game'].'/cfg/'.$this_server['host_name'].'.cfg'));
+$file_select ='';
+$cfg_path = $this_server['location'].'/'.$this_server['game'].'/cfg/';
+foreach (glob("$cfg_path*.*") as $filename) {
+    //echo "$filename size " . filesize($filename) . "\n";
+    $basename = basename($filename);
+    if ($basename == $this_server['host_name'].'.cfg') {$selected= 'selected';} else {$selected = '';}
+    $file_select .= "<option value='$filename' $selected>$basename</option>";
+}
+$this_server['cfg_file'] = file_get_contents($this_server['location'].'/'.$this_server['game'].'/cfg/'.$this_server['host_name'].'.cfg');
 $this_server['server_update'] = date("d-m-Y H:i:s a",$this_server['server_update']);
 if ($this_server['starttime']) {$this_server['starttime'] = date("d-m-Y H:i:s a",$this_server['starttime']);}
 $info = get_server_info($this_server);
@@ -123,7 +132,7 @@ $page['sidebar'] =$template->get_template();
 $template->load('templates/subtemplates/footer.html');
 $page['footer'] = $template->get_template();
 $page['bserver'] = $bserver;
-
+$page['file_select'] = $file_select;
 $page['url'] = $url;
 //$v = json_decode(geturl($this_server['url'].'/ajaxv2.php?action=game_detail&filter='.$bserver),true);
 //$v[$bserver] = array_change_key_case($v[$bserver]);
