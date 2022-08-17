@@ -1240,8 +1240,8 @@ a.invert:hover {
 
 }
 .table-wrapper table th {
-  /*background:#F3F5F6;
-  color:black;*/
+  /*background:#2F2F2F;
+  /*color:black;*/
 }
 .table-wrapper table thead th .text {
   position:absolute;   
@@ -1407,3 +1407,8 @@ a.invert:hover {
   width: 100%;
   margin: 0;
 }	
+.table-header {
+  background-color: #2F2F2F !important;
+  position: sticky;
+  top: 0;
+}
