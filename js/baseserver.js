@@ -6,7 +6,7 @@
         dataType: "json", 
         success: function (data) {
 			var server_id = data.server_id; 
-            //console.log(server_id);
+            console.log(server_id);
             //document.cookie = "favorite_food=tripe; SameSite=None; Secure";
             var oldCookieValue = getCookie('phpgsm_theme');
             console.log(oldCookieValue);
@@ -31,7 +31,7 @@
 				$('#root').addClass('hidden');
 			}	
             $('#boot_mount').text(data.root_mount);
-	    $('#boot_size').text(data.root_size);
+			$('#boot_size').text(data.root_size);
             $('#boot_used').text(data.root_used+' ('+data.root_pc+')');
             $('#boot_free').text(data.root_free);
             $('#memtotal').text(data.MemTotal);
@@ -87,10 +87,11 @@
             var x =  parseFloat(data.total_size_raw.toFixed(2))/1000000;
              //var quota_pc = x* (100/parseFloat(data.quota));
              // game graph
-            $("#gs_pb").attr('aria-valuenow',data.live_servers);
-            $("#gs_pbs").text(data.live_servers+'/'+data.total_servers);
+            $("#gs_pb").attr('aria-valuenow',data.server_total_servers);
+            $("#gs_pbs").text(data.server_live_servers+'/'+data.server_total_servers);
             $('#gs_pbs').width($('#gs_pb').parent().width());
-            var gs_width = parseInt(data.live_servers) / parseInt(data.total_servers)*100;
+          
+            var gs_width = parseInt(data.server_live_servers) / parseInt(data.server_total_servers)*100;
             $('#gs_pb').css('width',gs_width+'%');
             changeClass('gs_pb',gs_width);
             // disk used graph
@@ -112,8 +113,8 @@
              changeClass('cpu_pb',parseInt(data.game_cpu));
              // slots graph
              $('#op_pbs').width($('#op_pb').parent().width());
-             $("#op_pbs").text(data.total_players+'/'+data.total_bots+'/'+data.total_slots);
-             var player_pc = data.used_slots/data.total_slots*100; 
+             $("#op_pbs").text(data.server_players+'/'+data.server_total_bots+'/'+data.server_total_slots);
+             var player_pc = data.server_used_slots/data.server_total_slots*100; 
              $("#op_pb").css('width',player_pc+'%');
              changeClass('op_pb',Math.round(player_pc));
              
