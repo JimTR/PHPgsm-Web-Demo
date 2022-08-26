@@ -223,14 +223,19 @@ $('#data_table').on('click','.tpButton', function(event) {
 				//processData: false,
 				success:function(data){
 					var noe = data.data.length;
-					
-					console.log("found "+noe+" records");
+					if(typeof noe == 'undefined') {
+						console.log('no history via noe');
+						//no_history = true;
+					}
+					else {
+						console.log("found "+noe+" records");
+					}	
 					//$('#editor').hide();
 					players = data.data;
 					$.each(players, function(i, item) {
 						if (item.server_name == null) {
 							console.log ("no longer with us");
-							return true;
+							//return true;
 						}
 						else {
 							console.log(item.server_name+" is valid");
@@ -247,7 +252,9 @@ $('#data_table').on('click','.tpButton', function(event) {
 					console.log(data);
 					//console.log(man);
 					gen_data =players[0];
-					if(gen_data.banned == 1) {
+					if(typeof data.data.error == 'undefined') {
+											
+					 if (gen_data.banned == 1) {
 						gendetail += '<tr><td>User Status</td><td><span style="color:red;">Banned </span><span style="padding-right:20%;float:right;">Reason '+gen_data.reason+'</span></td></tr>';
 					}
 					gendetail += '<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;"  src="'+gen_data.flag+'"></td></tr>'
@@ -259,11 +266,15 @@ $('#data_table').on('click','.tpButton', function(event) {
 					gendetail +="<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>";
 					gendetail +="<tr><td>Steam Id (old)</td><td>"+gen_data.steam_id+"</td></tr>";
 					gendetail +='<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>';
+					}
+					else {
+						gendetail ='<tr><td>no data found for this user</td></tr>';
+					}
 				},
 				 complete:function(data){
 					//setTimeout(index(url),7000);
 					//console.log("complete "+man);
-					console.log(gendetail);
+					//console.log(gendetail);
 					$("#gd1").html(gdetail);
 					$("#gen").html(gendetail);
 					//$('#cflag').attr('src',login)
@@ -326,8 +337,8 @@ $( "#go_back" ).click (function() {
                 console.log("go back");
                 $('#editor').hide();
                 $('#searchbox').show();
-                //$('#results').show();
-                $('#text').val("");
+                $('#results').show();
+                //$('#text').val("");
                 $("#gd1").empty();
 				$("#gen").empty();
 				gendetail="";
