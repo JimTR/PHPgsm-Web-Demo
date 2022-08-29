@@ -107,7 +107,7 @@ $sdata1= print_r($sdata,true);
 //$page['url'] =dirname($_SERVER['PHP_SELF'])."/ajax.php?".$_SERVER['QUERY_STRING']."&module=baseserver&url=$url";
 $page['url'] = $url;
 //print_r($page);
-$sdata['g_pc'] = ($sdata['live_servers'] / $sdata['total_servers'])*100;
+$sdata['g_pc'] = ($sdata['server_live_servers'] / $sdata['server_total_servers'])*100;
 $template->load('templates/baseserver.html');
 $template->replace_vars($page);
 $template->replace_vars($sdata);
