@@ -222,6 +222,8 @@ $('#player').on('click','.tpButton', function(event) {
 			$('#ip').attr('value',ip)
 			$('#logins').attr('value',login)
 			$('#steam_id').attr('value',href)
+			$("#steam_id").prop("href", "http://steamcommunity.com/profiles/"+href)
+			$("#steam_id").text(href);
 			$('#ipb').attr('value',ip)
 			$('#steam_idb').attr('value',href)
 			$('#ban_user').modal('show');
