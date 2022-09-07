@@ -1,0 +1,145 @@
+<!--
+   stats.html
+   
+   Copyright 2022 Jim Richardson <jim@noideersoftware.co.uk>
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+   
+   
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1.0" name="viewport">
+		<title><!--#page-title#--></title>
+		<meta content="" name="description">
+		<meta content="" name="keywords">
+		<!-- Favicons -->
+		<link href="img/favicon.png" rel="icon">
+		<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+		<!-- Google Fonts -->
+		<link href="https://fonts.gstatic.com" rel="preconnect">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+		<!--#include#-->
+	</head>
+	<body>
+		<!--#header#-->
+		<!--#sidebar#-->
+		<main id="main" class="main">
+			<div class="pagetitle">
+				<h1><!--#page-title#--></h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="index.php">Home</a></li>
+						<li class="breadcrumb-item active"><!--#page-title#--></li>
+					</ol>
+				</nav>
+			</div><!-- End Page Title -->
+		<section class="section">
+			<div class="col-lg12">
+				<div class="card">
+					<div class="card-body">
+				<div class="row">
+					<h5 class="card-title">Player Statistics</h5>
+				<div class="col-lg-6" id="searchbox">
+					
+					<form id="sendcmd" style="width:100%;float:left;" action="<!--#url#-->/api.php method="get">
+					<!--<div class="input-group">-->
+							<div class="row mb-3">
+                			<label for="inputDate" class="col-sm-2 col-form-label">Start Date</label>
+							<div class="col-sm-3">
+							<input type="date" class="form-control" id="start" name="server" data-date-format="yyyy-mm-dd" >
+							</div>
+							 <input type="hidden" id="action" name="action" value="stats">
+							</div>
+							<div class ="row mb-3">
+							<label for="inputDate" class="col-sm-2 col-form-label">End Date</label>
+							<div class="col-sm-3">
+								<input type="date" class="form-control" id="finish" name="filter"  data-date-format="yyyy-mm-dd"  >
+							</div>
+							</div>
+							<!--</div>
+					<!--</div>-->	
+					<div class ="row">
+						<div class="col-sm-3">
+					<input class ="btn btn-primary" type ="submit" id="send" name="send"/>
+					</div>
+					</div>
+				</form>
+				</div>
+				<div class="col-lg-6" style="display:none;" id="results">
+					<h5 class="card-title">Results</h5>
+					<div class="table-wrapper" style="max-height:200px;">
+					<table class="table table-sml" style="position: relative;">
+						<thead>
+							<tr style="padding-bottom:6px;">
+								<th class="table-header" >User</th>
+								<th class="table-header">Last Log On</th>
+								<th class="table-header">Profile Link</th>
+							</tr>
+						</thead>	
+						<tbody id="data_table">
+							<tr><td>hello</td><td>there</td></tr>
+						</tbody>
+					</table>
+					<div class="col-lg-6" style="display:none;" id="results">
+					<h5 class="card-title">Results</h5>
+					<div class="table-wrapper" style="max-height:200px;">
+					<table class="table table-sml" style="position: relative;">
+						<thead>
+							<tr style="padding-bottom:6px;">
+								<th class="table-header" >User</th>
+								<th class="table-header">Last Log On</th>
+								<th class="table-header">Profile Link</th>
+							</tr>
+						</thead>	
+						<tbody id="data_table">
+							<tr><td>hello</td><td>there</td></tr>
+						</tbody>
+					</table>
+					</div>
+				 </div> <!-- end row 1 -->
+				
+			</div>	
+				  <!-- Template Main JS File -->
+   <script src = "js/jquery.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script src = "assets/js/main.js"></script>
+   <!--<script src = "js/console.js"></script>-->
+ <script>
+ $('#sendcmd').on('submit', function(e) {
+    e.preventDefault();
+    var items='';
+    var url = $(this).attr('action');
+    $("#data_table").html(items);
+    var sndData = $('#sendcmd input').serialize();
+    console.log(sndData);
+    $.ajax({
+    type: $(this).attr('method'),
+    url: $(this).attr('action'),
+    data: sndData,
+    //cache: false,
+    dataType: "json",
+    //contentType: false,
+    //processData: false,
+    success:  function(data){
+		console.log(data);
+	}
+    });
+});
+ </script>

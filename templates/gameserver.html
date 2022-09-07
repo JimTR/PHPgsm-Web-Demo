@@ -392,9 +392,9 @@
 		    selected_value = $('#files').val();
 		    console.log(selected_value);
 		    var sendurl = url+"/api.php";
-		    //file = $('#fileview').val();
-		    file = $('#fileview').val().replace(/"/gi, "/#/");
-		    //file = JSON.stringify($('#fileview').val());
+		    file = $('#fileview').html();
+		    //file = $('#fileview').val().replace(/"/gi, "/#/");
+		   // file = JSON.stringify($('#fileview').val());
 		   alert(file);
 		    console.log(sendurl);
 		    //var formData = new FormData();
@@ -412,8 +412,8 @@
 				//data: $(this).serialize(),
 				success: function(data) {
 					console.log(data);
-					alert("data back");
-					//$("#fileview").html(data);
+					alert("data back"+data);
+					$("#fileview").html(data);
 					var $textarea = $('#fileview');
 					$textarea.scrollTop(0);
 					sendurl='';    
