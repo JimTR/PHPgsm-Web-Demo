@@ -85,7 +85,7 @@
 				<div class="col-lg-12" style="display:none;" id="results">
 					<h5 class="card-title">Results</h5>
 					<p>Players for the period from <span id="starter"></span> to <span id="finisher"></span> <span style="color:blue;" id="count"></span></p> 
-					<div class="table-wrapper" style="max-height:200px;">
+					<div class="table-wrapper" style="max-height:400px;">
 					<table class="table table-sml" style="position: relative;">
 						<thead>
 							<tr style="padding-bottom:6px;">
@@ -99,14 +99,17 @@
 						</tbody>
 					</table>
 					 <!-- end row 1 -->
-				
+					 </div>
+					 <div class="col-sm-3" style="margin-top:20px;"> 
+						 <button id="go_back" type="button" class="btn btn-success">Go Back</button>
 			</div>	
-				  <!-- Template Main JS File -->
+			</div>	  <!-- Template Main JS File -->
    <script src = "js/jquery.js"></script>
    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <script src = "assets/js/main.js"></script>
    <!--<script src = "js/console.js"></script>-->
  <script>
+	 var gdetail='';
  $('#sendcmd').on('submit', function(e) {
     e.preventDefault();
     var items='';
@@ -134,8 +137,69 @@
 		$('#starter').html(data.start);
 		$('#finisher').html(data.finish);
 		player = data.results;
-		console.log(player)
-	}
+		$.each(player, function(i, item) {
+						
+							//console.log("is valid");
+							var timestamp =  timeConverter(item.last_log_on);
+							//return(myDate.toLocaleString());
+							gdetail += "<tr><td>"+item.name+"</td><td>"+timestamp+"</td><td>" ;
+							gdetail +='<a href=http://steamcommunity.com/profiles/'+item.steam_id64+' target="_blank">'+item.steam_id64+'</a></td></tr>';
+							
+							
+							
+						//console.log(item.name_c);
+						man=item.name_c;
+						
+					});
+					$("#data_table").html(gdetail);
+		console.log(gdetail)
+	},
+     error: function(XMLHttpRequest, textStatus, errorThrown) {
+        alert('failed '+textStatus);
+    }
     });
 });
+	function timeConverter(UNIX_timestamp){
+  var a = new Date(UNIX_timestamp * 1000);
+  var months = ['January','Febuary','March','April','May','June','July','August','September','October','November','December'];
+  var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var day = weekday[a.getDay()];
+  var date = a.getDate();
+  var hour = a.getHours();
+  var timeOfDay = ( hour < 12 ) ? "am" : "pm"; 
+  currentHours = ( hour > 12 ) ? hour - 12 : hour;
+     // Convert an hours component of "0" to "12"
+    
+  //hour = ( currentHours == 0 ) ? 12 : currentHours;
+ 
+  //var date = dateOrdinal(date);
+  var d = a.getDate();
+	var d1 =a.getHours();
+//console.log(currentHours);
+var d = ('0'+d).slice(-2);
+	var m = a.getMonth()+1;
+var m = ('0'+m).slice(-2);
+
+var hour =('0'+hour).slice(-2);
+        //m += 1;  // JavaScript months are 0-11
+	var y = a.getFullYear();
+  var min = ('0'+a.getMinutes()).slice(-2);
+  var sec = a.getSeconds();
+
+  var time = d+ '-' + m + '-' + y + ' ' + hour + ':' + min ;
+  return time;
+}
+$( "#go_back" ).click (function() {
+                console.log("go back");
+                $('#results').hide();
+                $('#searchbox').show();
+                //$('#results').show();
+                //$('#text').val("");
+                $("#data_table").empty();
+				$("#gen").empty();
+				gendetail="";
+				gdetail="";
+            });	
  </script>
