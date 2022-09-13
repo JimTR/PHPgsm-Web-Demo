@@ -23,9 +23,9 @@
  */
 include 'inc/master.inc.php';
    $Auth = new Auth ();
-$build = "6620-2864687030";
+$build = "3219-1103334067";
 $version = "1.001";
-$time = "1653110483";
+$time = "1663056490";
 $module = "Statistics";
         $user = $Auth->getAuth();
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
