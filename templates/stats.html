@@ -102,16 +102,15 @@
 								<th class="table-header">Profile Link</th>
 							</tr>
 						</thead>	
-						<tbody id="data_table">
-							
-						</tbody>
+						<tbody id="data_table"></tbody>
 					</table>
 					 <!-- end row 1 -->
 					 </div>
-					 <div class="col-sm-3" style="margin-top:20px;"> 
+					 <div class="col-lg-12" style="margin-top:20px;text-align:right;"> 
 						 <button id="go_back" type="button" class="btn btn-success">Go Back</button>
 			</div>	
 			</div>	  <!-- Template Main JS File -->
+			<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
    <script src = "js/jquery.js"></script>
    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <script src = "assets/js/main.js"></script>
@@ -210,4 +209,18 @@ $( "#go_back" ).click (function() {
 				gendetail="";
 				gdetail="";
             });	
+            $('th').click(function(){
+    var table = $(this).parents('table').eq(0)
+    var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+    this.asc = !this.asc
+    if (!this.asc){rows = rows.reverse()}
+    for (var i = 0; i < rows.length; i++){table.append(rows[i])}
+})
+function comparer(index) {
+    return function(a, b) {
+        var valA = getCellValue(a, index), valB = getCellValue(b, index)
+        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
+    }
+}
+function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
  </script>
