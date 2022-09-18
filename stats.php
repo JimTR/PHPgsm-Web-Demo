@@ -80,6 +80,7 @@ $sidebar_data['servers'] = 'Game Servers';
 $sidebar_data['base_servers'] = 'Base Servers';
 $page['page-title'] = 'Statistics';
 $page['url'] = $url;
+$page['today'] = date("Y-m-d");
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
 $template->replace_vars($header_vars);
