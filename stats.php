@@ -27,7 +27,7 @@ $build = "3219-1103334067";
 $version = "1.001";
 $time = "1663056490";
 $module = "Statistics";
-        $user = $Auth->getAuth();
+$user = $Auth->getAuth();
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
 $we_are_here = $settings['url'];
 if($user->loggedIn()) {
@@ -52,7 +52,7 @@ if($user->loggedIn()) {
 		redirect('login.php');
 		
 	}
-	$url = $settings['url'];
+$url = $settings['url'];
 $sidebar_data = array();
 $header_vars['title'] = "$module";
 $sql = "select * from server1 order by `host_name` ASC";
@@ -76,12 +76,16 @@ $base_servers = $database->get_results($sql);
 foreach ($base_servers as $server) {
 	$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
 }
+$sidebar_data['servers'] = 'Game Servers';
+$sidebar_data['base_servers'] = 'Base Servers';
 $page['page-title'] = 'Statistics';
 $page['url'] = $url;
 $template = new template;
+$template->replace_vars($header_vars);
+$page['header'] = $template->get_template();
 $template->load('templates/subtemplates/sidebar.html'); //sidebar
 $template->replace_vars($sidebar_data);
-$page['sidebar'] =$template->get_template();
+$page['sidebar'] = $template->get_template();
 $template->load('templates/stats.html');
 $template->replace_vars($page);
 $template->publish();
