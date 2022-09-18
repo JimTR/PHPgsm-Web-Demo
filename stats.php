@@ -81,6 +81,7 @@ $sidebar_data['base_servers'] = 'Base Servers';
 $page['page-title'] = 'Statistics';
 $page['url'] = $url;
 $template = new template;
+$template->load('templates/subtemplates/header.html'); // load header
 $template->replace_vars($header_vars);
 $page['header'] = $template->get_template();
 $template->load('templates/subtemplates/sidebar.html'); //sidebar
