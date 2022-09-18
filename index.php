@@ -195,6 +195,7 @@ $page['url'] = $we_are_here.'/ajax.php';
 $template->load('templates/index.html');
 $template->replace_vars($page);
 $template->publish();
+$database->disconnect();
 //print_r($settings);
 
 function searchforkey($id, $array,$col) {
