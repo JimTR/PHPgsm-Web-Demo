@@ -144,7 +144,7 @@ $template->replace_vars($this_server);
 //$template->replace_vars($v[$bserver]);
 
 $template->publish();
-
+$database->disconnect();
 function get_server_info($server) {
 	// return xpaw info
 	
