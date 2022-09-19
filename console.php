@@ -1,8 +1,4 @@
 <?php
-$build = "3951-2772200471";
-$version = "1.000";
-$time = "1660629399";
-$module = "Console";
 /*
  * quick_console.php
  * 
@@ -26,41 +22,25 @@ $module = "Console";
  * 
  */
 	include 'inc/master.inc.php';
-	$Auth = new Auth ();
-    $user = $Auth->getAuth();
+$build = "3243-1919938056";
+	$version = "1.000";
+$time = "1663578036";
+	$module = "Console";
 	$we_are_here = $settings['url'];
 	$tmp='';
-	if($user->loggedIn()) {
-		// set sidebar
-		// allow user to use the api (ready for v3)
-   	}
-   	else {
-		redirect('login.php');
-	}
+	$sidebar_data['servers'] = 'Game Servers';
+	$sidebar_data['base_servers'] = 'Base Servers';
+	
 	$template = new template();
 	$template->load('templates/subtemplates/header.html');
 	$page['header'] = $template->get_template();
 	$template->load('templates/subtemplates/footer.html');
 	$page['footer'] = $template->get_template();
 	$template->load('templates/subtemplates/sidebar.html');
+	$template->replace_vars($sidebar_data);
 	$page['sidebar'] = $template->get_template();
-	$page['bmenu'] = '';
-	$page['smenu'] = '';
-	//  sidebar
-	$sql = "select * from server1 order by `host_name` ASC";
-	$servers = $database->get_results($sql);
-	foreach($servers as $server) {
-		// populate the game server section
-		$href = 'gameserver.php?server='.$server['host_name'];
-		$page['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
-	}
-	$sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `fname` ASC";
-	$base_servers = $database->get_results($sql);
-	foreach ($base_servers as $server) {
-		// populate base servers
-		$page['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
-	}
-
+	//$page['sidebar'] = str_replace("class=\"nav-link collapsed\" id=\"$module\" ","class=\"nav-link\"  id=\"$module\" ",$page['sidebar']);
+	//die($page['sidebar']);
 	$sql = "SELECT DISTINCT `host_name`,`server_name`,`url`,`bport`,`location`,`host`,`port` FROM server1 where `running` = 1 order by `host_name`";
     $servers = $database->get_results($sql);
     $sbox ='<option id ="" value="" path="" host ="">Choose Server</option>';
