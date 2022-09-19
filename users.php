@@ -27,51 +27,16 @@ require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 	define( 'SQ_TIMEOUT',     $settings['SQ_TIMEOUT'] );
 	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
 	define( 'LOG',	'logs/ajax.log');
-$module = "Dashboard";	
-$build = "9302-1817691380";
+$module = "users";	
+$build = "3362-1104287304";
 $version = "1.010";
-$time = "1653110419";
-
-    $Auth = new Auth ();
-    $user = $Auth->getAuth();
-	$we_are_here = $settings['url'];
-
-if($user->loggedIn()) {
-		// set sidebar
-		// allow user to use the api (ready for v3)
-		$user_data = array (
-		'user_id' => $user->id,
-		'user_name' => $user->username,
-		'ip' =>  ip2long($_SERVER['REMOTE_ADDR']),
-		'start_time' => time(),
-		'nid' => $user->nid 
-		) ;
-		if ($database->get_row('select * from allowed_users where ip = "'.$user_data['ip'].'"')) {
-			$where = array('user_id' => $user->ip);
-			unset($user_data['user_ip']);
-			$database->update('allowed_users',$user_data,$where);
-	
-		} 
-		else {
-			$database->insert('allowed_users',$user_data);
-		}
-   	}
-   	else {
-		redirect('login.php');
-		
-	}
-	$url = $settings['url'];
-	//print_r($settings);
-	
-	//echo "Page as of now \n".print_r($page);
-	$template = new template;
-$sidebar_data = array();
+$time = "1663578087";
+$we_are_here = $settings['url'];
+$url = $settings['url'];
 $header_vars['title'] = "$module - $bserver";
 $sql = "select * from server1 order by `host_name` ASC";
-$sidebar_data['bmenu'] = '';
-$sidebar_data['smenu'] = '';
 $servers = $database->get_results($sql);
-foreach ($servers as $server) {
+/*foreach ($servers as $server) {
 	$fname = trim($server['host_name']);
         $href = "gameserver.php?server=$fname";
         if(!$server['enabled']) {
@@ -88,8 +53,8 @@ $base_servers = $database->get_results($sql);
 foreach ($base_servers as $server) {
 	$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
 }
-	 
-	 $sidebar_data['servers'] = 'Game Servers';
+	*/ 
+ $sidebar_data['servers'] = 'Game Servers';
 $sidebar_data['base_servers'] = 'Base Servers';
 $page['title'] = "User Editor";
 $template->load('templates/subtemplates/header.html'); // load header
@@ -98,6 +63,8 @@ $page['header'] = $template->get_template();
 $template->load('templates/subtemplates/sidebar.html'); //sidebar
 $template->replace_vars($sidebar_data);
 $page['sidebar'] =$template->get_template();
+//<a class="nav-link collapsed" id="users" href="users.php">
+$page['sidebar'] = str_replace("class=\"nav-link collapsed\" id=\"$module\" ","class=\"nav-link\"  id=\"$module\" ",$page['sidebar']);
 $template->load('templates/subtemplates/footer.html');
 $page['footer'] = $template->get_template();
 $page['bserver'] = $bserver;

@@ -6,39 +6,10 @@ require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
 	define( 'LOG',	'logs/ajax.log');
 $module = "Dashboard";	
-$build = "9302-1817691380";
+$build = "8601-4231264222";
 $version = "1.010";
-$time = "1653110419";
-
-    $Auth = new Auth ();
-    $user = $Auth->getAuth();
-	$we_are_here = $settings['url'];
-
-if($user->loggedIn()) {
-		// set sidebar
-		// allow user to use the api (ready for v3)
-		$user_data = array (
-		'user_id' => $user->id,
-		'user_name' => $user->username,
-		'ip' =>  ip2long($_SERVER['REMOTE_ADDR']),
-		'start_time' => time(),
-		'nid' => $user->nid 
-		) ;
-		if ($database->get_row('select * from allowed_users where ip = "'.$user_data['ip'].'"')) {
-			$where = array('user_id' => $user->ip);
-			unset($user_data['user_ip']);
-			$database->update('allowed_users',$user_data,$where);
-	
-		} 
-		else {
-			$database->insert('allowed_users',$user_data);
-		}
-   	}
-   	else {
-		redirect('login.php');
-		
-	}
-	 
+$time = "1663578062";
+$we_are_here = $settings['url'];
 	$a = print_r($user_data,true);
 //file_put_contents(DOC_ROOT.'/xyzzy.php',$a);
 $sql = "SELECT game as server,count(*) as today FROM player_history WHERE FROM_UNIXTIME(last_play,'%Y-%m-%d') = CURDATE() group by game";
@@ -47,9 +18,7 @@ $sql = 'SELECT `country`,country_code, count(*) as today FROM players WHERE FROM
 $todays_countries = $database->get_results($sql);
 $template = new template;
 $sql = "select * from server1 order by `host_name` ASC";
-$sidebar_data = array();
 //$page = array();
-$sidebar_data['smenu'] = '';
 $xpaw = new SourceQuery( );
 	
 $servers = $database->get_results($sql);

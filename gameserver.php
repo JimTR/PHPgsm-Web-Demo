@@ -23,36 +23,13 @@
  */
 //echo "hello there <br>";
 include 'inc/master.inc.php';
-   $Auth = new Auth ();
-$build = "6620-2864687030";
+$build = "5164-1513887087";
 $version = "1.001";
-$time = "1653110483";
+$time = "1663578049";
 $module = "Game_Server";
-        $user = $Auth->getAuth();
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
 $we_are_here = $settings['url'];
-if($user->loggedIn()) {
-		//set the sidebar option to logout;
-		$user_data = array (
-		'user_id' => $user->id,
-		'user_name' => $user->username,
-		'ip' =>  ip2long($_SERVER['REMOTE_ADDR']),
-		'start_time' => time(),
-		'nid' => $user->nid  
-		) ;
-		if ($database->get_row('select * from allowed_users where user_id = '.$user->id)) {
-			$where = array('user_id' => $user->id);
-			unset($user_data['user_id']);
-			$database->update('allowed_users',$user_data,$where);
-		} 
-		else {
-			$database->insert('allowed_users',$user_data);
-		}
-   	}
-   	else {
-		redirect('login.php');
-		
-	}
+$header_vars['title'] = "$module";
 $is[0] = 'N/A';
 require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 use xPaw\SourceQuery\SourceQuery;
@@ -62,29 +39,9 @@ use xPaw\SourceQuery\SourceQuery;
 $bserver = trim($bserver[1]);
 //echo "$bserver<br>";
 $template = new template;
-$sidebar_data = array();
 $header_vars['title'] = "$module - $bserver";
 $sql = "select * from server1 order by `host_name` ASC";
-$sidebar_data['bmenu'] = '';
-$sidebar_data['smenu'] = '';
 $servers = $database->get_results($sql);
-foreach ($servers as $server) {
-	$fname = trim($server['host_name']);
-        $href = "gameserver.php?server=$fname";
-        if(!$server['enabled']) {
-             $sidebar_data['smenu'] .='<li><a class="" href="'.$href.'" style="color:red;"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
-             continue;
-       }
-
-	$href = 'gameserver.php?server='.$server['host_name'];
-	if ($bserver == $server['host_name'] ) {$class = 'active';} else {$class='';}
-	$sidebar_data['smenu'] .='<li><a class="'.$class.'" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
-}
-$sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `fname` ASC";
-$base_servers = $database->get_results($sql);
-foreach ($base_servers as $server) {
-	$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
-}
 $sql = "select * from server1 where host_name = '$bserver'";
 $this_server =  $database->get_row($sql);
 //print_r($this_server);
@@ -110,12 +67,6 @@ $this_server['players'] -= $this_server['bots'];
 //$this_server['rserver_update'] = date('d-m-y h: i:s a',$this_server['rserver_update']);
 if ($this_server['secure']) {$this_server['secure'] = 'true';} else {$this_server['secure'] = 'false';}
 
-//if(!empty($this_server['mem'])) {
-//	print_r($this_server);
-//	$this_server['mem'] .="%";
-//	$this_server['cpu'] .="%";
-//} 
-
 $page['join_link'] = 'steam://connect/'.$this_server['host'].':'.$this_server['port'].'/'; 
 $is = explode("\t",trim(shell_exec('du -hs '.$this_server['install_dir'])));
 $this_server['install_size'] = $is[0];
@@ -134,17 +85,12 @@ $page['footer'] = $template->get_template();
 $page['bserver'] = $bserver;
 $page['file_select'] = $file_select;
 $page['url'] = $url;
-//$v = json_decode(geturl($this_server['url'].'/ajaxv2.php?action=game_detail&filter='.$bserver),true);
-//$v[$bserver] = array_change_key_case($v[$bserver]);
-//die(print_r($v,true));
 $template->load('templates/gameserver.html');
 $template->replace_vars($page);
 $template->replace_vars($this_server);
-//die('just about to publish');
-//$template->replace_vars($v[$bserver]);
-
 $template->publish();
 $database->disconnect();
+
 function get_server_info($server) {
 	// return xpaw info
 	
