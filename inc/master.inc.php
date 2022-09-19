@@ -26,6 +26,7 @@ $template = new template;
     define('settings',$settings); // read only but global !
     define('dark',411811);
     define ('light',1297820);
+    
      if ($settings['send_cors'] ==1) {
 		 header("Access-Control-Allow-Origin: *");
 	}
@@ -80,4 +81,57 @@ $template->load('templates/subtemplates/footer.html');
 $page['footer'] = $template->get_template();
 $template->load('templates/subtemplates/header.html');
 $page['header'] = $template->get_template();
+ $Auth = new Auth ();
+$user = $Auth->getAuth(); // get the user
+if($user->loggedIn()) {
+		//set the sidebar option to logout;
+		$user_data = array (
+		'user_id' => $user->id,
+		'user_name' => $user->username,
+		'ip' =>  ip2long($_SERVER['REMOTE_ADDR']),
+		'start_time' => time(),
+		'nid' => $user->nid  
+		) ;
+		if ($database->get_row('select * from allowed_users where user_id = '.$user->id)) {
+			$where = array('user_id' => $user->id);
+			unset($user_data['user_id']);
+			$database->update('allowed_users',$user_data,$where);
+		} 
+		else {
+			$database->insert('allowed_users',$user_data);
+		}
+   	}
+   	else {
+		redirect('login.php');
+		
+	}
+$sidebar_data = array();
+$sidebar_data['smenu']='';
+$sidebar_data['bmenu'] = '';
+$sql = "select * from server1 order by `host_name` ASC";
+$sidebar_data['bmenu'] = '';
+$sidebar_data['smenu'] = '';
+$bserver = explode('=',$_SERVER['QUERY_STRING']);
+//print_r($bserver);
+$servers = $database->get_results($sql);
+foreach ($servers as $server) {
+	$fname = trim($server['host_name']);
+        $href = 'gameserver.php?server='.$server['host_name'];
+        if(!$server['enabled']) {
+             $sidebar_data['smenu'] .='<li><a class="" href="'.$href.'" style="color:red;"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
+             continue;
+       }
+	
+	if ($bserver[1] == $server['host_name'] ) {$class = 'active';} else {$class='';}
+	$sidebar_data['smenu'] .='<li><a class="'.$class.'" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
+}
+
+$sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `fname` ASC";
+$base_servers = $database->get_results($sql);
+foreach ($base_servers as $server) {
+	$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
+}
+$sidebar_data['servers'] = 'Game Servers';
+$sidebar_data['base_servers'] = 'Base Servers';
+
 ?>
