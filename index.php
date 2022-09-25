@@ -6,10 +6,39 @@ require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
 	define( 'LOG',	'logs/ajax.log');
 $module = "Dashboard";	
-$build = "7194-1062186618";
+$build = "9302-1817691380";
 $version = "1.010";
-$time = "1663579379";
-$we_are_here = $settings['url'];
+$time = "1653110419";
+
+    $Auth = new Auth ();
+    $user = $Auth->getAuth();
+	$we_are_here = $settings['url'];
+
+if($user->loggedIn()) {
+		// set sidebar
+		// allow user to use the api (ready for v3)
+		$user_data = array (
+		'user_id' => $user->id,
+		'user_name' => $user->username,
+		'ip' =>  ip2long($_SERVER['REMOTE_ADDR']),
+		'start_time' => time(),
+		'nid' => $user->nid 
+		) ;
+		if ($database->get_row('select * from allowed_users where ip = "'.$user_data['ip'].'"')) {
+			$where = array('user_id' => $user->ip);
+			unset($user_data['user_ip']);
+			$database->update('allowed_users',$user_data,$where);
+	
+		} 
+		else {
+			$database->insert('allowed_users',$user_data);
+		}
+   	}
+   	else {
+		redirect('login.php');
+		
+	}
+	 
 	$a = print_r($user_data,true);
 //file_put_contents(DOC_ROOT.'/xyzzy.php',$a);
 $sql = "SELECT game as server,count(*) as today FROM player_history WHERE FROM_UNIXTIME(last_play,'%Y-%m-%d') = CURDATE() group by game";
@@ -18,7 +47,9 @@ $sql = 'SELECT `country`,country_code, count(*) as today FROM players WHERE FROM
 $todays_countries = $database->get_results($sql);
 $template = new template;
 $sql = "select * from server1 order by `host_name` ASC";
+$sidebar_data = array();
 //$page = array();
+$sidebar_data['smenu'] = '';
 $xpaw = new SourceQuery( );
 	
 $servers = $database->get_results($sql);
@@ -27,25 +58,46 @@ $gd ='';
 foreach ($servers as $server) {
 	$fname = trim($server['host_name']);
 	$href = "gameserver.php?server=$fname";
-	if(empty($server['starttime'])) { $server['starttime']= 0;}
-	$start = date("d-m-y  h:i:s a",$server['starttime']);
-	$fname = trim($server['host_name']);
-	$key = searchforkey($fname, $todays_players,'server');
-     if ($key === false) {
-		 $player_tot = 0;
-	 }
-	 else {
-		 $player_tot = $todays_players[$key]['today'];
-	 }
-	 $disp ='style="display:none;"';
-	 $gd .='<tr id="'.$fname.'" '.$disp.'><td><span class="invert_link"><a href="'.$href.'" class="invert_link">'.$server['server_name'].'</a></span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="pt'.$fname.'">'.$player_tot.'</td><td id="gdate'.$fname.'" style="text-align:center;">'.$start.'</td></tr>'; 
-	
+		if(!$server['enabled']) {
+			$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'" style="color:red;"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
+			continue;
+		}
+		$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
+		if(empty($server['starttime'])) { $server['starttime']= 0;}
+		$start = date("d-m-y  h:i:s a",$server['starttime']);
+	     $fname = trim($server['host_name']);
+	     $key = searchforkey($fname, $todays_players,'server');
+
+	     if ($key === false) {
+			 $player_tot = 0;
+		 }
+		 else {
+			 $player_tot = $todays_players[$key]['today'];
+		 }
+		 $disp ='style="display:none;"';
+		 //$href = "gameserver.php?server=$fname";
+		 $gd .='<tr id="'.$fname.'" '.$disp.'><td><span class="invert_link"><a href="'.$href.'" class="invert_link">'.$server['server_name'].'</a></span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="pt'.$fname.'">'.$player_tot.'</td><td id="gdate'.$fname.'" style="text-align:center;">'.$start.'</td></tr>'; 
+		 //$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 }
 
 $page['gd']= $gd;
 
 $jsa ='';
-
+$sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `fname` ASC";
+$base_servers = $database->get_results($sql);
+$sidebar_data['bmenu'] ='';
+//https://api.noideersoftware.co.uk/ajax_send.php?url=https://api.noideersoftware.co.uk/ajaxv2.php&query=action=game_detail
+foreach ($base_servers as $server) {
+	//print_r($server);
+		$uri = parse_url($server['url']);
+		$url = $uri['scheme']."://".$uri['host'].':'.$server['port'];
+		if(isset($uri['path'])) {
+			$url .= "/".$uri['path'];
+		}
+		//echo "$url<br>";
+$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
+$jsa .= '"'.$url.'/api.php?action=game_detail&server='.$server['fname'].'",';
+}
 
 //die();	
 if (endsWith($jsa, ',')) {
