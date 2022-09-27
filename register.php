@@ -5,9 +5,9 @@
  *  
  */
 define('cr',PHP_EOL);
-$build = "6572-1408588099";
+$build = "6649-57344158";
 $version = "1.000";
-$time = "1643351306";
+$time = "1664264512";
 $module = "Register";
  require 'inc/master.inc.php'; // do login or not
  $template = new Template;
