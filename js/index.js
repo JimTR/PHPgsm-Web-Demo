@@ -150,7 +150,8 @@ function online(url){
 					$('#cmap'+server_id).html(server.Map);
 					$('#host'+server_id).html(server.server_name);
 					$('#gdate'+server_id).html(start_date);
-					$('#gol'+server_id).html(server.Players+'/'+server.max_players);
+					real_players = server.Players - server.Bots;
+					$('#gol'+server_id).html(real_players+'/'+server.max_players);
 					$('#pt'+server_id).html(server.player_tot);
 						 
 					if (server.Players ==0 ) {
