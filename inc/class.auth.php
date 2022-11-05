@@ -57,7 +57,7 @@ $time = "1639128588";
             $hashed_password = self::hashedPassword($password);
             //$database = new db;
             $row = $database->get_Row("SELECT * FROM users WHERE username = '" . $username . "' AND password = '" . $hashed_password."'");
-            
+            print_r($row);
             if(!$row) {
                 return false;
             }
@@ -294,7 +294,8 @@ $time = "1639128588";
                 'httponly' => true,    // or false
                 'samesite' => 'Lax' // None || Lax  || Strict
                 );
-                die (print_r($cookie_options));
+                //print_r($cookie_options);
+		//echo "user = ".$this->id.'<br>';
             setcookie("userid",$this->id,$cookie_options);
             setcookie("phpgsm",$this->nid,$cookie_options);
              $update = array( 'currentip' => $this->currentip); // update last movement
@@ -339,11 +340,12 @@ $time = "1639128588";
 			 $cookie_options = array (
                 'expires' => time()-3600,
                 'path' => '/',
-                'domain' => '.', // leading dot for compatibility or use subdomain
+                'domain' => '', // leading dot for compatibility or use subdomain
                 'secure' => true,     // or false
                 'httponly' => true,    // or false
                 'samesite' => 'Lax' // None || Lax  || Strict
                 );
+		//print_r($cookie_options);
             setcookie ("phpgsm", "", $cookie_options);
             setcookie('userid', '', $cookie_options);
         }

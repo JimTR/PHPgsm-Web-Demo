@@ -103,6 +103,7 @@ class db
     public function __construct($settings =  '')
     {
 		//change here ?
+	//die($settings);
         mb_internal_encoding( 'UTF-8' );
         mb_regex_encoding( 'UTF-8' );
 		$const =get_defined_constants(true);
