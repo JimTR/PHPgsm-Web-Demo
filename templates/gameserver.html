@@ -256,8 +256,15 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 						<div class="row">	
-						<div class="col-lg-6"><span><!--#startcmd#--></span>
-                     <div><span>Game Port</span><span><!--#port#--></span></div>
+						<div class="col-lg-6" style="display:table">
+							<form id="startcmd" method="POST" action="api.php">
+								<input type="hidden" value="setting" name="action"/>
+								<input type="hidden" value="startcmd" name="set"/>
+								<input type="hidden" name="server" value="<!--#host_name#-->"/>
+								<input  name="text" type="textarea" rows="4" style="display:table-cell; width:80%"  value="<!--#startcmd#-->"></input>
+								<button  class="btn btn-primary"/>Go</button>
+							 </form>
+							<div><span>Game Port</span><span style="padding-left:1%;"><!--#port#--></span></div>
                      </div>
                      <div class="col-lg-6">
 						 <h5 class="card-title">Config Files</h5>
@@ -326,7 +333,29 @@
 		setInterval(get_game,4000);
     //console.log(url);
     //base_servers(url)
+    $('#startcmd').on('submit', function(e) {
+        e.preventDefault();
+        url +="/"+$(this).attr('action');
+        var formValues = $(this).serialize();
+        //alert(formValues+" - "+url);
+       console.log( $(this).attr('action'));
+         
+        $.ajax({
+			
+            type: $(this).attr('method'),
+           url: url,
+            data: formValues,
+           success: function(data) {
+        //         alert (data);    
+         //       $('#ajax-response').html(data);
+         //       $("#ajax-response").show();
+         //      $('#text').val(""); 
+         //       $("#send").blur(); 
+         //       $('#ajax-response').delay(3000).fadeOut('slow');
+           }
+        });
 
+    });
  	$('#sendcmd').on('submit', function(e) {
         e.preventDefault();
         //alert('send command');
