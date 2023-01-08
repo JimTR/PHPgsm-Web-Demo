@@ -70,6 +70,7 @@ console.log(players_online);
 		$('#build').text('');
 		$('#server_id').text('');
 		$('#gameid').text('');
+		$('#player-tot').text(serverd.player_tot);
 		// buttons 
 		//$('#'+server_id+'qbutton').removeClass('btn-primary').addClass('btn-danger');
 		$('#stop_server').addClass('hidden');
@@ -101,7 +102,7 @@ console.log(players_online);
 			$('#update').text(date_format(serverd.server_update));
 			$('#build').text(serverd.Version);
 			$('#server_id').text(serverd.server_id);
-			
+			$('#player-tot').text(serverd.player_tot);
 			//buttons
 			$('#stop_server').removeClass('hidden');
 			$('#restart_server').removeClass('hidden');
@@ -115,6 +116,7 @@ console.log(players_online);
 			$('#update').text(date_format(vdf.LastUpdated));
 			console.log(serverd.disk_space);
 			$('#disk_space').text(formatBytes(serverd.disk_space)); 
+			$('#player-tot').text(serverd.player_tot);
 		}
     });
 }
