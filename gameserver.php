@@ -39,11 +39,13 @@ use xPaw\SourceQuery\SourceQuery;
 $bserver = trim($bserver[1]);
 //echo "$bserver<br>";
 $template = new template;
-$header_vars['title'] = "$module - $bserver";
+
 $sql = "select * from server1 order by `host_name` ASC";
 $servers = $database->get_results($sql);
 $sql = "select * from server1 where host_name = '$bserver'";
 $this_server =  $database->get_row($sql);
+$tserver = $this_server['server_name'];
+$header_vars['title'] = "$module - $tserver";
 //print_r($this_server);
 $file_select ='';
 $cfg_path = $this_server['location'].'/'.$this_server['game'].'/cfg/';
@@ -73,7 +75,7 @@ $this_server['install_size'] = $is[0];
 $x = json_encode($this_server);
 $sidebar_data['servers'] = 'Game Servers';
 $sidebar_data['base_servers'] = 'Base Servers';
-$page['title'] = "Game Server $bserver";
+$page['title'] = "Server $tserver";
 $template->load('templates/subtemplates/header.html'); // load header
 $template->replace_vars($header_vars);
 $page['header'] = $template->get_template();
