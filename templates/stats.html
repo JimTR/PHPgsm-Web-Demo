@@ -149,7 +149,7 @@
 							//console.log("is valid");
 							var timestamp =  timeConverter(item.last_log_on);
 							//return(myDate.toLocaleString());
-							gdetail += "<tr><td>"+item.name+"</td><td>"+timestamp+"</td><td>" ;
+							gdetail += "<tr><td><img style='padding-right:3%;' src='"+item.flag+"' title='"+item.country+"'>"+item.name+"</td><td>"+timestamp+"</td><td>" ;
 							gdetail +='<a href=http://steamcommunity.com/profiles/'+item.steam_id64+' target="_blank">'+item.steam_id64+'</a></td></tr>';
 							
 							
