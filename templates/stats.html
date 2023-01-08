@@ -97,7 +97,7 @@
 					<table class="table table-sml" style="position: relative;">
 						<thead>
 							<tr style="padding-bottom:6px;">
-								<th class="table-header" >User</th>
+								<th  colspan="2" style="padding-left:13%;" class="table-header" >User</th>
 								<th class="table-header">Last Log On</th>
 								<th class="table-header">Profile Link</th>
 							</tr>
@@ -149,7 +149,7 @@
 							//console.log("is valid");
 							var timestamp =  timeConverter(item.last_log_on);
 							//return(myDate.toLocaleString());
-							gdetail += "<tr><td><img style='padding-right:3%;' src='"+item.flag+"' title='"+item.country+"'>"+item.name+"</td><td>"+timestamp+"</td><td>" ;
+							gdetail += "<tr><td><img  src='"+item.flag+"' title='"+item.country+"'></td><td>"+item.name+"</td><td>"+timestamp+"</td><td>" ;
 							gdetail +='<a href=http://steamcommunity.com/profiles/'+item.steam_id64+' target="_blank">'+item.steam_id64+'</a></td></tr>';
 							
 							
