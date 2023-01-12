@@ -214,7 +214,9 @@ var hour =('0'+hour).slice(-2);
   return time;
 }
 $( "#go_back" ).click (function() {
-                console.log("go back");
+	// need to do a history back
+	 if ($('#user-id').is(':empty')){
+	           console.log("go back");
                 $('#editor').hide();
                 $('#searchbox').show();
                 $('#results').show();
@@ -223,6 +225,10 @@ $( "#go_back" ).click (function() {
 				$("#gen").empty();
 				gendetail="";
 				gdetail="";
+			}
+			else {
+				history.back();
+			}
             });	
  $('#sendcmd').change(function(){
             selected_value = $("input[name='type']:checked").val();
