@@ -1,9 +1,21 @@
 var gdetail='';
-	var gendetail ='';
-	var item='';
+var gendetail ='';
+var item='';
+var data="";
  $(document).ready(function() {
      console.log('hit this');
-    
+     console.log($('#user-id').text());
+     if ($('#user-id').is(':empty')){
+		return;
+	}
+     var userID = $('#user-id').text();
+     value = "id";
+     $("input[name=type][value=" + value + "]").prop('checked', true);
+     $('#text').val(userID);
+     $('#sendcmd').submit();
+     //alert(userID);
+     displayData(userID);
+	return;
 	});
 	$('#sendcmd').on('submit', function(e) {
     e.preventDefault();
@@ -16,13 +28,14 @@ var gdetail='';
     type: $(this).attr('method'),
     url: $(this).attr('action'),
     data: sndData,
-    //cache: false,
+    async: false,
     dataType: "json",
     //contentType: false,
     //processData: false,
     success:  function(data){
 		var noe = data.data.length;
-		$('#editor').hide();
+		
+		//$('#editor').hide();
 		if (typeof(noe) == 'undefined') {
 			$('#results').hide();
 			$('#error_action').text('Invalid Search');
@@ -43,18 +56,27 @@ var gdetail='';
 		var last_log = timeConverter(item.last_log_on);
 		items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'" flag="'+item.flag+'"><a href="#">'+item.name+'</a></td><td>'+last_log+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">'+item.steam_id64+'</a></td></tr>';
 		uni = item.steam_id64;
-		
+		//alert("all done");
+		return data;
 		});
 $("#data_table").html(items);
-$('#results').show();
+if ($('#user-id').is(':empty')){
+		$('#results').show();
+	}
+
         console.log(data);
+        
         }
     });
+    
 });
 $('#data_table').on('click','.tpButton', function(event) {
-	console.log("clicked data table");				
+	//console.log("are we touching this ? "+tpButton);
+	console.log("clicked data table");	
+		//alert($('we have an id set and data'+ '#user-id').text());			
         var href = $(this).closest('tr').attr("id");
-		console.log(href);        
+		console.log(href); 
+		//alert (href);       
 	    var ip = $("#"+href).find("td:eq(0)").attr("ip");
 	    console.log( "ip should be "+ip);
 	    var user = $("#"+href).find("td:first").text();
@@ -218,3 +240,86 @@ $( "#go_back" ).click (function() {
      $("#text").attr('placeholder','Enter IP to search for');
 }
         });
+function displayData(userID) {
+	console.clear();
+	var url = $('#sendcmd').attr('action')+"?action=search&type=id&text="+userID;
+	var user = $("#"+userID).find("td:first").text();
+	$("#searchbox").hide();
+	$("#results").hide();
+	$("#editor").show();
+	players = data.text;
+	console.log(url);
+	$.ajax({
+				type: 'GET',
+				url: url,
+				//data: sndData,
+				//cache: false,
+				dataType: "json",
+				//contentType: false,
+				//processData: false,
+				success:function(data){
+					var noe = data.data.length;
+					if(typeof noe == 'undefined') {
+						console.log('no history via noe');
+						//no_history = true;
+					}
+					else {
+						console.log("found "+noe+" records");
+					}	
+					//$('#editor').hide();
+					players = data.data;
+					$.each(players, function(i, item) {
+						if (item.server_name == null) {
+							console.log ("no longer with us");
+							//return true;
+						}
+						else {
+							console.log(item.server_name+" is valid");
+							var timestamp =  timeConverter(item.last_play);
+							//return(myDate.toLocaleString());
+							gdetail += "<tr><td>"+item.server_name+"</td><td style='text-align:right;padding-right:16%;'>"+item.log_ons+"</td><td>"+timestamp+"</td></tr>";
+							
+							
+						}	
+						//console.log(item.name_c);
+						man=item.name_c;
+						
+					});
+					console.log(data);
+					//console.log(man);
+					gen_data =players[0];
+					if(typeof data.data.error == 'undefined') {
+											
+					 if (gen_data.banned == 1) {
+						gendetail += '<tr><td>User Status</td><td><span style="color:red;">Banned </span><span style="padding-right:20%;float:right;">Reason '+gen_data.reason+'</span></td></tr>';
+					}
+					gendetail += '<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;"  src="'+gen_data.flag+'"></td></tr>'
+					gendetail += "<tr><td>Last Known IP</td><td>"+gen_data.real_ip+"</td></tr>";
+					first_log_on =  timeConverter(gen_data.first_log_on);
+					gendetail +="<tr><td>First Log on</td><td>"+first_log_on+"</td></tr>";
+					first_log_on =  timeConverter(gen_data.last_log_on);
+					gendetail +="<tr><td>Latest Log on</td><td>"+first_log_on+"</td></tr>";
+					gendetail +="<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>";
+					gendetail +="<tr><td>Steam Id (old)</td><td>"+gen_data.steam_id+"</td></tr>";
+					gendetail +='<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>';
+					}
+					else {
+						gendetail ='<tr><td>no data found for this user</td></tr>';
+					}
+				},
+				 complete:function(data){
+					//setTimeout(index(url),7000);
+					//console.log("complete "+man);
+					//console.log(gendetail);
+					$("#gd1").html(gdetail);
+					$("#gen").html(gendetail);
+					//$('#cflag').attr('src',login)
+					$('#un').html(user)
+					$('#results').hide();	
+					$('#editor').show();
+					$('#searchbox').hide();
+				}
+				
+			});	
+	
+}

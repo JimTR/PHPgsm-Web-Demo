@@ -150,7 +150,7 @@
 							//console.log("is valid");
 							var timestamp =  timeConverter(item.last_log_on);
 							//return(myDate.toLocaleString());
-							gdetail += "<tr><td>"+item.name+"</td><td style='padding-left:2%;'><img  src='"+item.flag+"' title='"+item.country+"'></td><td>"+timestamp+"</td><td>" ;
+							gdetail += "<tr><td><a href='"+'users.php?id='+item.steam_id64+"'>"+item.name+"</a></td><td style='padding-left:2%;'><img  src='"+item.flag+"' title='"+item.country+"'></td><td>"+timestamp+"</td><td>" ;
 							gdetail +='<a href=http://steamcommunity.com/profiles/'+item.steam_id64+' target="_blank">'+item.steam_id64+'</a></td></tr>';
 							
 							

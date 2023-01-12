@@ -53,8 +53,13 @@ $base_servers = $database->get_results($sql);
 foreach ($base_servers as $server) {
 	$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
 }
-	*/ 
- $sidebar_data['servers'] = 'Game Servers';
+	*/
+	
+if(isset($_GET['id'])) {	
+	//workout_options ($_GET);
+	$page['userid'] = $_GET['id'];
+}	 
+$sidebar_data['servers'] = 'Game Servers';
 $sidebar_data['base_servers'] = 'Base Servers';
 $page['title'] = "User Editor";
 $template->load('templates/subtemplates/header.html'); // load header
@@ -76,4 +81,10 @@ $template->load('templates/users.html');
 $template->replace_vars($page);
 $template->replace_vars($this_server);
 $template->publish();
+function workout_options ($get) {
+	// see if we need to jump
+	global $page;
+	print_r($get);
+	die();
+}
 ?>
