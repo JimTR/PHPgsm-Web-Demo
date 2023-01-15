@@ -84,6 +84,7 @@ $page['header'] = $template->get_template();
  $Auth = new Auth ();
 $user = $Auth->getAuth(); // get the user
 if($user->loggedIn()) {
+	
 		//set the sidebar option to logout;
 		$user_data = array (
 		'user_id' => $user->id,
@@ -101,7 +102,9 @@ if($user->loggedIn()) {
 			$database->insert('allowed_users',$user_data);
 		}
    	}
-   	else {
+   	elseif (basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']) !== 'login.php') {
+		echo basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
+		
 		redirect('login.php');
 		
 	}
@@ -118,7 +121,7 @@ foreach ($servers as $server) {
 	$fname = trim($server['host_name']);
         $href = 'gameserver.php?server='.$server['host_name'];
         if(!$server['enabled']) {
-             $sidebar_data['smenu'] .='<li><a class="" href="'.$href.'" style="color:red;"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
+             $sidebar_data['smenu'] .='<li><a class="" href="'.$href.'" style="text-decoration: line-through;"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
              continue;
        }
 	
