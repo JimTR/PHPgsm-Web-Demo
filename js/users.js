@@ -6,6 +6,7 @@ var data="";
      console.log('hit this');
      console.log($('#user-id').text());
      if ($('#user-id').is(':empty')){
+		 $("#searchbox").show();
 		return;
 	}
      var userID = $('#user-id').text();
@@ -53,6 +54,7 @@ var data="";
 			console.log("banned "+item.name);
 			item.name = '<span style="text-decoration: line-through;">'+item.name+'</span>';
 		}
+		console.log(item.name);
 		var last_log = timeConverter(item.last_log_on);
 		items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'" flag="'+item.flag+'"><a href="#">'+item.name+'</a></td><td>'+last_log+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">'+item.steam_id64+'</a></td></tr>';
 		uni = item.steam_id64;
@@ -247,9 +249,9 @@ $( "#go_back" ).click (function() {
 }
         });
 function displayData(userID) {
-	console.clear();
+	//console.clear();
 	var url = $('#sendcmd').attr('action')+"?action=search&type=id&text="+userID;
-	var user = $("#"+userID).find("td:first").text();
+	var user = ''; // $("#"+userID).find("td:first").text();
 	$("#searchbox").hide();
 	$("#results").hide();
 	$("#editor").show();
@@ -274,6 +276,7 @@ function displayData(userID) {
 					}	
 					//$('#editor').hide();
 					players = data.data;
+					
 					$.each(players, function(i, item) {
 						if (item.server_name == null) {
 							console.log ("no longer with us");
@@ -281,6 +284,7 @@ function displayData(userID) {
 						}
 						else {
 							console.log(item.server_name+" is valid");
+							
 							var timestamp =  timeConverter(item.last_play);
 							//return(myDate.toLocaleString());
 							gdetail += "<tr><td>"+item.server_name+"</td><td style='text-align:right;padding-right:16%;'>"+item.log_ons+"</td><td>"+timestamp+"</td></tr>";
@@ -294,6 +298,7 @@ function displayData(userID) {
 					console.log(data);
 					//console.log(man);
 					gen_data =players[0];
+					var user = gen_data.name
 					if(typeof data.data.error == 'undefined') {
 											
 					 if (gen_data.banned == 1) {
@@ -316,11 +321,11 @@ function displayData(userID) {
 				 complete:function(data){
 					//setTimeout(index(url),7000);
 					//console.log("complete "+man);
-					//console.log(gendetail);
+					console.log(gen_data);
 					$("#gd1").html(gdetail);
 					$("#gen").html(gendetail);
 					//$('#cflag').attr('src',login)
-					$('#un').html(user)
+					$('#un').html(gen_data.name)
 					$('#results').hide();	
 					$('#editor').show();
 					$('#searchbox').hide();
