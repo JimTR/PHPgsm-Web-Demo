@@ -169,7 +169,7 @@ function players() {
 			
 $.each(player, function(i, item) {
     //alert(item);
-items = items+'<tr id="'+item.steam_id+'" style="width:100%;"><td style="width:30%;overflow:hidden" title="'+item.Name+' ('+item.steam_id+')" class="tpButton" log="'+item.logons+'">'+item.Name+'</td><td style="text-align:center;" title="'+item.country+'" id="'+item.ip+'"><img class="flag" '+item.flag+'/></td><td style="text-align:center;">'+item.Frags+'</td><td style="text-align:right;padding-right:4%;">'+item.TimeF+'</td></tr>';
+items = items+'<tr id="'+item.steam_id+'" style="width:100%;"><td style="width:50%;overflow:hidden" title="'+item.Name+' ('+item.steam_id+')" class="tpButton" log="'+item.logons+'">'+item.Name+'</td><td style="text-align:center;" title="'+item.country+'" id="'+item.ip+'"><img class="flag" '+item.flag+'/></td><td style="text-align:center;">'+item.Frags+'</td><td style="text-align:right;padding-right:4%;">'+item.TimeF+'</td></tr>';
 });
 $("#pbody").html(items);
 //items='<div style="width:100%;position:relative;text-align:center;top:5;">Current Rule Set</div><br>';
