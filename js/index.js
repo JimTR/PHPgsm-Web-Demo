@@ -141,7 +141,11 @@ function online(url){
 					var playern = server.Players;
 					$('#pl'+server_id).html(playern); 
 					$("#"+server_id).show();
-					var start_date = timeConverter(parseFloat(server.starttime));
+					//var start_date = timeConverter(parseFloat(server.starttime));
+					//var rel_date = timeDifference(Math.floor(Date.now() / 1000), parseFloat(server.starttime));
+					//console.log("Current Time stamp "+Math.floor(Date.now() / 1000));
+					//console.log("Start Time "+server.r_time);
+					//console.log(rel_date);
 					var logo  =server.url+':'+server.bport+'/'+server.logo;
 					if (typeof server.Players === "undefined") {
 						server.Players = 0;
@@ -149,7 +153,7 @@ function online(url){
 					$("#img"+server_id).attr("src",logo);
 					$('#cmap'+server_id).html(server.Map+" ("+server.ModDesc+")");
 					$('#host'+server_id).html(server.server_name);
-					$('#gdate'+server_id).html(start_date);
+					$('#gdate'+server_id).html(server.r_time);
 					real_players = server.Players - server.Bots;
 					$('#gol'+server_id).html(real_players+'/'+server.max_players);
 					$('#pt'+server_id).html(server.player_tot);
@@ -227,5 +231,40 @@ var hour =('0'+hour).slice(-2);
 
   var time = d+ '-' + m + '-' + y + ' ' + hour + ':' + min ;
   return time;
+}
+
+function timeDifference(current, previous) {
+    
+    var msPerMinute = 60 * 1000;
+    var msPerHour = msPerMinute * 60;
+    var msPerDay = msPerHour * 24;
+    var msPerMonth = msPerDay * 30;
+    var msPerYear = msPerDay * 365;
+    
+    var elapsed = current - previous;
+    
+    if (elapsed < msPerMinute) {
+         return Math.round(elapsed/1000) + ' seconds ago';   
+    }
+    
+    else if (elapsed < msPerHour) {
+         return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+    }
+    
+    else if (elapsed < msPerDay ) {
+         return Math.round(elapsed/msPerHour ) + ' hours ago';   
+    }
+
+    else if (elapsed < msPerMonth) {
+         return 'approximately ' + Math.round(elapsed/msPerDay) + ' days ago';   
+    }
+    
+    else if (elapsed < msPerYear) {
+         return 'approximately ' + Math.round(elapsed/msPerMonth) + ' months ago';   
+    }
+    
+    else {
+         return 'approximately ' + Math.round(elapsed/msPerYear ) + ' years ago';   
+    }
 }
 
