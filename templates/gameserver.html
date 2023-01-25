@@ -48,16 +48,26 @@
 							<tr><td>Client Software ID</td><td id="gameid"></td></tr>
 							<tr><td>Server Software ID</td><td id="server_id"></td></tr>
 							<tr><td>Server Version</td><td id="build"></td></tr>
+							<tr><td>VAC Secure</td><td id="secure"></td></tr>
 							<tr><td>CPU use</td><td id="cpu"></td></tr>
 							<tr><td>Memory use</td><td id="mem"></td></tr>
 							<tr><td>Players Today</td><td id="player-tot"></td></tr>
 							<tr><td>Game Tags</td><td id="gametags"><!--#gametags#--></td></tr>
+							<tr><td>Last Update</td><td id="update"></td></tr>
 						</table>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title" id="showlog" style="cursor:pointer;">Send Command</h5>
+						<hr style="height:0px;margin-top:-1px;"/>
+						<!--<h5 class="card-title" style="padding:0">Controls</h5>-->
+						<table>
+							<tr style="border-bottom: 12px solid transparent;">
+								<td class="hidden pad_right"   id="stop_server"><button id="stop_serverd" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Stop</button></td>
+								<td class="hidden pad_right"   id="start_server"><button class="btn btn-success"  onclick="start_server()"><i class="far fa-play-circle"></i> Start</button></td>
+								<td class="hidden pad_right"   id="restart_server"><button class="btn btn-warning" onclick="restart_server()"><i class="ri-restart-line"></i> Restart</button></td>
+								<td class="hidden pad_right"   id="join_server"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->">Join</a></button></td>
+								<td class="hidden pad_right"   id="cvar"><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> C Vars</button></td>
+								<td id="settings"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod_settings"<i class="ri-edit-2-line"></i> Settings</button></td>
+							</tr>
+						</table>
+						<h5 class="card-title" id="showlog" style="cursor:pointer;padding:0;">Send Command</h5>
 						<div id ="log"  class="gameserver_log gameserver-cmd"></div>
 						<div style="width:100%;">
 							<form id="sendcmd"  style ="width:100%;float:left;padding-top:2%;" action="<!--#url#-->/api.php" method="get">
@@ -73,26 +83,10 @@
 							</form>
 							<div class ="ajax_response" id="ajax-response"></div>
 						</div>
-					</div>   
-				</div>
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title">Start Up</h5>
-						<table class="table">
-							<tr><td style="width:50%;">Managed By</td><td style="text-transform: uppercase;"><!--#managed_by#--></td></tr>
-							<tr><td>Internal ID</td><td><!--#host_name#--></td></tr>
-							<tr><td>Host Name</td><td id="broadcast_name"><!--#server_name#--></td></tr>
-							<tr><td>Secure</td><td id="secure"></td></tr>
-							<tr><td>Start Up Map</td><td id="default_map"><!--#default_map#--></td></tr>
-							<tr><td>Game Port</td><td id="port"><!--#port#--></td></tr>
-							<tr><td>Client Port</td><td id="client_port"><!--#client_port#--></td></tr>
-							<tr><td>SourceTv Port</td><td id="source_port"><!--#source_port#--></td></tr>
-							<tr><td>Game Tags</td><td id = "start_tags"><!--#gametags#--></td></tr>
-							<tr><td>Last Update</td><td id="update"></td></tr>
-							<tr><td>API location</td><td><!--#url#--></td></tr>
-						</table>
 					</div>
 				</div>
+				
+				
 			</div>
 			<div class="col-lg-6">
 				<div class="card">
@@ -102,10 +96,10 @@
 							<span style="float:right;padding-right:1%;">Map</span>
 						</h5>
 						<div class="table-wrapper" style ="height:391px;"> 
-							<table style="width:100%;" class="table table-sm">
+							<table style="width:100%;" class="table table-sm" style="table-layout: fixed;">
 								<thead>
 								<tr>
-									<th style="width:35%;">Name</th><th>Location</th><th style="padding-left:2%;">Score</th><th style="text-align:center;">Time Online</th>
+									<th style="width:50%;">Name</th><th>Location</th><th style="padding-left:2%;">Score</th><th style="text-align:center;">Time Online</th>
 								</tr>
 								</thead>
 								<tbody id="pbody"></tbody>
@@ -113,21 +107,7 @@
 						</div>
 					</div>
 				</div> 
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title">Controls</h5>
-						<table>
-							<tr style="border-bottom: 12px solid transparent;">
-								<td class="hidden pad_right"   id="stop_server"><button id="stop_serverd" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Stop</button></td>
-								<td class="hidden pad_right"   id="start_server"><button class="btn btn-success"  onclick="start_server()"><i class="far fa-play-circle"></i> Start</button></td>
-								<td class="hidden pad_right"   id="restart_server"><button class="btn btn-warning" onclick="restart_server()"><i class="ri-restart-line"></i> Restart</button></td>
-								<td class="hidden pad_right"   id="join_server"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->">Join</a></button></td>
-								<td class="hidden pad_right"   id="cvar"><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> C Vars</button></td>
-								<td id="settings"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod_settings"<i class="ri-edit-2-line"></i> Settings</button></td>
-							</tr>
-						</table>
-					</div>
-          </div> 
+				
 	<div class="card">
             <div class="card-body">
               <h5 class="card-title">Disk Usage</h5>
@@ -247,49 +227,85 @@
               </div>
       </div>
      <div class="modal fade" id="mod_settings" tabindex="-1">
-                <div class="modal-dialog modal-fullscreen">
-                  <div class="modal-content">
-                  
-                    <div class="modal-body">
+         <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                 <div class="modal-body">
 					<div class="col-lg-12">
-						  <div class="modal-header" style="border-bottom:none;">
-                      <h5 class="modal-title">Settings for <!--#host_name#--></h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-						<div class="row">	
-						<div class="col-lg-6" style="display:table">
+					  <div class="modal-header" style="border-bottom:none;">
+						<h5 class="modal-title"><span class="card-title">Settings for</span> <!--#server_name#--></h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+                    <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
+						<li class="nav-item" role="presentation">
+							<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true">General</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Startup Manager</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Config Files</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="supported-games" data-bs-toggle="tab" data-bs-target="#bordered-games" type="button" role="tab" aria-controls="contact" aria-selected="false">Mods</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="notifactions" data-bs-toggle="tab" data-bs-target="#bordered-notifications" type="button" role="tab" aria-controls="contact" aria-selected="false">Notifications</button>
+						</li>
+					</ul>
+					<div class="tab-content pt-2" id="borderedTabContent">
+						<div class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
+							<div class="col-lg-6">
+								<p>Server ID :<span style="padding-left:1%;"><!--#host_name#--></span></p>
+								<p>Mod : <span style="padding-left:1%;"><!--#run_stub#--></span></p>
+								<p>Host IP :<span style="padding-left:1%;"><!--#host#--></span></p>
+								<p>Game Port :<span style="padding-left:1%;"><!--#port#--></span></p>
+								<p>Client Port :<span style="padding-left:1%;"><!--#client_port#--></span></p>
+								<p>TV Port :<span style="padding-left:1%;"><!--#source_port#--></span></p>
+							</div>
+						</div>
+					<div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
+						<div style="margin:auto;">
 							<form id="startcmd" method="POST" action="api.php">
 								<input type="hidden" value="setting" name="action"/>
 								<input type="hidden" value="startcmd" name="set"/>
 								<input type="hidden" name="server" value="<!--#host_name#-->"/>
 								<input  name="text" type="textarea" rows="4" style="display:table-cell; width:80%"  value="<!--#startcmd#-->"></input>
-								<button  class="btn btn-primary"/>Go</button>
-							 </form>
-							<div><span>Game Port</span><span style="padding-left:1%;"><!--#port#--></span></div>
-                     </div>
-                     <div class="col-lg-6">
-						 <h5 class="card-title">Config Files</h5>
-						 <select name="files" id="files">
-							<!--#file_select#-->
-						</select>
-					<div style="margin-top:1%;">	
-                     <textarea id="fileview" name="fileview" rows="20" cols="80"><!--#cfg_file#--></textarea>
-                     <br>
-                     <button id ="save-file" class="btn btn-success" style="float:right;margin-right:17%;">Save File</button>
-                                         
+								<button  class="btn btn-primary" style="margin-left:1%">Go</button>
+							</form>
+							<!--#cmd_line_opts#-->
 						</div>
-                     </div>
-                    </div>
-                    </div>
+					</div>
+									<div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
+										<select name="files" id="files">
+											<!--#file_select#-->
+										</select>
+										<div style="margin-top:1%;">	
+											<textarea id="fileview" name="fileview" rows="20" cols="80"><!--#cfg_file#--></textarea>
+											<br>
+											<button id ="save-file" class="btn btn-success" >Save File</button>
+                                         </div>
+									</div>
+									<div class="tab-pane fade" id="bordered-games" role="tabpanel" aria-labelledby="contact-tab">
+										<div class="panel">
+											Supported
+										</div>
+									</div>
+								<div class="tab-pane fade"  id="bordered-notifications" role="tabpanel" aria-labelledby="home-tab">	
+									<p>Notiifications are sent to discord  </p>
+									<p>Notifications are sent to your email address</p>
+								</div>
+							
+						     </div>
+						</div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
+						<!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>-->
                     </div>
                   </div>
                 </div>
               </div>
-    </section>
+    
 
   </main><!-- End #main -->
 

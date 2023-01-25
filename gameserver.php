@@ -67,8 +67,17 @@ $v = json_decode(geturl("$url/api.php?action=game_detail&filter=$bserver&server=
 $this_server = array_change_key_case(array_merge_recursive($this_server,$info));
 $this_server['players'] -= $this_server['bots'];
 //$this_server['rserver_update'] = date('d-m-y h: i:s a',$this_server['rserver_update']);
-if ($this_server['secure']) {$this_server['secure'] = 'true';} else {$this_server['secure'] = 'false';}
-
+if ($this_server['secure']) {$this_server['secure'] = 'Yes';} else {$this_server['secure'] = 'No';}
+$this_server['cmd_line_opts'] = print_r(preg_split('/(\+|\-)/', $this_server['startcmd']),true);
+$cmdline = $this_server['startcmd'];
+$cmd_opts = cmd_line($cmdline);
+$this_server['cmd_line_opts'] = '';
+foreach($cmd_opts as $tmp) {
+	// loop the array
+	$tmp1 = explode(" ",$tmp);
+	$this_server['cmd_line_opts'] .= "<div id='{$tmp1[0]}'>{$tmp1[0]} {$tmp1[1]}</div>";
+}
+//die(print_r($this_server));
 $page['join_link'] = 'steam://connect/'.$this_server['host'].':'.$this_server['port'].'/'; 
 $is = explode("\t",trim(shell_exec('du -hs '.$this_server['install_dir'])));
 $this_server['install_size'] = $is[0];
@@ -128,5 +137,21 @@ function get_server_info($server) {
 	$info['l_status'] = 'online';								
 	$xpaw->Disconnect();
 	return $info;
+}
+function cmd_line($cmd_line) {
+	// function to split command line into bits
+	if(empty($cmd_line)) {return false;}
+	$cmd_line = str_replace("+","#+",$cmd_line);
+	$cmd_line = str_replace("-","*-",$cmd_line);
+	$split = preg_split('/(\#|\*)/', $cmd_line);
+	//unset($split[0]);
+	//unset($split[1]);
+	//unset($split[2]);
+	$split = array_slice($split,7); // remove stuff the user can not edit
+	$split = array_values(array_filter($split));
+	//print_r  ($split);
+	//echo "<br>$cmd_line";
+	//die ();
+	return $split;	
 }
 ?>
