@@ -68,15 +68,72 @@ $this_server = array_change_key_case(array_merge_recursive($this_server,$info));
 $this_server['players'] -= $this_server['bots'];
 //$this_server['rserver_update'] = date('d-m-y h: i:s a',$this_server['rserver_update']);
 if ($this_server['secure']) {$this_server['secure'] = 'Yes';} else {$this_server['secure'] = 'No';}
-$this_server['cmd_line_opts'] = print_r(preg_split('/(\+|\-)/', $this_server['startcmd']),true);
-$cmdline = $this_server['startcmd'];
+$cmdline = stripslashes($this_server['startcmd']);
+$this_server['startcmd'] =  str_replace('"', "", stripslashes($cmdline));
+//die($cmdline);
 $cmd_opts = cmd_line($cmdline);
-$this_server['cmd_line_opts'] = '';
+$this_server['cmd_line_opts'] = '<table class="table table-sml">';
+echo print_r($cmd_opts,true)."<br>";
+$key =   array_partial_search($cmd_opts, "hostname");
+	//echo "key found = $key<br>";
+	if(count($key)) {echo "found at ".print_r($key,true)."<br>";}
+	else{
+		$soption="hostname";
+		$option="hostname";
+		$value="";
+		$this_server['cmd_line_opts'] .= "<tr><td id='s$option'>$option</td><td >$value</td>";
+		
+		$this_server['cmd_line_opts'] .= "<td><input type='text' id='$soption' name='{$tmp1[0]}' value='$value' ></td><td></td><td>Host Name is set in the config file, setting it here will disable the config file option</td></tr>";
+		}  
+
 foreach($cmd_opts as $tmp) {
 	// loop the array
-	$tmp1 = explode(" ",$tmp);
-	$this_server['cmd_line_opts'] .= "<div id='{$tmp1[0]}'>{$tmp1[0]} {$tmp1[1]}</div>";
+	$tmp1 = explode(" ",trim($tmp));
+	
+	if (count($tmp1) >= 3) {
+		for ($x = 2; $x <= count($tmp1); $x+=1) {
+		$tmp1[1] = $tmp1[1]." ".$tmp1[$x];
+	}
+	//$tmp1(1)
+	}
+	$option = substr($tmp1[0], 1);
+	$value = str_replace('"', "", stripslashes($tmp1[1]));
+	$value = htmlentities($value);
+	//$value=str_replace("'","",$tmp1[1]);
+	//echo "new value = $value<br>";
+	$this_server['cmd_line_opts'] .= "<tr><td id='s$option'>$option</td><td >$value</td>";
+	if ($option =="map" || $option=="hostname") {
+		// text options
+		if($option == "hostname") {
+			//echo "value = $value<br>";
+			//print_r($tmp1);
+			//die();
+			$this_server['cmd_line_opts'] .= "<td><input type='text' id='s$option' name='{$tmp1[0]}' value='$value' ></td><td></td><td>using this option will disable the hostname in the config file , &quot;entries must be in quotes&quot; </td></tr>";
+		}
+		else {	
+			$this_server['cmd_line_opts'] .= "<td><input type='text' id='s$option' name='{$tmp1[0]}' value='$value' ></td><td>Required</td><td>this here for some reason </td></tr>";
+		}
+	}
+	elseif ($option =="maxplayers") {
+		//players
+		$this_server['cmd_line_opts'] .= "<td><select id='$soption' name='{$tmp1[0]}' >";
+		for ($x = 2; $x <= 24; $x+=2) {
+			if ($x == $value) {
+				// set selected
+				$this_server['cmd_line_opts'] .="<option  selected value='$x'>$x</option>";
+			}
+			else{
+				$this_server['cmd_line_opts'] .="<option  value='$x'>$x</option>";
+			}
+		}
+		$this_server['cmd_line_opts'].="</select></td><td>Required</td><td>set maximum player value</td></tr>";
+	}
+	else{
+		$this_server['cmd_line_opts'] .= "<td><input type='checkbox' id='$soption' name='$option' value='$value' checked><//td><td></td><td>check this if required</td></tr>";
+	}
 }
+//die();
+$this_server['cmd_line_opts'].="</table>";
 //die(print_r($this_server));
 $page['join_link'] = 'steam://connect/'.$this_server['host'].':'.$this_server['port'].'/'; 
 $is = explode("\t",trim(shell_exec('du -hs '.$this_server['install_dir'])));
@@ -154,4 +211,11 @@ function cmd_line($cmd_line) {
 	//die ();
 	return $split;	
 }
+function in_arrayr($needle, $haystack) {
+        foreach ($haystack as $v) {
+                if ($needle == $v) return true;
+                elseif (is_array($v)) return in_array($needle, $v);
+        }
+        return false;
+} 
 ?>

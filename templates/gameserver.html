@@ -37,7 +37,7 @@
 			<div class="col-lg-6">
 				<div class="card">
 					<div class="card-body">
-						<h5 class="card-title">Status <span id="status" class="card-title" style="font-size:18px;font-weight: 500;"><!--#l_status#--></span></h5>
+						<h5 class="card-title">Status <span id="status" class="card-title" style="font-size:18px;font-weight: 500;"></span></h5>
 						<table style="width:100%;" class="table">
 							<tr><td>Started</td><td id="start"></td></tr>
 							<tr><td>Steam ID</td><td id="steamid"></td></tr>
@@ -269,9 +269,10 @@
 								<input type="hidden" value="setting" name="action"/>
 								<input type="hidden" value="startcmd" name="set"/>
 								<input type="hidden" name="server" value="<!--#host_name#-->"/>
-								<input  name="text" type="textarea" rows="4" style="display:table-cell; width:80%"  value="<!--#startcmd#-->"></input>
+								<input  name="text" type="textarea" rows="4" style="display:table-cell; width:80%"  value="<!--#startcmd#-->" ></input> <!-- readonly-->
 								<button  class="btn btn-primary" style="margin-left:1%">Go</button>
 							</form>
+							<h5 class="card-title">Options</h5>
 							<!--#cmd_line_opts#-->
 						</div>
 					</div>

@@ -297,8 +297,8 @@ function displayData(userID) {
 					});
 					console.log(data);
 					//console.log(man);
-					gen_data =players[0];
-					var user = gen_data.name
+					gen_data = players[0];
+					user = gen_data.name
 					if(typeof data.data.error == 'undefined') {
 											
 					 if (gen_data.banned == 1) {
@@ -322,10 +322,11 @@ function displayData(userID) {
 					//setTimeout(index(url),7000);
 					//console.log("complete "+man);
 					console.log(gen_data);
+					console.log(user);
 					$("#gd1").html(gdetail);
 					$("#gen").html(gendetail);
 					//$('#cflag').attr('src',login)
-					$('#un').html(gen_data.name)
+					$('#un').html(user)
 					$('#results').hide();	
 					$('#editor').show();
 					$('#searchbox').hide();
