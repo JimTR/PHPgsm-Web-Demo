@@ -73,10 +73,10 @@ $this_server['startcmd'] =  str_replace('"', "", stripslashes($cmdline));
 //die($cmdline);
 $cmd_opts = cmd_line($cmdline);
 $this_server['cmd_line_opts'] = '<table class="table table-sml">';
-echo print_r($cmd_opts,true)."<br>";
+//echo print_r($cmd_opts,true)."<br>";
 $key =   array_partial_search($cmd_opts, "hostname");
 	//echo "key found = $key<br>";
-	if(count($key)) {echo "found at ".print_r($key,true)."<br>";}
+	if(count($key)) {}
 	else{
 		$soption="hostname";
 		$option="hostname";
