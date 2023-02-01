@@ -63,61 +63,95 @@ $uri = parse_url($this_server['url']);
 $url = $uri['scheme']."://".$uri['host'].':'.$this_server['bport'];
 if(isset($uri['path'])){ $url .= $uri['path'];}
 $v = json_decode(geturl("$url/api.php?action=game_detail&filter=$bserver&server=".$this_server['fname']),true); //needs replacing with ajax_send
+$map_cycle =  json_decode(geturl("$url/api.php?action=get_file&cmd=view&n="),true); //needs replacing with ajax_send
 //$info = array_merge($info,array_change_key_case($v[$bserver]));
 $this_server = array_change_key_case(array_merge_recursive($this_server,$info));
 $this_server['players'] -= $this_server['bots'];
+$file_location = $this_server['location'].'/'.$this_server['run_stub']."/cfg/mapcycle.txt";
+$map_cycle =  geturl("$url/api.php?action=get_file&cmd=view&n=$file_location"); //needs replacing with ajax_send
+$map_cycle= explode(PHP_EOL,trim($map_cycle));
+if (count($map_cycle) >0) {
+	$map_options= "<span style='padding-right:3%;'>Suggestions</span><select id='map-options'>";
+	foreach($map_cycle as $map_text) {
+		// do maps
+		if ($this_server['default_map'] == trim($map_text)) {
+			$map_options .= "<option value='$map_text' selected>$map_text</option>";
+		}
+		else {
+			$map_options .= "<option value='$map_text'>$map_text</option>";
+		}
+	}
+	$map_options .= "</select>";
+}
 //$this_server['rserver_update'] = date('d-m-y h: i:s a',$this_server['rserver_update']);
 if ($this_server['secure']) {$this_server['secure'] = 'Yes';} else {$this_server['secure'] = 'No';}
 $cmdline = stripslashes($this_server['startcmd']);
 $this_server['startcmd'] =  str_replace('"', "", stripslashes($cmdline));
 //die($cmdline);
 $cmd_opts = cmd_line($cmdline);
+//echo print_r($cmd_opts,true)."<br>";
+//die();
 $this_server['cmd_line_opts'] = '<table class="table table-sml">';
 //echo print_r($cmd_opts,true)."<br>";
 $key =   array_partial_search($cmd_opts, "hostname");
-	//echo "key found = $key<br>";
-	if(count($key)) {}
+	//echo "key found = ".print_r($key,true)."<br>";
+	//die();
+	if(count($key)) { 
+		//print_r($key);
+		//die();
+		}
+	
 	else{
-		$soption="hostname";
+		//$option="hostname";
 		$option="hostname";
 		$value="";
-		$this_server['cmd_line_opts'] .= "<tr><td id='s$option'>$option</td><td >$value</td>";
-		
-		$this_server['cmd_line_opts'] .= "<td><input type='text' id='$soption' name='{$tmp1[0]}' value='$value' ></td><td></td><td>Host Name is set in the config file, setting it here will disable the config file option</td></tr>";
+		$this_server['cmd_line_opts'] .= "<tr><td>$option</td><td >$value</td>";
+		$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='+hostname' value='$value' orig=''></td><td></td><td>Host Name is set in the config file, setting it here will disable the config file option</td></tr>";
 		}  
 
 foreach($cmd_opts as $tmp) {
 	// loop the array
-	$tmp1 = explode(" ",trim($tmp));
 	
+	$tmp1 = explode(" ",trim($tmp));
+	//print_r($tmp1);
 	if (count($tmp1) >= 3) {
 		for ($x = 2; $x <= count($tmp1); $x+=1) {
-		$tmp1[1] = $tmp1[1]." ".$tmp1[$x];
+			$tmp1[1] = $tmp1[1]." ".$database->escape($tmp1[$x]);
 	}
 	//$tmp1(1)
 	}
+	//print_r($tmp1);
 	$option = substr($tmp1[0], 1);
-	$value = str_replace('"', "", stripslashes($tmp1[1]));
-	$value = htmlentities($value);
+	//$value = str_replace('"', "", stripslashes($tmp1[1]));
+	$value=trim($tmp1[1]);
+	$value = htmlentities($value,ENT_QUOTES | ENT_HTML401); 
 	//$value=str_replace("'","",$tmp1[1]);
+	//$value=$tmp1[1];
 	//echo "new value = $value<br>";
-	$this_server['cmd_line_opts'] .= "<tr><td id='s$option'>$option</td><td >$value</td>";
+	$this_server['cmd_line_opts'] .= "<tr><td>$option</td><td >$value</td>";
 	if ($option =="map" || $option=="hostname") {
 		// text options
 		if($option == "hostname") {
 			//echo "value = $value<br>";
 			//print_r($tmp1);
 			//die();
-			$this_server['cmd_line_opts'] .= "<td><input type='text' id='s$option' name='{$tmp1[0]}' value='$value' ></td><td></td><td>using this option will disable the hostname in the config file , &quot;entries must be in quotes&quot; </td></tr>";
+			$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='{$tmp1[0]}' value='$value'  orig='{$tmp1[0]} $value'></td><td></td><td>using this option will disable the hostname in the config file </td></tr>";
 		}
-		else {	
-			$this_server['cmd_line_opts'] .= "<td><input type='text' id='s$option' name='{$tmp1[0]}' value='$value' ></td><td>Required</td><td>this here for some reason </td></tr>";
+		if($option == "map") {	
+			
+			$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='{$tmp1[0]}' value='$value' orig='{$tmp1[0]} $value'></td><td>$map_options</td><td>you can use any valid map , but check your player count </td></tr>";
 		}
 	}
 	elseif ($option =="maxplayers") {
 		//players
-		$this_server['cmd_line_opts'] .= "<td><select id='$soption' name='{$tmp1[0]}' >";
-		for ($x = 2; $x <= 24; $x+=2) {
+		if($this_server['game_max_players'] >0){
+			$max_players = $this_server['game_max_players'];
+		}
+		else {
+			$max_players = 64;
+		}
+		$this_server['cmd_line_opts'] .= "<td><select id='o$option' option='{$tmp1[0]}' orig='{$tmp1[0]} $value'>";
+		for ($x = 2; $x <= $max_players; $x+=2) {
 			if ($x == $value) {
 				// set selected
 				$this_server['cmd_line_opts'] .="<option  selected value='$x'>$x</option>";
@@ -126,10 +160,22 @@ foreach($cmd_opts as $tmp) {
 				$this_server['cmd_line_opts'] .="<option  value='$x'>$x</option>";
 			}
 		}
-		$this_server['cmd_line_opts'].="</select></td><td>Required</td><td>set maximum player value</td></tr>";
+		$this_server['cmd_line_opts'].="</select></td><td>Required</td><td>set maximum player value<span style='color:red;'> Warning</span> Not all maps are designed for high player numbers</td></tr>";
 	}
 	else{
-		$this_server['cmd_line_opts'] .= "<td><input type='checkbox' id='$soption' name='$option' value='$value' checked><//td><td></td><td>check this if required</td></tr>";
+		$int = (int) filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+		if ($int >0) {
+			// a number
+			$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='$option' value='$value' checked><//td><td></td><td>numeric value</td></tr>";
+			continue;
+		}
+		if(strlen($value) >0){
+			// text box
+			$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='{$tmp1[0]}' value='$value' ><//td><td></td><td>text value</td></tr>";
+		}
+		else {
+			$this_server['cmd_line_opts'] .= "<td><input type='checkbox' id='o$option' option='{$tmp1[0]}' value='$value' checked><//td><td></td><td>check this if required</td></tr>";
+		}
 	}
 }
 //die();
@@ -198,9 +244,11 @@ function get_server_info($server) {
 function cmd_line($cmd_line) {
 	// function to split command line into bits
 	if(empty($cmd_line)) {return false;}
-	$cmd_line = str_replace("+","#+",$cmd_line);
-	$cmd_line = str_replace("-","*-",$cmd_line);
-	$split = preg_split('/(\#|\*)/', $cmd_line);
+	$cmd_line = str_replace("+","#plus+",$cmd_line);
+	$cmd_line = str_replace("-","*minus-",$cmd_line);
+	$cmd_line= str_replace('"','',$cmd_line);
+	//preg_split('/(\#plus|\*minus)/', $input_line);
+	$split = preg_split('/(\#plus|\*minus)/', $cmd_line);
 	//unset($split[0]);
 	//unset($split[1]);
 	//unset($split[2]);

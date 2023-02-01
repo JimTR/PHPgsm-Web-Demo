@@ -265,18 +265,19 @@
 						</div>
 					<div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
 						<div style="margin:auto;">
+							
+							<h5 class="card-title">Options</h5>
+							<!--#cmd_line_opts#-->
 							<form id="startcmd" method="POST" action="api.php">
 								<input type="hidden" value="setting" name="action"/>
 								<input type="hidden" value="startcmd" name="set"/>
 								<input type="hidden" name="server" value="<!--#host_name#-->"/>
-								<input  name="text" type="textarea" rows="4" style="display:table-cell; width:80%"  value="<!--#startcmd#-->" ></input> <!-- readonly-->
+								<input  id="scmd" name="text" type="textarea" rows="4" style="display:table-cell; width:80%"  value="<!--#startcmd#-->" ></input> <!-- readonly-->
 								<button  class="btn btn-primary" style="margin-left:1%">Go</button>
 							</form>
-							<h5 class="card-title">Options</h5>
-							<!--#cmd_line_opts#-->
 						</div>
 					</div>
-									<div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
+					<div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
 										<select name="files" id="files">
 											<!--#file_select#-->
 										</select>
@@ -336,7 +337,7 @@
 		var type='Source';
 		var host= '';
 		var file ="";
-	jQuery(document).ready(function(){
+	$(document).ready(function(){
 		$('#gameservers-nav').toggleClass("show");
 	  	
 		id = "<!--#host_name#-->";
@@ -412,7 +413,7 @@
 		$('#gameservers-nav').toggleClass('show');
 	});
 	
-});
+
  $('#files').change(function(){
             selected_value = $('#files').val()
             console.log("triggerd change");
@@ -476,6 +477,28 @@
 		   //let file = JSON.stringify(res);
 		   //alert (file);
 	   });
+	
+$("#ohostname").change(function(){
+	    cmd =$("#scmd").val();
+	    newopt = $(this).attr("option")+" "+$(this).val();
+	    //newopt = $.trim(newopt)+" ";
+		original = $(this).attr("orig");
+		$.trim(original)
+		x = cmd.replace(original,newopt);
+		$(this).attr("orig",newopt)
+		$("#scmd").val(x);
+  });
+  
+  $('#omaxplayers').on('change', function() {
+  cmd =$("#scmd").val();
+  newopt = $(this).attr("option")+" "+$(this).val();
+  original = $(this).attr("orig");
+  //alert(original+" "+newopt);
+  $(this).attr("orig",newopt)
+   x = cmd.replace(original,newopt);
+   $("#scmd").val(x);
+});
+});
 </script>
 </body>
 
