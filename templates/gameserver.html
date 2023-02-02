@@ -489,7 +489,7 @@
 $("#ohostname").change(function(){
 	    cmd =$("#scmd").val();
 	    newopt = $(this).attr("option")+" "+$(this).val();
-	    newopt = $.trim(newopt);
+	    newopt = $.trim(newopt)+" ";
 	    //alert($(this).val());
 	    original = $(this).attr("orig");
 	    original = $.trim(original);
