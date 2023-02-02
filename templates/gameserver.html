@@ -523,7 +523,7 @@ $("#ohostname").change(function(){
   
   $('#omaxplayers').on('change', function() {
 	cmd =$("#scmd").val();
-	newopt = $(this).attr("option")+" "+$(this).val();
+	newopt = " "+$(this).attr("option")+" "+$(this).val();
 	original = $(this).attr("orig");
 	$(this).attr("orig",newopt);
 	x = cmd.replace(original,newopt);
