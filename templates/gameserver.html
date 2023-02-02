@@ -272,13 +272,17 @@
 								<input type="hidden" value="setting" name="action"/>
 								<input type="hidden" value="startcmd" name="set"/>
 								<input type="hidden" name="server" value="<!--#host_name#-->"/>
-								<input id ="changes" type="hidden" name="file" value=""/>
+								<input id ="changes" type="hidden" name="cmd" value=""/>
 								<input  id="scmd" name="text" type="hidden" rows="4" style="display:table-cell;width:100%;" value="<!--#startcmd#-->" ></input> <!-- readonly-->
-								<div class="card-title" style="margin-top:1%;">Comand Line</div>
-								<div id="vcmd" onclick="copyDivToClipboard()"><!--#startcmd#--></div>
-								
 								<div style="text-align:center;margin-top:1%;"><button  class="btn btn-primary" style="margin-left:1%">Go</button></div>
 							</form>
+								<div>
+									<span class="card-title">Comand Line</span>
+									 <div style="float:left;clear:none;" title="Copy To Clipboard" onclick="copyDivToClipboard()"><span><i style="color:green;" class="fa-regular fa-clipboard fa-fw"></i></span></i></div>
+								 </div>
+								<div id="vcmd" onclick="copyDivToClipboard()"><!--#startcmd#--></div>
+								
+								
 						</div>
 					</div>
 					<div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -343,7 +347,12 @@
 		var file ="";
 	$(document).ready(function(){
 		$('#gameservers-nav').toggleClass("show");
-	  	
+	  	cmd =$("#scmd").val();
+	  	if ($("#ohostname").val()) {
+			option = $("#ohostname").val();
+			newopt = '"'+option+'"';
+			$("#vcmd").text(cmd.replace(option,newopt));
+		}
 		id = "<!--#host_name#-->";
 		game = "<!--#bserver#-->"
 		server ="<!--#fname#-->";
@@ -491,6 +500,7 @@ $("#ohostname").change(function(){
 			$("#changes").val("remove_hostname");
 			$("#scmd").val(x);
 			newline = x.replace(newopt,'"'+newopt+'"'); 
+			
 			$("#vcmd").text(newline);
 			
 			return;
@@ -536,6 +546,13 @@ $("#ohostname").change(function(){
 		newmap = "+map "+$(this).val();
 		newmap = $.trim(newmap);
 		$("#omap").attr("orig",newmap);
+		if($("#changes").val() =='') {
+		$("#changes").val("change_map");
+		}	
+		else {
+			added = $("#changes").val()+','+'change_map';
+			$("#changes").val(added);
+		}
 	});
 	$('#omap').on('change', function() {
 		// map typed in
@@ -578,6 +595,7 @@ $("#ohostname").change(function(){
 <script>
 	function copyDivToClipboard() {
 		var range = document.createRange();
+		
 		range.selectNode(document.getElementById("vcmd"));
 		window.getSelection().removeAllRanges(); // clear current selection
 		window.getSelection().addRange(range); // to select text

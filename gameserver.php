@@ -70,6 +70,8 @@ $file_location = $this_server['location'].'/'.$this_server['run_stub']."/cfg/map
 $map_cycle =  geturl("$url/api.php?action=get_file&cmd=view&n=$file_location"); //needs replacing with ajax_send
 $map_cycle= explode(PHP_EOL,trim($map_cycle));
 //die("map count = ".count($map_cycle));
+$option_help['ignoresigint'] = "Disables &laquo; ctl+c &raquo; in the terminal console";
+$option_help['sv_setsteamaccount'] = "set a persistant username and password. some games require this option  to be set";
 if (count($map_cycle) >1) {
 	$map_options= "<span style='padding-right:3%;'>Suggestions</span><select id='map-options'>";
 	foreach($map_cycle as $map_text) {
@@ -174,11 +176,12 @@ foreach($cmd_opts as $tmp) {
 		//}
 		if(strlen($value) >0){
 			// text box
-			
-			$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='{$tmp1[0]}' value='$value' orig='{$tmp1[0]} $value'><//td><td></td><td>text value</td></tr>";
+			if (isset($option_help[$option])) { $help = $option_help[$option];} else {$help = "no help avaiible";}
+			$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='{$tmp1[0]}' value='$value' orig='{$tmp1[0]} $value'><//td><td></td><td>$help</td></tr>";
 		}
 		else {
-			$this_server['cmd_line_opts'] .= "<td><input type='checkbox' id='o$option' option='{$tmp1[0]}' value='$value' orig='{$tmp1[0]} $value' checked><//td><td></td><td>check this if required</td></tr>";
+			if (isset($option_help[$option])) { $help = $option_help[$option];} else {$help = "no help avaiible";}
+			$this_server['cmd_line_opts'] .= "<td><input type='checkbox' id='o$option' option='{$tmp1[0]}' value='$value' orig='{$tmp1[0]} $value' checked><//td><td></td><td>$help</td></tr>";
 		}
 	}
 }
