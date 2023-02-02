@@ -547,6 +547,7 @@ $("#ohostname").change(function(){
 		newmap = "+map "+$(this).val();
 		newmap = $.trim(newmap);
 		$("#omap").attr("orig",newmap);
+		newmap =" "+newmap;
 		if($("#changes").val() =='nothing') {
 		$("#changes").val("change_map");
 		}	
