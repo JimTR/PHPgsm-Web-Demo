@@ -275,7 +275,7 @@ function stop_server() {
 function restart_server() {
 	//starts the server
 	cmd = url+'/api.php?action=exe_tmux&server='+id+'&cmd=r';
-	alert(cmd);
+	//alert(cmd);
 	$.get(cmd, function(data, status){
 		//alert("Data: " + data + "\nStatus: " + status);
 		if(status == "success" ) {
