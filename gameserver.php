@@ -39,7 +39,6 @@ use xPaw\SourceQuery\SourceQuery;
 $bserver = trim($bserver[1]);
 //echo "$bserver<br>";
 $template = new template;
-
 $sql = "select * from server1 order by `host_name` ASC";
 $servers = $database->get_results($sql);
 $sql = "select * from server1 where host_name = '$bserver'";
@@ -118,10 +117,10 @@ foreach($cmd_opts as $tmp) {
 	if (count($tmp1) >= 3) {
 		for ($x = 2; $x <= count($tmp1); $x+=1) {
 			$tmp1[1] = $tmp1[1]." ".$database->escape($tmp1[$x]);
+		}
+	
 	}
-	//$tmp1(1)
-	}
-	//print_r($tmp1);
+	
 	$option = substr($tmp1[0], 1);
 	//$value = str_replace('"', "", stripslashes($tmp1[1]));
 	$value=trim($tmp1[1]);
@@ -129,6 +128,7 @@ foreach($cmd_opts as $tmp) {
 	//$value=str_replace("'","",$tmp1[1]);
 	//$value=$tmp1[1];
 	//echo "new value = $value<br>";
+	//echo "$option<br>";
 	$this_server['cmd_line_opts'] .= "<tr><td>$option</td><td >$value</td>";
 	if ($option =="map" || $option=="hostname") {
 		// text options
@@ -165,11 +165,13 @@ foreach($cmd_opts as $tmp) {
 	}
 	else{
 		$int = (int) filter_var($value, FILTER_SANITIZE_NUMBER_INT);
-		if ($int >0) {
+		//if ($int >0) {
 			// a number
-			$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='$option' value='$value' orig='{$tmp1[0]} $value'><//td><td></td><td>numeric value</td></tr>";
-			continue;
-		}
+			//print_r($tmp1);
+			//die();
+			//$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='$option' value='$value' orig='{$tmp1[0]} $value'><//td><td></td><td>numeric value</td></tr>";
+			//continue;
+		//}
 		if(strlen($value) >0){
 			// text box
 			
