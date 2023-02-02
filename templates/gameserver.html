@@ -272,7 +272,7 @@
 								<input type="hidden" value="setting" name="action"/>
 								<input type="hidden" value="startcmd" name="set"/>
 								<input type="hidden" name="server" value="<!--#host_name#-->"/>
-								<input id ="changes" type="hidden" name="cmd" value=""/>
+								<input id ="changes" type="hidden" name="cmd" value="nothing"/>
 								<input  id="scmd" name="text" type="hidden" rows="4" style="display:table-cell;width:100%;" value="<!--#startcmd#-->" ></input> <!-- readonly-->
 								<div style="text-align:center;margin-top:1%;"><button  class="btn btn-primary" style="margin-left:1%">Go</button></div>
 							</form>
@@ -489,9 +489,10 @@
 $("#ohostname").change(function(){
 	    cmd =$("#scmd").val();
 	    newopt = $(this).attr("option")+" "+$(this).val();
+	    newopt = $.trim(newopt);
 	    //alert($(this).val());
 	    original = $(this).attr("orig");
-	    $.trim(original);
+	    original = $.trim(original);
 	    //alert(original);
 	    if ($(this).val() === "") {
 			$(this).attr("orig","not set");
@@ -527,7 +528,7 @@ $("#ohostname").change(function(){
 	$(this).attr("orig",newopt);
 	x = cmd.replace(original,newopt);
 	$("#scmd").val(x);
-	if($("#changes").val() =='') {
+	if($("#changes").val() ='nothing') {
 		$("#changes").val("change_players");
 	}
 	else {
@@ -546,7 +547,7 @@ $("#ohostname").change(function(){
 		newmap = "+map "+$(this).val();
 		newmap = $.trim(newmap);
 		$("#omap").attr("orig",newmap);
-		if($("#changes").val() =='') {
+		if($("#changes").val() =='nothing') {
 		$("#changes").val("change_map");
 		}	
 		else {
@@ -564,7 +565,7 @@ $("#ohostname").change(function(){
 		$(this).attr("orig",newopt)
 		$("#scmd").val(x);
 		$("#vcmd").text(x);
-		if($("#changes").val() =='') {
+		if($("#changes").val() =='nothing') {
 		$("#changes").val("change_map");
 		}	
 		else {
@@ -588,9 +589,44 @@ $("#ohostname").change(function(){
 	$("#mod_settings").on("hidden.bs.modal", function () {
     location.reload();
 	});
-	
+	$("#cnew").click(function() {
+		cmd =$("#scmd").val();
+		orig = $("#onew").val();
+		prefix = orig.charAt(0) ;
+		if ((prefix !== "+" ) && (prefix !== "-"))  {
+			alert("all options must start with either a + or - sign")
+			return;
+		}
+		var [option, value] = orig.split(" ");
+		if(typeof value != 'undefined'){
+			alert("non boolean");
+			}
+			else{
+				optionid =  option.substring(1, option.length);
+				html = "<tr><td>"+optionid+"</td><td></td><td><input type='checkbox' id='o"+optionid+"' option='"+option+"' orig='"+option+"' checked>'</td><td></td><td>no help</td></tr>";
+				//<td><input type='checkbox' id='o$option' option='{$tmp1[0]}' value='$value' orig='{$tmp1[0]} $value' checked><//td><td></td><td>$help</td></tr> 
+				value="";
+				cmd = cmd+" "+option;
+				alert (cmd);
+				$("#scmd").val(cmd);
+				if ($("#ohostname").val()) {
+					hoption = $("#ohostname").val();
+					alert(hoption);
+					newhopt = '"'+hoption+'"';
+					test = cmd.replace(hoption,newhopt)
+					alert(test);
+					$("#vcmd").text(test);
+				}
+				//$("#vcmd").text(cmd);
+			}
+		alert ("first "+option+" second "+value);
+		 var row = $(this).closest('tr');
+		  var row_index = $(row).index();
+		 alert(row_index);
+		 $('#options-table > tbody > tr').eq(row_index).before(html); //adds new row
+		 $("#onew").val('');
+	});
 });
-
 </script>
 <script>
 	function copyDivToClipboard() {

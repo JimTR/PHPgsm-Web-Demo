@@ -185,7 +185,7 @@ foreach($cmd_opts as $tmp) {
 		}
 	}
 }
-$this_server['cmd_line_opts'] .= "<td>Add an option</td><td></td><td id='new'><input type='text' id='onew' value='' orig=''><//td><td><button class='btn btn-primary'  id='new'>Add</button></td><td>proceed with caution</td></tr>";
+$this_server['cmd_line_opts'] .= "<td>Add an option</td><td></td><td id='new'><input type='text' id='onew' value='' orig=''><//td><td><button class='btn btn-primary'  id='cnew'>Add</button></td><td>proceed with caution</td></tr>";
 //die();
 $this_server['cmd_line_opts'].="</tbody></table>";
 //die(print_r($this_server));
@@ -262,6 +262,10 @@ function cmd_line($cmd_line) {
 	//unset($split[2]);
 	$split = array_slice($split,7); // remove stuff the user can not edit
 	$split = array_values(array_filter($split));
+	foreach ($split as $temp) {
+		$tmp[] = trim($temp);
+	}
+	$split = $tmp;
 	//print_r  ($split);
 	//echo "<br>$cmd_line";
 	//die ();
