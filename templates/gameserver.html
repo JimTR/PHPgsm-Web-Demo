@@ -272,8 +272,11 @@
 								<input type="hidden" value="setting" name="action"/>
 								<input type="hidden" value="startcmd" name="set"/>
 								<input type="hidden" name="server" value="<!--#host_name#-->"/>
-								<input  id="scmd" name="text" type="textarea" rows="4" style="display:table-cell; width:80%"  value="<!--#startcmd#-->" ></input> <!-- readonly-->
-								<button  class="btn btn-primary" style="margin-left:1%">Go</button>
+								<input id ="changes" type="hidden" name="file" value=""/>
+								<input  id="scmd" name="text" type="hidden" rows="4" style="display:table-cell;width:100%;" value="<!--#startcmd#-->" ></input> <!-- readonly-->
+								<div style="margin-top:1%;">Comand Line</div>
+								<div id="vcmd" ><!--#startcmd#--></div>
+								<div style="text-align:center;margin-top:1%;"><button  class="btn btn-primary" style="margin-left:1%">Go</button></div>
 							</form>
 						</div>
 					</div>
@@ -441,12 +444,7 @@
 		    console.log(selected_value);
 		    var sendurl = url+"/api.php";
 		    file = $('#fileview').html();
-		    //file = $('#fileview').val().replace(/"/gi, "/#/");
-		   // file = JSON.stringify($('#fileview').val());
-		   alert(file);
 		    console.log(sendurl);
-		    //var formData = new FormData();
-			//formData.append('file', $('#fileview');
 		    $.ajax({
 				type: 'POST',
 				url: sendurl,
@@ -481,23 +479,94 @@
 $("#ohostname").change(function(){
 	    cmd =$("#scmd").val();
 	    newopt = $(this).attr("option")+" "+$(this).val();
-	    //newopt = $.trim(newopt)+" ";
-		original = $(this).attr("orig");
-		$.trim(original)
-		x = cmd.replace(original,newopt);
+	    //alert($(this).val());
+	    original = $(this).attr("orig");
+	    $.trim(original);
+	    //alert(original);
+	    if ($(this).val() === "") {
+			$(this).attr("orig","not set");
+			x= cmd.replace(" "+original,"");
+			//alert(x);
+			$("#changes").val("remove_hostname");
+			$("#scmd").val(x);
+			newline = x.replace(newopt,'"'+newopt+'"'); 
+			$("#vcmd").text(newline);
+			
+			return;
+		}	
+	    		
+		if (original === "not set") {
+				x = cmd.replace("+map",newopt+" +map");
+		}
+		else {
+			x = cmd.replace(original,newopt);
+		}
+		//alert(x);
 		$(this).attr("orig",newopt)
 		$("#scmd").val(x);
+		newline = x.replace($(this).val(),'"'+$(this).val()+'"'); 
+		$("#vcmd").text(newline);
+		$("#changes").val("add_hostname");
   });
   
   $('#omaxplayers').on('change', function() {
-  cmd =$("#scmd").val();
-  newopt = $(this).attr("option")+" "+$(this).val();
-  original = $(this).attr("orig");
-  //alert(original+" "+newopt);
-  $(this).attr("orig",newopt)
-   x = cmd.replace(original,newopt);
-   $("#scmd").val(x);
-});
+	cmd =$("#scmd").val();
+	newopt = $(this).attr("option")+" "+$(this).val();
+	original = $(this).attr("orig");
+	$(this).attr("orig",newopt);
+	x = cmd.replace(original,newopt);
+	$("#scmd").val(x);
+	if($("#changes").val() =='') {
+		$("#changes").val("change_players");
+	}
+	else {
+		added = $("#changes").val()+','+'change_players';
+		$("#changes").val(added);
+	}
+	$("#vcmd").text(x);
+	});
+	 $('#map-options').on('change', function() {
+		// change map here
+		cmd =$("#scmd").val();
+		x= cmd.replace($("#omap").val(),$(this).val());
+		$("#omap").val($(this).val());
+		$("#scmd").val(x);
+		$("#vcmd").text(x);
+		newmap = "+map "+$(this).val();
+		newmap = $.trim(newmap);
+		$("#omap").attr("orig",newmap);
+	});
+	$('#omap').on('change', function() {
+		// map typed in
+		cmd =$("#scmd").val();
+		newopt = $(this).attr("option")+" "+$(this).val();
+		original = $.trim($(this).attr("orig"));
+		//alert ("original "+original+" new "+newopt);
+		x = cmd.replace(original,newopt);
+		$(this).attr("orig",newopt)
+		$("#scmd").val(x);
+		$("#vcmd").text(x);
+		if($("#changes").val() =='') {
+		$("#changes").val("change_map");
+		}	
+		else {
+			added = $("#changes").val()+','+'change_map';
+			$("#changes").val(added);
+		}
+		alert("you typed something");
+	});
+	$('#omp_teamplay').on('change', function() {
+		// team play
+		cmd =$("#scmd").val();
+	    newopt = $(this).attr("option")+" "+$(this).val();
+	    original = $.trim($(this).attr("orig"));
+		alert ("original "+original+" new "+newopt);
+		x = cmd.replace(original,newopt);
+		alert (x);
+		$(this).attr("orig",newopt);
+		$("#scmd").val(x);
+		$("#vcmd").text(x);
+	});
 });
 </script>
 </body>

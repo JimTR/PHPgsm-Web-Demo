@@ -70,7 +70,8 @@ $this_server['players'] -= $this_server['bots'];
 $file_location = $this_server['location'].'/'.$this_server['run_stub']."/cfg/mapcycle.txt";
 $map_cycle =  geturl("$url/api.php?action=get_file&cmd=view&n=$file_location"); //needs replacing with ajax_send
 $map_cycle= explode(PHP_EOL,trim($map_cycle));
-if (count($map_cycle) >0) {
+//die("map count = ".count($map_cycle));
+if (count($map_cycle) >1) {
 	$map_options= "<span style='padding-right:3%;'>Suggestions</span><select id='map-options'>";
 	foreach($map_cycle as $map_text) {
 		// do maps
@@ -91,7 +92,7 @@ $this_server['startcmd'] =  str_replace('"', "", stripslashes($cmdline));
 $cmd_opts = cmd_line($cmdline);
 //echo print_r($cmd_opts,true)."<br>";
 //die();
-$this_server['cmd_line_opts'] = '<table class="table table-sml">';
+$this_server['cmd_line_opts'] = '<table id="options-table" class="table table-sml"><tbody id="options-body">';
 //echo print_r($cmd_opts,true)."<br>";
 $key =   array_partial_search($cmd_opts, "hostname");
 	//echo "key found = ".print_r($key,true)."<br>";
@@ -106,7 +107,7 @@ $key =   array_partial_search($cmd_opts, "hostname");
 		$option="hostname";
 		$value="";
 		$this_server['cmd_line_opts'] .= "<tr><td>$option</td><td >$value</td>";
-		$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='+hostname' value='$value' orig=''></td><td></td><td>Host Name is set in the config file, setting it here will disable the config file option</td></tr>";
+		$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='+hostname' value='$value' orig='not set'></td><td></td><td>Host Name is set in the config file, setting it here will disable the config file option</td></tr>";
 		}  
 
 foreach($cmd_opts as $tmp) {
@@ -150,7 +151,7 @@ foreach($cmd_opts as $tmp) {
 		else {
 			$max_players = 64;
 		}
-		$this_server['cmd_line_opts'] .= "<td><select id='o$option' option='{$tmp1[0]}' orig='{$tmp1[0]} $value'>";
+		$this_server['cmd_line_opts'] .= "<td><select style='width:20%;' id='o$option' option='{$tmp1[0]}' orig='{$tmp1[0]} $value'>";
 		for ($x = 2; $x <= $max_players; $x+=2) {
 			if ($x == $value) {
 				// set selected
@@ -166,20 +167,22 @@ foreach($cmd_opts as $tmp) {
 		$int = (int) filter_var($value, FILTER_SANITIZE_NUMBER_INT);
 		if ($int >0) {
 			// a number
-			$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='$option' value='$value' checked><//td><td></td><td>numeric value</td></tr>";
+			$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='$option' value='$value' orig='{$tmp1[0]} $value'><//td><td></td><td>numeric value</td></tr>";
 			continue;
 		}
 		if(strlen($value) >0){
 			// text box
-			$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='{$tmp1[0]}' value='$value' ><//td><td></td><td>text value</td></tr>";
+			
+			$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='{$tmp1[0]}' value='$value' orig='{$tmp1[0]} $value'><//td><td></td><td>text value</td></tr>";
 		}
 		else {
-			$this_server['cmd_line_opts'] .= "<td><input type='checkbox' id='o$option' option='{$tmp1[0]}' value='$value' checked><//td><td></td><td>check this if required</td></tr>";
+			$this_server['cmd_line_opts'] .= "<td><input type='checkbox' id='o$option' option='{$tmp1[0]}' value='$value' orig='{$tmp1[0]} $value' checked><//td><td></td><td>check this if required</td></tr>";
 		}
 	}
 }
+$this_server['cmd_line_opts'] .= "<td>Add an option</td><td></td><td id='new'><input type='text' id='onew' value='' orig=''><//td><td><button class='btn btn-primary'  id='new'>Add</button></td><td>proceed with caution</td></tr>";
 //die();
-$this_server['cmd_line_opts'].="</table>";
+$this_server['cmd_line_opts'].="</tbody></table>";
 //die(print_r($this_server));
 $page['join_link'] = 'steam://connect/'.$this_server['host'].':'.$this_server['port'].'/'; 
 $is = explode("\t",trim(shell_exec('du -hs '.$this_server['install_dir'])));
