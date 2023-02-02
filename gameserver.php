@@ -62,7 +62,6 @@ $uri = parse_url($this_server['url']);
 $url = $uri['scheme']."://".$uri['host'].':'.$this_server['bport'];
 if(isset($uri['path'])){ $url .= $uri['path'];}
 $v = json_decode(geturl("$url/api.php?action=game_detail&filter=$bserver&server=".$this_server['fname']),true); //needs replacing with ajax_send
-$map_cycle =  json_decode(geturl("$url/api.php?action=get_file&cmd=view&n="),true); //needs replacing with ajax_send
 //$info = array_merge($info,array_change_key_case($v[$bserver]));
 $this_server = array_change_key_case(array_merge_recursive($this_server,$info));
 $this_server['players'] -= $this_server['bots'];
@@ -72,6 +71,7 @@ $map_cycle= explode(PHP_EOL,trim($map_cycle));
 //die("map count = ".count($map_cycle));
 $option_help['ignoresigint'] = "Disables &laquo; ctl+c &raquo; in the terminal console";
 $option_help['sv_setsteamaccount'] = "set a persistant username and password. some games require this option  to be set";
+$option_help['mp_teamplay'] = "Set to 0 for FFA or 1 for teams"; 
 if (count($map_cycle) >1) {
 	$map_options= "<span style='padding-right:3%;'>Suggestions</span><select id='map-options'>";
 	foreach($map_cycle as $map_text) {
