@@ -103,6 +103,7 @@ console.log(players_online);
 			$('#build').text(serverd.Version);
 			$('#server_id').text(serverd.server_id);
 			$('#player-tot').text(serverd.player_tot);
+			$('#moddesc').text(serverd.ModDesc);
 			//buttons
 			$('#stop_server').removeClass('hidden');
 			$('#restart_server').removeClass('hidden');
