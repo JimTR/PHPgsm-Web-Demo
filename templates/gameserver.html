@@ -528,6 +528,7 @@ $("#ohostname").change(function(){
 	$(this).attr("orig",newopt);
 	x = cmd.replace(original,newopt);
 	$("#scmd").val(x);
+	$("#vcmd").text(x);
 	if($("#changes").val() ='nothing') {
 		$("#changes").val("change_players");
 	}
@@ -535,7 +536,7 @@ $("#ohostname").change(function(){
 		added = $("#changes").val()+','+'change_players';
 		$("#changes").val(added);
 	}
-	$("#vcmd").text(x);
+	
 	});
 	 $('#map-options').on('change', function() {
 		// change map here
@@ -555,6 +556,7 @@ $("#ohostname").change(function(){
 			added = $("#changes").val()+','+'change_map';
 			$("#changes").val(added);
 		}
+		$("#vcmd").text(x);
 	});
 	$('#omap').on('change', function() {
 		// map typed in
