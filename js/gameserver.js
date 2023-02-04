@@ -298,3 +298,50 @@ function formatBytes(bytes, decimals = 2) {
 
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
+
+function copyDivToClipboard() {
+		var range = document.createRange();
+		
+		range.selectNode(document.getElementById("vcmd"));
+		window.getSelection().removeAllRanges(); // clear current selection
+		window.getSelection().addRange(range); // to select text
+		document.execCommand("copy");
+		window.getSelection().removeAllRanges();// to deselect
+	}
+	
+	$("input[type='checkbox']").change(function() {
+    if(this.checked) {
+        //Do stuff
+    }
+    else {
+		cmd =$("#scmd").val();
+		original = $(this).attr("orig");
+	    original = $.trim(original);
+	    cmd = cmd.replace(original+" ","");
+		$("#vcmd").text(cmd);
+		$(this).closest('tr').remove();
+		$("#scmd").val(cmd);
+	}
+});
+
+$('#omap').on('change', function() {
+		// map typed in
+		cmd =$("#scmd").val();
+		alert(cmd);
+		newopt = $(this).attr("option")+" "+$(this).val();
+		original = $.trim($(this).attr("orig"));
+		//alert ("original "+original+" new "+newopt);
+		x = cmd.replace(original,newopt);
+		$(this).attr("orig",newopt);
+		alert(x);
+		$("#scmd").val(x);
+		$("#vcmd").text(x);
+		if($("#changes").val() =='nothing') {
+		$("#changes").val("change_map");
+		}	
+		else {
+			added = $("#changes").val()+','+'change_map';
+			$("#changes").val(added);
+		}
+		alert("you typed something");
+	});

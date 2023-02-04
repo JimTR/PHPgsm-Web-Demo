@@ -153,7 +153,7 @@
                     </div>
                     <div class="modal-footer">
                       <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary" id="quit">Do It</button>
+                      <button type="submit" class="btn btn-primary" id="quit">Stop Server</button>
                     </div>
                   </div>
                 </div>
@@ -201,7 +201,7 @@
                     </div>
                     <div class="modal-footer">
                       <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary" id="ban">Do It</button>
+                      <button type="submit" class="btn btn-primary" id="ban">Update User</button>
                     </div>
                   </div>
                 </div>
@@ -254,19 +254,24 @@
 					</ul>
 					<div class="tab-content pt-2" id="borderedTabContent">
 						<div class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
-							<div class="col-lg-6">
-								<p>Server ID :<span style="padding-left:1%;"><!--#host_name#--></span></p>
-								<p>Mod : <span style="padding-left:1%;"><!--#run_stub#--></span></p>
-								<p>Host IP :<span style="padding-left:1%;"><!--#host#--></span></p>
-								<p>Game Port :<span style="padding-left:1%;"><!--#port#--></span></p>
-								<p>Client Port :<span style="padding-left:1%;"><!--#client_port#--></span></p>
-								<p>TV Port :<span style="padding-left:1%;"><!--#source_port#--></span></p>
+							<div class="col-lg-3">
+								<table class="table ">
+									<tr><td>Server ID </td><td><!--#host_name#--></td></tr>
+									<tr><td>Mod</td><td><!--#run_stub#--></td></tr>
+									<tr><td>Host IP</td><td><!--#host#--></td></tr>
+									<tr><td>Game Port </td><td><!--#port#--></td></tr>
+									<tr><td>Client Port</td><td><!--#client_port#--></td></tr>
+									<tr><td>TV Port</td><td><!--#source_port#--></td></tr>
+									<tr><td>Disable</td><td><form><input type='checkbox' id='o$option' option='{$tmp1[0]}' value='$value' orig='{$tmp1[0]} $value'></form></td></tr>
+									<tr><td>Delete</td><td><form><input type='checkbox' id='o$option' option='{$tmp1[0]}' value='$value' orig='{$tmp1[0]} $value'></form></td></tr>
+								</table>
+								
 							</div>
 						</div>
 					<div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
 						<div style="margin:auto;">
 							
-							<h5 class="card-title">Options</h5>
+							<h5 class="card-title">Command-line arguments</h5>
 							<!--#cmd_line_opts#-->
 							<form id="startcmd" method="POST" action="api.php">
 								<input type="hidden" value="setting" name="action"/>
@@ -274,13 +279,14 @@
 								<input type="hidden" name="server" value="<!--#host_name#-->"/>
 								<input id ="changes" type="hidden" name="cmd" value="nothing"/>
 								<input  id="scmd" name="text" type="hidden" rows="4" style="display:table-cell;width:100%;" value="<!--#startcmd#-->" ></input> <!-- readonly-->
-								<div style="text-align:center;margin-top:1%;"><button  class="btn btn-primary" style="margin-left:1%">Go</button></div>
+								<div style="text-align:center;margin-top:1%;"><button  class="btn btn-primary" style="margin-left:1%">Save Changes</button></div>
 							</form>
 								<div>
-									<span class="card-title">Comand Line</span>
+									<span class="card-title">Debug Command Line</span>
 									 <div style="float:left;clear:none;" title="Copy To Clipboard" onclick="copyDivToClipboard()"><span><i style="color:green;" class="fa-regular fa-clipboard fa-fw"></i></span></i></div>
 								 </div>
 								<div id="vcmd" onclick="copyDivToClipboard()"><!--#startcmd#--></div>
+								<div style="font-size:smaller;padding:3px 0 0 1%;">to use this click on <i style="color:green;" class="fa-regular fa-clipboard fa-fw"></i> above to copy to the clipboard, open a terminal, navigate to the server instance directory  and paste </div>
 								
 								
 						</div>
@@ -296,8 +302,8 @@
                                          </div>
 									</div>
 									<div class="tab-pane fade" id="bordered-games" role="tabpanel" aria-labelledby="contact-tab">
-										<div class="panel">
-											Supported
+										<div>
+											<div class="card-title">Supported Mods</div>
 										</div>
 									</div>
 								<div class="tab-pane fade"  id="bordered-notifications" role="tabpanel" aria-labelledby="home-tab">	
@@ -351,7 +357,8 @@
 	  	if ($("#ohostname").val()) {
 			option = $("#ohostname").val();
 			newopt = '"'+option+'"';
-			$("#vcmd").text(cmd.replace(option,newopt));
+			x = cmd.replace(option,newopt);
+			$("#vcmd").text(x);
 		}
 		id = "<!--#host_name#-->";
 		game = "<!--#bserver#-->"
@@ -558,25 +565,7 @@ $("#ohostname").change(function(){
 		}
 		$("#vcmd").text(x);
 	});
-	$('#omap').on('change', function() {
-		// map typed in
-		cmd =$("#scmd").val();
-		newopt = $(this).attr("option")+" "+$(this).val();
-		original = $.trim($(this).attr("orig"));
-		//alert ("original "+original+" new "+newopt);
-		x = cmd.replace(original,newopt);
-		$(this).attr("orig",newopt)
-		$("#scmd").val(x);
-		$("#vcmd").text(x);
-		if($("#changes").val() =='nothing') {
-		$("#changes").val("change_map");
-		}	
-		else {
-			added = $("#changes").val()+','+'change_map';
-			$("#changes").val(added);
-		}
-		alert("you typed something");
-	});
+	
 	$('#omp_teamplay').on('change', function() {
 		// team play
 		cmd =$("#scmd").val();
@@ -630,18 +619,9 @@ $("#ohostname").change(function(){
 		 $("#onew").val('');
 	});
 });
+
 </script>
-<script>
-	function copyDivToClipboard() {
-		var range = document.createRange();
-		
-		range.selectNode(document.getElementById("vcmd"));
-		window.getSelection().removeAllRanges(); // clear current selection
-		window.getSelection().addRange(range); // to select text
-		document.execCommand("copy");
-		window.getSelection().removeAllRanges();// to deselect
-	}
-</script>
+
 </body>
 
 </html>
