@@ -72,12 +72,14 @@ $map_cycle= explode(PHP_EOL,trim($map_cycle));
 $option_help['ignoresigint'] = "Disables &laquo; ctl+c &raquo; in the terminal console";
 $option_help['sv_setsteamaccount'] = "set a persistant username and password. some games require this option  to be set";
 $option_help['mp_teamplay'] = "Set to 0 for FFA or 1 for teams"; 
+$option_help['strictportbind'] = "The server will fail to start if it's port is already in use. if not set the server will start but on the next available port";
 if (count($map_cycle) >1) {
-	$map_options= "<span style='padding-right:3%;'>Suggestions</span><select id='map-options'>";
+	$map_options= "<span style='padding-right:3%;'>Suggestions</span><select id='map-options' option='+map' orig='{$tmp1[0]} $value'>";
 	foreach($map_cycle as $map_text) {
 		// do maps
-		if ($this_server['default_map'] == trim($map_text)) {
-			$map_options .= "<option value='$map_text' selected>$map_text</option>";
+		$map_text = trim($map_text);
+		if ($this_server['default_map'] == $map_text) {
+			$map_options .= "<option value='$map_text' selected >$map_text</option>";
 		}
 		else {
 			$map_options .= "<option value='$map_text'>$map_text</option>";
@@ -190,6 +192,12 @@ $this_server['cmd_line_opts'] .= "<td>Add an option</td><td></td><td id='new'><i
 $this_server['cmd_line_opts'].="</tbody></table>";
 //die(print_r($this_server));
 $page['join_link'] = 'steam://connect/'.$this_server['host'].':'.$this_server['port'].'/'; 
+if($this_server['enabled'] ==0) {
+	$page['checked'] = "checked";
+}
+else {
+	$page['checked'] ='';
+}
 $is = explode("\t",trim(shell_exec('du -hs '.$this_server['install_dir'])));
 $this_server['install_size'] = $is[0];
 $x = json_encode($this_server);
