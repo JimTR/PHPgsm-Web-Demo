@@ -43,6 +43,7 @@ $sql = "select * from server1 order by `host_name` ASC";
 $servers = $database->get_results($sql);
 $sql = "select * from server1 where host_name = '$bserver'";
 $this_server =  $database->get_row($sql);
+define('this_server',$this_server);
 $tserver = $this_server['server_name'];
 $header_vars['title'] = "$module - $tserver";
 //print_r($this_server);
@@ -73,6 +74,10 @@ $option_help['ignoresigint'] = "Disables &laquo; ctl+c &raquo; in the terminal c
 $option_help['sv_setsteamaccount'] = "set a persistant username and password. some games require this option  to be set";
 $option_help['mp_teamplay'] = "Set to 0 for FFA or 1 for teams"; 
 $option_help['strictportbind'] = "The server will fail to start if it's port is already in use. if not set the server will start but on the next available port";
+$option_help['fof_sv_maxteams'] = "Set The maximum amout of teams in teamplay mode";
+$option_help['fof_sv_currentmode']="";
+$option_help['sv_contact'] ="Admin's contact Email address";
+$option_help['mapcyclefile'] = "mapcycle file, if deleted the default file will be used";
 if (count($map_cycle) >1) {
 	$map_options= "<span style='padding-right:3%;'>Suggestions</span><select id='map-options' option='+map' orig='{$tmp1[0]} $value'>";
 	foreach($map_cycle as $map_text) {
@@ -169,13 +174,14 @@ foreach($cmd_opts as $tmp) {
 	}
 	else{
 		$int = (int) filter_var($value, FILTER_SANITIZE_NUMBER_INT);
-		//if ($int >0) {
+		if (is_int($value) or $int >0 ){
 			// a number
 			//print_r($tmp1);
 			//die();
+			//echo "$option needs a drop down<br>";
 			//$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='$option' value='$value' orig='{$tmp1[0]} $value'><//td><td></td><td>numeric value</td></tr>";
 			//continue;
-		//}
+		}
 		if(strlen($value) >0){
 			// text box
 			if (isset($option_help[$option])) { $help = $option_help[$option];} else {$help = "no help avaiible";}
@@ -219,7 +225,7 @@ $template->load('templates/gameserver.html');
 $template->replace_vars($page);
 $template->replace_vars($this_server);
 $template->publish();
-$database->disconnect();
+//$database->disconnect();
 
 function get_server_info($server) {
 	// return xpaw info
@@ -286,4 +292,7 @@ function in_arrayr($needle, $haystack) {
         }
         return false;
 } 
+function build_pull_down ($data,$id,$help) {
+	// builds drop down list
+}
 ?>
