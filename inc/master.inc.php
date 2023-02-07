@@ -125,7 +125,7 @@ foreach ($servers as $server) {
              continue;
        }
 	
-	if ($bserver[1] == $server['host_name'] ) {$class = 'active';} else {$class='';}
+	if (isset($bserver[1]) and  $bserver[1] == $server['host_name'] ) {$class = 'active';} else {$class='';}
 	$sidebar_data['smenu'] .='<li><a class="'.$class.'" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 }
 
