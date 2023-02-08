@@ -79,7 +79,7 @@ $template->load('templates/users.html');
 //echo "page url is {$page['url']}";
 //die();
 $template->replace_vars($page);
-$template->replace_vars($this_server);
+//$template->replace_vars($this_server);
 $template->publish();
 function workout_options ($get) {
 	// see if we need to jump
