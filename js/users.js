@@ -298,7 +298,7 @@ function displayData(userID) {
 					console.log(data);
 					//console.log(man);
 					gen_data = players[0];
-					user = JSON.parse(gen_data.name_c);
+					user = JSON.parse('"'+gen_data.name_c+'"');
 					if(typeof data.data.error == 'undefined') {
 											
 					 if (gen_data.banned == 1) {
