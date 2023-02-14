@@ -52,11 +52,11 @@ var data="";
 		if (item.steam_id64 == uni) {return true;}
 		if(item.banned == 1) { 
 			console.log("banned "+item.name);
-			item.name = '<span style="text-decoration: line-through;">'+item.name+'</span>';
+			item.name = '<span style="text-decoration: line-through;">'+item.name_c+'</span>';
 		}
 		console.log(item.name);
 		var last_log = timeConverter(item.last_log_on);
-		items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'" flag="'+item.flag+'"><a href="#">'+item.name+'</a></td><td>'+last_log+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">'+item.steam_id64+'</a></td></tr>';
+		items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'" flag="'+item.flag+'"><a href="#">'+item.name_c+'</a></td><td>'+last_log+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">'+item.steam_id64+'</a></td></tr>';
 		uni = item.steam_id64;
 		//alert("all done");
 		return data;
@@ -298,7 +298,7 @@ function displayData(userID) {
 					console.log(data);
 					//console.log(man);
 					gen_data = players[0];
-					user = gen_data.name
+					user = gen_data.name_c
 					if(typeof data.data.error == 'undefined') {
 											
 					 if (gen_data.banned == 1) {
