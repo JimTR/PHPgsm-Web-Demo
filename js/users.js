@@ -24,7 +24,7 @@ var data="";
     var url = $(this).attr('action');
     $("#data_table").html(items);
     var sndData = $('#sendcmd input').serialize();
-    console.log(sndData);
+    console.log("we are using "+url);
     $.ajax({
     type: $(this).attr('method'),
     url: $(this).attr('action'),
@@ -123,7 +123,7 @@ $('#data_table').on('click','.tpButton', function(event) {
 							console.log(item.server_name+" is valid");
 							var timestamp =  timeConverter(item.last_play);
 							//return(myDate.toLocaleString());
-							gdetail += "<tr><td>"+item.server_name+"</td><td style='text-align:right;padding-right:16%;'>"+item.log_ons+"</td><td>"+timestamp+"</td></tr>";
+							gdetail += "<tr><td>"+item.server_name+"</td><td style='text-align:right;padding-right:10%;'>"+item.log_ons+"</td><td>"+timestamp+"</td><td></td></tr>";
 							
 							
 						}	
@@ -146,8 +146,9 @@ $('#data_table').on('click','.tpButton', function(event) {
 					first_log_on =  timeConverter(gen_data.last_log_on);
 					gendetail +="<tr><td>Latest Log on</td><td>"+first_log_on+"</td></tr>";
 					gendetail +="<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>";
-					gendetail +="<tr><td>Steam Id (old)</td><td>"+gen_data.steam_id+"</td></tr>";
 					gendetail +='<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>';
+					console.log(gen_data);
+					gendetail +="<tr><td>Overall Time on Line</td><td>"+data.data.time_on_line+"</td></tr>";
 					}
 					else {
 						gendetail ='<tr><td>no data found for this user</td></tr>';
