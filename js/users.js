@@ -330,7 +330,7 @@ function displayData(userID) {
 						aka = aka.replace(/,\s*$/, "");
 						gendetail +="<tr><td>Played as</td><td>"+aka+"</td></tr>";
 					}
-					gendetail +="<tr><td>Played as</td><td>"+aka+"</td></tr>";
+					//gendetail +="<tr><td>Played as</td><td>"+aka+"</td></tr>";
 					}
 					else {
 						gendetail ='<tr><td>no data found for this user</td></tr>';
