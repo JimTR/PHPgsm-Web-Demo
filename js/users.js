@@ -155,6 +155,7 @@ $('#data_table').on('click','.tpButton', function(event) {
 					gendetail +="<tr><td>Overall Time on Line</td><td>"+data.time_on_line+"</td></tr>";
 					aka = gen_data.aka;
 					if (aka != null){
+						alert("first run "+aka);
 						aka = aka.replace(/,\s*$/, "");
 						gendetail +="<tr><td>Played as</td><td>"+aka+"</td></tr>";
 					}
