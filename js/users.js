@@ -326,7 +326,7 @@ function displayData(userID) {
 					gendetail +="<tr><td>Overall Time on Line</td><td>"+data.time_on_line+"</td></tr>";
 					aka = gen_data.aka;
 					if (aka != null){
-						alert(aka);
+						//alert(aka);
 						aka = aka.replace(/,\s*$/, "");
 						gendetail +="<tr><td>Played as</td><td>"+aka+"</td></tr>";
 					}
