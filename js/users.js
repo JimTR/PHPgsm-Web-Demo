@@ -324,7 +324,8 @@ function displayData(userID) {
 					gendetail +='<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>';
 					gendetail +="<tr><td>Overall Time on Line</td><td>"+data.time_on_line+"</td></tr>";
 					aka = gen_data.aka;
-					if (aka !== 'null'){
+					if (aka != null){
+						alert(aka);
 						aka = aka.replace(/,\s*$/, "");
 						gendetail +="<tr><td>Played as</td><td>"+aka+"</td></tr>";
 					}
