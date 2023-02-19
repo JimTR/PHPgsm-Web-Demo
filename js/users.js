@@ -309,7 +309,7 @@ function displayData(userID) {
 					 if (gen_data.banned == 1) {
 						gendetail += '<tr><td>User Status</td><td><span style="color:red;">Banned </span><span style="padding-right:20%;float:right;">Reason '+gen_data.reason+'</span></td></tr>';
 					}
-					gendetail += '<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;"  src="'+gen_data.flag+'"></td></tr>'
+					gendetail += '<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;width:15%;"  src="'+gen_data.flag+'"></td></tr>'
 					gendetail += "<tr><td>Last Known IP</td><td>"+gen_data.real_ip+"</td></tr>";
 					first_log_on =  timeConverter(gen_data.first_log_on);
 					gendetail +="<tr><td>First Log on</td><td>"+first_log_on+"</td></tr>";
@@ -318,6 +318,7 @@ function displayData(userID) {
 					gendetail +="<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>";
 					gendetail +='<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>';
 					gendetail +="<tr><td>Overall Time on Line</td><td>"+data.time_on_line+"</td></tr>";
+					gendetail +="<tr><td>Played as</td><td>"+gen_data.aka+"</td></tr>";
 					}
 					else {
 						gendetail ='<tr><td>no data found for this user</td></tr>';
