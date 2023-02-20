@@ -58,8 +58,9 @@ var data="";
 			item.name = '<span style="text-decoration: line-through;">'+item.name_c+'</span>';
 		}
 		console.log(item.name);
+		enc_name = JSON.parse('"'+item.name_c+'"');
 		var last_log = timeConverter(item.last_log_on);
-		items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'" flag="'+item.flag+'"><a href="#">'+item.name_c+'</a></td><td>'+last_log+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">'+item.steam_id64+'</a></td></tr>';
+		items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'" flag="'+item.flag+'"><a href="#">'+enc_name+'</a></td><td>'+last_log+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">'+item.steam_id64+'</a></td></tr>';
 		uni = item.steam_id64;
 		//alert("all done");
 		return data;
@@ -157,6 +158,7 @@ $('#data_table').on('click','.tpButton', function(event) {
 					if (aka != null){
 						//alert("first run "+aka);
 						aka = aka.replace(/,\s*$/, "");
+						aka = JSON.parse('"'+aka+'"');
 						gendetail +="<tr><td>Played as</td><td>"+aka+"</td></tr>";
 					}
 					}
@@ -328,6 +330,7 @@ function displayData(userID) {
 					if (aka != null){
 						//alert(aka);
 						aka = aka.replace(/,\s*$/, "");
+						aka = JSON.parse('"'+aka+'"');
 						gendetail +="<tr><td>Played as</td><td>"+aka+"</td></tr>";
 					}
 					//gendetail +="<tr><td>Played as</td><td>"+aka+"</td></tr>";
