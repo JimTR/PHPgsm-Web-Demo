@@ -568,7 +568,7 @@
 		var [option, value] = orig.split(" ");
 		optionid = option.substring(1, option.length);
 		if(typeof value != 'undefined'){
-			alert("non boolean");
+			//alert("non boolean");
 			html = "<tr><td>"+optionid+"</td><td></td><td><input type='text' id='o"+optionid+"' option='"+option+"' orig='"+option+"' value='"+value+"'>'</td><td></td><td>no help</td></tr>";
 			cmd = cmd+" "+option+" "+value;
 			$("#vcmd").text(cmd);
