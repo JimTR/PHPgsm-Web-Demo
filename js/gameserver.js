@@ -310,38 +310,132 @@ function copyDivToClipboard() {
 	}
 	
 	$("input[type='checkbox']").change(function() {
-    if(this.checked) {
-        //Do stuff
-    }
-    else {
-		cmd =$("#scmd").val();
-		original = $(this).attr("orig");
-	    original = $.trim(original);
-	    cmd = cmd.replace(original+" ","");
-		$("#vcmd").text(cmd);
-		$(this).closest('tr').remove();
-		$("#scmd").val(cmd);
+	expression = ($(this).attr('id'));
+	
+	switch(expression) {
+		case 'disable-server':
+		case 'delete-server':
+			chkvalue = $(this).val();
+				if(this.checked) {
+					$(this).val("0");
+					$("#dis-text").val("0");
+				}
+				else {
+					$(this).val("1");
+					$("#dis-text").val("1");
+				}
+				
+				return;
+				break
+		default:
+			if(this.checked) {
+				//Do stuff
+			}
+			else {
+				cmd =$("#scmd").val();
+				original = $(this).attr("orig");
+				original = $.trim(original);
+				cmd = cmd.replace(original+" ","");
+				$("#vcmd").text(cmd);
+				$(this).closest('tr').remove();
+				$("#scmd").val(cmd);
+			}
 	}
 });
 
-$('#omap').on('change', function() {
-		// map typed in
-		cmd =$("#scmd").val();
-		alert(cmd);
-		newopt = $(this).attr("option")+" "+$(this).val();
-		original = $.trim($(this).attr("orig"));
-		//alert ("original "+original+" new "+newopt);
-		x = cmd.replace(original,newopt);
-		$(this).attr("orig",newopt);
-		alert(x);
-		$("#scmd").val(x);
-		$("#vcmd").text(x);
-		if($("#changes").val() =='nothing') {
-		$("#changes").val("change_map");
-		}	
-		else {
-			added = $("#changes").val()+','+'change_map';
+$("input[type='text']").change(function() {
+    expression = ($(this).attr('id'));
+    cmd = $("#scmd").val();
+    //cmd = $.trim(cmd);
+    newopt = $(this).attr("option")+" "+$(this).val();
+    //newopt = $.trim(newopt);
+    original = $(this).attr("orig");
+	original = $.trim(original);
+	option = $(this).attr('option');
+	//option = $.trim('option');
+	change = $("#changes").val();
+    switch(expression) {
+		case 'scmd':
+		case 'onew':
+			//alert (expression+" hit returning");
+			return;
+		case 'ohostname':
+			alert ("host name change");
+			if ($(this).val() === "") {
+				$(this).attr("orig","not set");
+				cmd = cmd.replace(" "+original,"");
+				//alert(x);
+				$("#scmd").val(cmd);
+				newline = cmd.replace(newopt,'"'+newopt+'"'); 
+				$("#vcmd").text(newline);
+				return;
+			}	
+	    		
+			if (original === "not set") {
+				cmd = cmd.replace("+map",newopt+" +map");
+			}
+			else {
+				cmd = cmd.replace(original,newopt);
+			}
+			
+			$(this).attr("orig",newopt)
+			$("#scmd").val(cmd);
+			newline = cmd.replace($(this).val(),'"'+$(this).val()+'"'); 
+			$("#vcmd").text(newline);
+			if($("#changes").val() =='nothing') {
+				$("#changes").val(option);
+			}
+			else {
+				added = change.replace(option,'');
+				added = $.trim(added);
+				added = added+','+option;
+				chr =added.charAt(0); // check for comma 
+				if (chr == ",") {
+					added = added.substring(1, added.length);
+				}
+				$("#changes").val(added);
+			}	
+		break;
+		
+		default:
+		// code block
+		if($(this).val() == '') {
+			// remove the option
+			cmd = cmd.replace(original+" ","");
+			$("#vcmd").text(cmd);
+			$("#scmd").val(cmd);
+			added = change.replace(option,'');
+			chr =added.charAt(0);
+			if (chr == ",") {
+				added = added.substring(1, added.length);
+			}
 			$("#changes").val(added);
+			$(this).closest('tr').remove();
+			
 		}
-		alert("you typed something");
+		else {
+			// update the option
+			cmd = cmd.replace(original+" ",newopt+" ");
+			$(this).attr("orig",newopt)
+			$("#scmd").val(cmd);
+			$("#vcmd").text(cmd);
+			if($("#changes").val() =='nothing') {
+				$("#changes").val(option);
+			}	
+			else {
+				added = change.replace(option,'');
+				added = $.trim(added);
+				added = added+','+option;
+				chr =added.charAt(0); // check for comma 
+				if (chr == ",") {
+					added = added.substring(1, added.length);
+				}
+				$("#changes").val(added);
+			}
+		}
+}
+});
+
+$("#mod_settings").on("hidden.bs.modal", function () {
+    location.reload();
 	});

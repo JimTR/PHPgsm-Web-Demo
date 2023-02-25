@@ -254,19 +254,40 @@
 					</ul>
 					<div class="tab-content pt-2" id="borderedTabContent">
 						<div class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
-							<div class="col-lg-3">
+							<div class="col-lg-6">
 								<table class="table ">
-									<tr><td>Server ID </td><td><!--#host_name#--></td></tr>
-									<tr><td>Mod</td><td><!--#run_stub#--></td></tr>
-									<tr><td>Host IP</td><td><!--#host#--></td></tr>
-									<tr><td>Game Port </td><td><!--#port#--></td></tr>
-									<tr><td>Client Port</td><td><!--#client_port#--></td></tr>
-									<tr><td>TV Port</td><td><!--#source_port#--></td></tr>
-									<tr><td>Disable</td><td><form><input type='checkbox' id='o$option' option='{$tmp1[0]}' value='$value' orig='{$tmp1[0]} $value'></form></td></tr>
-									<tr><td>Delete</td><td><form><input type='checkbox' id='o$option' option='{$tmp1[0]}' value='$value' orig='{$tmp1[0]} $value'></form></td></tr>
+									<tr><td style="width:20%;">Server ID </td><td style="width:40%;"><!--#host_name#--></td><td >??</td></tr>
+									<tr><td>Mod</td><td><!--#run_stub#--></td><td></td></tr>
+									<tr><td>Host IP</td><td><!--#host#--></td><td></td></tr>
+									<tr><td>Game Port </td><td><!--#port#--></td><td></td></tr>
+									<tr><td>Client Port</td><td><!--#client_port#--></td><td></td></tr>
+									<tr><td>TV Port</td><td><!--#source_port#--></td><td></td></tr>
+									<tr>
+										<form id="disable-server" method="POST" action="api.php">
+											<td>Status</td>
+											<td>
+												<input type="hidden" value="setting" name="action"/>
+												<input type="hidden" value="enabled" name="set"/>
+												<input type="hidden" name="server" value="<!--#host_name#-->"/>
+												
+												<!--<input type="checkbox" id="disable-server"  <!--#checked#--> />-->
+												<input class="form-check-input"  style="margin-left:0;" type="radio" name="gridRadios" id="gridRadios1" value="1" checked="checked">
+												<label style="margin-top:5px;width:31%;padding-left:21px;" class="form-check-label" for="gridRadios1">Enabled</label>
+												<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="0" >
+												<label class="form-check-label" style="margin-top:3px;width:31%;padding-left:3px;" for="gridRadios2">Disabled</label>
+												<input  id="dis-text" type="hidden" name="text" value="1" />
+											</td>
+											
+										</form>
+										<td>
+											<div class ="ajax_response" style="margin: 0 0 0 0"  id="disable-response"></div>
+										</td>
+									</tr>
+									<tr><td>Delete</td><td><form><input type='checkbox' id='delete-server'></form></td><td></td></tr>
 								</table>
 								
 							</div>
+							
 						</div>
 					<div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
 						<div style="margin:auto;">
@@ -493,131 +514,149 @@
 		   //alert (file);
 	   });
 	
-$("#ohostname").change(function(){
-	    cmd =$("#scmd").val();
-	    newopt = $(this).attr("option")+" "+$(this).val();
-	    newopt = $.trim(newopt)+" ";
-	    //alert($(this).val());
-	    original = $(this).attr("orig");
-	    original = $.trim(original);
-	    //alert(original);
-	    if ($(this).val() === "") {
-			$(this).attr("orig","not set");
-			x= cmd.replace(" "+original,"");
-			//alert(x);
-			$("#changes").val("remove_hostname");
-			$("#scmd").val(x);
-			newline = x.replace(newopt,'"'+newopt+'"'); 
-			
-			$("#vcmd").text(newline);
-			
-			return;
-		}	
-	    		
-		if (original === "not set") {
-				x = cmd.replace("+map",newopt+" +map");
-		}
-		else {
-			x = cmd.replace(original,newopt);
-		}
-		//alert(x);
-		$(this).attr("orig",newopt)
-		$("#scmd").val(x);
-		newline = x.replace($(this).val(),'"'+$(this).val()+'"'); 
-		$("#vcmd").text(newline);
-		$("#changes").val("add_hostname");
-  });
-  
-  $('#omaxplayers').on('change', function() {
-	cmd =$("#scmd").val();
-	newopt = " "+$(this).attr("option")+" "+$(this).val();
-	original = $(this).attr("orig");
-	$(this).attr("orig",newopt);
-	x = cmd.replace(original,newopt);
-	$("#scmd").val(x);
-	$("#vcmd").text(x);
-	if($("#changes").val() ='nothing') {
-		$("#changes").val("change_players");
-	}
-	else {
-		added = $("#changes").val()+','+'change_players';
-		$("#changes").val(added);
-	}
+ 
+  //$('#omaxplayers').on('change', function() {
+	//cmd =$("#scmd").val();
+	//newopt = " "+$(this).attr("option")+" "+$(this).val();
+	//original = $(this).attr("orig");
+	//$(this).attr("orig",newopt);
+	//x = cmd.replace(original,newopt);
+	//$("#scmd").val(x);
+	//$("#vcmd").text(x);
+	//if($("#changes").val() ='nothing') {
+		//$("#changes").val("change_players");
+	//}
+	//else {
+	//	added = $("#changes").val()+','+'change_players';
+	//	$("#changes").val(added);
+	//}
 	
-	});
-	 $('#map-options').on('change', function() {
-		// change map here
-		cmd =$("#scmd").val();
-		x= cmd.replace($("#omap").val(),$(this).val());
-		$("#omap").val($(this).val());
-		$("#scmd").val(x);
-		$("#vcmd").text(x);
-		newmap = "+map "+$(this).val();
-		newmap = $.trim(newmap);
-		$("#omap").attr("orig",newmap);
-		newmap =" "+newmap;
-		if($("#changes").val() =='nothing') {
-		$("#changes").val("change_map");
-		}	
-		else {
-			added = $("#changes").val()+','+'change_map';
-			$("#changes").val(added);
-		}
-		$("#vcmd").text(x);
-	});
+	//});
 	
-	$('#omp_teamplay').on('change', function() {
-		// team play
-		cmd =$("#scmd").val();
-	    newopt = $(this).attr("option")+" "+$(this).val();
-	    original = $.trim($(this).attr("orig"));
-		alert ("original "+original+" new "+newopt);
-		x = cmd.replace(original,newopt);
-		alert (x);
-		$(this).attr("orig",newopt);
-		$("#scmd").val(x);
-		$("#vcmd").text(x);
-	});
-	$("#mod_settings").on("hidden.bs.modal", function () {
-    location.reload();
-	});
+	// $('#map-options').on('change', function() {
+	//	// change map here
+	//	cmd =$("#scmd").val();
+	//	x= cmd.replace($("#omap").val(),$(this).val());
+	//	$("#omap").val($(this).val());
+	//	$("#scmd").val(x);
+	//	$("#vcmd").text(x);
+	//	newmap = "+map "+$(this).val();
+	//	newmap = $.trim(newmap);
+	//	$("#omap").attr("orig",newmap);
+	//	newmap =" "+newmap;
+	//	if($("#changes").val() =='nothing') {
+	//	$("#changes").val(option);
+	//	}	
+	//	else {
+	//		//added = $("#changes").val()+','+'change_map';
+	//		$("#changes").val(added);
+	//	}
+	//	$("#vcmd").text(x);
+	//});
+		
+	
+	
 	$("#cnew").click(function() {
 		cmd =$("#scmd").val();
+		cmd = $.trim(cmd);
 		orig = $("#onew").val();
 		prefix = orig.charAt(0) ;
 		if ((prefix !== "+" ) && (prefix !== "-"))  {
-			alert("all options must start with either a + or - sign")
+			alert("all options must start with either a + or - sign\n - for command line otions + for CVARS")
 			return;
 		}
 		var [option, value] = orig.split(" ");
+		optionid = option.substring(1, option.length);
 		if(typeof value != 'undefined'){
 			alert("non boolean");
+			html = "<tr><td>"+optionid+"</td><td></td><td><input type='text' id='o"+optionid+"' option='"+option+"' orig='"+option+"' value='"+value+"'>'</td><td></td><td>no help</td></tr>";
+			cmd = cmd+" "+option+" "+value;
+			$("#vcmd").text(cmd);
 			}
 			else{
-				optionid =  option.substring(1, option.length);
 				html = "<tr><td>"+optionid+"</td><td></td><td><input type='checkbox' id='o"+optionid+"' option='"+option+"' orig='"+option+"' checked>'</td><td></td><td>no help</td></tr>";
 				//<td><input type='checkbox' id='o$option' option='{$tmp1[0]}' value='$value' orig='{$tmp1[0]} $value' checked><//td><td></td><td>$help</td></tr> 
-				value="";
+				value=""; // stop undefined later
 				cmd = cmd+" "+option;
-				alert (cmd);
-				$("#scmd").val(cmd);
+			}
+			$("#scmd").val(cmd);
 				if ($("#ohostname").val()) {
 					hoption = $("#ohostname").val();
-					alert(hoption);
+					//alert(hoption);
 					newhopt = '"'+hoption+'"';
 					test = cmd.replace(hoption,newhopt)
-					alert(test);
+					//alert(test);
 					$("#vcmd").text(test);
 				}
-				//$("#vcmd").text(cmd);
-			}
-		alert ("first "+option+" second "+value);
-		 var row = $(this).closest('tr');
-		  var row_index = $(row).index();
-		 alert(row_index);
-		 $('#options-table > tbody > tr').eq(row_index).before(html); //adds new row
-		 $("#onew").val('');
+				else {
+					$("#vcmd").text(cmd);
+				}
+				var row = $(this).closest('tr');
+				var row_index = $(row).index();
+				$('#options-table > tbody > tr').eq(row_index).before(html); //adds new row
+				$("#onew").val('');
+				$("#changes").val = $("#changes").val+','+option;
 	});
+	$('select').on('change', function() {
+	
+	option = $(this).attr("option");
+	newid = option.substring(1, option.length);
+	newopt = $(this).val();
+	//$(this).attr("orig",newopt);
+	newopt = option+" "+newopt;
+	full = $(this).attr('orig');
+	
+	cmd = $("#scmd").val();
+	vcmd = $("#vcmd").text();
+		switch (option){
+			case "+map":
+				full = $(this).attr("option");
+				full = full+" "+$("#o"+newid).val();
+				cmd = cmd.replace(full,newopt);
+				vcmd = vcmd.replace(full,newopt);
+				$("#o"+newid).val($(this).val());
+				
+				break;
+			default:
+				//alert("full = "+full+" new = "+newopt);
+				cmd = cmd.replace(full,newopt);
+				//alert(cmd);
+				vcmd = vcmd.replace(full,newopt);
+				alert ("vcmd = "+vcmd);
+				$(this).attr("orig",newopt);
+	}
+	$("#scmd").val(cmd);
+	$("#vcmd").text(vcmd);
+	});
+$('#disable-server').submit(function(e) {
+	alert("we are here");
+      e.preventDefault();
+        url +="/"+$(this).attr('action');
+        var formValues = $(this).serialize();
+        //alert(formValues+" - "+url);
+       console.log( $(this).attr('action'));
+         
+        $.ajax({
+			
+            type: $(this).attr('method'),
+           url: url,
+            data: formValues,
+            dataType: 'json',
+           success: function(data) {
+			   console.clear();
+                 console.log (data); 
+                 alert (data[0]);   
+               $('#disable-response').html(data[0]);
+                $("#disable-response").show();
+         //      $('#text').val(""); 
+         //       $("#send").blur(); 
+                $('#disable-response').delay(3000).fadeOut('slow');
+           }
+        });
+});
+$('input[name=gridRadios]').on('change', function() {
+	alert($(this).val());
+});
 });
 
 </script>
