@@ -158,7 +158,7 @@ $('#data_table').on('click','.tpButton', function(event) {
 					if (aka != null){
 						//alert("first run "+aka);
 						aka = aka.replace(/,\s*$/, "");
-						aka = JSON.parse('"'+aka+'"');
+						//aka = JSON.parse('"'+aka+'"');
 						gendetail +="<tr><td>Played as</td><td>"+aka+"</td></tr>";
 					}
 					}
@@ -300,7 +300,7 @@ function displayData(userID) {
 							
 							var timestamp =  timeConverter(item.last_play);
 							//return(myDate.toLocaleString());
-							gdetail += "<tr><td>"+item.server_name+"</td><td style='text-align:right;padding-right:10%;'>"+item.log_ons+"</td><td>"+timestamp+"</td><td></td></tr>";
+							gdetail += "<tr><td>"+item.server_name+"</td><td style='text-align:right;padding-right:10%;'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='padding-left:4%;'>"+item.game_time+"</td></tr>";
 							
 							
 						}	
@@ -330,7 +330,7 @@ function displayData(userID) {
 					if (aka != null){
 						//alert(aka);
 						aka = aka.replace(/,\s*$/, "");
-						aka = JSON.parse('"'+aka+'"');
+						//aka = JSON.parse('"'+aka+'"');
 						gendetail +="<tr><td>Played as</td><td>"+aka+"</td></tr>";
 					}
 					//gendetail +="<tr><td>Played as</td><td>"+aka+"</td></tr>";
