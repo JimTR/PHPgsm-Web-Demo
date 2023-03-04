@@ -58,7 +58,7 @@ var data="";
 			item.name = '<span style="text-decoration: line-through;">'+item.name_c+'</span>';
 		}
 		console.log(item.name);
-		enc_name = JSON.parse('"'+item.name_c+'"');
+		enc_name = item.name_c;
 		var last_log = timeConverter(item.last_log_on);
 		items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'" flag="'+item.flag+'"><a href="#">'+enc_name+'</a></td><td>'+last_log+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">'+item.steam_id64+'</a></td></tr>';
 		uni = item.steam_id64;
@@ -128,7 +128,7 @@ $('#data_table').on('click','.tpButton', function(event) {
 							console.log(item.server_name+" is valid");
 							var timestamp =  timeConverter(item.last_play);
 							//return(myDate.toLocaleString());
-							gdetail += "<tr><td>"+item.server_name+"</td><td style='text-align:right;padding-right:10%;'>"+item.log_ons+"</td><td>"+timestamp+"</td><td></td></tr>";
+							gdetail += "<tr><td>"+item.server_name+"</td><td style='text-align:right;padding-right:10%;'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='padding-left:4%;'>"+item.game_time+"</td></tr>";
 							
 							
 						}	
