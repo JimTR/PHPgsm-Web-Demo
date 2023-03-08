@@ -128,7 +128,7 @@ $('#data_table').on('click','.tpButton', function(event) {
 							console.log(item.server_name+" is valid");
 							var timestamp =  timeConverter(item.last_play);
 							//return(myDate.toLocaleString());
-							gdetail += "<tr><td>"+item.server_name+"</td><td style='text-align:right;padding-right:10%;'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='padding-left:4%;'>"+item.game_time+"</td></tr>";
+							gdetail += "<tr><td>"+item.server_name+"</td><td style='text-align:right;padding-right:7%;'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='padding-left:4%;'>"+item.game_time+"</td></tr>";
 							
 							
 						}	
@@ -136,6 +136,7 @@ $('#data_table').on('click','.tpButton', function(event) {
 						man=item.name_c;
 						
 					});
+					gdetail += "<tr><td  class='card-title' colspan=3>Overall Time on Line</td><td style='padding-left:4%;'>"+data.time_on_line+"</td></tr>";
 					console.log(data);
 					//console.log(man);
 					gen_data =players[0];
@@ -144,16 +145,19 @@ $('#data_table').on('click','.tpButton', function(event) {
 					 if (gen_data.banned == 1) {
 						gendetail += '<tr><td>User Status</td><td><span style="color:red;">Banned </span><span style="padding-right:20%;float:right;">Reason '+gen_data.reason+'</span></td></tr>';
 					}
+					
+					gendetail +="<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>";
+					gendetail +='<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>';
 					gendetail += '<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;"  src="'+gen_data.flag+'"></td></tr>'
 					gendetail += "<tr><td>Last Known IP</td><td>"+gen_data.real_ip+"</td></tr>";
 					first_log_on =  timeConverter(gen_data.first_log_on);
 					gendetail +="<tr><td>First Log on</td><td>"+first_log_on+"</td></tr>";
 					first_log_on =  timeConverter(gen_data.last_log_on);
-					gendetail +="<tr><td>Latest Log on</td><td>"+first_log_on+"</td></tr>";
-					gendetail +="<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>";
-					gendetail +='<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>';
+					gendetail +="<tr><td>Last Log on</td><td>"+first_log_on+"</td></tr>";
+					gendetail += "<tr><td>Total Log ons</td><td>"+gen_data.total_log_ons+"</td></tr>";
+					
 					console.log(gen_data);
-					gendetail +="<tr><td>Overall Time on Line</td><td>"+data.time_on_line+"</td></tr>";
+					//gendetail +="<tr><td>Overall Time on Line</td><td>"+data.time_on_line+"</td></tr>";
 					aka = gen_data.aka;
 					if (aka != null){
 						//alert("first run "+aka);
@@ -300,7 +304,7 @@ function displayData(userID) {
 							
 							var timestamp =  timeConverter(item.last_play);
 							//return(myDate.toLocaleString());
-							gdetail += "<tr><td>"+item.server_name+"</td><td style='text-align:right;padding-right:10%;'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='padding-left:4%;'>"+item.game_time+"</td></tr>";
+							gdetail += "<tr><td>"+item.server_name+"</td><td style='text-align:right;padding-right:7%;'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='padding-left:4%;'>"+item.game_time+"</td></tr>";
 							
 							
 						}	
@@ -308,6 +312,7 @@ function displayData(userID) {
 						man=item.name_c;
 						
 					});
+					gdetail += "<tr><td  class='card-title' colspan=3>Overall Time on Line</td><td style='padding-left:4%;'>"+data.time_on_line+"</td></tr>";
 					console.log(data);
 					//console.log(man);
 					gen_data = players[0];
@@ -317,15 +322,16 @@ function displayData(userID) {
 					 if (gen_data.banned == 1) {
 						gendetail += '<tr><td>User Status</td><td><span style="color:red;">Banned </span><span style="padding-right:20%;float:right;">Reason '+gen_data.reason+'</span></td></tr>';
 					}
+					
+					gendetail +="<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>";
+					gendetail +='<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>';
 					gendetail += '<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;width:15%;"  src="'+gen_data.flag+'"></td></tr>'
 					gendetail += "<tr><td>Last Known IP</td><td>"+gen_data.real_ip+"</td></tr>";
 					first_log_on =  timeConverter(gen_data.first_log_on);
 					gendetail +="<tr><td>First Log on</td><td>"+first_log_on+"</td></tr>";
 					first_log_on =  timeConverter(gen_data.last_log_on);
 					gendetail +="<tr><td>Latest Log on</td><td>"+first_log_on+"</td></tr>";
-					gendetail +="<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>";
-					gendetail +='<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>';
-					gendetail +="<tr><td>Overall Time on Line</td><td>"+data.time_on_line+"</td></tr>";
+					//gendetail +="<tr><td>Overall Time on Line</td><td>"+data.time_on_line+"</td></tr>";
 					aka = gen_data.aka;
 					if (aka != null){
 						//alert(aka);
