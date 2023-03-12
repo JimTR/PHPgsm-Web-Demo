@@ -148,7 +148,7 @@ $('#data_table').on('click','.tpButton', function(event) {
 					
 					gendetail +="<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>";
 					gendetail +='<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>';
-					gendetail += '<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;"  src="'+gen_data.flag+'"></td></tr>'
+					gendetail += '<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%; width:11%"  src="'+gen_data.flag+'"></td></tr>'
 					gendetail += "<tr><td>Last Known IP</td><td>"+gen_data.real_ip+"</td></tr>";
 					first_log_on =  timeConverter(gen_data.first_log_on);
 					gendetail +="<tr><td>First Log on</td><td>"+first_log_on+"</td></tr>";
@@ -325,7 +325,7 @@ function displayData(userID) {
 					
 					gendetail +="<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>";
 					gendetail +='<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>';
-					gendetail += '<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;width:15%;"  src="'+gen_data.flag+'"></td></tr>'
+					gendetail += '<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;width:11%;"  src="'+gen_data.flag+'"></td></tr>'
 					gendetail += "<tr><td>Last Known IP</td><td>"+gen_data.real_ip+"</td></tr>";
 					first_log_on =  timeConverter(gen_data.first_log_on);
 					gendetail +="<tr><td>First Log on</td><td>"+first_log_on+"</td></tr>";
