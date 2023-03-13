@@ -136,7 +136,7 @@ $('#data_table').on('click','.tpButton', function(event) {
 						man=item.name_c;
 						
 					});
-					gdetail += "<tr><td  class='card-title' colspan=2>Overall Time on Line</td><td style='padding-right:8%;text-align:right;' colspan=2 >"+data.time_on_line+"</td></tr>";
+					gdetail += "<tr><td  class='card-title' colspan=2>Overall Time on Line</td><td style='padding-right:6.5%;text-align:right;' colspan=2 >"+data.time_on_line+"</td></tr>";
 					console.log(data);
 					//console.log(man);
 					gen_data =players[0];
@@ -312,7 +312,7 @@ function displayData(userID) {
 						man=item.name_c;
 						
 					});
-					gdetail += "<tr><td  class='card-title' colspan=2>Overall Time on Line</td><td style='padding-right:8%;text-align:right;' colspan=2 >"+data.time_on_line+"</td></tr>";
+					gdetail += "<tr><td  class='card-title' colspan=2>Overall Time on Line</td><td style='padding-right:6.5%;text-align:right;' colspan=2 >"+data.time_on_line+"</td></tr>";
 					console.log(data);
 					//console.log(man);
 					gen_data = players[0];
