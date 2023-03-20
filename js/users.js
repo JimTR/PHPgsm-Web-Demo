@@ -373,8 +373,13 @@ function get_steam_data(user_id) {
 		url: url,
 		dataType: "json",
 		success:function(data){
-			console.log(data.avatar);
+			console.log(data);
 			//alert ("success");
+			if (data.frame !== undefined) {
+				console.log("framed image");
+				$("#user-frame").attr("src",data.frame);
+				$("#user-frame").show();
+			}
 			$("#user-avatar").attr("src",data.avatar);	
 			$('#dta').append('<tr><td>Steam Status</td><td>'+data.status+'</td></tr>');
 		},
