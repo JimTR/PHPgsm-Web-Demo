@@ -13,6 +13,34 @@
 		<link href="https://fonts.gstatic.com" rel="preconnect">
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 		<!--#include#-->
+		<style>
+.playerAvatar .profile_avatar_frame {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	 pointer-events: none;
+	 top:-18px;left:-22px;
+	 }
+.playerAvatar.profile_header_size .playerAvatarAutoSizeInner {
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	bottom: 2px;
+	left: 2px;
+	}
+ .playerAvatar.profile_header_size .playerAvatarAutoSizeInner {
+	 position: absolute;
+	 top: 2px;
+	 right: 2px;
+	 bottom: 2px;
+	 left: 2px;
+	 }
+	 .playerAvatar.profile_header_size {
+		 position: relative;
+		 height: 65px;
+	 }
+ </style>
 	</head>
 	<body>
 		<!--#header#-->
@@ -73,10 +101,22 @@
 			<!-- new row -->
 			<div id="editor" class="col-lg-12" style="display:none">
 				<h5 class="card-title">Details For <span id="un"></span></h5>
+				<div style="margin-top:-2%"> 
+					<div style="position:relative;margin-left:93%;">
+					<div class="playerAvatar profile_header_size offline" data-miniprofile="168311066">
+						<div class="playerAvatarAutoSizeInner">
+							<div class="profile_avatar_frame">
+								<img  style="width:109px;display:none;" src="https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/1263950/77a5bfca9dcc44e2e3aaaabea62249407f9f4ec0.png">
+							</div>
+								<img id="user-avatar" style="width:80px;position:absolute;left:-8px;top:-4px;" src="img/blank.png">
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="row">
 				<div class="col-lg-6">
 					<h5>General Details</h5>
-					<table class="table"><tbody id="gen"><tr><td>hello</td><td>me</td></tr></tbody></table>
+					<table id="dta" class="table"><tbody id="gen"><tr><td>hello</td><td>me</td></tr></tbody></table>
 				</div>
 				<div class="col-lg-6">
 					<h5>Server History</h5>

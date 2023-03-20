@@ -198,6 +198,7 @@ $('#data_table').on('click','.tpButton', function(event) {
 		$('#results').hide();	
 		$('#editor').show();
 		console.log("done");
+		get_steam_data(href);
 	});
 	
 	function timeConverter(UNIX_timestamp){
@@ -274,7 +275,7 @@ function displayData(userID) {
 	$("#editor").show();
 	players = data.text;
 	console.log(url);
-	$.ajax({
+		$.ajax({
 				type: 'GET',
 				url: url,
 				//data: sndData,
@@ -357,8 +358,33 @@ function displayData(userID) {
 					$('#results').hide();	
 					$('#editor').show();
 					$('#searchbox').hide();
+					get_steam_data(userID);
 				}
 				
-			});	
+			});
+	}			
+function get_steam_data(user_id) {
+	//alert(user_id);
+	 var url = "steampage.php?id="+user_id;
+	 //alert(window.location.href);
+	 //alert (url);
+	 $.ajax({
+		type: 'GET',
+		url: url,
+		dataType: "json",
+		success:function(data){
+			console.log(data.avatar);
+			//alert ("success");
+			$("#user-avatar").attr("src",data.avatar);	
+			$('#dta').append('<tr><td>Steam Status</td><td>'+data.status+'</td></tr>');
+		},
+		complete:function(data){
+			//alert("complete");
+			//alert(data);
+			//console.log(data);		
+		}
+				
+	});
+}			
 	
-}
+
