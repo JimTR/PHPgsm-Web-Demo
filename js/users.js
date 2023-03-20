@@ -197,6 +197,7 @@ $('#data_table').on('click','.tpButton', function(event) {
 		}
 		$('#results').hide();	
 		$('#editor').show();
+		$("#user-frame").hide();
 		console.log("done");
 		get_steam_data(href);
 	});
@@ -273,6 +274,7 @@ function displayData(userID) {
 	$("#searchbox").hide();
 	$("#results").hide();
 	$("#editor").show();
+	$("#user-frame").hide();
 	players = data.text;
 	console.log(url);
 		$.ajax({
