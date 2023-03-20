@@ -391,6 +391,9 @@ function get_steam_data(user_id) {
 			}
 			$("#user-avatar").attr("src",data.avatar);	
 			$('#dta').append('<tr><td>Steam Status</td><td>'+data.status+'</td></tr>');
+			if (data.steam_date !== undefined) {
+				$('#dta').append('<tr><td>Steam Member Since</td><td>'+data.steam_date+'</td></tr>');
+			}
 		},
 		complete:function(data){
 			//alert("complete");

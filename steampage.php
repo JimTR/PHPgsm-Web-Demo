@@ -12,54 +12,60 @@ foreach ($tmp as $line) {
 	$work[] = trim($line);
 }
 foreach($work as $line) {
-if (str_starts_with($line, $search_string)) {
-preg_match('/<div class="playerAvatar profile_header_size (.*)" (.*)>/', $line, $output);
-$state = trim($output[1]);
-if($state == "offline") {$user_data['status'] = "offline";} else {$user_data['status'] ="online";}
-	//echo "$line\n";
-	$found = true;
-	continue;
-}
-if($found) {
-	if (str_starts_with($line,'<div class="profile_header_badgeinfo">')){
-		$found = false;
-		//die();
+	if (str_starts_with($line, $search_string)) {
+		preg_match('/<div class="playerAvatar profile_header_size (.*)" (.*)>/', $line, $output);
+		$state = trim($output[1]);
+		if($state == "offline") {$user_data['status'] = "offline";} else {$user_data['status'] ="online";}
+		//echo "$line\n";
+		$found = true;
 		continue;
 	}
-//$line = str_replace('<img src=','<img style="width:50px;height:50px;" src=',$line);
-if (str_starts_with($line,'<div class="profile_avatar_frame')) {
-//echo "framed\n";
-$framed =true;
-}
-if ($framed) {
-if (str_starts_with($line,'</div>')){
-//echo "frame finish $line\n";
-$framed = false;
-continue;
-}
-if(strpos($line,"img src")) {
-//echo "image found\n";
-//echo strip_tags($line)."\n";
-$x = str_replace('<img src="','',$line);
-$x = str_replace('">','',$x);
-//echo "$x\n";
-$user_data['frame'] = $x;
-}
-
-}
-else {
-if(strpos($line,"img src")) {
-//echo "image found\n";
-//echo strip_tags($line)."\n";
-$x = str_replace('<img src="','',$line);
-$x = str_replace('">','',$x);
-//echo "$x\n";
-$user_data['avatar'] = $x;
-}
-//echo "$line\n";
-}
-}  
-
+	if($found) {
+		if (str_starts_with($line,'<div class="profile_header_badgeinfo">')){
+			$found = false;
+			//die();
+			continue;
+		}
+		//$line = str_replace('<img src=','<img style="width:50px;height:50px;" src=',$line);
+		if (str_starts_with($line,'<div class="profile_avatar_frame')) {
+			//echo "framed\n";
+			$framed =true;
+		}
+		if ($framed) {
+			if (str_starts_with($line,'</div>')){
+				//echo "frame finish $line\n";
+				$framed = false;
+				continue;
+			}
+			if(strpos($line,"img src")) {
+				//echo "image found\n";
+				//echo strip_tags($line)."\n";
+				$x = str_replace('<img src="','',$line);
+				$x = str_replace('">','',$x);
+				//echo "$x\n";
+				$user_data['frame'] = $x;
+			}
+		}
+		else {
+			if(strpos($line,"img src")) {
+				//echo "image found\n";
+				//echo strip_tags($line)."\n";
+				$x = str_replace('<img src="','',$line);
+				$x = str_replace('">','',$x);
+				//echo "$x\n";
+				$user_data['avatar'] = $x;
+			}
+			//echo "$line\n";
+		}
+	}  
+	$years = strpos($line,'Member since');
+	if ($years !== false) {
+		$steam_date = substr($line,$years);
+		$steam_date = str_replace('." >','',$steam_date);
+		$steam_date = str_replace('Member since ','',$steam_date);
+		//echo "test  $steam_date\n";
+		$user_data['steam_date'] = $steam_date;
+	}
 }
 //echo "</div>";
 //print_r($user_data);
