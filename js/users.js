@@ -197,8 +197,10 @@ $('#data_table').on('click','.tpButton', function(event) {
 		}
 		$('#results').hide();
 		$("#user-frame").attr("src","img/blank.png");	
+		$("#user-avatar").attr("src","img/blank.png");
 		$('#editor').show();
 		$("#user-frame").hide();
+		
 		console.log("done");
 		get_steam_data(href);
 	});
@@ -239,6 +241,8 @@ $( "#go_back" ).click (function() {
 	// need to do a history back
 	 if ($('#user-id').is(':empty')){
 	           console.log("go back");
+				$("#user-frame").attr("src","img/blank.png");
+				$("#user-avatar").attr("src","img/blank.png");
                 $('#editor').hide();
                 $('#searchbox').show();
                 $('#results').show();
@@ -276,6 +280,7 @@ function displayData(userID) {
 	$("#results").hide();
 	$("#editor").show();
 	$("#user-frame").hide();
+	$("#user-avatar").attr("src","img/blank.png");
 	players = data.text;
 	console.log(url);
 		$.ajax({
