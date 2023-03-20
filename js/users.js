@@ -195,7 +195,8 @@ $('#data_table').on('click','.tpButton', function(event) {
 			$('#steam_idb').attr('value',href)
 			
 		}
-		$('#results').hide();	
+		$('#results').hide();
+		$("#user-frame").attr("src","img/blank.png");	
 		$('#editor').show();
 		$("#user-frame").hide();
 		console.log("done");
@@ -357,6 +358,7 @@ function displayData(userID) {
 					$("#gen").html(gendetail);
 					//$('#cflag').attr('src',login)
 					$('#un').html(user)
+					$("#user-frame").attr("src","img/blank.png");
 					$('#results').hide();	
 					$('#editor').show();
 					$('#searchbox').hide();
