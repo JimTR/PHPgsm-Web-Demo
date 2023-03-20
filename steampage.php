@@ -1,6 +1,6 @@
 <?php
 $search_string = "<div class=\"playerAvatar profile_header_size";
-include "../inc/functions.inc.php";
+include "inc/functions.inc.php";
 //$page = file_get_contents("765.dta");
 $found = false;
 $framed = false;
