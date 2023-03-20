@@ -62,6 +62,7 @@ foreach($work as $line) {
 	if ($years !== false) {
 		$steam_date = substr($line,$years);
 		$steam_date = str_replace('." >','',$steam_date);
+		$steam_date = str_replace('.">','',$steam_date);
 		$steam_date = str_replace('Member since ','',$steam_date);
 		//echo "test  $steam_date\n";
 		$user_data['steam_date'] = $steam_date;
