@@ -4,6 +4,7 @@ include "inc/functions.inc.php";
 //$page = file_get_contents("765.dta");
 $found = false;
 $framed = false;
+$ban_process = false;
 $id = $_GET['id'];
 $url= "https://steamcommunity.com/profiles/$id";
 $page = curl($url);
@@ -16,46 +17,35 @@ foreach($work as $line) {
 		preg_match('/<div class="playerAvatar profile_header_size (.*)" (.*)>/', $line, $output);
 		$state = trim($output[1]);
 		if($state == "offline") {$user_data['status'] = "offline";} else {$user_data['status'] ="online";}
-		//echo "$line\n";
 		$found = true;
 		continue;
 	}
 	if($found) {
 		if (str_starts_with($line,'<div class="profile_header_badgeinfo">')){
 			$found = false;
-			//die();
 			continue;
 		}
-		//$line = str_replace('<img src=','<img style="width:50px;height:50px;" src=',$line);
 		if (str_starts_with($line,'<div class="profile_avatar_frame')) {
-			//echo "framed\n";
 			$framed =true;
 		}
 		if ($framed) {
 			if (str_starts_with($line,'</div>')){
-				//echo "frame finish $line\n";
 				$framed = false;
 				continue;
 			}
 			if(strpos($line,"img src")) {
-				//echo "image found\n";
-				//echo strip_tags($line)."\n";
 				$x = str_replace('<img src="','',$line);
 				$x = str_replace('">','',$x);
-				//echo "$x\n";
 				$user_data['frame'] = $x;
 			}
 		}
 		else {
 			if(strpos($line,"img src")) {
-				//echo "image found\n";
-				//echo strip_tags($line)."\n";
 				$x = str_replace('<img src="','',$line);
 				$x = str_replace('">','',$x);
-				//echo "$x\n";
 				$user_data['avatar'] = $x;
 			}
-			//echo "$line\n";
+			
 		}
 	}  
 	$years = strpos($line,'Member since');
@@ -64,7 +54,6 @@ foreach($work as $line) {
 		$steam_date = str_replace('." >','',$steam_date);
 		$steam_date = str_replace('.">','',$steam_date);
 		$steam_date = str_replace('Member since ','',$steam_date);
-		//echo "test  $steam_date\n";
 		$user_data['steam_date'] = $steam_date;
 	}
 	$level = strpos($line,'<span class="friendPlayerLevelNum"');
@@ -73,9 +62,51 @@ foreach($work as $line) {
 		$steam_level =substr($line,$level);
 		$steam_level = str_replace('<span class="friendPlayerLevelNum">','',$steam_level);
 		$steam_level = str_replace('</span></div></div>','',$steam_level);
-		$user_data['steam_level'] = $steam_level;
+		$user_data['steam_level'] = intval($steam_level);
 	}
+	$xp = strpos($line,'<div class="xp">');
+		if($xp !== false) {
+			$steam_xp = str_replace('<div class="xp">','',$line);
+			$steam_xp = str_replace('</div>','',$steam_xp);
+			$user_data['steam_xp'] = $steam_xp;
+		}
+		$ban = strpos($line,'<div class="profile_ban_status">');
+		if($ban !==false) {
+			$ban_process = true;
+			$ban_output = '';
+			// we have a vac ban
+		}	
+		if ($ban_process) {
+			$finish_ban = strpos('<div class="responsive_count_link_area">',$line);
+			if ($finish_ban !== false) {
+				$ban_process = false;
+			}
+			else{
+				$line = trim(preg_replace('/\t/', '', $line));
+				$span_pos = strpos($line,'<span ');
+				if($span_pos) {
+					$line = substr($line,0,$span_pos).", ";
+					$user_data['steam_ban'] = $line;
+					continue;
+				}
+				$x = str2int($line);
+				if ($x >  0) {
+					$line = str_replace("</div>",'',$line);
+					$user_data['steam_ban'] .= $line;
+				}
+			}
+		}
+	
 }
-//echo "</div>";
-//print_r($user_data);
 echo json_encode($user_data).PHP_EOL;
+
+function str2int($string) {
+  $length = strlen($string);   
+  for ($i = 0, $int = ''; $i < $length; $i++) {
+    if (is_numeric($string[$i]))
+        $int .= $string[$i];
+     else break;
+  }
+
+  return (int) $int;
+}

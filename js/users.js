@@ -394,6 +394,12 @@ function get_steam_data(user_id) {
 			if (data.steam_date !== undefined) {
 				$('#dta').append('<tr><td>Steam Member Since</td><td>'+data.steam_date+'</td></tr>');
 			}
+			if (data.steam_ban !== undefined) {
+				$('#dta').append('<tr><td>Steam VAC ban</td><td>'+data.steam_ban+'</td></tr>');
+			}
+			if (data.steam_xp !== undefined) {
+				$('#dta').append('<tr><td>Steam XP Level</td><td>'+data.steam_xp+'</td></tr>');
+			}
 			if (data.steam_level !== undefined) {
 				$('#dta').append('<tr><td>Steam Level</td><td>'+data.steam_level+'</td></tr>');
 			}
