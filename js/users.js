@@ -394,6 +394,9 @@ function get_steam_data(user_id) {
 			if (data.steam_date !== undefined) {
 				$('#dta').append('<tr><td>Steam Member Since</td><td>'+data.steam_date+'</td></tr>');
 			}
+			if (data.steam_level !== undefined) {
+				$('#dta').append('<tr><td>Steam Level</td><td>'+data.steam_level+'</td></tr>');
+			}
 		},
 		complete:function(data){
 			//alert("complete");

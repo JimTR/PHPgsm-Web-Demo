@@ -67,6 +67,14 @@ foreach($work as $line) {
 		//echo "test  $steam_date\n";
 		$user_data['steam_date'] = $steam_date;
 	}
+	$level = strpos($line,'<span class="friendPlayerLevelNum"');
+	if($level !==false) {
+		if(!str_ends_with($line,"</div></div>")) { continue;}
+		$steam_level =substr($line,$level);
+		$steam_level = str_replace('<span class="friendPlayerLevelNum">','',$steam_level);
+		$steam_level = str_replace('</span></div></div>','',$steam_level);
+		$user_data['steam_level'] = $steam_level;
+	}
 }
 //echo "</div>";
 //print_r($user_data);
