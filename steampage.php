@@ -91,8 +91,8 @@ foreach($work as $line) {
 				}
 				$x = str2int($line);
 				if ($x >  0) {
-					$line = str_replace("</div>",'',$line);
-					$user_data['steam_ban'] .= $line;
+					$date_last_banned = date('d-m-y',(strtotime ( "- $x day" , time () ) ));
+					$user_data['steam_ban'] .= "last ban $date_last_banned";
 				}
 			}
 		}
@@ -109,4 +109,13 @@ function str2int($string) {
   }
 
   return (int) $int;
+}
+function days_convert($sum) {
+    $years = floor($sum / 365);
+    $months = floor(($sum - ($years * 365))/30.5);
+    $days = ($sum - ($years * 365) - ($months * 30.5));
+    if ($years >1) {$years .=" years";} else {$years .=" year";}  
+    if ($months >1) {$months .=" months";} else {$months .=" month";}
+    if ($days >1) {$days .=" days";} else {$days .=" day";}
+    return "$years $months $days";
 }
