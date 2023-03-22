@@ -284,11 +284,15 @@ function get_steam_data(user_id) {
 			if (data.steam_ban !== undefined) {
 				$('#dta').append('<tr><td>Steam Bans</td><td style="color:red;">'+data.steam_ban+'</td></tr>');
 			}
-			if (data.steam_xp !== undefined) {
-				$('#dta').append('<tr><td>Steam XP Level</td><td>'+data.steam_xp+'</td></tr>');
-			}
+			//if (data.steam_xp !== undefined) {
+				//$('#dta').append('<tr><td>Steam XP Level</td><td>'+data.steam_xp+'</td></tr>');
+			//}
 			if (data.steam_level !== undefined) {
-				$('#dta').append('<tr><td>Steam Level</td><td>'+data.steam_level+'</td></tr>');
+				level = data.steam_level;
+				if (data.steam_xp !== undefined) {
+				level = level+"  ("+data.steam_xp+")";
+				}
+				$('#dta').append('<tr><td>Steam Level</td><td>'+level+'</td></tr>');
 			}
 		},
 		complete:function(data){
