@@ -22,6 +22,10 @@
  * 
  */
 	include 'inc/master.inc.php';
+	if (isset($_GET['server'])) {
+		// just load this server
+		$display_server = $_GET['server'];
+	}
 $build = "3243-1919938056";
 	$version = "1.000";
 $time = "1663578036";
@@ -60,6 +64,7 @@ $time = "1663578036";
 	
 	//echo $template->get_template();
 	//die();
+	$page['display_server'] =$display_server;
 	$template->replace_vars($page);
 	$template->publish();
 
