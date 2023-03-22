@@ -88,121 +88,8 @@ $('#data_table').on('click','.tpButton', function(event) {
 	    var user = $("#"+href).find("td:first").text();
 	    var login = $("#"+href).find("td:eq(0)").attr("flag");
 	    var url = $('#sendcmd').attr('action')+"?action=search&type=id&text="+href;
-			console.log(url);
-			console.log("login should be "+login);
-			console.log("href is "+href);	
-        if(href) {
-			if(href == 'undefined') {
-				//alert('can not ban an unknown user');
-				$('#error_action').text('Invalid User');
-				$('#error_text').html('You can not view an unknown user<br>This maybe a bot or a user that is curently unknown');
-				$('#error').modal('show');
-				return ;
-			}
-				
-			$.ajax({
-				type: 'GET',
-				url: url,
-				//data: sndData,
-				//cache: false,
-				dataType: "json",
-				//contentType: false,
-				//processData: false,
-				success:function(data){
-					var noe = data.data.length;
-					if(typeof noe == 'undefined') {
-						console.log('no history via noe');
-						//no_history = true;
-					}
-					else {
-						console.log("found "+noe+" records");
-					}	
-					//$('#editor').hide();
-					players = data.data;
-					$.each(players, function(i, item) {
-						if (item.server_name == null) {
-							console.log ("no longer with us");
-							//return true;
-						}
-						else {
-							console.log(item.server_name+" is valid");
-							var timestamp =  timeConverter(item.last_play);
-							//return(myDate.toLocaleString());
-							gdetail += "<tr><td style='width:335px;'>"+item.server_name+"</td><td style='text-align:right;padding-right:7%;'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='padding-left:4%;'>"+item.game_time+"</td></tr>";
-							
-							
-						}	
-						//console.log(item.name_c);
-						man=item.name_c;
-						
-					});
-					gdetail += "<tr><td ><h6  class='card-title' style='padding:0;'>Overall Time on Line</h6></td><td style='padding-right:6.5%;text-align:right;' colspan=3>"+data.time_on_line+"</td></tr>";
-					console.log(data);
-					//console.log(man);
-					gen_data =players[0];
-					if(typeof data.data.error == 'undefined') {
-											
-					 if (gen_data.banned == 1) {
-						gendetail += '<tr><td>User Status</td><td><span style="color:red;">Banned </span><span style="padding-right:20%;float:right;">Reason '+gen_data.reason+'</span></td></tr>';
-					}
-					
-					gendetail +="<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>";
-					gendetail +='<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>';
-					gendetail += '<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%; width:11%"  src="'+gen_data.flag+'"></td></tr>'
-					gendetail += "<tr><td>Last Known IP</td><td>"+gen_data.real_ip+"</td></tr>";
-					first_log_on =  timeConverter(gen_data.first_log_on);
-					gendetail +="<tr><td>First Log on</td><td>"+first_log_on+"</td></tr>";
-					first_log_on =  timeConverter(gen_data.last_log_on);
-					gendetail +="<tr><td>Last Log on</td><td>"+first_log_on+"</td></tr>";
-					gendetail += "<tr><td>Total Log ons</td><td>"+gen_data.total_log_ons+"</td></tr>";
-					
-					console.log(gen_data);
-					//gendetail +="<tr><td>Overall Time on Line</td><td>"+data.time_on_line+"</td></tr>";
-					aka = gen_data.aka;
-					if (aka != null){
-						//alert("first run "+aka);
-						aka = aka.replace(/,\s*$/, "");
-						//aka = JSON.parse('"'+aka+'"');
-						gendetail +="<tr><td>Played as</td><td>"+aka+"</td></tr>";
-					}
-					}
-					else {
-						gendetail ='<tr><td>no data found for this user</td></tr>';
-					}
-				},
-				 complete:function(data){
-					//setTimeout(index(url),7000);
-					//console.log("complete "+man);
-					//console.log(gendetail);
-					$("#gd1").html(gdetail);
-					$("#gen").html(gendetail);
-					//$('#cflag').attr('src',login)
-					$('#un').html(user)
-					$('#results').hide();	
-					$('#editor').show();
-					$('#searchbox').hide();
-				}
-				
-			});	
-			//console.log("end name set to "+man);
-			
-        	$('#name').attr('value',user)
-			//$('#ip').attr('value',ip)
-			//un = un+" !";
-			$('#un').html(user)
-			$('#steam_id').attr('text',href)
-			//$('#ipb').attr('value',ip)
-			$('#steam_idb').attr('value',href)
-			
-		}
-		$('#results').hide();
-		$("#user-frame").attr("src","img/blank.png");	
-		$("#user-avatar").attr("src","img/blank.png");
-		$('#editor').show();
-		$("#user-frame").hide();
+		displayData(href);
 		
-		console.log("done");
-		get_steam_data(href);
 	});
 	
 	function timeConverter(UNIX_timestamp){
@@ -321,7 +208,7 @@ function displayData(userID) {
 						man=item.name_c;
 						
 					});
-					gdetail += "<tr><td  class='card-title'><h6  class='card-title' style='padding:0;'>Overall Time on Line</h6></td><td style='padding-right:6.5%;text-align:right;' colspan=3>"+data.time_on_line+"</td></tr>";
+					gdetail += "<tr><td  class='card-title'><h6  class='card-title' style='padding:0;'>Overall Time on Line</h6></td><td style='padding-right:6.5%;text-align:right;vertical-align:top;' colspan=3>"+data.time_on_line+"</td></tr>";
 					console.log(data);
 					//console.log(man);
 					gen_data = players[0];
