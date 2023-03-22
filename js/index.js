@@ -151,7 +151,7 @@ function online(url){
 						server.Players = 0;
 					}   
 					$("#img"+server_id).attr("src",logo);
-					$('#cmap'+server_id).html(server.Map+" ("+server.ModDesc+")");
+					$('#cmap'+server_id).html(server.Map);
 					$('#host'+server_id).html(server.server_name);
 					$('#gdate'+server_id).html(server.r_time);
 					real_players = server.Players - server.Bots;
