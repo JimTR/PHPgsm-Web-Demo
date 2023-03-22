@@ -128,7 +128,7 @@ $('#data_table').on('click','.tpButton', function(event) {
 							console.log(item.server_name+" is valid");
 							var timestamp =  timeConverter(item.last_play);
 							//return(myDate.toLocaleString());
-							gdetail += "<tr><td>"+item.server_name+"</td><td style='text-align:right;padding-right:7%;'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='padding-left:4%;'>"+item.game_time+"</td></tr>";
+							gdetail += "<tr><td style='width:335px;'>"+item.server_name+"</td><td style='text-align:right;padding-right:7%;'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='padding-left:4%;'>"+item.game_time+"</td></tr>";
 							
 							
 						}	
@@ -313,7 +313,7 @@ function displayData(userID) {
 							
 							var timestamp =  timeConverter(item.last_play);
 							//return(myDate.toLocaleString());
-							gdetail += "<tr><td>"+item.server_name+"</td><td style='text-align:right;padding-right:7%;'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='padding-left:4%;'>"+item.game_time+"</td></tr>";
+							gdetail += "<tr><td style='width:335px;'>"+item.server_name+"</td><td style='text-align:right;padding-right:7%;'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='padding-left:4%;'>"+item.game_time+"</td></tr>";
 							
 							
 						}	
@@ -341,7 +341,7 @@ function displayData(userID) {
 					first_log_on =  timeConverter(gen_data.last_log_on);
 					gendetail +="<tr><td>Latest Log on</td><td>"+first_log_on+"</td></tr>";
 					//gendetail +="<tr><td>Overall Time on Line</td><td>"+data.time_on_line+"</td></tr>";
-					aka = gen_data.aka;
+					aka =JSON.parse('"'+gen_data.aka+'"');
 					if (aka != null){
 						//alert(aka);
 						aka = aka.replace(/,\s*$/, "");
