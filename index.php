@@ -28,7 +28,7 @@ $servers = $database->get_results($sql);
 $gd ='';
 foreach ($servers as $server) {
 	$fname = trim($server['host_name']);
-	$href = "gameserver.php?server=$fname";
+	$href = "console.php?server=$fname";
 		//if(!$server['enabled']) {
 			//$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'" style="color:red;"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 			//continue;
