@@ -4,8 +4,9 @@
 		var path='';
 		var type='Source';
 		var host= '';
+		var server='';
 		$(document).ready(function() {
-			console.log('hit this');
+			console.log('hit that');
 			$( "#buttonr" ).click(function() {
 			$("#buttonr").blur();   
 			$("#rules").toggle();
