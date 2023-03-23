@@ -1,4 +1,9 @@
 <?php
+require 'inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
+	use xPaw\SourceQuery\SourceQuery;
+	define( 'SQ_TIMEOUT',    3 );
+	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
+	$xpaw = new SourceQuery( );
 $search_string = "<div class=\"playerAvatar profile_header_size";
 include "inc/functions.inc.php";
 //$page = file_get_contents("765.dta");
@@ -95,6 +100,45 @@ foreach($work as $line) {
 					$user_data['steam_ban'] .= "last ban $date_last_banned";
 				}
 			}
+		}
+		$in_game = strpos($line,'<div class="profile_in_game persona in-game">');
+		if($in_game !==false) {
+			$in_game_process = true;
+		}
+		if($in_game_process) {
+			$finish_in_game = strpos($line,'<div class="responsive_count_link_area">');
+			$in_game_process = false;
+		}
+		else {
+			$line = trim(preg_replace('/\t/', '', $line));
+			if (str_starts_with($line,'<div class="profile_in_game_name">')) {
+				$tmp = str_replace('<div class="profile_in_game_name">','',$line);
+				$tmp = str_replace('</div>','',$tmp);
+				$user_data['in_game'] = $tmp;
+				
+			}
+			if (str_starts_with($line,'<a href="steam://connect/')) {
+				$tmp = str_replace('<a href="steam://connect/','',$line);
+				$tmp = str_replace('" class="btn_green_white_innerfade btn_small_thin">','',$tmp);
+				$user_data['current_server'] = $tmp;
+				$tmp = explode(":",$tmp);
+				try
+					{
+						$xpaw->Connect( $tmp[0], $tmp[1], SQ_TIMEOUT, SQ_ENGINE );
+						$sub_cmd = 'GetInfo';
+						$info = $xpaw->GetInfo();
+					}
+				catch( Exception $e )
+					{
+						$Exception = $e;
+						if (strpos($Exception,'Failed to read any data from socket')) {
+							$Exception = 'Failed to read any data from socket Module (Ajax - Game Detail '.$sub_cmd.')';
+						}
+					}
+					$xpaw->Disconnect();
+					if(isset($info['HostName'])) { $user_data['current_host'] = $info['HostName'];}
+			}
+				
 		}
 	
 }

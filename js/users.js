@@ -229,6 +229,9 @@ function get_steam_data(user_id) {
 				}
 				$('#dta').append('<tr><td>Steam Level</td><td>'+level+'</td></tr>');
 			}
+			if(data.in_game !== undefined) {
+				$('#dta').append('<tr><td>Currently Playing</td><td>'+data.in_game+' ('+data.current_host+')</td></tr>');
+			}
 		},
 		complete:function(data){
 		}
