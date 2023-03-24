@@ -56,14 +56,17 @@
 					<div class="card-body">
 						<div class="row">
 							<div class="col-lg-6" id="searchbox">
-								<h5 class="card-title" style="margin-left:1%;">Player Statistics</h5>
+								<h5 class="card-title" style="margin-left:1%;">Period Statistics</h5>
 								<form id="sendcmd"  action="<!--#url#-->/api.php" method="get">
 									<input type="hidden" id="action" name="action" value="stats">
 									<table class="table">
-										<tr><td style="width:16%;">Start Date</td><td><input style="width:28%;" type="date" class="form-control" id="start" name="server"  value="<!--#today#-->"data-date-format="yyyy-mm-dd" ></td></tr>
-										<tr><td style="border-top:0px">End Date</td><td style="border-top:0px"><input style="width:28%;" type="date" class="form-control" id="finish" name="filter"  value ="<!--#today#-->" data-date-format="yyyy-mm-dd"  ></td></tr>
-										<tr>
-											<td style="border-top:0px;" colspan=2>
+										<tr><td style="width:16%;border-style:none;">Start Date</td><td style="border-style:none;"><input style="width:28%;" type="date" class="form-control" id="start" name="server"  value="<!--#today#-->"data-date-format="yyyy-mm-dd" ></td></tr>
+										<tr style="border-top:0px;border-style:none;">
+											<td style="border-top:0px;border-style:none;">End Date</td>
+											<td style="border-top:0px;border-style:none;"><input style="width:28%;" type="date" class="form-control" id="finish" name="filter"  value ="<!--#today#-->" data-date-format="yyyy-mm-dd"  ></td>
+										</tr>
+										<tr style="border-top:0px;border-style:none;">
+											<td style="border-top:0px;border-style:none;" colspan=2>
 												<span style="margin-left:23%;">
 													<input class ="btn btn-primary" type ="submit" id="send" name="send" value ="Go"/>
 												</span>
