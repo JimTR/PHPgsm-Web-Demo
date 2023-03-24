@@ -51,177 +51,156 @@
 				</nav>
 			</div><!-- End Page Title -->
 		<section class="section">
-			<div class="col-lg12">
+			<div class="col-lg12" id="search">
 				<div class="card">
 					<div class="card-body">
-				<div class="row">
-					<h5 class="card-title">Player Statistics</h5>
-				<div class="col-lg-6" id="searchbox">
-					
-					<form id="sendcmd" style="width:100%;float:left;" action="<!--#url#-->/api.php" method="get">
-					<!--<div class="input-group">-->
-							<div class="row mb-3">
-                			<label for="inputDate" class="col-sm-2 col-form-label">Start Date</label>
-							<div class="col-sm-3">
-							<input type="date" class="form-control" id="start" name="server"  value="<!--#today#-->"data-date-format="yyyy-mm-dd" >
-							</div>
-							 <input type="hidden" id="action" name="action" value="stats">
-							</div>
-							<div class ="row mb-3">
-							<label for="inputDate" class="col-sm-2 col-form-label">End Date</label>
-							<div class="col-sm-3">
-								<input type="date" class="form-control" id="finish" name="filter"  value ="<!--#today#-->" data-date-format="yyyy-mm-dd"  >
-							</div>
-							</div>
-							<!--</div>
-					<!--</div>-->	
-					<div class ="row">
-						<div class="col-sm-3">
-					<input class ="btn btn-primary" type ="submit" id="send" name="send"/>
+						<div class="row">
+							<div class="col-lg-6" id="searchbox">
+								<h5 class="card-title" style="margin-left:1%;">Player Statistics</h5>
+								<form id="sendcmd"  action="<!--#url#-->/api.php" method="get">
+									<input type="hidden" id="action" name="action" value="stats">
+									<table class="table">
+										<tr><td style="width:16%;">Start Date</td><td><input style="width:28%;" type="date" class="form-control" id="start" name="server"  value="<!--#today#-->"data-date-format="yyyy-mm-dd" ></td></tr>
+										<tr><td style="border-top:0px">End Date</td><td style="border-top:0px"><input style="width:28%;" type="date" class="form-control" id="finish" name="filter"  value ="<!--#today#-->" data-date-format="yyyy-mm-dd"  ></td></tr>
+										<tr>
+											<td style="border-top:0px;" colspan=2>
+												<span style="margin-left:23%;">
+													<input class ="btn btn-primary" type ="submit" id="send" name="send" value ="Go"/>
+												</span>
+											</td>
+										</tr>
+									</table>	
+								</form>
+								</div>
+								<div class="col-lg-6" id="stats">
+									<h5 class="card-title" style="margin-left:1%;">General Statistics</h5>
+									<table class="table">
+										<tr><td>Top County</td><td><!--#country#--></td><td><!--#country_stat#--></td></tr>
+										<tr><td>Top Time Online</td><td><!--#time_online#--></td><td><!--#time_online_count#--></td></tr>
+										<tr><td>Top Logins</td><td><!--#most_log_ons#--></td><td><!--#log_on_count#--></td></tr>
+									</table>	
+								</div>
+						</div>
 					</div>
+				</div>	
+			</div>
+			<div class="col-lg-12" style="display:none;" id="results">
+				<div class="card">
+					<div class="card-body">
+						<div class="row">
+							<h5 class="card-title" style="margin-left:1%;">Results</h5>
+							<p>Players for the period from <span id="starter"></span> to <span id="finisher"></span>  Total <span  id="count"></span></p> 
+							<div class="table-wrapper" style="max-height:400px;">
+								<table class="table table-sml" style="position: relative;">
+									<thead>
+										<tr style="padding-bottom:6px;">
+											<th  style="width:25%;" class="table-header" >User</th>
+											<th  class="table-header" >Location</th>
+											<th class="table-header">Last Log On</th>
+											<th class="table-header">Profile Link</th>
+										</tr>
+									</thead>	
+									<tbody id="data_table"></tbody>
+								</table>
+					 		</div>
+							<div class="col-lg-12" style="margin-top:20px;text-align:right;"> 
+								<button id="go_back" type="button" class="btn btn-success">Go Back</button>
+							</div>	
+						</div>
 					</div>
-				</form>
 				</div>
-				<div class="col-lg-12" style="display:none;" id="results">
-					<h5 class="card-title">Results</h5>
-					<p>Players for the period from <span id="starter"></span> to <span id="finisher"></span>  Total <span  id="count"></span></p> 
-					<!--<table class="table table-sml">
-					<tr>
-						<th>Player</th>
-						<th>Last Log On</th>
-						<th>Profile Link</th>
-					</tr>
-					</table> -->
-					<div class="table-wrapper" style="max-height:400px;">
-	
-					<table class="table table-sml" style="position: relative;">
-						<thead>
-							<tr style="padding-bottom:6px;">
-								<th  style="width:25%;" class="table-header" >User</th>
-								<th  class="table-header" >Location</th>
-								<th class="table-header">Last Log On</th>
-								<th class="table-header">Profile Link</th>
-							</tr>
-						</thead>	
-						<tbody id="data_table"></tbody>
-					</table>
-					 <!-- end row 1 -->
-					 </div>
-					 <div class="col-lg-12" style="margin-top:20px;text-align:right;"> 
-						 <button id="go_back" type="button" class="btn btn-success">Go Back</button>
-			</div>	
-			</div>	  <!-- Template Main JS File -->
+			</div>
+		</section>					
 			<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
    <script src = "js/jquery.js"></script>
    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <script src = "assets/js/main.js"></script>
    <!--<script src = "js/console.js"></script>-->
  <script>
-	 var gdetail='';
- $('#sendcmd').on('submit', function(e) {
-    e.preventDefault();
-    var items='';
-    var url = $(this).attr('action');
-    $("#data_table").html(items);
-    var sndData = $('#sendcmd input').serialize();
-    console.log(sndData);
-    $.ajax({
-    type: $(this).attr('method'),
-    url: $(this).attr('action'),
-    data: sndData,
-    //cache: false,
-    dataType: "json",
-    //contentType: false,
-    //processData: false,
-    success:  function(data){
-		console.log(data);
-		if (data.count ==  0) {
-			return
-		}
-		$("#searchbox").css("display","none");
-		$("#results").css("display","block");
-		console.log(data.start);
-		$('#count').html(data.count);
-		$('#starter').html(data.start);
-		$('#finisher').html(data.finish);
-		player = data.results;
-		$.each(player, function(i, item) {
-						
-							//console.log("is valid");
-							var timestamp =  timeConverter(item.last_log_on);
-							//return(myDate.toLocaleString());
-							gdetail += "<tr><td><a href='"+'users.php?id='+item.steam_id64+"'>"+item.name_c+"</a></td><td style='padding-left:2%;'><img  style='width:40px;' src='"+item.flag+"' title='"+item.country+"'></td><td>"+timestamp+"</td><td>" ;
-							gdetail +='<a href=http://steamcommunity.com/profiles/'+item.steam_id64+' target="_blank">'+item.steam_id64+'</a></td></tr>';
-							
-							
-							
-						//console.log(item.name_c);
+	var gdetail='';
+	$('#sendcmd').on('submit', function(e) {
+		e.preventDefault();
+		var items='';
+		var url = $(this).attr('action');
+		$("#data_table").html(items);
+		var sndData = $('#sendcmd input').serialize();
+		console.log(sndData);
+		$.ajax({
+			type: $(this).attr('method'),
+			url: $(this).attr('action'),
+			data: sndData,
+			dataType: "json",
+			success:  function(data){
+				//console.log(data);
+				if (data.count ==  0) {return}
+					$("#search").css("display","none");
+					$("#results").css("display","block");
+					console.log(data.start);
+					$('#count').html(data.count);
+					$('#starter').html(data.start);
+					$('#finisher').html(data.finish);
+					player = data.results;
+					$.each(player, function(i, item) {
+						var timestamp =  timeConverter(item.last_log_on);
+						gdetail += "<tr><td><a href='"+'users.php?id='+item.steam_id64+"'>"+item.name_c+"</a></td><td style='padding-left:2%;'><img  style='width:40px;' src='"+item.flag+"' title='"+item.country+"'></td><td>"+timestamp+"</td><td>" ;
+						gdetail +='<a href=http://steamcommunity.com/profiles/'+item.steam_id64+' target="_blank">'+item.steam_id64+'</a></td></tr>';
 						man=item.name_c;
-						
 					});
 					$("#data_table").html(gdetail);
-		console.log(gdetail)
-	},
-     error: function(XMLHttpRequest, textStatus, errorThrown) {
-        alert('failed '+textStatus);
-    }
-    });
-});
-	function timeConverter(UNIX_timestamp){
-  var a = new Date(UNIX_timestamp * 1000);
-  var months = ['January','Febuary','March','April','May','June','July','August','September','October','November','December'];
-  var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  var year = a.getFullYear();
-  var month = months[a.getMonth()];
-  var day = weekday[a.getDay()];
-  var date = a.getDate();
-  var hour = a.getHours();
-  var timeOfDay = ( hour < 12 ) ? "am" : "pm"; 
-  currentHours = ( hour > 12 ) ? hour - 12 : hour;
-     // Convert an hours component of "0" to "12"
-    
-  //hour = ( currentHours == 0 ) ? 12 : currentHours;
- 
-  //var date = dateOrdinal(date);
-  var d = a.getDate();
+					//console.log(gdetail)
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				alert('failed '+textStatus);
+			}
+		});
+	});
+function timeConverter(UNIX_timestamp){
+	var a = new Date(UNIX_timestamp * 1000);
+	var months = ['January','Febuary','March','April','May','June','July','August','September','October','November','December'];
+	var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+	var year = a.getFullYear();
+	var month = months[a.getMonth()];
+	var day = weekday[a.getDay()];
+	var date = a.getDate();
+	var hour = a.getHours();
+	var timeOfDay = ( hour < 12 ) ? "am" : "pm"; 
+	currentHours = ( hour > 12 ) ? hour - 12 : hour;
+	var d = a.getDate();
 	var d1 =a.getHours();
-//console.log(currentHours);
-var d = ('0'+d).slice(-2);
+	var d = ('0'+d).slice(-2);
 	var m = a.getMonth()+1;
-var m = ('0'+m).slice(-2);
-
-var hour =('0'+hour).slice(-2);
-        //m += 1;  // JavaScript months are 0-11
-	var y = a.getFullYear();
-  var min = ('0'+a.getMinutes()).slice(-2);
-  var sec = a.getSeconds();
-
-  var time = d+ '-' + m + '-' + y + ' ' + hour + ':' + min ;
-  return time;
+	var m = ('0'+m).slice(-2);
+	var hour =('0'+hour).slice(-2);
+    var y = a.getFullYear();
+	var min = ('0'+a.getMinutes()).slice(-2);
+	var sec = a.getSeconds();
+	var time = d+ '-' + m + '-' + y + ' ' + hour + ':' + min ;
+	return time;
 }
 $( "#go_back" ).click (function() {
-                console.log("go back");
-                $('#results').hide();
-                $('#searchbox').show();
-                //$('#results').show();
-                //$('#text').val("");
-                $("#data_table").empty();
-				$("#gen").empty();
-				gendetail="";
-				gdetail="";
-            });	
-            $('th').click(function(){
-    var table = $(this).parents('table').eq(0)
-    var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
-    this.asc = !this.asc
-    if (!this.asc){rows = rows.reverse()}
-    for (var i = 0; i < rows.length; i++){table.append(rows[i])}
+	var rowCount = $('#data_table tr').length;
+	console.log(rowCount);
+	$('#results').hide();
+	$('#search').show();
+	$("#data_table").empty();
+	$("#gen").empty();
+	gendetail="";
+	gdetail="";
+});	
+$('th').click(function(){
+	var table = $(this).parents('table').eq(0)
+	var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+	this.asc = !this.asc
+	if (!this.asc){rows = rows.reverse()}
+		for (var i = 0; i < rows.length; i++){table.append(rows[i])}
 })
+
 function comparer(index) {
     return function(a, b) {
         var valA = getCellValue(a, index), valB = getCellValue(b, index)
         return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
     }
 }
+
 function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
  </script>
