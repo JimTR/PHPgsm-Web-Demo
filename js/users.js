@@ -232,7 +232,7 @@ function get_steam_data(user_id) {
 			if(data.in_game !== undefined) {
 				in_game = data.in_game;
 				if(data.current_host !== undefined) {
-					in_game += '('+data.current_host+')';
+					in_game += ' ('+data.current_host+')';
 				}
 				$('#dta').append('<tr><td>Currently Playing</td><td>'+in_game+'</td></tr>');
 			}
