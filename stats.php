@@ -46,7 +46,8 @@ $sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as
 $stats = $database->get_results($sql);
 $page['most_log_ons'] = "<a href='users.php?id={$stats[0]['steam_id']}'>{$stats[0]['user_name']}</a>";
 $page['log_on_count'] = $stats[0]['total_logins'];
-$sql ="SELECT player_history.game, servers.server_name, sum(player_history.log_ons) as total,sum(game_time) FROM `player_history` left join `servers` on `servers`.`host_name` = player_history.game group by game order by total DESC limit 1;";
+//$sql ="SELECT player_history.game, servers.server_name, sum(player_history.log_ons) as total,sum(game_time) FROM `player_history` left join `servers` on `servers`.`host_name` = player_history.game group by game order by total DESC limit 1;";
+$sql = "SELECT servers.server_name,player_history.game as server_id,count(player_history.`game`) as total FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.`game` order by total desc limit 1;";
 $stats = $database->get_results($sql);
 $page['most_popular'] = $stats[0]['server_name'];
 $page['most_popular_count'] = $stats[0]['total'];
