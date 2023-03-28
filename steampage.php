@@ -92,7 +92,7 @@ foreach($work as $line) {
 				$span_pos = strpos($line,'<span ');
 				if($span_pos) {
 					$line = substr($line,0,$span_pos).", ";
-					$user_data['steam_ban'] = $line;
+					$user_data['steam_ban'] .= $line;
 					continue;
 				}
 				$x = str2int($line);
