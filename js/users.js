@@ -43,7 +43,7 @@ $('#sendcmd').on('submit', function(e) {
 			if (item.steam_id64 == uni) {return true;}
 			if(item.banned == 1) { 
 				console.log("banned "+item.name);
-				item.name = '<span style="text-decoration: line-through;">'+item.name_c+'</span>';
+				item.name_c = '<span style="text-decoration: line-through;">'+item.name_c+'</span>';
 			}
 			console.log(item.name);
 			enc_name = item.name_c;
