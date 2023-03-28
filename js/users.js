@@ -170,7 +170,8 @@ function displayData(userID) {
 			first_log_on =  timeConverter(gen_data.first_log_on);
 			last_log_on =  timeConverter(gen_data.last_log_on);
 			if(typeof data.data.error == 'undefined') {
-				if (gen_data.banned == 1) {$('#dta').append('<tr><td>User Status</td><td><span style="color:red;">Banned </span><span style="padding-right:20%;float:right;">Reason '+gen_data.reason+'</span></td></tr>');}
+				if(typeof data.data.reason == 'undefined') { reason = '';} else {reason = gen_data.reason;}
+				if (gen_data.banned == 1) {$('#dta').append('<tr><td>User Status</td><td><span style="color:red;">Banned </span><span style="padding-right:20%;float:right;">Reason '+reason+'</span></td></tr>');}
 				$('#dta').append("<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>");
 				$('#dta').append('<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>');
 				$('#dta').append('<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;width:11%;"  src="'+gen_data.flag+'"></td></tr>');
