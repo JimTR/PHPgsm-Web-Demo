@@ -85,6 +85,7 @@ foreach($work as $line) {
 			$finish_ban = strpos('<div class="responsive_count_link_area">',$line);
 			if ($finish_ban !== false) {
 				$ban_process = false;
+				$user_data['steam_ban'] .= "last ban $date_last_banned";
 			}
 			else{
 				$line = trim(preg_replace('/\t/', '', $line));
@@ -95,9 +96,9 @@ foreach($work as $line) {
 					continue;
 				}
 				$x = str2int($line);
-				if ($x >  0) {
+				if (is_numeric($x) ) {
 					$date_last_banned = date('d-m-y',(strtotime ( "- $x day" , time () ) ));
-					$user_data['steam_ban'] .= "last ban $date_last_banned";
+					
 				}
 			}
 		}
