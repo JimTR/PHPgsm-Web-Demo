@@ -97,7 +97,9 @@ foreach($work as $line) {
 				}
 				$x = str2int($line);
 				if (is_numeric($x) ) {
-					$date_last_banned = date('d-m-y',(strtotime ( "- $x day" , time () ) ));
+					$second += (($x * 24 + 0) * 60 + 0) * 60;
+					$ts = time() - $second;	
+					$date_last_banned = date('d-m-y',$ts);
 					
 				}
 			}
