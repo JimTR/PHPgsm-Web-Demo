@@ -205,7 +205,9 @@ function displayData(userID) {
 					$('#dta').append('<tr><td style="width:30%;">Banned By</td><td>'+admin+'</td></tr>');
 					$('#dta').append('<tr><td>Reason</td><td>'+reason+'</td></tr>');
 					user =  '<span style="text-decoration: line-through;">'+gen_data.name_c+'</span>';
+					$('#un').html(user)
 					}
+					
 			$('#editor').show();
 		}
 				
