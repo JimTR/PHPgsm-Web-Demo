@@ -174,11 +174,7 @@ function displayData(userID) {
 					admin = gen_data.admin+" on "+gen_data.created;
 					reason = gen_data.reason;
 					}
-				if (gen_data.banned == 1) {
-					$('#dta').append('<tr><td style="width:30%;">Banned By</td><td>'+admin+'</td></tr>');
-					$('#dta').append('<tr><td>Reason</td><td>'+reason+'</td></tr>');
-					user =  '<span style="text-decoration: line-through;">'+gen_data.name_c+'</span>';
-					}
+				
 				$('#dta').append("<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>");
 				$('#dta').append('<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>');
 				$('#dta').append('<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;width:11%;"  src="'+gen_data.flag+'"></td></tr>');
@@ -203,6 +199,13 @@ function displayData(userID) {
 			$('#results').hide();	
 			$('#searchbox').hide();
 			get_steam_data(userID);
+			//data.data;
+			//gen_data = [0];
+			if (gen_data.banned == 1) {
+					$('#dta').append('<tr><td style="width:30%;">Banned By</td><td>'+admin+'</td></tr>');
+					$('#dta').append('<tr><td>Reason</td><td>'+reason+'</td></tr>');
+					user =  '<span style="text-decoration: line-through;">'+gen_data.name_c+'</span>';
+					}
 			$('#editor').show();
 		}
 				
