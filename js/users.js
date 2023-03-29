@@ -170,7 +170,7 @@ function displayData(userID) {
 			first_log_on =  timeConverter(gen_data.first_log_on);
 			last_log_on =  timeConverter(gen_data.last_log_on);
 			if(typeof data.data.error == 'undefined') {
-				if(typeof gen_data.reason == 'undefined') { reason = '';} else {reason = gen_data.reason+"<div style='padding-top:1%;'>Admin : "+gen_data.admin+" on "+gen_data.created+"</div>";}
+				if(typeof gen_data.reason == 'undefined') { reason = '';} else {reason = "<div style='padding-top:1%;'>Banned By : "+gen_data.admin+" on "+gen_data.created+"</div>"+gen_data.reason;}
 				if (gen_data.banned == 1) {
 					$('#dta').append('<tr><td style="width:30%;"><span style="color:red;">Banned </span></td><td><div  style="word-wrap:break-word;"> '+reason+'</div></td></tr>');
 					user =  '<span style="text-decoration: line-through;">'+gen_data.name_c+'</span>';
