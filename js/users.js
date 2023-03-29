@@ -171,7 +171,10 @@ function displayData(userID) {
 			last_log_on =  timeConverter(gen_data.last_log_on);
 			if(typeof data.data.error == 'undefined') {
 				if(typeof gen_data.reason == 'undefined') { reason = '';} else {reason = gen_data.reason+" by "+gen_data.admin+" on "+gen_data.created;}
-				if (gen_data.banned == 1) {$('#dta').append('<tr><td><span style="color:red;">Banned </span></td><td><span> '+reason+'</span></td></tr>');}
+				if (gen_data.banned == 1) {
+					$('#dta').append('<tr><td><span style="color:red;">Banned </span></td><td><span> '+reason+'</span></td></tr>');
+					user =  '<span style="text-decoration: line-through;">'+gen_data.name_c+'</span>';
+					}
 				$('#dta').append("<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>");
 				$('#dta').append('<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>');
 				$('#dta').append('<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;width:11%;"  src="'+gen_data.flag+'"></td></tr>');
