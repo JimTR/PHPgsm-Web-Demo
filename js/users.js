@@ -175,8 +175,8 @@ function displayData(userID) {
 					reason = gen_data.reason;
 					}
 				if (gen_data.banned == 1) {
-					$('#dta').append('<tr><td style="width:30%;"><span style="color:red;">Banned By</span></td><td>'+admin+'</td></tr>');
-					$('#dta').append('<tr><td style="width:30%;"><span style="color:red;">Reason</span></td><td>'+reason+'</td></tr>');
+					$('#dta').append('<tr><td style="width:30%;">Banned By</td><td>'+admin+'</td></tr>');
+					$('#dta').append('<tr><td>Reason</td><td>'+reason+'</td></tr>');
 					user =  '<span style="text-decoration: line-through;">'+gen_data.name_c+'</span>';
 					}
 				$('#dta').append("<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>");
