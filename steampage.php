@@ -88,6 +88,9 @@ foreach($work as $line) {
 				if(isset($date_last_banned)) {
 					$user_data['steam_ban'] .= "last ban $date_last_banned";
 				}
+				else {
+					$user_data['steam_ban'] .="This Player may have set bans private";
+				} 
 			}
 			else{
 				$line = trim(preg_replace('/\t/', '', $line));
