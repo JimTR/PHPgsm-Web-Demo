@@ -223,7 +223,7 @@ function displayData(userID) {
 				user =  '<span style="color:orange;font-weight:bold;">'+gen_data.name_c+'</span>';
 				$('#un').html(user);	
 			}
-			else {
+			else if (head.banned == 0) {
 				user =	'<span style="color:green;font-weight:bold;">'+gen_data.name_c+'</span>';
 			}	
 			$('#editor').show();
