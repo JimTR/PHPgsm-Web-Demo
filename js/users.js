@@ -164,8 +164,9 @@ function displayData(userID) {
 				man=item.name_c;
 			});
 			$('#dta1').append( "<tr><td  class='card-title'><h6  class='card-title' style='padding:0;'>Overall Time on Line</h6></td><td style='padding-right:6.5%;text-align:right;vertical-align:top;' colspan=3>"+data.time_on_line+"</td></tr>");
-			console.log(data);
+			//console.log(data);
 			gen_data = players[0];
+			head = data;
 			user = gen_data.name_c;
 			first_log_on =  timeConverter(gen_data.first_log_on);
 			last_log_on =  timeConverter(gen_data.last_log_on);
@@ -190,7 +191,7 @@ function displayData(userID) {
 		},
 		complete:function(data){
 			console.log("start user data");
-			console.log(data);
+			console.log(head);
 			console.log("end user data");
 			$('#un').html(user)
 			$("#user-frame").attr("src","img/blank.png");
