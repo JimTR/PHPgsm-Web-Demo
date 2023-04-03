@@ -209,7 +209,8 @@ function displayData(userID) {
 				
 					$('#dta').append('<tr><td style="width:30%;">Banned By</td><td>'+admin+'</td></tr>');
 					$('#dta').append('<tr><td>Reason</td><td>'+reason+'</td></tr>');
-					user =  '<span style="text-decoration: line-through;">'+gen_data.name_c+'</span>';
+					if (gen_data.banned = 1) {user =  '<span style="text-decoration: line-through;">'+gen_data.name_c+'</span>';}
+					else {user = gen_data.name_c;}
 					$('#un').html(user)
 					}
 					
