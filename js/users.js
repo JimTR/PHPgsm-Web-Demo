@@ -200,13 +200,15 @@ function displayData(userID) {
 			get_steam_data(userID);
 			//data.data;
 			//gen_data = [0];
-			if(typeof head.reason == 'undefined') { reason = '';} else {
+			if(typeof head.reason == 'undefined') { reason = '';} 
+			else {
 				if (head.admin !== undefined) {
 					admin = head.admin+" on "+head.created;
 				}
-				else {admin = "console";}
-					
+				else {
+					admin = "console";
 				}
+			}
 			if (head.banned == 1) {
 					reason = head.reason;
 					$('#dta').append('<tr><td style="width:30%;">Banned By</td><td>'+admin+'</td></tr>');
@@ -216,7 +218,7 @@ function displayData(userID) {
 			}
 			if (head.banned == 2) {
 				reason = head.reason;
-				$('#dta').append('<tr><td style="width:30%;">Banned Removed By</td><td>'+admin+'</td></tr>');
+				$('#dta').append('<tr><td style="width:30%;">Ban Removed By</td><td>'+admin+'</td></tr>');
 				$('#dta').append('<tr><td>Reason</td><td>'+reason+'</td></tr>');
 				user =  '<span style="color:orange;font-weight:bold;">'+gen_data.name_c+'</span>';
 				$('#un').html(user);	
