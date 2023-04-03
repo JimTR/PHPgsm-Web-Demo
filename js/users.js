@@ -207,14 +207,19 @@ function displayData(userID) {
 				else {admin = "console";}
 					
 				}
-			if (head.banned >= 1) {
+			if (head.banned == 1) {
 					reason = head.reason;
 					$('#dta').append('<tr><td style="width:30%;">Banned By</td><td>'+admin+'</td></tr>');
 					$('#dta').append('<tr><td>Reason</td><td>'+reason+'</td></tr>');
-					if (head.banned == 1) {user =  '<span style="text-decoration: line-through;">'+gen_data.name_c+'</span>';}
-					else {user = gen_data.name_c;}
+					user =  '<span style="text-decoration: line-through;">'+gen_data.name_c+'</span>';
 					$('#un').html(user)
-					}
+			}
+			if (head.banned == 2) {
+				$('#dta').append('<tr><td style="width:30%;">Banned Removed By</td><td>'+admin+'</td></tr>');
+				$('#dta').append('<tr><td>Reason</td><td>'+reason+'</td></tr>');
+				user =  '<span style="color:orange;font-weight:bold;">'+gen_data.name_c+'</span>';
+				$('#un').html(user);	
+			}
 					
 			$('#editor').show();
 		}
