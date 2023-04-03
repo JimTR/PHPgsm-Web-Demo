@@ -198,18 +198,18 @@ function displayData(userID) {
 			get_steam_data(userID);
 			//data.data;
 			//gen_data = [0];
-			if(typeof gen_data.reason == 'undefined') { reason = '';} else {
-				if (gen_data.admin !== undefined) {
-					admin = gen_data.admin+" on "+gen_data.created;
+			if(typeof data.reason == 'undefined') { reason = '';} else {
+				if (data.admin !== undefined) {
+					admin = data.admin+" on "+data.created;
 				}
 				else {admin = "console";}
-					reason = gen_data.reason;
+					reason = data.reason;
 				}
-			if (gen_data.banned >= 1) {
+			if (data.banned >= 1) {
 				
 					$('#dta').append('<tr><td style="width:30%;">Banned By</td><td>'+admin+'</td></tr>');
 					$('#dta').append('<tr><td>Reason</td><td>'+reason+'</td></tr>');
-					if (gen_data.banned = 1) {user =  '<span style="text-decoration: line-through;">'+gen_data.name_c+'</span>';}
+					if (data.banned = 1) {user =  '<span style="text-decoration: line-through;">'+gen_data.name_c+'</span>';}
 					else {user = gen_data.name_c;}
 					$('#un').html(user)
 					}
