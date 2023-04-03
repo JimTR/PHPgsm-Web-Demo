@@ -205,7 +205,7 @@ function displayData(userID) {
 				else {admin = "console";}
 					reason = gen_data.reason;
 				}
-			if (gen_data.banned == 1) {
+			if (gen_data.banned >= 1) {
 				
 					$('#dta').append('<tr><td style="width:30%;">Banned By</td><td>'+admin+'</td></tr>');
 					$('#dta').append('<tr><td>Reason</td><td>'+reason+'</td></tr>');
