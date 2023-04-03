@@ -189,8 +189,8 @@ function displayData(userID) {
 			}
 		},
 		complete:function(data){
-			console.log(gen_data);
-			console.log(user);
+			console.log(data);
+			//console.log(user);
 			$('#un').html(user)
 			$("#user-frame").attr("src","img/blank.png");
 			$('#results').hide();	
@@ -203,10 +203,10 @@ function displayData(userID) {
 					admin = data.admin+" on "+data.created;
 				}
 				else {admin = "console";}
-					reason = data.reason;
+					
 				}
 			if (data.banned >= 1) {
-				
+					reason = data.reason;
 					$('#dta').append('<tr><td style="width:30%;">Banned By</td><td>'+admin+'</td></tr>');
 					$('#dta').append('<tr><td>Reason</td><td>'+reason+'</td></tr>');
 					if (data.banned = 1) {user =  '<span style="text-decoration: line-through;">'+gen_data.name_c+'</span>';}
