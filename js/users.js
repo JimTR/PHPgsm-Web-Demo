@@ -190,7 +190,7 @@ function displayData(userID) {
 		},
 		complete:function(data){
 			console.log("start user data");
-			console.log(data);
+			console.log(data.data);
 			console.log("end user data");
 			$('#un').html(user)
 			$("#user-frame").attr("src","img/blank.png");
