@@ -199,7 +199,7 @@ function displayData(userID) {
 			//data.data;
 			//gen_data = [0];
 			if(typeof gen_data.reason == 'undefined') { reason = '';} else {
-				if (data.frame !== undefined) {
+				if (gen_data.admin !== undefined) {
 					admin = gen_data.admin+" on "+gen_data.created;
 				}
 				else {admin = "console";}
