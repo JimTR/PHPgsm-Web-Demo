@@ -225,6 +225,7 @@ function displayData(userID) {
 			}
 			else if (head.banned == undefined) {
 				user =	'<span style="color:green;font-weight:bold;">'+gen_data.name_c+'</span>';
+				$('#un').html(user);
 			}	
 			$('#editor').show();
 		}
