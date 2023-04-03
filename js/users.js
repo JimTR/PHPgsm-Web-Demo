@@ -189,8 +189,9 @@ function displayData(userID) {
 			}
 		},
 		complete:function(data){
+			console.log("start user data");
 			console.log(data);
-			//console.log(user);
+			console.log("end user data");
 			$('#un').html(user)
 			$("#user-frame").attr("src","img/blank.png");
 			$('#results').hide();	
