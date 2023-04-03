@@ -213,17 +213,19 @@ function displayData(userID) {
 					reason = head.reason;
 					$('#dta').append('<tr><td style="width:30%;">Banned By</td><td>'+admin+'</td></tr>');
 					$('#dta').append('<tr><td>Reason</td><td>'+reason+'</td></tr>');
-					user =  '<span style="text-decoration: line-through;">'+gen_data.name_c+'</span>';
+					user =  '<span style="color:red;font-weight:bold;">'+gen_data.name_c+'</span>';
 					$('#un').html(user)
 			}
-			if (head.banned == 2) {
+			else if (head.banned == 2) {
 				reason = head.reason;
 				$('#dta').append('<tr><td style="width:30%;">Ban Removed By</td><td>'+admin+'</td></tr>');
 				$('#dta').append('<tr><td>Reason</td><td>'+reason+'</td></tr>');
 				user =  '<span style="color:orange;font-weight:bold;">'+gen_data.name_c+'</span>';
 				$('#un').html(user);	
 			}
-					
+			else {
+				user =	'<span style="color:green;font-weight:bold;">'+gen_data.name_c+'</span>';
+			}	
 			$('#editor').show();
 		}
 				
