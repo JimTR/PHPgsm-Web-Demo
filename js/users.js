@@ -214,7 +214,8 @@ function displayData(userID) {
 					$('#dta').append('<tr><td style="width:30%;">Banned By</td><td>'+admin+'</td></tr>');
 					$('#dta').append('<tr><td>Reason</td><td>'+reason+'</td></tr>');
 					user =  '<span style="color:red;font-weight:bold;">'+gen_data.name_c+'</span>';
-					$('#un').html(user)
+					$('#un').html(user);
+					$("#bans").show();
 			}
 			else if (head.banned == 2) {
 				reason = head.reason;
@@ -222,6 +223,7 @@ function displayData(userID) {
 				$('#dta').append('<tr><td>Reason</td><td>'+reason+'</td></tr>');
 				user =  '<span style="color:orange;font-weight:bold;">'+gen_data.name_c+'</span>';
 				$('#un').html(user);	
+				$("#bans").show();
 			}
 			else if (head.banned == undefined) {
 				user =	'<span style="color:green;font-weight:bold;">'+gen_data.name_c+'</span>';
