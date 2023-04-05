@@ -242,7 +242,7 @@ function displayData(userID) {
 				$.each(head.ban_history, function(i, item) {
 					console.log(item.authid+" "+item.created)
 					 created = timeConverter(item.created);
-					if(item.Removed == null) {
+					if(item.removed == null) {
 						 ends ='permanent';
 					}
 					else {
