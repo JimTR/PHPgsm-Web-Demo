@@ -255,7 +255,7 @@ function displayData(userID) {
 				others ='';
 				console.log("found more than one");
 				$.each(head.outer_ip, function(i,item) {
-					others += item.name+" ";
+					others += '<a href="users.php?id='+item.steam_id+'">'+item.name+"</a> ";
 				});
 				console.log(others);
 			}
