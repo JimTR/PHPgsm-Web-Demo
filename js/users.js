@@ -251,6 +251,9 @@ function displayData(userID) {
 				// your code here.
 				console.log("no multiple users");
 			}
+			else {
+				console.log("found more than one");
+			}
 		}
 				
 	});
