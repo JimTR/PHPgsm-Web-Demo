@@ -242,7 +242,12 @@ function displayData(userID) {
 				$.each(head.ban_history, function(i, item) {
 					console.log(item.authid+" "+item.created)
 					 created = timeConverter(item.created);
-					 ends = timeConverter(item.ends);
+					if(item.Removed == null) {
+						 ends ='Perminant';
+					}
+					else {
+						ends = timeConverter(item.ends);
+					}
 					$('#ban-body').append('<tr><td>'+item.steam_id+'</td><td>'+item.name+'</td><td>'+item.ip+'</td><td>'+item.reason+'</td><td>'+created+'</td><td>'+ends+'<td></tr>');
 				});
 				
