@@ -255,10 +255,10 @@ function displayData(userID) {
 				others ='';
 				console.log("found more than one");
 				$.each(head.outer_ip, function(i,item) {
-					others += '<a href="users.php?id='+item.steam_id+'">'+item.name+"</a> ";
+					others += '<a href="users.php?id='+item.steam_id+'">'+item.name+"</a>, ";
 				});
 				console.log(others);
-				$("#dta").append('<tr><td>Multiplue users on ip</td><td>'+others+'</td></tr>');
+				$("#dta").append('<tr><td>Multiple users on ip</td><td>'+others+'</td></tr>');
 			}
 		}
 				
