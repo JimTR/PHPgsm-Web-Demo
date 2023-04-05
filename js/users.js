@@ -259,7 +259,7 @@ function displayData(userID) {
 				});
 				console.log(others);
 				//alert(others.slice(0, -2));
-				$("#dta").append('<tr><td>Multiple users on ip</td><td>'+others.slice(0,-2)+'</td></tr>');
+				$("#dta").append('<tr><td>Multiple users on this ip</td><td>'+others.slice(0,-2)+'</td></tr>');
 			}
 		}
 				
