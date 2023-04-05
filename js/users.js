@@ -231,6 +231,14 @@ function displayData(userID) {
 				$("#bans").hide();
 			}	
 			$('#editor').show();
+			if (head.ban_history !== undefined) {
+				alert("bans");
+				//ban_history = head.ban_history;
+				$.each(head.ban_history, function(i, item) {
+					console.log(item.authid)
+				});
+				
+			}
 		}
 				
 	});
