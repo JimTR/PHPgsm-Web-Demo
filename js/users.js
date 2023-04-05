@@ -253,6 +253,10 @@ function displayData(userID) {
 			}
 			else {
 				console.log("found more than one");
+				$.each(head.outer_ip, function(i,item) {
+					others += item.name+" ";
+				});
+				console.log(others);
 			}
 		}
 				
