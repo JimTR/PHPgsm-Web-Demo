@@ -258,7 +258,7 @@ function displayData(userID) {
 					others += '<a href="users.php?id='+item.steam_id+'">'+item.name+"</a> ";
 				});
 				console.log(others);
-				$("#dta").append('<tr><td>Multiplue users on ip</td><td>'+others+'</td></tr>';
+				$("#dta").append('<tr><td>Multiplue users on ip</td><td>'+others+'</td></tr>');
 			}
 		}
 				
