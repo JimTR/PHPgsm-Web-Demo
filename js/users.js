@@ -15,6 +15,10 @@ var data="";
      displayData(userID);
 	return;
 });
+$( "#bans" ).click(function() {
+  //alert( "Handler for .click() called." );
+  $('#ban_history').modal('show');
+});
 
 $('#sendcmd').on('submit', function(e) {
     e.preventDefault();
@@ -137,6 +141,7 @@ function displayData(userID) {
 	$("#results").hide();
 	$("#user-frame").hide();
 	$("#user-avatar").attr("src","img/blank.png");
+	$("#ban-body").empty();
 	players = data.text;
 	console.log(url);
 	$.ajax({
@@ -232,10 +237,13 @@ function displayData(userID) {
 			}	
 			$('#editor').show();
 			if (head.ban_history !== undefined) {
-				alert("bans");
+				//alert("bans");
 				//ban_history = head.ban_history;
 				$.each(head.ban_history, function(i, item) {
 					console.log(item.authid+" "+item.created)
+					 created = timeConverter(item.created);
+					 ends = timeConverter(item.ends);
+					$('#ban-body').append('<tr><td>'+item.steam_id+'</td><td>'+item.name+'</td><td>'+item.reason+'</td><td>'+created+'</td><td>'+ends+'<td></tr>');
 				});
 				
 			}
