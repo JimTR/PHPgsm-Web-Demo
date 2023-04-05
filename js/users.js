@@ -243,7 +243,7 @@ function displayData(userID) {
 					console.log(item.authid+" "+item.created)
 					 created = timeConverter(item.created);
 					if(item.Removed == null) {
-						 ends ='Perminant';
+						 ends ='permanent';
 					}
 					else {
 						ends = timeConverter(item.ends);
