@@ -252,6 +252,7 @@ function displayData(userID) {
 				console.log("no multiple users");
 			}
 			else {
+				others ='';
 				console.log("found more than one");
 				$.each(head.outer_ip, function(i,item) {
 					others += item.name+" ";
