@@ -247,6 +247,10 @@ function displayData(userID) {
 				});
 				
 			}
+			if (head.outer_ip !== null){
+				// your code here.
+				console.log("multiple users");
+			}
 		}
 				
 	});
