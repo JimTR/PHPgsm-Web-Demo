@@ -235,7 +235,7 @@ function displayData(userID) {
 				alert("bans");
 				//ban_history = head.ban_history;
 				$.each(head.ban_history, function(i, item) {
-					console.log(item.authid)
+					console.log(item.authid+" "+item.created)
 				});
 				
 			}
