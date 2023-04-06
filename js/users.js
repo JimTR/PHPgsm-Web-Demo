@@ -261,7 +261,7 @@ function displayData(userID) {
 				$.each(head.outer_ip, function(i,item) {
 					others += '<a href="users.php?id='+item.steam_id+'">'+item.name+"</a>, ";
 				});
-				$("#dta").append('<tr><td>Multiple users on this ip</td><td>'+others.slice(0,-2)+'</td></tr>');
+				$("#dta").append('<tr><td>Users on this ip</td><td>'+others.slice(0,-2)+'</td></tr>');
 			}
 		}
 				
