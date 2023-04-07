@@ -30,7 +30,7 @@
 	echo "this is symlink $symlink_location<br>";
 	$location = "{$server['install_dir']}/{$server['game']}";
 	if ($symlink_location === $location) {$symlink = false;} 	else {$symlink = true;}
-	
+	if($symlink)  {echo "we should symlink<br>";}
 	echo $location;
 	//die();
     $countfiles = count($_FILES['userfile']['name']);
@@ -66,6 +66,7 @@
 			  }
               if(move_uploaded_file($_FILES['userfile']['tmp_name'][$i],$upload_location)){
 				  if($symlink) {
+					  echo "linking $upload_location to $symlink_upload<br>";
 					symlink($upload_location, $symlink_upload);
 					echo readlink($symlink_upload)."<br>"; 
 				}
