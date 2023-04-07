@@ -67,8 +67,9 @@
               if(move_uploaded_file($_FILES['userfile']['tmp_name'][$i],$upload_location)){
 				  if($symlink) {
 					  echo "linking $upload_location to $symlink_upload<br>";
-					symlink($upload_location,$symlink_upload);
-					echo readlink($symlink_upload)."<br>"; 
+					//symlink($upload_location,$symlink_upload);
+					$v =shell_exec("ln -s $upload_location $symlink_upload");
+					//echo "$v<br>"; 
 				}
 
                    echo "file name : ".$filename."<br/>";
