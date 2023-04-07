@@ -246,6 +246,9 @@
 							<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Config Files</button>
 						</li>
 						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="maps" data-bs-toggle="tab" data-bs-target="#bordered-maps" type="button" role="tab" aria-controls="contact" aria-selected="false">Maps</button>
+						</li>
+						<li class="nav-item" role="presentation">
 							<button class="nav-link" id="supported-games" data-bs-toggle="tab" data-bs-target="#bordered-games" type="button" role="tab" aria-controls="contact" aria-selected="false">Mods</button>
 						</li>
 						<li class="nav-item" role="presentation">
@@ -256,7 +259,7 @@
 						<div class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
 							<div class="col-lg-6">
 								<table class="table ">
-									<tr><td style="width:20%;">Server ID </td><td style="width:40%;"><!--#host_name#--></td><td >??</td></tr>
+									<tr><td style="width:20%;">Server ID </td><td style="width:40%;"><!--#host_name#--></td><td ></td></tr>
 									<tr><td>Mod</td><td><!--#run_stub#--></td><td></td></tr>
 									<tr><td>Host IP</td><td><!--#host#--></td><td></td></tr>
 									<tr><td>Game Port </td><td><!--#port#--></td><td></td></tr>
@@ -313,37 +316,58 @@
 						</div>
 					</div>
 					<div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
-										<select name="files" id="files">
-											<!--#file_select#-->
-										</select>
-										<div style="margin-top:1%;">	
-											<textarea id="fileview" name="fileview" rows="20" cols="80"><!--#cfg_file#--></textarea>
-											<br>
-											<button id ="save-file" class="btn btn-success" >Save File</button>
-                                         </div>
-									</div>
-									<div class="tab-pane fade" id="bordered-games" role="tabpanel" aria-labelledby="contact-tab">
-										<div>
-											<div class="card-title">Supported Mods</div>
-										</div>
-									</div>
-								<div class="tab-pane fade"  id="bordered-notifications" role="tabpanel" aria-labelledby="home-tab">	
-									<p>Notiifications are sent to discord  </p>
-									<p>Notifications are sent to your email address</p>
-								</div>
-							
-						     </div>
+						<div class="row">
+							<div class="col-lg-6">
+								<h5 class="card-title">Edit Config File</h5>
+								<select name="files" id="files">
+									<!--#file_select#-->
+								</select>
+								<div style="margin-top:1%;">	
+									<textarea id="fileview" name="fileview" rows="20" cols="80"><!--#cfg_file#--></textarea>
+									<br>
+									<button id ="save-file" class="btn btn-success" >Save File</button>
+                                </div>
+							</div>
+							<div class="col-lg-6">
+								<h5 class="card-title">Restore Config File</h5>
+							</div>
 						</div>
-                    </div>
-                    <div class="modal-footer">
-						<!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>-->
-                    </div>
-                  </div>
-                </div>
-              </div>
-    
-
+					</div>
+					<div class="tab-pane fade" id="bordered-games" role="tabpanel" aria-labelledby="contact-tab">
+						<div>
+							<div class="card-title">Supported Mods</div>
+						</div>
+					</div>
+					<div class="tab-pane fade"  id="bordered-notifications" role="tabpanel" aria-labelledby="home-tab">	
+						<p>Notiifications are sent to discord  </p>
+						<p>Notifications are sent to your email address</p>
+					</div>
+					<div class="tab-pane fade"  id="bordered-maps" role="tabpanel" aria-labelledby="home-tab">
+						<div class="row">
+							<div class="col-lg-6">	
+								<h5 class="card-title">Current Map Files</h5>
+								<p>Total Size on disk <!--#map_size#--></p>
+								<table class="table">
+									<th>Map Name</th>
+									<th>Size on disk</th>
+									<!--#map_files#-->
+								</table>
+							</div>
+							<div class="col-lg-6">
+								<h5 class="card-title">Add a map</h5>
+							</div>
+						</div>		
+					</div>
+				 </div>
+			</div>
+         </div>
+         <div class="modal-footer">
+			<!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>-->
+          </div>
+          </div>
+          </div>
+           
   </main><!-- End #main -->
 
  <!--#footer#-->

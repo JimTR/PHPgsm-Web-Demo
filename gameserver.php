@@ -204,6 +204,9 @@ if($this_server['enabled'] ==0) {
 else {
 	$page['checked'] ='';
 }
+$current_maps = get_maps($this_server);
+$page['map_files'] = $current_maps['formatted'];
+$page['map_size'] = $current_maps['total_size'];
 $is = explode("\t",trim(shell_exec('du -hs '.$this_server['install_dir'])));
 $this_server['install_size'] = $is[0];
 $x = json_encode($this_server);
@@ -294,5 +297,18 @@ function in_arrayr($needle, $haystack) {
 } 
 function build_pull_down ($data,$id,$help) {
 	// builds drop down list
+}
+function get_maps($server) {
+	$all_files = 0;
+	$map_dir = "{$server['location']}/{$server['game']}/maps";
+	foreach (glob("$map_dir/*.bsp") as $filename) {
+		$tmp['file'] = basename($filename);
+		$tmp['size'] =  dataSize(filesize($filename));
+		$all_files += filesize($filename);
+		$return[] =$tmp;
+		$return['formatted'] .= "<tr><td>{$tmp['file']}</td><td>{$tmp['size']}</td></tr>";
+	}
+	$return['total_size'] = dataSize($all_files);
+	return $return;
 }
 ?>
