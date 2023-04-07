@@ -32,7 +32,7 @@
 	if ($symlink_location === $location) {$symlink = false;} 	else {$symlink = true;}
 	
 	echo $location;
-	die();
+	//die();
     $countfiles = count($_FILES['userfile']['name']);
     echo "<br>file count $countfiles<br>";
 	
@@ -59,13 +59,15 @@
 				  case "nav":
 				  case "php":
 					$upload_location = "$location/maps/$filename";
+					$symlink_upload = " $symlink_location/maps/$filename";
 					echo "$upload_location<br>";
 				case "ain":	
 					//$location  ="";
 			  }
               if(move_uploaded_file($_FILES['userfile']['tmp_name'][$i],$upload_location)){
 				  if($symlink) {
-					symlink($target, $link); 
+					symlink($upload_location, $symlink_upload);
+					echo readlink($symlink_upload)."<br>"; 
 				}
 
                    echo "file name : ".$filename."<br/>";
