@@ -346,15 +346,24 @@
 						<div class="row">
 							<div class="col-lg-6">	
 								<h5 class="card-title">Current Map Files</h5>
-								<p>Total Size on disk <!--#map_size#--></p>
-								<table class="table">
-									<th>Map Name</th>
-									<th>Size on disk</th>
-									<!--#map_files#-->
-								</table>
+								<p>Current Map Files <!--#map_count#--><span style="margin-left:2%;">Total Size on disk <!--#map_size#--></span></p>
+								<div class="table-wrapper" style="height:60%;"> 
+									<table class="table">
+										<th>Map Name</th>
+										<th>Size on disk</th>
+										<!--#map_files#-->
+									</table>
+								</div>	
 							</div>
 							<div class="col-lg-6">
 								<h5 class="card-title">Add a map</h5>
+								<form action="maps.php" method="post" enctype="multipart/form-data">
+									Send these files:<br />
+									<input name="userfile[]" type="file" multiple /><br /><br>
+									<input name="server" type="hidden" value="<!--#bserver#-->" /><br /><br>
+									<input type="submit" value="Send files" />
+								</form>
+
 							</div>
 						</div>		
 					</div>

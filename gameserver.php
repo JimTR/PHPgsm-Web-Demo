@@ -207,6 +207,7 @@ else {
 $current_maps = get_maps($this_server);
 $page['map_files'] = $current_maps['formatted'];
 $page['map_size'] = $current_maps['total_size'];
+$page['map_count'] = count($current_maps)-2;
 $is = explode("\t",trim(shell_exec('du -hs '.$this_server['install_dir'])));
 $this_server['install_size'] = $is[0];
 $x = json_encode($this_server);
@@ -302,7 +303,8 @@ function get_maps($server) {
 	$all_files = 0;
 	$map_dir = "{$server['location']}/{$server['game']}/maps";
 	foreach (glob("$map_dir/*.bsp") as $filename) {
-		$tmp['file'] = basename($filename);
+		$filename1 = pathinfo($filename, PATHINFO_FILENAME); 
+		$tmp['file'] = basename($filename1);
 		$tmp['size'] =  dataSize(filesize($filename));
 		$all_files += filesize($filename);
 		$return[] =$tmp;
