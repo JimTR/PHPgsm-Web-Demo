@@ -46,7 +46,7 @@
          $extension = strtolower($extension);
 
          ## File upload allowed extensions
-         $valid_extensions = array("bsp","nav","ain","php");
+         $valid_extensions = array("bsp","nav","ain","bz2");
 		//echo "extension $extension<br>";
          $response = 0;
          ## Check file extension
@@ -57,9 +57,8 @@
 				  // work out where to put them
 				  case "bsp":
 				  case "nav":
-				  case "php":
-					$upload_location = "$location/maps/$filename";
-					$symlink_upload = " $symlink_location/maps/$filename";
+				  	$upload_location = "$location/maps/$filename";
+					$symlink_upload = "$symlink_location/maps/$filename";
 					echo "$upload_location<br>";
 				case "ain":	
 					//$location  ="";
@@ -67,9 +66,9 @@
               if(move_uploaded_file($_FILES['userfile']['tmp_name'][$i],$upload_location)){
 				  if($symlink) {
 					  echo "linking $upload_location to $symlink_upload<br>";
-					//symlink($upload_location,$symlink_upload);
-					$v =shell_exec("ln -s $upload_location $symlink_upload");
-					//echo "$v<br>"; 
+					symlink($upload_location,$symlink_upload); // doesn't work 100%
+					//shell_exec("ln -s $upload_location $symlink_upload"); // this does
+					 
 				}
 
                    echo "file name : ".$filename."<br/>";
