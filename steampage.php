@@ -10,6 +10,7 @@ include "inc/functions.inc.php";
 $found = false;
 $framed = false;
 $ban_process = false;
+$in_game_process = false;
 $id = $_GET['id'];
 $url= "https://steamcommunity.com/profiles/$id";
 $page = curl($url);
@@ -89,7 +90,7 @@ foreach($work as $line) {
 					$user_data['steam_ban'] .= "last ban $date_last_banned";
 				}
 				else {
-					$user_data['steam_ban'] .="This Player may have set bans private";
+					$user_data['steam_ban'] .="This Player 's last ban was over 7 years ago";
 				} 
 			}
 			else{
