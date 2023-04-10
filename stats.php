@@ -54,6 +54,10 @@ $page['most_popular_count'] = $stats[0]['total'];
 $page['page-title'] = 'Statistics';
 $page['url'] = $url;
 $page['today'] = date("Y-m-d");
+$sql = "SELECT servers.server_name,player_history.`game`,sum(player_history.`game_time`) as full_time FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.game ORDER BY `full_time` DESC limit 10";
+$stats = $database->get_results($sql);
+$page['most_played_time'] =convertSecToTime($stats[0]['full_time']);
+$page['most_played'] = $stats[0]['server_name'];
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
 $template->replace_vars($header_vars);
