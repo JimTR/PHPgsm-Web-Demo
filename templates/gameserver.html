@@ -359,9 +359,10 @@
 								<h5 class="card-title">Add a map</h5>
 								<form action="maps.php" method="post" enctype="multipart/form-data">
 									Send these files:<br />
-									<input name="userfile[]" type="file" multiple /><br /><br>
+									<!-- <button class="btn btn-primary" type="submit">Button</button> -->
+									<input name="userfile[]" type="file" multiple  id="file-list"/><br /><br>
 									<input name="server" type="hidden" value="<!--#bserver#-->" /><br /><br>
-									<input type="submit" value="Send files" />
+									<button class="btn btn-primary" type ="submit ">Upload Map Files</button>
 								</form>
 
 							</div>
@@ -399,12 +400,12 @@
   
 <script>
 	var a_href = 0;
-		url = "<!--#url#-->";
-		var id='';
-		var path='';
-		var type='Source';
-		var host= '';
-		var file ="";
+	url = "<!--#url#-->";
+	var id='';
+	var path='';
+	var type='Source';
+	var host= '';
+	var file ="";
 	$(document).ready(function(){
 		$('#gameservers-nav').toggleClass("show");
 	  	cmd =$("#scmd").val();
@@ -424,274 +425,7 @@
 		setInterval(players, 7000);
 		get_game(url,server,id);
 		setInterval(get_game,4000);
-    //console.log(url);
-    //base_servers(url)
-    $('#startcmd').on('submit', function(e) {
-        e.preventDefault();
-        url +="/"+$(this).attr('action');
-        var formValues = $(this).serialize();
-        //alert(formValues+" - "+url);
-       console.log( $(this).attr('action'));
-         
-        $.ajax({
-			
-            type: $(this).attr('method'),
-           url: url,
-            data: formValues,
-           success: function(data) {
-        //         alert (data);    
-         //       $('#ajax-response').html(data);
-         //       $("#ajax-response").show();
-         //      $('#text').val(""); 
-         //       $("#send").blur(); 
-         //       $('#ajax-response').delay(3000).fadeOut('slow');
-           }
-        });
-
-    });
- 	$('#sendcmd').on('submit', function(e) {
-        e.preventDefault();
-        //alert('send command');
-       console.log( $(this).attr('action'));
-        
-        $.ajax({
-            type: $(this).attr('method'),
-            url: $(this).attr('action'),
-            data: $(this).serialize(),
-            success: function(data) {
-            
-                $('#ajax-response').html(data);
-                $("#ajax-response").show();
-                $('#text').val(""); 
-                $("#send").blur(); 
-                $('#ajax-response').delay(3000).fadeOut('slow');
-            }
-        });
-
-    });
-    $('#quit').click(function() {
-		// pressed quit
-		cmd = url+'/ajaxv2.php?action=version';
-		//alert ('hit quit '+url);
-		 $('#quit_game').modal('hide');
-		 stop_server(); 
-
 	});
-	$('#showlog').click(function() {
-		$('#log').toggle();
-		$('#log').scrollTop($('#log')[0].scrollHeight);
-	});
-	
-	$('#toggle').click(function() {
-		$('#gameservers').toggleClass('collapsed');
-		$('#gameservers-nav').toggleClass('show');
-	});
-	
-
- $('#files').change(function(){
-            selected_value = $('#files').val()
-            console.log("triggerd change");
-            //alert(selected_value);
-            var sendurl = url+"/api.php?action=get_file&cmd=view&n="+selected_value;
-            alert(sendurl);
-            $.ajax({
-            type: 'GET',
-            url: sendurl,
-            dataType: 'text',
-            //data: $(this).serialize(),
-            success: function(data) {
-			alert(data);
-            //alert("data back");
-            $("#fileview").val(data);
-            var $textarea = $('#fileview');
-			$textarea.scrollTop(0);    
-            }
-        });
-    
-        });
-       $('#save-file').click(function() {
-		   console.log("saving file");
-		    selected_value = $('#files').val();
-		    console.log(selected_value);
-		    var sendurl = url+"/api.php";
-		    file = $('#fileview').html();
-		    console.log(sendurl);
-		    $.ajax({
-				type: 'POST',
-				url: sendurl,
-				dataType: 'text',
-				data: { 'import': file,
-				'action': 'get_file' ,
-				'cmd': 'save' ,
-				'n': selected_value },
-				//processData: true,
-				//contentType: "application/json; charset=UTF-8",
-				//data: $(this).serialize(),
-				success: function(data) {
-					console.log(data);
-					alert("data back"+data);
-					$("#fileview").html(data);
-					var $textarea = $('#fileview');
-					$textarea.scrollTop(0);
-					sendurl='';    
-				}
-			});
-	   }); 
-	   $('#fileview').change(function(){
-		   console.log ("fileview changed");
-		   alert ($('#fileview').val());
-		   //result = $('#fileview').val().replace(/"/gi, "/#/");
-		   //alert (result);
-		   //res = $('#fileview').val();
-		   //let file = JSON.stringify(res);
-		   //alert (file);
-	   });
-	
- 
-  //$('#omaxplayers').on('change', function() {
-	//cmd =$("#scmd").val();
-	//newopt = " "+$(this).attr("option")+" "+$(this).val();
-	//original = $(this).attr("orig");
-	//$(this).attr("orig",newopt);
-	//x = cmd.replace(original,newopt);
-	//$("#scmd").val(x);
-	//$("#vcmd").text(x);
-	//if($("#changes").val() ='nothing') {
-		//$("#changes").val("change_players");
-	//}
-	//else {
-	//	added = $("#changes").val()+','+'change_players';
-	//	$("#changes").val(added);
-	//}
-	
-	//});
-	
-	// $('#map-options').on('change', function() {
-	//	// change map here
-	//	cmd =$("#scmd").val();
-	//	x= cmd.replace($("#omap").val(),$(this).val());
-	//	$("#omap").val($(this).val());
-	//	$("#scmd").val(x);
-	//	$("#vcmd").text(x);
-	//	newmap = "+map "+$(this).val();
-	//	newmap = $.trim(newmap);
-	//	$("#omap").attr("orig",newmap);
-	//	newmap =" "+newmap;
-	//	if($("#changes").val() =='nothing') {
-	//	$("#changes").val(option);
-	//	}	
-	//	else {
-	//		//added = $("#changes").val()+','+'change_map';
-	//		$("#changes").val(added);
-	//	}
-	//	$("#vcmd").text(x);
-	//});
-		
-	
-	
-	$("#cnew").click(function() {
-		cmd =$("#scmd").val();
-		cmd = $.trim(cmd);
-		orig = $("#onew").val();
-		prefix = orig.charAt(0) ;
-		if ((prefix !== "+" ) && (prefix !== "-"))  {
-			alert("all options must start with either a + or - sign\n - for command line otions + for CVARS")
-			return;
-		}
-		var [option, value] = orig.split(" ");
-		optionid = option.substring(1, option.length);
-		if(typeof value != 'undefined'){
-			//alert("non boolean");
-			html = "<tr><td>"+optionid+"</td><td></td><td><input type='text' id='o"+optionid+"' option='"+option+"' orig='"+option+"' value='"+value+"'>'</td><td></td><td>no help</td></tr>";
-			cmd = cmd+" "+option+" "+value;
-			$("#vcmd").text(cmd);
-			}
-			else{
-				html = "<tr><td>"+optionid+"</td><td></td><td><input type='checkbox' id='o"+optionid+"' option='"+option+"' orig='"+option+"' checked>'</td><td></td><td>no help</td></tr>";
-				//<td><input type='checkbox' id='o$option' option='{$tmp1[0]}' value='$value' orig='{$tmp1[0]} $value' checked><//td><td></td><td>$help</td></tr> 
-				value=""; // stop undefined later
-				cmd = cmd+" "+option;
-			}
-			$("#scmd").val(cmd);
-				if ($("#ohostname").val()) {
-					hoption = $("#ohostname").val();
-					//alert(hoption);
-					newhopt = '"'+hoption+'"';
-					test = cmd.replace(hoption,newhopt)
-					//alert(test);
-					$("#vcmd").text(test);
-				}
-				else {
-					$("#vcmd").text(cmd);
-				}
-				var row = $(this).closest('tr');
-				var row_index = $(row).index();
-				$('#options-table > tbody > tr').eq(row_index).before(html); //adds new row
-				$("#onew").val('');
-				$("#changes").val = $("#changes").val+','+option;
-	});
-	$('select').on('change', function() {
-	
-	option = $(this).attr("option");
-	newid = option.substring(1, option.length);
-	newopt = $(this).val();
-	//$(this).attr("orig",newopt);
-	newopt = option+" "+newopt;
-	full = $(this).attr('orig');
-	
-	cmd = $("#scmd").val();
-	vcmd = $("#vcmd").text();
-		switch (option){
-			case "+map":
-				full = $(this).attr("option");
-				full = full+" "+$("#o"+newid).val();
-				cmd = cmd.replace(full,newopt);
-				vcmd = vcmd.replace(full,newopt);
-				$("#o"+newid).val($(this).val());
-				
-				break;
-			default:
-				//alert("full = "+full+" new = "+newopt);
-				cmd = cmd.replace(full,newopt);
-				//alert(cmd);
-				vcmd = vcmd.replace(full,newopt);
-				alert ("vcmd = "+vcmd);
-				$(this).attr("orig",newopt);
-	}
-	$("#scmd").val(cmd);
-	$("#vcmd").text(vcmd);
-	});
-$('#disable-server').submit(function(e) {
-	alert("we are here");
-      e.preventDefault();
-        url +="/"+$(this).attr('action');
-        var formValues = $(this).serialize();
-        //alert(formValues+" - "+url);
-       console.log( $(this).attr('action'));
-         
-        $.ajax({
-			
-            type: $(this).attr('method'),
-           url: url,
-            data: formValues,
-            dataType: 'json',
-           success: function(data) {
-			   console.clear();
-                 console.log (data); 
-                 alert (data[0]);   
-               $('#disable-response').html(data[0]);
-                $("#disable-response").show();
-         //      $('#text').val(""); 
-         //       $("#send").blur(); 
-                $('#disable-response').delay(3000).fadeOut('slow');
-           }
-        });
-});
-$('input[name=gridRadios]').on('change', function() {
-	alert($(this).val());
-});
-});
-
 </script>
 
 </body>

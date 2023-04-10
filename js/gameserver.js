@@ -261,57 +261,50 @@ function start_server() {
 }
 
 function stop_server() {
-	//starts the server
 	cmd = url+'/api.php?action=exe_tmux&server='+id+'&cmd=q';
 	console.log(cmd);
 	$.get(cmd, function(data, status){
-		//alert("Data: " + data + "\nStatus: " + status);
 		if(status == "success" ) {
-			//$("#"+id).blur();
 			console.log(data);
 		 }
 	});
 }
+
 function restart_server() {
 	//starts the server
 	cmd = url+'/api.php?action=exe_tmux&server='+id+'&cmd=r';
 	//alert(cmd);
 	$.get(cmd, function(data, status){
-		//alert("Data: " + data + "\nStatus: " + status);
 		if(status == "success" ) {
-			//$("#"+id).blur();
 			console.log(data);
 		 }
 	});
 }
+
 function print_r(o){
 	return JSON.stringify(o,null,'\t');
 }
+
 function formatBytes(bytes, decimals = 2) {
     if (bytes === 0) return '0 B';
-
     const k = 1024;
     const dm = decimals < 0 ? 0 : decimals;
     const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
 function copyDivToClipboard() {
-		var range = document.createRange();
-		
-		range.selectNode(document.getElementById("vcmd"));
-		window.getSelection().removeAllRanges(); // clear current selection
-		window.getSelection().addRange(range); // to select text
-		document.execCommand("copy");
-		window.getSelection().removeAllRanges();// to deselect
-	}
+	var range = document.createRange();
+	range.selectNode(document.getElementById("vcmd"));
+	window.getSelection().removeAllRanges(); // clear current selection
+	window.getSelection().addRange(range); // to select text
+	document.execCommand("copy");
+	window.getSelection().removeAllRanges();// to deselect
+}
 	
-	$("input[type='checkbox']").change(function() {
+$("input[type='checkbox']").change(function() {
 	expression = ($(this).attr('id'));
-	
 	switch(expression) {
 		case 'disable-server':
 		case 'delete-server':
@@ -324,7 +317,6 @@ function copyDivToClipboard() {
 					$(this).val("1");
 					$("#dis-text").val("1");
 				}
-				
 				return;
 				break
 		default:
@@ -346,25 +338,20 @@ function copyDivToClipboard() {
 $("input[type='text']").change(function() {
     expression = ($(this).attr('id'));
     cmd = $("#scmd").val();
-    //cmd = $.trim(cmd);
     newopt = $(this).attr("option")+" "+$(this).val();
-    //newopt = $.trim(newopt);
     original = $(this).attr("orig");
 	original = $.trim(original);
 	option = $(this).attr('option');
-	//option = $.trim('option');
 	change = $("#changes").val();
     switch(expression) {
 		case 'scmd':
 		case 'onew':
-			//alert (expression+" hit returning");
 			return;
 		case 'ohostname':
 			alert ("host name change");
 			if ($(this).val() === "") {
 				$(this).attr("orig","not set");
 				cmd = cmd.replace(" "+original,"");
-				//alert(x);
 				$("#scmd").val(cmd);
 				newline = cmd.replace(newopt,'"'+newopt+'"'); 
 				$("#vcmd").text(newline);
@@ -433,9 +420,200 @@ $("input[type='text']").change(function() {
 				$("#changes").val(added);
 			}
 		}
-}
+	}
 });
 
 $("#mod_settings").on("hidden.bs.modal", function () {
     location.reload();
+});
+	
+ $('#file-list').change (function ()
+    {
+		alert ("file-lists");
+        for (var i = 0; i < this.files.length; i++)
+        {
+            alert(this.files[i].name);
+        }
+    });
+    
+$('#fileview').change(function(){
+   console.log ("fileview changed");
+   alert ($('#fileview').val());
+});
+
+$('#sendcmd').on('submit', function(e) {
+	e.preventDefault();
+	$.ajax({
+		type: $(this).attr('method'),
+		url: $(this).attr('action'),
+		data: $(this).serialize(),
+		success: function(data) {
+			$('#ajax-response').html(data);
+			$("#ajax-response").show();
+			$('#text').val(""); 
+			$("#send").blur(); 
+			$('#ajax-response').delay(3000).fadeOut('slow');
+		}
 	});
+});
+  	
+$('#quit').click(function() {
+	cmd = url+'/ajaxv2.php?action=version';
+	 $('#quit_game').modal('hide');
+	 stop_server(); 
+});
+	
+$('#files').change(function(){
+	selected_value = $('#files').val()
+	console.log("triggerd change");
+	var sendurl = url+"/api.php?action=get_file&cmd=view&n="+selected_value;
+	$.ajax({
+		type: 'GET',
+		url: sendurl,
+		dataType: 'text',
+		success: function(data) {
+			$("#fileview").val(data);
+			var $textarea = $('#fileview');
+			$textarea.scrollTop(0);    
+		}
+	});
+});
+
+$('#startcmd').on('submit', function(e) {
+	e.preventDefault();
+	url +="/"+$(this).attr('action');
+	var formValues = $(this).serialize();
+	$.ajax({
+		type: $(this).attr('method'),
+		url: url,
+		data: formValues,
+		success: function(data) {
+		}
+	});
+});
+
+$('#showlog').click(function() {
+	$('#log').toggle();
+	$('#log').scrollTop($('#log')[0].scrollHeight);
+});
+	
+$('#toggle').click(function() {
+	$('#gameservers').toggleClass('collapsed');
+	$('#gameservers-nav').toggleClass('show');
+});
+
+$('input[name=gridRadios]').change, function() {
+	alert($(this).val());
+}
+
+$("#cnew").click(function() {
+	cmd =$("#scmd").val();
+	cmd = $.trim(cmd);
+	orig = $("#onew").val();
+	prefix = orig.charAt(0) ;
+	if ((prefix !== "+" ) && (prefix !== "-"))  {
+		alert("all options must start with either a + or - sign\n - for command line otions + for CVARS")
+		return;
+	}
+	var [option, value] = orig.split(" ");
+	optionid = option.substring(1, option.length);
+	if(typeof value != 'undefined'){
+		html = "<tr><td>"+optionid+"</td><td></td><td><input type='text' id='o"+optionid+"' option='"+option+"' orig='"+option+"' value='"+value+"'>'</td><td></td><td>no help</td></tr>";
+		cmd = cmd+" "+option+" "+value;
+		$("#vcmd").text(cmd);
+	}
+	else{
+		html = "<tr><td>"+optionid+"</td><td></td><td><input type='checkbox' id='o"+optionid+"' option='"+option+"' orig='"+option+"' checked>'</td><td></td><td>no help</td></tr>";
+		value=""; // stop undefined later
+		cmd = cmd+" "+option;
+	}
+	$("#scmd").val(cmd);
+	if ($("#ohostname").val()) {
+		hoption = $("#ohostname").val();
+		newhopt = '"'+hoption+'"';
+		test = cmd.replace(hoption,newhopt)
+		$("#vcmd").text(test);
+	}
+	else {
+		$("#vcmd").text(cmd);
+	}
+	var row = $(this).closest('tr');
+	var row_index = $(row).index();
+	$('#options-table > tbody > tr').eq(row_index).before(html); //adds new row
+	$("#onew").val('');
+	$("#changes").val = $("#changes").val+','+option;
+});  
+
+$('#disable-server').submit(function(e) {
+	alert("we are here");
+	e.preventDefault();
+	url +="/"+$(this).attr('action');
+	var formValues = $(this).serialize();
+	console.log( $(this).attr('action'));
+	$.ajax({
+		type: $(this).attr('method'),
+		url: url,
+		data: formValues,
+		dataType: 'json',
+		success: function(data) {
+			console.clear();
+			console.log (data); 
+			alert (data[0]);   
+			$('#disable-response').html(data[0]);
+			$("#disable-response").show();
+			$('#disable-response').delay(3000).fadeOut('slow');
+		}
+	});
+});
+
+$('select').on('change', function() {
+	option = $(this).attr("option");
+	newid = option.substring(1, option.length);
+	newopt = $(this).val();
+	newopt = option+" "+newopt;
+	full = $(this).attr('orig');
+	cmd = $("#scmd").val();
+	vcmd = $("#vcmd").text();
+	switch (option){
+		case "+map":
+			full = $(this).attr("option");
+			full = full+" "+$("#o"+newid).val();
+			cmd = cmd.replace(full,newopt);
+			vcmd = vcmd.replace(full,newopt);
+			$("#o"+newid).val($(this).val());
+			break;
+		default:
+			cmd = cmd.replace(full,newopt);
+			vcmd = vcmd.replace(full,newopt);
+			alert ("vcmd = "+vcmd);
+			$(this).attr("orig",newopt);
+	}
+	$("#scmd").val(cmd);
+	$("#vcmd").text(vcmd);
+});
+
+$('#save-file').click(function() {
+	console.log("saving file");
+	selected_value = $('#files').val();
+	console.log(selected_value);
+	var sendurl = url+"/api.php";
+	file = $('#fileview').html();
+	console.log(sendurl);
+    $.ajax({
+		type: 'POST',
+		url: sendurl,
+		dataType: 'text',
+		data: { 'import': file,
+		'action': 'get_file' ,
+		'cmd': 'save' ,
+		'n': selected_value },
+		success: function(data) {
+			console.log(data);
+			alert("data back"+data);
+			$("#fileview").html(data);
+			var $textarea = $('#fileview');
+			$textarea.scrollTop(0);
+			sendurl='';    
+		}
+	});
+});       
