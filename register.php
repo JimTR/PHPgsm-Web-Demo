@@ -13,7 +13,12 @@ $module = "Register";
  $template = new Template;
 if (!is_cli()) {
 // hmm  think we go 404
+//print_r ($page);
+//die();
+
 $template->load('templates/404.html');
+//$template->replace_vars($page);
+$template->replace('include',$page['include']);
 $template->publish();
 
 }	
