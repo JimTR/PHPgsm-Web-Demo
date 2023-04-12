@@ -43,6 +43,14 @@ $template = new template;
 
     const SALT = 'insert some random text here';
     $database = new db($db_settings); // start up a db class just in case we need it
+    define ('db',$database);
+     if (isset($config['database2'])) {
+                $db2 = $config['database2'];
+                $sb = new db($db2);
+                define ('db2',$sb); // second database
+                                
+        } 
+
     // Fix magic quotes
         $_POST    = fix_slashes($_POST);
         $_GET     = fix_slashes($_GET);
