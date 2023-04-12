@@ -59,10 +59,11 @@ $stats = $database->get_results($sql);
 $page['most_played_time'] =convertSecToTime($stats[0]['full_time']);
 $page['most_played'] = $stats[0]['server_name'];
 $sql = "SELECT count(*) as total, (select count(*) from sb_comms where `RemovedOn` is null) as live FROM `sb_comms` ";
-$comms = db2->get_row($sql);
-$page['comm_total'] = $comms['total'];
-$page['comm_live'] = $comms['live'];
-
+$comms = db2->get_results($sql);
+$page['comm_total'] = $comms[0]['total'];
+$page['comm_live'] = $comms[0]['live'];
+print_r($comms);
+die();
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
 $template->replace_vars($header_vars);
