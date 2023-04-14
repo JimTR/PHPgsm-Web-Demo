@@ -338,7 +338,8 @@
 							<div class="card-title">Supported Mods</div>
 						</div>
 					</div>
-					<div class="tab-pane fade"  id="bordered-notifications" role="tabpanel" aria-labelledby="home-tab">	
+					<div class="tab-pane fade"  id="bordered-notifications" role="tabpanel" aria-labelledby="home-tab">
+						<h5 class="card-title">Notifications</h5>	
 						<p>Notiifications are sent to discord  </p>
 						<p>Notifications are sent to your email address</p>
 					</div>
@@ -346,23 +347,45 @@
 						<div class="row">
 							<div class="col-lg-6">	
 								<h5 class="card-title">Current Map Files</h5>
-								<p>Current Map Files <!--#map_count#--><span style="margin-left:2%;">Total Size on disk <!--#map_size#--></span></p>
-								<div class="table-wrapper" style="height:60%;"> 
-									<table class="table">
-										<th>Map Name</th>
-										<th>Size on disk</th>
-										<!--#map_files#-->
-									</table>
+								<p>Current Map Files <!--#map_count#-->
+									<span style="margin-left:2%;">Total Size on disk <!--#map_size#--></span>
+									<span style="margin-left:2%;">Maps in cycle <!--#map_cycle#--></span>
+								</p>
+								<div class="table-wrapper" style="height:50vh;"> 
+									<form action="maps.php" method="post">
+										<input name="action" type="hidden" value="mapcycle">
+										<input name="server" type="hidden" value="<!--#bserver#-->" />
+										<table class="table">
+											<th>Map Name</th>
+											<th>Size on disk</th>
+											<th>Map cycle</th>
+											<!--#map_files#-->
+										</table>
+								</div>
+								<div style="text-align:center;">
+									<button class="btn btn-primary" style="margin-top:7%;" type ="submit ">Update Map Cycle</button>
 								</div>	
+								</form>
 							</div>
 							<div class="col-lg-6">
-								<h5 class="card-title">Add a map</h5>
+								<h5 class="card-title">Add More Maps</h5>
+								
 								<form action="maps.php" method="post" enctype="multipart/form-data">
-									Send these files:<br />
+									<div class="row">
+									<div class="col-lg-6">
+									<label></label>
 									<!-- <button class="btn btn-primary" type="submit">Button</button> -->
-									<input name="userfile[]" type="file" multiple  id="file-list"/><br /><br>
-									<input name="server" type="hidden" value="<!--#bserver#-->" /><br /><br>
-									<button class="btn btn-primary" type ="submit ">Upload Map Files</button>
+									<label class="btn btn-primary">
+										<input style="display:none;" name="userfile[]" type="file" multiple  id="file-list"/>
+										 Upload map & fastdl files
+									</label>
+									<!--<input style="color:transparent;" name="userfile[]" type="file" multiple  id="file-list"/><br>-->
+									<input name="server" type="hidden" value="<!--#bserver#-->" />
+									<input name="action" type="hidden" value="upload">
+									<div id="f-list"></div>
+									
+									</div>
+									</div>
 								</form>
 
 							</div>

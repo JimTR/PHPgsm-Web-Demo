@@ -305,6 +305,7 @@ function copyDivToClipboard() {
 	
 $("input[type='checkbox']").change(function() {
 	expression = ($(this).attr('id'));
+	if ($( "input[name^='map']" )) {return;}
 	switch(expression) {
 		case 'disable-server':
 		case 'delete-server':
@@ -429,11 +430,26 @@ $("#mod_settings").on("hidden.bs.modal", function () {
 	
  $('#file-list').change (function ()
     {
-		alert ("file-lists");
+		
+		flist="";
+		szt=0;
         for (var i = 0; i < this.files.length; i++)
         {
-            alert(this.files[i].name);
+			sz = formatBytes(this.files[i].size)
+            //alert(sz);
+            szt +=this.files[i].size;
+            flist +="<tr><td>"+ this.files[i].name+"</td><td style='text-align:right;'>"+sz+"</td></tr>";
         }
+        if(flist !== "") {
+			sztf = formatBytes(szt);
+			flist = "<h6 class='card-title'>Files to upload</h6><table>"+flist;
+			flist += "<tr><td class='card-title'>Total size of upload</td><td class='card-title' style='text-align:right;'>"+sztf+"</td></tr>";
+			flist += "<tr><td colspan=2>	Add to all available servers ? <input name='all_servers' type='checkbox' id='all-servers'></td></tr>";
+			flist += '<tr><td><button class="btn btn-primary" style="margin-top:7%;" type ="submit "><i class="fa fa-cloud-upload"></i> Upload Map Files</button></td></tr></table>';
+		}
+		
+        $("#f-list").html(flist);
+        
     });
     
 $('#fileview').change(function(){
@@ -616,4 +632,17 @@ $('#save-file').click(function() {
 			sendurl='';    
 		}
 	});
-});       
+}); 
+
+function formatBytes(bytes, decimals = 2) {
+    if (!+bytes) return '0 Bytes'
+
+    const k = 1024
+    const dm = decimals < 0 ? 0 : decimals
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k))
+
+    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
+}
+      

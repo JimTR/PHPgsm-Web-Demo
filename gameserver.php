@@ -208,6 +208,7 @@ $current_maps = get_maps($this_server);
 $page['map_files'] = $current_maps['formatted'];
 $page['map_size'] = $current_maps['total_size'];
 $page['map_count'] = count($current_maps)-2;
+$page['map_cycle'] = $current_maps['mapcycle'];
 $is = explode("\t",trim(shell_exec('du -hs '.$this_server['install_dir'])));
 $this_server['install_size'] = $is[0];
 $x = json_encode($this_server);
@@ -301,16 +302,31 @@ function build_pull_down ($data,$id,$help) {
 }
 function get_maps($server) {
 	$all_files = 0;
+	$map_count = 0;
+	// need to add  mapcycle 
+	$mc_file = "{$server['location']}/{$server['game']}/cfg/mapcycle.txt";
+	$mc_list = explode(PHP_EOL,file_get_contents($mc_file));
+	foreach ($mc_list as $k => $v) {
+		$mc_list[$k] = trim($v);
+	}
 	$map_dir = "{$server['location']}/{$server['game']}/maps";
 	foreach (glob("$map_dir/*.bsp") as $filename) {
 		$filename1 = pathinfo($filename, PATHINFO_FILENAME); 
 		$tmp['file'] = basename($filename1);
+		if(in_array($filename1,$mc_list)) {
+			$tmp['in_cycle'] ="<input style ='margin-left:18%;' type='checkbox' id='map-$filename1' name='$filename1' checked>" ;
+			$map_count ++;
+		}
+		else {$tmp['in_cycle'] ="<input style='margin-left:18%;' type='checkbox' id='map-$filename1' name='$filename1'>";}
 		$tmp['size'] =  dataSize(filesize($filename));
 		$all_files += filesize($filename);
 		$return[] =$tmp;
-		$return['formatted'] .= "<tr><td>{$tmp['file']}</td><td>{$tmp['size']}</td></tr>";
+		$return['formatted'] .= "<tr><td>{$tmp['file']}</td><td>{$tmp['size']}</td><td>{$tmp['in_cycle']}</td></tr>";
 	}
+	
 	$return['total_size'] = dataSize($all_files);
+	$return['mapcycle'] = $map_count;
+	
 	return $return;
 }
 ?>
