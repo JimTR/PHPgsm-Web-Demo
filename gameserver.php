@@ -38,7 +38,8 @@ use xPaw\SourceQuery\SourceQuery;
 	define( 'LOG',	DOC_ROOT.'/logs/ajax.log');
 $bserver = trim($bserver[1]);
 //echo "$bserver<br>";
-$template = new template;
+ $page['max_upload'] = dataSize(file_upload_max_size());
+ $template = new template;
 $sql = "select * from server1 order by `host_name` ASC";
 $servers = $database->get_results($sql);
 $sql = "select * from server1 where host_name = '$bserver'";
@@ -206,7 +207,7 @@ $page['mod_list'] = $mods['mods'];
 $page['sm_plugins'] = $mods['sm_plugins'];
 $page['map_files'] = $current_maps['formatted'];
 $page['map_size'] = $current_maps['total_size'];
-$page['map_count'] = count($current_maps)-2;
+$page['map_count'] = count($current_maps);
 $page['map_cycle'] = $current_maps['mapcycle'];
 $is = explode("\t",trim(shell_exec('du -hs '.$this_server['install_dir'])));
 $this_server['install_size'] = $is[0];
@@ -335,7 +336,7 @@ function get_mods($server) {
 	$plugin_rows ='';
 	if (!is_dir($mod_location)) {
 		// nothing installed
-		die("empty");
+		//die("empty");
 	}
 	$files = array_diff(scandir($mod_location),array('..', '.'));
 	//print_r($files);

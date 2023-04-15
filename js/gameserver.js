@@ -445,6 +445,7 @@ $("#mod_settings").on("hidden.bs.modal", function () {
 			flist = "<h6 class='card-title'>Files to upload</h6><table>"+flist;
 			flist += "<tr><td class='card-title'>Total size of upload</td><td class='card-title' style='text-align:right;'>"+sztf+"</td></tr>";
 			flist += "<tr><td colspan=2>	Add to all available servers ? <input name='all_servers' type='checkbox' id='all-servers'></td></tr>";
+			flist+= "<tr><td colspan=2>"+sztf+ " used out of  "+ maxFilesize+"</td></tr>"
 			flist += '<tr><td><button class="btn btn-primary" style="margin-top:7%;" type ="submit "><i class="fa fa-cloud-upload"></i> Upload Map Files</button></td></tr></table>';
 		}
 		
@@ -634,6 +635,26 @@ $('#save-file').click(function() {
 	});
 }); 
 
+$('#map-update').on('submit', function(e) {
+	e.preventDefault();
+	murl = $(this).attr('action');
+	var formValues = $(this).serialize();
+	$.ajax({
+		type: $(this).attr('method'),
+		url: murl,
+		dataType: "json",
+		data: formValues,
+		success: function(data) {
+			 nc =  $("table input[type=checkbox]:checked").length-1;
+			 $("#cycle-count").html(nc);;
+			$("#map-response").html(data);
+			$("#map-response").show();
+			$('#map-response').delay(3000).fadeOut(1000); 
+
+		}
+	});
+});
+
 function formatBytes(bytes, decimals = 2) {
     if (!+bytes) return '0 Bytes'
 
@@ -645,4 +666,18 @@ function formatBytes(bytes, decimals = 2) {
 
     return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
 }
-      
+
+ function checkTotalCheckedBoxes(){
+	   var checked = 0;
+$("#table-wrapper" ).each(function( ) {
+  if(this.children.length === 3){ 
+
+	$(this.children).each(function() {
+        this.checked ? checked++ : null;      
+        $("input[name="+this.name+"]").parent().siblings().closest('.totalchecked')[0].innerText = (checked) + " selected"; 
+
+  	    });
+  }
+});
+return checked;
+}     
