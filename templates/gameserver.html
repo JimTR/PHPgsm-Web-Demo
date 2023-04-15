@@ -334,8 +334,31 @@
 						</div>
 					</div>
 					<div class="tab-pane fade" id="bordered-games" role="tabpanel" aria-labelledby="contact-tab">
-						<div>
-							<div class="card-title">Supported Mods</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<h6  class="card-title">Installed Mods</h6>
+									<div class="table-wrapper" style="max-height:50vh;"> 
+										<table class="table">
+											<tbody id="installed-mods">
+												<!--#mod_list#-->
+												
+											</tbody>
+										</table>
+										</div>
+										<h6  class="card-title">Installed Plugins</h6>
+										<div class="table-wrapper" style="max-height:50vh;"> 
+										<table class="table">
+										<!--#sm_plugins#-->
+										</table>
+									</div>	
+							</div>	
+							<div class="col-lg-6">
+								<h6 id="supported-mods" class="card-title">Supported Mods</h6>
+								<div class="panel">
+									<p>Meta Mod</p>
+									<p>Source Mod</p>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="tab-pane fade"  id="bordered-notifications" role="tabpanel" aria-labelledby="home-tab">

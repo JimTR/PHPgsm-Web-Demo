@@ -198,13 +198,12 @@ $this_server['cmd_line_opts'] .= "<td>Add an option</td><td></td><td id='new'><i
 $this_server['cmd_line_opts'].="</tbody></table>";
 //die(print_r($this_server));
 $page['join_link'] = 'steam://connect/'.$this_server['host'].':'.$this_server['port'].'/'; 
-if($this_server['enabled'] ==0) {
-	$page['checked'] = "checked";
-}
-else {
-	$page['checked'] ='';
-}
+if($this_server['enabled'] ==0) {$page['checked'] = "checked";}
+else {$page['checked'] ='';}
 $current_maps = get_maps($this_server);
+$mods = get_mods($this_server);
+$page['mod_list'] = $mods['mods'];
+$page['sm_plugins'] = $mods['sm_plugins'];
 $page['map_files'] = $current_maps['formatted'];
 $page['map_size'] = $current_maps['total_size'];
 $page['map_count'] = count($current_maps)-2;
@@ -328,5 +327,39 @@ function get_maps($server) {
 	$return['mapcycle'] = $map_count;
 	
 	return $return;
+}
+
+function get_mods($server) {
+	$mod_location = "{$server['location']}/{$server['game']}/addons";
+	$plugin_header='';
+	$plugin_rows ='';
+	if (!is_dir($mod_location)) {
+		// nothing installed
+		die("empty");
+	}
+	$files = array_diff(scandir($mod_location),array('..', '.'));
+	//print_r($files);
+	foreach ($files as $file) {
+		if(is_dir("$mod_location/$file")) {
+			$return['mods'].="<tr><td colspan=2>$file</td></tr>";
+			if($file == "sourcemod") {
+				$plugin_location= "$mod_location/$file/plugins";
+				$sm_plugins = array_values(array_diff(scandir($plugin_location),array('..', '.')));
+				//$plugin_rows= "<tr><th></th><th>Last Update</th></tr>";
+				$plugin_rows='';
+				foreach ($sm_plugins as $plugin) {
+					// tidy up the plugins
+					if (str_starts_with($plugin, ".")){continue;}
+					$plugin_name = pathinfo("$plugin_location/$plugin",PATHINFO_FILENAME);
+					$plugin_lastupdate = date ("d-m-Y H:i:s", filemtime("$plugin_location/$plugin"));
+					$plugin_rows.="<tr><td>$plugin_name</td><td>$plugin_lastupdate</td></tr>";
+				}
+				//echo "$plugin_rows</tabe>";
+			}
+			$return['sm_plugins'] = $plugin_rows;
+		}
+	}
+		//die(printr($return['sm_plugins']));
+		return $return;
 }
 ?>
