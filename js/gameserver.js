@@ -78,6 +78,7 @@ console.log(players_online);
 		$('#start_server').removeClass('hidden');
 		$('#cvar').addClass('hidden');
 		$('#join_server').addClass('hidden');
+		$('#console').addClass('hidden');
 		$('#send').prop('disabled', true);
 		
 		
@@ -108,6 +109,7 @@ console.log(players_online);
 			$('#stop_server').removeClass('hidden');
 			$('#restart_server').removeClass('hidden');
 			$('#cvar').removeClass('hidden');
+			$('#console1').removeClass('hidden');
 			$('#start_server').addClass('hidden');
 			$('#join_server').removeClass('hidden');
 			$('#send').prop('disabled', false);

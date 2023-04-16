@@ -335,8 +335,9 @@ function get_mods($server) {
 	$plugin_header='';
 	$plugin_rows ='';
 	if (!is_dir($mod_location)) {
-		// nothing installed
-		//die("empty");
+		$return['mods'] ="none installed";
+		$return['sm_plugins'] = "none installed";
+		return $return ;
 	}
 	$files = array_diff(scandir($mod_location),array('..', '.'));
 	//print_r($files);
@@ -346,7 +347,6 @@ function get_mods($server) {
 			if($file == "sourcemod") {
 				$plugin_location= "$mod_location/$file/plugins";
 				$sm_plugins = array_values(array_diff(scandir($plugin_location),array('..', '.')));
-				//$plugin_rows= "<tr><th></th><th>Last Update</th></tr>";
 				$plugin_rows='';
 				foreach ($sm_plugins as $plugin) {
 					// tidy up the plugins
@@ -355,12 +355,10 @@ function get_mods($server) {
 					$plugin_lastupdate = date ("d-m-Y H:i:s", filemtime("$plugin_location/$plugin"));
 					$plugin_rows.="<tr><td>$plugin_name</td><td>$plugin_lastupdate</td></tr>";
 				}
-				//echo "$plugin_rows</tabe>";
 			}
 			$return['sm_plugins'] = $plugin_rows;
 		}
 	}
-		//die(printr($return['sm_plugins']));
-		return $return;
+	return $return;
 }
 ?>

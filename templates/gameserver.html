@@ -64,7 +64,8 @@
 								<td class="hidden pad_right"   id="restart_server"><button class="btn btn-warning" onclick="restart_server()"><i class="ri-restart-line"></i> Restart</button></td>
 								<td class="hidden pad_right"   id="join_server"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->">Join</a></button></td>
 								<td class="hidden pad_right"   id="cvar"><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> C Vars</button></td>
-								<td id="settings"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod_settings"<i class="ri-edit-2-line"></i> Settings</button></td>
+								<td class="hidden pad_right"   id="console1"><a class="btn btn-primary" href="console.php?server=<!--#bserver#-->"><i class="bx bxs-terminal"></i> Console</a></td>
+								<td id="settings"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod_settings"><i class="ri-edit-2-line"> Settings</button></td>
 							</tr>
 						</table>
 						<h5 class="card-title" id="showlog" style="cursor:pointer;padding:0;">Send Command</h5>
@@ -121,19 +122,14 @@
           </div>
           </div>
         </div>
-      
-              <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
-                <div class="modal-dialog modal-dialog-scrollable">
-                  <div class="modal-content">
+		<div class="modal fade" id="modalDialogScrollable" tabindex="-1">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title">Current Cvars</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body" id="rule">
-                      Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequa>
-                      <br><br><br><br><br><br><br><br><br>jim<br>bow<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                      This content should appear at the bottom after you scroll.
-                    </div>
+                    <div class="modal-body" id="rule"></div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                      
@@ -422,7 +418,7 @@
 			<!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary">Save changes</button>-->
           </div>
-          </div>
+     </div>
           </div>
            
   </main><!-- End #main -->
