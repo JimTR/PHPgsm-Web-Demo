@@ -47,7 +47,17 @@ foreach ($servers as $server) {
 		 }
 		 $disp ='style="display:none;"';
 		 //$href = "gameserver.php?server=$fname";
-		 $gd .='<tr id="'.$fname.'" '.$disp.'><td><span class="invert_link"><a href="'.$href.'" class="invert_link">'.$server['server_name'].'</a></span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="pt'.$fname.'">'.$player_tot.'</td><td id="gdate'.$fname.'" style="text-align:center;">'.$start.'</td></tr>'; 
+		 $template->load('templates/subtemplates/server_card.html');
+		 $lserver['id'] = $fname;
+		 $lserver['server_name'] = $server['server_name'];
+		 $lserver['logo'] = $server['logo'];
+		 $lserver['console_link'] = $href;
+		 $lserver['detail_link'] = "gameserver.php?server=$fname";
+		 $lserver['cmap'] = 
+		 
+		 $template->replace_vars($lserver);
+         $gd .= $template->get_template();
+		 //$gd .='<tr id="'.$fname.'" '.$disp.'><td><span class="invert_link"><a href="'.$href.'" class="invert_link">'.$server['server_name'].'</a></span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="pt'.$fname.'">'.$player_tot.'</td><td id="gdate'.$fname.'" style="text-align:center;">'.$start.'</td></tr>'; 
 		 //$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 }
 

@@ -1322,3 +1322,12 @@ a.invert:hover {
     margin-left: -1.5em;
     padding-top: 0em;
 }
+.map-response {
+    margin-top: 30vh;
+    position: fixed;
+    z-index: 1000;
+    border: 1px solid red;
+    padding: 0.4%;
+    margin-left: 20vw;
+    background-color: green;
+}
