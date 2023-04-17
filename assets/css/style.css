@@ -1331,3 +1331,9 @@ a.invert:hover {
     margin-left: 20vw;
     background-color: green;
 }
+
+.map-title {
+  color: #4e583d;
+  font-weight: bold;
+  padding-left: 1%;
+}

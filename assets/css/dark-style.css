@@ -1412,3 +1412,9 @@ a.invert:hover {
   position: sticky;
   top: 0;
 }
+
+.map-title {
+  color: greenyellow;
+  font-weight: bold;
+  padding-left: 1%;
+}	

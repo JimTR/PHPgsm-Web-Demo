@@ -40,3 +40,6 @@
     width: 33.33333333%;
 }
 
+.no-border td {
+    border-top: 0 !important ;
+}	
