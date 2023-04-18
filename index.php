@@ -10,17 +10,13 @@ $build = "8669-4063036449";
 $version = "1.010";
 $time = "1664264149";
 $we_are_here = $settings['url'];
-	$a = print_r($user_data,true);
-//file_put_contents(DOC_ROOT.'/xyzzy.php',$a);
 $sql = "SELECT game as server,count(*) as today FROM player_history WHERE FROM_UNIXTIME(last_play,'%Y-%m-%d') = CURDATE() group by game";
 $todays_players = $database->get_results($sql);   
 $sql = 'SELECT `country`,country_code, count(*) as today FROM players WHERE FROM_UNIXTIME(last_log_on,"%Y-%m-%d") = CURDATE() group by country_code order by today desc;';
 $todays_countries = $database->get_results($sql);
+$page['country_top_today']= $todays_countries[0]['country'];
 $template = new template;
 $sql = "select * from server1 order by `host_name` ASC";
-//$sidebar_data = array();
-//$page = array();
-//$sidebar_data['smenu'] = '';
 $xpaw = new SourceQuery( );
 	
 $servers = $database->get_results($sql);
@@ -29,16 +25,10 @@ $gd ='';
 foreach ($servers as $server) {
 	$fname = trim($server['host_name']);
 	$href = "console.php?server=$fname";
-		//if(!$server['enabled']) {
-			//$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'" style="color:red;"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
-			//continue;
-		//}
-		//$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
-		if(empty($server['starttime'])) { $server['starttime']= 0;}
+	if(empty($server['starttime'])) { $server['starttime']= 0;}
 		$start = date("d-m-y  h:i:s a",$server['starttime']);
 	     $fname = trim($server['host_name']);
 	     $key = searchforkey($fname, $todays_players,'server');
-
 	     if ($key === false) {
 			 $player_tot = 0;
 		 }
@@ -57,10 +47,7 @@ foreach ($servers as $server) {
 		 
 		 $template->replace_vars($lserver);
          $gd .= $template->get_template();
-		 //$gd .='<tr id="'.$fname.'" '.$disp.'><td><span class="invert_link"><a href="'.$href.'" class="invert_link">'.$server['server_name'].'</a></span></td><td><span  id="cmap'.$fname.'">No Data</span></td><td style="text-align:center;"><span id="gol'.$fname.'"></span></td><td  style="text-align:center;" id="pt'.$fname.'">'.$player_tot.'</td><td id="gdate'.$fname.'" style="text-align:center;">'.$start.'</td></tr>'; 
-		 //$sidebar_data['smenu'] .='<li><a class="" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 }
-
 $page['gd']= $gd;
 
 $jsa ='';
@@ -99,6 +86,7 @@ $page['run_tot'] = $qstat['run_tot'];
 $sql = "SELECT * FROM `logins` limit 10";
 $countries = $database->get_results($sql);
 //echo "$module has got this far bserver loop done";
+$page['country_top'] = $countries[0]['country'];
 $i=0;
 $page['country_data'] = "";
 foreach ($countries as $country) {
