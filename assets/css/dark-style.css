@@ -145,13 +145,13 @@ h1, h2, h3, h4, h5, h6 {
     content: "";
     width: 13px;
     height: 13px;
-    background: #fff;
+    background: #111;
     position: absolute;
     top: -7px;
     right: 20px;
     transform: rotate(45deg);
-    border-top: 1px solid #eaedf1;
-    border-left: 1px solid #eaedf1;
+    border-top: 1px solid #111;
+    border-left: 1px solid #111;
   }
 }
 @-webkit-keyframes dropdown-animate {
@@ -321,7 +321,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Bordered Tabs */
 .nav-tabs-bordered {
-  border-bottom: 2px solid #ebeef4;
+  border-bottom: 1px solid #cccccc;
 }
 .nav-tabs-bordered .nav-link {
   margin-bottom: -2px;
@@ -329,12 +329,12 @@ h1, h2, h3, h4, h5, h6 {
   color: #cccccc;
 }
 .nav-tabs-bordered .nav-link:hover, .nav-tabs-bordered .nav-link:focus {
-  color: #4154f1;
+  color: #CCCD0A;
 }
 .nav-tabs-bordered .nav-link.active {
-  background-color: #2F3065;
-  color: #cccccc;
-  border-bottom: 2px solid #4154f1;
+  background-color: #CCCD0A;
+  color: #000000;
+  border-bottom: 2px solid #CCCD0A;
 }
 
 /*--------------------------------------------------------------
@@ -1414,7 +1414,7 @@ a.invert:hover {
 }
 
 .map-title {
-  color: greenyellow;
+  color: #CCCD0A;
   font-weight: bold;
   padding-left: 1%;
 }	
