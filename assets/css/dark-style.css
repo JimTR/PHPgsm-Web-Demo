@@ -137,7 +137,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 0;
 }
 .dropdown-menu .dropdown-item:hover {
-  background-color: #f6f9ff;
+  /*background-color: #f6f9ff;*/
 }
 
 @media (min-width: 768px) {
@@ -546,7 +546,7 @@ h1, h2, h3, h4, h5, h6 {
 .sidebar {
   position: fixed;
   top: 60px;
-  left: 0;
+  left: 0px;
   bottom: 0;
   width: 300px;
   z-index: 996;
@@ -556,7 +556,7 @@ h1, h2, h3, h4, h5, h6 {
   scrollbar-width: thin;
   scrollbar-color: #cccccc transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-  /*background-color: #fff;*/
+  background-color: #222222;
 }
 
 .sidebar::-webkit-scrollbar {
