@@ -25,6 +25,7 @@ $gd ='';
 foreach ($servers as $server) {
 	$fname = trim($server['host_name']);
 	$href = "console.php?server=$fname";
+	$game_link= "steam://connect/{$server['host']}:{$server['port']}/";
 	if(empty($server['starttime'])) { $server['starttime']= 0;}
 		$start = date("d-m-y  h:i:s a",$server['starttime']);
 	     $fname = trim($server['host_name']);
@@ -43,7 +44,7 @@ foreach ($servers as $server) {
 		 $lserver['logo'] = $server['logo'];
 		 $lserver['console_link'] = $href;
 		 $lserver['detail_link'] = "gameserver.php?server=$fname";
-		 $lserver['cmap'] = 
+		 $lserver['game_link'] = $game_link; 
 		 
 		 $template->replace_vars($lserver);
          $gd .= $template->get_template();
