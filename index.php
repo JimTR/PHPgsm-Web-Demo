@@ -11,7 +11,7 @@ $version = "1.010";
 $time = "1664264149";
 $we_are_here = $settings['url'];
 	$a = print_r($user_data,true);
-//file_put_contents(DOC_ROOT.'/xyzzy.php',$a);
+//this is the circle version
 $sql = "SELECT game as server,count(*) as today FROM player_history WHERE FROM_UNIXTIME(last_play,'%Y-%m-%d') = CURDATE() group by game";
 $todays_players = $database->get_results($sql);   
 $sql = 'SELECT `country`,country_code, count(*) as today FROM players WHERE FROM_UNIXTIME(last_log_on,"%Y-%m-%d") = CURDATE() group by country_code order by today desc;';
