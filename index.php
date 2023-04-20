@@ -92,7 +92,9 @@ $i=0;
 $page['country_data'] = "";
 foreach ($countries as $country) {
 // do stats
-$template->load('templates/subtemplates/country_table.html');
+//print_r($country);
+//die();
+$template->load('templates/subtemplates/country_card.html');
 $cname = trim($country['country']);
 $key = searchforkey($cname, $todays_countries,'country');
 		if ($key === false) {
@@ -101,12 +103,14 @@ $key = searchforkey($cname, $todays_countries,'country');
 		 else {
 			 $cplayers = $todays_countries[$key]['today'];
 		 }
+	 
 $country['row_id'] = $i;
+
 $country['percent'] = number_format(($country['logins']/$page['logins_tot'])*100,2).'%';
 $country['p_percent'] = number_format(($country['players']/$page['player_tot'])*100,2).'%';
 $country['flag'] = 'https://ipdata.co/flags/'.trim(strtolower($country['country_code'])).'.png';
-$country['title'] = $country['country'];
-$country['cplayers'] = $cplayers;
+$country['name'] = $country['country'];
+$country['players_today'] = $cplayers;
 $template->replace_vars($country);
 $page['country_data'] .= $template->get_template();
 $i++;
@@ -124,7 +128,7 @@ $sql = "select servers.server_name,player_history.*,players.name,players.country
 		$map = '<img style="width:5%;vertical-align: middle;" src="https://ipdata.co/flags/'.trim(strtolower($player['country_code'])).'.png">';
 		$pd.='<tr><td style="vertical-align: middle;">'.$map.'  '.$playerN2.'</td><td>'.$player['server_name'].'</td><td><span style="">'.$player['log_ons'].'</span></td><td style="text-align:left;padding-right:6%;">'.$player['last_play'].'</td></tr>';
 	}
-	$sql = "select players.name_c,players.country,players.country_code,players.log_ons,players.last_log_on,players.first_log_on,players.steam_id64 from players ORDER BY `players`.`log_ons` DESC LIMIT 9";
+	$sql = "select players.name_c,players.country,players.country_code,players.log_ons,players.last_log_on,players.first_log_on,players.steam_id64 from players ORDER BY `players`.`log_ons` DESC LIMIT 6";
 	$fpd = '';
 	$players = $database->get_results($sql);
 	$i=0;
