@@ -124,25 +124,40 @@ $sql = "select servers.server_name,player_history.*,players.name,players.country
 		$map = '<img style="width:5%;vertical-align: middle;" src="https://ipdata.co/flags/'.trim(strtolower($player['country_code'])).'.png">';
 		$pd.='<tr><td style="vertical-align: middle;">'.$map.'  '.$playerN2.'</td><td>'.$player['server_name'].'</td><td><span style="">'.$player['log_ons'].'</span></td><td style="text-align:left;padding-right:6%;">'.$player['last_play'].'</td></tr>';
 	}
-	$sql = "select players.name,players.country,players.country_code,players.log_ons,players.last_log_on,players.first_log_on,players.steam_id64 from players ORDER BY `players`.`log_ons` DESC LIMIT 10";
+	$sql = "select players.name_c,players.country,players.country_code,players.log_ons,players.last_log_on,players.first_log_on,players.steam_id64 from players ORDER BY `players`.`log_ons` DESC LIMIT 9";
 	$fpd = '';
 	$players = $database->get_results($sql);
 	$i=0;
 	
 	foreach ($players as $player) {
 		// top 10 players
-		$playerN2 = Emoji::Decode($player['name']);
+		$playerN2 = $player['name_c'];
 		$player['last_log_on'] = time2str($player['last_log_on']);
                 if ($player['last_log_on'] == "1 weeks ago") {$player['last_log_on'] = 'a week ago';}
 		//if ($player['log_ons'] < 100) {$player['log_ons'] =' '.$player['log_ons'];}
+		
+		$v1 = shell_exec("php steampage.php {$player['steam_id64']}");
+		$template->load('templates/subtemplates/player_card.html');
+		$steam_info =json_decode($v1,true);
+		$steam_info['name'] = $playerN2;
+		
 		if ($player['first_log_on'] >0 ) {
 			$player['first_log_on'] = time2str($player['first_log_on']);
 		}
 		else {
 			$player['first_log_on'] = 'N/A';
 		}
-		$map = '<img style="width:5%;vertical-align: middle;" src="https://ipdata.co/flags/'.trim(strtolower($player['country_code'])).'.png">';
-		$fpd.='<tr title="'.$player['country'].'" id="playerrow_'.$i.'"><td  id="player_row_'.$i.'" style="vertical-align: middle;"><span class="span_black">'.$map.'&nbsp;&nbsp;<a href="users.php?id='.$player['steam_id64'].'">'.$playerN2.'</a></span></td><td><span class="span_black">'.$player['first_log_on'].'</span></td><td><span>'.$player['log_ons'].'</span></td><td><span>'.$player['last_log_on'].'</span></td></tr>';
+		$c_code = trim(strtolower($player['country_code']));
+		$steam_info['map'] = "<img style='vertical-align: middle;' src='https://ipdata.co/flags/$c_code.png'/> {$player['country']}";
+		//die(print_r($player));
+		$steam_info['joined']= $player['first_log_on'];
+		$steam_info['login'] = $player['last_log_on'];
+		$steam_info['logins'] = $player['log_ons'];
+		$steam_info['detail_link'] = "users.php?id={$player['steam_id64']}";
+		$template->replace_vars($steam_info);
+		//$fpd.='<tr title="'.$player['country'].'" id="playerrow_'.$i.'"><td  id="player_row_'.$i.'" style="vertical-align: middle;"><span class="span_black">'.$map.'&nbsp;&nbsp;<a href="users.php?id='.$player['steam_id64'].'">'.$playerN2.'</a></span></td><td><span class="span_black">'.$player['first_log_on'].'</span></td><td><span>'.$player['log_ons'].'</span></td><td><span>'.$player['last_log_on'].'</span></td></tr>';
+		$fpd .=$template->get_template();
+		
 		$i++;
 	}
 //print_r($countries);

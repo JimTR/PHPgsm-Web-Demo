@@ -11,7 +11,12 @@ $found = false;
 $framed = false;
 $ban_process = false;
 $in_game_process = false;
+if(isset($argv[1])) {
+	$id = $argv[1];
+}
+else {
 $id = $_GET['id'];
+}
 $url= "https://steamcommunity.com/profiles/$id";
 $page = curl($url);
 $tmp = array_filter(explode(PHP_EOL,$page));
