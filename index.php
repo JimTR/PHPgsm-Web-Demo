@@ -84,7 +84,7 @@ $page['logins_tot'] = $qstat['tot_logins'];
 $page['country_tot'] = $qstat['countries'];
 $page['game_tot'] = $qstat['game_tot'];
 $page['run_tot'] = $qstat['run_tot'];
-$sql = "SELECT * FROM `logins` limit 10";
+$sql = "SELECT * FROM `logins` limit 12";
 $countries = $database->get_results($sql);
 //echo "$module has got this far bserver loop done";
 $page['country_top'] = $countries[0]['country'];
@@ -115,7 +115,7 @@ $template->replace_vars($country);
 $page['country_data'] .= $template->get_template();
 $i++;
 }
-$sql = "select servers.server_name,player_history.*,players.name,players.country_code,players.steam_id64 from player_history left join players on `steam_id` = players.steam_id64 left join servers on player_history.`game` = servers.host_name  ORDER BY `player_history`.`log_ons` DESC LIMIT 10";
+$sql = "select servers.server_name,player_history.*,players.name,players.country_code,players.steam_id64 from player_history left join players on `steam_id` = players.steam_id64 left join servers on player_history.`game` = servers.host_name  ORDER BY `player_history`.`log_ons` DESC LIMIT 12";
 	$players = $database->get_results($sql);
 	$pd = '';
 	foreach ($players as $player) {
