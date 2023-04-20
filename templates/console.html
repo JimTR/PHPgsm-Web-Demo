@@ -21,7 +21,7 @@
 
 </head>
 
-<body>
+<body  class="toggle-sidebar">
 
   <!--#header#-->
 <!-- End Header -->
@@ -88,6 +88,7 @@
 			<span style="float:right;clear:none;padding-left:5px;">
 			    <button id="quick" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#quick_cmds"><i class="fas fa-tachometer-alt"></i> Quick Commands</button>
 			</span>
+			<button onclick="history.back();" type="button" class="btn btn-success">Go Back</button>
 		 </div>
   
     </section>
@@ -310,6 +311,7 @@
 		 $('#servers>option[id="' + server + '"]').prop('selected', true);
 		 $("#servers").trigger("change");
 		 history.replaceState({}, null, "console.php");
+		 return;
 	}
 
      //console.log("working with "+server);

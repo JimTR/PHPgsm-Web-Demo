@@ -16,7 +16,7 @@
 	<!--#include#-->
 </head>
 
-<body>
+<body class="toggle-sidebar">
 	<!--#header#-->
 	<!--#sidebar#-->
 	<main id="main" class="main">
@@ -65,9 +65,11 @@
 								<td class="hidden pad_right"   id="join_server"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->">Join</a></button></td>
 								<td class="hidden pad_right"   id="cvar"><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> C Vars</button></td>
 								<td class="hidden pad_right"   id="console1"><a class="btn btn-primary" href="console.php?server=<!--#bserver#-->"><i class="bx bxs-terminal"></i> Console</a></td>
-								<td id="settings"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod_settings"><i class="ri-edit-2-line"> Settings</button></td>
+								<td id="settings"  class="pad_right"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mod_settings"><i class="ri-edit-2-line"> Settings</button></td>
+								<td class="pad_right"><button onclick="history.back();" type="button" class="btn btn-success">Go Back</button></td>
 							</tr>
 						</table>
+						
 						<h5 class="card-title" id="showlog" style="cursor:pointer;padding:0;">Send Command</h5>
 						<div id ="log"  class="gameserver_log gameserver-cmd"></div>
 						<div style="width:100%;">
