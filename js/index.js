@@ -125,11 +125,13 @@ function online(url){
 					$('#host'+server_id).html(server.server_name);
 					$('#gdate'+server_id).html(server.r_time);
 					real_players = server.Players - server.Bots;
+					
 					if(real_players >0) {
 						key = server.host_name;
 						online_has_players[key] = real_players;
 					}
 					ptot +=real_players;
+					console.log(ptot);
 					$('#gol'+server_id).html(real_players+'/'+server.max_players);
 					$('#pt'+server_id).html(server.player_tot);
 					if (server.Players ==0 ) {
@@ -161,22 +163,19 @@ function online(url){
 					$('#'+server_id).hide(); // hide the server
 				}					
 			}
-			//console.log(online_has_players);
-			console.log("ptot moved = "+ptot);
 			online_servers='';
-			if (typeof image_array !== 'undefined' && image_array.length > 0) {
+			console.log("array length"+online_has_players.length);
+			if (ptot >0 ) {
 				$.each( online_has_players, function( key, value ) {
 					//console.log( key + ": " + value );
 					online_servers += "<tr><td>"+key+"</td><td>"+value+"</td></tr>"; 
 				});
-				console.log(online_servers);
 				$("#activeservers").html(online_servers);
 				$("#active-servers").show();
 			}
 			else {
-				//$("#active-servers").hide();
 				$("#activeservers").html("<tr><td colspan=2 style='text-align:center;'>No Active Servers</td></tr>");
-				}
+			}
 		}
   },
     fail: function() {
