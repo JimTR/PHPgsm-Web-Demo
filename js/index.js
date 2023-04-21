@@ -55,7 +55,7 @@ function online(url){
 				var fname = i; // got the base server
 				if( i =='general' ) {
 					var general = data1[i];
-					console.log(general);
+					//console.log(general);
 					for (g in general) {
 						if( g =='countries') {
 							var country_data = general['countries'];  
@@ -162,9 +162,18 @@ function online(url){
 					$('#'+server_id).hide(); // hide the server
 				}					
 			}
-			online_servers='';
-			
+			online_servers= "";
+			 var myTable = document.getElementById('activeservers');
+			var rows =  myTable.rows;
+			var firstRow = rows[0];
+			console.log(firstRow);
+			 if (firstRow === '<tr><td colspan="2" style="text-align:center;">No Active Servers</td></tr>') {
+				 console.log("row match");
+			 }
+			var rowCount = $('#activeservers tr').length;
+				console.log("rowCount = "+rowCount);
 			if (ptot >0 ) {
+				
 				$.each( online_has_players, function( key, value ) {
 					//console.log( key + ": " + value );
 					online_servers += "<tr><td>"+key+"</td><td>"+value+"</td></tr>"; 
