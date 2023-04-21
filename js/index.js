@@ -164,15 +164,20 @@ function online(url){
 			//console.log(online_has_players);
 			console.log("ptot moved = "+ptot);
 			online_servers='';
-			$.each( online_has_players, function( key, value ) {
-				//console.log( key + ": " + value );
-				online_servers += "<tr><td>"+key+"</td><td>"+value+"</td></tr>"; 
-			});
-			console.log(online_servers);
-			$("#activeservers").html(online_servers);
-			$("#active-servers").show();
-	}
-	 
+			if (typeof image_array !== 'undefined' && image_array.length > 0) {
+				$.each( online_has_players, function( key, value ) {
+					//console.log( key + ": " + value );
+					online_servers += "<tr><td>"+key+"</td><td>"+value+"</td></tr>"; 
+				});
+				console.log(online_servers);
+				$("#activeservers").html(online_servers);
+				$("#active-servers").show();
+			}
+			else {
+				//$("#active-servers").hide();
+				$("#activeservers").html("<tr><td colspan=2 style='text-align:center;'>No Active Servers</td></tr>");
+				}
+		}
   },
     fail: function() {
 		 alert('Failed');
