@@ -93,6 +93,8 @@
 											<td>Player Count</td>
 											</tr>
 											<tbody id="activeservers"></tbody>
+											<tbody id="activeserver2"></tbody>
+											<tbody id="activeserver2"></tbody>
 										</table>	
 									</div>
 								</div>
@@ -177,15 +179,17 @@
 				const servers = [<!--#jsa#-->];
 				var url = "";
 				var jim = '';
-				console.log(servers);
+				//console.log(servers);
 				$('#dashboard').toggleClass("collapsed");
 				//document.getElementsByTagName("html")[0].style.visibility = "visible";
 				index();
+				
 				setInterval( function() { index(); },7000);
 				jQuery.each( servers, function( i, val ) {
-					online(val);
+					
 					setInterval( function() { online(val); }, 5000 );
 				});
+				
 			});
 		</script>
 	</body>

@@ -126,7 +126,7 @@ function online(url){
 					$('#gdate'+server_id).html(server.r_time);
 					real_players = server.Players-server.Bots;
 					if(real_players >0) {
-						key = server.host_name;
+						key = server.HostName;
 						online_has_players[key] = real_players;
 					}
 					ptot +=real_players;
@@ -163,19 +163,8 @@ function online(url){
 				}					
 			}
 			online_servers= "";
-			 var myTable = document.getElementById('activeservers');
-			var rows =  myTable.rows;
-			var firstRow = rows[0];
-			console.log(firstRow);
-			 if (firstRow === '<tr><td colspan="2" style="text-align:center;">No Active Servers</td></tr>') {
-				 console.log("row match");
-			 }
-			var rowCount = $('#activeservers tr').length;
-				console.log("rowCount = "+rowCount);
 			if (ptot >0 ) {
-				
 				$.each( online_has_players, function( key, value ) {
-					//console.log( key + ": " + value );
 					online_servers += "<tr><td>"+key+"</td><td>"+value+"</td></tr>"; 
 				});
 				
