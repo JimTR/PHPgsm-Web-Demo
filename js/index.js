@@ -48,6 +48,7 @@ function online(url){
 		dataType: "json" ,
 		success: function(xml,status){
 			var ptot= 0;
+			var online_has_players = {};
 			var ps = '';
 			var data1 = xml;
 			for (var i in data1) {
@@ -124,6 +125,10 @@ function online(url){
 					$('#host'+server_id).html(server.server_name);
 					$('#gdate'+server_id).html(server.r_time);
 					real_players = server.Players - server.Bots;
+					if(real_players >0) {
+						key = server.host_name;
+						online_has_players[key] = real_players;
+					}
 					ptot +=real_players;
 					$('#gol'+server_id).html(real_players+'/'+server.max_players);
 					$('#pt'+server_id).html(server.player_tot);
@@ -144,8 +149,7 @@ function online(url){
 						//var players = server.players;
 						var players = $.map(server.players, function(value, index) { return [value]; });
 						var players = players.sort((b, a) => (a.Frags > b.Frags) ? 1 : -1)
-						//console.log(players);
-						console.log("ptot moved = "+ptot);	   
+						
 						for (p in players) {
 							newRowContent='<tr style="font-size:14px;"><td style="width:60% !important;"><i class="p_name">'+players[p].Name+'</i></td><td style="text-align:right;width:15%; !important;padding-right:14%" class="p_score">'+players[p].Frags+'</td><td style=text-align:right;padding-right:3%;width:20%" class="p_time">'+players[p].TimeF+'</td></tr>'; 
 							$("#pbody"+server_id).append(newRowContent);
@@ -157,7 +161,16 @@ function online(url){
 					$('#'+server_id).hide(); // hide the server
 				}					
 			}
-			
+			//console.log(online_has_players);
+			console.log("ptot moved = "+ptot);
+			online_servers='';
+			$.each( online_has_players, function( key, value ) {
+				//console.log( key + ": " + value );
+				online_servers += "<tr><td>"+key+"</td><td>"+value+"</td></tr>"; 
+			});
+			console.log(online_servers);
+			$("#activeservers").html(online_servers);
+			$("#active-servers").show();
 	}
 	 
   },
