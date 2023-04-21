@@ -124,14 +124,13 @@ function online(url){
 					$('#cmap'+server_id).html(server.Map);
 					$('#host'+server_id).html(server.server_name);
 					$('#gdate'+server_id).html(server.r_time);
-					real_players = server.Players;
-					console.log(server);
+					real_players = server.Players-server.Bots;
 					if(real_players >0) {
 						key = server.host_name;
 						online_has_players[key] = real_players;
 					}
 					ptot +=real_players;
-					console.log(ptot);
+					
 					$('#gol'+server_id).html(real_players+'/'+server.max_players);
 					$('#pt'+server_id).html(server.player_tot);
 					if (server.Players ==0 ) {
@@ -170,8 +169,9 @@ function online(url){
 					//console.log( key + ": " + value );
 					online_servers += "<tr><td>"+key+"</td><td>"+value+"</td></tr>"; 
 				});
+				
 				$("#activeservers").html(online_servers);
-				$("#active-servers").show();
+				
 			}
 			else {
 				$("#activeservers").html("<tr><td colspan=2 style='text-align:center;'>No Active Servers</td></tr>");
