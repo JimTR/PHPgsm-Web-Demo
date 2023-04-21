@@ -124,8 +124,8 @@ function online(url){
 					$('#cmap'+server_id).html(server.Map);
 					$('#host'+server_id).html(server.server_name);
 					$('#gdate'+server_id).html(server.r_time);
-					real_players = server.Players - server.Bots;
-					
+					real_players = server.Players;
+					console.log(server);
 					if(real_players >0) {
 						key = server.host_name;
 						online_has_players[key] = real_players;
@@ -164,7 +164,7 @@ function online(url){
 				}					
 			}
 			online_servers='';
-			console.log("array length"+online_has_players.length);
+			
 			if (ptot >0 ) {
 				$.each( online_has_players, function( key, value ) {
 					//console.log( key + ": " + value );
