@@ -84,6 +84,19 @@
 											</div>
 										</div>
 									</div>
+									<div class="col-xxl-4 col-md-12" id="parent-server"  >
+										<div class="card info-card revenue-card">
+										<div class="card-body">
+										<h5 class="card-title" style="margin-top:3%;">Parent Servers</h5>
+										<table class="table table-sml no-border">
+											<tr><td>Server ID</td><td class="map-title" id="p-name"></td></tr>
+											<tr><td>Online For</td><td class="map-title" id="up-time"></td></tr>
+											<tr><td>Processor Load</td><td class="map-title" id="load"></td></tr>
+											<tr><td>Needs Reboot ?</td><td class="map-title" id="reboot"></td></tr>
+										</table>	
+									</div>
+								</div>
+								</div>
 									<div class="col-xxl-4 col-md-12" id="active-servers"  >
 										<div class="card info-card revenue-card">
 										<div class="card-body">
@@ -179,17 +192,15 @@
 				const servers = [<!--#jsa#-->];
 				var url = "";
 				var jim = '';
-				//console.log(servers);
+				console.log(servers);
 				$('#dashboard').toggleClass("collapsed");
 				//document.getElementsByTagName("html")[0].style.visibility = "visible";
 				index();
-				
 				setInterval( function() { index(); },7000);
 				jQuery.each( servers, function( i, val ) {
-					
+					console.log(val);
 					setInterval( function() { online(val); }, 5000 );
 				});
-				
 			});
 		</script>
 	</body>

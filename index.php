@@ -53,7 +53,7 @@ foreach ($base_servers as $server) {
 	$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
 	$jsa .= '"'.$url.'/api.php?action=game_detail&server='.$server['fname'].'",';
 }
-if (endsWith($jsa, ',')) {$jsa = rtrim($jsa,",");}
+if (endsWith($jsa, ',')) {$jsa = rtrim($jsa,",");} //upgrade this to php 8
 $sql = "SELECT sum(players) as player_tot, count(country) as countries, sum(logins) as tot_logins, (select count(*) from servers) as game_tot, (select count(*) from servers where running = 1 and enabled = 1) as run_tot  FROM `logins` WHERE 1";
 $qstat = $database->get_row($sql);
 $page['player_tot'] =  $qstat['player_tot'];
@@ -137,20 +137,17 @@ $template->publish();
 $database->disconnect();
 
 function searchforkey($id, $array,$col) {
-	//echo "looking for $id with a key of $col in<br>";
-	//print_r($array); 
-   foreach ($array as $key => $val) {
-       if ($val[$col] === $id) {
-		   //echo "found $id in $col<br>";
-           return $key;
-       }
+	foreach ($array as $key => $val) {
+		if ($val[$col] === $id) {
+			return $key;
+		}
    }
    return false;
 }
 function endsWith( $haystack, $needle ) {
-    $length = strlen( $needle );
-    if( !$length ) {
-        return true;
-    }
-    return substr( $haystack, -$length ) === $needle;
+	$length = strlen( $needle );
+	if( !$length ) {
+		return true;
+	}
+	return substr( $haystack, -$length ) === $needle;
 }

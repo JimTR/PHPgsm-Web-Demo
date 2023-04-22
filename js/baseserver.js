@@ -6,7 +6,7 @@
         dataType: "json", 
         success: function (data) {
 			var server_id = data.server_id; 
-            console.log(server_id);
+            console.log(data);
             //document.cookie = "favorite_food=tripe; SameSite=None; Secure";
             var oldCookieValue = getCookie('phpgsm_theme');
             console.log(oldCookieValue);

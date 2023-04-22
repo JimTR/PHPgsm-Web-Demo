@@ -55,7 +55,12 @@ function online(url){
 				var fname = i; // got the base server
 				if( i =='general' ) {
 					var general = data1[i];
-					//console.log(general);
+					console.log(general);
+					$("#p-name").html(general.server_id);
+					$("#up-time").html(general.uptime);
+					cpu = general.cpu_info;
+					$("#reboot").html(cpu.reboot);
+					$("#load").html(cpu.load_pc);
 					for (g in general) {
 						if( g =='countries') {
 							var country_data = general['countries'];  
