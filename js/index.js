@@ -127,7 +127,8 @@ function online(url){
 					real_players = server.Players-server.Bots;
 					if(real_players >0) {
 						key = server.HostName;
-						online_has_players[key] = real_players;
+						
+						online_has_players[key] = real_players+","+server.host_name;
 					}
 					ptot +=real_players;
 					
@@ -164,8 +165,9 @@ function online(url){
 			}
 			online_servers= "";
 			if (ptot >0 ) {
-				$.each( online_has_players, function( key, value ) {
-					online_servers += "<tr><td><a href='console.php?server="+key+"'>"+key+"</a></td><td>"+value+"</td></tr>"; 
+					$.each( online_has_players, function( key, value ) {
+					ServerData = value.split(",");
+					online_servers += "<tr><td><a href='console.php?server="+ServerData[1]+"'>"+key+"</a></td><td>"+ServerData[0]+"</td></tr>"; 
 				});
 				
 				$("#activeservers").html(online_servers);
