@@ -165,7 +165,7 @@ function online(url){
 			online_servers= "";
 			if (ptot >0 ) {
 				$.each( online_has_players, function( key, value ) {
-					online_servers += "<tr><td>"+key+"</td><td>"+value+"</td></tr>"; 
+					online_servers += "<tr><td><a href='console.php?server="+key+"'>"+key+"</a></td><td>"+value+"</td></tr>"; 
 				});
 				
 				$("#activeservers").html(online_servers);
