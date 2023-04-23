@@ -5,9 +5,11 @@
 * License: https://bootstrapmade.com/license/
 */
 jQuery(document).ready(function(){
+jQuery('body').addClass('toggle-sidebar');
 sessionStorage.clear();	
 updateClock();
 setInterval('updateClock()', 1000);
+
 });
 
 function updateClock ()
