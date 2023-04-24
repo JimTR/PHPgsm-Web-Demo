@@ -51,6 +51,9 @@ foreach ($base_servers as $server) {
 	$url = $uri['scheme']."://".$uri['host'].':'.$server['port'];
 	if(isset($uri['path'])) {$url .= "/".$uri['path'];}
 	$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
+	$template->load('templates/subtemplates/server_body.html');
+	$template->replace("fname",$server['fname']);
+	$page['server_body'] .= $template->get_template();
 	$jsa .= '"'.$url.'/api.php?action=game_detail&server='.$server['fname'].'",';
 }
 if (endsWith($jsa, ',')) {$jsa = rtrim($jsa,",");} //upgrade this to php 8

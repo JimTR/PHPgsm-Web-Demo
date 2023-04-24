@@ -8,11 +8,11 @@ jQuery(document).ready(function(){
 var wSize = jQuery(window).width();
 if(wSize > 1200) {
 jQuery('body').addClass('toggle-sidebar');
-}
+
 sessionStorage.clear();	
 updateClock();
 setInterval('updateClock()', 1000);
-
+}
 });
 
 function updateClock ()
