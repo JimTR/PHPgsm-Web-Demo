@@ -57,7 +57,7 @@ function online(url){
 				
 				if( i =='general' ) {
 					var general = data1[i];
-					console.log(general);
+					//console.log(general);
 					var serverid = general.server_id;
 					$("#"+serverid+"-p-name").html(general.server_id);
 					$("#"+serverid+"-up-time").html(general.uptime);
