@@ -59,7 +59,8 @@ function online(url){
 					var general = data1[i];
 					//console.log(general);
 					var serverid = general.server_id;
-					$("#"+serverid+"-p-name").html(general.server_id);
+					href="<a href='baseserver.php?server="+serverid+"'>"+serverid+"</a>";
+					$("#"+serverid+"-p-name").html(href);
 					$("#"+serverid+"-up-time").html(general.uptime);
 					cpu = general.cpu_info;
 					$("#"+serverid+"-reboot").html(cpu.reboot);
