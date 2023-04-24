@@ -172,17 +172,27 @@ function online(url){
 				}					
 			}
 			online_servers= "";
+			var rowCount = $('#xy tr').length;
+			console.log ("row count outer= "+rowCount); // this should be the server count at idle
+			var count = $('#'+serverid).children('tr').length;
+			console.log("innter table length "+count);
+			var group = $('#xy tr.group').length;
+			console.log("Groups = "+group);
+			//xcount = $("#"+serverid+ " tr" )length;
+			//console.log("xcount = "+xcount);
 			if (ptot >0 ) {
+					
 					$.each( online_has_players, function( key, value ) {
 					ServerData = value.split(",");
-					online_servers += "<tr><td><a href='console.php?server="+ServerData[1]+"'>"+key+"</a></td><td>"+ServerData[0]+"</td></tr>"; 
+					online_servers += "<tr class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+key+"</a></td><td>"+ServerData[0]+"</td></tr>"; 
 				});
-				
-				$("#activeservers").html(online_servers);
+				$("#dormant").hide();
+				$("#a"+serverid).html(online_servers);
 				
 			}
 			else {
-				$("#activeservers").html("<tr><td colspan=2 style='text-align:center;'>No Active Servers</td></tr>");
+				$("#a"+serverid).empty();
+				if(rowCount == serverCount ){$("#dormant").show();}
 			}
 		}
   },

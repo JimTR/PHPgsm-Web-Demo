@@ -54,6 +54,7 @@ foreach ($base_servers as $server) {
 	$template->load('templates/subtemplates/server_body.html');
 	$template->replace("fname",$server['fname']);
 	$page['server_body'] .= $template->get_template();
+	$page['active_body'] .="<tbody id ='a{$server['fname']}'></tbody>";
 	$jsa .= '"'.$url.'/api.php?action=game_detail&server='.$server['fname'].'",';
 }
 if (endsWith($jsa, ',')) {$jsa = rtrim($jsa,",");} //upgrade this to php 8
