@@ -192,6 +192,7 @@ function online(url){
 			}
 			else {
 				$("#a"+serverid).empty();
+				console.log("server Count = "+serverCount+" row count = "+rowCount);
 				if(rowCount == serverCount ){$("#dormant").show();}
 			}
 		}
