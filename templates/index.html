@@ -30,6 +30,7 @@
 				</nav>
 			</div>
 			<section class="section dashboard">
+				<div class="loader" id="active-load"></div>				
 				<div class="card-body">
 					<ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist" style="margin-bottom:1%;">
 						<li class="nav-item" role="presentation">
@@ -80,7 +81,7 @@
 												<table class="table">
 													<tr  class="no-border"><td>Managed Servers</td><td class="map-title" id=""><!--#game_tot#--></td></tr>
 													<tr  class="no-border"><td>Online Servers</td><td class="map-title" id="run_tot"><!--#run_tot#--></td></tr>
-													<tr  class="no-border"><td>&nbsp;</td><td class="map-title" id="">&nbsp;</td></tr>
+													<tr  class="no-border"><td>Most Popular</td><td class="map-title" id=""><!--#most_popular#--></td></tr>
 												</table>	
 											</div>
 										</div>
@@ -90,6 +91,7 @@
 										<div class="card-body">
 										<h5 class="card-title" style="margin-top:3%;">API Servers</h5>
 										<table class="table table-sml no-border">
+											
 											<!--#server_body#-->
 										</table>	
 									</div>
@@ -105,6 +107,7 @@
 											<th>Player Count</th>
 											</thead>
 											<tbody id="dormant" style="border-top:0;"><tr><td colspan=2 style="text-align:center;">No Active Servers</td></tr></tbody>
+											
 											<!--#active_body#-->
 										</table>	
 									</div>

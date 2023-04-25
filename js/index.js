@@ -181,10 +181,12 @@ function online(url){
 					online_servers += "<tr class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+key+"</a></td><td>"+ServerData[0]+"</td></tr>"; 
 				});
 				$("#dormant").hide();
+				$("#active-load").hide();
 				$("#a"+serverid).html(online_servers);
 			}
 			else {
 				$("#a"+serverid).empty();
+				$("#active-load").hide();
 				rowCount = $('#xy tr').length;
 				console.log("server Count = "+serverCount+" row count = "+rowCount);
 				if(serverCount >rowCount ){$("#dormant").show();}

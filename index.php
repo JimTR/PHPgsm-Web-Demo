@@ -60,6 +60,10 @@ foreach ($base_servers as $server) {
 if (endsWith($jsa, ',')) {$jsa = rtrim($jsa,",");} //upgrade this to php 8
 $sql = "SELECT sum(players) as player_tot, count(country) as countries, sum(logins) as tot_logins, (select count(*) from servers) as game_tot, (select count(*) from servers where running = 1 and enabled = 1) as run_tot  FROM `logins` WHERE 1";
 $qstat = $database->get_row($sql);
+$sql = "SELECT servers.server_name,player_history.game as server_id,count(player_history.`game`) as total FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.`game` order by total desc limit 1;";
+$stats = $database->get_results($sql);
+$page['most_popular'] = $stats[0]['server_name'];
+$page['most_popular_count'] = $stats[0]['total'];
 $page['player_tot'] =  $qstat['player_tot'];
 $page['logins_tot'] = $qstat['tot_logins'];
 $page['country_tot'] = $qstat['countries'];
