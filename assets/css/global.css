@@ -42,6 +42,7 @@
 
 .no-border td {
     border-top: 0 !important ;
+    border-bottom: 0;	
 }	
 
 .loader {
