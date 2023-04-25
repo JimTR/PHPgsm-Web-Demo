@@ -43,3 +43,28 @@
 .no-border td {
     border-top: 0 !important ;
 }	
+
+.loader {
+  border: 10px solid red;
+  border-radius: 50%;
+  border-top: 10px solid green;
+  width: 90px;
+  height: 90px;
+   -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  position: absolute;
+  margin-left: 45vw;
+  margin-top: 30vh;
+  z-index: 2000;
+
+}
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
