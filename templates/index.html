@@ -58,6 +58,7 @@
 													<tr  class="no-border"><td>Online Players</td><td class="map-title" id="player">0<//td></tr>
 													<tr  class="no-border"><td>Total Players</td><td class="map-title" id="player_tot"><!--#logins_tot#--></td></tr>	
 													<tr  class="no-border"><td>Total Logins</td><td class="map-title" id="logins_tot"><!--#logins_tot#--></td></tr>	
+													<tr  class="no-border"><td>Logins Today</td><td class="map-title" id="logins_tot"><!--#logins_today#--></td></tr>	
 												</table>
 											</div>
 										</div>		
@@ -70,6 +71,7 @@
 													<tr  class="no-border"><td>Total Countries</td><td class="map-title" id=""><!--#country_tot#--></td></tr>
 													<tr  class="no-border"><td>Top Country Today</td><td class="map-title" id=""><!--#country_top_today#--></td></tr>
 													<tr  class="no-border"><td>Top Country Overall</td><td class="map-title" id=""><!--#country_top#--></td></tr>
+													<tr  class="no-border"><td>&nbsp;</td><td class="map-title" id="">&nbsp;</td></tr>
 												</table>	
 											</div>
 										</div>	
@@ -82,6 +84,7 @@
 													<tr  class="no-border"><td>Managed Servers</td><td class="map-title" id=""><!--#game_tot#--></td></tr>
 													<tr  class="no-border"><td>Online Servers</td><td class="map-title" id="run_tot"><!--#run_tot#--></td></tr>
 													<tr  class="no-border"><td>Most Popular</td><td class="map-title" id=""><!--#most_popular#--></td></tr>
+													<tr  class="no-border"><td>Time Online</td><td class="map-title" id=""><!--#time_online#--></td></tr>
 												</table>	
 											</div>
 										</div>
@@ -93,15 +96,18 @@
 												<table class="table no-border">
 													<tr  class="no-border">
 														<td>
-															<button class="btn btn-primary"><a style="color:#fff;" href="stats.php"><i class="fa-solid fa-chart-simple"></i> Statistics</a></button>
+															<a class="btn btn-primary"  href="users.php"><i class="fa-solid fa-magnifying-glass"></i> Search Players</a>
 														</td>
 														<td>
-															<button class="btn btn-primary"><a style="color:#fff;" href="users.php"><i class="fa-solid fa-magnifying-glass"></i> Search Players</a></button>
+															<a class="btn btn-primary" href="stats.php"><i class="fa-solid fa-chart-simple"></i> Statistics</a>															
 														</td>
 													</tr>
 													<tr>
 														<td>
 															<a class="btn btn-primary" id="themeswitchp" style="cursor:pointer;"><i class="fa fa-fw fa-sun" aria-hidden="true"></i> Switch Mode</a>
+														</td>
+														<td>
+															<a class="btn btn-primary" href="logout.php"><i class="fa fa-fw fa-sign-out-alt text-danger" aria-hidden="true"></i></i> Log Out</a>
 														</td>
 													</tr>
 												</table>	
