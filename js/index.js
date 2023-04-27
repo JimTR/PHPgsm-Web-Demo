@@ -82,7 +82,7 @@ function online(url){
 					cpu = general.cpu_info;
 					if(cpu.reboot  == "Yes") { 
 						title = "this server needs a reboot";
-						cpu.reboot = "<img src ='img/offline.png' title='"+title"'></img>";
+						cpu.reboot = "<img src ='img/offline.png' title='"+title+"'></img>";
 						
 					}
 					else{ 
