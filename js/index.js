@@ -7,11 +7,15 @@ function index() {
         dataType: "json", 
         success: function (data1) {
 			// got data
-			//console.log(data1);
+			console.log(data1);
 			$('#player_tot').text(data1.player_tot);
 			$('#logins_tot').text(data1.logins_tot);
 			$('#player').text(data1.players);
 			$('#run_tot').text(data1.run_tot);
+			$('#logins_today').text(data1.logins_today);
+			$('#countries').text(data1.countries);
+			$('#country_top_today').text(data1.country_top_today);
+			$('#country_top').text(data1.country_top);
 		},
         complete:function(data1){
 		}
