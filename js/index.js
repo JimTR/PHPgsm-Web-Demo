@@ -204,7 +204,7 @@ function online(url){
 			if (ptot >0 ) {
 				$.each( online_has_players, function( key, value ) {
 					ServerData = value.split(",");
-					online_servers += "<tr class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+key+"</a></td><td>"+ServerData[0]+"</td></tr>"; 
+					online_servers += "<tr class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+key+"</a></td><td style='text-align:center;'>"+ServerData[0]+"</td></tr>"; 
 				});
 				$("#dormant").hide();
 				$("#active-load").hide();
