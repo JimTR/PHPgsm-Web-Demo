@@ -12,6 +12,7 @@ $time = "1664264149";
 $we_are_here = $settings['url'];
 $sql = "SELECT game as server,count(*) as today FROM player_history WHERE FROM_UNIXTIME(last_play,'%Y-%m-%d') = CURDATE() group by game";
 $todays_players = $database->get_results($sql);   
+foreach ($todays_players as $x) {$page['logins_today'] += $x['today'];}
 $sql = 'SELECT `country`,country_code, count(*) as today FROM players WHERE FROM_UNIXTIME(last_log_on,"%Y-%m-%d") = CURDATE() group by country_code order by today desc;';
 $todays_countries = $database->get_results($sql);
 $page['country_top_today']= $todays_countries[0]['country'];
