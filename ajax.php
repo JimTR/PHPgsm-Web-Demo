@@ -72,6 +72,15 @@ switch ($module) {
 			$country['flag'] = 'https://ipdata.co/flags/'.trim(strtolower($country['country_code'])).'.png';
 		}
 		$qstat['players']= $page['players'];
+		$sql = "SELECT game as server,count(*) as today FROM player_history WHERE FROM_UNIXTIME(last_play,'%Y-%m-%d') = CURDATE() group by game";
+		$todays_players = $database->get_results($sql);   
+		foreach ($todays_players as $x) {$qstat['logins_today'] += $x['today'];}
+		$sql = 'SELECT `country`,country_code, count(*) as today FROM players WHERE FROM_UNIXTIME(last_log_on,"%Y-%m-%d") = CURDATE() group by country_code order by today desc;';
+		$todays_countries = $database->get_results($sql);
+		$qstat['country_top_today']= $todays_countries[0]['country'];
+		$sql = "SELECT * FROM `logins` limit 12";
+		$countries = $database->get_results($sql);
+		$qstat['country_top'] = $countries[0]['country'];
 	    echo json_encode($qstat);
 		break;
 		
