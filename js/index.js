@@ -80,7 +80,15 @@ function online(url){
 					$("#"+serverid+"-p-name").html(href);
 					$("#"+serverid+"-up-time").html(general.uptime);
 					cpu = general.cpu_info;
-					if(cpu.reboot  == "Yes") { cpu.reboot = "<span style='color:red;'>Yes</span>";}
+					if(cpu.reboot  == "Yes") { 
+						title = "this server needs a reboot";
+						cpu.reboot = "<img src ='img/offline.png' title='"+title"'></img>";
+						
+					}
+					else{ 
+						title = "this server is running normally";
+						cpu.reboot = "<img src ='img/online.png' title='"+title+"'></img>";
+					}
 					$("#"+serverid+"-reboot").html(cpu.reboot);
 					$("#"+serverid+"-load").html(cpu.load_pc);
 					for (g in general) {
