@@ -7,7 +7,7 @@ function index() {
         dataType: "json", 
         success: function (data1) {
 			// got data
-			console.log(data1);
+			//console.log(data1);
 			$('#player_tot').text(data1.player_tot);
 			$('#logins_tot').text(data1.logins_tot);
 			$('#player').text(data1.players);
@@ -16,6 +16,19 @@ function index() {
 			$('#countries').text(data1.countries);
 			$('#country_top_today').text(data1.country_top_today);
 			$('#country_top').text(data1.country_top);
+			playerInfo = data1.player_info;
+			//console.log(playerInfo);
+			for (var i in playerInfo) {
+				player= playerInfo[i];
+				console.log(player);
+				$("#player"+i+"-login").html(player.login);
+				$("#player"+i+"-logins").html(player.logins);
+				$("#player"+i+"-name").html(player.name);
+				$("#player"+i+"-map").html(player.map);
+				console.log($("#player"+i+"-avatar1").attr("src"));
+				//player0-avatar1
+				$("#player"+i+"-avatar1").attr("src",player.avatar);
+			}
 		},
         complete:function(data1){
 		}
@@ -67,6 +80,7 @@ function online(url){
 					$("#"+serverid+"-p-name").html(href);
 					$("#"+serverid+"-up-time").html(general.uptime);
 					cpu = general.cpu_info;
+					if(cpu.reboot  == "Yes") { cpu.reboot = "<span style='color:red;'>Yes</span>";
 					$("#"+serverid+"-reboot").html(cpu.reboot);
 					$("#"+serverid+"-load").html(cpu.load_pc);
 					for (g in general) {
@@ -256,3 +270,8 @@ function timeDifference(current, previous) {
     }
 }
 
+function imgError(image) {
+    image.onerror = "";
+    image.src = "img/unknown.png";
+    return true;
+}
