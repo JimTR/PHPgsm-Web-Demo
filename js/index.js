@@ -80,7 +80,7 @@ function online(url){
 					$("#"+serverid+"-p-name").html(href);
 					$("#"+serverid+"-up-time").html(general.uptime);
 					cpu = general.cpu_info;
-					if(cpu.reboot  == "Yes") { cpu.reboot = "<span style='color:red;'>Yes</span>";
+					if(cpu.reboot  == "Yes") { cpu.reboot = "<span style='color:red;'>Yes</span>";}
 					$("#"+serverid+"-reboot").html(cpu.reboot);
 					$("#"+serverid+"-load").html(cpu.load_pc);
 					for (g in general) {
