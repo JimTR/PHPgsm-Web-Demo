@@ -202,7 +202,7 @@ function online(url){
 			var rowCount = $('#xy tr').length;
 			var count = $('#'+serverid).children('tr').length;
 			if (ptot >0 ) {
-				key = key.replace(/\/g, '');
+				key = jQuery.parseJSON( '"'+key+'"' );
 				$.each( online_has_players, function( key, value ) {
 					ServerData = value.split(",");
 					online_servers += "<tr class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+key+"</a></td><td style='text-align:center;'>"+ServerData[0]+"</td></tr>"; 
