@@ -321,7 +321,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Bordered Tabs */
 .nav-tabs-bordered {
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 0px solid #cccccc;
 }
 .nav-tabs-bordered .nav-link {
   margin-bottom: -2px;
@@ -332,9 +332,9 @@ h1, h2, h3, h4, h5, h6 {
   color: #CCCD0A;
 }
 .nav-tabs-bordered .nav-link.active {
-  background-color: #CCCD0A;
-  color: #000000;
-  border-bottom: 2px solid #CCCD0A;
+  background-color: transparent;
+  color: #CCCD0A;
+  border-bottom: 0px solid #CCCD0A;
 }
 
 /*--------------------------------------------------------------
