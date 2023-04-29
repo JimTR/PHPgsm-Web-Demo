@@ -108,6 +108,10 @@ switch ($module) {
 		}
 		//printr($steam_info);
 		//printr($player_info);
+		$sql = "SELECT servers.server_name,player_history.`game`,sum(player_history.`game_time`) as full_time FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.game ORDER BY `full_time` DESC limit 10";
+		$stats = $database->get_results($sql);
+		$qstat['most_played_time'] =convertSecToTime($stats[0]['full_time']);
+		$qstat['most_played'] = $stats[0]['server_name'];
 		$qstat['player_info'] = $player_info;
 	    echo json_encode($qstat);
 		break;
@@ -144,5 +148,27 @@ function get_server_info($server) {
 	}
 	$xpaw->Disconnect();
 	return($info);
+}
+function convertSecToTime($sec){
+	$return='';
+	if (!is_numeric($sec)) {$sec=0;}
+	$date1 = new DateTime("@0"); //starting seconds
+	$date2 = new DateTime("@$sec"); // ending seconds
+	$interval =  date_diff($date1, $date2); //the time difference
+	$y =  $interval->format('%y');
+	$m = $interval->format('%m');
+	$d = $interval->format('%d');
+	$h = $interval->format('%H');
+	$mi = $interval->format('%I');
+	$s = $interval->format('%S');
+	if ($y >0) {$return.= "{$y}y, ";}
+	if ($m >0) {$return.= "{$m}m, ";}
+	//if ($m > 0 and $y == 0) {$return .= "$m mo ";}
+	if($d >0){$return .= "{$d}d, ";}
+	$return .= "$h:";
+	$return.= "$mi:";
+	$return .= "$s";	
+	//return $interval->format('%y y %m mo %d d, %h h %i m %s s'); // convert into Years, Months, Days, Hours, Minutes and Seconds
+	return $return;
 }
 ?>

@@ -7,7 +7,7 @@ function index() {
         dataType: "json", 
         success: function (data1) {
 			// got data
-			//console.log(data1);
+			console.log(data1);
 			$('#player_tot').text(data1.player_tot);
 			$('#logins_tot').text(data1.logins_tot);
 			$('#player').text(data1.players);
@@ -16,6 +16,8 @@ function index() {
 			$('#countries').text(data1.countries);
 			$('#country_top_today').text(data1.country_top_today);
 			$('#country_top').text(data1.country_top);
+			$('#most-played').text(data1.most_played);
+			$('#most-played-time').text(data1.most_played_time);
 			playerInfo = data1.player_info;
 			//console.log(playerInfo);
 			for (var i in playerInfo) {
@@ -79,6 +81,7 @@ function online(url){
 					$("#"+serverid+"-p-name").html(href);
 					$("#"+serverid+"-up-time").html(general.uptime);
 					cpu = general.cpu_info;
+					//console.log(cpu);
 					if(cpu.reboot  == "Yes") { 
 						title = "this server needs a reboot";
 						cpu.reboot = "<img src ='img/offline.png' title='"+title+"'></img>";
