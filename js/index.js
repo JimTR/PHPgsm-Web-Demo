@@ -17,7 +17,7 @@ function index() {
 			$('#country_top_today').text(data1.country_top_today);
 			$('#country_top').text(data1.country_top);
 			$('#most-played').text(data1.most_played);
-			$('#most-played-time').text(data1.most_played_time);
+			$('#most-played-time').text(data1.total_time);
 			playerInfo = data1.player_info;
 			//console.log(playerInfo);
 			for (var i in playerInfo) {
