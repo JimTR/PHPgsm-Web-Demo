@@ -7,7 +7,7 @@ function index() {
         dataType: "json", 
         success: function (data1) {
 			// got data
-			console.log(data1);
+			//console.log(data1);
 			$('#player_tot').text(data1.player_tot);
 			$('#logins_tot').text(data1.logins_tot);
 			$('#player').text(data1.players);
@@ -20,13 +20,12 @@ function index() {
 			//console.log(playerInfo);
 			for (var i in playerInfo) {
 				player= playerInfo[i];
-				console.log(player);
+				//console.log(player);
 				$("#player"+i+"-login").html(player.login);
 				$("#player"+i+"-logins").html(player.logins);
 				$("#player"+i+"-name").html(player.name);
 				$("#player"+i+"-map").html(player.map);
-				console.log($("#player"+i+"-avatar1").attr("src"));
-				//player0-avatar1
+				$("#player"+i+"-joined").html(player.joined);
 				$("#player"+i+"-avatar1").attr("src",player.avatar);
 			}
 		},
