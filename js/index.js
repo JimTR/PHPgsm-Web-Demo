@@ -7,7 +7,7 @@ function index() {
         dataType: "json", 
         success: function (data1) {
 			// got data
-			//console.log(data1);
+			console.log(data1);
 			$('#player_tot').text(data1.player_tot);
 			$('#logins_tot').text(data1.logins_tot);
 			$('#player').text(data1.players);
