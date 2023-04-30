@@ -168,7 +168,7 @@ function displayData(userID) {
 				}	
 				man=item.name_c;
 			});
-			$('#dta1').append( "<tr><td  class='card-title'><h6  class='card-title' style='padding:0;'>Overall Time on Line</h6></td><td style='padding-right:6.5%;text-align:right;vertical-align:top;' colspan=3>"+data.time_on_line+"</td></tr>");
+			$('#dta1').append( "<tr><td  class='card-title'><h6  class='card-title' style='padding:0;'>Overall Time on Line</h6></td><td>&nbsp;</td><td >&nbsp;</td><td style='padding-left:4%;vertical-align:top;'>"+data.time_on_line+"</td></tr>");
 			//console.log(data);
 			gen_data = players[0];
 			head = data;
