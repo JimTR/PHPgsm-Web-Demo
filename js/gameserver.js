@@ -70,7 +70,7 @@ console.log(players_online);
 		$('#build').text('');
 		$('#server_id').text('');
 		$('#gameid').text('');
-		$('#player-tot').text(serverd.player_tot);
+		$('#player-tot').text('');
 		// buttons 
 		//$('#'+server_id+'qbutton').removeClass('btn-primary').addClass('btn-danger');
 		$('#stop_server').addClass('hidden');
