@@ -1,5 +1,6 @@
 function index() {
 	// read data use simular to loading the index file
+	if (serverCount ==1) {$("#server-desc").text("API Server");}
      $.ajax({ 
         type: 'GET', 
         url: 'ajax.php', 
