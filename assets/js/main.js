@@ -322,3 +322,9 @@ $('#themeswitchp').click(function()
 			}
 			location.reload();
 });
+$('#switch').click(function()
+ {
+	 var oldCookieValue = getCookie('phpgsm_colour');
+	 alert (oldCookieValue);
+		
+ });
