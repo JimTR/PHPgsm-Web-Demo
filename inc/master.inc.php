@@ -57,6 +57,17 @@ $template = new template;
         $_REQUEST = fix_slashes($_REQUEST);
         $_COOKIE  = fix_slashes($_COOKIE);
     //print_r ($_COOKIE);
+		if(!isset($_COOKIE['phpgsm_colour'])) {
+			$arr_cookie_options = array (
+                'expires' => time() + 60*60*24*30,
+                'path' => '/',
+                'domain' => '', // leading dot for compatibility or use subdomain
+                'secure' => true,     // or false
+                'httponly' => false,    // or false
+                'samesite' => 'Lax' // None || Lax  || Strict
+                );
+			setcookie('phpgsm_colour', "main", $arr_cookie_options);
+		}
        if (!isset($_COOKIE['phpgsm_theme'])) {
 		$arr_cookie_options = array (
                 'expires' => time() + 60*60*24*30,

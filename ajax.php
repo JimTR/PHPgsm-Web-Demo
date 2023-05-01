@@ -133,6 +133,15 @@ switch ($module) {
 		$page = array_change_key_case(array_merge($server,get_server_info($server)));
 		echo json_encode($page);
 		break;
+		
+		case 'colour':
+			echo "hello";
+			
+			//echo "the return is {$_COOKIE['phpgsm_colour']}<br>".print_r($_COOKIE['phpgsm_colour'],true);
+			if ($_COOKIE['phpgsm_colour'] =='main') {
+				echo "changing to circle";
+			}
+			break;
 	}
 	
 function get_server_info($server) {
