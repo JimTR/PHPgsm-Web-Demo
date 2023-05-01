@@ -30,6 +30,7 @@ function index() {
 				$("#player"+i+"-map").html(player.map);
 				$("#player"+i+"-joined").html(player.joined);
 				$("#player"+i+"-avatar1").attr("src",player.avatar);
+				$("#player"+i+"-link").prop("href",player.detail_link);
 			}
 		},
         complete:function(data1){
