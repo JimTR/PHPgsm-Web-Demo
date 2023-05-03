@@ -31,6 +31,7 @@ $bserver = explode('=',$_SERVER['QUERY_STRING']);
 $we_are_here = $settings['url'];
 $url = $settings['url'];
 $sql = "select * from logins limit 1";
+if ($settings['left_buttons']) {$page['button_class'] = "button-left";} else {$page['button_class']='';}
 $country = $database->get_results($sql);
 $page['country'] = $country[0]['country'];
 $page['country_stat'] = "{$country[0]['logins']} / {$country[0]['players']}";
