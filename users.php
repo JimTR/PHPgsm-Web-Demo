@@ -36,24 +36,8 @@ $url = $settings['url'];
 $header_vars['title'] = "$module - $bserver";
 $sql = "select * from server1 order by `host_name` ASC";
 $servers = $database->get_results($sql);
-/*foreach ($servers as $server) {
-	$fname = trim($server['host_name']);
-        $href = "gameserver.php?server=$fname";
-        if(!$server['enabled']) {
-             $sidebar_data['smenu'] .='<li><a class="" href="'.$href.'" style="color:red;"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
-             continue;
-       }
 
-	$href = 'gameserver.php?server='.$server['host_name'];
-	if ($bserver == $server['host_name'] ) {$class = 'active';} else {$class='';}
-	$sidebar_data['smenu'] .='<li><a class="'.$class.'" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
-}
-$sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `fname` ASC";
-$base_servers = $database->get_results($sql);
-foreach ($base_servers as $server) {
-	$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
-}
-	*/
+if ($settings['left_buttons']) {$page['button_class'] = "button-left";} else {$page['button_class']='';}
 	
 if(isset($_GET['id'])) {	
 	//workout_options ($_GET);
