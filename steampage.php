@@ -158,6 +158,7 @@ foreach($work as $line) {
 	
 }
 echo json_encode($user_data).PHP_EOL;
+shell_exec("find /tmp -size 300c -exec rm -v {} \; ");
 
 function str2int($string) {
   $length = strlen($string);   
