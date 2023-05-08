@@ -220,7 +220,7 @@ function online(url){
 				$("#active-load").hide();
 				rowCount = $('#xy tr').length;
 				console.log("server Count = "+serverCount+" row count = "+rowCount);
-				if(serverCount == rowCount  || serverCount < rowCount){$("#dormant").show();}
+				if(rowCount == 2  || serverCount < rowCount){$("#dormant").show();}
 			}
 		}
   },
