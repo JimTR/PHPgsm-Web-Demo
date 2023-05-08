@@ -31,17 +31,22 @@ foreach ($servers as $server) {
 	$key = searchforkey($fname, $todays_players,'server');
 	if ($key === false) {$player_tot = 0; }
 	else {$player_tot = $todays_players[$key]['today']; }
-	 $disp ='style="display:none;"';
-	 $template->load('templates/subtemplates/server_card.html');
-	 $lserver['id'] = $fname;
-	 $lserver['server_name'] = $server['server_name'];
-	 $lserver['logo'] = $server['logo'];
-	 $lserver['console_link'] = $href;
-	 $lserver['detail_link'] = "gameserver.php?server=$fname";
-	 $lserver['game_link'] = $game_link; 
+	$disp ='style="display:none;"';
+	$template->load('templates/subtemplates/server_card.html');
+	$lserver['id'] = $fname;
+	$lserver['server_name'] = $server['server_name'];
+	$lserver['logo'] = $server['logo'];
+	$lserver['console_link'] = $href;
+	$lserver['detail_link'] = "gameserver.php?server=$fname";
+	$lserver['game_link'] = $game_link; 
+	$ban_location = "{$server['location']}/{$server['game']}/cfg/banned_ip.cfg";
+	$system_bans = explode(PHP_EOL,file_get_contents($ban_location));
+	$lserver['system_bans'] = count($system_bans);	
 	 $template->replace_vars($lserver);
      $gd .= $template->get_template();
+     
 }
+
 $page['gd']= $gd;
 $jsa ='';
 $sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `fname` ASC";
@@ -87,6 +92,7 @@ foreach ($countries as $country) {
 	$country['flag'] = 'https://ipdata.co/flags/'.trim(strtolower($country['country_code'])).'.png';
 	$country['name'] = $country['country'];
 	$country['players_today'] = $cplayers;
+	//$country['uid'] = "country$i";
 	$template->replace_vars($country);
 	$page['country_data'] .= $template->get_template();
 	$i++;
