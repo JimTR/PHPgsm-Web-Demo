@@ -49,7 +49,7 @@ function check_source_bans($data) {
 		$sql = "select * from players where ip like '$y'";
 		$isp = db->get_results($sql);
 		if($isplayer) { 
-			echo "{$isplayer['name_c']}<br>";
+			echo "{$isplayer['name']}<br>";
 		}
 		elseif ($isp) {
 			echo "this is a known player<br>";
