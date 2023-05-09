@@ -161,6 +161,7 @@ function online(url){
 					if (typeof server.Players === "undefined") {server.Players = 0;}   
 					$("#img"+server_id).attr("src",logo);
 					$('#cmap'+server_id).html(server.Map);
+					//console.log(unescape(server.sever.name));
 					$('#host'+server_id).html(server.server_name);
 					$('#gdate'+server_id).html(server.r_time);
 					real_players = server.Players-server.Bots;
@@ -220,7 +221,7 @@ function online(url){
 				$("#active-load").hide();
 				rowCount = $('#xy tr').length;
 				console.log("server Count = "+serverCount+" row count = "+rowCount);
-				if( serverCount == rowCount   ) {$("#dormant").show();}
+				if(rowCount == 2  ) {$("#dormant").show();}
 			}
 		}
   },
