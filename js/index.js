@@ -161,7 +161,7 @@ function online(url){
 					if (typeof server.Players === "undefined") {server.Players = 0;}   
 					$("#img"+server_id).attr("src",logo);
 					$('#cmap'+server_id).html(server.Map);
-					//console.log(unescape(server.sever.name));
+					console.log(unescape(server.sever.name));
 					$('#host'+server_id).html(server.server_name);
 					$('#gdate'+server_id).html(server.r_time);
 					real_players = server.Players-server.Bots;
