@@ -44,15 +44,15 @@ function check_source_bans($data) {
 		$x = trim($findip[2]);
 		$y = ip2long($x);
 		$sql = "select * from sb_bans  where ip like '$x'";
-		echo "using $sql ($y)<br>";
+		//echo "using $sql ($y)<br>";
 		$isplayer = db2->get_row($sql);
 		$sql = "select * from players where ip like '$y'";
 		$isp = db->get_results($sql);
 		if($isplayer) { 
-			echo "{$isplayer['name']}<br>";
+			echo "{$isplayer['name']} is known to sourcebans<br>";
 		}
 		elseif ($isp) {
-			echo "this is a known player<br>";
+			echo "{$isp['name_c']} is a known player, but is not in the sourcebans table<br>";
 		}
 		else {
 			echo "$x - ip not found in database<br>";
