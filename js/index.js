@@ -182,9 +182,9 @@ function online(url){
 						$('#op1'+server_id).css('cursor','default');  
 						classList = $("#gol"+server_id).attr("class");
 						//console.log(classList);
-						if(classList == "p_count"){
+						//if(classList == "p_count"){
 							$('gol'+server_id).removeClass("p_count").addClass("map-title");
-						}	
+						//}	
 						//$('#gol'+server_id).removeClass('p_count'); 
 					}
 					else if (server.Players >0) {
