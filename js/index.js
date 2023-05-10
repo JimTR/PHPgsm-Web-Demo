@@ -170,7 +170,6 @@ function online(url){
 					real_players = server.Players-server.Bots;
 					if(real_players >0) {
 						key = server.HostName;
-						
 						online_has_players[key] = real_players+","+server.host_name;
 					}
 					ptot +=real_players;
@@ -181,7 +180,12 @@ function online(url){
 						//console.log ('should be nowt '+server.Players);
 						$("#ops"+server_id).slideUp();
 						$('#op1'+server_id).css('cursor','default');  
-						$('#gol'+server_id).removeClass('p_count'); 
+						classList = $("#gol"+server_id).attr("class");
+						//console.log(classList);
+						if(classList == "p_count"){
+							$('gol'+server_id).toggleClass("p_count map-title");
+						}	
+						//$('#gol'+server_id).removeClass('p_count'); 
 					}
 					else if (server.Players >0) {
 						if (typeof server.players === "undefined") {
@@ -189,7 +193,8 @@ function online(url){
 							return;
 						}   
 						$('#op1'+server_id).css('cursor','pointer');
-						$('#gol'+server_id).addClass('p_count');	
+						//$('#gol'+server_id).addClass('p_count');
+						$('gol'+server_id).toggleClass("map-title p_count");	
 						$("#pbody"+server_id).empty();
 						//var players = server.players;
 						var players = $.map(server.players, function(value, index) { return [value]; });
