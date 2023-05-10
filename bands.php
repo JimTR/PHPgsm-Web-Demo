@@ -23,6 +23,7 @@
  */
 include "inc/master.inc.php"; // get set up
 define('cr',PHP_EOL);
+$games = array();
 $sql = "select * from server1  where running = 1 order by `host_name` ASC";
 $servers = db->get_results($sql);
 foreach ($servers as $server) {
