@@ -162,7 +162,8 @@ function online(url){
 					$("#img"+server_id).attr("src",logo);
 					$('#cmap'+server_id).html(server.Map);
 					//console.log(unescape(server.sever_name));
-					esc = JSON.parse('"'+server.server_name+'"');
+					//esc = JSON.parse('"'+server.server_name+'"');
+					 esc = server.server_name.replace("/'", "'");
 					 server.server_name= esc;
 					$('#host'+server_id).html(server.server_name);
 					$('#gdate'+server_id).html(server.r_time);
