@@ -183,7 +183,7 @@ function online(url){
 						classList = $("#gol"+server_id).attr("class");
 						console.log(classList);
 						//if(classList == "p_count"){
-							$('gol'+server_id).removeClass("p_count").addClass("map-title");
+							$('#gol'+server_id).removeClass("p_count").addClass("map-title");
 						//}	
 						//$('#gol'+server_id).removeClass('p_count'); 
 					}
