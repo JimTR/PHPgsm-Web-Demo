@@ -33,6 +33,7 @@ $page['players'] = 0;
 define( 'SQ_TIMEOUT',     $settings['SQ_TIMEOUT'] );
 define( 'SQ_ENGINE',      SourceQuery::SOURCE );
 define( 'LOG',	DOC_ROOT.'/logs/ajax.log');
+define('cr',PHP_EOL);
 switch ($module) {
 	case 'index':
 		$sql = "select * from server1  where running = 1 order by `host_name` ASC";
@@ -57,7 +58,10 @@ switch ($module) {
 				$output = 'info->HostName = '.$info['HostName'].' $page->players = '.$page['players'].' info->Players = '.$info['Players'].' info->bots = '.$info['Bots']." \$players = $players".PHP_EOL;
 				$page['players'] = $page['players']+$players;
 				unset($info);
-			}	
+			}
+			$ban_location = "{$server['location']}/{$server['game']}/cfg/banned_ip.cfg";
+			$system_bans = explode(cr,file_get_contents($ban_location));
+			$qstat['system_bans'] = $ban_location;	
 		}
 		$sql = "SELECT sum(players) as player_tot, count(country) as countries, sum(logins) as tot_logins, (select count(*) from servers) as game_tot, (select count(*) from servers where running = 1 and enabled = 1) as run_tot  FROM `logins` WHERE 1";
 		$qstat = $database->get_row($sql);
@@ -136,9 +140,13 @@ switch ($module) {
 		
 		case 'colour':
 			echo "hello";
-			
+			$git_cmd="git status";
+			exec($git_cmd,$git_response);
+			print_r( $git_response);	
+			//printr($settings);
 			//echo "the return is {$_COOKIE['phpgsm_colour']}<br>".print_r($_COOKIE['phpgsm_colour'],true);
 			if ($_COOKIE['phpgsm_colour'] =='main') {
+				
 				echo "changing to circle";
 			}
 			break;
