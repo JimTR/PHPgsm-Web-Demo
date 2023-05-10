@@ -31,7 +31,7 @@ foreach ($servers as $server) {
 	if(in_array($server['game'],$games)) { continue;}
 	$ban_location = "{$server['location']}/{$server['game']}/cfg/banned_ip.cfg";
 	$system_bans = explode(cr,trim(file_get_contents($ban_location)));
-	echo "{$server['host_name']}<br>";
+	//echo "{$server['host_name']}<br>";
 	check_source_bans($system_bans);
 	$games[] = $server['game'];
 }
