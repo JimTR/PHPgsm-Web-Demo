@@ -181,7 +181,7 @@ function online(url){
 						$("#ops"+server_id).slideUp();
 						$('#op1'+server_id).css('cursor','default');  
 						classList = $("#gol"+server_id).attr("class");
-						//console.log(classList);
+						console.log(classList);
 						//if(classList == "p_count"){
 							$('gol'+server_id).removeClass("p_count").addClass("map-title");
 						//}	
