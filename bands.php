@@ -42,6 +42,7 @@ function check_source_bans($data) {
 		// loop the system bans
 		//include "inc/config.php";
 		//print_r($config);
+		$sb = false;
 		$findip = explode(" ",$user);
 		//echo "{$findip[2]}<br>";
 		$x = trim($findip[2]);
@@ -56,7 +57,7 @@ function check_source_bans($data) {
 			echo "{$isplayer['name']}  is known to sourcebans<br>";
 		}
 		if ($isp) {
-			if(!$b) {
+			if($b === false) {
 				echo "{$isp[0]['name_c']} is a known player, but is not in the sourcebans table <br>";
 			}
 			else {
