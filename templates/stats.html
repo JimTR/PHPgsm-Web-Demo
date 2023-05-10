@@ -137,6 +137,7 @@
 		var url = $(this).attr('action');
 		$("#data_table").html(items);
 		var sndData = $('#sendcmd input').serialize();
+		console.log($url)
 		console.log(sndData);
 		$.ajax({
 			type: $(this).attr('method'),
