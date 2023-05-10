@@ -27,10 +27,12 @@ $sql = "select * from server1  where running = 1 order by `host_name` ASC";
 $servers = db->get_results($sql);
 foreach ($servers as $server) {
 	// loop the data
+	if(in_array($server['game'],$games)) { continue;}
 	$ban_location = "{$server['location']}/{$server['game']}/cfg/banned_ip.cfg";
 	$system_bans = explode(cr,trim(file_get_contents($ban_location)));
 	echo "{$server['host_name']}<br>";
 	check_source_bans($system_bans);
+	$games[] = $server['game'];
 }
 
 function check_source_bans($data) {
