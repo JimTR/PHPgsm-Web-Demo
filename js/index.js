@@ -183,7 +183,7 @@ function online(url){
 						classList = $("#gol"+server_id).attr("class");
 						//console.log(classList);
 						if(classList == "p_count"){
-							$('gol'+server_id).removeClass("p_count");
+							$('gol'+server_id).removeClass("p_count").addClass("map-title");
 						}	
 						//$('#gol'+server_id).removeClass('p_count'); 
 					}
@@ -193,7 +193,7 @@ function online(url){
 							return;
 						}   
 						$('#op1'+server_id).css('cursor','pointer');
-						$('#gol'+server_id).addClass('p_count');
+						$('#gol'+server_id).removeClass("map-title").addClass('p_count');
 						//$('gol'+server_id).toggleClass("map-title p_count");	
 						$("#pbody"+server_id).empty();
 						//var players = server.players;
