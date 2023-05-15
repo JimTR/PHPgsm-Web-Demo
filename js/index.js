@@ -90,8 +90,14 @@ function online(url){
 						
 					}
 					else{ 
-						title = "this server is running normally";
-						cpu.reboot = "<img src ='img/online.png' title='"+title+"'></img>";
+						if(parseInt(cpu.load_1_min_pc) >80 ) {
+							title = "this server is using large cpu";
+							cpu.reboot = "<img src ='img/offline1.png' title='"+title+"'></img>";
+						}
+						else{	
+							title = "this server is running normally";
+							cpu.reboot = "<img src ='img/online.png' title='"+title+"'></img>";
+						}
 					}
 					$("#"+serverid+"-reboot").html(cpu.reboot);
 					$("#"+serverid+"-load").html(cpu.load_pc);
@@ -299,3 +305,9 @@ function imgError(image) {
     image.src = "img/unknown.png";
     return true;
 }
+	 
+ $("#golbb2server").click, function() {
+ alert ("mouse over");
+}
+
+
