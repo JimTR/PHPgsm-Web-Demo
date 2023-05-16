@@ -34,6 +34,8 @@ function index() {
 			}
 		},
         complete:function(data1){
+			 durl = $("#disco-img").attr("src");
+			$("#disco-img").removeAttr("src").attr("src", durl); // update discord
 		}
     });
 }
@@ -91,7 +93,7 @@ function online(url){
 					}
 					else{ 
 						if(parseInt(cpu.load_1_min_pc) >80 ) {
-							title = "this server is using large cpu";
+							title = "this server is using a lot of cpu";
 							cpu.reboot = "<img src ='img/offline1.png' title='"+title+"'></img>";
 						}
 						else{	
@@ -156,7 +158,7 @@ function online(url){
 			for (var j in data1[i]) {
 				if (typeof serverlength === 0) {return;}   
 				var server = data1[i][j]; // got server id
-				//console.log(server);
+				
 				var server_id = j;	
 				if (server.running == 1 ) {
 					var playern = server.Players;
@@ -167,8 +169,6 @@ function online(url){
 					if (typeof server.Players === "undefined") {server.Players = 0;}   
 					$("#img"+server_id).attr("src",logo);
 					$('#cmap'+server_id).html(server.Map);
-					//console.log(unescape(server.sever_name));
-					//esc = JSON.parse('"'+server.server_name+'"');
 					 esc = server.server_name.replace("\\", "");
 					 server.server_name= esc;
 					$('#host'+server_id).html(server.server_name);
@@ -188,10 +188,7 @@ function online(url){
 						$('#op1'+server_id).css('cursor','default');  
 						classList = $("#gol"+server_id).attr("class");
 						console.log(classList);
-						//if(classList == "p_count"){
-							$('#gol'+server_id).removeClass("p_count").addClass("map-title");
-						//}	
-						//$('#gol'+server_id).removeClass('p_count'); 
+						$('#gol'+server_id).removeClass("p_count").addClass("map-title");
 					}
 					else if (server.Players >0) {
 						if (typeof server.players === "undefined") {
@@ -200,9 +197,7 @@ function online(url){
 						}   
 						$('#op1'+server_id).css('cursor','pointer');
 						$('#gol'+server_id).removeClass("map-title").addClass('p_count');
-						//$('gol'+server_id).toggleClass("map-title p_count");	
 						$("#pbody"+server_id).empty();
-						//var players = server.players;
 						var players = $.map(server.players, function(value, index) { return [value]; });
 						var players = players.sort((b, a) => (a.Frags > b.Frags) ? 1 : -1)
 						
