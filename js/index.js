@@ -202,7 +202,7 @@ function online(url){
 						var players = players.sort((b, a) => (a.Frags > b.Frags) ? 1 : -1)
 						
 						for (p in players) {
-							newRowContent='<tr style="font-size:14px;"><td style="width:50% !important;"><i class="p_name">'+players[p].Name+'</i></td><td style="text-align:right;width:15%; class="p_score">'+players[p].Frags+'</td><td style=text-align:right;padding-right:3%;width:20%" class="p_time">'+players[p].TimeF+'</td></tr>'; 
+							newRowContent='<tr style="font-size:14px;"><td style="width:50% !important;"><i class="p_name">'+players[p].Name+'</i></td><td style="text-align:right;width:15%;" >'+players[p].Frags+'</td><td style=text-align:right;padding-right:3%;width:20%" class="p_time">'+players[p].TimeF+'</td></tr>'; 
 							$("#"+server_id+"-playerbody").append(newRowContent);
 						}
 					}
