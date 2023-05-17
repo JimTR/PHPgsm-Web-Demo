@@ -79,11 +79,12 @@
 .secret {
   display:none;
   position:absolute;
-  background: grey;
+  background-color: #1e90ff;
   color:white;
-  width: 90%;
+  width: 95%;
+  margin-left: -1%;
   /*height:50%;*/
-  border:3px solid red;
+  border:3px solid #6c676740;
   z-index:1000;
   
 }
