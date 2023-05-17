@@ -197,13 +197,13 @@ function online(url){
 						}   
 						$('#op1'+server_id).css('cursor','pointer');
 						$('#gol'+server_id).removeClass("map-title").addClass('p_count');
-						$("#pbody"+server_id).empty();
+						$("#"+server_id+"-playerbody").empty();
 						var players = $.map(server.players, function(value, index) { return [value]; });
 						var players = players.sort((b, a) => (a.Frags > b.Frags) ? 1 : -1)
 						
 						for (p in players) {
 							newRowContent='<tr style="font-size:14px;"><td style="width:60% !important;"><i class="p_name">'+players[p].Name+'</i></td><td style="text-align:right;width:15%; !important;padding-right:14%" class="p_score">'+players[p].Frags+'</td><td style=text-align:right;padding-right:3%;width:20%" class="p_time">'+players[p].TimeF+'</td></tr>'; 
-							$("#pbody"+server_id).append(newRowContent);
+							$("#"+server_id+"-playerbody").append(newRowContent);
 						}
 					}
 					
@@ -301,19 +301,17 @@ function imgError(image) {
     return true;
 }
 	 
- $("#golbb2server").click, function() {
- alert ("mouse over");
-}
 
-$(".p_count").click(function(){
-  // Holds the product ID of the clicked element
-  //var productId = $(this).attr('class').replace('addproduct ', '');
-alert (this.html());
-  //addToCart(productId);
-});
+
 $(document).on('click', '.p_count', function(){
 		game = this.id.substr(3);
-		game = "#"+game+"-name";
-		title = $(game).text();
-        alert(title +" was clicked");
+		game = "#"+game;
+		title = $(game+"-name").text();
+        $(game+"-secret").show();
     });
+$("div").click(function() {
+	
+	if(this.className == 'secret') {
+		$("#"+this.id).hide();
+	}
+});
