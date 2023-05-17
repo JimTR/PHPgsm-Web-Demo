@@ -1340,7 +1340,8 @@ a.invert:hover {
 }
 
 .p-name {
-  color:#ccc;
+  color:#000;
+  background-color: #fff;
 }
 
 .sml {
