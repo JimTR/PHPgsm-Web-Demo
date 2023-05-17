@@ -1342,3 +1342,8 @@ a.invert:hover {
 .p-name {
   color:#ccc;
 }
+
+.sml {
+  max-height : 223px;
+}
+

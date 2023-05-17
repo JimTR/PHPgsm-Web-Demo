@@ -1420,3 +1420,6 @@ a.invert:hover {
   margin-top:-3px;
   margin-left:7px;
 }
+.sml {
+  max-height: 158px;
+}
