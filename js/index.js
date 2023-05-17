@@ -305,4 +305,12 @@ function imgError(image) {
  alert ("mouse over");
 }
 
-
+$(".p_count").click(function(){
+  // Holds the product ID of the clicked element
+  //var productId = $(this).attr('class').replace('addproduct ', '');
+alert (this.html());
+  //addToCart(productId);
+});
+$(document).on('click', '.p_count', function(){
+        alert(this.id +" was clicked");
+    });
