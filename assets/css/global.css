@@ -82,7 +82,7 @@
   background: grey;
   color:white;
   width: 90%;
-  height:50%;
+  /*height:50%;*/
   border:3px solid red;
   z-index:1000;
   
