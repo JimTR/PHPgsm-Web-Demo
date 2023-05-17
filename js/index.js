@@ -312,5 +312,8 @@ alert (this.html());
   //addToCart(productId);
 });
 $(document).on('click', '.p_count', function(){
-        alert(this.id +" was clicked");
+		game = this.id.substr(3);
+		game = "#"+game+"-name";
+		title = $(game).text();
+        alert(title +" was clicked");
     });
