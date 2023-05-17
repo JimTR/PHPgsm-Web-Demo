@@ -1338,3 +1338,7 @@ a.invert:hover {
   position:absolute;
   margin-left:7px;
 }
+
+.p-name {
+  color:#ccc;
+}
