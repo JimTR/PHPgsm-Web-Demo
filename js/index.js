@@ -307,11 +307,11 @@ $(document).on('click', '.p_count', function(){
 		game = this.id.substr(3);
 		game = "#"+game;
 		title = $(game+"-name").text();
-        $(game+"-secret").show();
+        $(game+"-secret").slideToggle()
     });
 $("div").click(function() {
 	
 	if(this.className == 'secret') {
-		$("#"+this.id).hide();
+		$("#"+this.id).slideToggle();
 	}
 });
