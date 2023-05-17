@@ -57,20 +57,11 @@
 					console.log(url);
 					$('#sendcmd').attr('action',url+ '/api.php');
 					$('#server').attr('value',id);
-					//setTimeout(function() { startTimer(parm1); }, startInterval);
-					 //a_href = setTimeout(FetchLog, 1000);
-					//var sc = $('#log').scrollHeight();
-					//$('#log').scrollTop = $('#log').height();
-					 var element = document.getElementById("log");
+				  var element = document.getElementById("log");
      				element.scrollTop = element.scrollHeight;
 					console.log('top = '+element.scrollTop);
 					$("#servers").blur(); 
-					//FetchPlayers();
-					//a_href = setTimeout(function(){FetchLog(url,id,path);},1000);
-					//console.log('in change '+currentId);
-			// 1st
-    // do your code here
-    // When your element is already rendered
+					
 });
 			
 			$( "#close" ).click(function() {
@@ -82,7 +73,7 @@ function fetchlog() {
 	//alert(port+' '+id+' '+url);
 	rows = 100;
 	cmd = url+'/api.php?action=console&server='+id+'&rows='+rows;
-	//alert (cmd);
+	console.log (cmd);
 	var items='';
          //console.log(cmd);
           $.ajax({

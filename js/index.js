@@ -199,7 +199,7 @@ function online(url){
 						$('#gol'+server_id).removeClass("map-title").addClass('p_count');
 						$("#"+server_id+"-playerbody").empty();
 						var players = $.map(server.players, function(value, index) { return [value]; });
-						var players = players.sort((b, a) => (a.Frags > b.Frags) ? 1 : -1)
+						//var players = players.sort((b, a) => (a.Frags > b.Frags) ? 1 : -1)
 						
 						for (p in players) {
 							newRowContent='<tr style="font-size:14px;" class="p-name"><td style="width:50% !important;"><i >'+players[p].Name+'</i></td><td style="text-align:right;width:15%;" >'+players[p].Frags+'</td><td style=text-align:right;padding-right:3%;width:20%" class="p_time">'+players[p].TimeF+'</td></tr>'; 
