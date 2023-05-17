@@ -184,10 +184,9 @@ function online(url){
 					$('#pt'+server_id).html(server.player_tot);
 					if (server.Players ==0 ) {
 						//console.log ('should be nowt '+server.Players);
-						$("#ops"+server_id).slideUp();
-						$('#op1'+server_id).css('cursor','default');  
-						classList = $("#gol"+server_id).attr("class");
-						console.log(classList);
+						//$("#"+server_id+"-playerbody.").slideUp();
+						//$('#'+server_id+"-playerbody").css('cursor','default');  
+						
 						$('#gol'+server_id).removeClass("p_count").addClass("map-title");
 					}
 					else if (server.Players >0) {
