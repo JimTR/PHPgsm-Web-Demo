@@ -112,16 +112,20 @@ switch ($module) {
 		}
 		//printr($steam_info);
 		//printr($player_info);
-		$sql = "SELECT count(*) as player_count,sum(log_ons) as login_count, sum(time_on_line) as total_time from players"; //get player count & time on line
+		$sql = "SELECT count(*) as player_count,sum(log_ons) as login_count, sum(time_on_line) as total_time  from players"; //get player count & time on line
 		$stats = $database->get_results($sql);
 		//$page['player_total'] = $stats[0]['player_count'];
 		$qstat['total_time'] = convertSecToTime($stats[0]['total_time']);
+		$sql = "SELECT country,sum(time_on_line) as time FROM `players` group by country order by time desc limit 1";
+		$bc = $database->get_results($sql);
+		$qstat['pop_country'] = $bc[0]['country'];
+		$qstat['pop_time'] = convertSecToTime($bc[0]['time']);
 		$sql = "SELECT servers.server_name,player_history.`game`,sum(player_history.`game_time`) as full_time FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.game ORDER BY `full_time` DESC limit 10";
 		$stats = $database->get_results($sql);
 		$qstat['most_played_time'] =convertSecToTime($stats[0]['full_time']);
 		$qstat['most_played'] = $stats[0]['server_name'];
 		$qstat['player_info'] = $player_info;
-	    echo json_encode($qstat);
+		echo json_encode($qstat);
 		break;
 		
 		case 'gameserver' :
