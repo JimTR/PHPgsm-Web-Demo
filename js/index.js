@@ -17,6 +17,7 @@ function index() {
 			$('#countries').text(data1.countries);
 			$('#country_top_today').text(data1.country_top_today);
 			$('#country_top').text(data1.country_top);
+			$('#pop_country').text(data1.pop_country+" ("+data1.pop_time+")");
 			$('#most-played').text(data1.most_played);
 			$('#most-played-time').text(data1.total_time);
 			playerInfo = data1.player_info;
@@ -184,8 +185,8 @@ function online(url){
 					$('#pt'+server_id).html(server.player_tot);
 					if (server.Players ==0 ) {
 						//console.log ('should be nowt '+server.Players);
-						//$("#"+server_id+"-playerbody.").slideUp();
-						//$('#'+server_id+"-playerbody").css('cursor','default');  
+						$("#"+server_id+"-secret").slideUp();
+						$('#'+server_id+"-secret").css('cursor','default');  
 						
 						$('#gol'+server_id).removeClass("p_count").addClass("map-title");
 					}
