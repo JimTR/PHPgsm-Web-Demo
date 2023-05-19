@@ -34,7 +34,7 @@ foreach ($servers as $server) {
 	$disp ='style="display:none;"';
 	$template->load('templates/subtemplates/server_card.html');
 	$lserver['id'] = $fname;
-	//$lserver['server_name'] = $server['server_name'];
+	$lserver['server_name'] = $server['server_name'];
 	//$lserver['logo'] = $server['logo'];
 	$lserver['console_link'] = $href;
 	$lserver['detail_link'] = "gameserver.php?server=$fname";
@@ -65,7 +65,9 @@ $page['country_top'] = $countries[0]['country'];
 //$i=0;
 $page['country_data'] = "";
 for($i=1; $i<=12; $i++) {
+	
 	$template->load('templates/subtemplates/country_card.html');
+	
 	$country['id'] = "country-$i";
 	$template->replace_vars($country);
 	$page['country_data'] .= $template->get_template();
