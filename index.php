@@ -64,7 +64,7 @@ $countries = $database->get_results($sql);
 $page['country_top'] = $countries[0]['country'];
 //$i=0;
 $page['country_data'] = "";
-for($i=0; $i<=12; $i++) {
+for($i=0; $i<12; $i++) {
 	
 	$template->load('templates/subtemplates/country_card.html');
 	
