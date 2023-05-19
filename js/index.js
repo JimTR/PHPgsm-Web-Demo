@@ -112,7 +112,7 @@ function online(url){
 					} 
 				}
 				if (i =='top_players') {var top_players=data1[i];}
-				//console.log(country_data);
+				console.log(country_data);
 				for (var j in country_data) {
 					console.log(country_data[j]['test']);
 					$("#country-"+j+"-name").text(country_data[j]['country']);
