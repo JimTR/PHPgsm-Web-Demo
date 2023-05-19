@@ -10,7 +10,7 @@ function index() {
 			// got data
 			console.log(data1);
 			$('#player_tot').text(data1.player_tot);
-			$('#logins_tot').text(data1.logins_tot);
+			$('#logins_tot').text(data1.tot_logins);
 			$('#player').text(data1.players);
 			$('#run_tot').text(data1.run_tot);
 			$('#logins_today').text(data1.logins_today);
