@@ -11,6 +11,7 @@ function index() {
 			console.log(data1);
 			$('#player_tot').text(data1.player_tot);
 			$('#logins_tot').text(data1.tot_logins);
+			$('#game_tot').text(data1.game_tot);
 			$('#player').text(data1.players);
 			$('#run_tot').text(data1.run_tot);
 			$('#logins_today').text(data1.logins_today);
