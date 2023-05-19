@@ -65,7 +65,7 @@ function game_server(url,server) {
 }
 function online(url){
      var timer =sessionStorage.getItem(url);
-     //console.log("enter online with "+url);
+     console.log("enter online with "+url);
 	 $.ajax({
 		url: url,
 		type: 'post',
@@ -106,25 +106,22 @@ function online(url){
 					$("#"+serverid+"-reboot").html(cpu.reboot);
 					$("#"+serverid+"-load").html(cpu.load_pc);
 					for (g in general) {
-						if( g =='countries') {
-							var country_data = general['countries'];  
+						if( g =='country_data') {
+							var country_data = general['country_data'];  
 						}
 					} 
 				}
 				if (i =='top_players') {var top_players=data1[i];}
 				//console.log(country_data);
 				for (var j in country_data) {
-					var td_title = '<tr id="country_'+j+'"><td id="country_row_'+j+'" title = "'+country_data[j]['country']+'"><img src="'+country_data[j]['flag']+'" style="height:18px;margin-top:-2px;"></td>';
-					var td_country = '<td>'+country_data[j]['country']+'</td>';
-					var td_players = '<td>'+country_data[j]['players']+'</td>';
-					var td_logins = '<td>'+country_data[j]['logins']+'</td>';
-					var td_ppercent = '<td>'+country_data[j]['ppercent']+'</td>';
-					var td_percent =  '<td>'+country_data[j]['percent']+'</td>';
-					var td_today =  '<td  style="text-align:right;padding-right:16%;">'+country_data[j]['today']+'</td>';
-					var tr = td_title+td_country+td_players+td_logins+td_ppercent+td_percent+td_today+"</tr>";
-					//console.log(tr);
-					//console.log(country_data[j]['country'])
-					$("td#country_row_"+j).parent().replaceWith(tr);   
+					console.log(country_data[j]['test']);
+					$("#country-"+j+"-name").text(country_data[j]['country']);
+					$("#country-"+j+"-flag").attr("src",country_data[j]['flag']);
+					$("#country-"+j+"-logins").text(country_data[j]['logins']);
+					$("#country-"+j+"-players_total").text(country_data[j]['players']);
+					$("#country-"+j+"-players_today").text(country_data[j]['today']);
+					$("#country-"+j+"-percent").text(country_data[j]['percent']);
+					
 				}
 				for (var j in  top_players) {
 					// read in players
@@ -167,7 +164,7 @@ function online(url){
 					
 					$('#pl'+server_id).html(playern); 
 					$("#"+server_id).show();
-					var logo  =server.url+':'+server.bport+'/'+server.logo;
+					var logo  = server.logo;
 					if (typeof server.Players === "undefined") {server.Players = 0;}   
 					$("#img"+server_id).attr("src",logo);
 					$('#cmap'+server_id).html(server.Map);

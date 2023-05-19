@@ -34,8 +34,8 @@ foreach ($servers as $server) {
 	$disp ='style="display:none;"';
 	$template->load('templates/subtemplates/server_card.html');
 	$lserver['id'] = $fname;
-	$lserver['server_name'] = $server['server_name'];
-	$lserver['logo'] = $server['logo'];
+	//$lserver['server_name'] = $server['server_name'];
+	//$lserver['logo'] = $server['logo'];
 	$lserver['console_link'] = $href;
 	$lserver['detail_link'] = "gameserver.php?server=$fname";
 	$lserver['game_link'] = $game_link; 
@@ -48,65 +48,29 @@ foreach ($servers as $server) {
 }
 
 $page['gd']= $gd;
-$jsa ='';
-$sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `fname` ASC";
-$base_servers = $database->get_results($sql);
-$sidebar_data['bmenu'] ='';
-foreach ($base_servers as $server) {
-	$uri = parse_url($server['url']);
-	$url = $uri['scheme']."://".$uri['host'].':'.$server['port'];
-	if(isset($uri['path'])) {$url .= "/".$uri['path'];}
-	$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
-	$template->load('templates/subtemplates/server_body.html');
-	$template->replace("fname",$server['fname']);
-	$page['server_body'] .= $template->get_template();
-	$page['active_body'] .="<tbody style='border:0;' id ='a{$server['fname']}'></tbody>";
-	$jsa .= '"'.$url.'/api.php?action=game_detail&server='.$server['fname'].'",';
-}
-if (endsWith($jsa, ',')) {$jsa = rtrim($jsa,",");} //upgrade this to php 8
 $sql = "SELECT sum(players) as player_tot, count(country) as countries, sum(logins) as tot_logins, (select count(*) from servers) as game_tot, (select count(*) from servers where running = 1 and enabled = 1) as run_tot  FROM `logins` WHERE 1";
 $qstat = $database->get_row($sql);
 $sql = "SELECT servers.server_name,player_history.game as server_id,count(player_history.`game`) as total FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.`game` order by total desc limit 1;";
 $stats = $database->get_results($sql);
-$page['most_popular'] = $stats[0]['server_name'];
-$page['most_popular_count'] = $stats[0]['total'];
+//$page['most_popular'] = $stats[0]['server_name'];
+//$page['most_popular_count'] = $stats[0]['total'];
 $page['player_tot'] =  $qstat['player_tot'];
 $page['logins_tot'] = $qstat['tot_logins'];
 $page['country_tot'] = $qstat['countries'];
-$page['game_tot'] = $qstat['game_tot'];
-$page['run_tot'] = $qstat['run_tot'];
+//$page['game_tot'] = $qstat['game_tot'];
+//$page['run_tot'] = $qstat['run_tot'];
 $sql = "SELECT * FROM `logins` limit 12";
 $countries = $database->get_results($sql);
 $page['country_top'] = $countries[0]['country'];
-$i=0;
+//$i=0;
 $page['country_data'] = "";
-foreach ($countries as $country) {
+for($i=1; $i<=12; $i++) {
 	$template->load('templates/subtemplates/country_card.html');
-	$cname = trim($country['country']);
-	$key = searchforkey($cname, $todays_countries,'country');
-	if ($key === false) {$cplayers = 0;}
-	else {$cplayers = $todays_countries[$key]['today'];}
-	$country['row_id'] = $i;
-	$country['percent'] = number_format(($country['logins']/$page['logins_tot'])*100,2).'%';
-	$country['p_percent'] = number_format(($country['players']/$page['player_tot'])*100,2).'%';
-	$country['flag'] = 'https://ipdata.co/flags/'.trim(strtolower($country['country_code'])).'.png';
-	$country['name'] = $country['country'];
-	$country['players_today'] = $cplayers;
-	//$country['uid'] = "country$i";
+	$country['id'] = "country-$i";
 	$template->replace_vars($country);
 	$page['country_data'] .= $template->get_template();
-	$i++;
 }
-$sql = "select servers.server_name,player_history.*,players.name,players.country_code,players.steam_id64 from player_history left join players on `steam_id` = players.steam_id64 left join servers on player_history.`game` = servers.host_name  ORDER BY `player_history`.`log_ons` DESC LIMIT 12";
-$players = $database->get_results($sql);
-$pd = '';
-foreach ($players as $player) {
-	$playerN2 = Emoji::Decode($player['name']);
-    $player['last_play'] = time2str($player['last_play']);
-	if ($player['last_play'] == "1 weeks ago") {$player['last_play'] = 'a week ago';}
-	$map = '<img style="width:5%;vertical-align: middle;" src="https://ipdata.co/flags/'.trim(strtolower($player['country_code'])).'.png">';
-	$pd.='<tr><td style="vertical-align: middle;">'.$map.'  '.$playerN2.'</td><td>'.$player['server_name'].'</td><td><span style="">'.$player['log_ons'].'</span></td><td style="text-align:left;padding-right:6%;">'.$player['last_play'].'</td></tr>';
-}
+
 $sql = "select players.name_c,players.country,players.country_code,players.log_ons,players.last_log_on,players.first_log_on,players.steam_id64 from players ORDER BY `players`.`log_ons` DESC LIMIT 9";
 $fpd = '';
 $players = $database->get_results($sql);
@@ -166,13 +130,7 @@ function searchforkey($id, $array,$col) {
    }
    return false;
 }
-function endsWith( $haystack, $needle ) {
-	$length = strlen( $needle );
-	if( !$length ) {
-		return true;
-	}
-	return substr( $haystack, -$length ) === $needle;
-}
+
 function convertSecToTime($sec){
 	$return='';
 	if (!is_numeric($sec)) {$sec=0;}

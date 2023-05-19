@@ -133,6 +133,7 @@ $sidebar_data['bmenu'] = '';
 $sql = "select * from server1 order by `host_name` ASC";
 $sidebar_data['bmenu'] = '';
 $sidebar_data['smenu'] = '';
+$jsa = '';
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
 //print_r($bserver);
 $servers = $database->get_results($sql);
@@ -152,7 +153,16 @@ $sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER B
 $base_servers = $database->get_results($sql);
 foreach ($base_servers as $server) {
 	$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
+	$template->load('templates/subtemplates/server_body.html');
+	$template->replace("fname",$server['fname']);
+	$page['server_body'] .= $template->get_template();
+	$page['active_body'] .="<tbody style='border:0;' id ='a{$server['fname']}'></tbody>";
+	$uri = parse_url($server['url']);
+	$url = $uri['scheme']."://".$uri['host'].':'.$server['port'];
+	if(isset($uri['path'])) {$url .= "/".$uri['path'];}
+	$jsa .= '"'.$url.'/api.php?action=game_detail&server='.$server['fname'].'",';
 }
+//if (str_ends_with(rtrim($jsa), ',') {$jsa = rtrim($jsa,",");} 
 $sidebar_data['servers'] = 'Game Servers';
 $sidebar_data['base_servers'] = 'Base Servers';
 
