@@ -1,9 +1,5 @@
 <?php
 include 'inc/master.inc.php';
-require DOC_ROOT. '/inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
-use xPaw\SourceQuery\SourceQuery;
-define( 'SQ_TIMEOUT',     $settings['SQ_TIMEOUT'] );
-define( 'SQ_ENGINE',      SourceQuery::SOURCE );
 define( 'LOG',	'logs/ajax.log');
 $module = "Dashboard";	
 $build = "8669-4063036449";
@@ -18,7 +14,6 @@ $todays_countries = $database->get_results($sql);
 $page['country_top_today']= $todays_countries[0]['country'];
 $template = new template;
 $sql = "select * from server1 order by `host_name` ASC";
-$xpaw = new SourceQuery( );
 $servers = $database->get_results($sql);
 $gd ='';
 foreach ($servers as $server) {
@@ -50,6 +45,7 @@ foreach ($servers as $server) {
 $page['gd']= $gd;
 $sql = "SELECT sum(players) as player_tot, count(country) as countries, sum(logins) as tot_logins, (select count(*) from servers) as game_tot, (select count(*) from servers where running = 1 and enabled = 1) as run_tot  FROM `logins` WHERE 1";
 $qstat = $database->get_row($sql);
+
 $sql = "SELECT servers.server_name,player_history.game as server_id,count(player_history.`game`) as total FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.`game` order by total desc limit 1;";
 $stats = $database->get_results($sql);
 //$page['most_popular'] = $stats[0]['server_name'];
@@ -78,23 +74,23 @@ $fpd = '';
 $players = $database->get_results($sql);
 $i=0;
 foreach ($players as $player) {
-	$playerN2 = $player['name_c'];
-	$player['last_log_on'] = time2str($player['last_log_on']);
-    if ($player['last_log_on'] == "1 weeks ago") {$player['last_log_on'] = 'a week ago';}
-	$v1 = shell_exec("php steampage.php {$player['steam_id64']}");
+	//$playerN2 = $player['name_c'];
+	//$player['last_log_on'] = time2str($player['last_log_on']);
+    //if ($player['last_log_on'] == "1 weeks ago") {$player['last_log_on'] = 'a week ago';}
+	//$v1 = shell_exec("php steampage.php {$player['steam_id64']}");
 	$template->load('templates/subtemplates/player_card.html');
-	$steam_info =json_decode($v1,true);
-	$steam_info['name'] = $playerN2;
-	if ($player['first_log_on'] >0 ) {$player['first_log_on'] = time2str($player['first_log_on']);	}
-	else {$player['first_log_on'] = 'N/A';}
-	$c_code = trim(strtolower($player['country_code']));
-	if ($c_code =="") {$img_src="img/unknown.png";}
-	else {$img_src= "https://ipdata.co/flags/$c_code.png";}	
-	$steam_info['map'] = "<img style='vertical-align: middle;' src='$img_src'/> {$player['country']}";
-	$steam_info['joined']= $player['first_log_on'];
-	$steam_info['login'] = $player['last_log_on'];
-	$steam_info['logins'] = $player['log_ons'];
-	$steam_info['detail_link'] = "users.php?id={$player['steam_id64']}";
+	//$steam_info =json_decode($v1,true);
+	//$steam_info['name'] = $playerN2;
+	//if ($player['first_log_on'] >0 ) {$player['first_log_on'] = time2str($player['first_log_on']);	}
+	//else {$player['first_log_on'] = 'N/A';}
+	//$c_code = trim(strtolower($player['country_code']));
+	//if ($c_code =="") {$img_src="img/unknown.png";}
+	//else {$img_src= "https://ipdata.co/flags/$c_code.png";}	
+	//$steam_info['map'] = "<img style='vertical-align: middle;' src='$img_src'/> {$player['country']}";
+	//$steam_info['joined']= $player['first_log_on'];
+	//$steam_info['login'] = $player['last_log_on'];
+	//$steam_info['logins'] = $player['log_ons'];
+	//$steam_info['detail_link'] = "users.php?id={$player['steam_id64']}";
 	$steam_info['uid'] = "player$i";
 	$template->replace_vars($steam_info);
 	$fpd .=$template->get_template();
@@ -110,8 +106,10 @@ $sidebar_data['servers'] = 'Game Servers';
 $sidebar_data['base_servers'] = 'Base Servers';
 $page['title'] = $module;
 $page['jsa'] = $jsa;
-$page['pd'] = $pd;
+//$page['pd'] = $pd;
 $page['fpd'] = $fpd;
+//print_r($page);
+//die();
 $template->load('templates/subtemplates/header.html'); // load header
 $template->replace_vars($header_vars);
 $page['header'] = $template->get_template();
