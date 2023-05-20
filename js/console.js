@@ -44,7 +44,7 @@
 				path = $(this).children(":selected").attr("path");
 				host = $(this).children(":selected").attr("host");
 				port =$(this).children(":selected").attr("port");	
-			   	console.log('going for fetch');	
+			   	console.log('going for fetch '+url);	
 				fetchlog(port,id,url);
 				logi = setInterval(fetchlog, 5000);
 				players(port,id,url);	
