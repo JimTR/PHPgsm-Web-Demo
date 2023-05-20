@@ -74,23 +74,8 @@ $fpd = '';
 $players = $database->get_results($sql);
 $i=0;
 foreach ($players as $player) {
-	//$playerN2 = $player['name_c'];
-	//$player['last_log_on'] = time2str($player['last_log_on']);
-    //if ($player['last_log_on'] == "1 weeks ago") {$player['last_log_on'] = 'a week ago';}
-	//$v1 = shell_exec("php steampage.php {$player['steam_id64']}");
+
 	$template->load('templates/subtemplates/player_card.html');
-	//$steam_info =json_decode($v1,true);
-	//$steam_info['name'] = $playerN2;
-	//if ($player['first_log_on'] >0 ) {$player['first_log_on'] = time2str($player['first_log_on']);	}
-	//else {$player['first_log_on'] = 'N/A';}
-	//$c_code = trim(strtolower($player['country_code']));
-	//if ($c_code =="") {$img_src="img/unknown.png";}
-	//else {$img_src= "https://ipdata.co/flags/$c_code.png";}	
-	//$steam_info['map'] = "<img style='vertical-align: middle;' src='$img_src'/> {$player['country']}";
-	//$steam_info['joined']= $player['first_log_on'];
-	//$steam_info['login'] = $player['last_log_on'];
-	//$steam_info['logins'] = $player['log_ons'];
-	//$steam_info['detail_link'] = "users.php?id={$player['steam_id64']}";
 	$steam_info['uid'] = "player$i";
 	$template->replace_vars($steam_info);
 	$fpd .=$template->get_template();

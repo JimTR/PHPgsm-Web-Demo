@@ -94,3 +94,8 @@
   cursor:pointer;	
 }
 
+.modal-dialog{
+  margin: auto;
+  max-width: 83%;  
+  max-height:none;
+ }

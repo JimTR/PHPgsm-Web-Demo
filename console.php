@@ -43,8 +43,6 @@ $time = "1663578036";
 	$template->load('templates/subtemplates/sidebar.html');
 	$template->replace_vars($sidebar_data);
 	$page['sidebar'] = $template->get_template();
-	//$page['sidebar'] = str_replace("class=\"nav-link collapsed\" id=\"$module\" ","class=\"nav-link\"  id=\"$module\" ",$page['sidebar']);
-	//die($page['sidebar']);
 	$sql = "SELECT DISTINCT `host_name`,`server_name`,`url`,`bport`,`location`,`host`,`port` FROM server1 where `running` = 1 order by `host_name`";
     $servers = $database->get_results($sql);
     $sbox ='<option id ="" value="" path="" host ="">Choose Server</option>';
@@ -61,9 +59,6 @@ $time = "1663578036";
 	$page['sbox'] = $sbox;
 	//we need to fill the map select some how  
 	$template->load('templates/console.html');
-	
-	//echo $template->get_template();
-	//die();
 	$page['display_server'] =$display_server;
 	$template->replace_vars($page);
 	$template->publish();

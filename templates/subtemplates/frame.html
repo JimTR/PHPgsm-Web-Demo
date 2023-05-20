@@ -1,0 +1,69 @@
+<head>
+	 <!--#include#-->
+</head>
+<body>
+	<div id="editor" class="col-lg-12">
+		<div id="user-id" style="display:none;"><!--#id#--></div>
+		<form id="sendcmd" style="display:none;" action="<!--#url#-->/search.php" method="get">
+			<div class="input-group">
+				<input class="form-control"name="text" type="text" id="text" size="70" placeholder="Player name, steam id or IP">
+				<input type="hidden" id="action" name="action" value="search">
+				<label for="send" class="btn btn-info">Search<i class="bx bxs-send"></i></label>	   
+						<input class="hidden" type="submit" value="send" id="send">
+					</div>	
+					<div class="form-check" style="padding-left:6%;padding-top:1em;">
+					 <input class="form-check-input" type="radio" name="type" id="gridRadios3" value="fuzzy" checked>
+                      <label class="form-check-label" for="gridRadios3"  style="padding-right:6%;">Name</label>
+					<input class="form-check-input" type="radio" name="type" id="gridRadios1" value="id">
+                      <label class="form-check-label" for="gridRadios1"  style="padding-right:6%;">Steam ID</label>
+                     
+                      <input class="form-check-input" type="radio" name="type" id="gridRadios4" value="ip">
+                      <label class="form-check-label" for="gridRadios4">IP</label>
+                    </div>
+				</form>
+		<h5 class="card-title">Details For <span id="un"><!--#id#--></span></h5>
+		<div style="margin-top:-2%"> 
+			<div style="position:relative;margin-left:93%;">
+				<div class="playerAvatar profile_header_size offline" data-miniprofile="168311066">
+					<div class="playerAvatarAutoSizeInner">
+						<div class="profile_avatar_frame">
+							<img  id ="user-frame" style="width:109px;display:none;" src="img/blank.png">
+						</div>
+						<img id="user-avatar" style="width:80px;position:absolute;left:-8px;top:-4px;" src="img/blank.png">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<h5>General Details</h5>
+				<table id="dta" class="table"><tbody id="gen"></tbody></table>
+			</div>
+			<div class="col-lg-6">
+				<h5>Server History</h5>
+				<table id="dta1" class="table">
+					<thead>
+						<tr style="padding-bottom:6px;">
+							<th>Server</th>
+							<th style="text-align:left;">Log ons</th>
+							<th style="text-align:left;">Last Log on</th>
+							<th style="text-align:left;">Time On Line</th>
+						</tr>
+					</thead>	
+					<tbody id="gd1"></tbody>
+				</table>
+			</div>
+			<div class="modal-footer <!--#button_class#-->">
+					<button id="ban" type="button" class="btn btn-danger"><i class="fa-solid fa-user-slash"></i> Ban</button>
+					<button id="bans" type="button" class="btn btn-warning"><i class="fa-solid fa-file-waveform"></i> Ban History</button>
+					<!--<button id="go_back" type="button" class="btn btn-success">Go Back</button>-->
+				</div>
+		</div>
+	</div>
+	<!--  JS Files -->
+     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+     <script src = "js/jquery.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src = "assets/js/main.js"></script>
+	<script src = "js/users.js"></script>
+</body>	

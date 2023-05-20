@@ -24,6 +24,7 @@ $('#sendcmd').on('submit', function(e) {
     e.preventDefault();
     var items='';
     var url = $(this).attr('action');
+    alert (url);
     $("#data_table").html(items);
     var sndData = $('#sendcmd input').serialize();
      $.ajax({

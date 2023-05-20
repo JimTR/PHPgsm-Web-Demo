@@ -1422,6 +1422,7 @@ a.invert:hover {
 }
 .sml {
   max-height: 158px;
+  border: 1px solid #fff;
 }
 .secret {
   background-color: #2f2f2f;

@@ -197,11 +197,12 @@ $('#sendcmd').on('submit', function(e) {
 
     });
 $('#player').on('click','.tpButton', function(event) {				
-            var href = $(this).closest('tr').attr("id");
+        var href = $(this).closest('tr').attr("id");
 	    var ip = $("#"+href).find("td:eq(1)").attr("id");
 	    var user = $("#"+href).find("td:first").text();
 	    var login = $("#"+href).find("td:eq(0)").attr("log");
-	    	
+	    console.log(href);
+	    loadIframe("ifrm", "frame.php?id="+href);	
         if(href) {
 			if(href == 'undefined') {
 				//alert('can not ban an unknown user');
@@ -306,4 +307,14 @@ function ClearAllIntervals() {
         window.clearInterval(i);
 }
 
-
+function loadIframe(iframeName, url) {
+    var $iframe = $('#' + iframeName);
+    if ($iframe.length) {
+        $iframe.attr('src',url);
+        return false;
+    }
+    return true;
+}
+$('#ban_user').on('show', function () {
+      $('.modal-body',this).css({width:'auto',height:'auto', 'max-height':'100%'});
+});
