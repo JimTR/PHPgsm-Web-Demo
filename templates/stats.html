@@ -43,39 +43,32 @@
 		<main id="main" class="main">
 			<div class="pagetitle">
 				<h1><!--#page-title#--></h1>
-				<nav>
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="index.php">Home</a></li>
-						<li class="breadcrumb-item active"><!--#page-title#--></li>
-					</ol>
-				</nav>
+				
 			</div><!-- End Page Title -->
 		<section class="section">
+			<ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist" style="margin-bottom:1%;">
+						<li class="nav-item" role="presentation">
+							<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true"><i class="fa-solid fa-igloo"></i> General</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><i class="ri-base-station-line"></i> Player Lists</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-contact" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="bx bx-world"></i> Country Lists</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="supported-games" data-bs-toggle="tab" data-bs-target="#bordered-games" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-link"></i> Linked IP Addresses</button>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="users.php"><i class="fa-solid fa-magnifying-glass"></i> Search Players</a></li>
+						
+					</ul>
 			<div class="col-lg12" id="search">
 				<div class="card">
 					<div class="card-body">
-						<div class="row">
-							<div class="col-lg-6" id="searchbox">
-								<h5 class="card-title" style="margin-left:1%;">Player Statistics</h5>
-								<form id="sendcmd"  action="<!--#url#-->/api.php" method="get">
-									<input type="hidden" id="action" name="action" value="stats">
-									<table class="table">
-										<tr><td style="width:16%;border-style:none;">Start Date</td><td style="border-style:none;"><input style="width:28%;" type="date" class="form-control" id="start" name="server"  value="<!--#today#-->"data-date-format="yyyy-mm-dd" ></td></tr>
-										<tr style="border-top:0px;border-style:none;">
-											<td style="border-top:0px;border-style:none;">End Date</td>
-											<td style="border-top:0px;border-style:none;"><input style="width:28%;" type="date" class="form-control" id="finish" name="filter"  value ="<!--#today#-->" data-date-format="yyyy-mm-dd"  ></td>
-										</tr>
-										<tr style="border-top:0px;border-style:none;">
-											<td style="border-top:0px;border-style:none;" colspan=2>
-												<span style="margin-left:23%;">
-													<input class ="btn btn-primary" type ="submit" id="send" name="send" value ="Go"/>
-												</span>
-											</td>
-										</tr>
-									</table>	
-								</form>
-								</div>
-								<div class="col-lg-6" id="stats">
+						<div class="tab-content pt-2" id="borderedTabContent">
+							<div class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
+								<div class="row">
+								<div class="col-lg-6" id="stats" >
 									<h5 class="card-title" style="margin-left:1%;">General Statistics</h5>
 									<table class="table">
 										<tr><td>Total Players</td><td colspan=2><!--#player_total#--></td></tr>
@@ -90,9 +83,56 @@
 									</table>
 								</div>
 							</div>
-						<div class="col-lg-12" style="margin-top:20px;text-align:right;"> 
-							<button onclick="history.back();" type="button" class="btn btn-success <!--#button_class#-->">Go Back</button>
-						</div>	
+							</div>
+							<div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
+								<div class="row">
+									<div class="col-lg-6" id="searchbox">
+										<h5 class="card-title" style="margin-left:1%;">Player Lists</h5>
+										<form id="sendcmd"  action="<!--#url#-->/api.php" method="get">
+											<input type="hidden" id="action" name="action" value="stats">
+											<table class="table">
+												<tr><td style="width:16%;border-style:none;">Start Date</td><td style="border-style:none;"><input style="width:28%;" type="date" class="form-control" id="start" name="server"  value="<!--#today#-->"data-date-format="yyyy-mm-dd" ></td></tr>
+												<tr style="border-top:0px;border-style:none;">
+													<td style="border-top:0px;border-style:none;">End Date</td>
+													<td style="border-top:0px;border-style:none;"><input style="width:28%;" type="date" class="form-control" id="finish" name="filter"  value ="<!--#today#-->" data-date-format="yyyy-mm-dd"  ></td>
+												</tr>
+												<tr style="border-top:0px;border-style:none;">
+													<td style="border-top:0px;border-style:none;" colspan=2>
+														<span style="margin-left:23%;">
+															<input class ="btn btn-primary" type ="submit" id="send" name="send" value ="Go"/>
+														</span>
+													</td>
+												</tr>
+											</table>	
+										</form>
+									</div>
+								</div>
+							</div>	
+							<div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
+								<div class="row">
+									<h5 class="card-title" style="margin-left:1%;">Country Lists</h5>
+									country data
+								</div>
+							</div>
+							<div class="tab-pane fade" id="bordered-games" role="tabpanel" aria-labelledby="contact-tab">
+								<div class="row">
+									<div class="col-lg-6" id="">
+										<h5 class="card-title" style="margin-left:1%;">Linked IP Addresses</h5>
+										<table class="table">
+											<thead>
+												<th>IP Address</th>
+												<th>Linked Account</th>
+												<th>Last Logon</th>
+											</thead>
+											<!--#dups#-->
+											
+										</table>
+									</div>	  
+								</div>
+							</div>
+							<div class="col-lg-12" style="margin-top:20px;text-align:right;"> 
+								<button onclick="history.back();" type="button" class="btn btn-success <!--#button_class#-->">Go Back</button>
+							</div>	
 					</div>
 				</div>	
 			</div>
@@ -115,7 +155,13 @@
 									<tbody id="data_table"></tbody>
 								</table>
 					 		</div>
-							
+					 		
+							<div class="tab-pane fade" id="bordered-games" role="tabpanel" aria-labelledby="contact-tab">
+										<div class="row">
+												linked ip's  
+										
+										</div>
+									</div>
 						</div>
 						<div class="col-lg-12" style="margin-top:20px;text-align:right;"> 
 							<button id="go_back" type="button" class="btn btn-success <!--#button_class#-->">Go Back</button>
