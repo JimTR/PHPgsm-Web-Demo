@@ -47,7 +47,6 @@ $sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as
 $stats = $database->get_results($sql);
 $page['most_log_ons'] = "<a href='users.php?id={$stats[0]['steam_id']}'>{$stats[0]['user_name']}</a>";
 $page['log_on_count'] = $stats[0]['total_logins'];
-//$sql ="SELECT player_history.game, servers.server_name, sum(player_history.log_ons) as total,sum(game_time) FROM `player_history` left join `servers` on `servers`.`host_name` = player_history.game group by game order by total DESC limit 1;";
 $sql = "SELECT servers.server_name,player_history.game as server_id,count(player_history.`game`) as total FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.`game` order by total desc limit 1;";
 $stats = $database->get_results($sql);
 $page['most_popular'] = $stats[0]['server_name'];
@@ -65,33 +64,24 @@ $sql = "SELECT * FROM players INNER JOIN( SELECT ip FROM players GROUP BY ip HAV
 $dups = $database->get_results($sql);
 $i=0;
 $page['dup_count'] = count($dups);
-//printr($dups);
 foreach($dups as $dup) {
 	// scan through
+	$id = $dup['steam_id64'];
 	if ($dup['ip'] == $last_ip) {
 		// add to the row
-		//echo "dup $last_ip should go to $i<br>";
 		$i--;
-		//echo "{$dup_table[$i]['name']} current<br>";
-		$dup_table[$i]['name'] .=", ".$dup['name_c'];
-		//printr($dup_table[$i]);
-		//echo "adding  {$dup['name_c']} to $i now<br>";
+		
+		$dup_table[$i]['name'] .=", <a href='javascript:void(0)' class='user-id' id='$id'>{$dup['name_c']}</a>";
 		$i++;
 		continue;
 	}
-	//printr($dup);
-	//else {
 	 $dup_table[$i]['ip'] = long2ip($dup['ip']);
-	 $dup_table[$i]['name'] = $dup['name_c']; 
+	 $dup_table[$i]['name'] = "<a href='javascript:void(0)' class='user-id' id='$id'>{$dup['name_c']}</a>"; 
 	 $last_ip = $dup['ip'];
 	 $i++;
- //}
 }
-//printr($dup_table);
-//die();
 $page['dups'] ='';
-foreach ($dup_table as $dup) {
-	// render
+foreach ($dup_table as $dup) {	
 	$page['dups'] .= "<tr><td>{$dup['ip']}</td><td>{$dup['name']}</td></tr>";
 }
 $page['comms_total'] = $comms[0]['total'];
