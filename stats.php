@@ -64,6 +64,7 @@ $comms = db2->get_results($sql);
 $sql = "SELECT * FROM players INNER JOIN( SELECT ip FROM players GROUP BY ip HAVING COUNT(ip) > 1 order by ip) temp ON players.ip = temp.ip ORDER BY `players`.`ip` ASC"; // get dups
 $dups = $database->get_results($sql);
 $i=0;
+$page['dup_count'] = count($dups);
 //printr($dups);
 foreach($dups as $dup) {
 	// scan through
