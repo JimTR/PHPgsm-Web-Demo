@@ -61,6 +61,21 @@ $page['most_played_time'] =convertSecToTime($stats[0]['full_time']);
 $page['most_played'] = $stats[0]['server_name'];
 $sql = "SELECT COUNT(*) AS total, ( SELECT COUNT(*) FROM sb_comms WHERE `RemovedOn` IS NULL ) AS live, ( SELECT COUNT(*) FROM sb_bans ) AS game_total, (select count(*) as game_live from sb_bans where RemovedOn is null) as game_live FROM `sb_comms`";
 $comms = db2->get_results($sql);
+$sql = "SELECT * FROM players INNER JOIN( SELECT ip FROM players GROUP BY ip HAVING COUNT(ip) > 1 order by ip) temp ON players.ip = temp.ip ORDER BY `players`.`ip` ASC"; // get dups
+$dups = $database->get_results($sql);
+$i=0;
+foreach($dups as $dup) {
+	// scan through
+	if ($dup['ip'] = $last_ip) {
+		// add to the row
+	}
+	 $dup_table[$i]['ip'] = long2ip($dup['ip']);
+	  $dup_table[$i]['name'] = $dup['name_c']; 
+	 $last_ip = $dup['ip'];
+	 $i++;
+}
+printr($dup_table);
+die();
 $page['comms_total'] = $comms[0]['total'];
 $page['comms_live'] = $comms[0]['live'];
 $page['game_live'] = $comms[0]['game_live'];
