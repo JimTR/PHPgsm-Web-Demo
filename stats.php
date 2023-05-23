@@ -71,13 +71,13 @@ foreach($dups as $dup) {
 		// add to the row
 		$i--;
 		$last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
-		$dup_table[$i]['name'] .=", <span><a href='javascript:void(0)' class='user-id' id='$id'>{$dup['name_c']}</a> ($last_login)</span>";
+		$dup_table[$i]['name'] .="<br><span><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a> - $last_login</span>";
 		$i++;
 		continue;
 	}
 	 $dup_table[$i]['ip'] = long2ip($dup['ip']);
 	 $last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
-	 $dup_table[$i]['name'] = "<span><a href='javascript:void(0)' class='user-id' id='$id'>{$dup['name_c']}</a> ($last_login)</span>"; 
+	 $dup_table[$i]['name'] = "<span><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a> - $last_login</span>"; 
 	 $last_ip = $dup['ip'];
 	 $i++;
 }
