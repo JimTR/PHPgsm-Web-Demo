@@ -83,7 +83,7 @@ foreach($dups as $dup) {
 }
 $page['dups'] ='';
 foreach ($dup_table as $dup) {	
-	$page['dups'] .= "<tr><td>{$dup['ip']}</td><td>{$dup['name']}</td></tr>";
+	$page['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td>{$dup['name']}</td></tr>";
 }
 $page['comms_total'] = $comms[0]['total'];
 $page['comms_live'] = $comms[0]['live'];
