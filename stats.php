@@ -71,19 +71,19 @@ foreach($dups as $dup) {
 		// add to the row
 		$i--;
 		$last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
-		$dup_table[$i]['name'] .="<br><span><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a> - $last_login</span>";
+		$dup_table[$i]['name'] .="<table><tr><td style='width:30%'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:45%;'>$last_login</td><td>{$dup['log_ons']}</td></tr></table>";
 		$i++;
 		continue;
 	}
 	 $dup_table[$i]['ip'] = long2ip($dup['ip']);
 	 $last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
-	 $dup_table[$i]['name'] = "<span><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a> - $last_login</span>"; 
+	 $dup_table[$i]['name'] = "<table><tr><td style='width:30%;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:45%;'>$last_login</td><td>{$dup['log_ons']}</td></tr></table>"; 
 	 $last_ip = $dup['ip'];
 	 $i++;
 }
 $page['dups'] ='';
 foreach ($dup_table as $dup) {	
-	$page['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td>{$dup['name']}</td></tr>";
+	$page['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=3>{$dup['name']}</td></tr>";
 }
 $page['comms_total'] = $comms[0]['total'];
 $page['comms_live'] = $comms[0]['live'];
