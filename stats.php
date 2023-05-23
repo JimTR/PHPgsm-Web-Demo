@@ -71,13 +71,13 @@ foreach($dups as $dup) {
 		// add to the row
 		$i--;
 		$last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
-		$dup_table[$i]['name'] .="<table><tr><td style='width:30%'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:45%;'>$last_login</td><td>{$dup['log_ons']}</td></tr></table>";
+		$dup_table[$i]['name'] .="<table><tr class='no-border'><td style='width:30%'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:45%;'>$last_login</td><td>{$dup['log_ons']}</td></tr></table>";
 		$i++;
 		continue;
 	}
 	 $dup_table[$i]['ip'] = long2ip($dup['ip']);
 	 $last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
-	 $dup_table[$i]['name'] = "<table><tr><td style='width:30%;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:45%;'>$last_login</td><td>{$dup['log_ons']}</td></tr></table>"; 
+	 $dup_table[$i]['name'] = "<table><tr class='no-border'><td style='width:30%;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:45%;'>$last_login</td><td>{$dup['log_ons']}</td></tr></table>"; 
 	 $last_ip = $dup['ip'];
 	 $i++;
 }
