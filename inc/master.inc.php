@@ -83,22 +83,22 @@ $template = new template;
         else {
 		switch($_COOKIE['phpgsm_theme']) {
 			case light:
-				$template->load('templates/subtemplates/light-include.html');
+				$template->load(DOC_ROOT.'/templates/subtemplates/light-include.html');
 				$page['include']= $template->get_template();
 				break;
 			case dark:
-				$template->load('templates/subtemplates/dark-include.html');
+				$template->load(DOC_ROOT.'/templates/subtemplates/dark-include.html');
                                 $page['include']= $template->get_template();
                                 break;
 			default:
-				$template->load('templates/subtemplates/light-include.html');
+				$template->load(DOC_ROOT.'/templates/subtemplates/light-include.html');
                                 $page['include']= $template->get_template();
                                 break;
    		 }
 	}
-$template->load('templates/subtemplates/footer.html');
+$template->load(DOC_ROOT.'/templates/subtemplates/footer.html');
 $page['footer'] = $template->get_template();
-$template->load('templates/subtemplates/header.html');
+$template->load(DOC_ROOT.'/templates/subtemplates/header.html');
 $page['header'] = $template->get_template();
  $Auth = new Auth ();
 $user = $Auth->getAuth(); // get the user
@@ -153,7 +153,7 @@ $sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER B
 $base_servers = $database->get_results($sql);
 foreach ($base_servers as $server) {
 	$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
-	$template->load('templates/subtemplates/server_body.html');
+	$template->load(DOC_ROOT.'/templates/subtemplates/server_body.html');
 	$template->replace("fname",$server['fname']);
 	$page['server_body'] .= $template->get_template();
 	$page['active_body'] .="<tbody style='border:0;' id ='a{$server['fname']}'></tbody>";

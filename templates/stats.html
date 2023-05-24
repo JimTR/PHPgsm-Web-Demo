@@ -128,8 +128,16 @@
 				</div> <!-- after row -->	
 									<div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
 								<div class="row">
-									<h5 class="card-title" style="margin-left:1%;">Country Lists</h5>
-									country data
+									<div class="col-lg-6">
+										<h5 class="card-title" style="margin-left:1%;">Country Lists</h5>
+										<label for="country" style="padding-right:1%;">Select a Country</label>
+										<select name="country" id="country" style="width:25%;">
+											<!--#c_select#-->
+										</select>
+									</div>
+									<div class="col-lg-6">
+										<h5 class="card-title">Results For <span id="country-name"></span></h5>
+									</div>	
 								</div>
 							</div>
 							<div class="tab-pane fade" id="bordered-games" role="tabpanel" aria-labelledby="contact-tab">
@@ -172,7 +180,8 @@
 					</div>
                 </div>
             </div>
-		</section>					
+		</section>
+		<!--#footer#-->					
 			<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
    <script src = "js/jquery.js"></script>
    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -281,5 +290,34 @@ $('.user-id').on("click",function(){
   var usersid =  $(this).attr("id");
    loadIframe("ifrm", "frame.php?id="+usersid);
    $('#ban_user').modal('show');	
-})
+});
+$("#country").change(function(){
+	option = $('option:selected', this).attr('flag');
+	val = $('option:selected', this).val();
+	if(val == "none selected") {
+		$("#country-name").text('');
+		$("#country").blur();
+		return;
+	}
+	text = $('option:selected', this).text();
+	url = "helpers/country.php?id="+val;
+	console.log(url);
+	 $.ajax({ 
+        type: 'GET', 
+        url: url,
+        dataType: "json", 
+        success: function (data1) {
+			// got data
+			console.log(data1);
+			for (var i in data1) {
+				//
+				player= data1[i];
+				//console.log(player.name_c);
+			}
+		}
+		
+    });
+	$("#country-name").text(text);
+	$("#country").blur();
+});
  </script>

@@ -85,6 +85,13 @@ $page['dups'] ='';
 foreach ($dup_table as $dup) {	
 	$page['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=3>{$dup['name']}</td></tr>";
 }
+$sql = "SELECT `country`, `flag`, `country_code` FROM `logins` order by `logins` desc";
+$c1 = $database->get_results($sql);
+$page['c_select'] ="<option>none selected</option>";
+foreach ($c1 as $c2) {
+	if($c2['country'] == ''){continue;}
+	$page['c_select'] .="<option value='{$c2['country_code']}' flag='{$c2['flag']}'>{$c2['country']}</option>"; 
+}
 $page['comms_total'] = $comms[0]['total'];
 $page['comms_live'] = $comms[0]['live'];
 $page['game_live'] = $comms[0]['game_live'];
