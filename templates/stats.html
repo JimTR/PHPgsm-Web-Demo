@@ -330,11 +330,12 @@ $("#country").change(function(){
 			country = data1.country;
 			if(data1.pages == 1) {$("#country-pages").hide();} 
 			else {
+				$("#country-pages").empty();
 				for (var counter = 0; counter < data1.pages; counter++) {
 					console.log("in loop "+counter);
 					realPage = counter+1;
 					pageNo ='<li class="page-item"><a class="page-link" href="helpers/country.php?id='+data1.id+'&page='+counter+'">'+realPage+'</a></li>';
-					console.log(pageNo);
+					$("#country-pages").append(pageNo);
 				}
 				$("#country-pages").show();
 			}
