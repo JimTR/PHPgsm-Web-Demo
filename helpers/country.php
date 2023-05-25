@@ -20,6 +20,7 @@ switch ($page) {
 	}
 $data['rows'] =  $rows;
 $data['pages'] = $pages;
+$data['page'] = $page;
 //$data['county'] = $r;
 echo json_encode($data);
 //echo json_encode($id);

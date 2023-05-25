@@ -328,8 +328,18 @@ $("#country").change(function(){
 			// got data
 			console.log(data1);
 			country = data1.country;
-			if(data1.pages == 1) {$("#country-pages").hide();} else {$("#country-pages").show();} 
+			if(data1.pages == 1) {$("#country-pages").hide();} 
+			else {
+				for (var counter = 0; counter < data1.pages; counter++) {
+					console.log("in loop "+counter);
+					pageNo ='<li class="page-item"><a class="page-link" href="helpers/country.php?id='+counter+'">Previous</a></li>';
+					console.log(pageNo);
+				}
+				$("#country-pages").show();
+			}
+			console.log(data1.pages); 
 			console.log(country);
+			
 			for (var i in country) {
 				//
 				player= country[i];
