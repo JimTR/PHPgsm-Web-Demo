@@ -389,6 +389,7 @@ $(document).on('click','.page-link',function(){
 console.log("entered click");
 	var url =  $(this).attr("url");
 	console.log(url);
+	$("#country-body").empty();
 	$.ajax({ 
         type: 'GET', 
         url: url,
