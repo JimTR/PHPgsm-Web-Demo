@@ -2,8 +2,16 @@
 include "../inc/master.inc.php";
 $id= $_GET['id'];
 $sql = "select steam_id64,name_c,aka,server,first_log_on,last_log_on,log_ons,city from players where country_code like '$id' limit 1000";
-//echo "$sql<br>";
+$rows = $database->num_rows($sql);
+if ($rows > 1000) {
+	$pages= $rows/1000;
+}
+else {
+	$pages = 1;
+}
 $r = $database->get_results($sql);
-//printr($r);
-echo json_encode($database->escape($r));
+$data['rows'] =  $rows;
+$data['pages'] = $pages;
+$data['county'] = $r;
+echo json_encode($data);
 //echo json_encode($id);
