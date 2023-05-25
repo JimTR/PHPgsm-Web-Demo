@@ -128,16 +128,32 @@
 				</div> <!-- after row -->	
 									<div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
 								<div class="row">
-									<div class="col-lg-6">
+									<div class="col-lg-4">
 										<h5 class="card-title" style="margin-left:1%;">Country Lists</h5>
 										<label for="country" style="padding-right:1%;">Select a Country</label>
 										<select name="country" id="country" style="width:25%;">
 											<!--#c_select#-->
 										</select>
 									</div>
-									<div class="col-lg-6">
+									<div class="col-lg-8" style="display:none;" id="country-results">
 										<h5 class="card-title">Results For <span id="country-name"></span></h5>
-									</div>	
+										<div class="table-wrapper" style="max-height:400px;">
+											<table class="table"  id="player-results">
+												<thead>
+													<th>Name</th><th>Location</th><th>Log ins</th><th>Last Login</th><th>Servers Played</th>
+												</thead>
+												<tbody id="country-body"></tbody>
+											</table>
+										</div>	
+										<ul class="pagination" style="margin-top:1%;" id="country-pages">
+											<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+											<li class="page-item"><a class="page-link" href="#">1</a></li>
+											<li class="page-item"><a class="page-link" href="#">2</a></li>
+											<li class="page-item"><a class="page-link" href="#">3</a></li>
+											<li class="page-item"><a class="page-link" href="#">Next</a></li>
+										</ul>	
+									</div>
+									
 								</div>
 							</div>
 							<div class="tab-pane fade" id="bordered-games" role="tabpanel" aria-labelledby="contact-tab">
@@ -260,13 +276,13 @@ $( "#go_back" ).click (function() {
 	gendetail="";
 	gdetail="";
 });	
-$('th').click(function(){
-	var table = $(this).parents('table').eq(0)
-	var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
-	this.asc = !this.asc
-	if (!this.asc){rows = rows.reverse()}
-		for (var i = 0; i < rows.length; i++){table.append(rows[i])}
-})
+//$('th').click(function(){
+//	var table = $(this).parents('table').eq(0)
+//	var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+//	this.asc = !this.asc
+//	if (!this.asc){rows = rows.reverse()}
+//		for (var i = 0; i < rows.length; i++){table.append(rows[i])}
+//})
 
 function comparer(index) {
     return function(a, b) {
@@ -292,11 +308,13 @@ $('.user-id').on("click",function(){
    $('#ban_user').modal('show');	
 });
 $("#country").change(function(){
+	$("#country-body").empty();
 	option = $('option:selected', this).attr('flag');
 	val = $('option:selected', this).val();
 	if(val == "none selected") {
 		$("#country-name").text('');
 		$("#country").blur();
+		$("#country-results").hide();
 		return;
 	}
 	text = $('option:selected', this).text();
@@ -309,15 +327,45 @@ $("#country").change(function(){
         success: function (data1) {
 			// got data
 			console.log(data1);
-			for (var i in data1) {
+			country = data1.country;
+			if(data1.pages == 1) {$("#country-pages").hide();} else {$("#country-pages").show();} 
+			console.log(country);
+			for (var i in country) {
 				//
-				player= data1[i];
-				//console.log(player.name_c);
+				player= country[i];
+				server = player.server.replace(/\*/g, ', ')
+				cRow = "<tr><td style='overflow:hidden;max-width: 150px;'>"+player.name_c+"</td><td>"+player.city+"</td><td>"+player.log_ons+"</td><td>"+timeConverter(player.last_log_on)+"</td><td>"+server+"</td></tr>";
+				$('#player-results > tbody:last-child').append(cRow);
 			}
 		}
 		
     });
 	$("#country-name").text(text);
 	$("#country").blur();
+	$("#country-results").show();
 });
+function timeConverter(UNIX_timestamp){
+	var a = new Date(UNIX_timestamp * 1000);
+	var months = ['January','Febuary','March','April','May','June','July','August','September','October','November','December'];
+	var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+	var year = a.getFullYear();
+	var month = months[a.getMonth()];
+	var day = weekday[a.getDay()];
+	var date = a.getDate();
+	var hour = a.getHours();
+	var timeOfDay = ( hour < 12 ) ? "am" : "pm"; 
+	currentHours = ( hour > 12 ) ? hour - 12 : hour;
+	var d = a.getDate();
+	var d1 =a.getHours();
+	var d = ('0'+d).slice(-2);
+	var m = a.getMonth()+1;
+	var m = ('0'+m).slice(-2);
+	var hour =('0'+hour).slice(-2);
+    var y = a.getFullYear();
+	var min = ('0'+a.getMinutes()).slice(-2);
+	var sec = a.getSeconds();
+	var time = d+ '-' + m + '-' + y + ' ' + hour + ':' + min ;
+	return time;
+}
+
  </script>
