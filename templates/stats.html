@@ -332,7 +332,8 @@ $("#country").change(function(){
 			else {
 				for (var counter = 0; counter < data1.pages; counter++) {
 					console.log("in loop "+counter);
-					pageNo ='<li class="page-item"><a class="page-link" href="helpers/country.php?id='+data1.id+'&page='+counter+'">Previous</a></li>';
+					realPage = counter+1;
+					pageNo ='<li class="page-item"><a class="page-link" href="helpers/country.php?id='+data1.id+'&page='+counter+'">'+realPage+'</a></li>';
 					console.log(pageNo);
 				}
 				$("#country-pages").show();
