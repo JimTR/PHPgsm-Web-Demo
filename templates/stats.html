@@ -205,7 +205,7 @@
    <!--<script src = "js/console.js"></script>-->
  <script>
 	var gdetail='';
-	console.log("on load "+history.length);
+	//console.log("on load "+history.length);
 	$('#sendcmd').on('submit', function(e) {
 		e.preventDefault();
 		var items='';
@@ -334,7 +334,7 @@ $("#country").change(function(){
 				//
 				player= country[i];
 				server = player.server.replace(/\*/g, ', ')
-				cRow = "<tr><td style='overflow:hidden;max-width: 150px;'>"+player.name_c+"</td><td>"+player.city+"</td><td>"+player.log_ons+"</td><td>"+timeConverter(player.last_log_on)+"</td><td style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
+				cRow = "<tr><td style='overflow:hidden;max-width: 150px;' id='"+player.steam_id64+"'>"+player.name_c+"</td><td>"+player.city+"</td><td>"+player.log_ons+"</td><td>"+timeConverter(player.last_log_on)+"</td><td style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
 				$('#player-results > tbody:last-child').append(cRow);
 			}
 		}
