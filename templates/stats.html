@@ -334,7 +334,7 @@ $("#country").change(function(){
 				for (var counter = 0; counter < data1.pages; counter++) {
 					console.log("in loop "+counter);
 					realPage = counter+1;
-					pageNo ='<li class="page-item"><span class="page-link" href="#" url="helpers/country.php?id='+data1.id+'&page='+counter+'">'+realPage+'</span></li>';
+					pageNo ='<li class="page-item"><span class="page-link" url="helpers/country.php?id='+data1.id+'&page='+counter+'">'+realPage+'</span></li>';
 					$("#country-pages").append(pageNo);
 				}
 				$("#country-pages").show();
@@ -379,7 +379,7 @@ function timeConverter(UNIX_timestamp){
 	var time = d+ '-' + m + '-' + y + ' ' + hour + ':' + min ;
 	return time;
 }
-$('.page-item').on("click",function(){
+$('.page-link').on("click",function(){
 	//
 	console.log("entered click");
 	var url =  $(this).attr("url");
