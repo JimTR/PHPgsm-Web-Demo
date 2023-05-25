@@ -389,5 +389,37 @@ $(document).on('click','.page-link',function(){
 console.log("entered click");
 	var url =  $(this).attr("url");
 	console.log(url);
+	$.ajax({ 
+        type: 'GET', 
+        url: url,
+        dataType: "json", 
+        success: function (data1) {
+			// got data
+			console.log(data1);
+			country = data1.country;
+			if(data1.pages == 1) {$("#country-pages").hide();} 
+			else {
+				$("#country-pages").empty();
+				for (var counter = 0; counter < data1.pages; counter++) {
+					console.log("in loop "+counter);
+					realPage = counter+1;
+					pageNo ='<li class="page-item"><span class="page-link" url="helpers/country.php?id='+data1.id+'&page='+counter+'">'+realPage+'</span></li>';
+					$("#country-pages").append(pageNo);
+				}
+				$("#country-pages").show();
+			}
+			console.log(data1.pages); 
+			console.log(country);
+			
+			for (var i in country) {
+				//
+				player= country[i];
+				server = player.server.replace(/\*/g, ', ')
+				cRow = "<tr><td style='overflow:hidden;max-width: 150px;' id='"+player.steam_id64+"'>"+player.name_c+"</td><td>"+player.city+"</td><td>"+player.log_ons+"</td><td>"+timeConverter(player.last_log_on)+"</td><td style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
+				$('#player-results > tbody:last-child').append(cRow);
+			}
+		}
+		
+    });
 });
  </script>
