@@ -389,7 +389,7 @@ $(document).on('click','.page-link',function(){
 console.log("entered click");
 	var url =  $(this).attr("url");
 	console.log(url);
-	$("#country-body").empty();
+	
 	$.ajax({ 
         type: 'GET', 
         url: url,
@@ -411,7 +411,7 @@ console.log("entered click");
 			}
 			console.log(data1.pages); 
 			console.log(country);
-			
+			$("#country-body").empty();
 			for (var i in country) {
 				//
 				player= country[i];
