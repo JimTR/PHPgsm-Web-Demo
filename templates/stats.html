@@ -334,7 +334,7 @@ $("#country").change(function(){
 				for (var counter = 0; counter < data1.pages; counter++) {
 					console.log("in loop "+counter);
 					realPage = counter+1;
-					pageNo ='<li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="movepage("helpers/country.php?id='+data1.id+'&page='+counter+'")">'+realPage+'</a></li>';
+					pageNo ='<li class="page-item"><a class="page-link" href="javascript:void(0)" url="helpers/country.php?id='+data1.id+'&page='+counter+'">'+realPage+'</a></li>';
 					$("#country-pages").append(pageNo);
 				}
 				$("#country-pages").show();
@@ -379,8 +379,9 @@ function timeConverter(UNIX_timestamp){
 	var time = d+ '-' + m + '-' + y + ' ' + hour + ':' + min ;
 	return time;
 }
-function movepage(url) {
-	// move thro pagination
-	console.log("moving to "+url)
+$('.page-link').on("click",function(){
+	//
+	var url =  $(this).attr("url");
+	console.log(url);
 }
  </script>
