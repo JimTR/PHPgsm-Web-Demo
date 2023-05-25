@@ -1,7 +1,7 @@
 <?php
 include "../inc/master.inc.php";
 $id= $_GET['id'];
-if (!isset($_GET['page'])) {$page = 1;}
+if (!isset($_GET['page'])) {$page = 0;}
 else {$page = $_GET['page'];}
 $sql = "select steam_id64,name_c,aka,server,first_log_on,last_log_on,log_ons,city from players where country_code like '$id'";
 $rows = $database->num_rows( $sql);
@@ -13,8 +13,10 @@ else {
 }
 $r = $database->get_results($sql);
 switch ($page) {
-	case 1:
+	case 0:
 		$data['country'] = array_slice($r,0,1000);
+	default:
+		$data['country'] = array_slice($r,1000*$page,1000);	
 	}
 $data['rows'] =  $rows;
 $data['pages'] = $pages;
