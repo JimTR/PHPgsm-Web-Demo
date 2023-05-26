@@ -346,7 +346,7 @@ $("#country").change(function(){
 				//
 				player= country[i];
 				server = player.server.replace(/\*/g, ', ')
-				cRow = "<tr><td style='overflow:hidden;max-width: 150px;' id='"+player.steam_id64+"'>"+player.name_c+"</td><td>"+player.city+"</td><td>"+player.log_ons+"</td><td>"+timeConverter(player.last_log_on)+"</td><td style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
+				cRow = "<tr  id='"+player.steam_id64+"'><td style='overflow:hidden;max-width: 150px;'><a href='users.php?id="+player.steam_id64+"'>"+player.name_c+"</a></td><td>"+player.city+"</td><td>"+player.log_ons+"</td><td>"+timeConverter(player.last_log_on)+"</td><td style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
 				$('#player-results > tbody:last-child').append(cRow);
 			}
 		}
@@ -413,10 +413,10 @@ console.log("entered click");
 			console.log(country);
 			$("#country-body").empty();
 			for (var i in country) {
-				//
+				console.log('in loop');
 				player= country[i];
 				server = player.server.replace(/\*/g, ', ')
-				cRow = "<tr><td style='overflow:hidden;max-width: 150px;' id='"+player.steam_id64+"'>"+player.name_c+"</td><td>"+player.city+"</td><td>"+player.log_ons+"</td><td>"+timeConverter(player.last_log_on)+"</td><td style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
+				cRow = "<tr  id='"+player.steam_id64+"'><td style='overflow:hidden;max-width: 150px;'><a href='users.php?id='"+player.name_c+"'>"+player.steam_id64+"</a></td><td>"+player.city+"</td><td>"+player.log_ons+"</td><td>"+timeConverter(player.last_log_on)+"</td><td style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
 				$('#player-results > tbody:last-child').append(cRow);
 			}
 		}
