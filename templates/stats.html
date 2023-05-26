@@ -411,9 +411,11 @@ console.log("entered click");
 					console.log("in loop "+counter);
 					realPage = counter+1;
 					if (counter == data1.page) {
-						console.log ("we have the page to highlight "+counter);
+						pageNo ='<li class="page-item"><span class="page-link" style="background-color: #2c2c;" url="helpers/country.php?id='+data1.id+'&page='+counter+'">'+realPage+'</span></li>';
 					}
-					pageNo ='<li class="page-item"><span class="page-link" url="helpers/country.php?id='+data1.id+'&page='+counter+'">'+realPage+'</span></li>';
+					else{
+						pageNo ='<li class="page-item"><span class="page-link" url="helpers/country.php?id='+data1.id+'&page='+counter+'">'+realPage+'</span></li>';
+					}
 					$("#country-pages").append(pageNo);
 				}
 				$("#country-pages").show();
