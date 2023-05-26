@@ -404,6 +404,9 @@ console.log("entered click");
 				for (var counter = 0; counter < data1.pages; counter++) {
 					console.log("in loop "+counter);
 					realPage = counter+1;
+					if (counter == data1.page) {
+						console.log ("we have the page to highlight "+counter);
+					}
 					pageNo ='<li class="page-item"><span class="page-link" url="helpers/country.php?id='+data1.id+'&page='+counter+'">'+realPage+'</span></li>';
 					$("#country-pages").append(pageNo);
 				}
@@ -413,7 +416,7 @@ console.log("entered click");
 			console.log(country);
 			$("#country-body").empty();
 			for (var i in country) {
-				console.log('in loop');
+				console.log('in loop reload');
 				player= country[i];
 				server = player.server.replace(/\*/g, ', ')
 				cRow = "<tr  id='"+player.steam_id64+"'><td style='overflow:hidden;max-width: 150px;'><a href='users.php?id='"+player.name_c+"'>"+player.steam_id64+"</a></td><td>"+player.city+"</td><td>"+player.log_ons+"</td><td>"+timeConverter(player.last_log_on)+"</td><td style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
