@@ -133,7 +133,7 @@ $sidebar_data['bmenu'] = '';
 $sql = "select * from server1 order by `host_name` ASC";
 $sidebar_data['bmenu'] = '';
 $sidebar_data['smenu'] = '';
-$jsa = '';
+$page['jsa'] = '';
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
 //print_r($bserver);
 $servers = $database->get_results($sql);
@@ -160,7 +160,7 @@ foreach ($base_servers as $server) {
 	$uri = parse_url($server['url']);
 	$url = $uri['scheme']."://".$uri['host'].':'.$server['port'];
 	if(isset($uri['path'])) {$url .= "/".$uri['path'];}
-	$jsa .= '"'.$url.'/api.php?action=game_detail&server='.$server['fname'].'",';
+	$page['jsa'] .= '"'.$url.'/api.php?action=game_detail&server='.$server['fname'].'",';
 }
 //if (str_ends_with(rtrim($jsa), ',') {$jsa = rtrim($jsa,",");} 
 $sidebar_data['servers'] = 'Game Servers';
