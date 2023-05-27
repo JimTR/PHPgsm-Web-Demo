@@ -134,6 +134,14 @@
 										<select name="country" id="country" style="width:65%;">
 											<!--#c_select#-->
 										</select>
+										<div id="country-stats" style="display:none;">
+											<table class="table" style="margin-top:5%;">
+												<tbody>
+													<tr><td>Total Players</td><td id="c-rows"></td></tr>
+													<tr><td>In Game</td><td>ages</td></tr>
+												</tbody>
+											</table>
+										</div>
 									</div>
 									<div class="col-lg-9" style="display:none;" id="country-results">
 										<h5 class="card-title">Results For <span id="country-name"></span></h5>
@@ -145,13 +153,7 @@
 												<tbody id="country-body"></tbody>
 											</table>
 										</div>	
-										<ul class="pagination" style="margin-top:1%;" id="country-pages">
-											<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-											<li class="page-item"><a class="page-link" href="#">1</a></li>
-											<li class="page-item"><a class="page-link" href="#">2</a></li>
-											<li class="page-item"><a class="page-link" href="#">3</a></li>
-											<li class="page-item"><a class="page-link" href="#">Next</a></li>
-										</ul>	
+										<ul class="pagination" style="margin-top:1%;" id="country-pages"></ul>	
 									</div>
 									
 								</div>
@@ -315,6 +317,7 @@ $("#country").change(function(){
 		$("#country-name").text('');
 		$("#country").blur();
 		$("#country-results").hide();
+		$("#country-stats").hide();
 		return;
 	}
 	text = $('option:selected', this).text();
@@ -327,8 +330,10 @@ $("#country").change(function(){
         success: function (data1) {
 			// got data
 			console.log(data1);
+			$("#c-rows").text(data1.rows); 
 			country = data1.country;
-			if(data1.pages == 1) {$("#country-pages").hide();} 
+			if(data1.pages == 1) {$("#country-pages").hide();}
+			
 			else {
 				$("#country-pages").empty();
 				for (var counter = 0; counter < data1.pages; counter++) {
@@ -344,6 +349,7 @@ $("#country").change(function(){
 					$("#country-pages").append(pageNo);
 				}
 				$("#country-pages").show();
+				
 			}
 			console.log(data1.pages); 
 			console.log(country);
@@ -361,6 +367,7 @@ $("#country").change(function(){
 	$("#country-name").text(text);
 	$("#country").blur();
 	$("#country-results").show();
+	$("#country-stats").show();
 });
 function timeConverter(UNIX_timestamp){
 	var a = new Date(UNIX_timestamp * 1000);
@@ -404,6 +411,7 @@ console.log("entered click");
 			// got data
 			console.log(data1);
 			country = data1.country;
+			//$("#c-rows").text(data1.rows); 
 			if(data1.pages == 1) {$("#country-pages").hide();} 
 			else {
 				$("#country-pages").empty();
