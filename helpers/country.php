@@ -26,6 +26,12 @@ $data['pages'] = $pages;
 $data['page'] = $page;
 $data['id'] = $id;
 //$data['county'] = $r;
+$sql = "SELECT players.name_c, sum(`game_time`) as total,players.log_ons FROM `player_history` left join players on player_history.steam_id= players.steam_id64 where player_history.country LIKE '$id' GROUP BY `steam_id`  ORDER BY `total`  DESC limit 1";
+$p = $database->get_row($sql);
+//echo $p['name_c'];
+//$x =convertSecToTime($p['total']);
+$data['top_player'] = $p['name_c'].' - '.convertSecToTime($p['total']) ; 
+//printr($p);
 echo json_encode($data);
 //echo json_encode($id);
 function convertSecToTime($sec){

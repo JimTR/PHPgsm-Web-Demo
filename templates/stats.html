@@ -139,6 +139,7 @@
 												<tbody>
 													<tr><td>Total Players</td><td id="c-rows"></td></tr>
 													<tr><td>In Game</td><td id="online-time"></td></tr>
+													<tr><td>In Game Player</td><td id="online-player"></td></tr>
 												</tbody>
 											</table>
 										</div>
@@ -332,6 +333,7 @@ $("#country").change(function(){
 			console.log(data1);
 			$("#c-rows").text(data1.rows); 
 			$("#online-time").text(data1.online);
+			$("#online-player").text(data1.top_player);
 			country = data1.country;
 			if(data1.pages == 1) {$("#country-pages").hide();}
 			
