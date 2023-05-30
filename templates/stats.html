@@ -59,6 +59,10 @@
 						<li class="nav-item" role="presentation">
 							<button class="nav-link" id="supported-games" data-bs-toggle="tab" data-bs-target="#bordered-games" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-link"></i> Linked IP Addresses</button>
 						</li>
+						<!--<i class="fa-solid fa-user-slash"></i>-->
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="bans" data-bs-toggle="tab" data-bs-target="#bordered-bans" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-user-slash"></i> User Bans</button>
+						</li>
 						<li class="nav-item"><a class="nav-link" href="users.php"><i class="fa-solid fa-magnifying-glass"></i> Search Players</a></li>
 						
 					</ul>
@@ -161,19 +165,73 @@
 							</div>
 							<div class="tab-pane fade" id="bordered-games" role="tabpanel" aria-labelledby="contact-tab">
 								<div class="row">
-									<div class="col-lg-6" id="">
+									<div class="col-lg-8" id="">
 										<h5 class="card-title" style="margin-left:1%;">Linked IP Addresses</h5>
 										<p><!--#dup_count#--> accounts share IP addresses</p>
 										<div class="table-wrapper">
 										<table class="table">
 											<thead>
 												<th style="width:10%;">IP Address</th>
-												<th style="width:45%;">Name</th>
-												<th style="width:30%;">Last Login</th>
-												<th>Logins</th>
+												<th style="width:29%;">Name</th>
+												<th style="width:24%;padding-left:1.5%;">Last Login</th>
+												<th style="width:10%;padding-left:4.5%;">Logins</th>
+												<th style="text-align:right;padding-right:3%;">Ban Status</th>
 												<!--<th>Last Logon</th>-->
 											</thead>
 											<!--#dups#-->
+											
+										</table>
+										</div>
+									</div>	  
+								</div>
+							</div>
+							<div class="tab-pane fade" id="bordered-bans" role="tabpanel" aria-labelledby="contact-tab">
+								<div class="row">
+									<h5 class="card-title" style="margin-left:1%;">Banned Users</h5>
+									<div class="col-lg-4" id="">
+										
+										<p class="card-title">Vac Banned Users</p>
+										<div class="table-wrapper">
+										<table class="table">
+											<thead>
+												<th style="width:45%;">Name</th>
+												<th style="width:30%;">Last Ban</th>
+												<th>Last Login</th>
+												
+											</thead>
+											
+											
+										</table>
+										</div>
+										</div>
+										<div class="col-lg-4" id="">
+										
+										<p class="card-title">Source Banned Users</p>
+										<div class="table-wrapper">
+										<table class="table">
+											<thead>
+												<th style="width:45%;">Name</th>
+												<th style="width:30%;">Last Ban</th>
+												<th>Last Login</th>
+												
+											</thead>
+											
+											
+										</table>
+										</div>
+										</div>
+										<div class="col-lg-4" id="">
+										
+										<p class="card-title">System Banned Users</p>
+										<div class="table-wrapper">
+										<table class="table">
+											<thead>
+												<th style="width:45%;">IP / userid</th>
+												<th style="width:30%;">Last Ban</th>
+												<th>Last Login</th>
+												
+											</thead>
+											
 											
 										</table>
 										</div>
@@ -324,6 +382,7 @@ $("#country").change(function(){
 	text = $('option:selected', this).text();
 	url = "helpers/country.php?id="+val;
 	console.log(url);
+	$("#country-pages").hide();
 	 $.ajax({ 
         type: 'GET', 
         url: url,
@@ -352,6 +411,7 @@ $("#country").change(function(){
 					$("#country-pages").append(pageNo);
 				}
 				$("#country-pages").show();
+				//$("#country-pages").hide();
 				
 			}
 			console.log(data1.pages); 

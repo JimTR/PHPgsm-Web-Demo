@@ -71,19 +71,19 @@ foreach($dups as $dup) {
 		// add to the row
 		$i--;
 		$last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
-		$dup_table[$i]['name'] .="<table><tr class='no-border'><td style='width:49%'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:40%;'>$last_login</td><td style='text-align:right;padding-right: 5%;'>{$dup['log_ons']}</td></tr></table>";
+		$dup_table[$i]['name'] .="<table><tr class='no-border'><td style='width:31%'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:18%;'>$last_login</td><td style='text-align:right;padding-right: 6%;'>{$dup['log_ons']}</td><td style='text-align:right;padding-right: 6%;'>0</td></tr></table>";
 		$i++;
 		continue;
 	}
 	 $dup_table[$i]['ip'] = long2ip($dup['ip']);
 	 $last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
-	 $dup_table[$i]['name'] = "<table><tr class='no-border'><td style='width:49%;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:40%;'>$last_login</td><td style='text-align:right;padding-right: 5%;'>{$dup['log_ons']}</td></tr></table>"; 
+	 $dup_table[$i]['name'] = "<table><tr class='no-border'><td style='width:31%;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:18%;'>$last_login</td><td style='text-align:right;padding-right: 6%;'>{$dup['log_ons']}</td><td style='text-align:right;padding-right: 6%;'>0</td></tr></table>"; 
 	 $last_ip = $dup['ip'];
 	 $i++;
 }
 $page['dups'] ='';
 foreach ($dup_table as $dup) {	
-	$page['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=3>{$dup['name']}</td></tr>";
+	$page['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=4>{$dup['name']}</td></tr>";
 }
 $sql = "SELECT `country`, `flag`, `country_code` FROM `logins` order by `logins` desc";
 $c1 = $database->get_results($sql);
