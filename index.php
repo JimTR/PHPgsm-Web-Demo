@@ -64,4 +64,17 @@ $template->load('templates/index.html');
 $template->replace_vars($page);
 $template->publish();
 $database->disconnect();
-
+/*
+$members = json_decode(file_get_contents('https://discordapp.com/api/guilds/191581638629523456/widget.json'), true)['members'];
+foreach ($members as $member) {
+	if ($member['status'] == 'online') {
+		$online[] = $member;
+	}
+	else{ 
+		$offline[] = $member;
+	}
+}
+$membersCount= count($online);
+$total_members = count($offline)+$membersCount;
+echo "Number of members: $membersCount / $total_members".PHP_EOL;
+*/
