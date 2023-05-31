@@ -1,6 +1,7 @@
 function index() {
 	// read data use simular to loading the index file
 	if (serverCount >1) {$("#server-desc").text("API Servers");}
+	console.log("in index ");
      $.ajax({ 
         type: 'GET', 
         url: 'ajax.php', 
@@ -8,7 +9,8 @@ function index() {
         dataType: "json", 
         success: function (data1) {
 			// got data
-			console.log(data1);
+			//alert(data1);
+			console.log(data1.player_tot);
 			$('#player_tot').text(data1.player_tot);
 			$('#logins_tot').text(data1.tot_logins);
 			$('#game_tot').text(data1.game_tot);
@@ -112,9 +114,9 @@ function online(url){
 					} 
 				}
 				if (i =='top_players') {var top_players=data1[i];}
-				console.log(country_data);
+				//console.log(country_data);
 				for (var j in country_data) {
-					console.log(country_data[j]['test']);
+					//console.log(country_data[j]['test']);
 					$("#country-"+j+"-name").text(country_data[j]['country']);
 					$("#country-"+j+"-flag").attr("src",country_data[j]['flag']);
 					$("#country-"+j+"-logins").text(country_data[j]['logins']);
@@ -229,7 +231,7 @@ function online(url){
 				$("#a"+serverid).empty();
 				$("#active-load").hide();
 				rowCount = $('#xy tr').length;
-				console.log("server Count = "+serverCount+" row count = "+rowCount);
+				//console.log("server Count = "+serverCount+" row count = "+rowCount);
 				if(rowCount == 2  ) {$("#dormant").show();}
 			}
 		}
