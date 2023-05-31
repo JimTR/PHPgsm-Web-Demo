@@ -35,10 +35,12 @@ $template = new template;
 	// set data to roman numerals
        define ("COPY_YEAR", romanNumerals(date("Y"))); 
        define ("START_YEAR",romanNumerals($settings['start_year']));
+      
    }
     else {
 	 define ("COPY_YEAR", date("Y")); 
      define ("START_YEAR",$settings['start_year']);
+     
       }
 
     const SALT = 'insert some random text here';
@@ -165,5 +167,5 @@ foreach ($base_servers as $server) {
 //if (str_ends_with(rtrim($jsa), ',') {$jsa = rtrim($jsa,",");} 
 $sidebar_data['servers'] = 'Game Servers';
 $sidebar_data['base_servers'] = 'Base Servers';
-
+ $page['year'] = START_YEAR." - ".COPY_YEAR;
 ?>
