@@ -143,7 +143,8 @@
 												<tbody>
 													<tr><td>Total Players</td><td id="c-rows"></td></tr>
 													<tr><td>In Game</td><td id="online-time"></td></tr>
-													<tr><td>In Game Player</td><td id="online-player"></td></tr>
+													<tr><td>Top Player</td><td id="online-player"></td></tr>
+													<tr><td>Top Player Tiime</td><td id="online-player-time"></td></tr>
 												</tbody>
 											</table>
 										</div>
@@ -190,7 +191,7 @@
 									<h5 class="card-title" style="margin-left:1%;">Banned Users</h5>
 									<div class="col-lg-4" id="">
 										
-										<p class="card-title">Vac Banned Users</p>
+										<p class="card-title">Vac Bans</p>
 										<div class="table-wrapper">
 										<table class="table">
 											<thead>
@@ -206,7 +207,7 @@
 										</div>
 										<div class="col-lg-4" id="">
 										
-										<p class="card-title">Source Banned Users</p>
+										<p class="card-title">Source Bans</p>
 										<div class="table-wrapper">
 										<table class="table">
 											<thead>
@@ -222,7 +223,7 @@
 										</div>
 										<div class="col-lg-4" id="">
 										
-										<p class="card-title">System Banned Users</p>
+										<p class="card-title">System Bans</p>
 										<div class="table-wrapper">
 										<table class="table">
 											<thead>
@@ -393,6 +394,7 @@ $("#country").change(function(){
 			$("#c-rows").text(data1.rows); 
 			$("#online-time").text(data1.online);
 			$("#online-player").text(data1.top_player);
+			$("#online-player-time").text(data1.top_player_time);
 			country = data1.country;
 			if(data1.pages == 1) {$("#country-pages").hide();}
 			
