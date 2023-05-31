@@ -30,7 +30,8 @@ $sql = "SELECT players.name_c, sum(`game_time`) as total,players.log_ons FROM `p
 $p = $database->get_row($sql);
 //echo $p['name_c'];
 //$x =convertSecToTime($p['total']);
-$data['top_player'] = $p['name_c'].' - '.convertSecToTime($p['total']) ; 
+$data['top_player'] = $p['name_c'];
+$data['top_player_time'] = convertSecToTime($p['total']) ; 
 //printr($p);
 echo json_encode($data);
 //echo json_encode($id);
