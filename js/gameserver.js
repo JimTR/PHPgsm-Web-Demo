@@ -500,6 +500,7 @@ $('#files').change(function(){
 
 $('#startcmd').on('submit', function(e) {
 	e.preventDefault();
+	console.log(url);
 	url +="/"+$(this).attr('action');
 	var formValues = $(this).serialize();
 	$.ajax({
