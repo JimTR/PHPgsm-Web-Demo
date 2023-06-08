@@ -160,6 +160,7 @@ foreach($work as $line) {
 echo json_encode($user_data).PHP_EOL;
 shell_exec("find /tmp -size 300c -exec rm -v {} \; "); // tidy up curl
 shell_exec("find /tmp -size 136c -exec rm -v {} \; "); // tidy up curl
+shell_exec("rm /tmp/FOO*");
 function str2int($string) {
   $length = strlen($string);   
   for ($i = 0, $int = ''; $i < $length; $i++) {
