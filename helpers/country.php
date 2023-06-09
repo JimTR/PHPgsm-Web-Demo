@@ -3,7 +3,7 @@ include "../inc/master.inc.php";
 $id= $_GET['id'];
 if (!isset($_GET['page'])) {$page = 0;}
 else {$page = $_GET['page'];}
-$sql = "select steam_id64,name_c,aka,server,first_log_on,last_log_on,log_ons,city,region from players where country_code like '$id' order by log_ons DESC";
+$sql = "select steam_id64,name_c,aka,server,first_log_on,last_log_on,log_ons,city,region from players where country_code like '$id' order by last_log_on DESC";
 $rows = $database->num_rows( $sql);
 if ($rows > 999) {
 	$pages= ceil($rows/1000);
