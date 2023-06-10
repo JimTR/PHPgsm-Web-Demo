@@ -221,7 +221,7 @@ function online(url){
 					ServerData = value.split(",");
 					sname = $("#"+ServerData[1]+"-name").text();
 					console.log(sname+"  should be "+ServerData[1]+" key = "+key);
-					online_servers += "<tr class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+sname+"</a></td><td style='text-align:center;'>"+ServerData[0]+"</td></tr>"; 
+					online_servers += "<tr title ='open console' class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+sname+"</a></td><td style='text-align:center;'>"+ServerData[0]+"</td></tr>"; 
 				});
 				$("#dormant").hide();
 				$("#active-load").hide();

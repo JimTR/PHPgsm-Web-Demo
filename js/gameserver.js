@@ -500,8 +500,9 @@ $('#files').change(function(){
 
 $('#startcmd').on('submit', function(e) {
 	e.preventDefault();
-	console.log(url);
+	
 	url +="/"+$(this).attr('action');
+	alert(url);
 	var formValues = $(this).serialize();
 	$.ajax({
 		type: $(this).attr('method'),
@@ -537,13 +538,14 @@ $("#cnew").click(function() {
 	}
 	var [option, value] = orig.split(" ");
 	optionid = option.substring(1, option.length);
+	alert(optionid);
 	if(typeof value != 'undefined'){
-		html = "<tr><td>"+optionid+"</td><td></td><td><input type='text' id='o"+optionid+"' option='"+option+"' orig='"+option+"' value='"+value+"'>'</td><td></td><td>no help</td></tr>";
+		html = "<tr id='tr-"+optionid+"'><td>"+optionid+"</td><td></td><td><input type='text' id='o"+optionid+"' option='"+option+"' orig='"+option+"' value='"+value+"'></td><td></td><td>no help</td></tr>";
 		cmd = cmd+" "+option+" "+value;
 		$("#vcmd").text(cmd);
 	}
 	else{
-		html = "<tr><td>"+optionid+"</td><td></td><td><input type='checkbox' id='o"+optionid+"' option='"+option+"' orig='"+option+"' checked>'</td><td></td><td>no help</td></tr>";
+		html = "<tr id='tr-"+optionid+"'><td>"+optionid+"</td><td></td><td><input type='checkbox' id='o"+optionid+"' option='"+option+"' orig='"+option+"' checked></td><td></td><td>no help</td></tr>";
 		value=""; // stop undefined later
 		cmd = cmd+" "+option;
 	}
@@ -682,5 +684,34 @@ $("#table-wrapper" ).each(function( ) {
   	    });
   }
 });
+alert (checked);
 return checked;
 }     
+$("input[type='checkbox']").on('change', function() {
+//$(document).on('change', 'checkbox', function() {
+	oid = this.id;
+	 if(this.checked) {
+      console.log ("checkbox is checked");
+    }
+    else {
+		console.log ("unchecked");
+		trid = $(this).closest('tr').attr('id'); 
+		 original = $(this).attr("orig");
+		 vcmd = $("#vcmd").text();
+		 cmd = $("#scmd").val();
+		 alert(vcmd);
+		 newopt='';
+		 cmd = cmd.replace(original,newopt);
+		 vcmd = vcmd.replace(original,newopt);
+		 $("#"+trid).remove();
+		 $("#scmd").val(cmd);
+		 $("#vcmd").text(vcmd);
+		 
+	}
+});
+function onClickHandler(){
+    var chk=document.getElementById("box").value;
+	
+    //use this value
+
+}
