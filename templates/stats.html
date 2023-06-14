@@ -239,9 +239,9 @@
 										<div class="table-wrapper">
 										<table class="table">
 											<thead>
-												<th style="width:45%;">IP / userid</th>
-												<th style="width:30%;">Last Ban</th>
-												<th>Last Login</th>
+												<th style="width:10%;vertical-align:middle;">IP / userid</th>
+												<th style="width:65%;text-align:center;">User Name<br> (if known)</th>
+												<th>Last Login <br>(if known)</th>
 												
 											</thead>
 											
@@ -435,7 +435,7 @@ $("#country").change(function(){
 				//
 				player= country[i];
 				server = player.server.replace(/\*/g, ', ')
-				cRow = "<tr  id='"+player.steam_id64+"'><td style='overflow:hidden;max-width: 150px;'><a href='users.php?id="+player.steam_id64+"'>"+player.name_c+"</a></td><td>"+player.city+" - "+player.region+"</td><td>"+player.log_ons+"</td><td>"+timeConverter(player.last_log_on)+"</td><td style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
+				cRow = "<tr  style='vertical-align:middle;' id='"+player.steam_id64+"'><td style='overflow:hidden;max-width: 150px;'><a href='users.php?id="+player.steam_id64+"'>"+player.name_c+"</a></td><td>"+player.city+" - "+player.region+"</td><td>"+player.log_ons+"</td><td>"+timeConverter(player.last_log_on)+"</td><td style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
 				$('#player-results > tbody:last-child').append(cRow);
 			}
 		}
