@@ -85,7 +85,7 @@ $page['dups'] ='';
 foreach ($dup_table as $dup) {	
 	$page['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=4>{$dup['name']}</td></tr>";
 }
-$sql = "SELECT `country`, `flag`, `country_code` FROM `logins` order by `logins` desc";
+$sql = "SELECT `country`, `flag`, `country_code` FROM `logins` order by `country` ASC";
 $c1 = $database->get_results($sql);
 $page['c_select'] ="<option>none selected</option>";
 foreach ($c1 as $c2) {
@@ -130,4 +130,5 @@ function convertSecToTime($sec){
 	//return $interval->format('%y y %m mo %d d, %h h %i m %s s'); // convert into Years, Months, Days, Hours, Minutes and Seconds
 	return $return;
 }
+//$sql = "SELECT game, MONTH(from_unixtime(last_play)) AS  start_month,  year(from_unixtime(last_play)) as selected_year, count(*) as user_count, sum(game_time) as tol FROM `user_stats` WHERE MONTH(from_unixtime(last_play)) = 6 and year(from_unixtime(last_play)) = 2023 group by game;";
 ?>
