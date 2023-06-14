@@ -178,7 +178,7 @@ function displayData(userID) {
 			if(typeof data.data.error == 'undefined') {
 				
 				
-				$('#dta').append("<tr><td>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>");
+				$('#dta').append("<tr><td style='width:25%;'>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>");
 				$('#dta').append('<tr><td>Steam Profile</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>');
 				$('#dta').append('<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;width:11%;"  src="'+gen_data.flag+'"></td></tr>');
 				$('#dta').append("<tr><td>Last Known IP</td><td>"+gen_data.real_ip+"</td></tr>");
