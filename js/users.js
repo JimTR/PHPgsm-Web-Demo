@@ -188,7 +188,7 @@ function displayData(userID) {
 				aka = gen_data.aka;
 				if (aka != null){
 					aka = aka.replace(/,\s*$/, "");
-					$('#dta').append("<tr><td>Played as</td><td>"+aka+"</td></tr>");
+					$('#dta').append("<tr><td style='vertical-align:middle;'>Played as</td><td>"+aka+"</td></tr>");
 				}
 			}
 			else {
