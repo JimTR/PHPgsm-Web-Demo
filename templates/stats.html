@@ -305,7 +305,7 @@
 					player = data.results;
 					$.each(player, function(i, item) {
 						var timestamp =  timeConverter(item.last_log_on);
-						gdetail += "<tr><td><a href='"+'users.php?id='+item.steam_id64+"'>"+item.name_c+"</a></td><td style='padding-left:2%;'><img  style='width:40px;' src='"+item.flag+"' title='"+item.country+"'></td><td>"+timestamp+"</td><td>" ;
+						gdetail += "<tr><td><a href='"+'users.php?id='+item.steam_id64+"'>"+item.name_c+"</a></td><td style='padding-left:2%;'><img  style='border:1px solid;width:40px;' src='"+item.flag+"' title='"+item.country+"'></td><td>"+timestamp+"</td><td>" ;
 						gdetail +='<a href=http://steamcommunity.com/profiles/'+item.steam_id64+' target="_blank">'+item.steam_id64+'</a></td></tr>';
 						man=item.name_c;
 					});
