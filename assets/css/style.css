@@ -1101,7 +1101,7 @@ h1, h2, h3, h4, h5, h6 {
   width:30%;
   padding-right:0%;
   vertical-align: middle;
-  /*border: 1px solid #000;*/
+  border: 1px solid;
 }
 .frag {
   width:5%;
