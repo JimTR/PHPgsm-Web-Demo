@@ -90,14 +90,15 @@ function online(url){
 					$("#"+serverid+"-up-time").html(general.uptime);
 					cpu = general.cpu_info;
 					//console.log(cpu);
+					title = '';
 					if(cpu.reboot  == "Yes") { 
-						title = "this server needs a reboot";
+						title += "Warning - this server's parent needs rebooting";
 						cpu.reboot = "<img src ='img/offline.png' title='"+title+"'></img>";
 						
 					}
 					else{ 
 						if(parseInt(cpu.load_1_min_pc) >80 ) {
-							title = "this server is using a lot of cpu";
+							title += "this server is using a lot of cpu";
 							cpu.reboot = "<img src ='img/offline1.png' title='"+title+"'></img>";
 						}
 						else{	
