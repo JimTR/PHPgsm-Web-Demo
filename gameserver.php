@@ -115,7 +115,7 @@ $key =   array_partial_search($cmd_opts, "hostname");
 		//$option="hostname";
 		$option="hostname";
 		$value="";
-		$this_server['cmd_line_opts'] .= "<tr><td>$option</td><td >$value</td>";
+		$this_server['cmd_line_opts'] .= "<tr id='tr-$option'><td>$option</td><td >$value</td>";
 		$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='+hostname' value='$value' orig='not set'></td><td></td><td>Host Name is set in the config file, setting it here will disable the config file option</td></tr>";
 		}  
 
@@ -139,7 +139,7 @@ foreach($cmd_opts as $tmp) {
 	//$value=$tmp1[1];
 	//echo "new value = $value<br>";
 	//echo "$option<br>";
-	$this_server['cmd_line_opts'] .= "<tr><td>$option</td><td >$value</td>";
+	$this_server['cmd_line_opts'] .= "<tr id='tr-$option'><td>$option</td><td >$value</td>";
 	if ($option =="map" || $option=="hostname") {
 		// text options
 		if($option == "hostname") {
