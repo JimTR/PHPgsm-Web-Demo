@@ -35,7 +35,7 @@
 		$where['steam_id'] = $user['steam_id'];
 		$insert = false;
 	}
-	
+	if ($user['last_update'] < time() -  86400) {$full_scan = true;} else{$full_scan = false;}
 	$url= "https://steamcommunity.com/profiles/$id";
 	$page = file_get_contents($url);
 	$tmp = array_filter(explode(PHP_EOL,$page));
@@ -48,6 +48,7 @@
 			$state = trim($output[1]);
 			if($state == "offline") {$user_data['status'] = "offline";} else {$user_data['status'] ="online";}
 			$found = true;
+			// no need to go any further if $full _scan is false
 			continue;
 		}
 		if($found) {
@@ -104,6 +105,7 @@
 		if($ban !==false) {
 			$ban_process = true;
 			$ban_output = '';
+			$user_data['steam_ban'] ='';
 			// we have a vac ban
 		}	
 		if ($ban_process) {
@@ -181,6 +183,8 @@
 		$user_insert['steam_id'] = $id;
 		$user_insert['avatar'] = $user_data['avatar'];
 		$user_insert['last_update'] = time();
+		$user_insert['steam_date'] = strtotime($steam_date);
+		if(isset($user_data['steam_ban'])) {$user_insert['vac_ban'] = $ts;}
 		$in = db->insert('steam_data',$user_insert); // now add it
 	}
 	else {
@@ -188,6 +192,7 @@
 		$user_update['last_update'] = time();
 		if(isset($user_data['frame'])) {$user_update['avatar_frame'] = $user_data['frame'];}
 		if(isset($user_data['steam_ban'])) {$user_update['vac_ban'] = $ts;}
+		if(isset($steam_date)) {$user_update['steam_date'] = strtotime($steam_date);}
 		db->update('steam_data',$user_update,$where); 
 	}
 	echo json_encode($user_data);
