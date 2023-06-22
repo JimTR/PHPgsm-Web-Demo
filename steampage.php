@@ -186,7 +186,7 @@
 		$user_insert['steam_id'] = $id;
 		$user_insert['avatar'] = $user_data['avatar'];
 		$user_insert['last_update'] = time();
-		if (!isset($user_insert['steam_date'])) {$user_insert['steam_date']  = 0;} 
+		if (!isset($user_insert['steam_date'])) {$steam_date  = 0;} 
 		$user_insert['steam_date'] = strtotime($steam_date);
 		if(isset($user_data['steam_ban'])) {$user_insert['vac_ban'] = $user_data['steam_ban'];}
 		$in = db->insert('steam_data',$user_insert); // now add it
