@@ -127,6 +127,7 @@
 					$user_data['steam_ban'] .= $line;
 					continue;
 				}
+				$second = 0;
 				$x = str2int($line);
 				if (is_numeric($x) ) {
 					if($x >0 ){
