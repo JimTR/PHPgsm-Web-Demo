@@ -185,14 +185,14 @@
 		$user_insert['avatar'] = $user_data['avatar'];
 		$user_insert['last_update'] = time();
 		$user_insert['steam_date'] = strtotime($steam_date);
-		if(isset($user_data['steam_ban'])) {$user_insert['vac_ban'] = $ts;}
+		if(isset($user_data['steam_ban'])) {$user_insert['vac_ban'] = $user_data['steam_ban'];}
 		$in = db->insert('steam_data',$user_insert); // now add it
 	}
 	else {
 		//echo "update data".PHP_EOL;
 		$user_update['last_update'] = time();
 		if(isset($user_data['frame'])) {$user_update['avatar_frame'] = $user_data['frame'];}
-		if(isset($user_data['steam_ban'])) {$user_update['vac_ban'] = $ts;}
+		if(isset($user_data['steam_ban'])) {$user_update['vac_ban'] = $user_data['steam_ban'];}
 		if(isset($steam_date)) {$user_update['steam_date'] = strtotime($steam_date);}
 		db->update('steam_data',$user_update,$where); 
 	}
