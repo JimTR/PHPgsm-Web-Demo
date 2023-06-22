@@ -1,81 +1,100 @@
 <?php
-require 'inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
+ 
+    if (!defined('DOC_ROOT')) {
+    	define('DOC_ROOT', realpath(dirname(__FILE__) ));
+    }
+    require DOC_ROOT . '/inc/functions.inc.php';  // spl_autoload_register() is contained in this file
+    require DOC_ROOT. '/inc/config.php'; // get config
+    include DOC_ROOT. '/inc/settings.php'; // get settings 
+    include DOC_ROOT.'/inc/functions.lin.php'; // linux os functions there will be a windoze version functions.win.php
+	require 'inc/xpaw/SourceQuery/bootstrap.php'; // load xpaw
 	use xPaw\SourceQuery\SourceQuery;
 	define( 'SQ_TIMEOUT',    3 );
 	define( 'SQ_ENGINE',      SourceQuery::SOURCE );
 	$xpaw = new SourceQuery( );
-$search_string = "<div class=\"playerAvatar profile_header_size";
-include "inc/functions.inc.php";
-//$page = file_get_contents("765.dta");
-$found = false;
-$framed = false;
-$ban_process = false;
-$in_game_process = false;
-if(isset($argv[1])) {
-	$id = $argv[1];
-}
-else {
-$id = $_GET['id'];
-}
-$url= "https://steamcommunity.com/profiles/$id";
-$page = file_get_contents($url);
-$tmp = array_filter(explode(PHP_EOL,$page));
-foreach ($tmp as $line) {
-	$work[] = trim($line);
-}
-foreach($work as $line) {
-	if (str_starts_with($line, $search_string)) {
-		preg_match('/<div class="playerAvatar profile_header_size (.*)" (.*)>/', $line, $output);
-		$state = trim($output[1]);
-		if($state == "offline") {$user_data['status'] = "offline";} else {$user_data['status'] ="online";}
-		$found = true;
-		continue;
+	$search_string = "<div class=\"playerAvatar profile_header_size";
+	$db_settings = $config['database']; // load default db connection settings
+	define('db', new db($db_settings)); 
+	//$page = file_get_contents("765.dta");
+	$found = false;
+	$framed = false;
+	$ban_process = false;
+	$in_game_process = false;
+	if(isset($argv[1])) {
+		$id = $argv[1];
 	}
-	if($found) {
-		if (str_starts_with($line,'<div class="profile_header_badgeinfo">')){
-			$found = false;
+	else {
+		$id = $_GET['id'];
+	}
+	$sql = "select * from steam_data where steam_id like '$id'";
+	$user = db->get_row($sql);
+	if (empty ($user)) {
+		 $insert = true;
+	}
+	else {
+		$where['steam_id'] = $user['steam_id'];
+		$insert = false;
+	}
+	
+	$url= "https://steamcommunity.com/profiles/$id";
+	$page = file_get_contents($url);
+	$tmp = array_filter(explode(PHP_EOL,$page));
+	foreach ($tmp as $line) {
+		$work[] = trim($line);
+	}
+	foreach($work as $line) {
+		if (str_starts_with($line, $search_string)) {
+			preg_match('/<div class="playerAvatar profile_header_size (.*)" (.*)>/', $line, $output);
+			$state = trim($output[1]);
+			if($state == "offline") {$user_data['status'] = "offline";} else {$user_data['status'] ="online";}
+			$found = true;
 			continue;
 		}
-		if (str_starts_with($line,'<div class="profile_avatar_frame')) {
-			$framed =true;
-		}
-		if ($framed) {
-			if (str_starts_with($line,'</div>')){
-				$framed = false;
+		if($found) {
+			if (str_starts_with($line,'<div class="profile_header_badgeinfo">')){
+				$found = false;
 				continue;
 			}
-			if(strpos($line,"img src")) {
-				$x = str_replace('<img src="','',$line);
-				$x = str_replace('">','',$x);
-				$user_data['frame'] = $x;
+			if (str_starts_with($line,'<div class="profile_avatar_frame')) {
+				$framed =true;
 			}
-		}
-		else {
-			if(strpos($line,"img src")) {
-				$x = str_replace('<img src="','',$line);
-				$x = str_replace('">','',$x);
-				$user_data['avatar'] = $x;
+			if ($framed) {
+				if (str_starts_with($line,'</div>')){
+					$framed = false;
+					continue;
+				}
+				if(strpos($line,"img src")) {
+					$x = str_replace('<img src="','',$line);
+					$x = str_replace('">','',$x);
+					$user_data['frame'] = $x;
+				}
 			}
+			else {
+				if(strpos($line,"img src")) {
+					$x = str_replace('<img src="','',$line);
+					$x = str_replace('">','',$x);
+					$user_data['avatar'] = $x;
+				}
 			
+			}
+		}  
+		$years = strpos($line,'Member since');
+		if ($years !== false) {
+			$steam_date = substr($line,$years);
+			$steam_date = str_replace('." >','',$steam_date);
+			$steam_date = str_replace('.">','',$steam_date);
+			$steam_date = str_replace('Member since ','',$steam_date);
+			$user_data['steam_date'] = $steam_date;
 		}
-	}  
-	$years = strpos($line,'Member since');
-	if ($years !== false) {
-		$steam_date = substr($line,$years);
-		$steam_date = str_replace('." >','',$steam_date);
-		$steam_date = str_replace('.">','',$steam_date);
-		$steam_date = str_replace('Member since ','',$steam_date);
-		$user_data['steam_date'] = $steam_date;
-	}
-	$level = strpos($line,'<span class="friendPlayerLevelNum"');
-	if($level !==false) {
-		if(!str_ends_with($line,"</div></div>")) { continue;}
-		$steam_level =substr($line,$level);
-		$steam_level = str_replace('<span class="friendPlayerLevelNum">','',$steam_level);
-		$steam_level = str_replace('</span></div></div>','',$steam_level);
-		$user_data['steam_level'] = intval($steam_level);
-	}
-	$xp = strpos($line,'<div class="xp">');
+		$level = strpos($line,'<span class="friendPlayerLevelNum"');
+		if($level !==false) {
+			if(!str_ends_with($line,"</div></div>")) { continue;}
+			$steam_level =substr($line,$level);
+			$steam_level = str_replace('<span class="friendPlayerLevelNum">','',$steam_level);
+			$steam_level = str_replace('</span></div></div>','',$steam_level);
+			$user_data['steam_level'] = intval($steam_level);
+		}
+		$xp = strpos($line,'<div class="xp">');
 		if($xp !== false) {
 			$steam_xp = str_replace('<div class="xp">','',$line);
 			$steam_xp = str_replace('</div>','',$steam_xp);
@@ -156,27 +175,40 @@ foreach($work as $line) {
 				
 		}
 	
-}
-echo json_encode($user_data).PHP_EOL;
-//shell_exec("find /tmp -size 300c -exec rm -v {} \; "); // tidy up curl
-//shell_exec("find /tmp -size 136c -exec rm -v {} \; "); // tidy up curl
-//shell_exec("rm /tmp/FOO*");
-function str2int($string) {
-  $length = strlen($string);   
-  for ($i = 0, $int = ''; $i < $length; $i++) {
-    if (is_numeric($string[$i]))
-        $int .= $string[$i];
-     else break;
-  }
-
-  return (int) $int;
-}
-function days_convert($sum) {
-    $years = floor($sum / 365);
-    $months = floor(($sum - ($years * 365))/30.5);
-    $days = ($sum - ($years * 365) - ($months * 30.5));
-    if ($years >1) {$years .=" years";} else {$years .=" year";}  
-    if ($months >1) {$months .=" months";} else {$months .=" month";}
-    if ($days >1) {$days .=" days";} else {$days .=" day";}
-    return "$years $months $days";
-}
+	}
+	if ($insert) {
+		//echo "insert data".PHP_EOL;
+		$user_insert['steam_id'] = $id;
+		$user_insert['avatar'] = $user_data['avatar'];
+		$in = db->insert('steam_data',$user_insert); // now add it
+	}
+	else {
+		//echo "update data".PHP_EOL;
+		$user_update['last_update'] = time();
+		if(isset($user_data['frame'])) {$user_update['avatar_frame'] = $user_data['frame'];}
+		if(isset($user_data['steam_ban'])) {$user_update['vac_ban'] = $ts;}
+		db->update('steam_data',$user_update,$where); 
+	}
+	echo json_encode($user_data);
+	
+	/*  Functions  */
+		
+	function str2int($string) {
+		$length = strlen($string);   
+		for ($i = 0, $int = ''; $i < $length; $i++) {
+			if (is_numeric($string[$i])){
+				$int .= $string[$i];
+			}
+			else {break;}
+		}
+		return (int) $int;
+	}
+	function days_convert($sum) {
+		$years = floor($sum / 365);
+		$months = floor(($sum - ($years * 365))/30.5);
+		$days = ($sum - ($years * 365) - ($months * 30.5));
+		if ($years >1) {$years .=" years";} else {$years .=" year";}  
+		if ($months >1) {$months .=" months";} else {$months .=" month";}
+		if ($days >1) {$days .=" days";} else {$days .=" day";}
+		return "$years $months $days";
+	}
