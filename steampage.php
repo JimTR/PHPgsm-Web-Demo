@@ -180,6 +180,7 @@
 		//echo "insert data".PHP_EOL;
 		$user_insert['steam_id'] = $id;
 		$user_insert['avatar'] = $user_data['avatar'];
+		$user_insert['last_update'] = time();
 		$in = db->insert('steam_data',$user_insert); // now add it
 	}
 	else {
