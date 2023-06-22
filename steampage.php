@@ -35,7 +35,9 @@
 		$where['steam_id'] = $user['steam_id'];
 		$insert = false;
 	}
-	if ($user['last_update'] < time() -  86400) {$full_scan = true;} else{$full_scan = false;}
+	if(!$insert) {
+		if ($user['last_update'] < time() -  86400) {$full_scan = true;} else{$full_scan = false;}
+	}
 	$url= "https://steamcommunity.com/profiles/$id";
 	$page = file_get_contents($url);
 	$tmp = array_filter(explode(PHP_EOL,$page));
