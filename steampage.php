@@ -181,13 +181,14 @@
 		}
 	
 	}
-	$steam_date = str_replace(",","",$steam_date); // make sure the date is right
+	//$steam_date = str_replace(",","",$steam_date); // make sure the date is right
 	if ($insert) {
 		//echo "insert data".PHP_EOL;
 		$user_insert['steam_id'] = $id;
 		$user_insert['avatar'] = $user_data['avatar'];
 		$user_insert['last_update'] = time();
-		if (!isset($user_insert['steam_date'])) {$steam_date  = 0;} 
+		if (!isset($user_data['steam_date'])) {$steam_date  = 0;}
+		else { $steam_date = str_replace(",","",$steam_date); }
 		$user_insert['steam_date'] = strtotime($steam_date);
 		if(isset($user_data['steam_ban'])) {$user_insert['vac_ban'] = $user_data['steam_ban'];}
 		$in = db->insert('steam_data',$user_insert); // now add it
@@ -197,7 +198,8 @@
 		$user_update['last_update'] = time();
 		if(isset($user_data['frame'])) {$user_update['avatar_frame'] = $user_data['frame'];}
 		if(isset($user_data['steam_ban'])) {$user_update['vac_ban'] = $user_data['steam_ban'];}
-		if(isset($steam_date)) {$user_update['steam_date'] = strtotime($steam_date);}
+		if (!isset($user_data['steam_date'])) {$steam_date  = 0;}
+		else { $steam_date = str_replace(",","",$steam_date); }
 		db->update('steam_data',$user_update,$where); 
 	}
 	echo json_encode($user_data);
