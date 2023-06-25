@@ -98,5 +98,5 @@
   margin: auto;
   max-width: 83%;  
   max-height:none;
-  width: fit-content;
+ /* width: fit-content;*/
  }
