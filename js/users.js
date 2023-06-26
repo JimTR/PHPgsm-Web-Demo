@@ -288,8 +288,8 @@ function get_steam_data(user_id) {
 			if (data.steam_date !== undefined) {
 				$('#dta').append('<tr><td>Steam Member Since</td><td>'+data.steam_date+'</td></tr>');
 			}
-			if (data.steam_ban !== undefined) {
-				$('#dta').append('<tr><td>Steam Bans</td><td style="color:red;">'+data.steam_ban+'</td></tr>');
+			if (data.ban_desc !== undefined) {
+				$('#dta').append('<tr><td>Steam Bans</td><td style="color:red;">'+data.ban_desc+'</td></tr>');
 			}
 			if (data.steam_level !== undefined) {
 				level = data.steam_level;
