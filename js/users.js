@@ -186,7 +186,8 @@ function displayData(userID) {
 				$('#dta').append("<tr><td>Latest Log on</td><td>"+last_log_on+"</td></tr>");
 				//aka =JSON.parse('"'+gen_data.aka+'"');
 				aka = gen_data.aka;
-				aka.replace(/\\/g, '');
+				aka.replace(/\\g, '');
+				//'some+multi+word+string'.replace(/\+/g, ' ');
 				if (aka != null){
 					aka = aka.replace(/,\s*$/, "");
 					$('#dta').append("<tr><td style='vertical-align:middle;'>Played as</td><td>"+aka+"</td></tr>");
