@@ -270,16 +270,17 @@ function displayData(userID) {
 }
 
 function get_steam_data(user_id) {
-	 var url = "steampage.php?id="+user_id;
+	 var url = "plugins/steam_data.php?id="+user_id;
+	 console.log("into steam data with "+url);
 	 $.ajax({
 		type: 'GET',
 		url: url,
 		dataType: "json",
 		success:function(data){
 			console.log(data);
-			if (data.frame !== undefined) {
+			if (data.avatar_frame !== undefined) {
 				console.log("framed image");
-				$("#user-frame").attr("src",data.frame);
+				$("#user-frame").attr("src",data.avatar_frame);
 				$("#user-frame").show();
 			}
 			$("#user-avatar").attr("src",data.avatar);	

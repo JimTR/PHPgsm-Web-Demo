@@ -92,7 +92,10 @@ switch ($module) {
 			$playerN2 = $player['name_c'];
 			$player['last_log_on'] = time2str($player['last_log_on']);
 			if ($player['last_log_on'] == "1 weeks ago") {$player['last_log_on'] = 'a week ago';}
-			$v1 = shell_exec("php steampage.php {$player['steam_id64']}");
+			$ds = DOC_ROOT;
+			//echo "php $ds/plugins/steam_data.php {$player['steam_id64']}";
+			//die();
+			$v1 = shell_exec("php $ds/plugins/steam_data.php {$player['steam_id64']}");
 			$steam_info =json_decode($v1,true);
 			$steam_info['name'] = $playerN2;
 			if ($player['first_log_on'] >0 ) {$player['first_log_on'] = time2str($player['first_log_on']);	}
