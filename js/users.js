@@ -184,8 +184,8 @@ function displayData(userID) {
 				$('#dta').append("<tr><td>Last Known IP</td><td>"+gen_data.real_ip+"</td></tr>");
 				$('#dta').append("<tr><td>First Log on</td><td>"+first_log_on+"</td></tr>");
 				$('#dta').append("<tr><td>Latest Log on</td><td>"+last_log_on+"</td></tr>");
-				aka =JSON.parse('"'+gen_data.aka+'"');
-				//aka = gen_data.aka;
+				//aka =JSON.parse('"'+gen_data.aka+'"');
+				aka = gen_data.aka;
 				if (aka != null){
 					aka = aka.replace(/,\s*$/, "");
 					$('#dta').append("<tr><td style='vertical-align:middle;'>Played as</td><td>"+aka+"</td></tr>");
