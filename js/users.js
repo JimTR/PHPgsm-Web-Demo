@@ -298,8 +298,8 @@ function get_steam_data(user_id) {
 				}
 				$('#dta').append('<tr><td>Steam Level</td><td>'+level+'</td></tr>');
 			}
-			if(data.in_game !== undefined) {
-				in_game = data.in_game;
+			if(data.game !== undefined) {
+				in_game = data.game;
 				if(data.current_host !== undefined) {
 					in_game += ' - '+data.current_host;
 				}
