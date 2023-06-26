@@ -89,7 +89,10 @@
 			echo json_encode($new_data);
 		} 
 		else{ 
-			if ($user['onlineState'] == 'in-game') {$user_data['game'] = $user['stateMessage'];}
+			if ($user['onlineState'] == 'in-game') {
+				$user_data['game'] = $user['stateMessage'];
+				$user_data['status'] ="In Game";
+			}
 			else {$user_data['status'] = $user['stateMessage'];}
 			if ($user['onlineState'] == 'in-game') {$user_data['game'] = $user['stateMessage'];}
 			if (isset($server_name ) and $server_name !== false) {$user_data['game'] .=" $server_name"; }
