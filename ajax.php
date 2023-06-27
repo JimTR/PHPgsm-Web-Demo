@@ -123,7 +123,7 @@ switch ($module) {
 		//$page['player_total'] = $stats[0]['player_count'];
 		$qstat['total_time'] = convertSecToTime($stats[0]['total_time']);
 		
-		$sql = "SELECT country,count(*) as player_count,sum(log_ons) as login_count, sum(time_on_line) as time  from players";
+		$sql = $sql = "SELECT country,count(*) as player_count,sum(log_ons) as login_count, sum(time_on_line) as time  from players group by `country` order by time DESC;";
 		$bc = $database->get_results($sql);
 		//print_r($bc);
 		//die();
