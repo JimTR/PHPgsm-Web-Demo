@@ -97,6 +97,7 @@ switch ($module) {
 			//die();
 			$v1 = shell_exec("php $ds/plugins/steam_data.php {$player['steam_id64']}");
 			$steam_info =json_decode($v1,true);
+			
 			$steam_info['name'] = $playerN2;
 			if ($player['first_log_on'] >0 ) {$player['first_log_on'] = time2str($player['first_log_on']);	}
 			else {$player['first_log_on'] = 'N/A';}
@@ -114,20 +115,30 @@ switch ($module) {
 			$i++;
 		}
 		//printr($steam_info);
-		//printr($player_info);
+		//die();
 		$sql = "SELECT count(*) as player_count,sum(log_ons) as login_count, sum(time_on_line) as total_time  from players"; //get player count & time on line
+		
 		$stats = $database->get_results($sql);
+		
 		//$page['player_total'] = $stats[0]['player_count'];
 		$qstat['total_time'] = convertSecToTime($stats[0]['total_time']);
-		$sql = "SELECT country,sum(time_on_line) as time FROM `players` group by country order by time desc limit 1";
+		
+		$sql = "SELECT count(*) as player_count,sum(log_ons) as login_count, sum(time_on_line) as total_time  from players";
 		$bc = $database->get_results($sql);
+		//print_r($bc);
 		$qstat['pop_country'] = $bc[0]['country'];
 		$qstat['pop_time'] = convertSecToTime($bc[0]['time']);
+		//die(print_r($qstat));
 		$sql = "SELECT servers.server_name,player_history.`game`,sum(player_history.`game_time`) as full_time FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.game ORDER BY `full_time` DESC limit 10";
 		$stats = $database->get_results($sql);
-		$qstat['most_played_time'] =convertSecToTime($stats[0]['full_time']);
+				$qstat['most_played_time'] =convertSecToTime($stats[0]['full_time']);
+		//echo 'full stats'.$stats[0]['full_time'].'<br>';
+		
 		$qstat['most_played'] = $stats[0]['server_name'];
+		//die(print_r($qstat));
 		$qstat['player_info'] = $player_info;
+		
+		
 		echo json_encode($qstat);
 		break;
 		
@@ -197,6 +208,7 @@ function convertSecToTime($sec){
 	$return.= "$mi:";
 	$return .= "$s";	
 	//return $interval->format('%y y %m mo %d d, %h h %i m %s s'); // convert into Years, Months, Days, Hours, Minutes and Seconds
+	//die($return);
 	return $return;
 }
 ?>

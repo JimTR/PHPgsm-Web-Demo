@@ -21,8 +21,15 @@
 	
 	$db_settings = $config['database']; // load default db connection settings
 	define('db', new db($db_settings)); 
-	$sql = "select * from steam_data where steam_id like '$id'";
+	//$sql = "select * from steam_data where steam_id like '$id'";
+	$sql = "SELECT players.name_c,players.aka,steam_data.* FROM `steam_data` left join players on steam_data.steam_id = players.steam_id64 WHERE `steam_id` like '$id';";
 	$user_data = db->get_row($sql);
+	/*if(is_null($user_data['name_c'])) {
+		die ("critical error user not found in the data table");
+		print_r($user_data);
+	}*/
+	//print_r($user_data);
+	//die();
 	if (empty ($user_data)) {$insert = true;} else {$insert = false;}
 	$xml=file_get_contents("https://steamcommunity.com/profiles/$id?xml=1");
 	$xml   = simplexml_load_string($xml,"SimpleXMLElement", LIBXML_NOCDATA);
@@ -33,6 +40,8 @@
 			unset($user[$k]);
 		}
 	}
+	//print_r($user);
+	//die();
 	if (isset($user['memberSince'])) {
 		$user['adjust'] = strtotime(str_replace(",","",$user['memberSince']));
 	}
@@ -73,19 +82,16 @@
 			$where['steam_id'] = $user_data['steam_id'];
 			unset($new_data['steam_id']);
 			unset($new_data['name_c']);
-			$new_data['steam_date'] = date("d M, Y",$new_data['steam_date']);
 			db->update('steam_data',$new_data,$where); 
 			
 			if ($user['onlineState'] == 'in-game') {$new_data['game'] = $user['stateMessage'];}
 			else {$new_data['status'] = $user['stateMessage'];}
 			if (isset($server_name ) and $server_name !== false) {$new_data['game'] .=" $server_name"; }
-			if ( $user_data['steam_date'] >0 ) {
-				echo $user_data['steam_date'];
-				$user_data['steam_date'] = date("d M, Y",$user_data['steam_date']);
+			if ($user['onlineState'] == 'in-game') {
+				$new_data['game'] = $user['stateMessage'];
+				$new_data['status'] ="In Game";
 			}
-			else {
-				unset($user_data['steam_date']);
-			}	
+			else {$new_data['status'] = $user['stateMessage'];}
 			echo json_encode($new_data);
 		} 
 		else{ 
