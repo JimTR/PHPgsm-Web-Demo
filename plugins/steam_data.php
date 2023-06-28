@@ -117,12 +117,7 @@
 				unset($user_data['steam_date']);
 			}
 			
-			if ($user['onlineState'] == 'in-game') {
-				$new_data['game'] = $user['stateMessage'];
-				$new_data['status'] ="In Game";
-				if (isset($server_name ) and $server_name !== false) {$new_data['game'] .=" $server_name"; }
-			}
-			else {$new_data['status'] = $user['stateMessage'];}
+			
 			//print_r($user_data);	
 			echo json_encode($user_data);
 			exit;
@@ -155,6 +150,12 @@
 			else {
 				unset($new_data['steam_date']);
 			}	
+			if ($user['onlineState'] == 'in-game') {
+				$new_data['game'] = $user['stateMessage'];
+				$new_data['status'] ="In Game";
+				if (isset($server_name ) and $server_name !== false) {$new_data['game'] .=" $server_name"; }
+			}
+			else {$new_data['status'] = $user['stateMessage'];}
 		echo json_encode($new_data);
 	}
 	//if ($user['vacBanned']==1) {echo "naughty {$user['steamID']} you have a vac ban \r\n";}
