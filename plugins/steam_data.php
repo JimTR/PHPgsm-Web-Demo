@@ -116,6 +116,13 @@
 			else {
 				unset($user_data['steam_date']);
 			}
+			
+			if ($user['onlineState'] == 'in-game') {
+				$new_data['game'] = $user['stateMessage'];
+				$new_data['status'] ="In Game";
+				if (isset($server_name ) and $server_name !== false) {$new_data['game'] .=" $server_name"; }
+			}
+			else {$new_data['status'] = $user['stateMessage'];}
 			//print_r($user_data);	
 			echo json_encode($user_data);
 			exit;
@@ -140,6 +147,7 @@
 		$in = db->insert('steam_data',$new_data); // now add it
 		if ($user['onlineState'] == 'in-game') {$new_data['game'] = $user['stateMessage'];}
 		else {$new_data['status'] = $user['stateMessage'];}
+		
 		if ( $new_data['steam_date'] >0 ) {
 				//echo $user_data['steam_date'];
 				$new_data['steam_date'] = date("d M, Y",$new_data['steam_date']);
