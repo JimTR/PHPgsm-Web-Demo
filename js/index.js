@@ -92,7 +92,7 @@ function online(url){
 					//console.log(cpu);
 					title = '';
 					if(cpu.reboot  == "Yes") { 
-						title += "Warning - this server\'s parent needs rebooting";
+						title += "Warning - parent needs rebooting";
 						cpu.reboot = "<img src ='img/offline.png' title='"+title+"'></img>";
 						
 					}
