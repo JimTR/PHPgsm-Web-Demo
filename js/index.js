@@ -10,7 +10,7 @@ function index() {
         success: function (data1) {
 			// got data
 			//alert(data1);
-			console.log(data1.player_tot);
+			console.log(data1);
 			$('#player_tot').text(data1.player_tot);
 			$('#logins_tot').text(data1.tot_logins);
 			$('#game_tot').text(data1.game_tot);
@@ -92,7 +92,7 @@ function online(url){
 					//console.log(cpu);
 					title = '';
 					if(cpu.reboot  == "Yes") { 
-						title += "Warning - this server's parent needs rebooting";
+						title += "Warning - this server\'s parent needs rebooting";
 						cpu.reboot = "<img src ='img/offline.png' title='"+title+"'></img>";
 						
 					}
