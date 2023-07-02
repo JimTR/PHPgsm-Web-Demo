@@ -58,6 +58,12 @@ $sql = "SELECT servers.server_name,player_history.`game`,sum(player_history.`gam
 $stats = $database->get_results($sql);
 $page['most_played_time'] =convertSecToTime($stats[0]['full_time']);
 $page['most_played'] = $stats[0]['server_name'];
+$page['game_list'] ='';
+foreach ($stats as $stat) {
+	if ($stat['full_time'] == 0) {continue;}
+	$used_time = convertSecToTime($stat['full_time']);
+	$page['game_list'] .= "<tr><td>{$stat['server_name']}</td><td>$used_time</td></tr>";
+}
 $sql = "SELECT COUNT(*) AS total, ( SELECT COUNT(*) FROM sb_comms WHERE `RemovedOn` IS NULL ) AS live, ( SELECT COUNT(*) FROM sb_bans ) AS game_total, (select count(*) as game_live from sb_bans where RemovedOn is null) as game_live FROM `sb_comms`";
 $comms = db2->get_results($sql);
 $sql = "SELECT * FROM players INNER JOIN( SELECT ip FROM players GROUP BY ip HAVING COUNT(ip) > 1 order by ip) temp ON players.ip = temp.ip ORDER BY `players`.`ip` ASC"; // get dups
