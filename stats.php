@@ -104,7 +104,7 @@ $page['game_live'] = $comms[0]['game_live'];
 $page['game_total'] = $comms[0]['game_total'];
 $page['vac_bans'] = '';
 //$sql = "select * from steam_data where vac_ban like '1'";
-$sql = "SELECT players.name_c,players.aka,players.last_log_on,steam_data.* FROM `steam_data` left join players on steam_data.steam_id = players.steam_id64 WHERE `vac_ban` like '1';";
+$sql = "SELECT players.name_c,players.aka,players.last_log_on,steam_data.* FROM `steam_data` left join players on steam_data.steam_id = players.steam_id64 WHERE steam_data.vac_ban like '1';";
 $vac_bans = $database->get_results($sql);
 foreach ($vac_bans as $vac_ban) {
 	// who has a vac ban
