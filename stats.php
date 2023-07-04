@@ -102,6 +102,16 @@ $page['comms_total'] = $comms[0]['total'];
 $page['comms_live'] = $comms[0]['live'];
 $page['game_live'] = $comms[0]['game_live'];
 $page['game_total'] = $comms[0]['game_total'];
+$page['vac_bans'] = '';
+//$sql = "select * from steam_data where vac_ban like '1'";
+$sql = "SELECT players.name_c,players.aka,players.last_log_on,steam_data.* FROM `steam_data` left join players on steam_data.steam_id = players.steam_id64 WHERE `vac_ban` like '1';";
+$vac_bans = $database->get_results($sql);
+foreach ($vac_bans as $vac_ban) {
+	// who has a vac ban
+	$last_ban = date("d-m-Y",$vac_ban['last_ban']);
+	$last_logon = date("d-m-Y",$vac_ban['last_log_on']);
+	$page['vac_bans'] .= "<tr><td>{$vac_ban['name_c']}</td><td>$last_ban</td><td>$last_logon</td></tr>";
+}
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
 $template->replace_vars($header_vars);
