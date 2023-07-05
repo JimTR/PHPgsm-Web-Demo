@@ -115,6 +115,37 @@ foreach ($vac_bans as $vac_ban) {
 	$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['name_c']}</a>";
 	$page['vac_bans'] .= "<tr><td>$player_link</td><td>$last_ban</td><td>$last_logon</td></tr>";
 }
+$sql = "select * from server1 order by `host_name` ASC";
+$servers = $database->get_results($sql);
+$ips = array();
+$bl =array();
+foreach ($servers as $server) {
+	// get system bans
+	
+	$ban_location = "{$server['location']}/{$server['game']}/cfg/banned_ip.cfg";
+	if(in_array($ban_location,$bl)) {continue;}
+	
+	$system_bans = explode(PHP_EOL,trim(file_get_contents($ban_location)));
+	
+	foreach ($system_bans as $system_ban) {
+		// split this up
+		$tmp = explode(" ",$system_ban);
+		if(!isset($tmp[1])) { continue;}
+		unset($tmp[0]);
+		$unit['ip' ] = $tmp[2];
+		$unit['ipl' ] = ip2long(trim($tmp[2]));
+		$unit['time'] = $tmp[1];
+		$game = $server['game'];
+		$x[$game][] =$unit;
+	}
+	$bl[] =$ban_location;
+	
+		
+}
+//printr($x);
+//echo "<br>".count($x)."<br>";
+//echo print_r($bl,true)."<br>";
+//die("done");
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
 $template->replace_vars($header_vars);
