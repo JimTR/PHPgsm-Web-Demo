@@ -219,7 +219,7 @@ function get_steamPage($id) {
 					$user_data['ban_ts'] = strtotime($date_last_banned);
 				}
 				else {
-					$user_data['steam_ban'] .="This Player \'s last ban was over 7 years ago";
+					$user_data['steam_ban'] .="Last ban was over 7 years ago";
 				} 
 			}
 			else{
