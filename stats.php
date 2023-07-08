@@ -197,7 +197,7 @@ $system_ips = db->get_results($sql);
 printr($system_ips);
 echo "<br>count of x ".count($x)."<br>";
 foreach ($system_ips as $system_ip) {
-	$x[$system_ip]['test'] = "hello";
+	//$x[$system_ip]['test'] = "hello";
 }
 printr($x);
 die("done");
