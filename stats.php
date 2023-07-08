@@ -66,6 +66,52 @@ foreach ($stats as $stat) {
 }
 $sql = "SELECT COUNT(*) AS total, ( SELECT COUNT(*) FROM sb_comms WHERE `RemovedOn` IS NULL ) AS live, ( SELECT COUNT(*) FROM sb_bans ) AS game_total, (select count(*) as game_live from sb_bans where RemovedOn is null) as game_live FROM `sb_comms`";
 $comms = db2->get_results($sql);
+
+$sql = "select * from sb_bans where RemovedON is null order by created DESC";
+$sb_bans = db2->get_results($sql);
+$lookfor = '';
+$page['sb_count'] =count($sb_bans);
+foreach ($sb_bans as $sb_ban) {
+	$ip = ip2long($sb_ban['ip']);
+	$created = date("d-m-Y",$sb_ban['created']);
+	$ends = date("d-m-Y",$sb_ban['ends']);
+	if(!empty($sb_ban['authid'])) {
+		$steam_id = new SteamID($sb_ban['authid']);
+		$id64 = $steam_id->ConvertToUInt64();
+		$lookfor .= "or steam_id64 like '$id64' ";
+	}
+	//echo "$ip - $id64 - {$sb_ban['name']} - $created<br>";
+	//$bans[]['ip'] = $ip;
+	//$bans[]['steam_id'] = $id64;
+	$newdata =  array (
+      'ip' => $ip,
+      'steam_id' => $id64,
+      'name' => $sb_ban['name'],
+      'reason' => $sb_ban['reason'],
+      'created' => $created,
+      'ends'=> $ends
+      
+    );
+	$bans[] = $newdata;	
+}
+$sql = "select * from players where ".substr($lookfor,2);
+//echo "$sql<br>";
+$db_users = $database->get_results($sql);
+//echo "found in user data base ".count($db_users).'<br>';
+//printr($db_users);
+foreach($db_users as $db_user) {
+	$id = $db_user['steam_id64'];
+	$key = array_search($id, array_column($bans, 'steam_id'));
+	//echo "key is $key<br>";
+	$bans[$key]['last_log_on'] = date("d-m-Y",$db_user['last_log_on']);
+	$bans[$key]['name'] = "<a href='users.php?id=$id'>{$db_user['name_c']}</a>";
+	$bans[$key]['server'] = $db_user['server'];
+}
+$line ='';
+foreach ($bans as $ban) {
+	$line .= "<tr><td>{$ban['name']}</td><td>{$ban['created']}</td><td>{$ban['last_log_on']}</td></tr>";
+}
+$page['sb_bans'] = $line;
 $sql = "SELECT * FROM players INNER JOIN( SELECT ip FROM players GROUP BY ip HAVING COUNT(ip) > 1 order by ip) temp ON players.ip = temp.ip ORDER BY `players`.`ip` ASC"; // get dups
 $dups = $database->get_results($sql);
 $i=0;
