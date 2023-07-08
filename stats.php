@@ -201,7 +201,7 @@ foreach ($system_ips as $system_ip) {
 	$ips = $system_ip['ip'];
 	$x[$ips]['name'] = $system_ip['name_c'];
 	$x[$ips]['steam_id'] = $system_ip['steam_id64'];
-	$x['$ips']['last_log_on'] = $system_ip['last_log_on'];
+	$x[$ips]['last_log_on'] = $system_ip['last_log_on'];
 }
 //printr($x);
 //die("done");
