@@ -201,9 +201,23 @@ foreach ($system_ips as $system_ip) {
 	$ips = $system_ip['ip'];
 	$x[$ips]['name'] = $system_ip['name_c'];
 	$x[$ips]['steam_id'] = $system_ip['steam_id64'];
+	$x['$ips']['last_log_on'] = $system_ip['last_log_on'];
 }
-printr($x);
-die("done");
+//printr($x);
+//die("done");
+$line='';
+foreach ($x as $y) {
+	if(isset($y['name'])) {
+		$name = $y['name'];
+		$logon = $y['last_log_on'];
+	}
+	else {
+		$name = "N/A";
+		$logon = "N/A";
+	}
+	$line .= "<tr><td>{$y['ip']}</td><td>$name</td><td>$logon</td></tr>";
+}
+$page['sys_bans'] = $line;
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
 $template->replace_vars($header_vars);
