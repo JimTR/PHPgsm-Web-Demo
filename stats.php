@@ -195,8 +195,8 @@ foreach ($servers as $server) {
 $sql = "select * from players where ".substr($lookfor,2);
 //echo "$sql<br>";
 $system_ips = db->get_results($sql);
-printr($system_ips);
-echo "<br>count of x ".count($x)."<br>";
+//printr($system_ips);
+//echo "<br>count of x ".count($x)."<br>";
 foreach ($system_ips as $system_ip) {
 	$ips = $system_ip['ip'];
 	$x[$ips]['name'] = $system_ip['name_c'];
