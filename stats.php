@@ -218,7 +218,7 @@ foreach ($x as $y) {
 		$name = "N/A";
 		$logon = "N/A";
 	}
-	$line .= "<tr><td>{$y['ip']}</td><td>$name</td><td>$logon</td></tr>";
+	$line .= "<tr><td>{$y['ip']}</td><td style='text-align:center;'>$name</td><td>$logon</td></tr>";
 }
 $page['sys_bans'] = $line;
 $template = new template;
