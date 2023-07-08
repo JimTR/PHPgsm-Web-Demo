@@ -193,15 +193,15 @@ foreach ($servers as $server) {
 	
 		
 }
-printr($x);
-printr($bl);
+//printr($x);
+//printr($bl);
 //die();
 $sql = "select * from players where ".substr($lookfor,2);
 //echo "$sql<br>";
 $system_ips = db->get_results($sql);
 //printr($system_ips);
-echo "<br>count of x ".count($x['ip'])."<br>";
-echo "<br>count of systemips ".count($system_ips)."<br>";
+//echo "<br>count of x ".count($x['ip'])."<br>";
+//echo "<br>count of systemips ".count($system_ips)."<br>";
 foreach ($system_ips as $system_ip) {
 	$ips = $system_ip['ip'];
 	$x['ip'][$ips]['name'] = $system_ip['name_c'];
@@ -225,8 +225,8 @@ foreach ($x['ip'] as $y) {
 	}
 	$line .= "<tr><td>{$y['ip']}</td><td style='text-align:center;'>$name</td><td>$logon</td></tr>";
 }
-echo "<table>$line</table>";
-die();
+//echo "<table>$line</table>";
+//die();
 $page['sys_bans'] = $line;
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
