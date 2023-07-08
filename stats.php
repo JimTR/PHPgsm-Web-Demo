@@ -183,18 +183,20 @@ foreach ($servers as $server) {
 		$unit['ipl' ] = ip2long(trim($tmp[2]));
 		$unit['time'] = $tmp[1];
 		$game = $server['game'];
-		$x[$game][] =$unit;
+		$x[$game][$unit['ipl']] =$unit;
 		$lookfor .= "or ip = {$unit['ipl']} ";
 	}
 	$bl[] =$ban_location;
 	
 		
 }
-//printr($x);
+printr($x);
 $sql = "select * from players where ".substr($lookfor,2);
-echo "$sql<br>";
+//echo "$sql<br>";
+$system_ips = db->get_results($sql);
+printr($system_ips);
 echo "<br>".count($x)."<br>";
-echo print_r($bl,true)."<br>";
+//echo print_r($bl,true)."<br>";
 die("done");
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
