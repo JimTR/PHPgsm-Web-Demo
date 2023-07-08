@@ -169,12 +169,12 @@ $lookfor = '';
 foreach ($servers as $server) {
 	// get system bans
 	
-	$ban_location = "{$server['location']}/{$server['game']}/cfg/banned_ip.cfg";
-	if(in_array($ban_location,$bl)) {continue;}
-	
-	$system_bans = explode(PHP_EOL,trim(file_get_contents($ban_location)));
-	
-	foreach ($system_bans as $system_ban) {
+	$ip_ban_location = "{$server['location']}/{$server['game']}/cfg/banned_ip.cfg";
+	$id_ban_location = "{$server['location']}/{$server['game']}/cfg/banned_user.cfg";
+	if(in_array($ip_ban_location,$bl) or in_array($id_ban_location,$bl )) {continue;}
+	$ip_system_bans = explode(PHP_EOL,trim(file_get_contents($ip_ban_location)));
+	$id_system_bans = explode(PHP_EOL,trim(file_get_contents($id_ban_location)));
+	foreach ($ip_system_bans as $system_ban) {
 		// split this up
 		$tmp = explode(" ",$system_ban);
 		if(!isset($tmp[1])) { continue;}
@@ -184,29 +184,34 @@ foreach ($servers as $server) {
 		$unit['time'] = $tmp[1];
 		$game = $server['game'];
 		
-		$x[$unit['ipl']] =$unit;
+		$x['ip'][$unit['ipl']] =$unit;
 		$lookfor .= "or ip = {$unit['ipl']} ";
 	}
-	$bl[] =$ban_location;
+	
+	$bl[] =$ip_ban_location;
+	$bl[] =$id_ban_location;
 	
 		
 }
-//printr($x);
+printr($x);
+printr($bl);
+//die();
 $sql = "select * from players where ".substr($lookfor,2);
 //echo "$sql<br>";
 $system_ips = db->get_results($sql);
 //printr($system_ips);
-//echo "<br>count of x ".count($x)."<br>";
+echo "<br>count of x ".count($x['ip'])."<br>";
+echo "<br>count of systemips ".count($system_ips)."<br>";
 foreach ($system_ips as $system_ip) {
 	$ips = $system_ip['ip'];
-	$x[$ips]['name'] = $system_ip['name_c'];
-	$x[$ips]['steam_id'] = $system_ip['steam_id64'];
-	$x[$ips]['last_log_on'] = date("d-m-Y",$system_ip['last_log_on']);
+	$x['ip'][$ips]['name'] = $system_ip['name_c'];
+	$x['ip'][$ips]['steam_id'] = $system_ip['steam_id64'];
+	$x['ip'][$ips]['last_log_on'] = date("d-m-Y",$system_ip['last_log_on']);
 }
 //printr($x);
 //die("done");
 $line='';
-foreach ($x as $y) {
+foreach ($x['ip'] as $y) {
 	if(empty($y['ip'])){continue;} 
 	if(isset($y['name'])) {
 		$name = $y['name'];
@@ -220,6 +225,8 @@ foreach ($x as $y) {
 	}
 	$line .= "<tr><td>{$y['ip']}</td><td style='text-align:center;'>$name</td><td>$logon</td></tr>";
 }
+echo "<table>$line</table>";
+die();
 $page['sys_bans'] = $line;
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
