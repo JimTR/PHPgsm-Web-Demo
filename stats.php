@@ -199,7 +199,8 @@ printr($system_ips);
 echo "<br>count of x ".count($x)."<br>";
 foreach ($system_ips as $system_ip) {
 	$ips = $system_ip['ip'];
-	$x[$ips]['test'] = "hello";
+	$x[$ips]['name'] = $system_ip['name_c'];
+	$x[$ips]['steam_id'] = $system_ip['steam_id64'];
 }
 printr($x);
 die("done");
