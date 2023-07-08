@@ -190,13 +190,16 @@ foreach ($servers as $server) {
 	
 		
 }
-printr($x);
+//printr($x);
 $sql = "select * from players where ".substr($lookfor,2);
 //echo "$sql<br>";
 $system_ips = db->get_results($sql);
-printr($system_ips);
+//printr($system_ips);
 echo "<br>".count($x)."<br>";
-//echo print_r($bl,true)."<br>";
+foreach ($system_ips as $system_ip) {
+	$x[$system_ip]['test'] = "hello";
+}
+printr($x);
 die("done");
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
