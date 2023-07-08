@@ -183,7 +183,8 @@ foreach ($servers as $server) {
 		$unit['ipl' ] = ip2long(trim($tmp[2]));
 		$unit['time'] = $tmp[1];
 		$game = $server['game'];
-		$x[$game][$unit['ipl']] =$unit;
+		
+		$x[$unit['ipl']] =$unit;
 		$lookfor .= "or ip = {$unit['ipl']} ";
 	}
 	$bl[] =$ban_location;
