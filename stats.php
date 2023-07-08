@@ -207,9 +207,12 @@ foreach ($system_ips as $system_ip) {
 //die("done");
 $line='';
 foreach ($x as $y) {
+	if(empty($y['ip'])){continue;} 
 	if(isset($y['name'])) {
 		$name = $y['name'];
+		$name = "<a href='users.php?id=$id'>$name</a>";
 		$logon = $y['last_log_on'];
+		$id = $y['steam_id'];
 	}
 	else {
 		$name = "N/A";
