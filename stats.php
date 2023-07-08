@@ -174,6 +174,8 @@ foreach ($servers as $server) {
 	if(in_array($ip_ban_location,$bl) or in_array($id_ban_location,$bl )) {continue;}
 	$ip_system_bans = explode(PHP_EOL,trim(file_get_contents($ip_ban_location)));
 	$id_system_bans = explode(PHP_EOL,trim(file_get_contents($id_ban_location)));
+	//echo $id_ban_location.'<br>';
+	//printr($id_system_bans);
 	foreach ($ip_system_bans as $system_ban) {
 		// split this up
 		$tmp = explode(" ",$system_ban);
@@ -183,11 +185,23 @@ foreach ($servers as $server) {
 		$unit['ipl' ] = ip2long(trim($tmp[2]));
 		$unit['time'] = $tmp[1];
 		$game = $server['game'];
-		
 		$x['ip'][$unit['ipl']] =$unit;
 		$lookfor .= "or ip = {$unit['ipl']} ";
 	}
-	
+	/*foreach($id_system_bans as $system_ban) {
+		echo $id_ban_location." ".count($id_system_bans).'<br>';
+		$id_count = count($id_system_bans) ;
+		if(empty($tmp[2])) {continue;}
+		$tmp = explode(" ",$system_ban);
+		//unset ($tmp[0]);
+		$steam_id = new SteamID($tmp[2]);
+		$id64 = $steam_id->ConvertToUInt64();
+		echo $tmp[2].'<br>';
+		$unit1['id'] = $id64;
+		$unit1['time'] = $tmp['1'];
+		$x['id'][$unit1['id']] =$unit1;
+	}
+	unset($x['id'][0]);*/
 	$bl[] =$ip_ban_location;
 	$bl[] =$id_ban_location;
 	
@@ -208,22 +222,24 @@ foreach ($system_ips as $system_ip) {
 	$x['ip'][$ips]['steam_id'] = $system_ip['steam_id64'];
 	$x['ip'][$ips]['last_log_on'] = date("d-m-Y",$system_ip['last_log_on']);
 }
-//printr($x);
+//printr($x['ip']);
 //die("done");
 $line='';
 foreach ($x['ip'] as $y) {
+	
 	if(empty($y['ip'])){continue;} 
+	$id = $y['steam_id'];
 	if(isset($y['name'])) {
 		$name = $y['name'];
 		$name = "<a href='users.php?id=$id'>$name</a>";
 		$logon = $y['last_log_on'];
-		$id = $y['steam_id'];
+		
 	}
 	else {
-		$name = "N/A";
-		$logon = "N/A";
+		$name = "-";
+		$logon = "-";
 	}
-	$line .= "<tr><td>{$y['ip']}</td><td style='text-align:center;'>$name</td><td>$logon</td></tr>";
+	$line .= "<tr><td>{$y['ip']}</td><td style='text-align:center;'>$name</td><td style='text-align:center;'>$logon</td></tr>";
 }
 //echo "<table>$line</table>";
 //die();
