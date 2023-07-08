@@ -165,6 +165,7 @@ $sql = "select * from server1 order by `host_name` ASC";
 $servers = $database->get_results($sql);
 $ips = array();
 $bl =array();
+$lookfor = '';
 foreach ($servers as $server) {
 	// get system bans
 	
@@ -183,15 +184,18 @@ foreach ($servers as $server) {
 		$unit['time'] = $tmp[1];
 		$game = $server['game'];
 		$x[$game][] =$unit;
+		$lookfor .= "or ip = {$unit['ipl']} ";
 	}
 	$bl[] =$ban_location;
 	
 		
 }
 //printr($x);
-//echo "<br>".count($x)."<br>";
-//echo print_r($bl,true)."<br>";
-//die("done");
+$sql = "select * from players where ".substr($lookfor,2);
+echo "$sql<br>";
+echo "<br>".count($x)."<br>";
+echo print_r($bl,true)."<br>";
+die("done");
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
 $template->replace_vars($header_vars);
