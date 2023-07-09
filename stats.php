@@ -157,7 +157,7 @@ $page['vac_count'] = count($vac_bans);
 foreach ($vac_bans as $vac_ban) {
 	// who has a vac ban
 	$last_ban = date("d-m-Y",$vac_ban['last_ban']);
-	$last_logon = date("d-m-Y",$vac_ban['last_log_on']);
+	if($vac_ban['last_ban'] >0){ $last_logon = date("d-m-Y",$vac_ban['last_log_on']);} else {$last_logon = '-';}
 	$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['name_c']}</a>";
 	$page['vac_bans'] .= "<tr><td>$player_link</td><td>$last_ban</td><td>$last_logon</td></tr>";
 }
