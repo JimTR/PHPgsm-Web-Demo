@@ -272,6 +272,7 @@ foreach ($x['id'] as $y) {
 	else {
 		$name = "-";
 		$logon = "-";
+		$y['steam_id'] = $id;
 	}
 	$line .= "<tr><td>{$y['steam_id']}</td><td style='text-align:center;'>$name</td><td style='text-align:center;'>$logon</td></tr>";
 }
