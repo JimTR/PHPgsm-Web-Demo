@@ -192,7 +192,7 @@ foreach ($servers as $server) {
 		$id_count = count($id_system_bans) ;
 		if(empty($tmp[2])) {continue;}
 		$tmp = explode(" ",$system_ban);
-		printr($tmp);
+		//printr($tmp);
 		//sleep(1);
 		$steam_id = new SteamID(trim($tmp[2]));
 		$id64 = $steam_id->ConvertToUInt64();
@@ -201,7 +201,7 @@ foreach ($servers as $server) {
 		$unit1['test'] = $tmp[2];
 		$unit1['time'] = $tmp['1'];
 		$x['id'][$unit1['id']] =$unit1;
-		$lookforid .= "or steam_id64 like '$id' ";
+		$lookforid .= "or steam_id64 like '$id64' ";
 	}
 	//unset($x['id'][0]);
 	$bl[] =$ip_ban_location;
