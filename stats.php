@@ -211,7 +211,7 @@ foreach ($servers as $server) {
 	
 		
 }
-echo  $lookforid.'<br>';
+echo  "select * from players where ".substr($lookforid,2).'<br>';
 //printr($x['id']);
 //printr($bl);
 die();
