@@ -193,7 +193,7 @@ foreach ($servers as $server) {
 		if(empty($tmp[2])) {continue;}
 		$tmp = explode(" ",$system_ban);
 		printr($tmp);
-		sleep(1);
+		//sleep(1);
 		//$steam_id = new SteamID(trim($tmp[2]));
 		//$id64 = $steam_id->ConvertToUInt64();
 		//echo $tmp[2].'<br>';
