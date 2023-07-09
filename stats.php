@@ -186,13 +186,14 @@ foreach ($servers as $server) {
 		$lookfor .= "or ip = {$unit['ipl']} ";
 	}
 	$lookforid ='';
+	unset($id_system_bans[0]);
 	foreach($id_system_bans as $system_ban) {
-		echo $id_ban_location." ".count($id_system_bans).'<br>';
+		//echo $id_ban_location." ".count($id_system_bans).'<br>';
 		$id_count = count($id_system_bans) ;
 		if(empty($tmp[2])) {continue;}
 		$tmp = explode(" ",$system_ban);
 		//unset ($tmp[0]);
-		//$steam_id = new SteamID($tmp[2]);
+		$steam_id = new SteamID($tmp[2]);
 		//$id64 = $steam_id->ConvertToUInt64();
 		echo $tmp[2].'<br>';
 		$unit1['id'] = $id64;
