@@ -251,7 +251,6 @@ foreach ($x['ip'] as $y) {
 //die();
 $sql = "select * from players where ".substr($lookforid,2);
 $system_ips = db->get_results($sql);
-printr($system_ips);
 foreach ($system_ips as $system_ip) {
 	$ips = $system_ip['steam_id64'];
 	echo "ips = $ips<br>";
@@ -260,7 +259,7 @@ foreach ($system_ips as $system_ip) {
 	else {$x['id'][$ips]['steam_id'] = $system_ip['steam_id64'];}
 	$x['id'][$ips]['last_log_on'] = date("d-m-Y",$system_ip['last_log_on']);
 }
-//printr($x['id']);
+printr($x['id']);
 //die();
 foreach ($x['id'] as $y) {
 	
