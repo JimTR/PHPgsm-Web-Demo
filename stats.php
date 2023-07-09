@@ -202,6 +202,7 @@ foreach ($servers as $server) {
 		$unit1['time'] = $tmp['1'];
 		$x['id'][$unit1['id']] =$unit1;
 		$lookforid .= "or steam_id64 like '$id64' ";
+		echo "$lookforid<br>";
 	}
 	//unset($x['id'][0]);
 	$bl[] =$ip_ban_location;
@@ -210,7 +211,7 @@ foreach ($servers as $server) {
 		
 }
 echo "select * from players where ".substr($lookforid,2).'<br>';
-printr($x);
+printr($x['id']);
 //printr($bl);
 die();
 $sql = "select * from players where ".substr($lookfor,2);
