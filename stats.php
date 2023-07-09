@@ -257,7 +257,8 @@ foreach ($system_ips as $system_ip) {
 	$x['id'][$ips]['steam_id'] = $system_ip['steam_id64'];
 	$x['id'][$ips]['last_log_on'] = date("d-m-Y",$system_ip['last_log_on']);
 }
-//printr($x['id']);
+printr($x['id']);
+die();
 foreach ($x['id'] as $y) {
 	
 	//if(empty($y['ip'])){continue;} 
