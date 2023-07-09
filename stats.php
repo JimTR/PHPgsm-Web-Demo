@@ -257,8 +257,8 @@ foreach ($system_ips as $system_ip) {
 	$x['id'][$ips]['steam_id'] = $system_ip['steam_id64'];
 	$x['id'][$ips]['last_log_on'] = date("d-m-Y",$system_ip['last_log_on']);
 }
-printr($x['id']);
-/*foreach ($x['id'] as $y) {
+//printr($x['id']);
+foreach ($x['id'] as $y) {
 	
 	//if(empty($y['ip'])){continue;} 
 	$id = $y['steam_id'];
@@ -274,7 +274,7 @@ printr($x['id']);
 		$logon = "-";
 	}
 	$line .= "<tr><td>{$y['id']}</td><td style='text-align:center;'>$name</td><td style='text-align:center;'>$logon</td></tr>";
-}*/
+}
 $page['sys_bans'] = $line;
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
