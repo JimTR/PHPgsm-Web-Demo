@@ -211,10 +211,10 @@ foreach ($servers as $server) {
 	
 		
 }
-echo  "select * from players where ".substr($lookforid,2).'<br>';
+
 //printr($x['id']);
 //printr($bl);
-die();
+//die();
 $sql = "select * from players where ".substr($lookfor,2);
 //echo "$sql<br>";
 $system_ips = db->get_results($sql);
@@ -249,6 +249,32 @@ foreach ($x['ip'] as $y) {
 }
 //echo "<table>$line</table>";
 //die();
+$sql = "select * from players where ".substr($lookforid,2);
+$system_ips = db->get_results($sql);
+foreach ($system_ips as $system_ip) {
+	$ips = $system_ip['id'];
+	$x['id'][$ips]['name'] = $system_ip['name_c'];
+	$x['id'][$ips]['steam_id'] = $system_ip['steam_id64'];
+	$x['id'][$ips]['last_log_on'] = date("d-m-Y",$system_ip['last_log_on']);
+}
+printr($x['id']);
+/*foreach ($x['id'] as $y) {
+	
+	//if(empty($y['ip'])){continue;} 
+	$id = $y['steam_id'];
+	if(isset($y['name'])) {
+		$name = $y['name'];
+		$name = "<a href='users.php?id=$id'>$name</a>";
+		if($y['last_log_on'] == 0) {$logon = "-";}
+		else {$logon = $y['last_log_on'];}
+		
+	}
+	else {
+		$name = "-";
+		$logon = "-";
+	}
+	$line .= "<tr><td>{$y['id']}</td><td style='text-align:center;'>$name</td><td style='text-align:center;'>$logon</td></tr>";
+}*/
 $page['sys_bans'] = $line;
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
