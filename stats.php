@@ -164,6 +164,7 @@ $servers = $database->get_results($sql);
 $ips = array();
 $bl =array();
 $lookfor = '';
+$lookforid ='';
 foreach ($servers as $server) {
 	// get system bans
 	$ip_ban_location = "{$server['location']}/{$server['game']}/cfg/banned_ip.cfg";
@@ -185,7 +186,7 @@ foreach ($servers as $server) {
 		$x['ip'][$unit['ipl']] =$unit;
 		$lookfor .= "or ip = {$unit['ipl']} ";
 	}
-	$lookforid ='';
+	
 	unset($id_system_bans[0]);
 	foreach($id_system_bans as $system_ban) {
 		//echo $id_ban_location." ".count($id_system_bans).'<br>';
