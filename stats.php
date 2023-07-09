@@ -259,10 +259,7 @@ foreach ($system_ips as $system_ip) {
 	else {$x['id'][$ips]['steam_id'] = $system_ip['steam_id64'];}
 	$x['id'][$ips]['last_log_on'] = date("d-m-Y",$system_ip['last_log_on']);
 }
-printr($x['id']);
-//die();
 foreach ($x['id'] as $y) {
-	
 	//if(empty($y['ip'])){continue;} 
 	$id = $y['test'];
 	if(isset($y['name'])) {
@@ -275,6 +272,9 @@ foreach ($x['id'] as $y) {
 	else {
 		$name = "-";
 		$logon = "-";
+		$link = $y['id'];
+		$id = "<a href='http://steamcommunity.com/profiles/$link' target='_blank'>$id</a>";
+		
 		//$y['steam_id'] = $id;
 	}
 	$line .= "<tr><td>$id</td><td style='text-align:center;'>$name</td><td style='text-align:center;'>$logon</td></tr>";
