@@ -192,8 +192,8 @@ foreach ($servers as $server) {
 		if(empty($tmp[2])) {continue;}
 		$tmp = explode(" ",$system_ban);
 		//unset ($tmp[0]);
-		$steam_id = new SteamID($tmp[2]);
-		$id64 = $steam_id->ConvertToUInt64();
+		//$steam_id = new SteamID($tmp[2]);
+		//$id64 = $steam_id->ConvertToUInt64();
 		echo $tmp[2].'<br>';
 		$unit1['id'] = $id64;
 		$unit1['time'] = $tmp['1'];
@@ -206,7 +206,7 @@ foreach ($servers as $server) {
 	
 		
 }
-echo "select * from palyers where ".substr($lookforid,2).'<br>';
+echo "select * from players where ".substr($lookforid,2).'<br>';
 printr($x);
 //printr($bl);
 die();
