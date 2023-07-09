@@ -197,6 +197,7 @@ foreach ($servers as $server) {
 		//$id64 = $steam_id->ConvertToUInt64();
 		echo $tmp[2].'<br>';
 		$unit1['id'] = $id64;
+		$unit1['test'] = $tmp[2];
 		$unit1['time'] = $tmp['1'];
 		$x['id'][$unit1['id']] =$unit1;
 		$lookforid .= "or steam_id64 like '$id' ";
