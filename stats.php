@@ -195,7 +195,7 @@ foreach ($servers as $server) {
 		printr($tmp);
 		//sleep(1);
 		$steam_id = new SteamID(trim($tmp[2]));
-		//$id64 = $steam_id->ConvertToUInt64();
+		$id64 = $steam_id->ConvertToUInt64();
 		//echo $tmp[2].'<br>';
 		$unit1['id'] = $id64;
 		$unit1['test'] = $tmp[2];
