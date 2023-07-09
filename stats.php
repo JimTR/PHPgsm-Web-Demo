@@ -253,7 +253,7 @@ $sql = "select * from players where ".substr($lookforid,2);
 $system_ips = db->get_results($sql);
 foreach ($system_ips as $system_ip) {
 	$ips = $system_ip['steam_id64'];
-	echo "ips = $ips<br>";
+	//echo "ips = $ips<br>";
 	$x['id'][$ips]['name'] = $system_ip['name_c'];
 	if(empty($system_ip['steam_id64'])) {$x['id'][$ips]['steam_id'] = $ips;}
 	else {$x['id'][$ips]['steam_id'] = $system_ip['steam_id64'];}
@@ -264,7 +264,7 @@ printr($x['id']);
 foreach ($x['id'] as $y) {
 	
 	//if(empty($y['ip'])){continue;} 
-	$id = $y['id'];
+	$id = $y['test'];
 	if(isset($y['name'])) {
 		$name = $y['name'];
 		$name = "<a href='users.php?id=$id'>$name</a>";
