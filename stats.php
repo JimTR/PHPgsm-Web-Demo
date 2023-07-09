@@ -273,7 +273,7 @@ foreach ($x['id'] as $y) {
 		$name = "-";
 		$logon = "-";
 	}
-	$line .= "<tr><td>{$y['id']}</td><td style='text-align:center;'>$name</td><td style='text-align:center;'>$logon</td></tr>";
+	$line .= "<tr><td>{$y['steam_id']}</td><td style='text-align:center;'>$name</td><td style='text-align:center;'>$logon</td></tr>";
 }
 $page['sys_bans'] = $line;
 $template = new template;
