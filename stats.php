@@ -279,7 +279,8 @@ foreach ($x['id'] as $y) {
 	}
 	$line .= "<tr><td>$id</td><td style='text-align:center;'>$name</td><td style='text-align:center;'>$logon</td></tr>";
 }
-//$page['sysbans_count'] = count($x['id'])+count($x['ip');
+$ip_count = count($x['ip']);
+$page['sysbans_count'] = $ip_count;
 $page['sys_bans'] = $line;
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
