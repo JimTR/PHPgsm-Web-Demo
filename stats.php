@@ -149,9 +149,7 @@ $page['comms_live'] = $comms[0]['live'];
 $page['game_live'] = $comms[0]['game_live'];
 $page['game_total'] = $comms[0]['game_total'];
 $page['vac_bans'] = '';
-//$sql = "select * from steam_data where vac_ban like '1'";
 $sql = "SELECT players.name_c,players.aka,players.last_log_on,steam_data.* FROM `steam_data` left join players on steam_data.steam_id = players.steam_id64 WHERE steam_data.vac_ban like '1' order by players.last_log_on DESC;";
-//die ($sql);
 $vac_bans = $database->get_results($sql);
 $page['vac_count'] = count($vac_bans);
 foreach ($vac_bans as $vac_ban) {
@@ -168,7 +166,6 @@ $bl =array();
 $lookfor = '';
 foreach ($servers as $server) {
 	// get system bans
-	
 	$ip_ban_location = "{$server['location']}/{$server['game']}/cfg/banned_ip.cfg";
 	$id_ban_location = "{$server['location']}/{$server['game']}/cfg/banned_user.cfg";
 	if(in_array($ip_ban_location,$bl) or in_array($id_ban_location,$bl )) {continue;}
@@ -188,7 +185,8 @@ foreach ($servers as $server) {
 		$x['ip'][$unit['ipl']] =$unit;
 		$lookfor .= "or ip = {$unit['ipl']} ";
 	}
-	/*foreach($id_system_bans as $system_ban) {
+	$lookforid ='';
+	foreach($id_system_bans as $system_ban) {
 		echo $id_ban_location." ".count($id_system_bans).'<br>';
 		$id_count = count($id_system_bans) ;
 		if(empty($tmp[2])) {continue;}
@@ -200,16 +198,18 @@ foreach ($servers as $server) {
 		$unit1['id'] = $id64;
 		$unit1['time'] = $tmp['1'];
 		$x['id'][$unit1['id']] =$unit1;
+		$lookforid .= "or steam_id64 like '$id' ";
 	}
-	unset($x['id'][0]);*/
+	unset($x['id'][0]);
 	$bl[] =$ip_ban_location;
 	$bl[] =$id_ban_location;
 	
 		
 }
-//printr($x);
+echo "select * from palyers where ".substr($lookforid,2).'<br>';
+printr($x);
 //printr($bl);
-//die();
+die();
 $sql = "select * from players where ".substr($lookfor,2);
 //echo "$sql<br>";
 $system_ips = db->get_results($sql);
