@@ -232,7 +232,8 @@ foreach ($x['ip'] as $y) {
 	if(isset($y['name'])) {
 		$name = $y['name'];
 		$name = "<a href='users.php?id=$id'>$name</a>";
-		$logon = $y['last_log_on'];
+		if($y['last_log_on'] == 0) {$logon = "-";}
+		else {$logon = $y['last_log_on'];}
 		
 	}
 	else {
@@ -275,8 +276,5 @@ function convertSecToTime($sec){
 	$return .= "$h:";
 	$return.= "$mi:";
 	$return .= "$s";	
-	//return $interval->format('%y y %m mo %d d, %h h %i m %s s'); // convert into Years, Months, Days, Hours, Minutes and Seconds
 	return $return;
 }
-//$sql = "SELECT game, MONTH(from_unixtime(last_play)) AS  start_month,  year(from_unixtime(last_play)) as selected_year, count(*) as user_count, sum(game_time) as tol FROM `user_stats` WHERE MONTH(from_unixtime(last_play)) = 6 and year(from_unixtime(last_play)) = 2023 group by game;";
-?>
