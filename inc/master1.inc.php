@@ -123,7 +123,7 @@ if($user->loggedIn()) {
 			$database->insert('allowed_users',$user_data);
 		}
    	}
-   	elseif (basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']) !== 'login.php') {
+   	elseif (isset($_SERVER['REQUEST_URI'])) {
 		echo basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 		
 		redirect('login.php');
@@ -136,7 +136,8 @@ $sql = "select * from server1 order by `host_name` ASC";
 $sidebar_data['bmenu'] = '';
 $sidebar_data['smenu'] = '';
 $page['jsa'] = '';
-$bserver = explode('=',$_SERVER['QUERY_STRING']);
+if (isset($_SERVER['QUERY_STRING'])) {
+	$bserver = explode('=',$_SERVER['QUERY_STRING']);
 //print_r($bserver);
 $servers = $database->get_results($sql);
 foreach ($servers as $server) {
@@ -150,17 +151,17 @@ foreach ($servers as $server) {
 	if (isset($bserver[1]) and  $bserver[1] == $server['host_name'] ) {$class = 'active';} else {$class='';}
 	$sidebar_data['smenu'] .='<li><a class="'.$class.'" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
 }
-
+}
 $sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `fname` ASC";
 $base_servers = $database->get_results($sql);
-$page['server_body']='';
-$page['active_body'] ='';
 foreach ($base_servers as $server) {
 	$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
 	$template->load(DOC_ROOT.'/templates/subtemplates/server_body.html');
 	$template->replace("fname",$server['fname']);
-	$page['server_body'] .= $template->get_template();
-	$page['active_body'] .="<tbody style='border:0;' id ='a{$server['fname']}'></tbody>";
+	//if(isset($_SERVER['QUERY_STRING'])) {
+		$page['server_body'] .= $template->get_template();
+		$page['active_body'] .="<tbody style='border:0;' id ='a{$server['fname']}'></tbody>";
+	//}
 	$uri = parse_url($server['url']);
 	$url = $uri['scheme']."://".$uri['host'].':'.$server['port'];
 	if(isset($uri['path'])) {$url .= "/".$uri['path'];}
