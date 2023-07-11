@@ -33,7 +33,7 @@ if(isset($_GET['id'])) {
 	$sql = "select * from server1 where host_name ='$server_name'";
 	//printr(get_defined_constants(true));
 	$server_record = db->get_row($sql);
-	$page['setting_title'] =  "Settings for{$server_record['server_name']}";
+	$page['setting_title'] =  "Settings for {$server_record['server_name']}";
 	$setting_type = true;
 }
 else{ 
