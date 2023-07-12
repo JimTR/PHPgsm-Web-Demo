@@ -98,7 +98,6 @@ $sql = "select * from players where ".substr($lookfor,2);
 //echo "$sql<br>";
 $db_users = $database->get_results($sql);
 //echo "found in user data base ".count($db_users).'<br>';
-//printr($db_users);
 foreach($db_users as $db_user) {
 	$id = $db_user['steam_id64'];
 	$key = array_search($id, array_column($bans, 'steam_id'));
@@ -111,6 +110,7 @@ $line ='';
 foreach ($bans as $ban) {
 	$line .= "<tr><td>{$ban['name']}</td><td>{$ban['created']}</td><td>{$ban['last_log_on']}</td></tr>";
 }
+
 $page['sb_bans'] = $line;
 $sql = "SELECT * FROM players INNER JOIN( SELECT ip FROM players GROUP BY ip HAVING COUNT(ip) > 1 order by ip) temp ON players.ip = temp.ip ORDER BY `players`.`ip` ASC"; // get dups
 $dups = $database->get_results($sql);
@@ -137,6 +137,7 @@ $page['dups'] ='';
 foreach ($dup_table as $dup) {	
 	$page['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=4>{$dup['name']}</td></tr>";
 }
+
 $sql = "SELECT `country`, `flag`, `country_code` FROM `logins` order by `country` ASC";
 $c1 = $database->get_results($sql);
 $page['c_select'] ="<option>none selected</option>";
@@ -173,7 +174,7 @@ foreach ($servers as $server) {
 	$ip_system_bans = explode(PHP_EOL,trim(file_get_contents($ip_ban_location)));
 	$id_system_bans = explode(PHP_EOL,trim(file_get_contents($id_ban_location)));
 	//echo $id_ban_location.'<br>';
-	//printr($id_system_bans);
+	
 	foreach ($ip_system_bans as $system_ban) {
 		// split this up
 		$tmp = explode(" ",$system_ban);
@@ -186,8 +187,8 @@ foreach ($servers as $server) {
 		$x['ip'][$unit['ipl']] =$unit;
 		$lookfor .= "or ip = {$unit['ipl']} ";
 	}
-	
-	unset($id_system_bans[0]);
+	//die($lookfor);
+	//unset($id_system_bans[0]);
 	foreach($id_system_bans as $system_ban) {
 		//echo $id_ban_location." ".count($id_system_bans).'<br>';
 		$id_count = count($id_system_bans) ;
@@ -195,13 +196,23 @@ foreach ($servers as $server) {
 		$tmp = explode(" ",$system_ban);
 		//printr($tmp);
 		//sleep(1);
-		$steam_id = new SteamID(trim($tmp[2]));
-		$id64 = $steam_id->ConvertToUInt64();
-		//echo $tmp[2].'<br>';
+		if (!empty($tmp[2])) {
+			//echo "tmp[2] is {$tmp[2]}<br>";
+			$steam_id = new SteamID(trim($tmp[2]));
+			$id64 = $steam_id->ConvertToUInt64();
+			//echo "id64 is $id64<br>";
+			//$unit1['test'] = $tmp[2];
+		}
+		else{
+			//if(empty($tmp[2])) {echo "why is this empty ?<br>";}
+			continue;
+			echo "tmp[2] out of context is {$tmp[2]}<br>";
+		}
 		$unit1['id'] = $id64;
 		$unit1['test'] = $tmp[2];
 		$unit1['time'] = $tmp['1'];
-		$x['id'][$unit1['id']] =$unit1;
+		$unit1['poo'] = "shit";
+		$x['id'][$id64]=$unit1;
 		$lookforid .= "or steam_id64 like '$id64' ";
 		//echo "$lookforid<br>";
 	}
