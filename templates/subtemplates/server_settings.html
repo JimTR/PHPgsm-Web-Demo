@@ -6,13 +6,14 @@
 			<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-cmd-line" type="button" role="tab" aria-controls="profile" aria-selected="false"><i class="fa-regular fa-circle-play"></i> Start up Manager</button>
 		</li>
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-contact" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-map"></i> Maps</button>
+			<button class="nav-link" id="bans" data-bs-toggle="tab" data-bs-target="#bordered-config" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-screwdriver-wrench"></i> Config Files</button>
 		</li>
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="supported-games" data-bs-toggle="tab" data-bs-target="#bordered-games" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-plug-circle-bolt"></i> Mods</button>
+			<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-maps" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-map"></i> Maps</button>
 		</li>
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="bans" data-bs-toggle="tab" data-bs-target="#bordered-bans" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-screwdriver-wrench"></i> Config Files</button>
+			<button class="nav-link" id="supported-games" data-bs-toggle="tab" data-bs-target="#bordered-mods" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-plug-circle-bolt"></i> Mods 
+			&amp; Plugins</button>
 		</li>
 		<li class="nav-item" role="presentation">
 			<button class="nav-link" id="bans" data-bs-toggle="tab" data-bs-target="#bordered-bans" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-bell"></i></i> Notifications</button>
@@ -49,7 +50,7 @@
 			</div>
 		</div>
 		<div class="tab-pane fade" id="bordered-cmd-line" role="tabpanel" aria-labelledby="profile-tab">
-			<h5 class="card-title">Command-line arguments</h5>
+			<!--<h5 class="card-title">Command-line arguments</h5>-->
 			<!--#cmd_line_opts#-->
 			<form id="startcmd" method="POST" action="api.php">
 				<input type="hidden" value="setting" name="action"/>
@@ -66,5 +67,101 @@
 		<div id="vcmd" onclick="copyDivToClipboard()"><!--#startcmd#--></div>
 		<div style="font-size:smaller;padding:3px 0 0 1%;">to use this click on <i style="color:green;" class="fa-regular fa-clipboard fa-fw"></i> above to copy to the clipboard, open a terminal, navigate to the server instance directory  and paste </div>
 	</div>
+	<div class="tab-pane fade" id="bordered-config" role="tabpanel" aria-labelledby="contact-tab">
+						<div class="row">
+							<div class="col-lg-6">
+								<h5 class="card-title">Edit Config File</h5>
+								<select name="files" id="files">
+									<!--#file_select#-->
+								</select>
+								<div style="margin-top:1%;">	
+									<textarea id="fileview" name="fileview" rows="20" cols="80"><!--#cfg_file#--></textarea>
+									<br>
+									<button id ="save-file" class="btn btn-success" >Save File</button>
+                                </div>
+							</div>
+							<div class="col-lg-6">
+								<h5 class="card-title">Restore Config File</h5>
+							</div>
+						</div>
+					</div>
+	<div class="tab-pane fade"  id="bordered-maps" role="tabpanel" aria-labelledby="home-tab">
+						<div class="row">
+							<div class="col-lg-6">	
+								<h5 class="card-title">Current Map Files</h5>
+								<div class="map-response" id="map-response">response</div>
+								<p>Current Map Files <!--#map_count#-->
+									<span style="margin-left:2%;">Total Size on disk <!--#map_size#--></span>
+									<span style="margin-left:2%;">Maps in cycle</span><span style="padding-left:1%;"  id="cycle-count"> <!--#map_cycle#--></span>
+								</p>
+								<div class="table-wrapper" style="height:50vh;"> 
+									<form id="map-update" action="maps.php" method="post">
+										<input name="action" type="hidden" value="mapcycle">
+										<input name="server" type="hidden" value="<!--#server#-->" />
+										<table class="table">
+											<th>Map Name</th>
+											<th>Size on disk</th>
+											<th>Map cycle</th>
+											<!--#map_files#-->
+										</table>
+								</div>
+								<div style="text-align:center;">
+									<button class="btn btn-primary" style="margin-top:7%;" type ="submit ">Update Map Cycle</button>
+								</div>	
+								</form>
+							</div>
+							<div class="col-lg-6">
+								<h5 class="card-title">Add More Maps</h5>
+								
+								<form action="maps.php" method="post" enctype="multipart/form-data">
+									<div class="row">
+									<div class="col-lg-6">
+									<label></label>
+									<!-- <button class="btn btn-primary" type="submit">Button</button> -->
+									<label class="btn btn-primary">
+										<input style="display:none;" name="userfile[]" type="file" multiple  id="file-list"/>
+										 Upload map & fastdl files
+									</label>
+									<!--<input style="color:transparent;" name="userfile[]" type="file" multiple  id="file-list"/><br>-->
+									<input name="server" type="hidden" value="<!--#bserver#-->" />
+									<input name="action" type="hidden" value="upload">
+									<div id="f-list"></div>
+									
+									</div>
+									</div>
+								</form>
+
+							</div>
+						</div>		
+					</div>
+	<div class="tab-pane fade" id="bordered-mods" role="tabpanel" aria-labelledby="contact-tab">
+						<div class="row">
+							<div class="col-lg-6">
+								<h6  class="card-title">Installed Mods</h6>
+									<div class="table-wrapper" style="max-height:50vh;"> 
+										<table class="table">
+											<tbody id="installed-mods">
+												<!--#mod_list#-->
+												
+											</tbody>
+										</table>
+										</div>
+										<h6  class="card-title">Installed Plugins</h6>
+										<div class="table-wrapper" style="max-height:50vh;"> 
+										<table class="table">
+										<!--#sm_plugins#-->
+										</table>
+									</div>	
+							</div>	
+							<div class="col-lg-6">
+								<h6 id="supported-mods" class="card-title">Supported Mods</h6>
+								<div class="panel">
+									<p>Meta Mod</p>
+									<p>Source Mod</p>
+								</div>
+							</div>
+						</div>
+					</div>
+	
 	</div>
 					

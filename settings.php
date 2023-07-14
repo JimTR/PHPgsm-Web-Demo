@@ -30,6 +30,7 @@ $module = "settings";
 include 'inc/master.inc.php'; // add setup
 if(isset($_GET['id'])) {
 	$server_name = $_GET['id'];
+	$page['server'] = $server_name;
 	$sql = "select * from server1 where host_name ='$server_name'";
 	//printr(get_defined_constants(true));
 	$server_record = db->get_row($sql);
@@ -52,11 +53,25 @@ $template->load('templates/subtemplates/sidebar.html'); //sidebar
 $template->replace_vars($sidebar_data);
 $page['sidebar'] = $template->get_template();
 $page['sidebar'] = str_replace("class=\"nav-link collapsed\" id=\"$module\" ","class=\"nav-link\"  id=\"users\" ",$page['sidebar']);
+$page['max_upload'] = dataSize(file_upload_max_size());
+
 if($setting_type){
+	
 	$template->load('templates/subtemplates/server_settings.html');
 	$template->replace_vars($server_record);
+	$template->replace_vars($page);
 	$page['menu_bar']  = $template->get_template();
+	$current_maps = get_maps($server_record);
+	$page['map_files'] = $current_maps['formatted'];
+	$page['map_size'] = $current_maps['total_size'];
+	$page['map_count'] = count($current_maps);
+	$page['map_cycle'] = $current_maps['mapcycle'];
+	$mods = get_mods($server_record);
+	$page['mod_list'] = $mods['mods'];
+	$page['sm_plugins'] = $mods['sm_plugins'];
 	$page['cmd_line_opts'] =get_cmdline($server_record['host_name']);
+	$page['file_select'] = read_cfgs($server_record);
+	$page['cfg_file'] = file_get_contents($server_record['location'].'/'.$server_record['game'].'/cfg/'.$server_record['host_name'].'.cfg');
 	//printr($page);
 	//die();
 }
@@ -95,10 +110,10 @@ function get_cmdline ($server){
 		//$option="hostname";
 		$option="hostname";
 		$value="";
-		$this_server['cmd_line_opts'] .= "<tr id='tr-$option'><td>$option</td><td >$value</td>";
-		$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='+hostname' value='$value' orig='not set'></td><td></td><td>Host Name is set in the config file, setting it here will disable the config file option</td></tr>";
+		//$this_server['cmd_line_opts'] .= "<tr id='tr-$option'><td>$option</td><td >$value</td>";
+		//$this_server['cmd_line_opts'] .= "<td><input type='text' id='o$option' option='+hostname' value='$value' orig='not set'></td><td></td><td>Host Name is set in the config file, setting it here will disable the config file option</td></tr>";
 		}
-		echo count($cmd_opts);
+		//echo count($cmd_opts);
 		//printr($cmd_opts);
 		//die();
 	foreach($cmd_opts as $tmp) {
@@ -178,6 +193,8 @@ function get_cmdline ($server){
 $this_server['cmd_line_opts'] .= "<td>Add an option</td><td></td><td id='new'><input type='text' id='onew' value='' orig=''><//td><td><button class='btn btn-primary'  id='cnew'>Add</button></td><td>proceed with caution</td></tr>";
 //die();
 $this_server['cmd_line_opts'].="</tbody></table>";
+//echo $this_server['cmd_line_opts'];
+//die();
 return $this_server['cmd_line_opts'];	  
 }
 function cmd_line($cmd_line) {
@@ -201,4 +218,74 @@ function cmd_line($cmd_line) {
 	//echo "<br>$cmd_line";
 	//die ();
 	return $split;	
+}
+function get_maps($server) {
+	$all_files = 0;
+	$map_count = 0;
+	// need to add  mapcycle 
+	$mc_file = "{$server['location']}/{$server['game']}/cfg/mapcycle.txt";
+	$mc_list = explode(PHP_EOL,file_get_contents($mc_file));
+	foreach ($mc_list as $k => $v) {
+		$mc_list[$k] = trim($v);
+	}
+	$map_dir = "{$server['location']}/{$server['game']}/maps";
+	foreach (glob("$map_dir/*.bsp") as $filename) {
+		$filename1 = pathinfo($filename, PATHINFO_FILENAME); 
+		$tmp['file'] = basename($filename1);
+		if(in_array($filename1,$mc_list)) {
+			$tmp['in_cycle'] ="<input style ='margin-left:18%;' type='checkbox' id='map-$filename1' name='$filename1' checked>" ;
+			$map_count ++;
+		}
+		else {$tmp['in_cycle'] ="<input style='margin-left:18%;' type='checkbox' id='map-$filename1' name='$filename1'>";}
+		$tmp['size'] =  dataSize(filesize($filename));
+		$all_files += filesize($filename);
+		$return[] =$tmp;
+		$return['formatted'] .= "<tr><td>{$tmp['file']}</td><td>{$tmp['size']}</td><td>{$tmp['in_cycle']}</td></tr>";
+	}
+	
+	$return['total_size'] = dataSize($all_files);
+	$return['mapcycle'] = $map_count;
+	
+	return $return;
+}
+function get_mods($server) {
+	$mod_location = "{$server['location']}/{$server['game']}/addons";
+	$plugin_header='';
+	$plugin_rows ='';
+	if (!is_dir($mod_location)) {
+		$return['mods'] ="none installed";
+		$return['sm_plugins'] = "none installed";
+		return $return ;
+	}
+	$files = array_diff(scandir($mod_location),array('..', '.'));
+	//print_r($files);
+	foreach ($files as $file) {
+		if(is_dir("$mod_location/$file")) {
+			$return['mods'].="<tr><td colspan=2>$file</td></tr>";
+			if($file == "sourcemod") {
+				$plugin_location= "$mod_location/$file/plugins";
+				$sm_plugins = array_values(array_diff(scandir($plugin_location),array('..', '.')));
+				$plugin_rows='';
+				foreach ($sm_plugins as $plugin) {
+					// tidy up the plugins
+					if (str_starts_with($plugin, ".")){continue;}
+					$plugin_name = pathinfo("$plugin_location/$plugin",PATHINFO_FILENAME);
+					$plugin_lastupdate = date ("d-m-Y H:i:s", filemtime("$plugin_location/$plugin"));
+					$plugin_rows.="<tr><td>$plugin_name</td><td>$plugin_lastupdate</td></tr>";
+				}
+			}
+			$return['sm_plugins'] = $plugin_rows;
+		}
+	}
+	return $return;
+}
+function read_cfgs($server) {
+	$cfg_path = $server['location'].'/'.$server['game'].'/cfg/';
+	foreach (glob("$cfg_path*.*") as $filename) {
+		//echo "$filename size " . filesize($filename) . "\n";
+		$basename = basename($filename);
+		if ($basename == $server['host_name'].'.cfg') {$selected= 'selected';} else {$selected = '';}
+		$file_select .= "<option value='$filename' $selected>$basename</option>";
+	}
+	return $file_select;
 }
