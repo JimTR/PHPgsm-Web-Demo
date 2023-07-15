@@ -1236,8 +1236,8 @@ a.invert:hover {
 
 }
 .table-wrapper table th {
-  /*background:#2F2F2F;
-  /*color:black;*/
+  background:#2F2F2F;
+  
 }
 .table-wrapper table thead th .text {
   position:absolute;   
@@ -1350,10 +1350,10 @@ a.invert:hover {
     border-style: none;
     border-width: 0;
 }
-.table th, .table td {
+.table th {
     padding: 0.5rem;
     vertical-align: middle;
-    border-top: 1px solid #495057;
+    border-top: 0;
 }
 .progress {
   background-color: #cccccc;
@@ -1427,3 +1427,4 @@ a.invert:hover {
 .secret {
   background-color: #2f2f2f;
 }
+

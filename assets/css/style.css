@@ -1351,3 +1351,9 @@ a.invert:hover {
 .secret {
   background-color: #ffffff;
 }
+
+.table-header {
+  /* background-color: #2F2F2F !important;*/
+  position: sticky;
+  top: 0;
+}
