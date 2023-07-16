@@ -23,6 +23,7 @@ foreach ($servers as $server) {
 	$lserver['server_name'] = $server['server_name'];
 	$lserver['console_link'] = $href;
 	$lserver['detail_link'] = "gameserver.php?server=$fname";
+	$lserver['setting_link'] = "settings.php?id=$fname";
 	$lserver['game_link'] = $game_link; 
 	$ban_location = "{$server['location']}/{$server['game']}/cfg/banned_ip.cfg";
 	$system_bans = explode(PHP_EOL,file_get_contents($ban_location));
