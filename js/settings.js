@@ -157,21 +157,25 @@ $("input[type='text']").change(function() {
     
 $('#fileview').change(function(){
    console.log ("fileview changed");
-   alert ($('#fileview').val());
+   //alert ($('#fileview').val());
 });
 
 $('#files').change(function(){
-	selected_value = $('#files').val()
+	//selected_value = $('#files').val();
+	selected_value = $('#files').find(":selected").val();
 	console.log("triggerd change");
+	//alert (selected_value);
 	var sendurl = url+"/api.php?action=get_file&cmd=view&n="+selected_value;
+	console.log(sendurl);
+	//return;
 	$.ajax({
 		type: 'GET',
 		url: sendurl,
 		dataType: 'text',
 		success: function(data) {
+			//alert(data);
 			$("#fileview").val(data);
-			var $textarea = $('#fileview');
-			$textarea.scrollTop(0);    
+			$('#fileview').scrollTop(0);    
 		}
 	});
 });
@@ -238,6 +242,8 @@ $('#disable-server').submit(function(e) {
 });
 
 $('select').on('change', function() {
+	id =$(this).attr("id");
+	if (id == "files") {return;}
 	option = $(this).attr("option");
 	newid = option.substring(1, option.length);
 	newopt = $(this).val();
@@ -256,19 +262,21 @@ $('select').on('change', function() {
 		default:
 			cmd = cmd.replace(full,newopt);
 			vcmd = vcmd.replace(full,newopt);
-			alert ("vcmd = "+vcmd);
+			//alert ("vcmd = "+vcmd);
 			$(this).attr("orig",newopt);
 	}
 	$("#scmd").val(cmd);
 	$("#vcmd").text(vcmd);
 });
 
+
 $('#save-file').click(function() {
 	console.log("saving file");
 	selected_value = $('#files').val();
 	console.log(selected_value);
-	var sendurl = url+"/api.php";
-	file = $('#fileview').html();
+	var sendurl = "helpers/settings.php";
+	file = $('#fileview').val();
+	//alert(file);
 	console.log(sendurl);
     $.ajax({
 		type: 'POST',
@@ -280,8 +288,8 @@ $('#save-file').click(function() {
 		'n': selected_value },
 		success: function(data) {
 			console.log(data);
-			alert("data back"+data);
-			$("#fileview").html(data);
+			//alert("data back"+data);
+			$("#fileview").text(data);
 			var $textarea = $('#fileview');
 			$textarea.scrollTop(0);
 			sendurl='';    
@@ -352,6 +360,21 @@ function onClickHandler(){
     //use this value
 
 }
+
+$('#startcmd').on('submit', function(e) {
+	e.preventDefault();
+	
+	url +="/"+$(this).attr('action');
+	alert(url);
+	var formValues = $(this).serialize();
+	$.ajax({
+		type: $(this).attr('method'),
+		url: url,
+		data: formValues,
+		success: function(data) {
+		}
+	});
+});
 
 function formatBytes(bytes, decimals = 2) {
     if (bytes === 0) return '0 B';
