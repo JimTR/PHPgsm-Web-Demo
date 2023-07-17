@@ -247,8 +247,8 @@ console.log("entered click");
 $('#vac').on('click','tr', function() {
 	console.log( $( this ).find("td:first").text());
 	lookfor = $( this ).find("td:first").text();
-	Selected_Rows = $("#sb_ban tr :contains('"+lookfor+"')");
-	alert(Selected_Rows.length);
-	console.log(Selected_Rows);	
-	$("#sb_ban").scrollTop($("* :contains('"+lookfor+"')").parent('tr').offset().top);
+	//Selected_Rows = $("#sb_ban tr :contains('"+lookfor+"')");
+	//alert(Selected_Rows.length);
+	//console.log(Selected_Rows);	
+	$("#sb_ban").scrollTop($("tr :contains('"+lookfor+"')").parent('tr').offset().top);
 });
