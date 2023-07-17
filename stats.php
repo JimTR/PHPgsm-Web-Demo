@@ -150,15 +150,16 @@ $page['comms_live'] = $comms[0]['live'];
 $page['game_live'] = $comms[0]['game_live'];
 $page['game_total'] = $comms[0]['game_total'];
 $page['vac_bans'] = '';
-$sql = "SELECT players.name_c,players.aka,players.last_log_on,steam_data.* FROM `steam_data` left join players on steam_data.steam_id = players.steam_id64 WHERE steam_data.vac_ban like '1' order by players.last_log_on DESC;";
+$sql = "SELECT players.name_c,players.aka,players.last_log_on,players.steam_id64,steam_data.* FROM `steam_data` left join players on steam_data.steam_id = players.steam_id64 WHERE steam_data.vac_ban like '1' order by players.last_log_on DESC;";
 $vac_bans = $database->get_results($sql);
 $page['vac_count'] = count($vac_bans);
 foreach ($vac_bans as $vac_ban) {
 	// who has a vac ban
 	$last_ban = date("d-m-Y",$vac_ban['last_ban']);
 	if($vac_ban['last_ban'] >0){ $last_logon = date("d-m-Y",$vac_ban['last_log_on']);} else {$last_logon = '-';}
-	$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['name_c']}</a>";
+	$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['steam_id64']}</a>";
 	$page['vac_bans'] .= "<tr><td>$player_link</td><td>$last_ban</td><td>$last_logon</td></tr>";
+	log_to("sp.log",print_r($vac_ban,true));
 }
 $sql = "select * from server1 order by `host_name` ASC";
 $servers = $database->get_results($sql);
