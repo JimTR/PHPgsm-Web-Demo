@@ -246,7 +246,7 @@ console.log("entered click");
 });
 $('#vac').on('click','tr', function() {
 	console.log( $( this ).find("td:first").text());
-	lookfor = $( this ).find("td:first").text();
+	lookfor = $( this ).find("td:first").html();
 	var Selected_Rows = $("#sb_ban tr:contains("+lookfor+")");
 	console.log(Selected_Rows);	
 });
