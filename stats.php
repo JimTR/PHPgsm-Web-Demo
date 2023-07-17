@@ -157,9 +157,14 @@ foreach ($vac_bans as $vac_ban) {
 	// who has a vac ban
 	$last_ban = date("d-m-Y",$vac_ban['last_ban']);
 	if($vac_ban['last_ban'] >0){ $last_logon = date("d-m-Y",$vac_ban['last_log_on']);} else {$last_logon = '-';}
-	$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['steam_id64']}</a>";
+	if(empty($vac_ban['name_c'])) { 
+		$vac_ban['name_c'] = $vac_ban['steam_id']; // we don't have the user logged in
+		$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['name_c']}</a>";
+	}
+	else {
+		$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['name_c']}</a>";
+	}
 	$page['vac_bans'] .= "<tr><td>$player_link</td><td>$last_ban</td><td>$last_logon</td></tr>";
-	log_to("sp.log",print_r($vac_ban,true));
 }
 $sql = "select * from server1 order by `host_name` ASC";
 $servers = $database->get_results($sql);
