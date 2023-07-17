@@ -250,5 +250,5 @@ $('#vac').on('click','tr', function() {
 	Selected_Rows = $("#sb_ban tr :contains('"+lookfor+"')");
 	alert(Selected_Rows.length);
 	console.log(Selected_Rows);	
-	$("#sb_ban").scrollTop($("*:contains('"+lookfor+"')").parent('tr').offset().top);
+	$("#sb_ban").scrollTop($("* :contains('"+lookfor+"')")."#sb_ban".('tr').offset().top);
 });
