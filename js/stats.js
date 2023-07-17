@@ -248,5 +248,6 @@ $('#vac').on('click','tr', function() {
 	console.log( $( this ).find("td:first").text());
 	lookfor = $( this ).find("td:first").text();
 	Selected_Rows = $("#sb_ban tr :contains('"+lookfor+"')");
+	alert(Selected_Rows.length);
 	console.log(Selected_Rows);	
 });
