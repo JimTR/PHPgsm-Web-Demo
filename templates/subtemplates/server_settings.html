@@ -16,7 +16,7 @@
 			&amp; Plugins</button>
 		</li>
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="bans" data-bs-toggle="tab" data-bs-target="#bordered-bans" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-bell"></i></i> Notifications</button>
+			<button class="nav-link" id="bans" data-bs-toggle="tab" data-bs-target="#bordered-notifications" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-bell"></i></i> Notifications</button>
 		</li>
 	</ul>
 	<div class="tab-content pt-2" id="borderedTabContent">
@@ -94,7 +94,7 @@
 									<span style="margin-left:2%;">Total Size on disk <!--#map_size#--></span>
 									<span style="margin-left:2%;">Maps in cycle</span><span style="padding-left:1%;"  id="cycle-count"> <!--#map_cycle#--></span>
 								</p>
-								<div class="table-wrapper" style="height:50vh;"> 
+								<div class="table-wrapper" style="height:30vh;"> 
 									<form id="map-update" action="maps.php" method="post">
 										<input name="action" type="hidden" value="mapcycle">
 										<input name="server" type="hidden" value="<!--#server#-->" />
@@ -138,7 +138,7 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<h6  class="card-title">Installed Mods</h6>
-									<div class="table-wrapper" style="max-height:50vh;"> 
+									<div class="table-wrapper" style="max-height:30vh;"> 
 										<table class="table">
 											<tbody id="installed-mods">
 												<!--#mod_list#-->
@@ -162,6 +162,10 @@
 							</div>
 						</div>
 					</div>
-	
+	<div class="tab-pane fade"  id="bordered-notifications" role="tabpanel" aria-labelledby="home-tab">
+						<h5 class="card-title">Notifications</h5>	
+						<p>Notiifications are sent to discord  </p>
+						<p>Notifications are sent to your email address</p>
+					</div>
 	</div>
 					
