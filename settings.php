@@ -290,3 +290,18 @@ function read_cfgs($server) {
 	}
 	return $file_select;
 }
+
+function local_settings($server) {
+	// return localsettings
+	$uri = parse_url($server['url']);
+	$url = $uri['scheme']."://".$uri['host'].':'.$this_server['bport'];
+	if(isset($uri['path'])){ $url .= $uri['path'];}
+	$console_path = "modules/mod_console/{$server['host_name']}.php";
+	geturl("$url/api.php?action=get_file&cmd=view&n=$file_location"); //needs replacing with ajax_send
+	if(is_file($console_path)) {
+		include $console_path;
+		print_r($x);
+	}
+	
+	
+}

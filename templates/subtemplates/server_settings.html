@@ -21,32 +21,39 @@
 	</ul>
 	<div class="tab-content pt-2" id="borderedTabContent">
 		<div class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
-			<div class="col-lg-6">
-				<table class="table ">
-					<tr><td style="width:20%;">Server ID </td><td style="width:40%;"><!--#host_name#--></td><td ></td></tr>
-					<tr><td>Mod</td><td><!--#run_stub#--></td><td></td></tr>
-					<tr><td>Host IP</td><td><!--#host#--></td><td></td></tr>
-					<tr><td>Game Port </td><td><!--#port#--></td><td></td></tr>
-					<tr><td>Client Port</td><td><!--#client_port#--></td><td></td></tr>
-					<tr><td>TV Port</td><td><!--#source_port#--></td><td></td></tr>
-					<tr>
-						<form id="disable-server" method="POST" action="api.php">
-							<td>Status</td>
-							<td>
-								<input type="hidden" value="setting" name="action"/>
-								<input type="hidden" value="enabled" name="set"/>
-								<input type="hidden" name="server" value="<!--#host_name#-->"/>
-								<input class="form-check-input"  style="margin-left:0;" type="radio" name="gridRadios" id="gridRadios1" value="1" checked="checked">
-								<label style="margin-top:5px;width:31%;padding-left:21px;" class="form-check-label" for="gridRadios1">Enabled</label>
-								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="0" >
-								<label class="form-check-label" style="margin-top:3px;width:31%;padding-left:3px;" for="gridRadios2">Disabled</label>
-								<input  id="dis-text" type="hidden" name="text" value="1" />
-							</td>
-						</form>
-						<td><div class ="ajax_response" style="margin: 0 0 0 0"  id="disable-response"></div></td>
-					</tr>
-					<tr><td>Delete</td><td><form><input type='checkbox' id='delete-server'></form></td><td></td></tr>
-				</table>
+			<div class="row">
+				<div class="col-lg-6">
+					<table class="table no-border">
+						<tr><td style="width:28%;"><b>Server ID</b></td><td style="width:78%;"><!--#host_name#--></td><td ></td></tr>
+						<tr><td><b>Mod</b></td><td><!--#run_stub#--></td><td></td></tr>
+						<tr><td><b>Host IP</b></td><td><!--#host#--></td><td></td></tr>
+						<tr><td><b>Game Port</b></td><td><!--#port#--></td><td></td></tr>
+						<tr><td><b>Client Port</b></td><td><!--#client_port#--></td><td></td></tr>
+						<tr><td><b>TV Port</b></td><td><!--#source_port#--></td><td></td></tr>
+						<tr>
+							<form id="disable-server" method="POST" action="api.php">
+								<td><b>Status</b></td>
+								<td>
+									<input type="hidden" value="setting" name="action"/>
+									<input type="hidden" value="enabled" name="set"/>
+									<input type="hidden" name="server" value="<!--#host_name#-->"/>
+									<input class="form-check-input"  type="radio" name="gridRadios" id="gridRadios1" value="1" checked="checked">
+									<label class="form-check-label" for="gridRadios1"><b>Enabled</b></label>
+									<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="0" >
+									<label class="form-check-label" for="gridRadios2"><b>Disabled</b></label>
+									<input  id="dis-text" type="hidden" name="text" value="1" />
+								</td>
+							</form>
+							<td><div class ="ajax_response" style="margin: 0 0 0 0"  id="disable-response"></div></td>
+						</tr>
+						<tr><td><b>Delete</b></td><td><form><input type='checkbox' id='delete-server'></form></td><td></td></tr>
+					</table>
+				</div>
+				<div class="col-lg-6">
+					<table class="table no-border">
+						<tr><td><b>Console Colour</b></td><td><!--#console_color#--></td></tr>
+					</table>
+				</div>
 			</div>
 		</div>
 		<div class="tab-pane fade" id="bordered-cmd-line" role="tabpanel" aria-labelledby="profile-tab">
