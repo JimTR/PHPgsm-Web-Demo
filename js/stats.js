@@ -251,4 +251,8 @@ $('#vac').on('click','tr', function() {
 	//alert(Selected_Rows.length);
 	//console.log(Selected_Rows);	
 	$("#sb_ban").scrollTop($("tr :contains('"+lookfor+"')").parent('tr').offset().top);
+	rowpos=45;
+	$('#sb_ban').scrollTop(rowpos.top);
+	
+	$('#sb_ban').scrollTop( $('#sb_ban').find( 'tr:last' ).scrollTop() );
 });

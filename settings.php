@@ -285,6 +285,7 @@ function read_cfgs($server) {
 		//echo "$filename size " . filesize($filename) . "\n";
 		$basename = basename($filename);
 		if ($basename == $server['host_name'].'.cfg') {$selected= 'selected';} else {$selected = '';}
+		if($basename == "mapcycle.txt") { continue;}
 		$file_select .= "<option value='$filename' $selected>$basename</option>";
 	}
 	return $file_select;
