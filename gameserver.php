@@ -48,7 +48,7 @@ define('this_server',$this_server);
 $tserver = $this_server['server_name'];
 $header_vars['title'] = "$module - $tserver";
 //print_r($this_server);
-$sql = "SELECT player_history.`steam_id`, players.name_c, player_history.`game_time`, players.country, player_history.`last_play`, steam_data.vac_ban FROM `player_history` INNER JOIN players ON player_history.steam_id = players.steam_id64 INNER JOIN steam_data on player_history.steam_id = steam_data.steam_id WHERE `game` LIKE 'fofserver' ORDER BY `game_time` DESC;";
+$sql = "SELECT player_history.`steam_id`, players.name_c, player_history.`game_time`, players.country, player_history.`last_play`, steam_data.vac_ban FROM `player_history` INNER JOIN players ON player_history.steam_id = players.steam_id64 INNER JOIN steam_data on player_history.steam_id = steam_data.steam_id WHERE `game` LIKE '$bserver' ORDER BY `game_time` DESC;";
 $players = $database->get_results($sql);
 $player_rows ='<tbody>';
 foreach ($players as $player) {
