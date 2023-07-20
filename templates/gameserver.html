@@ -95,17 +95,17 @@
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title">Players
-							<span style="float:right;clear:none;" id="player_title" ></span>
-							<span style="float:right;padding-right:1%;">Map</span>
+							<!--<span style="float:right;clear:none;" id="player_title" ></span>
+							<span style="float:right;padding-right:1%;">Map</span>-->
 						</h5>
 						<div class="table-wrapper" style ="height:391px;"> 
 							<table style="width:100%;" class="table table-sm" style="table-layout: fixed;">
 								<thead>
 								<tr>
-									<th style="width:50%;">Name</th><th>Location</th><th style="padding-left:2%;">Score</th><th style="text-align:center;">Time Online</th>
+									<th  class="table-header" style="width:50%;">Name</th><th class="table-header" >Location</th><th class="table-header" >Time Online</th>
 								</tr>
 								</thead>
-								<tbody id="pbody"></tbody>
+								<tbody id="pbody"><!--#player_list#--></tbody>
 							</table>
 						</div>
 					</div>
@@ -270,8 +270,8 @@
 		port = 0;
 		fetchlog(port,id,url);
 		setInterval(fetchlog, 2000);
-		players(port,id,url);
-		setInterval(players, 7000);
+		//players(port,id,url);
+		//setInterval(players, 7000);
 		get_game(url,server,id);
 		setInterval(get_game,4000);
 	});

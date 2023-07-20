@@ -31,19 +31,21 @@
 						<tr><td><b>Client Port</b></td><td><!--#client_port#--></td><td></td></tr>
 						<tr><td><b>TV Port</b></td><td><!--#source_port#--></td><td></td></tr>
 						<tr>
-							<form id="disable-server" method="POST" action="api.php">
+							
 								<td><b>Status</b></td>
 								<td>
-									<input type="hidden" value="setting" name="action"/>
-									<input type="hidden" value="enabled" name="set"/>
-									<input type="hidden" name="server" value="<!--#host_name#-->"/>
-									<input class="form-check-input"  type="radio" name="gridRadios" id="gridRadios1" value="1" checked="checked">
-									<label class="form-check-label" for="gridRadios1"><b>Enabled</b></label>
-									<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="0" >
-									<label class="form-check-label" for="gridRadios2"><b>Disabled</b></label>
-									<input  id="dis-text" type="hidden" name="text" value="1" />
+									<form id="disable-server" method="POST" action="api.php">
+										<input class="form-check-input"  type="radio" name="gridRadios" id="gridRadios1" value="1" checked="checked">
+										<label class="form-check-label" for="gridRadios1"><b>Enabled</b></label>
+										<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="0" >
+										<label class="form-check-label" for="gridRadios2"><b>Disabled</b></label>
+										<input type="hidden" value="setting" name="action"/>
+										<input type="hidden" value="enabled" name="set"/>
+										<input type="hidden" name="server" value="<!--#host_name#-->"/>
+										<input  id="dis-text" type="hidden" name="text" value="1" />
+									</form>
 								</td>
-							</form>
+								
 							<td><div class ="ajax_response" style="margin: 0 0 0 0"  id="disable-response"></div></td>
 						</tr>
 						<tr><td><b>Delete</b></td><td><form><input type='checkbox' id='delete-server'></form></td><td></td></tr>

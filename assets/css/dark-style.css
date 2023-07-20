@@ -1428,3 +1428,12 @@ a.invert:hover {
   background-color: #2f2f2f;
 }
 
+.form-check-label {
+  padding-right:5%;
+}
+
+.form-check-input {
+    /* position: absolute; */
+    margin-top: -0.1%;
+    /* margin-left: -1.25rem;*/
+}
