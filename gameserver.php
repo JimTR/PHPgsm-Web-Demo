@@ -48,7 +48,7 @@ define('this_server',$this_server);
 $tserver = $this_server['server_name'];
 $header_vars['title'] = "$module - $tserver";
 //print_r($this_server);
-$sql = "SELECT `steam_id`, players.name_c, player_history.`game_time`, players.country, `last_play` FROM `player_history` LEFT JOIN players ON player_history.steam_id = players.steam_id64 WHERE `game` LIKE '$bserver' ORDER BY `game_time` DESC;
+$sql = "SELECT `steam_id`, players.name_c, player_history.`game_time`, players.country, `last_play` FROM `player_history` LEFT JOIN players ON player_history.steam_id = players.steam_id64 WHERE `game` LIKE '$bserver' ORDER BY `game_time` DESC LIMIT 500;
 ";
 $players = $database->get_results($sql);
 $player_rows ='';
