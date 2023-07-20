@@ -99,13 +99,13 @@
 							<span style="float:right;padding-right:1%;">Map</span>-->
 						</h5>
 						<div class="table-wrapper" style ="height:391px;"> 
-							<table style="width:100%;" class="table table-sm" style="table-layout: fixed;">
+							<table class="table table-sm" style="table-layout: fixed;display:none;" id="player-table">
 								<thead>
 									<th  class="table-header" style="width:48%;">Name</th>
 									<th class="table-header" >Location</th>
 									<th class="table-header" style="width:27%;">Time Online</th>
 								</thead>
-								<tbody id="pbody"><!--#player_list#--></tbody>
+								<!--#player_list#-->
 							</table>
 						</div>
 					</div>
@@ -274,6 +274,8 @@
 		//setInterval(players, 7000);
 		get_game(url,server,id);
 		setInterval(get_game,4000);
+		//alert("show table");
+		$("#player-table").show();
 	});
 </script>
 

@@ -55,7 +55,7 @@ $player_rows ='<tbody>';
 $x=0;
 foreach ($players as $player) {
 	$online = convertSecToTime($player['game_time']);
-	if($x >500) {$player_rows .="</tbody><tbody style='display:none'>";}
+	//if($x >500) {$player_rows .="</tbody><tbody style='display:none'>";}
 	$player_rows .= "<tr><td><a href='users.php?id={$player['steam_id']}'>{$player['name_c']}</a></td><td>{$player['country']}</td><td style='text-align:right;padding-right:7%;'>$online</td></tr>";
 	$x++;
 }
