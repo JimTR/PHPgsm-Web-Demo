@@ -48,16 +48,18 @@ define('this_server',$this_server);
 $tserver = $this_server['server_name'];
 $header_vars['title'] = "$module - $tserver";
 //print_r($this_server);
-$sql = "SELECT `steam_id`, players.name_c, player_history.`game_time`, players.country, `last_play` FROM `player_history` LEFT JOIN players ON player_history.steam_id = players.steam_id64 WHERE `game` LIKE '$bserver' ORDER BY `game_time` DESC LIMIT 500;
+$sql = "SELECT `steam_id`, players.name_c, player_history.`game_time`, players.country, `last_play` FROM `player_history` LEFT JOIN players ON player_history.steam_id = players.steam_id64 WHERE `game` LIKE '$bserver' ORDER BY `game_time` DESC;
 ";
 $players = $database->get_results($sql);
-$player_rows ='';
+$player_rows ='<tbody>';
+$x=0;
 foreach ($players as $player) {
 	$online = convertSecToTime($player['game_time']);
+	if($x >500) {$player_rows .="</tbody><tbody style='display:none'>";}
 	$player_rows .= "<tr><td><a href='users.php?id={$player['steam_id']}'>{$player['name_c']}</a></td><td>{$player['country']}</td><td style='text-align:right;padding-right:7%;'>$online</td></tr>";
-	
+	$x++;
 }
-$page['player_list'] = $player_rows;
+$page['player_list'] = "$player_rows</tbody>";
 $this_server['server_update'] = date("d-m-Y H:i:s a",$this_server['server_update']);
 if ($this_server['starttime']) {$this_server['starttime'] = date("d-m-Y H:i:s a",$this_server['starttime']);}
 $info = get_server_info($this_server);
