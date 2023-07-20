@@ -16,7 +16,7 @@
 	<!--#include#-->
 </head>
 
-<body class="toggle-sidebar">
+<body>
 	<!--#header#-->
 	<!--#sidebar#-->
 	<main id="main" class="main">
@@ -276,6 +276,12 @@
 		setInterval(get_game,4000);
 		//alert("show table");
 		$("#player-table").show();
+		//alert($(window).width());
+		width = $(window).width();
+		if (width >1000) {
+			$("body").addClass("toggle-sidebar");
+		}
+		 
 	});
 </script>
 
