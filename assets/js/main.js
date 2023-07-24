@@ -6,13 +6,19 @@
 */
 jQuery(document).ready(function(){
 var wSize = jQuery(window).width();
-if(wSize > 1200) {
+if(wSize > 400) {
+console.log(wSize);
 jQuery('body').addClass('toggle-sidebar');
-
 sessionStorage.clear();	
 updateClock();
 setInterval('updateClock()', 1000);
 }
+});
+
+$( window ).resize(function() {
+   var width = $(window).width();
+   var height = $(window).height();
+   console.log( 'Browser Window width : '+width + ' , height : ' + height );
 });
 
 function updateClock ()

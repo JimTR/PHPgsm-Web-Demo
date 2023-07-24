@@ -1395,3 +1395,29 @@ if (isset($cmds)) {
 	return $cmds;
 }
 }
+function paginate($data,$page = 0,$rows_per_page=0) {
+	/*
+	 *  $data is an array of data to paginate
+	 *  $page is the page number you want to return
+	*/ 
+	$rows = count( $data);
+	 $row_total = $rows_per_page+1;
+	if ($rows > $rows_per_page) {
+		$pages= ceil($rows/$row_total);
+	}
+	else {
+		$pages = 1;
+	}
+	switch ($page) {
+	case 0:
+		$return['data'] = array_slice($data,0,);
+	default:
+		$return['data'] = array_slice($data,$row_total*$page,$row_total);	
+	}
+	$return['rows'] = $rows;
+	$return['pages'] = $pages;
+	$return['page'] = $page;
+	//printr($return);
+	//die();
+	return $return;
+}

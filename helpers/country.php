@@ -4,26 +4,15 @@ $id= $_GET['id'];
 if (!isset($_GET['page'])) {$page = 0;}
 else {$page = $_GET['page'];}
 $sql = "select steam_id64,name_c,aka,server,first_log_on,last_log_on,log_ons,city,region from players where country_code like '$id' order by last_log_on DESC";
-$rows = $database->num_rows( $sql);
-if ($rows > 999) {
-	$pages= ceil($rows/1000);
-}
-else {
-	$pages = 1;
-}
 $r = $database->get_results($sql);
-switch ($page) {
-	case 0:
-		$data['country'] = array_slice($r,0,1000);
-	default:
-		$data['country'] = array_slice($r,1000*$page,1000);	
-	}
+$country = paginate($r,$page,100);
+$data['country'] = $country['data'];
 $sql = "SELECT country,sum(game_time) as online FROM `player_history`  where `country` like '$id';";
 $online = $database->get_row($sql);
 $data['online'] = convertSecToTime($online['online']);	
-$data['rows'] =  $rows;
-$data['pages'] = $pages;
-$data['page'] = $page;
+$data['rows'] =  $country['rows'];
+$data['pages'] = $country['pages'];
+$data['page'] = $country['page'];
 $data['id'] = $id;
 //$data['county'] = $r;
 $sql = "SELECT players.name_c, sum(`game_time`) as total,players.log_ons FROM `player_history` left join players on player_history.steam_id= players.steam_id64 where player_history.country LIKE '$id' GROUP BY `steam_id`  ORDER BY `total`  DESC limit 1";

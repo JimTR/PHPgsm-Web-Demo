@@ -65,6 +65,8 @@ $page['player_list'] = "$player_rows</tbody>";
 $this_server['server_update'] = date("d-m-Y H:i:s a",$this_server['server_update']);
 if ($this_server['starttime']) {$this_server['starttime'] = date("d-m-Y H:i:s a",$this_server['starttime']);}
 $info = get_server_info($this_server);
+//printr($info);
+//die();
 $uri = parse_url($this_server['url']);
 $url = $uri['scheme']."://".$uri['host'].':'.$this_server['bport'];
 if(isset($uri['path'])){ $url .= $uri['path'];}

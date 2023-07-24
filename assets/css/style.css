@@ -575,7 +575,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (min-width: 1200px) {
   #main, #footer {
-    margin-left: 300px;
+   margin-left: 300px;
   }
 }
 @media (max-width: 1199px) {
@@ -1356,4 +1356,10 @@ a.invert:hover {
   /* background-color: #2F2F2F !important;*/
   position: sticky;
   top: 0;
+}
+
+@media (max-width: 480px) {
+  .span-show {
+   display: none;
+  }
 }
