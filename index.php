@@ -1,4 +1,9 @@
 <?php
+if(isset($_GET['debug'])) {
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+}
 include 'inc/master.inc.php';
 define( 'LOG',	'logs/ajax.log');
 $module = "Dashboard";	
@@ -7,6 +12,7 @@ $version = "1.010";
 $time = "1664264149";
 $we_are_here = $settings['url'];
 $template = new template;
+//die();
 $sql = "select * from server1 order by `host_name` ASC";
 $servers = $database->get_results($sql);
 $page['gd'] ='';
@@ -64,7 +70,7 @@ $page['url'] = $we_are_here.'/ajax.php';
 $template->load('templates/index.html');
 $template->replace_vars($page);
 $template->publish();
-$database->disconnect();
+//$database->disconnect();
 /*
 $members = json_decode(file_get_contents('https://discordapp.com/api/guilds/191581638629523456/widget.json'), true)['members'];
 foreach ($members as $member) {
