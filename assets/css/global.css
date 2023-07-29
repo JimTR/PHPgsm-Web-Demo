@@ -100,3 +100,12 @@
   max-height:none;
  /* width: fit-content;*/
  }
+
+@media (max-width: 480px) {
+  .span-show {
+   display: none;
+  }
+  .mini {
+  display: inline-flex;
+}  	
+}
