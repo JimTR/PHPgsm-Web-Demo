@@ -156,7 +156,10 @@ $page['vac_count'] = count($vac_bans);
 foreach ($vac_bans as $vac_ban) {
 	// who has a vac ban
 	$last_ban = date("d-m-Y",$vac_ban['last_ban']);
-	if($vac_ban['last_ban'] >0){ $last_logon = date("d-m-Y",$vac_ban['last_log_on']);} else {$last_logon = '-';}
+	$last_logon = date("d-m-Y",$vac_ban['last_log_on']);
+	if($vac_ban['last_ban'] ==0){
+		$Last_ban = strtotime("{$vac_ban['last_log_on']} -7 years"); 
+	} 
 	if(empty($vac_ban['name_c'])) { 
 		$vac_ban['name_c'] = $vac_ban['steam_id']; // we don't have the user logged in
 		$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['name_c']}</a>";
