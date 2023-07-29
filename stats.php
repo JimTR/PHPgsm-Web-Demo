@@ -133,11 +133,11 @@ foreach($dups as $dup) {
 	 $last_ip = $dup['ip'];
 	 $i++;
 }
-$dup_table = paginate($dup_table,0,100);
+//$dup_table = paginate($dup_table,0,100);
 //print_r($dup_table);
 //die();
 $page['dups'] ='';
-foreach ($dup_table['data'] as $dup) {	
+foreach ($dup_table as $dup) {	
 	$page['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=4>{$dup['name']}</td></tr>";
 }
 
