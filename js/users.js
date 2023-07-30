@@ -289,6 +289,11 @@ function get_steam_data(user_id) {
 			$("#user-avatar").attr("src",data.avatar);	
 			$('#dta').append('<tr><td>Steam Status</td><td>'+data.status+'</td></tr>');
 			if (data.steam_date !== undefined) {
+				if($.isNumeric(data.steam_date)) {
+					console.log("date is a number");
+					data.steam_date =timeConverter(data.steam_date);
+					data.steam_date = data.steam_date.replace('00:00', '');
+				}
 				$('#dta').append('<tr><td>Steam Member Since</td><td>'+data.steam_date+'</td></tr>');
 			}
 			if (data.ban_desc !== undefined) {
