@@ -22,7 +22,9 @@
  * 
  */
 include 'inc/master.inc.php';
-  
+ // ini_set('display_errors', 1);
+	//ini_set('display_startup_errors', 1);
+	//error_reporting(E_ALL);
 $build = "1667-3072679804";
 $version = "1.001";
 $time = "1663578073";
@@ -161,7 +163,13 @@ foreach ($vac_bans as $vac_ban) {
 	$last_ban = date("d-m-Y",$vac_ban['last_ban']);
 	$last_logon = date("d-m-Y",$vac_ban['last_log_on']);
 	if($vac_ban['last_ban'] ==0){
-		$Last_ban = 'Before '.strtotime("{$vac_ban['last_log_on']} -7 years"); 
+		//$x = date("d-m-y",$vac_ban['last_log_on'] );
+		$date = strtotime("$last_logon -7 years");
+		//echo "$date<br>";
+		//die();
+		$date = date("d-m-Y",$date);
+		//echo "$date<br>";
+		$last_ban = "Before $date"; 
 	} 
 	if(empty($vac_ban['name_c'])) { 
 		$vac_ban['name_c'] = $vac_ban['steam_id']; // we don't have the user logged in
