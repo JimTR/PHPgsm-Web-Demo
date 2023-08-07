@@ -21,11 +21,13 @@
  * 
  * 
  */
+ if(isset($_GET['debug'])) {
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+}
 include 'inc/master.inc.php';
- // ini_set('display_errors', 1);
-	//ini_set('display_startup_errors', 1);
-	//error_reporting(E_ALL);
-$build = "1667-3072679804";
+ $build = "1667-3072679804";
 $version = "1.001";
 $time = "1663578073";
 $module = "stats";
@@ -160,16 +162,16 @@ $vac_bans = $database->get_results($sql);
 $page['vac_count'] = count($vac_bans);
 foreach ($vac_bans as $vac_ban) {
 	// who has a vac ban
+	$name = $vac_ban['name_c'];
 	$last_ban = date("d-m-Y",$vac_ban['last_ban']);
+	$last_ban ="<span style='color:red;'>$last_ban</span>";
+	$title=  "$name has a current VAC ban";
 	$last_logon = date("d-m-Y",$vac_ban['last_log_on']);
 	if($vac_ban['last_ban'] ==0){
-		//$x = date("d-m-y",$vac_ban['last_log_on'] );
 		$date = strtotime("$last_logon -7 years");
-		//echo "$date<br>";
-		//die();
 		$date = date("d-m-Y",$date);
-		//echo "$date<br>";
-		$last_ban = "Before $date"; 
+		$title =  "$name&#39;s last ban was at least 7 years ago";
+		$last_ban = "<span style='color:yellow;'>$date</span>"; 
 	} 
 	if(empty($vac_ban['name_c'])) { 
 		$vac_ban['name_c'] = $vac_ban['steam_id']; // we don't have the user logged in
@@ -178,7 +180,7 @@ foreach ($vac_bans as $vac_ban) {
 	else {
 		$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['name_c']}</a>";
 	}
-	$page['vac_bans'] .= "<tr><td>$player_link</td><td>$last_ban</td><td>$last_logon</td></tr>";
+	$page['vac_bans'] .= "<tr title='$title'><td>$player_link</td><td>$last_ban</td><td>$last_logon</td></tr>";
 }
 $sql = "select * from server1 order by `host_name` ASC";
 $servers = $database->get_results($sql);
