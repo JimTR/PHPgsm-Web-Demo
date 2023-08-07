@@ -52,4 +52,9 @@ $page['dups'] ='';
 foreach ($dup_table as $dup) {	
 	$page['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=4>{$dup['name']}</td></tr>";
 }
-echo $page['dups'];
+//echo $page['dups'];
+$sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as total_logins, players.steam_id64 as steam_id FROM `players` WHERE `players`.time_on_line = (SELECT MAX(time_on_line) FROM players)";
+$stats = db->get_row($sql);
+$sql = "select * from logins limit 1";
+$country = db->get_row($sql);
+printr($country);
