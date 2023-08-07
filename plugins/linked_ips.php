@@ -57,4 +57,9 @@ $sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as
 $stats = db->get_row($sql);
 $sql = "select * from logins limit 1";
 $country = db->get_row($sql);
-printr($country);
+$sql = "SELECT count(*) as player_count,sum(log_ons) as login_count, sum(time_on_line) as total_time from players"; //get player count & time on line
+$counts = db->get_row($sql);
+printr($counts);
+$sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as total_logins, players.steam_id64 as steam_id FROM `players` WHERE `players`.log_ons = (SELECT MAX(log_ons) FROM players)";
+$times = db->get_row($sql);
+printr($times);
