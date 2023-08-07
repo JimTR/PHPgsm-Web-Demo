@@ -51,9 +51,13 @@ foreach($dups as $dup) {
 $dup_table = paginate($dup_table,0,100);
 $page['dups'] ='';
 //printr($dup_table);
+//die();
 foreach ($dup_table['data'] as $dup) {	
 	$page['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=4>{$dup['name']}</td></tr>";
+	//$x[] =  "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=4>{$dup['name']}</td></tr>";	
 }
+
+//$ = paginate($dup_table,0,100);
 //echo $page['dups'];
 $sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as total_logins, players.steam_id64 as steam_id FROM `players` WHERE `players`.time_on_line = (SELECT MAX(time_on_line) FROM players)";
 $stats['time_on_line'] = db->get_row($sql);
@@ -64,4 +68,5 @@ $stats['counts'] = db->get_row($sql);
 $sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as total_logins, players.steam_id64 as steam_id FROM `players` WHERE `players`.log_ons = (SELECT MAX(log_ons) FROM players)";
 $stats['times'] = db->get_row($sql);
 $stats['dups'] = $page['dups'];
-printr($stats);
+//printr($stats);
+echo "<table>{$stats['dups']}</table>";
