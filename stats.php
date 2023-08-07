@@ -171,7 +171,7 @@ foreach ($vac_bans as $vac_ban) {
 		$date = strtotime("$last_logon -7 years");
 		$date = date("d-m-Y",$date);
 		$title =  "$name&#39;s last ban was at least 7 years ago";
-		$last_ban = "<span style='color:yellow;'>$date</span>"; 
+		$last_ban = "<span style='color:orange;'>$date</span>"; 
 	} 
 	if(empty($vac_ban['name_c'])) { 
 		$vac_ban['name_c'] = $vac_ban['steam_id']; // we don't have the user logged in
