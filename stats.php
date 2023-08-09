@@ -137,7 +137,7 @@ foreach($dups as $dup) {
 	 $last_ip = $dup['ip'];
 	 $i++;
 }
-$dup_table = paginate($dup_table,0,500);
+$dup_table = paginate($dup_table,0,100);
 //print_r($dup_table);
 //die();
 $page['dups'] ='';
