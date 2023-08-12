@@ -31,35 +31,35 @@ include 'inc/master.inc.php';
 $version = "1.001";
 $time = "1663578073";
 $module = "stats";
+if ($settings['left_buttons']) {$page['button_class'] = "button-left";} else {$page['button_class']='';}
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
 $we_are_here = $settings['url'];
 $url = $settings['url'];
-$sql = "select * from logins limit 1";
-if ($settings['left_buttons']) {$page['button_class'] = "button-left";} else {$page['button_class']='';}
-$country = $database->get_results($sql);
-$page['country'] = $country[0]['country'];
-$page['country_stat'] = "{$country[0]['logins']} / {$country[0]['players']}";
-$sql = "SELECT count(*) as player_count,sum(log_ons) as login_count, sum(time_on_line) as total_time from players"; //get player count & time on line
-$stats = $database->get_results($sql);
-$page['player_total'] = $stats[0]['player_count'];
-$page['total_time'] = convertSecToTime($stats[0]['total_time']);
-$sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as total_logins, players.steam_id64 as steam_id FROM `players` WHERE `players`.time_on_line = (SELECT MAX(time_on_line) FROM players)";
-$stats = $database->get_results($sql);
-$page['time_online'] = "<a href='users.php?id={$stats[0]['steam_id']}'>{$stats[0]['user_name']}</a>";
-$page['time_online_count'] = convertSecToTime($stats[0]['play_time']);
-$sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as total_logins, players.steam_id64 as steam_id FROM `players` WHERE `players`.log_ons = (SELECT MAX(log_ons) FROM players)";
-$stats = $database->get_results($sql);
-$page['most_log_ons'] = "<a href='users.php?id={$stats[0]['steam_id']}'>{$stats[0]['user_name']}</a>";
-$page['log_on_count'] = $stats[0]['total_logins'];
-$sql = "SELECT servers.server_name,player_history.game as server_id,count(player_history.`game`) as total FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.`game` order by total desc limit 1;";
-$stats = $database->get_results($sql);
-$page['most_popular'] = $stats[0]['server_name'];
-$page['most_popular_count'] = $stats[0]['total'];
+$page['url'] = $settings['url'];
 $page['page-title'] = 'Statistics';
-$page['url'] = $url;
 $page['today'] = date("Y-m-d");
+$sql = "select * from logins limit 1";
+$country = db->get_row($sql);
+$page['country'] = $country['country'];
+$page['country_stat'] = "{$country['logins']} / {$country['players']}";
+$sql = "SELECT count(*) as player_count,sum(log_ons) as login_count, sum(time_on_line) as total_time from players"; //get player count & time on line
+$stats = db->get_row($sql);
+$page['player_total'] = $stats['player_count'];
+$page['total_time'] = convertSecToTime($stats['total_time']);
+$sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as total_logins, players.steam_id64 as steam_id FROM `players` WHERE `players`.time_on_line = (SELECT MAX(time_on_line) FROM players)";
+$stats = db->get_row($sql);
+$page['time_online'] = "<a href='users.php?id={$stats['steam_id']}'>{$stats['user_name']}</a>";
+$page['time_online_count'] = convertSecToTime($stats['play_time']);
+$sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as total_logins, players.steam_id64 as steam_id FROM `players` WHERE `players`.log_ons = (SELECT MAX(log_ons) FROM players)";
+$stats = db->get_row($sql);
+$page['most_log_ons'] = "<a href='users.php?id={$stats['steam_id']}'>{$stats['user_name']}</a>";
+$page['log_on_count'] = $stats['total_logins'];
+$sql = "SELECT servers.server_name,player_history.game as server_id,count(player_history.`game`) as total FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.`game` order by total desc limit 1;";
+$stats = db->get_row($sql);
+$page['most_popular'] = $stats['server_name'];
+$page['most_popular_count'] = $stats['total'];
 $sql = "SELECT servers.server_name,player_history.`game`,sum(player_history.`game_time`) as full_time, count(player_history.game) as player_tot  FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.game ORDER BY `full_time` DESC ";
-$stats = $database->get_results($sql);
+$stats = db->get_results($sql);
 $page['most_played_time'] =convertSecToTime($stats[0]['full_time']);
 $page['most_played'] = $stats[0]['server_name'];
 $page['game_list'] ='';
@@ -76,7 +76,7 @@ $sb_bans = db2->get_results($sql);
 $lookfor = '';
 $page['sb_count'] =count($sb_bans);
 foreach ($sb_bans as $sb_ban) {
-	$ip = ip2long($sb_ban['ip']);
+	if(isset($sb_ban['ip'])) {$ip = ip2long($sb_ban['ip']);}
 	$created = date("d-m-Y",$sb_ban['created']);
 	$ends = date("d-m-Y",$sb_ban['ends']);
 	if(!empty($sb_ban['authid'])) {
@@ -112,14 +112,16 @@ foreach($db_users as $db_user) {
 }
 $line ='';
 foreach ($bans as $ban) {
+	if (!isset($ban['last_log_on'])) {$ban['last_log_on'] = '-';}
 	$line .= "<tr><td>{$ban['name']}</td><td>{$ban['created']}</td><td>{$ban['last_log_on']}</td></tr>";
 }
 
 $page['sb_bans'] = $line;
 $sql = "SELECT * FROM players INNER JOIN( SELECT ip FROM players GROUP BY ip HAVING COUNT(ip) > 1 order by ip) temp ON players.ip = temp.ip ORDER BY `players`.`ip` ASC"; // get dups
-$dups = $database->get_results($sql);
+$dups = db->get_results($sql);
 $i=0;
 $page['dup_count'] = count($dups);
+$last_ip='';
 foreach($dups as $dup) {
 	// scan through
 	$id = $dup['steam_id64'];
@@ -193,8 +195,8 @@ foreach ($servers as $server) {
 	$ip_ban_location = "{$server['location']}/{$server['game']}/cfg/banned_ip.cfg";
 	$id_ban_location = "{$server['location']}/{$server['game']}/cfg/banned_user.cfg";
 	if(in_array($ip_ban_location,$bl) or in_array($id_ban_location,$bl )) {continue;}
-	$ip_system_bans = explode(PHP_EOL,trim(file_get_contents($ip_ban_location)));
-	$id_system_bans = explode(PHP_EOL,trim(file_get_contents($id_ban_location)));
+	if(is_file($ip_ban_location)) {$ip_system_bans = explode(PHP_EOL,trim(file_get_contents($ip_ban_location)));}
+	if(is_file($id_ban_location)) {$id_system_bans = explode(PHP_EOL,trim(file_get_contents($id_ban_location)));}
 	//echo $id_ban_location.'<br>';
 	
 	foreach ($ip_system_bans as $system_ban) {
@@ -266,8 +268,9 @@ $line='';
 foreach ($x['ip'] as $y) {
 	
 	if(empty($y['ip'])){continue;} 
-	$id = $y['steam_id'];
+	
 	if(isset($y['name'])) {
+		$id = $y['steam_id'];
 		$name = $y['name'];
 		$name = "<a href='users.php?id=$id'>$name</a>";
 		if($y['last_log_on'] == 0) {$logon = "-";}
@@ -318,7 +321,7 @@ $page['sysbans_count'] = $ip_count+$id_count;
 $page['sys_bans'] = $line;
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
-$template->replace_vars($header_vars);
+//$template->replace_vars($header_vars);
 $page['header'] = $template->get_template();
 $template->load('templates/subtemplates/sidebar.html'); //sidebar
 $template->replace_vars($sidebar_data);
