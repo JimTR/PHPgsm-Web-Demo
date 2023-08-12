@@ -303,8 +303,8 @@ $time = "1639128588";
                 );
                 //print_r($cookie_options);
 		//echo "user = ".$this->id.'<br>';
-            setcookie("userid",$this->id,$cookie_options);
-            setcookie("phpgsm",$this->nid,$cookie_options);
+            setcookie("userid",$row['id'],$cookie_options);
+            setcookie("phpgsm",$nid,$cookie_options);
              $update = array( 'currentip' => $this->currentip); // update last movement
 			 $update_where = array( 'id' => $row['id']);
 			 db->update( 'users', $update, $update_where, 1 );
