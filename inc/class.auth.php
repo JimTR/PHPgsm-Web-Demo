@@ -29,15 +29,11 @@ $time = "1639128588";
             $this->expiryDate = $d->format("U"); 
             //$this->user       = new User();
             //$this->currentip = getip();
-            if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)){
-            $this->currentip = $_SERVER["HTTP_X_FORWARDED_FOR"];  
-        }else if (array_key_exists('REMOTE_ADDR', $_SERVER)) { 
-            $this->currentip =  $_SERVER["REMOTE_ADDR"]; 
-        }else if (array_key_exists('HTTP_CLIENT_IP', $_SERVER)) {
-            $this->currentip = $_SERVER["HTTP_CLIENT_IP"]; 
-        }else if (array_key_exists('HTTP_X_REAL_IP', $_SERVER)) {
-			$this->currentip =  $_SERVER ['HTTP_X_REAL_IP'];}
-			$this->currentip = "Unknown";  
+            if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)){$this->currentip = $_SERVER["HTTP_X_FORWARDED_FOR"]; }
+            else if (array_key_exists('REMOTE_ADDR', $_SERVER)) {$this->currentip =  $_SERVER["REMOTE_ADDR"];}
+            else if (array_key_exists('HTTP_CLIENT_IP', $_SERVER)) {$this->currentip = $_SERVER["HTTP_CLIENT_IP"]; }
+            else if (array_key_exists('HTTP_X_REAL_IP', $_SERVER)) {$this->currentip =  $_SERVER ['HTTP_X_REAL_IP'];}
+			else {$this->currentip = "Unknown";}  
             
             
         }
