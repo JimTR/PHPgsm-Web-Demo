@@ -307,6 +307,8 @@ $time = "1639128588";
             setcookie("phpgsm",$nid,$cookie_options);
              $update = array( 'currentip' => $this->currentip); // update last movement
 			 $update_where = array( 'id' => $row['id']);
+			 print_r($update_where);
+			 print_r($update);
 			 db->update( 'users', $update, $update_where, 1 );
 			 //$database->disconnect();
             //$_SESSION['userid'] = $row['id'];
