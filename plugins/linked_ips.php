@@ -30,6 +30,8 @@
 include '../inc/master.inc.php';
 $sql = "SELECT * FROM players INNER JOIN( SELECT ip FROM players GROUP BY ip HAVING COUNT(ip) > 1 order by ip) temp ON players.ip = temp.ip ORDER BY `players`.`ip` ASC"; // get dups
 $dups = db->get_results($sql);
+$last_ip = 0;
+$i=0;
 //printr($dups);
 foreach($dups as $dup) {
 	// scan through
