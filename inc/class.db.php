@@ -416,7 +416,7 @@ class db
     public function get_row( $query, $object = false )
     {
         self::$counter++;
-        echo $query;
+        //echo $query;
         $row = $this->link->query( $query );
         if( $this->link->error )
         {
