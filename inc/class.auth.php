@@ -279,7 +279,7 @@ $time = "1639128588";
 				return false;
 			}
             
-             global $database;
+             //global $database;
 			 $nid = $_COOKIE["phpgsm"]; // get the user
 			 //die($nid);
             // We SELECT * so we can load the full user record into the user DBObject later (no longer used 20-10-14)
@@ -290,7 +290,7 @@ $time = "1639128588";
             
              foreach ($row as $key => $val) {
 				 if (!is_int($key)){
-					$this->$key = $val;
+					//$this->$key = $val;
 					}
 				}
 				 $cookie_options = array (
@@ -307,7 +307,7 @@ $time = "1639128588";
             setcookie("phpgsm",$this->nid,$cookie_options);
              $update = array( 'currentip' => $this->currentip); // update last movement
 			 $update_where = array( 'id' => $row['id']);
-			 $database->update( 'users', $update, $update_where, 1 );
+			 db->update( 'users', $update, $update_where, 1 );
 			 //$database->disconnect();
             //$_SESSION['userid'] = $row['id'];
             return true;
