@@ -416,6 +416,7 @@ class db
     public function get_row( $query, $object = false )
     {
         self::$counter++;
+        echo $query;
         $row = $this->link->query( $query );
         if( $this->link->error )
         {
@@ -977,7 +978,12 @@ class db
      */
     public function disconnect()
     {
+		//die($this->link);
+		//echo "stopped";
+	if ( $this->link->ping()) {	
         $this->link->close();
+	}
+        
     }
 
 } //end class DB
