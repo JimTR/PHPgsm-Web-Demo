@@ -28,7 +28,16 @@ $time = "1639128588";
             $this->loggedIn   = false;
             $this->expiryDate = $d->format("U"); 
             //$this->user       = new User();
-            $this->currentip = getip();
+            //$this->currentip = getip();
+            if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)){
+            $this->currentip = $_SERVER["HTTP_X_FORWARDED_FOR"];  
+        }else if (array_key_exists('REMOTE_ADDR', $_SERVER)) { 
+            $this->currentip =  $_SERVER["REMOTE_ADDR"]; 
+        }else if (array_key_exists('HTTP_CLIENT_IP', $_SERVER)) {
+            $this->currentip = $_SERVER["HTTP_CLIENT_IP"]; 
+        }else if (array_key_exists('HTTP_X_REAL_IP', $_SERVER)) {
+			$this->currentip =  $_SERVER ['HTTP_X_REAL_IP'];}
+			$this->currentip = "Unknown";  
             
             
         }
@@ -275,9 +284,10 @@ $time = "1639128588";
             
              global $database;
 			 $nid = $_COOKIE["phpgsm"]; // get the user
+			 //die($nid);
             // We SELECT * so we can load the full user record into the user DBObject later (no longer used 20-10-14)
             
-            $row = $database->get_Row('SELECT * FROM users WHERE nid = "' . $nid.'"');
+            $row = db->get_Row('SELECT * FROM users WHERE nid = "' . $nid.'"');
             if($row === false)
                 return false;
             
@@ -373,4 +383,17 @@ $time = "1639128588";
             srand(time());
             return md5(rand() . microtime());
         }
+        private function get_ip() {
+			// php 8
+			if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)){
+            return  $_SERVER["HTTP_X_FORWARDED_FOR"];  
+        }else if (array_key_exists('REMOTE_ADDR', $_SERVER)) { 
+            return $_SERVER["REMOTE_ADDR"]; 
+        }else if (array_key_exists('HTTP_CLIENT_IP', $_SERVER)) {
+            return $_SERVER["HTTP_CLIENT_IP"]; 
+        }else if (array_key_exists('HTTP_X_REAL_IP', $_SERVER)) {
+			return $_SERVER ['HTTP_X_REAL_IP'];}
+			return "Unknown";  
+		 
+		}
     }
