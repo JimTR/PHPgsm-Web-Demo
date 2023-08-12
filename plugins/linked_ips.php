@@ -48,7 +48,7 @@ foreach($dups as $dup) {
 	 $last_ip = $dup['ip'];
 	 $i++;
 }
-$dup_table = paginate($dup_table,0,100);
+//$dup_table = paginate($dup_table,0,100);
 $page['dups'] ='';
 //printr($dup_table);
 //die();
