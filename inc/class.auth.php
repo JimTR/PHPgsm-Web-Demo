@@ -2,6 +2,7 @@
 $build = "10915-2645781980";
 $version = "3.00";
 $time = "1639128588";
+#[AllowDynamicProperties]
     class Auth
     {
         const SALT = 'insert some random text here';
