@@ -27,6 +27,7 @@ $time = "1639128588";
             $this->user       = null;
             $this->loggedIn   = false;
             $this->currentip = 0;
+            $this->password='';
             $this->expiryDate = $d->format("U"); 
             //$this->user       = new User();
             //$this->currentip = getip();
