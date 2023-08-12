@@ -52,7 +52,8 @@ foreach($dups as $dup) {
 $page['dups'] ='';
 //printr($dup_table);
 //die();
-foreach ($dup_table['data'] as $dup) {	
+//foreach ($dup_table['data'] as $dup) {	
+foreach ($dup_table as $dup) {	
 	$page['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=4>{$dup['name']}</td></tr>";
 	//$x[] =  "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=4>{$dup['name']}</td></tr>";	
 }
