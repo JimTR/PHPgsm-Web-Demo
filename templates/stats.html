@@ -204,7 +204,7 @@
 									<h5 class="card-title" style="margin-left:1%;">Banned Users</h5>
 									<div class="<!--#div_width#-->" id="" <!--#vac_ban_class#-->>
 										
-										<p class="card-title">Vac Bans <!--#vac_count#--> bans found</p>
+										<p class="card-title">Vac Bans <dummy class="card-title" id="vac-count"></dummy> bans found</p>
 										<div class="table-wrapper">
 										<table class="table" id="vac">
 											<thead>
@@ -213,8 +213,8 @@
 												<th class="table-header" >Last Login</th>
 												
 											</thead>
-											<tbody>
-												<!--#vac_bans#-->
+											<tbody id="vac-bans">
+												
 											</tbody>
 											
 										</table>
@@ -222,7 +222,7 @@
 										</div>
 										<div class="<!--#div_width#-->" id="" <!--#sb_ban_class#-->>
 										
-										<p class="card-title">Source Bans <!--#sb_count#--> bans found</p>
+										<p class="card-title">Source Bans <dummy class="card-title" id="sb-count"></dummy> bans found</p>
 										<div class="table-wrapper">
 										<table class="table" id="sb_ban">
 											<thead>
@@ -231,8 +231,8 @@
 												<th class="table-header" >Last Login</th>
 												
 											</thead>
-											<tbody>
-												<!--#sb_bans#-->
+											<tbody id="sb-ban-body">
+												
 											</tbody>
 											
 										</table>
@@ -240,7 +240,7 @@
 										</div>
 										<div class="<!--#div_width#-->" id="" <!--#sys_ban_class#-->>
 										
-										<p class="card-title">System Bans <!--#sysbans_count#--> bans found</p>
+										<p class="card-title">System Bans <dummy class="card-title" id="sys-count"></dummy> bans found</p>
 										<div class="table-wrapper">
 										<table class="table">
 											<thead>
@@ -249,8 +249,8 @@
 												<th class="table-header" >Last Login <br>(if known)</th>
 												
 											</thead>
-											<tbody>
-												<!--#sys_bans#-->
+											<tbody id="sys-bans">
+												
 											</tbody>
 											
 										</table>
@@ -286,3 +286,54 @@
    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <script src = "assets/js/main.js"></script>
   <script src = "js/stats.js"></script>
+  <script>
+	 $(document).ready(function() {
+		action= 'sb-ban';
+		url = "plugins/stats_data.php?action="+action;
+		console.log(url);
+		$.ajax({ 
+			type: 'GET', 
+			url: url,
+			dataType: "json", 
+			success: function (sbbans) {
+				$("#sb-count").text(sbbans.sb_count);
+				sb_ban_table =sbbans.sb_bans;
+				$(sb_ban_table).each(function(i,row){
+					//console.log(row);
+					$("#sb-ban-body").append(row);
+				});
+			}
+		});
+		action = 'vac-ban';
+		url = "plugins/stats_data.php?action="+action;
+		$.ajax({ 
+			type: 'GET', 
+			url: url,
+			dataType: "json", 
+			success: function (vacbans) {
+				$("#vac-count").text(vacbans.vac_count);
+				vac_ban_table =vacbans.vac_bans;
+				$(vac_ban_table).each(function(i,row){
+					//console.log(row);
+					$("#vac-bans").append(row);
+				});
+			}
+		});
+		action = 'sys-bans';
+		url = "plugins/stats_data.php?action="+action;
+		console.log(url);
+		$.ajax({ 
+			type: 'GET', 
+			url: url,
+			dataType: "json", 
+			success: function (sysbans) {
+				$("#sys-count").text(sysbans.sys_count);
+				sys_ban_table =sysbans.sys_bans;
+				$(sys_ban_table).each(function(i,row){
+					//console.log(row);
+					$("#sys-bans").append(row);
+				});
+			}
+		});
+	});
+  </script>

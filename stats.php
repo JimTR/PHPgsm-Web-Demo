@@ -84,9 +84,9 @@ function menu_bar() {
 				$page['div_width'] = 'col-lg-4';
 				break;			
 		}
-		if (in_array("sb-bans",$ban_options)) {sb_bans(); $page['sb_ban_class'] ='';}
+		if (in_array("sb-bans",$ban_options)) {$page['sb_ban_class'] ='';}
 		else { $page['sb_ban_class'] = 'style="display:none;"';}
-		if (in_array("vac-bans",$ban_options)) {vac_bans();$page['vac_ban_class'] ='';}
+		if (in_array("vac-bans",$ban_options)) {$page['vac_ban_class'] ='';}
 		else { $page['vac_ban_class'] = 'style="display:none;"';}
 		if (in_array("sys-bans",$ban_options)) {system_bans();$page['sys_ban_class'] ='';}
 		else { $page['sys_ban_class'] = 'style="display:none;"';}
@@ -131,47 +131,7 @@ function get_gameList() {
 		$page['game_list'] .= "<tr><td><a href='gameserver.php?server={$stat['game']}'>{$stat['server_name']}</a></td><td>$used_time</td><td>{$stat['player_tot']}</td></tr>";
 	}
 }
-function sb_bans() {
-	global $page;
-	$sql = "select * from sb_bans where RemovedON is null order by created DESC";
-	$sb_bans = db2->get_results($sql);
-	$lookfor = '';
-	$page['sb_count'] =count($sb_bans);
-	foreach ($sb_bans as $sb_ban) {
-		if(isset($sb_ban['ip'])) {$ip = ip2long($sb_ban['ip']);}
-		$created = date("d-m-Y",$sb_ban['created']);
-		$ends = date("d-m-Y",$sb_ban['ends']);
-		if(!empty($sb_ban['authid'])) {
-			$steam_id = new SteamID($sb_ban['authid']);
-			$id64 = $steam_id->ConvertToUInt64();
-			$lookfor .= "or steam_id64 like '$id64' ";
-		}
-		$newdata =  array (
-			'ip' => $ip,
-			'steam_id' => $id64,
-			'name' => $sb_ban['name'],
-			'reason' => $sb_ban['reason'],
-			'created' => $created,
-			'ends'=> $ends
-		);
-		$bans[] = $newdata;	
-	}
-	$sql = "select * from players where ".substr($lookfor,2);
-	$db_users = db->get_results($sql);
-	foreach($db_users as $db_user) {
-		$id = $db_user['steam_id64'];
-		$key = array_search($id, array_column($bans, 'steam_id'));
-		$bans[$key]['last_log_on'] = date("d-m-Y",$db_user['last_log_on']);
-		$bans[$key]['name'] = "<a href='users.php?id=$id'>{$db_user['name_c']}</a>";
-		$bans[$key]['server'] = $db_user['server'];
-	}
-	$line ='';
-	foreach ($bans as $ban) {
-		if (!isset($ban['last_log_on'])) {$ban['last_log_on'] = '-';}
-		$line .= "<tr><td>{$ban['name']}</td><td>{$ban['created']}</td><td>{$ban['last_log_on']}</td></tr>";
-	}
-	$page['sb_bans'] = $line;
-}
+
 function ip_dups() {
 	global $page;
 	$sql = "SELECT * FROM players INNER JOIN( SELECT ip FROM players GROUP BY ip HAVING COUNT(ip) > 1 order by ip) temp ON players.ip = temp.ip ORDER BY `players`.`ip` ASC"; // get dups
@@ -204,35 +164,7 @@ function ip_dups() {
 		$page['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=4>{$dup['name']}</td></tr>";
 	}
 }
-function vac_bans(){
-	global $page;
-	$page['vac_bans'] = '';
-	$sql = "SELECT players.name_c,players.aka,players.last_log_on,players.steam_id64,steam_data.* FROM `steam_data` left join players on steam_data.steam_id = players.steam_id64 WHERE steam_data.vac_ban like '1' order by players.last_log_on DESC;";
-	$vac_bans = db->get_results($sql);
-	$page['vac_count'] = count($vac_bans);
-	foreach ($vac_bans as $vac_ban) {
-		// who has a vac ban
-		$name = $vac_ban['name_c'];
-		$last_ban = date("d-m-Y",$vac_ban['last_ban']);
-		$last_ban ="<span style='color:red;font-weight:bold;'>$last_ban</span>";
-		$title=  "$name has a current VAC ban";
-		$last_logon = date("d-m-Y",$vac_ban['last_log_on']);
-		if($vac_ban['last_ban'] ==0){
-			$date = strtotime("$last_logon -7 years");
-			$date = date("d-m-Y",$date);
-			$title =  "$name&#39;s last ban was at least 7 years ago";
-			$last_ban = "<span style='color:orange;font-weight:bold;'>$date</span>"; 
-		} 
-		if(empty($vac_ban['name_c'])) { 
-			$vac_ban['name_c'] = $vac_ban['steam_id']; // we don't have the user logged in
-			$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['name_c']}</a>";
-		}
-		else {
-			$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['name_c']}</a>";
-		}
-		$page['vac_bans'] .= "<tr title='$title'><td>$player_link</td><td>$last_ban</td><td>$last_logon</td></tr>";
-	}
-}
+
 function system_bans() {
 	global $page;
 	$sql = "select * from server1 order by `host_name` ASC";
