@@ -327,7 +327,8 @@
 			url: url,
 			dataType: "json", 
 			success: function (sysbans) {
-				$("#sys-count").text(sysbans.sys_count);
+				console.log(sysbans);
+				$("#sys-count").text(sysbans.sysbans_count);
 				sys_ban_table =sysbans.sys_bans;
 				$(sys_ban_table).each(function(i,row){
 					//console.log(row);
