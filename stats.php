@@ -58,7 +58,6 @@ function menu_bar() {
 	global $page;
 	// work out options
 	$options = explode(",",settings['stats']['options']);
-	$ban_options = explode(",",settings['stats']['ban_options']);
 	$menu_bar ='<ul class="nav nav-tabs nav-tabs-bordered mini" id="borderedTab" role="tablist" style="margin-bottom:1%;">';
 	$menu_bar .='<li class="nav-item" role="presentation"><button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true"><i class="fa-solid fa-igloo"></i> <span class="span-show">General</span></button></li>
 		<li class="nav-item" role="presentation"><button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><i class="ri-base-station-line"></i> <span class="span-show">Player Lists</span></button></li>';
@@ -70,9 +69,21 @@ function menu_bar() {
 		$menu_bar .='<li class="nav-item" role="presentation"><button class="nav-link" id="supported-games" data-bs-toggle="tab" data-bs-target="#bordered-games" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-link"></i> <span class="span-show">Linked IP Addresses</span></button></li>';
 		ip_dups();
 	}
-	if (in_array('bans',$options)) {					
+	if (in_array('bans',$options)) {
+		$ban_options = explode(",",settings['stats']['ban_options']);					
 		$menu_bar .='<li class="nav-item" role="presentation"><button class="nav-link" id="bans" data-bs-toggle="tab" data-bs-target="#bordered-bans" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-user-slash"></i> <span class="span-show">User Bans</span></button></li>';
 		$ban_count = count($ban_options);
+		switch($ban_count) {
+			case 1:
+				$page['div_width'] = 'col-lg-9';
+				break;
+			case 2:
+				$page['div_width'] = 'col-lg-6';
+				break;
+			case 3:
+				$page['div_width'] = 'col-lg-4';
+				break;			
+		}
 		if (in_array("sb-bans",$ban_options)) {sb_bans(); $page['sb_ban_class'] ='';}
 		else { $page['sb_ban_class'] = 'style="display:none;"';}
 		if (in_array("vac-bans",$ban_options)) {vac_bans();$page['vac_ban_class'] ='';}
