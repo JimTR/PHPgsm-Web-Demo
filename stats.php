@@ -58,6 +58,7 @@ function menu_bar() {
 	global $page;
 	// work out options
 	$options = explode(",",settings['stats']['options']);
+	$ban_options = explode(",",settings['stats']['ban_options']);
 	$menu_bar ='<ul class="nav nav-tabs nav-tabs-bordered mini" id="borderedTab" role="tablist" style="margin-bottom:1%;">';
 	$menu_bar .='<li class="nav-item" role="presentation"><button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true"><i class="fa-solid fa-igloo"></i> <span class="span-show">General</span></button></li>
 		<li class="nav-item" role="presentation"><button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><i class="ri-base-station-line"></i> <span class="span-show">Player Lists</span></button></li>';
@@ -71,9 +72,13 @@ function menu_bar() {
 	}
 	if (in_array('bans',$options)) {					
 		$menu_bar .='<li class="nav-item" role="presentation"><button class="nav-link" id="bans" data-bs-toggle="tab" data-bs-target="#bordered-bans" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-user-slash"></i> <span class="span-show">User Bans</span></button></li>';
-		sb_bans();
-		vac_bans();
-		system_bans();
+		$ban_count = count($ban_options);
+		if (in_array("sb-bans",$ban_options)) {sb_bans(); $page['sb_ban_class'] ='';}
+		else { $page['sb_ban_class'] = 'style="display:none;"';}
+		if (in_array("vac-bans",$ban_options)) {vac_bans();$page['vac_ban_class'] ='';}
+		else { $page['vac_ban_class'] = 'style="display:none;"';}
+		if (in_array("sys-bans",$ban_options)) {system_bans();$page['sys_ban_class'] ='';}
+		else { $page['sys_ban_class'] = 'style="display:none;"';}
 	}
 	if (in_array('search',$options)) {
 		$menu_bar .='<li class="nav-item"><a class="nav-link" href="users.php"><i class="fa-solid fa-magnifying-glass"></i> <span class="span-show">Search Players</span></a></li>';
