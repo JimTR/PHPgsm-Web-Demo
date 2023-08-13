@@ -1400,6 +1400,8 @@ function paginate($data,$page = 0,$rows_per_page=0) {
 	 *  $data is an array of data to paginate
 	 *  $page is the page number you want to return
 	*/ 
+	//printr($data);
+	//die();
 	$rows = count( $data);
 	 $row_total = $rows_per_page+1;
 	if ($rows > $rows_per_page) {

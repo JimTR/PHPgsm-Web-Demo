@@ -25,6 +25,7 @@
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
+	define('debug',true);
 }
 include 'inc/master.inc.php';
  $build = "1667-3072679804";
@@ -38,290 +39,12 @@ $url = $settings['url'];
 $page['url'] = $settings['url'];
 $page['page-title'] = 'Statistics';
 $page['today'] = date("Y-m-d");
-$sql = "select * from logins limit 1";
-$country = db->get_row($sql);
-$page['country'] = $country['country'];
-$page['country_stat'] = "{$country['logins']} / {$country['players']}";
-$sql = "SELECT count(*) as player_count,sum(log_ons) as login_count, sum(time_on_line) as total_time from players"; //get player count & time on line
-$stats = db->get_row($sql);
-$page['player_total'] = $stats['player_count'];
-$page['total_time'] = convertSecToTime($stats['total_time']);
-$sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as total_logins, players.steam_id64 as steam_id FROM `players` WHERE `players`.time_on_line = (SELECT MAX(time_on_line) FROM players)";
-$stats = db->get_row($sql);
-$page['time_online'] = "<a href='users.php?id={$stats['steam_id']}'>{$stats['user_name']}</a>";
-$page['time_online_count'] = convertSecToTime($stats['play_time']);
-$sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as total_logins, players.steam_id64 as steam_id FROM `players` WHERE `players`.log_ons = (SELECT MAX(log_ons) FROM players)";
-$stats = db->get_row($sql);
-$page['most_log_ons'] = "<a href='users.php?id={$stats['steam_id']}'>{$stats['user_name']}</a>";
-$page['log_on_count'] = $stats['total_logins'];
-$sql = "SELECT servers.server_name,player_history.game as server_id,count(player_history.`game`) as total FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.`game` order by total desc limit 1;";
-$stats = db->get_row($sql);
-$page['most_popular'] = $stats['server_name'];
-$page['most_popular_count'] = $stats['total'];
-$sql = "SELECT servers.server_name,player_history.`game`,sum(player_history.`game_time`) as full_time, count(player_history.game) as player_tot  FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.game ORDER BY `full_time` DESC ";
-$stats = db->get_results($sql);
-$page['most_played_time'] =convertSecToTime($stats[0]['full_time']);
-$page['most_played'] = $stats[0]['server_name'];
-$page['game_list'] ='';
-foreach ($stats as $stat) {
-	if ($stat['full_time'] == 0) {continue;}
-	$used_time = convertSecToTime($stat['full_time']);
-	$page['game_list'] .= "<tr><td><a href='gameserver.php?server={$stat['game']}'>{$stat['server_name']}</a></td><td>$used_time</td><td>{$stat['player_tot']}</td></tr>";
-}
-$sql = "SELECT COUNT(*) AS total, ( SELECT COUNT(*) FROM sb_comms WHERE `RemovedOn` IS NULL ) AS live, ( SELECT COUNT(*) FROM sb_bans ) AS game_total, (select count(*) as game_live from sb_bans where RemovedOn is null) as game_live FROM `sb_comms`";
-$comms = db2->get_results($sql);
+menu_bar();
+general();
+get_gameList();
 
-$sql = "select * from sb_bans where RemovedON is null order by created DESC";
-$sb_bans = db2->get_results($sql);
-$lookfor = '';
-$page['sb_count'] =count($sb_bans);
-foreach ($sb_bans as $sb_ban) {
-	if(isset($sb_ban['ip'])) {$ip = ip2long($sb_ban['ip']);}
-	$created = date("d-m-Y",$sb_ban['created']);
-	$ends = date("d-m-Y",$sb_ban['ends']);
-	if(!empty($sb_ban['authid'])) {
-		$steam_id = new SteamID($sb_ban['authid']);
-		$id64 = $steam_id->ConvertToUInt64();
-		$lookfor .= "or steam_id64 like '$id64' ";
-	}
-	//echo "$ip - $id64 - {$sb_ban['name']} - $created<br>";
-	//$bans[]['ip'] = $ip;
-	//$bans[]['steam_id'] = $id64;
-	$newdata =  array (
-      'ip' => $ip,
-      'steam_id' => $id64,
-      'name' => $sb_ban['name'],
-      'reason' => $sb_ban['reason'],
-      'created' => $created,
-      'ends'=> $ends
-      
-    );
-	$bans[] = $newdata;	
-}
-$sql = "select * from players where ".substr($lookfor,2);
-//echo "$sql<br>";
-$db_users = $database->get_results($sql);
-//echo "found in user data base ".count($db_users).'<br>';
-foreach($db_users as $db_user) {
-	$id = $db_user['steam_id64'];
-	$key = array_search($id, array_column($bans, 'steam_id'));
-	//echo "key is $key<br>";
-	$bans[$key]['last_log_on'] = date("d-m-Y",$db_user['last_log_on']);
-	$bans[$key]['name'] = "<a href='users.php?id=$id'>{$db_user['name_c']}</a>";
-	$bans[$key]['server'] = $db_user['server'];
-}
-$line ='';
-foreach ($bans as $ban) {
-	if (!isset($ban['last_log_on'])) {$ban['last_log_on'] = '-';}
-	$line .= "<tr><td>{$ban['name']}</td><td>{$ban['created']}</td><td>{$ban['last_log_on']}</td></tr>";
-}
-
-$page['sb_bans'] = $line;
-$sql = "SELECT * FROM players INNER JOIN( SELECT ip FROM players GROUP BY ip HAVING COUNT(ip) > 1 order by ip) temp ON players.ip = temp.ip ORDER BY `players`.`ip` ASC"; // get dups
-$dups = db->get_results($sql);
-$i=0;
-$page['dup_count'] = count($dups);
-$last_ip='';
-foreach($dups as $dup) {
-	// scan through
-	$id = $dup['steam_id64'];
-	if ($dup['ip'] == $last_ip) {
-		// add to the row
-		$i--;
-		$last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
-		$dup_table[$i]['name'] .="<table><tr class='no-border'><td style='width:31%'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:19%;'>$last_login</td><td style='text-align:center;width: 37%;'>{$dup['log_ons']}</td><td style='text-align:right;padding-right: 6%;'>0</td></tr></table>";
-		$i++;
-		continue;
-	}
-	 $dup_table[$i]['ip'] = long2ip($dup['ip']);
-	 $last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
-	 $dup_table[$i]['name'] = "<table><tr class='no-border'><td style='width:31%;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:19%;'>$last_login</td><td style='text-align:center;width: 37%;'>{$dup['log_ons']}</td><td style='text-align:right;padding-right: 6%;'>0</td></tr></table>"; 
-	 $last_ip = $dup['ip'];
-	 $i++;
-}
-$dup_table = paginate($dup_table,0,100);
-//print_r($dup_table);
-//die();
-$page['dups'] ='';
-foreach ($dup_table['data'] as $dup) {	
-	$page['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=4>{$dup['name']}</td></tr>";
-}
-
-$sql = "SELECT `country`, `flag`, `country_code` FROM `logins` order by `country` ASC";
-$c1 = $database->get_results($sql);
-$page['c_select'] ="<option>none selected</option>";
-foreach ($c1 as $c2) {
-	if($c2['country'] == ''){continue;}
-	$page['c_select'] .="<option value='{$c2['country_code']}' flag='{$c2['flag']}'>{$c2['country']}</option>"; 
-}
-$page['comms_total'] = $comms[0]['total'];
-$page['comms_live'] = $comms[0]['live'];
-$page['game_live'] = $comms[0]['game_live'];
-$page['game_total'] = $comms[0]['game_total'];
-$page['vac_bans'] = '';
-$sql = "SELECT players.name_c,players.aka,players.last_log_on,players.steam_id64,steam_data.* FROM `steam_data` left join players on steam_data.steam_id = players.steam_id64 WHERE steam_data.vac_ban like '1' order by players.last_log_on DESC;";
-$vac_bans = $database->get_results($sql);
-$page['vac_count'] = count($vac_bans);
-foreach ($vac_bans as $vac_ban) {
-	// who has a vac ban
-	$name = $vac_ban['name_c'];
-	$last_ban = date("d-m-Y",$vac_ban['last_ban']);
-	$last_ban ="<span style='color:red;font-weight:bold;'>$last_ban</span>";
-	$title=  "$name has a current VAC ban";
-	$last_logon = date("d-m-Y",$vac_ban['last_log_on']);
-	if($vac_ban['last_ban'] ==0){
-		$date = strtotime("$last_logon -7 years");
-		$date = date("d-m-Y",$date);
-		$title =  "$name&#39;s last ban was at least 7 years ago";
-		$last_ban = "<span style='color:orange;font-weight:bold;'>$date</span>"; 
-	} 
-	if(empty($vac_ban['name_c'])) { 
-		$vac_ban['name_c'] = $vac_ban['steam_id']; // we don't have the user logged in
-		$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['name_c']}</a>";
-	}
-	else {
-		$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['name_c']}</a>";
-	}
-	$page['vac_bans'] .= "<tr title='$title'><td>$player_link</td><td>$last_ban</td><td>$last_logon</td></tr>";
-}
-$sql = "select * from server1 order by `host_name` ASC";
-$servers = $database->get_results($sql);
-$ips = array();
-$bl =array();
-$lookfor = '';
-$lookforid ='';
-foreach ($servers as $server) {
-	// get system bans
-	$ip_ban_location = "{$server['location']}/{$server['game']}/cfg/banned_ip.cfg";
-	$id_ban_location = "{$server['location']}/{$server['game']}/cfg/banned_user.cfg";
-	if(in_array($ip_ban_location,$bl) or in_array($id_ban_location,$bl )) {continue;}
-	if(is_file($ip_ban_location)) {$ip_system_bans = explode(PHP_EOL,trim(file_get_contents($ip_ban_location)));}
-	if(is_file($id_ban_location)) {$id_system_bans = explode(PHP_EOL,trim(file_get_contents($id_ban_location)));}
-	//echo $id_ban_location.'<br>';
-	
-	foreach ($ip_system_bans as $system_ban) {
-		// split this up
-		$tmp = explode(" ",$system_ban);
-		if(!isset($tmp[1])) { continue;}
-		unset($tmp[0]);
-		$unit['ip' ] = $tmp[2];
-		$unit['ipl' ] = ip2long(trim($tmp[2]));
-		$unit['time'] = $tmp[1];
-		$game = $server['game'];
-		$x['ip'][$unit['ipl']] =$unit;
-		$lookfor .= "or ip = {$unit['ipl']} ";
-	}
-	//die($lookfor);
-	//unset($id_system_bans[0]);
-	foreach($id_system_bans as $system_ban) {
-		//echo $id_ban_location." ".count($id_system_bans).'<br>';
-		$id_count = count($id_system_bans) ;
-		if(empty($tmp[2])) {continue;}
-		$tmp = explode(" ",$system_ban);
-		//printr($tmp);
-		//sleep(1);
-		if (!empty($tmp[2])) {
-			//echo "tmp[2] is {$tmp[2]}<br>";
-			$steam_id = new SteamID(trim($tmp[2]));
-			$id64 = $steam_id->ConvertToUInt64();
-			//echo "id64 is $id64<br>";
-			//$unit1['test'] = $tmp[2];
-		}
-		else{
-			//if(empty($tmp[2])) {echo "why is this empty ?<br>";}
-			continue;
-			echo "tmp[2] out of context is {$tmp[2]}<br>";
-		}
-		$unit1['id'] = $id64;
-		$unit1['test'] = $tmp[2];
-		$unit1['time'] = $tmp['1'];
-		$unit1['poo'] = "shit";
-		$x['id'][$id64]=$unit1;
-		$lookforid .= "or steam_id64 like '$id64' ";
-		//echo "$lookforid<br>";
-	}
-	//unset($x['id'][0]);
-	$bl[] =$ip_ban_location;
-	$bl[] =$id_ban_location;
-	
-		
-}
-
-//printr($x['id']);
-//printr($bl);
-//die();
-$sql = "select * from players where ".substr($lookfor,2);
-//echo "$sql<br>";
-$system_ips = db->get_results($sql);
-//printr($system_ips);
-//echo "<br>count of x ".count($x['ip'])."<br>";
-//echo "<br>count of systemips ".count($system_ips)."<br>";
-foreach ($system_ips as $system_ip) {
-	$ips = $system_ip['ip'];
-	$x['ip'][$ips]['name'] = $system_ip['name_c'];
-	$x['ip'][$ips]['steam_id'] = $system_ip['steam_id64'];
-	$x['ip'][$ips]['last_log_on'] = date("d-m-Y",$system_ip['last_log_on']);
-}
-//printr($x['ip']);
-//die("done");
-$line='';
-foreach ($x['ip'] as $y) {
-	
-	if(empty($y['ip'])){continue;} 
-	
-	if(isset($y['name'])) {
-		$id = $y['steam_id'];
-		$name = $y['name'];
-		$name = "<a href='users.php?id=$id'>$name</a>";
-		if($y['last_log_on'] == 0) {$logon = "-";}
-		else {$logon = $y['last_log_on'];}
-		
-	}
-	else {
-		$name = "-";
-		$logon = "-";
-	}
-	$line .= "<tr><td>{$y['ip']}</td><td style='text-align:center;'>$name</td><td style='text-align:center;'>$logon</td></tr>";
-}
-//echo "<table>$line</table>";
-//die();
-$sql = "select * from players where ".substr($lookforid,2);
-$system_ips = db->get_results($sql);
-foreach ($system_ips as $system_ip) {
-	$ips = $system_ip['steam_id64'];
-	//echo "ips = $ips<br>";
-	$x['id'][$ips]['name'] = $system_ip['name_c'];
-	if(empty($system_ip['steam_id64'])) {$x['id'][$ips]['steam_id'] = $ips;}
-	else {$x['id'][$ips]['steam_id'] = $system_ip['steam_id64'];}
-	$x['id'][$ips]['last_log_on'] = date("d-m-Y",$system_ip['last_log_on']);
-}
-foreach ($x['id'] as $y) {
-	//if(empty($y['ip'])){continue;} 
-	$id = $y['test'];
-	if(isset($y['name'])) {
-		$name = $y['name'];
-		$name = "<a href='users.php?id=$id'>$name</a>";
-		if($y['last_log_on'] == 0) {$logon = "-";}
-		else {$logon = $y['last_log_on'];}
-		
-	}
-	else {
-		$name = "-";
-		$logon = "-";
-		$link = $y['id'];
-		$id = "<a href='http://steamcommunity.com/profiles/$link' target='_blank'>$id</a>";
-		
-		//$y['steam_id'] = $id;
-	}
-	$line .= "<tr><td>$id</td><td style='text-align:center;'>$name</td><td style='text-align:center;'>$logon</td></tr>";
-}
-$ip_count = count($x['ip']);
-$id_count = count($x['id']);
-$page['sysbans_count'] = $ip_count+$id_count;
-$page['sys_bans'] = $line;
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
-//$template->replace_vars($header_vars);
 $page['header'] = $template->get_template();
 $template->load('templates/subtemplates/sidebar.html'); //sidebar
 $template->replace_vars($sidebar_data);
@@ -331,6 +54,33 @@ $template->load('templates/stats.html');
 $template->replace_vars($page);
 $template->publish();
 
+function menu_bar() {
+	global $page;
+	// work out options
+	$options = explode(",",settings['stats']['options']);
+	$menu_bar ='<ul class="nav nav-tabs nav-tabs-bordered mini" id="borderedTab" role="tablist" style="margin-bottom:1%;">';
+	$menu_bar .='<li class="nav-item" role="presentation"><button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true"><i class="fa-solid fa-igloo"></i> <span class="span-show">General</span></button></li>
+		<li class="nav-item" role="presentation"><button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><i class="ri-base-station-line"></i> <span class="span-show">Player Lists</span></button></li>';
+	if (in_array('county',$options)) {
+		$menu_bar .='<li class="nav-item" role="presentation"><button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-contact" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="bx bx-world"></i> <span class="span-show">Country Lists</span></button></li>';
+		country();
+	}
+	if (in_array('linked',$options)) {
+		$menu_bar .='<li class="nav-item" role="presentation"><button class="nav-link" id="supported-games" data-bs-toggle="tab" data-bs-target="#bordered-games" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-link"></i> <span class="span-show">Linked IP Addresses</span></button></li>';
+		ip_dups();
+	}
+	if (in_array('ban',$options)) {					
+		$menu_bar .='<li class="nav-item" role="presentation"><button class="nav-link" id="bans" data-bs-toggle="tab" data-bs-target="#bordered-bans" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-user-slash"></i> <span class="span-show">User Bans</span></button></li>';
+		sb_bans();
+		vac_bans();
+		system_bans();
+	}
+	if (in_array('search',$options)) {
+		$menu_bar .='<li class="nav-item"><a class="nav-link" href="users.php"><i class="fa-solid fa-magnifying-glass"></i> <span class="span-show">Search Players</span></a></li>';
+	}					
+	$menu_bar.='</ul>';
+	$page['menu_bar'] = $menu_bar;				
+}
 function convertSecToTime($sec){
 	$return='';
 	if (!is_numeric($sec)) {$sec=0;}
@@ -351,4 +101,260 @@ function convertSecToTime($sec){
 	$return.= "$mi:";
 	$return .= "$s";	
 	return $return;
+}
+function get_gameList() {
+	global $page;
+	$sql = "SELECT servers.server_name,player_history.`game`,sum(player_history.`game_time`) as full_time, count(player_history.game) as player_tot  FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.game ORDER BY `full_time` DESC ";
+	$stats = db->get_results($sql);
+	$page['most_played_time'] =convertSecToTime($stats[0]['full_time']);
+	$page['most_played'] = $stats[0]['server_name'];
+	$page['game_list'] ='';
+	foreach ($stats as $stat) {
+		if ($stat['full_time'] == 0) {continue;}
+		$used_time = convertSecToTime($stat['full_time']);
+		$page['game_list'] .= "<tr><td><a href='gameserver.php?server={$stat['game']}'>{$stat['server_name']}</a></td><td>$used_time</td><td>{$stat['player_tot']}</td></tr>";
+	}
+}
+function sb_bans() {
+	global $page;
+	$sql = "select * from sb_bans where RemovedON is null order by created DESC";
+	$sb_bans = db2->get_results($sql);
+	$lookfor = '';
+	$page['sb_count'] =count($sb_bans);
+	foreach ($sb_bans as $sb_ban) {
+		if(isset($sb_ban['ip'])) {$ip = ip2long($sb_ban['ip']);}
+		$created = date("d-m-Y",$sb_ban['created']);
+		$ends = date("d-m-Y",$sb_ban['ends']);
+		if(!empty($sb_ban['authid'])) {
+			$steam_id = new SteamID($sb_ban['authid']);
+			$id64 = $steam_id->ConvertToUInt64();
+			$lookfor .= "or steam_id64 like '$id64' ";
+		}
+		$newdata =  array (
+			'ip' => $ip,
+			'steam_id' => $id64,
+			'name' => $sb_ban['name'],
+			'reason' => $sb_ban['reason'],
+			'created' => $created,
+			'ends'=> $ends
+		);
+		$bans[] = $newdata;	
+	}
+	$sql = "select * from players where ".substr($lookfor,2);
+	$db_users = db->get_results($sql);
+	foreach($db_users as $db_user) {
+		$id = $db_user['steam_id64'];
+		$key = array_search($id, array_column($bans, 'steam_id'));
+		$bans[$key]['last_log_on'] = date("d-m-Y",$db_user['last_log_on']);
+		$bans[$key]['name'] = "<a href='users.php?id=$id'>{$db_user['name_c']}</a>";
+		$bans[$key]['server'] = $db_user['server'];
+	}
+	$line ='';
+	foreach ($bans as $ban) {
+		if (!isset($ban['last_log_on'])) {$ban['last_log_on'] = '-';}
+		$line .= "<tr><td>{$ban['name']}</td><td>{$ban['created']}</td><td>{$ban['last_log_on']}</td></tr>";
+	}
+	$page['sb_bans'] = $line;
+}
+function ip_dups() {
+	global $page;
+	$sql = "SELECT * FROM players INNER JOIN( SELECT ip FROM players GROUP BY ip HAVING COUNT(ip) > 1 order by ip) temp ON players.ip = temp.ip ORDER BY `players`.`ip` ASC"; // get dups
+	$dups = db->get_results($sql);
+	$i=0;
+	$page['dup_count'] = count($dups);
+	$last_ip='';
+	foreach($dups as $dup) {
+	// scan through
+		$id = $dup['steam_id64'];
+		if ($dup['ip'] == $last_ip) {
+			// add to the row
+			$i--;
+			$last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
+			$dup_table[$i]['name'] .="<table><tr class='no-border'><td style='width:31%'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:19%;'>$last_login</td><td style='text-align:center;width: 37%;'>{$dup['log_ons']}</td><td style='text-align:right;padding-right: 6%;'>0</td></tr></table>";
+			$i++;
+			continue;
+		}
+		$dup_table[$i]['ip'] = long2ip($dup['ip']);
+		$last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
+		$dup_table[$i]['name'] = "<table><tr class='no-border'><td style='width:31%;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:19%;'>$last_login</td><td style='text-align:center;width: 37%;'>{$dup['log_ons']}</td><td style='text-align:right;padding-right: 6%;'>0</td></tr></table>"; 
+		$last_ip = $dup['ip'];
+		$i++;
+	}
+	$dup_table = paginate($dup_table,0,100);
+	//print_r($dup_table);
+	//die();
+	$page['dups'] ='';
+	foreach ($dup_table['data'] as $dup) {	
+		$page['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=4>{$dup['name']}</td></tr>";
+	}
+}
+function vac_bans(){
+	global $page;
+	$page['vac_bans'] = '';
+	$sql = "SELECT players.name_c,players.aka,players.last_log_on,players.steam_id64,steam_data.* FROM `steam_data` left join players on steam_data.steam_id = players.steam_id64 WHERE steam_data.vac_ban like '1' order by players.last_log_on DESC;";
+	$vac_bans = db->get_results($sql);
+	$page['vac_count'] = count($vac_bans);
+	foreach ($vac_bans as $vac_ban) {
+		// who has a vac ban
+		$name = $vac_ban['name_c'];
+		$last_ban = date("d-m-Y",$vac_ban['last_ban']);
+		$last_ban ="<span style='color:red;font-weight:bold;'>$last_ban</span>";
+		$title=  "$name has a current VAC ban";
+		$last_logon = date("d-m-Y",$vac_ban['last_log_on']);
+		if($vac_ban['last_ban'] ==0){
+			$date = strtotime("$last_logon -7 years");
+			$date = date("d-m-Y",$date);
+			$title =  "$name&#39;s last ban was at least 7 years ago";
+			$last_ban = "<span style='color:orange;font-weight:bold;'>$date</span>"; 
+		} 
+		if(empty($vac_ban['name_c'])) { 
+			$vac_ban['name_c'] = $vac_ban['steam_id']; // we don't have the user logged in
+			$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['name_c']}</a>";
+		}
+		else {
+			$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['name_c']}</a>";
+		}
+		$page['vac_bans'] .= "<tr title='$title'><td>$player_link</td><td>$last_ban</td><td>$last_logon</td></tr>";
+	}
+}
+function system_bans() {
+	global $page;
+	$sql = "select * from server1 order by `host_name` ASC";
+	$servers = db->get_results($sql);
+	$ips = array();
+	$bl =array();
+	$lookfor = '';
+	$lookforid ='';
+	foreach ($servers as $server) {
+		// get system bans
+		$ip_ban_location = "{$server['location']}/{$server['game']}/cfg/banned_ip.cfg";
+		$id_ban_location = "{$server['location']}/{$server['game']}/cfg/banned_user.cfg";
+		if(in_array($ip_ban_location,$bl) or in_array($id_ban_location,$bl )) {continue;}
+		if(is_file($ip_ban_location)) {$ip_system_bans = explode(PHP_EOL,trim(file_get_contents($ip_ban_location)));}
+		if(is_file($id_ban_location)) {$id_system_bans = explode(PHP_EOL,trim(file_get_contents($id_ban_location)));}
+		foreach ($ip_system_bans as $system_ban) {
+			// split this up
+			$tmp = explode(" ",$system_ban);
+			if(!isset($tmp[1])) { continue;}
+			unset($tmp[0]);
+			$unit['ip' ] = $tmp[2];
+			$unit['ipl' ] = ip2long(trim($tmp[2]));
+			$unit['time'] = $tmp[1];
+			$game = $server['game'];
+			$x['ip'][$unit['ipl']] =$unit;
+			$lookfor .= "or ip = {$unit['ipl']} ";
+		}
+		foreach($id_system_bans as $system_ban) {
+			$id_count = count($id_system_bans) ;
+			if(empty($tmp[2])) {continue;}
+			$tmp = explode(" ",$system_ban);
+			if (!empty($tmp[2])) {
+				$steam_id = new SteamID(trim($tmp[2]));
+				$id64 = $steam_id->ConvertToUInt64();
+			}
+			else{continue;}
+			$unit1['id'] = $id64;
+			$unit1['test'] = $tmp[2];
+			$unit1['time'] = $tmp['1'];
+			$unit1['poo'] = "shit";
+			$x['id'][$id64]=$unit1;
+			$lookforid .= "or steam_id64 like '$id64' ";
+		}
+		$bl[] =$ip_ban_location;
+		$bl[] =$id_ban_location;
+	}
+	$sql = "select * from players where ".substr($lookfor,2);
+	$system_ips = db->get_results($sql);
+	foreach ($system_ips as $system_ip) {
+		$ips = $system_ip['ip'];
+		$x['ip'][$ips]['name'] = $system_ip['name_c'];
+		$x['ip'][$ips]['steam_id'] = $system_ip['steam_id64'];
+		$x['ip'][$ips]['last_log_on'] = date("d-m-Y",$system_ip['last_log_on']);
+	}
+	$line='';
+	foreach ($x['ip'] as $y) {
+		if(empty($y['ip'])){continue;} 
+		if(isset($y['name'])) {
+			$id = $y['steam_id'];
+			$name = $y['name'];
+			$name = "<a href='users.php?id=$id'>$name</a>";
+			if($y['last_log_on'] == 0) {$logon = "-";}
+			else {$logon = $y['last_log_on'];}
+		}
+		else {
+			$name = "-";
+			$logon = "-";
+		}
+		$line .= "<tr><td>{$y['ip']}</td><td style='text-align:center;'>$name</td><td style='text-align:center;'>$logon</td></tr>";
+	}
+	$sql = "select * from players where ".substr($lookforid,2);
+	$system_ips = db->get_results($sql);
+	foreach ($system_ips as $system_ip) {
+		$ips = $system_ip['steam_id64'];
+		$x['id'][$ips]['name'] = $system_ip['name_c'];
+		if(empty($system_ip['steam_id64'])) {$x['id'][$ips]['steam_id'] = $ips;}
+		else {$x['id'][$ips]['steam_id'] = $system_ip['steam_id64'];}
+		$x['id'][$ips]['last_log_on'] = date("d-m-Y",$system_ip['last_log_on']);
+	}
+	foreach ($x['id'] as $y) {
+		$id = $y['test'];
+		if(isset($y['name'])) {
+			$name = $y['name'];
+			$name = "<a href='users.php?id=$id'>$name</a>";
+			if($y['last_log_on'] == 0) {$logon = "-";}
+			else {$logon = $y['last_log_on'];}
+		}
+		else {
+			$name = "-";
+			$logon = "-";
+			$link = $y['id'];
+			$id = "<a href='http://steamcommunity.com/profiles/$link' target='_blank'>$id</a>";
+		}
+		$line .= "<tr><td>$id</td><td style='text-align:center;'>$name</td><td style='text-align:center;'>$logon</td></tr>";
+	}
+	$ip_count = count($x['ip']);
+	$id_count = count($x['id']);
+	$page['sysbans_count'] = $ip_count+$id_count;
+	$page['sys_bans'] = $line;
+}
+
+function general () {
+	global $page;
+	$sql = "select * from logins limit 1";
+	$country = db->get_row($sql);
+	$page['country'] = $country['country'];
+	$page['country_stat'] = "{$country['logins']} / {$country['players']}";
+	$sql = "SELECT count(*) as player_count,sum(log_ons) as login_count, sum(time_on_line) as total_time from players"; //get player count & time on line
+	$stats = db->get_row($sql);
+	$page['player_total'] = $stats['player_count'];
+	$page['total_time'] = convertSecToTime($stats['total_time']);
+	$sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as total_logins, players.steam_id64 as steam_id FROM `players` WHERE `players`.time_on_line = (SELECT MAX(time_on_line) FROM players)";
+	$stats = db->get_row($sql);
+	$page['time_online'] = "<a href='users.php?id={$stats['steam_id']}'>{$stats['user_name']}</a>";
+	$page['time_online_count'] = convertSecToTime($stats['play_time']);
+	$sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as total_logins, players.steam_id64 as steam_id FROM `players` WHERE `players`.log_ons = (SELECT MAX(log_ons) FROM players)";
+	$stats = db->get_row($sql);
+	$page['most_log_ons'] = "<a href='users.php?id={$stats['steam_id']}'>{$stats['user_name']}</a>";
+	$page['log_on_count'] = $stats['total_logins'];
+	$sql = "SELECT servers.server_name,player_history.game as server_id,count(player_history.`game`) as total FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.`game` order by total desc limit 1;";
+	$stats = db->get_row($sql);
+	$page['most_popular'] = $stats['server_name'];
+	$page['most_popular_count'] = $stats['total'];
+	
+}
+function country() {
+	global $page;
+	$sql = "SELECT COUNT(*) AS total, ( SELECT COUNT(*) FROM sb_comms WHERE `RemovedOn` IS NULL ) AS live, ( SELECT COUNT(*) FROM sb_bans ) AS game_total, (select count(*) as game_live from sb_bans where RemovedOn is null) as game_live FROM `sb_comms`";
+	$comms = db2->get_results($sql);
+	$sql = "SELECT `country`, `flag`, `country_code` FROM `logins` order by `country` ASC";
+	$c1 = db->get_results($sql);
+	$page['c_select'] ="<option>none selected</option>";
+	foreach ($c1 as $c2) {
+		if($c2['country'] == ''){continue;}
+		$page['c_select'] .="<option value='{$c2['country_code']}' flag='{$c2['flag']}'>{$c2['country']}</option>"; 
+	}
+	$page['comms_total'] = $comms[0]['total'];
+	$page['comms_live'] = $comms[0]['live'];
+	$page['game_live'] = $comms[0]['game_live'];
+	$page['game_total'] = $comms[0]['game_total'];
 }
