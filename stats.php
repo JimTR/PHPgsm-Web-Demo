@@ -69,7 +69,7 @@ function menu_bar() {
 		$menu_bar .='<li class="nav-item" role="presentation"><button class="nav-link" id="supported-games" data-bs-toggle="tab" data-bs-target="#bordered-games" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-link"></i> <span class="span-show">Linked IP Addresses</span></button></li>';
 		ip_dups();
 	}
-	if (in_array('ban',$options)) {					
+	if (in_array('bans',$options)) {					
 		$menu_bar .='<li class="nav-item" role="presentation"><button class="nav-link" id="bans" data-bs-toggle="tab" data-bs-target="#bordered-bans" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-user-slash"></i> <span class="span-show">User Bans</span></button></li>';
 		sb_bans();
 		vac_bans();
