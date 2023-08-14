@@ -206,6 +206,7 @@
 										
 										<p class="card-title">Vac Bans <dummy class="card-title" id="vac-count"></dummy> bans found</p>
 										<div class="table-wrapper">
+											<div id= "vac-loader">Please Wait loading data</div>
 										<table class="table" id="vac">
 											<thead>
 												<th class="table-header" style="width:45%;">Name</th>
@@ -310,6 +311,9 @@
 			type: 'GET', 
 			url: url,
 			dataType: "json", 
+			beforeSend: function() {
+				$("#vac-loader").show();
+			},
 			success: function (vacbans) {
 				$("#vac-count").text(vacbans.vac_count);
 				vac_ban_table =vacbans.vac_bans;
@@ -317,6 +321,7 @@
 					//console.log(row);
 					$("#vac-bans").append(row);
 				});
+				$("#vac-loader").hide();
 			}
 		});
 		action = 'sys-bans';
