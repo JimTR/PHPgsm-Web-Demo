@@ -122,10 +122,10 @@ function vac_bans(){
 	$sql = "SELECT players.name_c,players.aka,players.last_log_on,players.steam_id64,steam_data.* FROM `steam_data` left join players on steam_data.steam_id = players.steam_id64 WHERE steam_data.vac_ban like '1' order by players.last_log_on DESC;";
 	$vac_bans = db->get_results($sql);
 	$output['vac_count'] = count($vac_bans);
-	$vac_bans = paginate($vac_bans,0,per_page);
-	$output['total_pages'] = $vac_bans['pages'];
-	$output['current_page'] = $vac_bans['page']+1;
-	foreach ($vac_bans['data'] as $vac_ban) {
+	//$vac_bans = paginate($vac_bans,0,per_page);
+	//$output['total_pages'] = $vac_bans['pages'];
+	//$output['current_page'] = $vac_bans['page']+1;
+	foreach ($vac_bans as $vac_ban) {
 		// who has a vac ban
 		$name = $vac_ban['name_c'];
 		$last_ban = date("d-m-Y",$vac_ban['last_ban']);
