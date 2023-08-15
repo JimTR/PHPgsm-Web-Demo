@@ -145,7 +145,7 @@ function vac_bans(){
 		else {
 			$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['name_c']}</a>";
 		}
-		$output['vac_bans'] .= "<tr title='$title'><td style='width:45%;overflow:hidden;'>$player_link</td><td>$last_ban</td><td>$last_logon</td></tr>";
+		$output['vac_bans'] .= "<tr title='$title'><td style='width:45%;overflow:hidden;white-space: nowrap;'>$player_link</td><td>$last_ban</td><td>$last_logon</td></tr>";
 	}
 	echo json_encode($output,JSON_UNESCAPED_SLASHES);
 }
