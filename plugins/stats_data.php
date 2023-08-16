@@ -122,6 +122,7 @@ function sb_bans() {
 
 function vac_bans(){
 	$output['vac_bans'] = '';
+	$time_start = microtime(true);
 	$sql = "SELECT players.name_c,players.aka,players.last_log_on,players.steam_id64,steam_data.* FROM `steam_data` left join players on steam_data.steam_id = players.steam_id64 WHERE steam_data.vac_ban like '1' order by players.last_log_on DESC;";
 	$vac_bans = db->get_results($sql);
 	$output['vac_count'] = count($vac_bans);
@@ -150,6 +151,8 @@ function vac_bans(){
 		}
 		$output['vac_bans'] .= "<tr title='$title'><td style='width:45%;overflow:hidden;white-space: nowrap;'>$player_link</td><td>$last_ban</td><td>$last_logon</td></tr>";
 	}
+	$time_end = microtime(true);
+	$output['exe_time'] = ($time_end - $time_start)/60;
 	echo json_encode($output,JSON_UNESCAPED_SLASHES);
 }
 function system_bans() {
