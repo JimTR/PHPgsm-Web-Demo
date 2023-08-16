@@ -312,6 +312,7 @@ function dup_page() {
 function vac_ban() {
 	action = 'vac-ban';
 	url = "plugins/stats_data.php?action="+action;
+	console.log(url+" vac_ban");
 	$.ajax({ 
 		type: 'GET', 
 		url: url,
