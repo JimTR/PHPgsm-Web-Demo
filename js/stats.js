@@ -256,3 +256,77 @@ $('#vac').on('click','tr', function() {
 	
 	$('#sb_ban').scrollTop( $('#sb_ban').find( 'tr:last' ).scrollTop() );
 });
+function sb_ban () {
+	action= 'sb-ban';
+		url = "plugins/stats_data.php?action="+action;
+		console.log(url +" in function");
+		$.ajax({ 
+			type: 'GET', 
+			url: url,
+			dataType: "json", 
+			success: function (sbbans) {
+				$("#sb-count").text(sbbans.sb_count);
+				sb_ban_table =sbbans.sb_bans;
+				$(sb_ban_table).each(function(i,row){
+					//console.log(row);
+					$("#sb-ban-body").append(row);
+				});
+			}
+		});
+}
+function sys_ban() {
+	action = 'sys-bans';
+		url = "plugins/stats_data.php?action="+action;
+		console.log(url+" in function" );
+		$.ajax({ 
+			type: 'GET', 
+			url: url,
+			dataType: "json", 
+			success: function (sysbans) {
+				$("#sys-count").text(sysbans.sysbans_count);
+				sys_ban_table =sysbans.sys_bans;
+				$(sys_ban_table).each(function(i,row){
+					$("#sys-bans").append(row);
+				});
+			}
+		});
+}
+function dup_page() {
+	action = 'dups';
+	url = "plugins/stats_data.php?action="+action;
+	console.log(url);
+	$.ajax({ 
+		type: 'GET', 
+		url: url,
+		dataType: "json", 
+		success: function (dups) {
+			//console.log(dups);
+			$("#dup-count").text(dups.dup_count);
+			dup_table =dups.dups;
+			$(dup_table).each(function(i,row){
+				$("#dup-table").append(row);
+			});
+		}
+	});
+}
+function vac_ban() {
+	action = 'vac-ban';
+	url = "plugins/stats_data.php?action="+action;
+	$.ajax({ 
+		type: 'GET', 
+		url: url,
+		dataType: "json", 
+		beforeSend: function() {
+			$("#vac-loader").show();
+		},
+		success: function (vacbans) {
+			$("#vac-count").text(vacbans.vac_count);
+			vac_ban_table =vacbans.vac_bans;
+			$(vac_ban_table).each(function(i,row){
+				//console.log(row);
+				$("#vac-bans").append(row);
+			});
+			$("#vac-loader").hide();
+		}
+	});
+}				
