@@ -67,7 +67,7 @@ function menu_bar() {
 	}
 	if (in_array('linked',$options)) {
 		$menu_bar .='<li class="nav-item" role="presentation"><button class="nav-link" id="supported-games" data-bs-toggle="tab" data-bs-target="#bordered-games" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-link"></i> <span class="span-show">Linked IP Addresses</span></button></li>';
-		ip_dups();
+		//ip_dups();
 	}
 	if (in_array('bans',$options)) {
 		$ban_options = explode(",",settings['stats']['ban_options']);					
@@ -157,8 +157,8 @@ function ip_dups() {
 		$i++;
 	}
 	$dup_table = paginate($dup_table,0,100);
-	//print_r($dup_table);
-	//die();
+	print_r($dup_table);
+	die();
 	$page['dups'] ='';
 	foreach ($dup_table['data'] as $dup) {	
 		$page['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=4>{$dup['name']}</td></tr>";

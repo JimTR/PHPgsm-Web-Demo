@@ -52,7 +52,10 @@
 		break;
 	case 'sys-bans':
 		system_bans();
-		break;			
+		break;
+	case 'dups':
+		ip_dups();
+		break;				
 }
  function country() {
 	$sql = "SELECT COUNT(*) AS total, ( SELECT COUNT(*) FROM sb_comms WHERE `RemovedOn` IS NULL ) AS live, ( SELECT COUNT(*) FROM sb_bans ) AS game_total, (select count(*) as game_live from sb_bans where RemovedOn is null) as game_live FROM `sb_comms`";
@@ -247,5 +250,37 @@ function system_bans() {
 	$id_count = count($x['id']);
 	$output['sysbans_count'] = $ip_count+$id_count;
 	$output['sys_bans'] = $line;
+	echo json_encode($output,JSON_UNESCAPED_SLASHES);
+}
+function ip_dups() {
+	$sql = "SELECT * FROM players INNER JOIN( SELECT ip FROM players GROUP BY ip HAVING COUNT(ip) > 1 order by ip) temp ON players.ip = temp.ip ORDER BY `players`.`ip` ASC"; // get dups
+	$dups = db->get_results($sql);
+	$i=0;
+	$output['dup_count'] = count($dups);
+	$last_ip='';
+	foreach($dups as $dup) {
+	// scan through
+		$id = $dup['steam_id64'];
+		if ($dup['ip'] == $last_ip) {
+			// add to the row
+			$i--;
+			$last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
+			$dup_table[$i]['name'] .="<table><tr class='no-border'><td style='width:31%'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:19%;'>$last_login</td><td style='text-align:center;width: 37%;'>{$dup['log_ons']}</td><td style='text-align:right;padding-right: 6%;'>0</td></tr></table>";
+			$i++;
+			continue;
+		}
+		$dup_table[$i]['ip'] = long2ip($dup['ip']);
+		$last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
+		$dup_table[$i]['name'] = "<table><tr class='no-border'><td style='width:31%;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:19%;'>$last_login</td><td style='text-align:center;width: 37%;'>{$dup['log_ons']}</td><td style='text-align:right;padding-right: 6%;'>0</td></tr></table>"; 
+		$last_ip = $dup['ip'];
+		$i++;
+	}
+	$dup_table = paginate($dup_table,0,100);
+	//print_r($dup_table);
+	//die();
+	$page['dups'] ='';
+	foreach ($dup_table['data'] as $dup) {	
+		$output['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=4>{$dup['name']}</td></tr>";
+	}
 	echo json_encode($output,JSON_UNESCAPED_SLASHES);
 }

@@ -169,9 +169,9 @@
 								<div class="row">
 									<div class="col-lg-8" id="">
 										<h5 class="card-title" style="margin-left:1%;">Linked IP Addresses</h5>
-										<p><!--#dup_count#--> accounts share IP addresses</p>
+										<p><dummy class="card-title" id="dup-count"></dummy> accounts share IP addresses</p>
 										<div class="table-wrapper">
-										<table class="table">
+										<table class="table" id="dup-table">
 											<thead>
 												<th class="table-header" style="width:10%;">IP Address</th>
 												<th class="table-header" style="width:29%;">Name</th>
@@ -180,8 +180,7 @@
 												<th class="table-header" style="text-align:right;padding-right:3%;">Ban Status</th>
 												<!--<th>Last Logon</th>-->
 											</thead>
-											<!--#dups#-->
-											
+																						
 										</table>
 										</div>
 										
@@ -342,6 +341,23 @@
 				$(sys_ban_table).each(function(i,row){
 					//console.log(row);
 					$("#sys-bans").append(row);
+				});
+			}
+		});
+		action = 'dups';
+		url = "plugins/stats_data.php?action="+action;
+		console.log(url);
+		$.ajax({ 
+			type: 'GET', 
+			url: url,
+			dataType: "json", 
+			success: function (dups) {
+				console.log(dups);
+				$("#dup-count").text(dups.dup_count);
+				dup_table =dups.dups;
+				$(dup_table).each(function(i,row){
+					//console.log(row);
+					$("#dup-table").append(row);
 				});
 			}
 		});
