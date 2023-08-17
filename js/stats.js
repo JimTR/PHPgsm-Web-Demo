@@ -306,6 +306,7 @@ function dup_page() {
 			$(dup_table).each(function(i,row){
 				$("#dup-table").append(row);
 			});
+			//$('#dup-table').DataTable();
 		}
 	});
 }
