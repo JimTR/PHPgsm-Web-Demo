@@ -300,7 +300,7 @@ function dup_page() {
 		url: url,
 		dataType: "json", 
 		success: function (dups) {
-			//console.log(dups);
+			console.log(dups);
 			$("#dup-count").text(dups.dup_count);
 			dup_table =dups.dups;
 			$(dup_table).each(function(i,row){
