@@ -332,4 +332,27 @@ function vac_ban() {
 			$("#vac-loader").hide();
 		}
 	});
-}				
+}
+function general() {
+	action = 'general';
+	url = "plugins/stats_data.php?action="+action;
+	console.log(url+" general");
+	$.ajax({ 
+		type: 'GET', 
+		url: url,
+		dataType: "json", 
+		beforeSend: function() {
+			//$("#vac-loader").show();
+		},
+		success: function (general) {
+			console.log("process "+vacbans.exe_time);
+			$("#vac-count").text(vacbans.vac_count);
+			vac_ban_table =vacbans.vac_bans;
+			$(vac_ban_table).each(function(i,row){
+				//console.log(row);
+				$("#vac-bans").append(row);
+			});
+			//$("#vac-loader").hide();
+		}
+	});
+}								

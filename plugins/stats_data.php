@@ -55,7 +55,10 @@
 		break;
 	case 'dups':
 		ip_dups();
-		break;				
+		break;
+	case 'general':
+		general();
+		break;					
 }
  function country() {
 	$sql = "SELECT COUNT(*) AS total, ( SELECT COUNT(*) FROM sb_comms WHERE `RemovedOn` IS NULL ) AS live, ( SELECT COUNT(*) FROM sb_bans ) AS game_total, (select count(*) as game_live from sb_bans where RemovedOn is null) as game_live FROM `sb_comms`";
@@ -285,5 +288,28 @@ function ip_dups() {
 	foreach ($dup_table as $dup) {	
 		$output['dups'] .= "<tr><td style='vertical-align:middle;'>{$dup['ip']}</td><td colspan=4>{$dup['name']}</td></tr>";
 	}
+	echo json_encode($output,JSON_UNESCAPED_SLASHES);
+}
+function general () {
+	$sql = "select * from logins limit 1";
+	$country = db->get_row($sql);
+	$output['country'] = $country['country'];
+	$output['country_stat'] = "{$country['logins']} / {$country['players']}";
+	$sql = "SELECT count(*) as player_count,sum(log_ons) as login_count, sum(time_on_line) as total_time from players"; //get player count & time on line
+	$stats = db->get_row($sql);
+	$output['player_total'] = $stats['player_count'];
+	$output['total_time'] = convertSecToTime($stats['total_time']);
+	$sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as total_logins, players.steam_id64 as steam_id FROM `players` WHERE `players`.time_on_line = (SELECT MAX(time_on_line) FROM players)";
+	$stats = db->get_row($sql);
+	$output['time_online'] = "<a href='users.php?id={$stats['steam_id']}'>{$stats['user_name']}</a>";
+	$output['time_online_count'] = convertSecToTime($stats['play_time']);
+	$sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as total_logins, players.steam_id64 as steam_id FROM `players` WHERE `players`.log_ons = (SELECT MAX(log_ons) FROM players)";
+	$stats = db->get_row($sql);
+	$output['most_log_ons'] = "<a href='users.php?id={$stats['steam_id']}'>{$stats['user_name']}</a>";
+	$output['log_on_count'] = $stats['total_logins'];
+	$sql = "SELECT servers.server_name,player_history.game as server_id,count(player_history.`game`) as total FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.`game` order by total desc limit 1;";
+	$stats = db->get_row($sql);
+	$output['most_popular'] = $stats['server_name'];
+	$output['most_popular_count'] = $stats['total'];
 	echo json_encode($output,JSON_UNESCAPED_SLASHES);
 }
