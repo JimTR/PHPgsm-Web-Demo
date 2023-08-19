@@ -271,13 +271,13 @@ function ip_dups() {
 			// add to the row
 			$i--;
 			$last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
-			$dup_table[$i]['name'] .="<table><tr class='no-border'><td style='width:31%'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:19%;'>$last_login</td><td style='text-align:center;width: 37%;'>{$dup['log_ons']}</td><td style='text-align:right;padding-right: 6%;'>0</td></tr></table>";
+			$dup_table[$i]['name'] .="<div style='width:31%;float:left;padding-bottom:1%;clear:both;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></div><div style='width:19%;float:left;padding-bottom:1%;'>$last_login</div><div style='text-align:center;width: 37%;float:left;padding-bottom:1%;'>{$dup['log_ons']}</div><div style='text-align:right;padding-right: 6%;float:left;padding-bottom:1%;'>0</div>";
 			$i++;
 			continue;
 		}
 		$dup_table[$i]['ip'] = long2ip($dup['ip']);
 		$last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
-		$dup_table[$i]['name'] = "<table><tr class='no-border'><td style='width:31%;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></td><td style='width:19%;'>$last_login</td><td style='text-align:center;width: 37%;'>{$dup['log_ons']}</td><td style='text-align:right;padding-right: 6%;'>0</td></tr></table>"; 
+		$dup_table[$i]['name'] = "<div style='width:31%;float:left;padding-bottom:1%;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></div><div style='width:19%;float:left;'>$last_login</div><div style='text-align:center;width: 37%;float:left;'>{$dup['log_ons']}</div><div style='text-align:right;padding-right: 6%;float:left;'>0</div>"; 
 		$last_ip = $dup['ip'];
 		$i++;
 	}

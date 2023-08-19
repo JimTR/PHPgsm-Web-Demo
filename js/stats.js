@@ -1,4 +1,6 @@
  	var gdetail='';
+ 	var pager_pos = 0;
+ 	var total_pages = 0;
 	//console.log("on load "+history.length);
 	$('#sendcmd').on('submit', function(e) {
 		e.preventDefault();
@@ -194,16 +196,12 @@ function timeConverter(UNIX_timestamp){
 	var time = d+ '-' + m + '-' + y + ' ' + hour + ':' + min ;
 	return time;
 }
-$('.page-link').on("click",function(){
-	//
-	console.log("entered click");
 
-});
-$(document).on('click','.page-link',function(){
+$("#country").on('click','.page-link',function(){
 //your code here
 console.log("entered click");
 	var url =  $(this).attr("url");
-	console.log(url);
+	//console.log(url);
 	
 	$.ajax({ 
         type: 'GET', 
@@ -304,12 +302,16 @@ function dup_page() {
 			$("#dup-count").text(dups.dup_count);
 			dup_table =dups.dups;
 			$(dup_table).each(function(i,row){
+				$this = $(row);
 				$("#dup-table").append(row);
+				$this.addClass('yourClass');
 			});
-			//$('#dup-table').DataTable();
+			 rp(0,'dup-table');
 		}
 	});
 }
+
+
 function vac_ban() {
 	action = 'vac-ban';
 	url = "plugins/stats_data.php?action="+action;
@@ -355,4 +357,126 @@ function general() {
 			//$("#vac-loader").hide();
 		}
 	});
-}								
+}
+$('body').click(function(e) {   
+  var $target = $(e.target); 
+  //alert("clicked")
+  console.log($target);  
+  if ($target.hasClass("test")) {
+    // do something
+     //var $table = $("#dup-table");
+     y = $target.attr('id');
+     if (y == 'f') {
+		 $target.text(1);
+	 }
+	 if (y == 'p') {
+		 $target.text(pager_pos);
+	 }
+	 if(y == "n") {
+		 $target.text(pager_pos+2)
+	 }
+	 if(y =='l') {
+		 $target.text(total_pages);
+	 }
+     console.log("id = "+y);
+     x = $target.text()-1;
+     console.log(x);
+    //alert("we clicked pagination "+x);
+    rp(x,'dup-table');
+  }
+});
+
+function rp(page,table) {
+	console.log("current pos "+pager_pos);
+	console.log("total pages "+total_pages);
+	$('#'+table).each(function () {
+				  var $table = $(this);
+				  var itemsPerPage = 100;
+				  var currentPage = page;
+				  pager_pos= page;
+				  var rowCount = $('#dup-table tr.yourClass').length;
+				  var pages = Math.ceil($table.find("tr:not(:has(th))").length / itemsPerPage); // fix this bit
+				  var pages1 = Math.ceil(rowCount / itemsPerPage); // fix this bit
+				  total_pages = pages;
+				   //console.log("all rows "+pages);
+				   //console.log("Pages with class "+pages1);
+				  var rowCount = $('#dup-table tr.yourClass').length;
+				  //console.log("Row Count "+rowCount);
+				  $table.bind('repaginate', function () {
+				    if (pages > 1) {
+				    var pager;
+				    console.log("current page "+currentPage);
+				    if ($table.next().hasClass("pager"))
+				      pager = $table.next().empty();  else
+				    pager = $('<ul class="pagination pager" id="pages" style="padding-top: 20px; direction:ltr; ">');
+					if (currentPage >0 ){
+						$('<li class="page-link test" id ="f"></li>').text(' « First ').bind('click', function () {
+						currentPage = 0;
+						$table.trigger('repaginate');
+						}).appendTo(pager);
+				
+						$('<li class="page-link test" id="p">  Prev </li>').bind('click', function () {
+						if (currentPage > 0)
+							currentPage--;
+							$table.trigger('repaginate');
+						}).appendTo(pager);
+					}
+				    var startPager = currentPage > 2 ? currentPage - 2 : 0;
+				    var endPager = startPager > 0 ? currentPage + 3 : 5;
+				    if (endPager > pages) {
+				      endPager = pages;
+				      startPager = pages - 5;    if (startPager < 0)
+				        startPager = 0;
+				    }
+
+				    for (var page = startPager; page < endPager; page++) {
+						if(page == currentPage) {
+							//console.log("hit current page");
+							style =' style="background-color: #2c2c;"';
+							}
+							else{ style='';}
+				      $('<span id="pg' + page + '" class="page-link test"'+style+'></span>').text(page + 1).bind('click', {
+				          newPage: page
+				        }, function (event) {
+				          currentPage = event.data['newPage'];
+				          $table.trigger('repaginate');
+				      }).appendTo(pager);
+				    }
+					console.log("current page (next) "+currentPage+ " pages "+pages);
+					if (currentPage !== pages-1) {
+						$('<li class="page-link test" id="n"> Next  </li>').bind('click', function () {
+						if (currentPage < pages - 1)
+						currentPage++;
+						$table.trigger('repaginate');
+						}).appendTo(pager);
+					
+						$('<li class="page-link test" id="l"> Last » </li></ul>').bind('click', function () {
+						currentPage = pages - 1;
+						$table.trigger('repaginate');
+						}).appendTo(pager);
+					}	
+				
+				    if (!$table.next().hasClass("pager"))
+				      pager.insertAfter($table);
+				      //pager.insertBefore($table);
+				    	
+				  }// end $table.bind('repaginate', function () { ...
+
+				  $table.find(
+				  'tbody tr:not(:has(th))').hide().slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).show();
+				 // $table.showSmallCars tr.smallCar { display:table-row; }
+				  rowpos = $table.position();
+				  console.log(rowpos.top);
+				  //$('#container').scrollTop(rowpos.top);
+				  $("#dup-wrap").scrollTop(0)
+				  //console.log(pager);
+				  //alert("run this");
+				  tp = $("#pages").html();
+				  console.log(tp);
+				  $("#pages-d").html(tp);
+				  $("#pages").hide()
+				  });
+
+				  $table.trigger('repaginate');
+				});								
+	}			

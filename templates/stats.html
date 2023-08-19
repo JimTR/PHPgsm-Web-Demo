@@ -170,7 +170,9 @@
 									<div class="col-lg-8" id="">
 										<h5 class="card-title" style="margin-left:1%;">Linked IP Addresses</h5>
 										<p><dummy class="card-title" id="dup-count"></dummy> accounts share IP addresses</p>
-										<div class="table-wrapper">
+										<div style="float:right;padding-right:2%;"><ul class="pagination pager" id="pages-d"></ul></div>
+										<div class="table-wrapper" id="dup-wrap">
+											
 										<table class="table" id="dup-table">
 											<thead>
 												<th class="table-header" style="width:10%;">IP Address</th>
@@ -193,6 +195,7 @@
 													<tr><td>System Ban ID</td><td><i class="fa-regular fa-circle-xmark" style="color:#325f6e;font-weight: 600;"></i></td></tr>
 												</table>
 											</div>
+											
 										</div>	  
 								</div>
 							</div>
@@ -292,6 +295,7 @@
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   <script>
 	 $(document).ready(function() {
+		var pager_pos= 0;
 		sb_ban();
 		sys_ban();
 		dup_page();
