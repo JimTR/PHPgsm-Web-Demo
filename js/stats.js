@@ -33,7 +33,7 @@
 						gdetail +='<a href=http://steamcommunity.com/profiles/'+item.steam_id64+' target="_blank">'+item.steam_id64+'</a></td></tr>';
 						man=item.name_c;
 					});
-					$("#data_table").html(gdetail);
+					$("#data_table").html(gdetail); // bad fix
 					//console.log(gdetail)
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -304,9 +304,9 @@ function dup_page() {
 			$(dup_table).each(function(i,row){
 				$this = $(row);
 				$("#dup-table").append(row);
-				$this.addClass('yourClass');
+				//$this.addClass('yourClass');
 			});
-			 rp(0,'dup-table');
+			 rp(0,'dup-table','pages-d');
 		}
 	});
 }
@@ -382,13 +382,14 @@ $('body').click(function(e) {
      x = $target.text()-1;
      console.log(x);
     //alert("we clicked pagination "+x);
-    rp(x,'dup-table');
+    rp(x,'dup-table','pages-d');
   }
 });
 
-function rp(page,table) {
+function rp(page,table,disp) {
 	console.log("current pos "+pager_pos);
 	console.log("total pages "+total_pages);
+	console.log("display "+disp);
 	$('#'+table).each(function () {
 				  var $table = $(this);
 				  var itemsPerPage = 100;
@@ -473,7 +474,7 @@ function rp(page,table) {
 				  //alert("run this");
 				  tp = $("#pages").html();
 				  console.log(tp);
-				  $("#pages-d").html(tp);
+				  $("#"+disp).html(tp);
 				  $("#pages").hide()
 				  });
 
