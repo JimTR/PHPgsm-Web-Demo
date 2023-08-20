@@ -107,5 +107,10 @@
   }
   .mini {
   display: inline-flex;
-}  	
+  }  	
+}
+.page-box {
+    background-color: #2c2c;
+    color: #000000;
+    font-weight: bold;
 }

@@ -143,7 +143,7 @@ $("#country").change(function(){
 					realPage = counter+1;
 					if (counter == data1.page) {
 						//console.log ("we have the page to highlight "+counter);
-						pageNo ='<li class="page-item"><span class="page-link" style="background-color: #2c2c;" url="helpers/country.php?id='+data1.id+'&page='+counter+'">'+realPage+'</span></li>';
+						pageNo ='<li class="page-item"><span class="page-link page-box"  url="helpers/country.php?id='+data1.id+'&page='+counter+'">'+realPage+'</span></li>';
 					}
 					else {
 						pageNo ='<li class="page-item"><span class="page-link" url="helpers/country.php?id='+data1.id+'&page='+counter+'">'+realPage+'</span></li>';
@@ -219,7 +219,7 @@ console.log("entered click");
 					console.log("in loop "+counter);
 					realPage = counter+1;
 					if (counter == data1.page) {
-						pageNo ='<li class="page-item"><span class="page-link" style="background-color: #2c2c;" url="helpers/country.php?id='+data1.id+'&page='+counter+'">'+realPage+'</span></li>';
+						pageNo ='<li class="page-item"><span class="page-link page-box" url="helpers/country.php?id='+data1.id+'&page='+counter+'">'+realPage+'</span></li>';
 					}
 					else{
 						pageNo ='<li class="page-item"><span class="page-link" url="helpers/country.php?id='+data1.id+'&page='+counter+'">'+realPage+'</span></li>';
@@ -298,7 +298,7 @@ function dup_page() {
 		url: url,
 		dataType: "json", 
 		success: function (dups) {
-			console.log(dups);
+			//console.log(dups);
 			$("#dup-count").text(dups.dup_count);
 			dup_table =dups.dups;
 			$(dup_table).each(function(i,row){
@@ -395,10 +395,8 @@ function rp(page,table,disp) {
 				  var itemsPerPage = 100;
 				  var currentPage = page;
 				  pager_pos= page;
-				  var rowCount = $('#dup-table tr.yourClass').length;
 				  var pages = Math.ceil($table.find("tr:not(:has(th))").length / itemsPerPage); // fix this bit
-				  var pages1 = Math.ceil(rowCount / itemsPerPage); // fix this bit
-				  total_pages = pages;
+				   total_pages = pages;
 				   //console.log("all rows "+pages);
 				   //console.log("Pages with class "+pages1);
 				  var rowCount = $('#dup-table tr.yourClass').length;
@@ -407,6 +405,7 @@ function rp(page,table,disp) {
 				    if (pages > 1) {
 				    var pager;
 				    console.log("current page "+currentPage);
+				    console.log("current pager "+pager);
 				    if ($table.next().hasClass("pager"))
 				      pager = $table.next().empty();  else
 				    pager = $('<ul class="pagination pager" id="pages" style="padding-top: 20px; direction:ltr; ">');
@@ -433,10 +432,10 @@ function rp(page,table,disp) {
 				    for (var page = startPager; page < endPager; page++) {
 						if(page == currentPage) {
 							//console.log("hit current page");
-							style =' style="background-color: #2c2c;"';
+							style ='  page-box"';
 							}
 							else{ style='';}
-				      $('<span id="pg' + page + '" class="page-link test"'+style+'></span>').text(page + 1).bind('click', {
+				      $('<li id="pg' + page + '" class="page-link test'+style+'"></li>').text(page + 1).bind('click', {
 				          newPage: page
 				        }, function (event) {
 				          currentPage = event.data['newPage'];
@@ -465,17 +464,16 @@ function rp(page,table,disp) {
 
 				  $table.find(
 				  'tbody tr:not(:has(th))').hide().slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).show();
-				 // $table.showSmallCars tr.smallCar { display:table-row; }
-				  rowpos = $table.position();
-				  console.log(rowpos.top);
-				  //$('#container').scrollTop(rowpos.top);
+				  if (total_pages <2) {return;}
 				  $("#dup-wrap").scrollTop(0)
-				  //console.log(pager);
-				  //alert("run this");
 				  tp = $("#pages").html();
-				  console.log(tp);
+				  page_display = currentPage+1 +"/"+total_pages;
+				  startDiv = "<div style='float:left;'>"+page_display+"</div><div style='float:right;padding-right:2%;'><ul class='pagination'>";
+				  endDiv = "</ul></div>";
+				  tp= startDiv+tp+endDiv;
 				  $("#"+disp).html(tp);
-				  $("#pages").hide()
+				  $("#pages").hide();
+				  $('#'+disp).show();
 				  });
 
 				  $table.trigger('repaginate');
