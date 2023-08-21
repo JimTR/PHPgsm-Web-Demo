@@ -15,6 +15,9 @@
 			url: url,
 			data: sndData,
 			dataType: "json",
+			beforeSend: function() {
+				$("#p-loader").show();
+			},
 			success:  function(data){
 				//console.log(data);
 				if (data.count ==  0) {return}
@@ -34,13 +37,13 @@
 						man=item.name_c;
 						$("#data_table").append(gdetail); 
 					});
-					//$("#data_table").html(gdetail); // bad fix
-					//console.log(gdetail)
 					rp(0,'data_table','u-pages-d');
+					$("#p-loader").hide();
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 				alert('failed '+textStatus);
 			}
+			//$("#p-loader").hide();
 		});
 	});
 function timeConverter(UNIX_timestamp){
