@@ -7,7 +7,7 @@
 jQuery(document).ready(function(){
 var wSize = jQuery(window).width();
 if(wSize > 400) {
-console.log(wSize);
+//console.log(wSize);
 jQuery('body').addClass('toggle-sidebar');
 sessionStorage.clear();	
 updateClock();
@@ -334,3 +334,111 @@ $('#switch').click(function()
 	 alert (oldCookieValue);
 		
  });
+ function paginate(page,table,disp) {
+	$('#'+table).each(function () {
+				//console.log('in each loop '+page);
+				  var $table = $(this);
+				  //console.log($table.html());
+				  var itemsPerPage = 100;
+				  var currentPage = page;
+				   pager_pos= page;
+				   var pager;
+				  var pages = Math.ceil($table.find("tr:not(:has(th))").length / itemsPerPage); // fix this bit
+				   total_pages = pages;
+				   //alert("new total pages "+pages);
+				   //alert("supposed to be displaying "+page); 
+				   //console.log("Pages with class "+pages1);
+				  //var rowCount = $('#dup-table tr.yourClass').length;
+				  //console.log("Row Count "+rowCount);
+				   
+				  $table.bind('repaginate', function () {
+				    if (pages > 1) {
+				    //console.log(pager);
+				    //pager='';
+				    //console.log("current page in bind "+currentPage);
+				    //console.log("current pager "+pager);
+				    if ($table.next().hasClass("pager")) {
+						//console.log("pager has class");
+				         pager = $table.next().empty(); 
+				      }
+				     else
+				    pager = $('<ul class="pagination pager" id="pages'+disp+'" style="padding-top: 20px; direction:ltr; ">');
+					if (currentPage >0 ){
+						$('<li class="page-link test" id ="'+disp+'-f" title="First Page"></li>').text(' « ').bind('click', function () {
+						currentPage = 0;
+						$table.trigger('repaginate');
+						}).appendTo(pager);
+				
+						$('<li class="page-link test" id="'+disp+'-p" title="Previous Page">  < </li>').bind('click', function () {
+						if (currentPage > 0)
+							currentPage--;
+							$table.trigger('repaginate');
+						}).appendTo(pager);
+					}
+				    var startPager = currentPage > 2 ? currentPage - 2 : 0;
+				    var endPager = startPager > 0 ? currentPage + 3 : 5;
+				    if (endPager > pages) {
+						//alert ("endpager to large ! setting to "+pages+ "current page = "+currentPage );
+				      endPager = pages;
+				      startPager = pages - 5;    if (startPager < 0)
+				        startPager = 0;
+				    }
+					//alert("end pager = "+endPager);
+				    for (var page = startPager; page < endPager; page++) {
+						
+						if(page == currentPage) {
+							//console.log("hit current page "+page);
+							style ='  page-box"';
+							}
+							else{ style='';}
+							pc = page + 1;
+				      $('<li id="pg-'+disp+'-' + page + '" class="page-link test'+style+'" title="goto page '+pc+'"></li>').text(page + 1).bind('click', {
+				          newPage: page
+				        }, function (event) {
+							//console.log(" ul perhaps ? "+page.html());
+				          currentPage = event.data['newPage'];
+				          $table.trigger('repaginate');
+				      }).appendTo(pager);
+				    }
+					//console.log("current page (next) "+currentPage+ " pages "+pages);
+					if (currentPage !== pages-1) {
+						$('<li class="page-link test" id="'+disp+'-n" title="Next Page"> > </li>').bind('click', function () {
+							//console.log(" ul perhaps ? "+pager.html());
+						if (currentPage < pages - 1)
+						currentPage++;
+						$table.trigger('repaginate');
+						}).appendTo(pager);
+					
+						$('<li class="page-link test" id="'+disp+'-l" title="Last Page"> » </li></ul>').bind('click', function () {
+						currentPage = pages - 1;
+						$table.trigger('repaginate');
+						}).appendTo(pager);
+					}	
+				
+				    if (!$table.next().hasClass("pager"))
+				      pager.insertAfter($table);
+				      //console.log("has pager");
+				      //pager.insertBefore($table);
+				    	
+				  }// end $table.bind('repaginate', function () { ...
+
+				  $table.find('tbody tr:not(:has(th))').hide().slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).show();
+				  //alert(total_pages);
+				  if (total_pages <2) {return;}
+				  $("#"+table+"-wrap").scrollTop(0)
+				   tp = $("#pages"+disp).html();
+				   //console.log(tp);
+				  page_display = currentPage+1 +"/"+total_pages;
+				  startDiv = "<div style='float:left;' title='Page Count'> Page "+page_display+"</div><div style='float:right;padding-right:2%;'><ul class='pagination'>";
+				  endDiv = "</ul></div>";
+				  tp= startDiv+tp+endDiv;
+				  //console.log(tp);
+				  $("#"+disp).html(tp);
+				  $("#pages"+disp).hide();
+				  $('#'+disp).show();
+				  //alert("wrapping up");
+				  });
+
+				  $table.trigger('repaginate');
+				});								
+	}			

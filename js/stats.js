@@ -6,7 +6,7 @@
 		e.preventDefault();
 		var items='';
 		var url = $(this).attr('action');
-		$("#data_table").html(items);
+		$("#u-tbody").empty();
 		var sndData = $('#sendcmd input').serialize();
 		console.log(url)
 		console.log(sndData);
@@ -25,19 +25,17 @@
 					$("#results").show();
 					$("#full-back").hide();
 					$("#go_back").show();
-					console.log(data.start);
 					$('#count').html(data.count);
 					$('#starter').html(data.start);
 					$('#finisher').html(data.finish);
 					player = data.results;
+					
 					$.each(player, function(i, item) {
 						var timestamp =  timeConverter(item.last_log_on);
-						gdetail = "<tr><td><a href='"+'users.php?id='+item.steam_id64+"'>"+item.name_c+"</a></td><td style='padding-left:2%;'><img  style='border:1px solid;width:40px;' src='"+item.flag+"' title='"+item.country+"'></td><td>"+timestamp+"</td><td>" ;
-						gdetail +='<a href=http://steamcommunity.com/profiles/'+item.steam_id64+' target="_blank">'+item.steam_id64+'</a></td></tr>';
-						man=item.name_c;
+						gdetail = "<tr><td><a href='"+'users.php?id='+item.steam_id64+"'>"+item.name_c+"</a></td><td style='padding-left:2%;'><img  style='border:1px solid;width:40px;' src='"+item.flag+"' title='"+item.country+"'></td><td>"+timestamp+"</td><td><a href='http://steamcommunity.com/profiles/"+item.steam_id64+"' target='_blank'>"+item.steam_id64+"</a></td></tr>";
 						$("#data_table").append(gdetail); 
 					});
-					rp(0,'data_table','u-pages-d');
+					paginate(0,'data_table','u-pages-d');
 					$("#p-loader").hide();
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -74,7 +72,7 @@ $( "#go_back" ).click (function() {
 	console.log(rowCount);
 	$('#results').hide();
 	$('#searchbox').show();
-	$("#data_table").empty();
+	$("#u-tbody").empty();
 	$("#gen").empty();
 	$("#go_back").hide();
 	$("#full-back").show();
@@ -262,7 +260,7 @@ $('#vac').on('click','tr', function() {
 function sb_ban () {
 	action= 'sb-ban';
 		url = "plugins/stats_data.php?action="+action;
-		console.log(url +" in function");
+		//console.log(url +" in function");
 		$.ajax({ 
 			type: 'GET', 
 			url: url,
@@ -280,7 +278,7 @@ function sb_ban () {
 function sys_ban() {
 	action = 'sys-bans';
 		url = "plugins/stats_data.php?action="+action;
-		console.log(url+" in function" );
+		//console.log(url+" in function" );
 		$.ajax({ 
 			type: 'GET', 
 			url: url,
@@ -297,7 +295,7 @@ function sys_ban() {
 function dup_page() {
 	action = 'dups';
 	url = "plugins/stats_data.php?action="+action;
-	console.log(url);
+	//console.log(url);
 	$.ajax({ 
 		type: 'GET', 
 		url: url,
@@ -311,7 +309,7 @@ function dup_page() {
 				$("#dup-table").append(row);
 				//$this.addClass('yourClass');
 			});
-			 rp(0,'dup-table','pages-d');
+			 paginate(0,'dup-table','pages-d');
 		}
 	});
 }
@@ -320,7 +318,7 @@ function dup_page() {
 function vac_ban() {
 	action = 'vac-ban';
 	url = "plugins/stats_data.php?action="+action;
-	console.log(url+" vac_ban");
+	//console.log(url+" vac_ban");
 	$.ajax({ 
 		type: 'GET', 
 		url: url,
@@ -374,7 +372,7 @@ $('body').click(function(e) {
      y = $target.attr('id');
      if (y == v+'-f') {
 		 $target.text(1);
-		 console.log ("target text "+$target.text);
+		 //console.log ("target text "+$target.text);
 	 }
 	 if (y == v+'-p') {
 		 $target.text(pager_pos);
@@ -398,27 +396,31 @@ $('body').click(function(e) {
       //} else {
  // no table found
 //}
-     //alert("parent div "+ce);
-     //alert ("closest table "+msgId );
+    //alert("parent div "+ce);
+    //alert ("closest table "+msgId );
     //alert("we clicked pagination "+x+" div to use "+v );
+    //paginate(x, msgId,v);
     rp(x, msgId,v);
   }
 });
 
 function rp(page,table,disp) {
-	console.log("current pos "+pager_pos);
+	
+	/*console.log("current pos "+pager_pos);
 	console.log("total pages "+total_pages);
 	console.log("display "+disp);
 	console.log( "page to display "+page);
 	console.log("current table "+table);
+	*/
 	$('#'+table).each(function () {
-				console.log('in each loop '+page);
+				//console.log('in each loop '+page);
 				  var $table = $(this);
 				  //console.log($table.html());
 				  var itemsPerPage = 100;
 				  var currentPage = page;
 				   pager_pos= page;
 				   var pager;
+				   //alert("full table length "+$table.length);
 				  var pages = Math.ceil($table.find("tr:not(:has(th))").length / itemsPerPage); // fix this bit
 				   total_pages = pages;
 				   //alert("new total pages "+pages);
@@ -431,8 +433,8 @@ function rp(page,table,disp) {
 				    if (pages > 1) {
 				    //console.log(pager);
 				    //pager='';
-				    console.log("current page in bind"+currentPage);
-				    console.log("current pager "+pager);
+				    //console.log("current page in bind "+currentPage);
+				    //console.log("current pager "+pager);
 				    if ($table.next().hasClass("pager")) {
 						//console.log("pager has class");
 				         pager = $table.next().empty(); 
@@ -463,7 +465,7 @@ function rp(page,table,disp) {
 				    for (var page = startPager; page < endPager; page++) {
 						
 						if(page == currentPage) {
-							console.log("hit current page "+page);
+							//console.log("hit current page "+page);
 							style ='  page-box"';
 							}
 							else{ style='';}
@@ -471,15 +473,15 @@ function rp(page,table,disp) {
 				      $('<li id="pg-'+disp+'-' + page + '" class="page-link test'+style+'" title="goto page '+pc+'"></li>').text(page + 1).bind('click', {
 				          newPage: page
 				        }, function (event) {
-							console.log(" ul perhaps ? "+page.html());
+							//console.log(" ul perhaps ? "+page.html());
 				          currentPage = event.data['newPage'];
 				          $table.trigger('repaginate');
 				      }).appendTo(pager);
 				    }
-					console.log("current page (next) "+currentPage+ " pages "+pages);
+					//console.log("current page (next) "+currentPage+ " pages "+pages);
 					if (currentPage !== pages-1) {
 						$('<li class="page-link test" id="'+disp+'-n" title="Next Page"> > </li>').bind('click', function () {
-							console.log(" ul perhaps ? "+pager.html());
+							//console.log(" ul perhaps ? "+pager.html());
 						if (currentPage < pages - 1)
 						currentPage++;
 						$table.trigger('repaginate');
@@ -493,22 +495,22 @@ function rp(page,table,disp) {
 				
 				    if (!$table.next().hasClass("pager"))
 				      pager.insertAfter($table);
-				      console.log("has pager");
+				      //console.log("has pager");
 				      //pager.insertBefore($table);
 				    	
 				  }// end $table.bind('repaginate', function () { ...
-
+				  //alert("before table.find");	
 				  $table.find('tbody tr:not(:has(th))').hide().slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).show();
-				  //alert(total_pages);
-				  if (total_pages <2) {return;}
+				  //alert("total pages after table.find"+total_pages);
+				  if (pages <2) {return;}
 				  $("#"+table+"-wrap").scrollTop(0)
 				   tp = $("#pages"+disp).html();
-				   console.log(tp);
-				  page_display = currentPage+1 +"/"+total_pages;
+				   //console.log(tp);
+				  page_display = currentPage+1 +"/"+pages;
 				  startDiv = "<div style='float:left;' title='Page Count'> Page "+page_display+"</div><div style='float:right;padding-right:2%;'><ul class='pagination'>";
 				  endDiv = "</ul></div>";
 				  tp= startDiv+tp+endDiv;
-				  console.log(tp);
+				  //console.log(tp);
 				  $("#"+disp).html(tp);
 				  $("#pages"+disp).hide();
 				  $('#'+disp).show();
