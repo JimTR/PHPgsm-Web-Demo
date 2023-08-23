@@ -709,9 +709,43 @@ $("input[type='checkbox']").on('change', function() {
 		 
 	}
 });
-function onClickHandler(){
-    var chk=document.getElementById("box").value;
-	
-    //use this value
-
-}
+$('body').click(function(e) {   
+  var $target = $(e.target); 4
+  //alert("clicked")
+  //console.log($target);  
+  if ($target.hasClass("pagination-page")) {
+    // do something
+    v = $(e.target).parent().parent().parent().attr('id');
+    y = $target.attr('id');
+    if (y == v+'-f') {
+		 $target.text(1);
+	} 
+	if (y == v+'-p') {
+		$target.text($target.parent().attr('cp'));
+	}
+	 if(y == v+"-n") {
+		 nextPage = parseInt($target.parent().attr('cp'));
+		 nextPage = nextPage+2;
+		 $target.text(nextPage);
+	 }
+	 if(y ==v+'-l') {
+		 $target.text($target.parent().attr('tp'));
+	 }
+     console.log("id = "+y);
+     x = $target.text()-1;
+     console.log(x);
+     ce = $(e.target).parent().parent().parent().parent().attr('id');
+     var msgId = $("#"+ce).closest('table').attr('id');
+     //if($("#"+ce).find('table').length) {
+		 tbl = $("#"+ce).find('table');
+		  var msgId = tbl.attr('id');
+      //} else {
+ // no table found
+//}
+    //alert("parent div "+ce);
+    //alert ("closest table "+msgId );
+    //alert("we clicked pagination "+x+" div to use "+v );
+    paginate(x, msgId,v);
+    //rp(x, msgId,v);
+  }
+});

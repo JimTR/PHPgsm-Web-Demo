@@ -93,13 +93,15 @@
 			</div>
 			<div class="col-lg-6">
 				<div class="card">
-					<div class="card-body">
+					<div class="card-body"  id="player-div">
 						<h5 class="card-title">Players
 							<!--<span style="float:right;clear:none;" id="player_title" ></span>
 							<span style="float:right;padding-right:1%;">Map</span>-->
 						</h5>
-						<div class="table-wrapper" style ="height:391px;"> 
-							<table class="table table-sm" style="table-layout: fixed;display:none;" id="player-table">
+						<div id="pages-d" style="display:none;"></div> 
+						<div class="table-wrapper" style ="height:391px;" id="player-table-wrap">
+							
+							<table class="table table-sm" style="table-layout: fixed;" id="player-table">
 								<thead>
 									<th  class="table-header" style="width:48%;">Name</th>
 									<th class="table-header" >Location</th>
@@ -275,14 +277,16 @@
 		get_game(url,server,id);
 		setInterval(get_game,4000);
 		//alert("show table");
-		$("#player-table").show();
+		//$("#player-table").show();
 		//alert($(window).width());
 		width = $(window).width();
-		if (width >1000) {
-			$("body").addClass("toggle-sidebar");
-		}
+		//if (width >1000) {
+			//$("body").addClass("toggle-sidebar");
+		//}
+		 paginate(0,'player-table','pages-d');
 		 
 	});
+	
 </script>
 
 </body>

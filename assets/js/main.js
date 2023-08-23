@@ -362,14 +362,14 @@ $('#switch').click(function()
 				         pager = $table.next().empty(); 
 				      }
 				     else
-				    pager = $('<ul class="pagination pager" id="pages'+disp+'" style="padding-top: 20px; direction:ltr; ">');
+						pager = $('<ul class="pagination pager" id="pages'+disp+'" cp="'+page+'" style="padding-top: 20px; direction:ltr;">');
 					if (currentPage >0 ){
-						$('<li class="page-link test" id ="'+disp+'-f" title="First Page"></li>').text(' « ').bind('click', function () {
+						$('<li class="page-link pagination-page" id ="'+disp+'-f" title="First Page"></li>').text(' « ').bind('click', function () {
 						currentPage = 0;
 						$table.trigger('repaginate');
 						}).appendTo(pager);
 				
-						$('<li class="page-link test" id="'+disp+'-p" title="Previous Page">  < </li>').bind('click', function () {
+						$('<li class="page-link pagination-page" id="'+disp+'-p" title="Previous Page">  < </li>').bind('click', function () {
 						if (currentPage > 0)
 							currentPage--;
 							$table.trigger('repaginate');
@@ -378,7 +378,7 @@ $('#switch').click(function()
 				    var startPager = currentPage > 2 ? currentPage - 2 : 0;
 				    var endPager = startPager > 0 ? currentPage + 3 : 5;
 				    if (endPager > pages) {
-						//alert ("endpager to large ! setting to "+pages+ "current page = "+currentPage );
+						
 				      endPager = pages;
 				      startPager = pages - 5;    if (startPager < 0)
 				        startPager = 0;
@@ -392,24 +392,24 @@ $('#switch').click(function()
 							}
 							else{ style='';}
 							pc = page + 1;
-				      $('<li id="pg-'+disp+'-' + page + '" class="page-link test'+style+'" title="goto page '+pc+'"></li>').text(page + 1).bind('click', {
+				      $('<li id="pg-'+disp+'-' + page + '" class="page-link pagination-page'+style+'" title="goto page '+pc+'"></li>').text(page + 1).bind('click', {
 				          newPage: page
 				        }, function (event) {
-							//console.log(" ul perhaps ? "+page.html());
+							
 				          currentPage = event.data['newPage'];
 				          $table.trigger('repaginate');
 				      }).appendTo(pager);
 				    }
-					//console.log("current page (next) "+currentPage+ " pages "+pages);
+					
 					if (currentPage !== pages-1) {
-						$('<li class="page-link test" id="'+disp+'-n" title="Next Page"> > </li>').bind('click', function () {
-							//console.log(" ul perhaps ? "+pager.html());
+						$('<li class="page-link pagination-page" id="'+disp+'-n" title="Next Page"> > </li>').bind('click', function () {
+							
 						if (currentPage < pages - 1)
 						currentPage++;
 						$table.trigger('repaginate');
 						}).appendTo(pager);
 					
-						$('<li class="page-link test" id="'+disp+'-l" title="Last Page"> » </li></ul>').bind('click', function () {
+						$('<li class="page-link pagination-page" id="'+disp+'-l" title="Last Page"> » </li></ul>').bind('click', function () {
 						currentPage = pages - 1;
 						$table.trigger('repaginate');
 						}).appendTo(pager);
@@ -417,27 +417,23 @@ $('#switch').click(function()
 				
 				    if (!$table.next().hasClass("pager"))
 				      pager.insertAfter($table);
-				      //console.log("has pager");
-				      //pager.insertBefore($table);
-				    	
-				  }// end $table.bind('repaginate', function () { ...
+				    				    	
+				  }// end $table.bind('repaginate', function 
 
 				  $table.find('tbody tr:not(:has(th))').hide().slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).show();
-				  //alert(total_pages);
 				  if (total_pages <2) {return;}
 				  $("#"+table+"-wrap").scrollTop(0)
 				   tp = $("#pages"+disp).html();
 				   //console.log(tp);
 				  page_display = currentPage+1 +"/"+total_pages;
-				  startDiv = "<div style='float:left;' title='Page Count'> Page "+page_display+"</div><div style='float:right;padding-right:2%;'><ul class='pagination'>";
+				  startDiv = "<div style='float:left;' title='Page Count'> Page "+page_display+"</div><div style='float:right;padding-right:2%;'><ul class='pagination' cp='"+currentPage+"' tp='"+pages+"'>";
 				  endDiv = "</ul></div>";
 				  tp= startDiv+tp+endDiv;
-				  //console.log(tp);
+				  
 				  $("#"+disp).html(tp);
 				  $("#pages"+disp).hide();
 				  $('#'+disp).show();
-				  //alert("wrapping up");
-				  });
+				 });
 
 				  $table.trigger('repaginate');
 				});								

@@ -1,6 +1,6 @@
  	var gdetail='';
  	var pager_pos = 0;
- 	var total_pages = 0;
+ 	//var total_pages = 0;
 	//console.log("on load "+history.length);
 	$('#sendcmd').on('submit', function(e) {
 		e.preventDefault();
@@ -365,29 +365,27 @@ $('body').click(function(e) {
   var $target = $(e.target); 4
   //alert("clicked")
   //console.log($target);  
-  if ($target.hasClass("test")) {
+  if ($target.hasClass("pagination-page")) {
     // do something
     v = $(e.target).parent().parent().parent().attr('id');
-     //var $table = $("#dup-table");
-     y = $target.attr('id');
-     if (y == v+'-f') {
+    y = $target.attr('id');
+    if (y == v+'-f') {
 		 $target.text(1);
-		 //console.log ("target text "+$target.text);
-	 }
-	 if (y == v+'-p') {
-		 $target.text(pager_pos);
-	 }
+	} 
+	if (y == v+'-p') {
+		$target.text($target.parent().attr('cp'));
+	}
 	 if(y == v+"-n") {
-		 $target.text(pager_pos+2)
+		 nextPage = parseInt($target.parent().attr('cp'));
+		 nextPage = nextPage+2;
+		 $target.text(nextPage);
 	 }
 	 if(y ==v+'-l') {
-		 $target.text(total_pages);
+		 $target.text($target.parent().attr('tp'));
 	 }
      console.log("id = "+y);
      x = $target.text()-1;
      console.log(x);
-     v = $(e.target).parent().parent().parent().attr('id');
-    //alert (v);
      ce = $(e.target).parent().parent().parent().parent().attr('id');
      var msgId = $("#"+ce).closest('table').attr('id');
      //if($("#"+ce).find('table').length) {
@@ -399,8 +397,8 @@ $('body').click(function(e) {
     //alert("parent div "+ce);
     //alert ("closest table "+msgId );
     //alert("we clicked pagination "+x+" div to use "+v );
-    //paginate(x, msgId,v);
-    rp(x, msgId,v);
+    paginate(x, msgId,v);
+    //rp(x, msgId,v);
   }
 });
 
@@ -414,6 +412,7 @@ function rp(page,table,disp) {
 	*/
 	$('#'+table).each(function () {
 				//console.log('in each loop '+page);
+				alert ("selected page "+page);
 				  var $table = $(this);
 				  //console.log($table.html());
 				  var itemsPerPage = 100;
@@ -423,6 +422,8 @@ function rp(page,table,disp) {
 				   //alert("full table length "+$table.length);
 				  var pages = Math.ceil($table.find("tr:not(:has(th))").length / itemsPerPage); // fix this bit
 				   total_pages = pages;
+				   alert (pages);
+				   if(page > pages) {currentPage=pages-1;}
 				   //alert("new total pages "+pages);
 				   //alert("supposed to be displaying "+page); 
 				   //console.log("Pages with class "+pages1);
@@ -440,14 +441,15 @@ function rp(page,table,disp) {
 				         pager = $table.next().empty(); 
 				      }
 				     else
-				    pager = $('<ul class="pagination pager" id="pages'+disp+'" style="padding-top: 20px; direction:ltr; ">');
+				    pager = $('<ul class="pagination pager" id="pages'+disp+'" cp="'+page+'" style="padding-top: 20px; direction:ltr;">');
+				     //pager = $('<ul class="pagination pager" id="pages'+disp+'" style="padding-top: 20px; direction:ltr; ">');
 					if (currentPage >0 ){
-						$('<li class="page-link test" id ="'+disp+'-f" title="First Page"></li>').text(' « ').bind('click', function () {
+						$('<li class="page-link page" id ="'+disp+'-f" title="First Page"></li>').text(' « ').bind('click', function () {
 						currentPage = 0;
 						$table.trigger('repaginate');
 						}).appendTo(pager);
 				
-						$('<li class="page-link test" id="'+disp+'-p" title="Previous Page">  < </li>').bind('click', function () {
+						$('<li class="page-link page" id="'+disp+'-p" title="Previous Page">  < </li>').bind('click', function () {
 						if (currentPage > 0)
 							currentPage--;
 							$table.trigger('repaginate');
@@ -466,11 +468,11 @@ function rp(page,table,disp) {
 						
 						if(page == currentPage) {
 							//console.log("hit current page "+page);
-							style ='  page-box"';
+							style ='page-box';
 							}
 							else{ style='';}
 							pc = page + 1;
-				      $('<li id="pg-'+disp+'-' + page + '" class="page-link test'+style+'" title="goto page '+pc+'"></li>').text(page + 1).bind('click', {
+				      $('<li id="pg-'+disp+'-' + page + '" class="page-link page '+style+'" title="goto page '+pc+'"></li>').text(page + 1).bind('click', {
 				          newPage: page
 				        }, function (event) {
 							//console.log(" ul perhaps ? "+page.html());
@@ -480,14 +482,14 @@ function rp(page,table,disp) {
 				    }
 					//console.log("current page (next) "+currentPage+ " pages "+pages);
 					if (currentPage !== pages-1) {
-						$('<li class="page-link test" id="'+disp+'-n" title="Next Page"> > </li>').bind('click', function () {
+						$('<li class="page-link page" id="'+disp+'-n" title="Next Page"> > </li>').bind('click', function () {
 							//console.log(" ul perhaps ? "+pager.html());
 						if (currentPage < pages - 1)
 						currentPage++;
 						$table.trigger('repaginate');
 						}).appendTo(pager);
 					
-						$('<li class="page-link test" id="'+disp+'-l" title="Last Page"> » </li></ul>').bind('click', function () {
+						$('<li class="page-link page" id="'+disp+'-l" title="Last Page"> » </li></ul>').bind('click', function () {
 						currentPage = pages - 1;
 						$table.trigger('repaginate');
 						}).appendTo(pager);
@@ -505,9 +507,9 @@ function rp(page,table,disp) {
 				  if (pages <2) {return;}
 				  $("#"+table+"-wrap").scrollTop(0)
 				   tp = $("#pages"+disp).html();
-				   //console.log(tp);
+				   alert(tp);
 				  page_display = currentPage+1 +"/"+pages;
-				  startDiv = "<div style='float:left;' title='Page Count'> Page "+page_display+"</div><div style='float:right;padding-right:2%;'><ul class='pagination'>";
+				  startDiv = "<div style='float:left;' title='Page Count'> Page "+page_display+"</div><div style='float:right;padding-right:2%;'><ul class='pagination' cp='"+currentPage+"' tp='"+pages+"'>";
 				  endDiv = "</ul></div>";
 				  tp= startDiv+tp+endDiv;
 				  //console.log(tp);
