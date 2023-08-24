@@ -114,3 +114,7 @@
     color: #000000;
     font-weight: bold;
 }
+
+.middle {
+    vertical-align: middle !important;
+}
