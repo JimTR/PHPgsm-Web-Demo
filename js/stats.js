@@ -167,7 +167,7 @@ $("#country").change(function(){
 				server = player.server.replace(/\*/g, ', ');
 				server = server.slice(0,-2);
 				console.log("second hit");
-				cRow = "<tr id='"+player.steam_id64+"'><td class='middle' style='overflow:hidden;max-width: 150px;'><a href='users.php?id="+player.steam_id64+"'>"+player.name_c+"</a></td><td class='middle'>"+player.city+" - "+player.region+"</td><td class='middle'>"+player.log_ons+"</td><td>"+timeConverter(player.last_log_on)+"</td><td class='middle' style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
+				cRow = "<tr id='"+player.steam_id64+"'><td class='middle' style='overflow:hidden;max-width: 150px;'><a href='users.php?id="+player.steam_id64+"'>"+player.name_c+"</a></td><td class='middle'>"+player.city+" - "+player.region+"</td><td class='middle'>"+player.log_ons+"</td><td class='middle'>"+timeConverter(player.last_log_on)+"</td><td class='middle' style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
 				$('#player-results > tbody:last-child').append(cRow);
 			}
 			//alert ("paginate");
