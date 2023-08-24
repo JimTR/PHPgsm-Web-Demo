@@ -388,11 +388,17 @@ $('#switch').click(function()
 						
 						if(page == currentPage) {
 							//console.log("hit current page "+page);
-							style ='  page-box"';
+							
+							style ='  page-box';
+							title = "goto top";
 							}
-							else{ style='';}
-							pc = page + 1;
-				      $('<li id="pg-'+disp+'-' + page + '" class="page-link pagination-page'+style+'" title="goto page '+pc+'"></li>').text(page + 1).bind('click', {
+							else{ 
+								pc = page + 1;
+								style='';
+								title =  'goto page '+pc;
+							}
+							
+				      $('<li id="pg-'+disp+'-' + page + '" class="page-link pagination-page'+style+'" title="'+title+'"></li>').text(page + 1).bind('click', {
 				          newPage: page
 				        }, function (event) {
 							
@@ -421,7 +427,11 @@ $('#switch').click(function()
 				  }// end $table.bind('repaginate', function 
 
 				  $table.find('tbody tr:not(:has(th))').hide().slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).show();
-				  if (total_pages <2) {return;}
+				  if (total_pages <2) {
+					  //alert("only one page");
+					  $('#'+disp).hide();
+					  return;
+					}
 				  $("#"+table+"-wrap").scrollTop(0)
 				   tp = $("#pages"+disp).html();
 				   //console.log(tp);

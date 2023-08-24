@@ -123,7 +123,7 @@ $("#country").change(function(){
 	}
 	text = $('option:selected', this).text();
 	url = "helpers/country.php?id="+val;
-	console.log(url);
+	//alert(url);
 	$("#country-pages").hide();
 	 $.ajax({ 
         type: 'GET', 
@@ -132,6 +132,7 @@ $("#country").change(function(){
         success: function (data1) {
 			// got data
 			console.log(data1);
+			//alert("data back");
 			$("#c-rows").text(data1.rows); 
 			$("#online-time").text(data1.online);
 			$("#online-player").text(data1.top_player);
@@ -159,7 +160,7 @@ $("#country").change(function(){
 			}
 			console.log(data1.pages); 
 			console.log(country);
-			
+			$('#player-results > tbody').empty();
 			for (var i in country) {
 				//
 				player= country[i];
@@ -168,13 +169,18 @@ $("#country").change(function(){
 				cRow = "<tr  style='vertical-align:middle;' id='"+player.steam_id64+"'><td style='overflow:hidden;max-width: 150px;'><a href='users.php?id="+player.steam_id64+"'>"+player.name_c+"</a></td><td>"+player.city+" - "+player.region+"</td><td>"+player.log_ons+"</td><td>"+timeConverter(player.last_log_on)+"</td><td style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
 				$('#player-results > tbody:last-child').append(cRow);
 			}
+			//alert ("paginate");
+			paginate(0,"player-results","pages-p");
+			//console.log($("#player-results").html());
 		}
 		
     });
 	$("#country-name").text(text);
 	$("#country").blur();
+	
 	$("#country-results").show();
 	$("#country-stats").show();
+	//alert("done");
 });
 function timeConverter(UNIX_timestamp){
 	var a = new Date(UNIX_timestamp * 1000);
@@ -241,6 +247,8 @@ console.log("entered click");
 				cRow = "<tr  id='"+player.steam_id64+"'><td style='overflow:hidden;max-width: 150px;'><a href='users.php?id="+player.steam_id64+"'>"+player.name_c+"</a></td><td>"+player.city+" - "+player.region+"</td><td>"+player.log_ons+"</td><td>"+timeConverter(player.last_log_on)+"</td><td style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
 				$('#player-results > tbody:last-child').append(cRow);
 			}
+			//alert("paginate #2");
+			 //rp(0,"player-results","pages-p");
 		}
 		
     });
@@ -364,7 +372,7 @@ function general() {
 $('body').click(function(e) {   
   var $target = $(e.target); 4
   //alert("clicked")
-  //console.log($target);  
+  console.log($target);  
   if ($target.hasClass("pagination-page")) {
     // do something
     v = $(e.target).parent().parent().parent().attr('id');
@@ -394,8 +402,8 @@ $('body').click(function(e) {
       //} else {
  // no table found
 //}
-    //alert("parent div "+ce);
-    //alert ("closest table "+msgId );
+   //alert("parent div "+ce);
+   //alert ("closest table "+msgId );
     //alert("we clicked pagination "+x+" div to use "+v );
     paginate(x, msgId,v);
     //rp(x, msgId,v);
@@ -404,12 +412,12 @@ $('body').click(function(e) {
 
 function rp(page,table,disp) {
 	
-	/*console.log("current pos "+pager_pos);
+	console.log("current pos "+pager_pos);
 	console.log("total pages "+total_pages);
 	console.log("display "+disp);
 	console.log( "page to display "+page);
 	console.log("current table "+table);
-	*/
+	
 	$('#'+table).each(function () {
 				//console.log('in each loop '+page);
 				alert ("selected page "+page);

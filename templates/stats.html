@@ -92,9 +92,9 @@
 										<form id="sendcmd"  action="<!--#url#-->/api.php" method="get">
 											<input type="hidden" id="action" name="action" value="stats">
 											<table class="table">
-												<tr><td style="border-style:none;">Start Date</td><td style="border-style:none;"><input style="width:fit-content;" type="date" class="form-control" id="start" name="server"  value="<!--#today#-->"data-date-format="yyyy-mm-dd" ></td></tr>
-												<tr style="border-top:0px;border-style:none;">
-													<td style="border-top:0px;border-style:none;">End Date</td>
+												<tr><td style="border-style:none vertical-align:middle;">Start Date</td><td style="border-style:none;"><input style="width:fit-content;" type="date" class="form-control" id="start" name="server"  value="<!--#today#-->"data-date-format="yyyy-mm-dd" ></td></tr>
+												<tr style="border-style:none;">
+													<td style="vertical-align:middle;border-style:none;">End Date</td>
 													<td style="border-top:0px;border-style:none;"><input style="width:fit-content;" type="date" class="form-control" id="finish" name="filter"  value ="<!--#today#-->" data-date-format="yyyy-mm-dd"  ></td>
 												</tr>
 												<tr style="border-top:0px;border-style:none;">
@@ -152,7 +152,7 @@
 									<div class="col-lg-9" style="display:none;" id="country-results">
 										<h5 class="card-title">Results For <span id="country-name"></span></h5>
 										<div id="pages-p" style="display:none;"></div>
-										<div class="table-wrapper" style="max-height:400px;">
+										<div class="table-wrapper" style="max-height:400px;" id="player-results-wrap">
 											<table class="table"  id="player-results">
 												<thead>
 													<th class="table-header">Name</th>
@@ -164,7 +164,7 @@
 												<tbody id="country-body"></tbody>
 											</table>
 										</div>	
-										<ul class="pagination" style="margin-top:1%;" id="country-pages"></ul>	
+										<!--<ul class="pagination" style="margin-top:1%;" id="country-pages"></ul>	-->
 									</div>
 									
 								</div>
