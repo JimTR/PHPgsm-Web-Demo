@@ -334,13 +334,17 @@ $('#switch').click(function()
 	 alert (oldCookieValue);
 		
  });
- function paginate(page,table,disp) {
+ function paginate(page,table,disp,PerPage) {
+	 
+	 
 	$('#'+table).each(function () {
 				//console.log('in each loop '+page);
 				  var $table = $(this);
 				  //console.log($table.html());
-				  var itemsPerPage = 100;
-				  var currentPage = page;
+				if(typeof PerPage === 'undefined') { var itemsPerPage = 100;}
+				else { var itemsPerPage = PerPage;}
+				   
+				   var currentPage = page;
 				   pager_pos= page;
 				   var pager;
 				  var pages = Math.ceil($table.find("tr:not(:has(th))").length / itemsPerPage); // fix this bit
@@ -362,7 +366,7 @@ $('#switch').click(function()
 				         pager = $table.next().empty(); 
 				      }
 				     else
-						pager = $('<ul class="pagination pager" id="pages'+disp+'" cp="'+page+'" style="padding-top: 20px; direction:ltr;">');
+						pager = $('<ul class="pagination pager" id="pages'+disp+'" cp="'+page+'" pp="'+itemsPerPage+'" style="padding-top: 20px; direction:ltr;">');
 					if (currentPage >0 ){
 						$('<li class="page-link pagination-page" id ="'+disp+'-f" title="First Page"></li>').text(' « ').bind('click', function () {
 						currentPage = 0;
@@ -436,7 +440,7 @@ $('#switch').click(function()
 				   tp = $("#pages"+disp).html();
 				   //console.log(tp);
 				  page_display = currentPage+1 +"/"+total_pages;
-				  startDiv = "<div style='float:left;' title='Page Count'> Page "+page_display+"</div><div style='float:right;padding-right:2%;'><ul class='pagination' cp='"+currentPage+"' tp='"+pages+"'>";
+				  startDiv = "<div style='float:left;' title='Page Count'> Page "+page_display+"</div><div style='float:right;padding-right:2%;'><ul class='pagination' cp='"+currentPage+"' tp='"+pages+"' pp='"+itemsPerPage+"'>";
 				  endDiv = "</ul></div>";
 				  tp= startDiv+tp+endDiv;
 				  

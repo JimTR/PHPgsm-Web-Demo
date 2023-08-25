@@ -172,7 +172,10 @@ $("#country").change(function(){
 			}
 			//alert ("paginate");
 			paginate(0,"player-results","pages-p");
-			//console.log($("#player-results").html());
+			//var tableRow = $("#player-results td").filter(function() {
+			//	return $(this).text() == "";
+			//}).closest("tr");
+			//console.log("found "+tableRow.html());
 		}
 		
     });
@@ -279,8 +282,9 @@ function sb_ban () {
 				sb_ban_table =sbbans.sb_bans;
 				$(sb_ban_table).each(function(i,row){
 					//console.log(row);
-					$("#sb-ban-body").append(row);
+					$("#sb-table").append(row);
 				});
+				paginate(0,'sb-table','sb-pages-d');
 			}
 		});
 }
@@ -296,8 +300,9 @@ function sys_ban() {
 				$("#sys-count").text(sysbans.sysbans_count);
 				sys_ban_table =sysbans.sys_bans;
 				$(sys_ban_table).each(function(i,row){
-					$("#sys-bans").append(row);
+					$("#sys-table").append(row);
 				});
+				paginate(0,'sys-table','sys-pages-d');
 			}
 		});
 }
@@ -341,9 +346,11 @@ function vac_ban() {
 			vac_ban_table =vacbans.vac_bans;
 			$(vac_ban_table).each(function(i,row){
 				//console.log(row);
-				$("#vac-bans").append(row);
+				$("#vac-table").append(row);
 			});
 			$("#vac-loader").hide();
+			//alert('paginate');
+			paginate(0,'vac-table','v-pages-d');
 		}
 	});
 }
@@ -392,6 +399,7 @@ $('body').click(function(e) {
 	 if(y ==v+'-l') {
 		 $target.text($target.parent().attr('tp'));
 	 }
+	 pp =$target.parent().attr('pp');
      console.log("id = "+y);
      x = $target.text()-1;
      console.log(x);
@@ -405,8 +413,8 @@ $('body').click(function(e) {
 //}
    //alert("parent div "+ce);
    //alert ("closest table "+msgId );
-    //alert("we clicked pagination "+x+" div to use "+v );
-    paginate(x, msgId,v);
+   //alert("we clicked pagination "+x+" div to use "+v );
+    paginate(x, msgId,v,pp);
     //rp(x, msgId,v);
   }
 });

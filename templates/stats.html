@@ -206,62 +206,52 @@
 							<div class="tab-pane fade" id="bordered-bans" role="tabpanel" aria-labelledby="contact-tab">
 								<div class="row">
 									<h5 class="card-title" style="margin-left:1%;">Banned Users</h5>
-									<div class="<!--#div_width#-->" id="" <!--#vac_ban_class#-->>
+									<div class="<!--#div_width#-->" id="vac-div" <!--#vac_ban_class#-->>
 										
 										<p class="card-title">Vac Bans <dummy class="card-title" id="vac-count"></dummy> bans found</p>
-										<div class="table-wrapper" style="position:relative;min-height:67%;">
+										<div id="v-pages-d" style="display:none;"></div>
+										<div class="table-wrapper" style="position:relative;min-height:67%;"  id="vac-table-wrap">
 											<div id= "vac-loader"  style="position:absolute;top:25%;text-align:center;width:100%;">
 												<div class="loader" style="margin-left:0;margin-top:0;left:44%;top:-14%;"></div>
 												<!--<img style="width:22%;" src="img/sp2.gif"></img>-->
 												<p style="position:absolute;margin-top:16%;width:100%;">Please Wait Loading Data</p>
 											</div>
-										<table class="table" id="vac" style="table-layout:fixed;">
+										<table class="table" id="vac-table" style="table-layout:fixed;">
 											<thead>
 												<th class="table-header" style="width:45%;">Name</th>
 												<th class="table-header" style="width:30%;">Last Ban</th>
 												<th class="table-header" >Last Login</th>
-												
 											</thead>
-											<tbody id="vac-bans">
-												
-											</tbody>
+											
 											
 										</table>
 										</div>
 										</div>
-										<div class="<!--#div_width#-->" id="" <!--#sb_ban_class#-->>
+										<div class="<!--#div_width#-->" id="sb-div" <!--#sb_ban_class#-->>
 										
 										<p class="card-title">Source Bans <dummy class="card-title" id="sb-count"></dummy> bans found</p>
-										<div class="table-wrapper">
-										<table class="table" id="sb_ban">
+										<div id="sb-pages-d" style="display:none;"></div>
+										<div class="table-wrapper" id="sb-table-wrap">
+										<table class="table" id="sb-table">
 											<thead>
 												<th class="table-header" style="width:45%;">Name</th>
 												<th class="table-header" style="width:30%;">Last Ban</th>
 												<th class="table-header" >Last Login</th>
-												
 											</thead>
-											<tbody id="sb-ban-body">
-												
-											</tbody>
-											
 										</table>
 										</div>
 										</div>
-										<div class="<!--#div_width#-->" id="" <!--#sys_ban_class#-->>
+										<div class="<!--#div_width#-->" id="sys-div" <!--#sys_ban_class#-->>
 										
 										<p class="card-title">System Bans <dummy class="card-title" id="sys-count"></dummy> bans found</p>
-										<div class="table-wrapper">
-										<table class="table">
+										<div id="sys-pages-d" style="display:none;"></div>
+										<div class="table-wrapper" id="sys-table-wrap">
+										<table class="table" id="sys-table">
 											<thead>
 												<th class="table-header" style="width:10%;vertical-align:middle;">IP / userid</th>
 												<th class="table-header" style="width:52%;text-align:center;">User Name<br> (if known)</th>
 												<th class="table-header" >Last Login <br>(if known)</th>
-												
 											</thead>
-											<tbody id="sys-bans">
-												
-											</tbody>
-											
 										</table>
 										</div>
 									</div>	  
