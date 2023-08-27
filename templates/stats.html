@@ -56,30 +56,28 @@
 								<div class="col-lg-6" id="stats" >
 									<h5 class="card-title" style="margin-left:1%;">General Statistics</h5>
 									<table class="table">
-										<tr><td>Total Players</td><td colspan=2><!--#player_total#--></td></tr>
-										<tr><td title="does not include current online players">Players have spent</td><td colspan=2> <!--#total_time#--> in game</td></tr>
-										<tr><td>Top County</td><td><!--#country#--></td><td title="logins / players"><!--#country_stat#--></td></tr>
-										<tr><td>Top Time Online</td><td><!--#time_online#--></td><td><!--#time_online_count#--></td></tr>
-										<tr><td>Top Logins</td><td><!--#most_log_ons#--></td><td><!--#log_on_count#--></td></tr>
-										<tr><td>Most logged into Server</td><td><!--#most_popular#--></td><td><!--#most_popular_count#--></td></tr>
-										<tr><td>Most Played Server</td><td><!--#most_played#--></td><td><!--#most_played_time#--></td></tr>
-										<tr><td>Comms Bans</td><td colspan=2><!--#comms_live#--> active bans out of <!--#comms_total#--> total</td></tr>
-										<tr><td>Game Bans</td><td colspan=2><!--#game_live#--> active bans out of <!--#game_total#--> total</td></tr>
+										<tr><td>Total Players</td><td id="total-players" colspan=2></td></tr>
+										<tr><td title="does not include current online players">Total In Game Time</td><td id="total_time" colspan=2></td></tr>
+										<tr><td>Top County</td><td id="country"></td><td id ="country_stat" title="logins / players"></td></tr>
+										<tr><td>Top Time Online</td><td id="time_online"></td><td id="time_online_count"></td></tr>
+										<tr><td>Top Logins</td><td id="most_log_ons"></td><td id="log_on_count"></td></tr>
+										<tr><td>Most logged into Server</td><td id="most_popular"></td><td  id="most_popular_count"></td></tr>
+										<tr><td>Most Played Server</td><td id="most_played"></td><td id="most_played_time"></td></tr>
+										<tr><td>Comms Bans</td><td colspan=2 id="comms_live"></td></tr>
+										<tr><td>Game Bans</td><td colspan=2 id="game_live"></td></tr>
 										<tr><td>Vac Bans</td><td colspan=2><!--#vac_count#--></td></tr>
 									</table>
 								</div>
 								<div class="col-lg-6" id="game_list" >
 									<h5 class="card-title" style="margin-left:1%;">Server Use</h5>
 									<div class="table-wrapper" style="max-height:400px;">
-										<table class="table">
+										<table class="table" id="game-list">
 											<thead>
 												<th class="table-header">Server Name</th>
 												<th class="table-header">In Game Time</th>
 												<th class="table-header">Players</th>
 											</thead>
-											<tbody>
-												<!--#game_list#-->
-											</tbody>
+											
 										</table>
 									</div>	
 								</div>	
@@ -135,9 +133,7 @@
 									<div class="col-lg-3">
 										<h5 class="card-title" style="margin-left:1%;">Country Lists</h5>
 										<label for="country" style="padding-right:1%;">Select a Country</label>
-										<select name="country" id="country" style="width:65%;">
-											<!--#c_select#-->
-										</select>
+										<select name="country" id="c-select" style="width:65%;"></select>
 										<div id="country-stats" style="display:none;">
 											<table class="table" style="margin-top:5%;">
 												<tbody>
@@ -290,6 +286,7 @@
   <script>
 	 $(document).ready(function() {
 		var pager_pos= 0;
+		general();
 		sb_ban();
 		sys_ban();
 		dup_page();

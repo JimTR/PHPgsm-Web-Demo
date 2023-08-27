@@ -40,9 +40,6 @@ $page['url'] = $settings['url'];
 $page['page-title'] = 'Statistics';
 $page['today'] = date("Y-m-d");
 menu_bar();
-general();
-get_gameList();
-
 $template = new template;
 $template->load('templates/subtemplates/header.html'); // load header
 $page['header'] = $template->get_template();
@@ -63,7 +60,7 @@ function menu_bar() {
 		<li class="nav-item" role="presentation"><button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><i class="ri-base-station-line"></i> <span class="span-show">Player Lists</span></button></li>';
 	if (in_array('county',$options)) {
 		$menu_bar .='<li class="nav-item" role="presentation"><button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-contact" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="bx bx-world"></i> <span class="span-show">Country Lists</span></button></li>';
-		country();
+		//country();
 	}
 	if (in_array('linked',$options)) {
 		$menu_bar .='<li class="nav-item" role="presentation"><button class="nav-link" id="supported-games" data-bs-toggle="tab" data-bs-target="#bordered-games" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-link"></i> <span class="span-show">Linked IP Addresses</span></button></li>';
@@ -88,7 +85,7 @@ function menu_bar() {
 		else { $page['sb_ban_class'] = 'style="display:none;"';}
 		if (in_array("vac-bans",$ban_options)) {$page['vac_ban_class'] ='';}
 		else { $page['vac_ban_class'] = 'style="display:none;"';}
-		if (in_array("sys-bans",$ban_options)) {system_bans();$page['sys_ban_class'] ='';}
+		if (in_array("sys-bans",$ban_options)) {/*ystem_bans();*/$page['sys_ban_class'] ='';}
 		else { $page['sys_ban_class'] = 'style="display:none;"';}
 	}
 	if (in_array('search',$options)) {
@@ -118,12 +115,12 @@ function convertSecToTime($sec){
 	$return .= "$s";	
 	return $return;
 }
-function get_gameList() {
+/*function get_gameList() {
 	global $page;
 	$sql = "SELECT servers.server_name,player_history.`game`,sum(player_history.`game_time`) as full_time, count(player_history.game) as player_tot  FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.game ORDER BY `full_time` DESC ";
 	$stats = db->get_results($sql);
-	$page['most_played_time'] =convertSecToTime($stats[0]['full_time']);
-	$page['most_played'] = $stats[0]['server_name'];
+	//$page['most_played_time'] =convertSecToTime($stats[0]['full_time']);
+	//$page['most_played'] = $stats[0]['server_name'];
 	$page['game_list'] ='';
 	foreach ($stats as $stat) {
 		if ($stat['full_time'] == 0) {continue;}
@@ -305,4 +302,4 @@ function country() {
 	$page['comms_live'] = $comms[0]['live'];
 	$page['game_live'] = $comms[0]['game_live'];
 	$page['game_total'] = $comms[0]['game_total'];
-}
+}*/

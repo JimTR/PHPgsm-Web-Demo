@@ -311,5 +311,57 @@ function general () {
 	$stats = db->get_row($sql);
 	$output['most_popular'] = $stats['server_name'];
 	$output['most_popular_count'] = $stats['total'];
+	$sql = "SELECT servers.server_name,player_history.`game`,sum(player_history.`game_time`) as full_time, count(player_history.game) as player_tot  FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.game ORDER BY `full_time` DESC ";
+	$stats = db->get_results($sql);
+	$output['most_played_time'] =convertSecToTime($stats[0]['full_time']);
+	$output['most_played'] = $stats[0]['server_name'];
+	//$page['game_list'] ='';
+	foreach ($stats as $stat) {
+		if ($stat['full_time'] == 0) {continue;}
+		$used_time = convertSecToTime($stat['full_time']);
+		$output['game_list'][] = "<tr><td><a href='gameserver.php?server={$stat['game']}'>{$stat['server_name']}</a></td><td>$used_time</td><td>{$stat['player_tot']}</td></tr>";
+	}
+	$sql = "SELECT COUNT(*) AS total, ( SELECT COUNT(*) FROM sb_comms WHERE `RemovedOn` IS NULL ) AS live, ( SELECT COUNT(*) FROM sb_bans ) AS game_total, (select count(*) as game_live from sb_bans where RemovedOn is null) as game_live FROM `sb_comms`";
+	$comms = db2->get_results($sql);
+	//$sql = "SELECT `country`, `flag`, `country_code` FROM `logins` order by `country` ASC";
+	$output['comms_total'] = $comms[0]['total'];
+	$output['comms_live'] = $comms[0]['live'];
+	$output['game_live'] = $comms[0]['game_live'];
+	$output['game_total'] = $comms[0]['game_total'];
+	$sql = "SELECT `country`, `flag`, `country_code` FROM `logins` order by `country` ASC";
+	$c1 = db->get_results($sql);
+	
+	$i=0;
+	$output['c_select'][$i]="none selected";
+	$i=1;
+	foreach ($c1 as $c2) {
+		if($c2['country'] == ''){continue;}
+		//$output['c_select'] .="<option value='{$c2['country_code']}' flag='{$c2['flag']}'>{$c2['country']}</option>";
+		$output['c_select'][$i]['value'] = $c2['country_code'];
+		$output['c_select'][$i]['country'] = $c2['country'];
+		$output['c_select'][$i]['flag'] = $c2['flag'];
+		$i++;
+	}
 	echo json_encode($output,JSON_UNESCAPED_SLASHES);
+}
+function convertSecToTime($sec){
+	$return='';
+	if (!is_numeric($sec)) {$sec=0;}
+	$date1 = new DateTime("@0"); //starting seconds
+	$date2 = new DateTime("@$sec"); // ending seconds
+	$interval =  date_diff($date1, $date2); //the time difference
+	$y =  $interval->format('%y');
+	$m = $interval->format('%m');
+	$d = $interval->format('%d');
+	$h = $interval->format('%H');
+	$mi = $interval->format('%I');
+	$s = $interval->format('%S');
+	if ($y >0) {$return.= "{$y}y, ";}
+	if ($m >0) {$return.= "{$m}m, ";}
+	//if ($m > 0 and $y == 0) {$return .= "$m mo ";}
+	if($d >0){$return .= "{$d}d, ";}
+	$return .= "$h:";
+	$return.= "$mi:";
+	$return .= "$s";	
+	return $return;
 }

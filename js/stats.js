@@ -1,5 +1,4 @@
  	var gdetail='';
- 	var pager_pos = 0;
  	//var total_pages = 0;
 	//console.log("on load "+history.length);
 	$('#sendcmd').on('submit', function(e) {
@@ -110,13 +109,13 @@ $('.user-id').on("click",function(){
    loadIframe("ifrm", "frame.php?id="+usersid);
    $('#ban_user').modal('show');	
 });
-$("#country").change(function(){
+$("#c-select").change(function(){
 	$("#country-body").empty();
 	option = $('option:selected', this).attr('flag');
 	val = $('option:selected', this).val();
 	if(val == "none selected") {
 		$("#country-name").text('');
-		$("#country").blur();
+		$("#c-select").blur();
 		$("#country-results").hide();
 		$("#country-stats").hide();
 		return;
@@ -180,7 +179,7 @@ $("#country").change(function(){
 		
     });
 	$("#country-name").text(text);
-	$("#country").blur();
+	$("#c-select").blur();
 	
 	$("#country-results").show();
 	$("#country-stats").show();
@@ -366,22 +365,43 @@ function general() {
 			//$("#vac-loader").show();
 		},
 		success: function (general) {
-			console.log("process "+vacbans.exe_time);
-			$("#vac-count").text(vacbans.vac_count);
-			vac_ban_table =vacbans.vac_bans;
-			$(vac_ban_table).each(function(i,row){
-				//console.log(row);
-				$("#vac-bans").append(row);
+			console.log(general);
+			$("#total-players").html(general.player_total);
+			$('#total_time').html(general.total_time);
+			$('#country').html(general.country);
+			$('#country_stat').html(general.country_stat);
+			$('#time_online').html(general.time_online);
+			$('#time_online_count').html(general.time_online_count);
+			$('#most_log_ons').html(general.most_log_ons);
+			$('#log_on_count').html(general.log_on_count);
+			$('#most_popular').html(general.most_popular);
+			$('#most_popular_count').html(general.most_popular_count);
+			$('#most_played').html(general.most_played);
+			$('#most_played_time').html(general.most_played_time);
+			$('#comms_live').html(general.comms_live+" active bans out of "+general.comms_total);
+			$('#game_live').html(general.game_live+" active bans out of "+general.game_total);	
+			gameList = general.game_list;
+			$(gameList).each(function(i,row){
+				$("#game-list").append(row);
 			});
-			//$("#vac-loader").hide();
+			c_select = general.c_select;
+			$(c_select).each(function(i,row){
+				//console.log(row);
+				if(typeof row.value =='undefined') {
+					console.log("must be the blank");
+					$('#c-select').append($('<option>').text(row));
+				}
+				else {
+					$('#c-select').append($('<option>').val(row.value).text(row.country));
+				}
+			});
+			
 		}
 	});
 }
 $('body').click(function(e) {   
   var $target = $(e.target); 4
-  //alert("clicked")
-  console.log($target);  
-  if ($target.hasClass("pagination-page")) {
+   if ($target.hasClass("pagination-page")) {
     // do something
     v = $(e.target).parent().parent().parent().attr('id');
     y = $target.attr('id');
@@ -399,18 +419,15 @@ $('body').click(function(e) {
 	 if(y ==v+'-l') {
 		 $target.text($target.parent().attr('tp'));
 	 }
-	 pp =$target.parent().attr('pp');
+	 pp = $target.parent().attr('pp');
      console.log("id = "+y);
      x = $target.text()-1;
-     console.log(x);
+     //console.log(x);
      ce = $(e.target).parent().parent().parent().parent().attr('id');
      var msgId = $("#"+ce).closest('table').attr('id');
-     //if($("#"+ce).find('table').length) {
-		 tbl = $("#"+ce).find('table');
-		  var msgId = tbl.attr('id');
-      //} else {
- // no table found
-//}
+     tbl = $("#"+ce).find('table');
+	 var msgId = tbl.attr('id');
+    search_table(msgId,'JimR');
    //alert("parent div "+ce);
    //alert ("closest table "+msgId );
    //alert("we clicked pagination "+x+" div to use "+v );
@@ -418,7 +435,28 @@ $('body').click(function(e) {
     //rp(x, msgId,v);
   }
 });
-
+function search_table(haystack,needle) {
+	console.log("looking for "+needle);
+	found = false
+$('#'+haystack+' tr').each(function(){
+        if($(this).find('td').eq(0).text() == needle){
+			cell = $(this).find('td').eq(0).html()
+            $(this).css('background','red');
+             var row_index = $(this).closest("tr").index();
+   			 var col_index = $(this).index();
+   			 alert (cell);
+   			 found = true
+            return false;
+        }
+        //else {
+			//alert( needle+ " Not Found");
+			//return;
+		//}
+    });
+    if (found == false) {
+    alert( needle+ " Not Found");
+}
+}
 function rp(page,table,disp) {
 	
 	console.log("current pos "+pager_pos);
