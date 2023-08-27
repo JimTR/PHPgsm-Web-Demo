@@ -427,7 +427,7 @@ $('body').click(function(e) {
      var msgId = $("#"+ce).closest('table').attr('id');
      tbl = $("#"+ce).find('table');
 	 var msgId = tbl.attr('id');
-    search_table(msgId,'JimR');
+   // search_table(msgId,'JimR');
    //alert("parent div "+ce);
    //alert ("closest table "+msgId );
    //alert("we clicked pagination "+x+" div to use "+v );
