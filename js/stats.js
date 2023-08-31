@@ -562,7 +562,7 @@ function rp(page,table,disp) {
 				  if (pages <2) {return;}
 				  $("#"+table+"-wrap").scrollTop(0)
 				   tp = $("#pages"+disp).html();
-				   alert(tp);
+				   //alert(tp);
 				  page_display = currentPage+1 +"/"+pages;
 				  startDiv = "<div style='float:left;' title='Page Count'> Page "+page_display+"</div><div style='float:right;padding-right:2%;'><ul class='pagination' cp='"+currentPage+"' tp='"+pages+"'>";
 				  endDiv = "</ul></div>";
