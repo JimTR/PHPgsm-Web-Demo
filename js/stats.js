@@ -134,7 +134,7 @@ $("#c-select").change(function(){
 			//alert("data back");
 			$("#c-rows").text(data1.rows); 
 			$("#online-time").text(data1.online);
-			$("#online-player").text(data1.top_player);
+			$("#online-player").html(data1.top_player);
 			$("#online-player-time").text(data1.top_player_time);
 			country = data1.country;
 			if(data1.pages == 1) {$("#country-pages").hide();}
@@ -444,7 +444,7 @@ $('#'+haystack+' tr').each(function(){
             $(this).css('background','red');
              var row_index = $(this).closest("tr").index();
    			 var col_index = $(this).index();
-   			 alert (cell);
+   			 alert ("cell = "+cell);
    			 found = true
             return false;
         }

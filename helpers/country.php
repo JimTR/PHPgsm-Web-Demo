@@ -1,4 +1,10 @@
 <?php
+ if(isset($_GET['debug'])) {
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+	define('debug',true);
+}
 include "../inc/master.inc.php";
 $id= $_GET['id'];
 if (!isset($_GET['page'])) {$page = 0;}
@@ -15,14 +21,14 @@ $data['pages'] = $country['pages'];
 $data['page'] = $country['page'];
 $data['id'] = $id;
 //$data['county'] = $r;
-$sql = "SELECT players.name_c, sum(`game_time`) as total,players.log_ons FROM `player_history` left join players on player_history.steam_id= players.steam_id64 where player_history.country LIKE '$id' GROUP BY `steam_id`  ORDER BY `total`  DESC limit 1";
+$sql = "SELECT players.name_c,players.steam_id64, sum(`game_time`) as total,players.log_ons FROM `player_history` left join players on player_history.steam_id= players.steam_id64 where player_history.country LIKE '$id' GROUP BY `steam_id`  ORDER BY `total`  DESC limit 1";
 $p = $database->get_row($sql);
 //echo $p['name_c'];
 //$x =convertSecToTime($p['total']);
-$data['top_player'] = $p['name_c'];
+$data['top_player'] = "<a href='users.php?id={$p['steam_id64']}'>{$p['name_c']}</a>";
 $data['top_player_time'] = convertSecToTime($p['total']) ; 
 //printr($p);
-echo json_encode($data);
+echo json_encode($data,JSON_UNESCAPED_SLASHES);
 //echo json_encode($id);
 function convertSecToTime($sec){
 	$return='';

@@ -21,7 +21,7 @@
 
 </head>
 
-<body class="toggle-sidebar">
+<body>
 
   <!--#header#-->
 <!-- End Header -->
@@ -258,7 +258,7 @@
  $(document).ready(function() {
     
      searchParams = new URLSearchParams(window.location.search)
-     server = searchParams.get('server')
+     server = searchParams.get('server');
      if (server !== null && server !== undefined) {
 		 console.log("hmm working with "+server);
 		 $('#servers>option[id="' + server + '"]').prop('selected', true);
@@ -266,7 +266,7 @@
 		 history.replaceState({}, null, "console.php");
 		 return;
 	}
-
+	
      //console.log("working with "+server);
      $('#console').toggleClass("collapsed");
          var options =$('#servers option').length;
