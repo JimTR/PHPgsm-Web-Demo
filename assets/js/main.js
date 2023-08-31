@@ -331,7 +331,7 @@ $('#themeswitchp').click(function()
 $('#switch').click(function()
  {
 	 var oldCookieValue = getCookie('phpgsm_colour');
-	 alert (oldCookieValue);
+	 //alert (oldCookieValue);
 		
  });
  function paginate(page,table,disp,PerPage) {
@@ -451,4 +451,13 @@ $('#switch').click(function()
 
 				  $table.trigger('repaginate');
 				});								
-	}			
+	}	
+	function validateIP(ip){ 
+		var ipaddress = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
+           
+          if (ipaddress.test(ip)) {
+            return true;
+          } else {
+            return false;
+          }
+	}
