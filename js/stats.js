@@ -444,7 +444,7 @@ $('#'+haystack+' tr').each(function(){
             $(this).css('background','red');
              var row_index = $(this).closest("tr").index();
    			 var col_index = $(this).index();
-   			 alert ("cell = "+cell);
+   			 //alert ("cell = "+cell);
    			 found = true
             return false;
         }
@@ -454,7 +454,7 @@ $('#'+haystack+' tr').each(function(){
 		//}
     });
     if (found == false) {
-    alert( needle+ " Not Found");
+    //alert( needle+ " Not Found");
 }
 }
 function rp(page,table,disp) {
@@ -467,7 +467,7 @@ function rp(page,table,disp) {
 	
 	$('#'+table).each(function () {
 				//console.log('in each loop '+page);
-				alert ("selected page "+page);
+				//alert ("selected page "+page);
 				  var $table = $(this);
 				  //console.log($table.html());
 				  var itemsPerPage = 100;
@@ -477,7 +477,7 @@ function rp(page,table,disp) {
 				   //alert("full table length "+$table.length);
 				  var pages = Math.ceil($table.find("tr:not(:has(th))").length / itemsPerPage); // fix this bit
 				   total_pages = pages;
-				   alert (pages);
+				   //alert (pages);
 				   if(page > pages) {currentPage=pages-1;}
 				   //alert("new total pages "+pages);
 				   //alert("supposed to be displaying "+page); 
