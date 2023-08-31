@@ -336,7 +336,7 @@ $('#switch').click(function()
  });
  function paginate(page,table,disp,PerPage) {
 	 
-	 
+	 console.log("page start "+table);
 	$('#'+table).each(function () {
 				//console.log('in each loop '+page);
 				  var $table = $(this);
