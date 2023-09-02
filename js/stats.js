@@ -316,12 +316,13 @@ function dup_page() {
 		success: function (dups) {
 			//console.log(dups);
 			$("#dup-count").text(dups.dup_count);
-			dup_table =dups.dups;
+			dup_table = dups.dups;
 			$(dup_table).each(function(i,row){
 				$this = $(row);
 				$("#dup-table").append(row);
 				//$this.addClass('yourClass');
 			});
+			
 			 paginate(0,'dup-table','pages-d');
 		}
 	});
@@ -388,7 +389,7 @@ function general() {
 			$(c_select).each(function(i,row){
 				//console.log(row);
 				if(typeof row.value =='undefined') {
-					console.log("must be the blank");
+					//console.log("must be the blank");
 					$('#c-select').append($('<option>').text(row));
 				}
 				else {
