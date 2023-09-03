@@ -5,15 +5,25 @@
 * License: https://bootstrapmade.com/license/
 */
 var nativeAlert = window.alert;
-window.alert = function(message,show) {
-		console.log("alert triggered");
-		console.log("message = "+message);
-		console.log("show = "+show);
+window.alert = function(message,show,title) {
+		//console.log("alert triggered");
+		//console.log("message = "+message);
+		//console.log("show = "+show);
 		if( typeof show == "undefined") {
-			console.log("ignore show is not set ");
+			console.log("ignore alert, show is not set ");
 		}
 		else {
-			nativeAlert("native");
+			if (show ==true) { 
+				nativeAlert(message);
+			}
+			else {
+				console.log("custom alert");
+				//$("#alert").toggle();
+				$("#alert-title").html(title);
+				$("#alert-message").html(message);
+				$('#alert').modal({ show: false});
+				$('#alert').modal('show');
+			}
 		}
 	}; 
 jQuery(document).ready(function(){
