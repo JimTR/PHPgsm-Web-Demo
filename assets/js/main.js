@@ -8,9 +8,9 @@ var nativeAlert = window.alert;
 window.alert = function(message,show) {
 		console.log("alert triggered");
 		console.log("message = "+message);
-		console.log("message = "+show);
-		if( typeof second == "undefined") {
-			console.log("ignore there is no message set");
+		console.log("show = "+show);
+		if( typeof show == "undefined") {
+			console.log("ignore show is not set ");
 		}
 		else {
 			nativeAlert("native");
