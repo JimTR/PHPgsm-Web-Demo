@@ -5,10 +5,11 @@
 * License: https://bootstrapmade.com/license/
 */
 var nativeAlert = window.alert;
-window.alert = function(message) {
+window.alert = function(message,second) {
 		console.log("alert triggered");
 		console.log("message = "+message);
-		if( typeof message == "undefined") {
+		console.log("message = "+second);
+		if( typeof second == "undefined") {
 			console.log("ignore there is no message set");
 		}
 	}; 
