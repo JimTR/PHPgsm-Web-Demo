@@ -7,6 +7,7 @@
 var nativeAlert = window.alert;
 window.alert = function(message) {
 		console.log("alert triggered");
+		console.log("message = "+message);
 		if( typeof message == "undefined") {
 			console.log("ignore there is no message set");
 		}
