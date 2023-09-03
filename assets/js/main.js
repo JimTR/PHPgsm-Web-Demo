@@ -5,7 +5,12 @@
 * License: https://bootstrapmade.com/license/
 */
 var nativeAlert = window.alert;
-window.alert = function() {}; 
+window.alert = function(message) {
+		console.log("alert triggered");
+		if( typeof message == "undefined") {
+			console.log("ignore there is no message set");
+		}
+	}; 
 jQuery(document).ready(function(){
 var wSize = jQuery(window).width();
 if(wSize > 400) {
