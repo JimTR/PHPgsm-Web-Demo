@@ -4,6 +4,8 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+var nativeAlert = window.alert;
+window.alert = function() {}; 
 jQuery(document).ready(function(){
 var wSize = jQuery(window).width();
 if(wSize > 400) {
