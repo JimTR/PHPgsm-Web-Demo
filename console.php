@@ -25,6 +25,11 @@
 	if (isset($_GET['server'])) {
 		// just load this server
 		$display_server = $_GET['server'];
+		$sql = "SELECT `host_name`,`server_name`,`url`,`bport`,`location`,`host`,`port` FROM server1 where `host_name` = '{$_GET['server']}' ";
+		$server = $database->get_row($sql);
+		//print_r($server);
+		//die();
+		$display_server = " - ".$server['server_name'];
 	}
 $build = "3243-1919938056";
 	$version = "1.000";

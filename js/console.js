@@ -88,8 +88,9 @@ function fetchlog() {
         }
       },
         success: function (data) {
-                        console.log('got data - fetchlog');
-
+			console.log('got data - fetchlog');
+			console.log ('using server id '+id);
+			//console.log(data);	
 
         },
         complete:function(data){
