@@ -296,12 +296,25 @@ function sys_ban() {
 			url: url,
 			dataType: "json", 
 			success: function (sysbans) {
-				$("#sys-count").text(sysbans.sysbans_count);
+				//console.log(sysbans);
+				//$("#sys-count").text(sysbans.sysbans_count);
+				count = 0
 				sys_ban_table =sysbans.sys_bans;
 				$(sys_ban_table).each(function(i,row){
 					$("#sys-table").append(row);
+					count++;
 				});
+				$("#sys-count").text(count);
 				paginate(0,'sys-table','sys-pages-d');
+				sys_ban_table_id =sysbans.sys_bans_id;
+				console.log("ban table = "+sys_ban_table_id.length);
+				count = 0
+				$(sys_ban_table_id).each(function(i,row){
+					$("#sys-id-table").append(row);
+					count++;
+				});
+				$("#sys-id-count").text(count);
+				paginate(0,'sys-id-table','sys-id-pages-d');
 			}
 		});
 }
@@ -458,3 +471,14 @@ $('#'+haystack+' tr').each(function(){
 		//alert( needle+ " Not Found");
 	}
 }
+$('#b-select').change(function() {
+	val = $('option:selected', this).val();
+	//alert( val,true );
+	$("#b-select > option").each(function() {
+		//alert(this.text + ' ' + this.value,true);
+		hide = this.value;
+		$("#"+hide).hide();
+	});
+	$("#"+val).show();
+	$("#b-select").blur();
+});

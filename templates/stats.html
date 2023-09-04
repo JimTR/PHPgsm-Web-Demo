@@ -202,7 +202,14 @@
 							<div class="tab-pane fade" id="bordered-bans" role="tabpanel" aria-labelledby="contact-tab">
 								<div class="row">
 									<h5 class="card-title" style="margin-left:1%;">Banned Users</h5>
-									<div class="<!--#div_width#-->" id="vac-div" <!--#vac_ban_class#-->>
+									 <label for="bans" style="width:fit-content;">Choose a ban catagory:</label>
+									<select name="bans" id="b-select" style="width:fit-content;">
+										<option value="vac-div">Vac Bans</option>
+										<option value="sb-div">Source Bans</option>
+										<option value="sys-div">System Bans (ip)</option>
+										<option value="sys-id-div">System Bans (id)</option>
+									</select>
+									<div class="col-lg-12" id="vac-div">
 										
 										<p class="card-title">Vac Bans <dummy class="card-title" id="vac-count"></dummy> bans found</p>
 										<div id="v-pages-d" style="display:none;"></div>
@@ -223,7 +230,7 @@
 										</table>
 										</div>
 										</div>
-										<div class="<!--#div_width#-->" id="sb-div" <!--#sb_ban_class#-->>
+										<div class="col-lg-12" id="sb-div" style="display:none">
 										
 										<p class="card-title">Source Bans <dummy class="card-title" id="sb-count"></dummy> bans found</p>
 										<div id="sb-pages-d" style="display:none;"></div>
@@ -237,7 +244,7 @@
 										</table>
 										</div>
 										</div>
-										<div class="<!--#div_width#-->" id="sys-div" <!--#sys_ban_class#-->>
+										<div class="col-lg-12" id="sys-div" style="display:none">
 										
 										<p class="card-title">System Bans <dummy class="card-title" id="sys-count"></dummy> bans found</p>
 										<div id="sys-pages-d" style="display:none;"></div>
@@ -250,7 +257,21 @@
 											</thead>
 										</table>
 										</div>
-									</div>	  
+									</div>	
+									<div class="col-lg-12" id="sys-id-div" style="display:none">
+										
+										<p class="card-title">System Bans <dummy class="card-title" id="sys-id-count"></dummy> bans found</p>
+										<div id="sys-id-pages-d" style="display:none;"></div>
+										<div class="table-wrapper" id="sys-id-table-wrap">
+										<table class="table" id="sys-id-table">
+											<thead>
+												<th class="table-header" style="width:10%;vertical-align:middle;">IP / userid</th>
+												<th class="table-header" style="width:52%;text-align:center;">User Name (if known)</th>
+												<th class="table-header" >Last Login (if known)</th>
+											</thead>
+										</table>
+										</div>
+									</div>	    
 								</div>
 							</div>
 						</div>

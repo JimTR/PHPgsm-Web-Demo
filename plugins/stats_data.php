@@ -250,12 +250,13 @@ function system_bans() {
 			$link = $y['id'];
 			$id = "<a href='http://steamcommunity.com/profiles/$link' target='_blank'>$id</a>";
 		}
-		$line .= "<tr><td>$id</td><td style='text-align:center;'>$name</td><td style='text-align:center;'>$logon</td></tr>";
+		$id_line .= "<tr><td class='user'>$id</td><td style='text-align:center;'>$name</td><td style='text-align:center;'>$logon</td></tr>";
 	}
 	$ip_count = count($x['ip']);
 	$id_count = count($x['id']);
 	$output['sysbans_count'] = $ip_count+$id_count;
 	$output['sys_bans'] = $line;
+	$output['sys_bans_id'] = $id_line;
 	echo json_encode($output,JSON_UNESCAPED_SLASHES);
 }
 function ip_dups() {
