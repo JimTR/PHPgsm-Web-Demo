@@ -54,12 +54,71 @@
 				</table>
 			</div>
 			<div class="modal-footer <!--#button_class#-->">
-					<button id="ban" type="button" class="btn btn-danger"><i class="fa-solid fa-user-slash"></i> Ban</button>
-					<button id="bans" type="button" class="btn btn-warning"><i class="fa-solid fa-file-waveform"></i> Ban History</button>
+					<button id="ban" type="button" class="btn btn-danger" onclick="shutdiv('ban-user','ban_history');"><i class="fa-solid fa-user-slash"></i> Ban</button>
+					<button id="list-bans" type="button" class="btn btn-warning" onclick="shutdiv('ban_history','ban-user');"><i class="fa-solid fa-file-waveform"></i> Ban History</button>
 					<!--<button id="go_back" type="button" class="btn btn-success">Go Back</button>-->
 				</div>
 		</div>
 	</div>
+	<div class="frame-popup" id="ban_history"  style="top:15vh; width:80%;">
+                <div class="">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ban History</span></h5>
+                      <button type="button" class="btn-close"  aria-label="Close" onclick="$('#ban_history').hide()"></button>
+                    </div>
+                    <div class="modal-body">
+						<table id="ban-history" class="table">
+							<th class="table-header">Steam ID</th>
+							<th>User Name</th>
+							<th>IP address</th>
+							<th>Reason</th>
+							<th>Start</th>
+							<th>Finish</th>
+							<tbody id="ban-body"></tbody>
+						</table>
+				</div>
+			 <div class="modal-footer">
+                      <!--<button class="btn btn-secondary" onclick="$('#ban_history').hide()">Close</button>-->
+             </div>
+                  </div>
+                 </div>
+                 </div>
+                 <div class="frame-popup" id="ban-user"   style="width:50vw;top:15vh;">
+                <!--<div class="">-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ban User <span id="un-b"></span></h5>
+                      <button type="button" class="btn-close" aria-label="Close" onclick="$('#ban-user').hide()"></button>
+                    </div>
+                    <div class="modal-body" >
+						<div style="width:100%;">
+							<form>
+								<table class="table">
+									<thead>
+										<th>Ban Type</th>
+										<th>Value</th>
+									</thead>
+									<tbody>
+										<tr><td>System Ban User</td><td><input  name="sys_ban_user" type="checkbox" id="sys-ban" value="sb-ban-user"></td></tr>
+										<tr><td>System Ban IP</td><td><input  name="sys_ban_ip" type="checkbox" id="sys-ban-ip" value="sb-ban-ip"></td></tr>
+										<tr><td>Source Ban User</td><td><input  name="sb_ban" type="checkbox" id="sb-ban" value="sb-ban"></td></tr>
+										<tr><td>Source Ban Mute</td><td><input type="checkbox" id="sb_mute" name="sb_mute" value="sb-mute"></td></tr>
+										<tr><td>Ban Reason</td><td><input  name="ban_reason" type="text" id="ban-reason" ></td></tr>
+										<tr><td>Ban Length</td><td><input type="number" id="quantity" name="quantity" min="0" max="5">&nbsp;minutes (use 0 for lifetime ban)</td></tr>
+										<tr><td colspan=2 style="text-align:center;"><button class="btn btn-danger"><i class="fa-solid fa-user-slash"></i> Ban User</button></td></tr>
+									</tbody>
+								</table>
+								 <input type="hidden" name="steam_id" id = "ban-steam-id"/> 
+							</form>
+						</div>
+					
+			 <!--<div class="modal-footer">
+                      <button class="btn btn-secondary" onclick="$('#ban-user').hide()">Close</button>
+             </div>-->
+                  </div>
+                 </div>
+                 </div>                                                 
 	<!--  JS Files -->
      <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
      <script src = "js/jquery.js"></script>
@@ -68,5 +127,9 @@
 	<script src = "js/users.js"></script>
 	<script>
 		console.log("in frame "+history.length);
+		//$("#list-bans").click(function(){
+			//$("#ban_history").show();
+		//}); 
+		
 	</script>
 </body>	

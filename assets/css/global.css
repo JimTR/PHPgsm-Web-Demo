@@ -118,3 +118,13 @@
 .middle {
     vertical-align: middle !important;
 }
+
+.frame-popup {
+   display: none;
+   left: 0;
+   right: 0;
+   margin-left: auto;
+   margin-right: auto;
+   position: absolute;
+}   
+ 

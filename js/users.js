@@ -17,7 +17,7 @@ var data="";
 });
 $( "#bans" ).click(function() {
   //alert( "Handler for .click() called." );
-  $('#ban_history').modal('show');
+  //$('#ban_history').modal('show');
 });
 
 $('#sendcmd').on('submit', function(e) {
@@ -134,7 +134,7 @@ $('#sendcmd').change(function(){
 });
 
 function displayData(userID) {
-	//console.clear();
+	console.clear();
 	var url = $('#sendcmd').attr('action')+"?action=search&type=id&text="+userID;
 	var user = ''; // $("#"+userID).find("td:first").text();
 	$("#searchbox").hide();
@@ -144,6 +144,7 @@ function displayData(userID) {
 	$("#ban-body").empty();
 	players = data.text;
 	console.log(url);
+	console.log(user);
 	$.ajax({
 		type: 'GET',
 		url: url,
@@ -203,6 +204,8 @@ function displayData(userID) {
 			console.log(head);
 			console.log("end user data");
 			$('#un').html(user)
+			$('#un-b').html(user)
+			$('#ban-steam-id').val(userID);
 			$("#user-frame").attr("src","img/blank.png");
 			$('#results').hide();	
 			$('#searchbox').hide();
@@ -315,6 +318,20 @@ function get_steam_data(user_id) {
 			}
 		},
 		complete:function(data){
+			console.log("frame name");
 		}
 	});
-}			
+}	
+function shutdiv (open,close) {
+	console.clear();
+	console.log("shut div open = "+open+" close = "+close);
+	//return
+	//if ( $("#"+).css('display') == 'none' || $(element).css("visibility") == "hidden"){
+    // 'element' is hidden
+//}
+	if($("#"+close).is(":visible")) {
+		console.log("window open");
+		$('#'+close).hide();
+	}
+	$('#'+open).show();
+}		
