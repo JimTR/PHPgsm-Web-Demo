@@ -17,7 +17,7 @@ var data="";
 });
 $( "#bans" ).click(function() {
   //alert( "Handler for .click() called." );
-  //$('#ban_history').modal('show');
+  $('#ban_history').modal('show');
 });
 
 $('#sendcmd').on('submit', function(e) {
@@ -228,6 +228,7 @@ function displayData(userID) {
 					user =  '<span style="color:red;font-weight:bold;">'+gen_data.name_c+'</span>';
 					$('#un').html(user);
 					$("#bans").show();
+					$("#list-bans").show();
 			}
 			else if (head.banned == 2) {
 				reason = head.reason;
