@@ -88,7 +88,7 @@
                 <!--<div class="">-->
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">Ban User <span id="un-b"></span></h5>
+                      <h5 class="modal-title">Ban <span id="un-b"></span></h5>
                       <button type="button" class="btn-close" aria-label="Close" onclick="$('#ban-user').hide()"></button>
                     </div>
                     <div class="modal-body" >
@@ -106,6 +106,9 @@
 										<tr><td>Source Ban Mute</td><td><input type="checkbox" id="sb_mute" name="sb_mute" value="sb-mute"></td></tr>
 										<tr><td>Ban Reason</td><td><input  name="ban_reason" type="text" id="ban-reason" ></td></tr>
 										<tr><td>Ban Length</td><td><input type="number" id="quantity" name="quantity" min="0" max="5">&nbsp;minutes (use 0 for lifetime ban)</td></tr>
+										<tr>
+											<td class="show"  id="auto-kick" colspan=2 style="texr-align:center;">Auto Kick is enabled</td>
+										</tr>
 										<tr><td colspan=2 style="text-align:center;"><button class="btn btn-danger"><i class="fa-solid fa-user-slash"></i> Ban User</button></td></tr>
 									</tbody>
 								</table>
