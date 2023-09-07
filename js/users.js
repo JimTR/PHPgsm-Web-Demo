@@ -237,6 +237,8 @@ function displayData(userID) {
 				user =  '<span style="color:orange;font-weight:bold;">'+gen_data.name_c+'</span>';
 				$('#un').html(user);	
 				$("#bans").show();
+				$("#list-bans").show();
+				
 			}
 			else if (head.banned == undefined) {
 				user =	'<span style="color:green;font-weight:bold;">'+gen_data.name_c+'</span>';
@@ -335,4 +337,52 @@ function shutdiv (open,close) {
 		$('#'+close).hide();
 	}
 	$('#'+open).show();
-}		
+}
+$('#quantity').change(function(){
+	//
+	qty = $('#quantity').val();
+	console.log(qty);
+	if (qty > 0) {
+		time = convertMinutes(qty);
+		$("#ban-length").html("Ban Length "+time);
+	}
+	else {
+		//console.log("permanent");
+		$("#ban-length").html("Ban Length permanent");
+	}
+});		
+
+function convertMinutes(minutes) {
+  // Calculate the number of days
+  const days = Math.floor(minutes / 1440);
+
+  // Calculate the number of hours
+  const hours = Math.floor((minutes % 1440) / 60);
+
+  // Calculate the number of minutes
+  const remainingMinutes = minutes % 60;
+  if (days > 0) {rday =  `${days} days, `;}
+  else {rday='';}
+  if (hours > 0) { rhour = `${hours} hours, `;}
+  else {rhour ='';} 
+  return rday+rhour+`${remainingMinutes} minutes`;
+}
+
+$('#check-all').change(function() {
+	//
+	console.log("check-all change");
+	if ($( "#check-all" ).prop( "checked") == true ) {
+		console.log("checked");
+		$( "#sys-ban" ).prop( "checked", true );
+		$( "#sys-ban-ip" ).prop( "checked", true );
+		$( "#sb-ban" ).prop( "checked", true );
+		$( "#sb-mute" ).prop( "checked", true );
+	}
+	else{
+		console.log("not checked");
+		$( "#sys-ban" ).prop( "checked", false );
+		$( "#sys-ban-ip" ).prop( "checked", false );
+		$( "#sb-ban" ).prop( "checked", false );
+		$( "#sb-mute" ).prop( "checked", false );
+	}
+}); 

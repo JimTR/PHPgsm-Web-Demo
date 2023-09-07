@@ -96,19 +96,17 @@
 							<form>
 								<table class="table">
 									<thead>
-										<th>Ban Type</th>
-										<th>Value</th>
+										<th class="no-border" colspan=2 style="text-align:center;padding-bottom:2%;"><span class="card-title">Select Ban Types</span><span style="float:right;font-weight:400;">Select All <input  name="check all" type="checkbox" id="check-all" value=""></span></th>
+										
 									</thead>
 									<tbody>
 										<tr><td>System Ban User</td><td><input  name="sys_ban_user" type="checkbox" id="sys-ban" value="sb-ban-user"></td></tr>
 										<tr><td>System Ban IP</td><td><input  name="sys_ban_ip" type="checkbox" id="sys-ban-ip" value="sb-ban-ip"></td></tr>
 										<tr><td>Source Ban User</td><td><input  name="sb_ban" type="checkbox" id="sb-ban" value="sb-ban"></td></tr>
-										<tr><td>Source Ban Mute</td><td><input type="checkbox" id="sb_mute" name="sb_mute" value="sb-mute"></td></tr>
-										<tr><td>Ban Reason</td><td><input  name="ban_reason" type="text" id="ban-reason" ></td></tr>
-										<tr><td>Ban Length</td><td><input type="number" id="quantity" name="quantity" min="0" max="5">&nbsp;minutes (use 0 for lifetime ban)</td></tr>
-										<tr>
-											<td class="show"  id="auto-kick" colspan=2 style="text-align:center;">Auto Kick is enabled</td>
-										</tr>
+										<tr><td>Source Ban Mute</td><td><input type="checkbox" id="sb-mute" name="sb_mute" value="sb-mute"></td></tr>
+										<tr><td style="vertical-align:middle;">Ban Reason</td><td><input  name="ban_reason" type="text" id="ban-reason" ></td></tr>
+										<tr><td style="vertical-align:middle;">Ban Length</td><td><input type="number" id="quantity" name="quantity" min="0" max="43200" value="0" title="use minutes  max 43200 (0 for permanent ban)">&nbsp;<span id="ban-length">Ban Length permanent</span></td></tr>
+										<tr><td id="auto-kick">Auto Kick is enabled</td><td></td></tr>
 										<tr><td colspan=2 style="text-align:center;"><button class="btn btn-danger"><i class="fa-solid fa-user-slash"></i> Ban User</button></td></tr>
 									</tbody>
 								</table>
