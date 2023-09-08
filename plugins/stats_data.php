@@ -260,25 +260,27 @@ function system_bans() {
 	echo json_encode($output,JSON_UNESCAPED_SLASHES);
 }
 function ip_dups() {
-	$sql = "SELECT * FROM players INNER JOIN( SELECT ip FROM players GROUP BY ip HAVING COUNT(ip) > 1 order by ip) temp ON players.ip = temp.ip ORDER BY `players`.`ip` ASC"; // get dups
+	$sql = "SELECT * FROM players INNER JOIN( SELECT ip FROM players GROUP BY ip HAVING COUNT(ip) > 1 ORDER BY ip ) temp ON players.ip = temp.ip INNER JOIN steam_data AS s ON players.steam_id64 = s.steam_id ORDER BY `players`.`ip` ASC;" ;// get dups
 	$dups = db->get_results($sql);
 	$i=0;
 	$output['dup_count'] = count($dups);
 	$last_ip='';
 	foreach($dups as $dup) {
 	// scan through
+		if ($dup['vac_ban']) { $bans = '<i class="fa-regular fa-circle-xmark" style="color:red;font-weight: 600;"></i>';}
+		else {$bans = '';}
 		$id = $dup['steam_id64'];
 		if ($dup['ip'] == $last_ip) {
 			// add to the row
 			$i--;
 			$last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
-			$dup_table[$i]['name'] .="<div style='width:31%;float:left;clear:both;padding-bottom:1%;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></div><div style='width:19%;float:left;'>$last_login</div><div style='text-align:center;width: 37%;float:left;'>{$dup['log_ons']}</div><div style='text-align:right;padding-right: 6%;padding-bottom:1%;'>0</div>";
+			$dup_table[$i]['name'] .="<div><div style='width:31%;float:left;clear:both;padding-bottom:1%;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></div><div style='width:19%;float:left;'>$last_login</div><div style='text-align:center;width: 37%;float:left;'>{$dup['log_ons']}</div><div style='width:11%;float:left;'>$bans</div></div>";
 			$i++;
 			continue;
 		}
 		$dup_table[$i]['ip'] = long2ip($dup['ip']);
 		$last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
-		$dup_table[$i]['name'] = "<div style='width:31%;float:left;padding-bottom:1%;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></div><div style='width:19%;float:left;padding-bottom:1%;'>$last_login</div><div style='text-align:center;width: 37%;float:left;padding-bottom:1%;'>{$dup['log_ons']}</div><div style='text-align:right;padding-right: 6%;padding-bottom:1%;'>0</div>"; 
+		$dup_table[$i]['name'] = "<div><div style='width:31%;float:left;padding-bottom:1%;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></div><div style='width:19%;float:left;padding-bottom:1%;'>$last_login</div><div style='text-align:center;width: 37%;float:left;padding-bottom:1%;'>{$dup['log_ons']}</div><div style='width:11%,float:left;'>$bans</div></div>"; 
 		$last_ip = $dup['ip'];
 		$i++;
 	}
