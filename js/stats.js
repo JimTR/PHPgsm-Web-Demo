@@ -414,7 +414,7 @@ function general() {
 	});
 }
 $('body').click(function(e) {   
-  var $target = $(e.target); 4
+  var $target = $(e.target); 
    if ($target.hasClass("pagination-page")) {
     // do something
     v = $(e.target).parent().parent().parent().attr('id');
@@ -447,6 +447,11 @@ $('body').click(function(e) {
    //alert("we clicked pagination "+x+" div to use "+v );
     paginate(x, msgId,v,pp);
     //rp(x, msgId,v);
+  }
+  else {
+	  id =  $(e.target).attr('id');
+	  url = "users.php?id="+id;
+	  console.log(url);
   }
 });
 function search_table(haystack,needle) {
