@@ -248,7 +248,7 @@ function system_bans() {
 			$name = "-";
 			$logon = "-";
 			$link = $y['id'];
-			$id = "<a href='http://steamcommunity.com/profiles/$link' target='_blank'>$id</a>";
+			$id = "<a href='http://steamcommunity.com/profiles/$link' target='_blank'>$link</a>";
 		}
 		$id_line .= "<tr><td class='user'>$id</td><td style='text-align:center;'>$name</td><td style='text-align:center;'>$logon</td></tr>";
 	}
