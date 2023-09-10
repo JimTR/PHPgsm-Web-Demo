@@ -232,7 +232,7 @@ function system_bans() {
 	foreach ($system_ips as $system_ip) {
 		$ips = $system_ip['steam_id64'];
 		$x['id'][$ips]['name'] = $system_ip['name_c'];
-		if(empty($system_ip['steam_id64'])) {$x['id'][$ips]['steam_id'] = $ips;}
+		if(empty($system_ip['steam_id64'])) {$x['id'][$ips]['steam_id64'] = $ips;}
 		else {$x['id'][$ips]['steam_id'] = $system_ip['steam_id64'];}
 		$x['id'][$ips]['last_log_on'] = date("d-m-Y",$system_ip['last_log_on']);
 	}
