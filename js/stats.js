@@ -410,7 +410,7 @@ function general() {
 					$('#c-select').append($('<option>').val(row.value).text(row.country));
 				}
 			});
-			
+			$("#general-data").show();
 		}
 	});
 }
