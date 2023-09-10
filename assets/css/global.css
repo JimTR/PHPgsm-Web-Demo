@@ -14,7 +14,7 @@
 	height: 100%;
 	z-index: 1;
 	 pointer-events: none;
-	 top:-18px;left:-22px;
+	 top:-21%;left:-19px;
  }
 .playerAvatar.profile_header_size .playerAvatarAutoSizeInner {
 	position: absolute;
@@ -34,6 +34,12 @@
 	 position: relative;
 	 height: 65px;
  }
+.user-avatar {
+    width: 4vw;
+    position: absolute;
+    left: -8px;
+    top: -4px;
+}
 
 .col-xxl-4 {
     flex: 0 0 auto;

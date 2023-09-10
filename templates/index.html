@@ -194,7 +194,7 @@
 		const servers = [<!--#jsa#-->];
 		var url = "";
 		var jim = '';
-		console.log(servers);
+		//console.log(servers);
 		var serverCount =servers.length;
 		$(document).ready(function(){
 			sessionStorage.clear();
@@ -202,7 +202,7 @@
 			index();
 			setInterval( function() { index(); },5000);
 			$.each( servers, function( i, val ) {
-				console.log(val);
+				//console.log(val);
 				setInterval( function() { online(val); }, 5000 );
 			});
 		});

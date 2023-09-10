@@ -60,7 +60,7 @@ $('#sendcmd').on('submit', function(e) {
 		if ($('#user-id').is(':empty')){
 			$('#results').show();
 		}
-        console.log(data);
+        //console.log(data);
 	}
 	});
  });
@@ -143,8 +143,8 @@ function displayData(userID) {
 	$("#user-avatar").attr("src","img/blank.png");
 	$("#ban-body").empty();
 	players = data.text;
-	console.log(url);
-	console.log(user);
+	//console.log(url);
+	//console.log(user);
 	$.ajax({
 		type: 'GET',
 		url: url,
@@ -155,7 +155,7 @@ function displayData(userID) {
 				console.log('no history');
 			}
 			else {
-				console.log("found "+noe+" records");
+				//console.log("found "+noe+" records");
 			}	
 			players = data.data;
 			$.each(players, function(i, item) {
@@ -163,7 +163,7 @@ function displayData(userID) {
 					console.log ("server no longer managed");
 				}
 				else {
-					console.log(item.server_name+" is valid");
+					//console.log(item.server_name+" is valid");
 					var timestamp =  timeConverter(item.last_play);
 					$('#dta1').append("<tr><td style='width:335px;'>"+item.server_name+"</td><td style='text-align:right;padding-right:7%;'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='padding-left:4%;'>"+item.game_time+"</td></tr>");
 				}	
@@ -187,7 +187,7 @@ function displayData(userID) {
 				$('#dta').append("<tr><td>Latest Log on</td><td>"+last_log_on+"</td></tr>");
 				//aka =JSON.parse('"'+gen_data.aka+'"');
 				aka = gen_data.aka;
-				console.log("aka = "+aka);
+				//console.log("aka = "+aka);
 				aka.replace(/\//g, '-')
 				//'some+multi+word+string'.replace(/\+/g, ' ');
 				if (aka != null){
@@ -200,9 +200,9 @@ function displayData(userID) {
 			}
 		},
 		complete:function(data){
-			console.log("start user data");
-			console.log(head);
-			console.log("end user data");
+			//console.log("start user data");
+			//console.log(head);
+			//console.log("end user data");
 			$('#un').html(user)
 			$('#un-b').html(user)
 			$('#ban-steam-id').val(userID);
@@ -267,7 +267,7 @@ function displayData(userID) {
 			}
 			else {
 				others ='';
-				console.log("found more than one");
+				//console.log("found more than one");
 				$.each(head.outer_ip, function(i,item) {
 					others += '<a href="users.php?id='+item.steam_id+'">'+item.name+"</a>, ";
 				});
@@ -280,13 +280,13 @@ function displayData(userID) {
 
 function get_steam_data(user_id) {
 	 var url = "plugins/steam_data.php?id="+user_id;
-	 console.log("into steam data with "+url);
+	 //console.log("into steam data with "+url);
 	 $.ajax({
 		type: 'GET',
 		url: url,
 		dataType: "json",
 		success:function(data){
-			console.log(data);
+			//console.log(data);
 			if (data.avatar_frame !== undefined) {
 				console.log("framed image");
 				$("#user-frame").attr("src",data.avatar_frame);
@@ -321,7 +321,7 @@ function get_steam_data(user_id) {
 			}
 		},
 		complete:function(data){
-			console.log("frame name");
+			//console.log("frame name");
 		}
 	});
 }	

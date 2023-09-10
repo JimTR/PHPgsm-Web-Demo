@@ -1,123 +1,109 @@
 // gameserver.js
 function get_game() {
-	console.log(url);
+	//console.log(url);
 	var offline = 0;
-cmd = url+'/api.php?action=game_detail&server='+server+'&filter='+game;
-console.log (cmd);
-         $.ajax({
-			
-        type: 'GET',
-        url: cmd,
-        dataType: "json",
-			    statusCode: {
-        500: function() {
-          alert("Script exhausted");
-			return;
-        }
-      },
+	cmd = url+'/api.php?action=game_detail&server='+server+'&filter='+game;
+	//console.log (cmd);
+	$.ajax({
+		type: 'GET',
+		url: cmd,
+		dataType: "json",
+		statusCode: {
+			500: function() {
+				alert("Script exhausted",false,"System Error");
+				return;
+			}
+		},
         success: function (data) {
-            console.log('got data - game_detail');
+            //console.log('got data - game_detail');
             //alert ('success game_detail')
         },
         complete:function(data){
-		if(typeof data.responseJSON.general != 'undefined') {
-			var general = data.responseJSON.general;
-		}
-		if(typeof data.responseJSON.server != 'undefined') {
-			//alert('online');
-			var serverd = data.responseJSON.server;
-			var people = serverd.players;
-			var vdf = serverd.vdf_data;
-			console.log(serverd);
-			offline = 1;
-		}	
-			//if(typeof serverd.players != 'undefined') {
-				
-			//}
-			
-			//console.log(print_r(vdf));
+			if(typeof data.responseJSON.general != 'undefined') {
+				var general = data.responseJSON.general;
+			}
+			if(typeof data.responseJSON.server != 'undefined') {
+				//alert('online');
+				var serverd = data.responseJSON.server;
+				var people = serverd.players;
+				var vdf = serverd.vdf_data;
+				//console.log(serverd);
+				offline = 1;
+			}	
 			var items = '';
-			//sorted=$(people).sort(sortLastNameDesc);  
-			//console.log(general);
-			//console.log(serverd);
 			if(typeof people != 'undefined') {
-			console.log(people);
+				//console.log(people);
 				$.each(people, function(i, item) {
 					items = items+'<tr id="'+item.steam_id+'"style="width:100%;"><td class="tpButton">'+item.Name+'</td><td id="'+item.ip+'"><img class="flag" '+item.flag+'/>'+item.country+'</td><td style="text-align:right;">'+item.Frags+'</td><td style="text-align:right;padding-right:2%;">'+item.TimeF+'</td></tr>';
 				});
 			}
-if (offline == 1) {			
-var players_online = serverd.Players-serverd.Bots
-console.log(players_online);
-}
-    if(isNaN(players_online)) {
-		console.log('running ??');
-		$('#status').text('Offline');
-		$('#mem').text("");
-		$('#cpu').text("");
-		$('#gametags').text("");
-		$('#hostname').text("");
-		$('#map').text('');
-		$('#players').text('');
-		$('#bots').text('');
-		$('#maxplayers').text('');
-		$('#items').html(items);
-		$('#secure').text('');
-		$('#steamid').text('');
-		$('#maxplayers').text('');
-		$('#start').text('');
-		$('#update').text('');
-		$('#build').text('');
-		$('#server_id').text('');
-		$('#gameid').text('');
-		$('#player-tot').text('');
-		// buttons 
-		//$('#'+server_id+'qbutton').removeClass('btn-primary').addClass('btn-danger');
-		$('#stop_server').addClass('hidden');
-		$('#restart_server').addClass('hidden');
-		$('#start_server').removeClass('hidden');
-		$('#cvar').addClass('hidden');
-		$('#join_server').addClass('hidden');
-		$('#console').addClass('hidden');
-		$('#send').prop('disabled', true);
-		
-		
-	}
-	else {
-			console.log ('got to html mangle');
-			$('#status').text(serverd.online);
-			$('#mem').text(serverd.mem+"%");
-			$('#cpu').text(serverd.cpu+"%");
-			$('#gametags').text(serverd.GameTags);
-			$('#hostname').text(serverd.HostName);
-			$('#map').text(serverd.Map);
-			$('#players').text(players_online);
-			$('#bots').text(serverd.Bots);
-			$('#maxplayers').text(serverd.MaxPlayers);
-			$('#items').html(items);
-			$('#secure').text(serverd.Secure);
-			$('#steamid').text(serverd.SteamID);
-			$('#gameid').text(serverd.GameID);
-			$('#maxplayers').text(serverd.MaxPlayers);
-			$('#start').text(date_format(serverd.starttime));
-			$('#update').text(date_format(serverd.server_update));
-			$('#build').text(serverd.Version);
-			$('#server_id').text(serverd.server_id);
-			$('#player-tot').text(serverd.player_tot);
-			$('#moddesc').text(serverd.ModDesc);
-			//buttons
-			$('#stop_server').removeClass('hidden');
-			$('#restart_server').removeClass('hidden');
-			$('#cvar').removeClass('hidden');
-			$('#console1').removeClass('hidden');
-			$('#start_server').addClass('hidden');
-			$('#join_server').removeClass('hidden');
-			$('#send').prop('disabled', false);
-		}
+			if (offline == 1) {			
+				var players_online = serverd.Players-serverd.Bots
+				//console.log(players_online);
+			}
+			if(isNaN(players_online)) {
+				//console.log('running ??');
+				$('#status').text('Offline');
+				$('#mem').text("");
+				$('#cpu').text("");
+				$('#gametags').text("");
+				$('#hostname').text("");
+				$('#map').text('');
+				$('#players').text('');
+				$('#bots').text('');
+				$('#maxplayers').text('');
+				$('#items').html(items);
+				$('#secure').text('');
+				$('#steamid').text('');
+				$('#maxplayers').text('');
+				$('#start').text('');
+				$('#update').text('');
+				$('#build').text('');
+				$('#server_id').text('');
+				$('#gameid').text('');
+				$('#player-tot').text('');
+				$('#stop_server').addClass('hidden');
+				$('#restart_server').addClass('hidden');
+				$('#start_server').removeClass('hidden');
+				$('#cvar').addClass('hidden');
+				$('#join_server').addClass('hidden');
+				$('#console').addClass('hidden');
+				$('#send').prop('disabled', true);
+			}
+			else {
+				//console.log ('got to html mangle');
+				$('#status').text(serverd.online);
+				$('#mem').text(serverd.mem+"%");
+				$('#cpu').text(serverd.cpu+"%");
+				$('#gametags').text(serverd.GameTags);
+				$('#hostname').text(serverd.HostName);
+				$('#map').text(serverd.Map);
+				$('#players').text(players_online);
+				$('#bots').text(serverd.Bots);
+				$('#maxplayers').text(serverd.MaxPlayers);
+				$('#items').html(items);
+				$('#secure').text(serverd.Secure);
+				$('#steamid').text(serverd.SteamID);
+				$('#gameid').text(serverd.GameID);
+				$('#maxplayers').text(serverd.MaxPlayers);
+				$('#start').text(date_format(serverd.starttime));
+				$('#update').text(date_format(serverd.server_update));
+				$('#build').text(serverd.Version);
+				$('#server_id').text(serverd.server_id);
+				$('#player-tot').text(serverd.player_tot);
+				$('#moddesc').text(serverd.ModDesc);
+				$('#stop_server').removeClass('hidden');
+				$('#restart_server').removeClass('hidden');
+				$('#cvar').removeClass('hidden');
+				$('#console1').removeClass('hidden');
+				$('#start_server').addClass('hidden');
+				$('#join_server').removeClass('hidden');
+				$('#send').prop('disabled', false);
+			}
 			$('#install_dir').text(vdf.installdir);
 			$('#install_size').text(formatBytes(vdf.SizeOnDisk,1));
 			$('#update').text(date_format(vdf.LastUpdated));
-			console.log(serverd.disk_space);
+			//console.log(serverd.disk_space);
 			$('#disk_space').text(formatBytes(serverd.disk_space)); 
 			$('#player-tot').text(serverd.player_tot);
 		}
@@ -125,119 +111,70 @@ console.log(players_online);
 }
 
 function fetchlog() {
-	//alert(url+"  "+id);
 	rows = 100;
 	cmd = url+'/api.php?action=console&server='+id+'&rows='+rows+'&output=json';
-	//alert (cmd);
 	var items='';
-         console.log(cmd);
-          $.ajax({
-			
-        type: 'GET',
-        url: cmd,
-        dataType: "json",
-			    statusCode: {
-        500: function() {
-          alert("Script exhausted");
-			return;
-        }
-      },
-        success: function (data) {
-                        console.log('got data - fetchlog');
-						//console.log(data);
-
-        },
+	//console.log(cmd);
+	$.ajax({
+		type: 'GET',
+		url: cmd,
+		dataType: "json",
+		statusCode: {
+			500: function() {
+				alert("Script exhausted",false,"Error Fetching log");
+				return;
+			}
+		},
+		success: function (data) {
+		},
         complete:function(data){
-                         //console.log(data);
-                        
-$.each(data.responseJSON, function(i, item) {
-    //alert(item);
-items = items+item;
-});
-			//setInterval(fetchlog(port,id,url), 5000);
+			$.each(data.responseJSON, function(i, item) {
+			//alert(item);
+			items = items+item;
+			});
 			var element = document.getElementById("log");
-			if (element.scrollHeight - element.scrollTop === element.clientHeight)
-    		{
+			if (element.scrollHeight - element.scrollTop === element.clientHeight) {
 				var bottom = true;
 			}
 			else {
 				var bottom =false;
 			}
-$("#log").html(items);
-			       if (bottom == true) {
-     				element.scrollTop = element.scrollHeight;
-					//console.log('top = '+element.scrollTop);
-				   }
-                }
+			$("#log").html(items);
+			if (bottom == true) {element.scrollTop = element.scrollHeight;}
+		}
     });
-
 }
 
 function players() {
-	 //get player functions
-	//alert ('Players ! '+url+' '+id);
-	//return;
-        var items='';
-		var cerror=false;
+	var items='';
+	var cerror=false;
 	cmd = url+'/api.php?action=viewserver&server='+id;
-	//alert(cmd);
-         console.log(cmd);
-          $.ajax({
-		
+	$.ajax({
 		type: 'GET',
         url: cmd,
         dataType: "json",
         success: function (data) {
-                       console.log('got data - viewplayers');
-                      // console.log(data);
-					 //info = data.responseJSON.info;
-             		//console.log('current data - '+info);	
-
         },
         complete:function(data){
-                       // console.log(data);
-						//setInterval(players(port,id,url), 5000);
-					if(typeof data.responseJSON == 'undefined') {
-                        
-                        console.log ('no info');
-                        return;
-					}
-					//else {
-					    info = data.responseJSON.info;
-                        player = data.responseJSON.players;
-					//}
-			             if(typeof(info.Map) == 'undefined') {
-				  			console.log('no map !');
-				  			return 0;
-			  			}
-						else {
-							$('#player_title').html(info.Map);
-						}
-						if(typeof(player) == "null") { 
-							console.log('returning empty from players function');
-   							 return 0;
-						} 
-						//pno = player.length;
-						
-                       
-			
-$.each(player, function(i, item) {
-    //alert(item);
-items = items+'<tr id="'+item.steam_id+'"style="width:100%;"><td class="tpButton">'+item.Name+'</td><td title="'+item.country+'" id="'+item.ip+'"><img class="flag" '+item.flag+'/></td><td style="text-align:right;">'+item.Frags+'</td><td style="text-align:right;padding-right:2%;">'+item.TimeF+'</td></tr>';
-});
-
-$("#pbody").html(items);
-items='<div style="width:100%;position:relative;text-align:center;top:5;">Current Rule Set</div><br>';
+			if(typeof data.responseJSON == 'undefined') {return;}
+			info = data.responseJSON.info;
+			player = data.responseJSON.players;
+            if(typeof(info.Map) == 'undefined') {return 0;}
+			else {$('#player_title').html(info.Map);}
+			if(typeof(player) == "null") {return 0;} 
+			$.each(player, function(i, item) {
+				items = items+'<tr id="'+item.steam_id+'"style="width:100%;"><td class="tpButton">'+item.Name+'</td><td title="'+item.country+'" id="'+item.ip+'"><img class="flag" '+item.flag+'/></td><td style="text-align:right;">'+item.Frags+'</td><td style="text-align:right;padding-right:2%;">'+item.TimeF+'</td></tr>';
+			});
+			$("#pbody").html(items);
+			items='<div style="width:100%;position:relative;text-align:center;top:5;">Current Rule Set</div><br>';
 			items='';
-			 rules = data.responseJSON.rules;
-$.each(rules, function(i, item2) {
-    //alert(item);
-items = items+'<div style="clear:both;padding:5px;"><div style="padding-right:10px;width:30%;text-align:left;float:left;">'+i+'</div><div style="width:60%;clear:none;text-align:right;float:left;">'+item2+'</div></div>';
-});
-$("#rule").html(items);
-                }
+			rules = data.responseJSON.rules;
+			$.each(rules, function(i, item2) {
+				items = items+'<div style="clear:both;padding:5px;"><div style="padding-right:10px;width:30%;text-align:left;float:left;">'+i+'</div><div style="width:60%;clear:none;text-align:right;float:left;">'+item2+'</div></div>';
+			});
+			$("#rule").html(items);
+		}
     });
-
 }
 
 function date_format( timestamp) {
@@ -250,13 +187,9 @@ function date_format( timestamp) {
 function start_server() {
 	//starts the server
 	cmd = url+'/api.php?action=exe_tmux&server='+id+'&cmd=s';
-	console.log(cmd);
-	//alert(cmd);
-	
 	$.get(cmd, function(data, status){
-		//alert("Data: " + data + "\nStatus: " + status);
-		if(status == "success" ) {
-			//$("#"+id).blur();
+	if(status == "success" ) {
+		//$("#"+id).blur();
 			console.log(data);
 		 }
 	});
@@ -430,30 +363,25 @@ $("#mod_settings").on("hidden.bs.modal", function () {
     location.reload();
 });
 	
- $('#file-list').change (function ()
-    {
-		
-		flist="";
-		szt=0;
-        for (var i = 0; i < this.files.length; i++)
-        {
-			sz = formatBytes(this.files[i].size)
-            //alert(sz);
-            szt +=this.files[i].size;
-            flist +="<tr><td>"+ this.files[i].name+"</td><td style='text-align:right;'>"+sz+"</td></tr>";
-        }
-        if(flist !== "") {
-			sztf = formatBytes(szt);
-			flist = "<h6 class='card-title'>Files to upload</h6><table>"+flist;
-			flist += "<tr><td class='card-title'>Total size of upload</td><td class='card-title' style='text-align:right;'>"+sztf+"</td></tr>";
-			flist += "<tr><td colspan=2>	Add to all available servers ? <input name='all_servers' type='checkbox' id='all-servers'></td></tr>";
-			flist+= "<tr><td colspan=2>"+sztf+ " used out of  "+ maxFilesize+"</td></tr>"
-			flist += '<tr><td><button class="btn btn-primary" style="margin-top:7%;" type ="submit "><i class="fa fa-cloud-upload"></i> Upload Map Files</button></td></tr></table>';
-		}
-		
-        $("#f-list").html(flist);
+ $('#file-list').change (function (){
+	flist="";
+	szt=0;
+	for (var i = 0; i < this.files.length; i++){
+		sz = formatBytes(this.files[i].size)
+		szt +=this.files[i].size;
+		flist +="<tr><td>"+ this.files[i].name+"</td><td style='text-align:right;'>"+sz+"</td></tr>";
+	}
+	if(flist !== "") {
+		sztf = formatBytes(szt);
+		flist = "<h6 class='card-title'>Files to upload</h6><table>"+flist;
+		flist += "<tr><td class='card-title'>Total size of upload</td><td class='card-title' style='text-align:right;'>"+sztf+"</td></tr>";
+		flist += "<tr><td colspan=2>	Add to all available servers ? <input name='all_servers' type='checkbox' id='all-servers'></td></tr>";
+		flist+= "<tr><td colspan=2>"+sztf+ " used out of  "+ maxFilesize+"</td></tr>"
+		flist += '<tr><td><button class="btn btn-primary" style="margin-top:7%;" type ="submit "><i class="fa fa-cloud-upload"></i> Upload Map Files</button></td></tr></table>';
+	}
+	$("#f-list").html(flist);
         
-    });
+});
     
 $('#fileview').change(function(){
    console.log ("fileview changed");
@@ -478,8 +406,8 @@ $('#sendcmd').on('submit', function(e) {
   	
 $('#quit').click(function() {
 	cmd = url+'/ajaxv2.php?action=version';
-	 $('#quit_game').modal('hide');
-	 stop_server(); 
+	$('#quit_game').modal('hide');
+	stop_server(); 
 });
 	
 $('#files').change(function(){
@@ -500,9 +428,7 @@ $('#files').change(function(){
 
 $('#startcmd').on('submit', function(e) {
 	e.preventDefault();
-	
 	url +="/"+$(this).attr('action');
-	alert(url);
 	var formValues = $(this).serialize();
 	$.ajax({
 		type: $(this).attr('method'),

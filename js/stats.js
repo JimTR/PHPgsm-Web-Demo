@@ -448,10 +448,12 @@ $('body').click(function(e) {
     paginate(x, msgId,v,pp);
     //rp(x, msgId,v);
   }
-  else {
+  if ($(e.target).hasClass("user-id")) {
 	  id =  $(e.target).attr('id');
 	  url = "users.php?id="+id;
 	  console.log(url);
+	  window.location.href=url;
+
   }
 });
 function search_table(haystack,needle) {

@@ -1,7 +1,7 @@
 function index() {
 	// read data use simular to loading the index file
 	if (serverCount >1) {$("#server-desc").text("API Servers");}
-	console.log("in index ");
+	//console.log("in index ");
      $.ajax({ 
         type: 'GET', 
         url: 'ajax.php', 
@@ -10,7 +10,7 @@ function index() {
         success: function (data1) {
 			// got data
 			//alert(data1);
-			console.log(data1);
+			//console.log(data1);
 			$('#player_tot').text(data1.player_tot);
 			$('#logins_tot').text(data1.tot_logins);
 			$('#game_tot').text(data1.game_tot);
@@ -67,7 +67,7 @@ function game_server(url,server) {
 }
 function online(url){
      var timer =sessionStorage.getItem(url);
-     console.log("enter online with "+url);
+     //console.log("enter online with "+url);
 	 $.ajax({
 		url: url,
 		type: 'post',
@@ -193,7 +193,7 @@ function online(url){
 					}
 					else if (server.Players >0) {
 						if (typeof server.players === "undefined") {
-							console.log('no need players array not set '+server.server_name);
+							//console.log('no need players array not set '+server.server_name);
 							return;
 						}   
 						$('#op1'+server_id).css('cursor','pointer');
@@ -221,7 +221,7 @@ function online(url){
 				$.each( online_has_players, function( key, value ) {
 					ServerData = value.split(",");
 					sname = $("#"+ServerData[1]+"-name").text();
-					console.log(sname+"  should be "+ServerData[1]+" key = "+key);
+					//console.log(sname+"  should be "+ServerData[1]+" key = "+key);
 					online_servers += "<tr title ='open console' class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+sname+"</a></td><td style='text-align:center;'>"+ServerData[0]+"</td></tr>"; 
 				});
 				$("#dormant").hide();
