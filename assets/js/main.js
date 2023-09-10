@@ -10,14 +10,14 @@ window.alert = function(message,show,title) {
 		//console.log("message = "+message);
 		//console.log("show = "+show);
 		if( typeof show == "undefined") {
-			console.log("ignore alert, show is not set ");
+			//console.log("ignore alert, show is not set ");
 		}
 		else {
 			if (show ==true) { 
 				nativeAlert(message);
 			}
 			else {
-				console.log("custom alert");
+				//console.log("custom alert");
 				//$("#alert").toggle();
 				$("#alert-title").html(title);
 				$("#alert-message").html(message);
@@ -40,7 +40,7 @@ setInterval('updateClock()', 1000);
 $( window ).resize(function() {
    var width = $(window).width();
    var height = $(window).height();
-   console.log( 'Browser Window width : '+width + ' , height : ' + height );
+   //console.log( 'Browser Window width : '+width + ' , height : ' + height );
 });
 
 function updateClock ()

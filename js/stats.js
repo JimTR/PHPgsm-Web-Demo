@@ -7,8 +7,8 @@
 		var url = $(this).attr('action');
 		$("#u-tbody").empty();
 		var sndData = $('#sendcmd input').serialize();
-		console.log(url)
-		console.log(sndData);
+		//console.log(url)
+		//console.log(sndData);
 		$.ajax({
 			type: $(this).attr('method'),
 			url: url,
@@ -38,7 +38,7 @@
 					$("#p-loader").hide();
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
-				alert('failed '+textStatus);
+				alert('failed '+textStatus,false);
 			}
 			//$("#p-loader").hide();
 		});
@@ -68,7 +68,7 @@ function timeConverter(UNIX_timestamp){
 }
 $( "#go_back" ).click (function() {
 	var rowCount = $('#data_table tr').length;
-	console.log(rowCount);
+	//console.log(rowCount);
 	$('#results').hide();
 	$('#searchbox').show();
 	$("#u-tbody").empty();
@@ -130,7 +130,7 @@ $("#c-select").change(function(){
         dataType: "json", 
         success: function (data1) {
 			// got data
-			console.log(data1);
+			//console.log(data1);
 			//alert("data back");
 			$("#c-rows").text(data1.rows); 
 			$("#online-time").text(data1.online);
@@ -142,7 +142,7 @@ $("#c-select").change(function(){
 			else {
 				$("#country-pages").empty();
 				for (var counter = 0; counter < data1.pages; counter++) {
-					console.log("in loop "+counter);
+					//console.log("in loop "+counter);
 					realPage = counter+1;
 					if (counter == data1.page) {
 						//console.log ("we have the page to highlight "+counter);
@@ -157,15 +157,15 @@ $("#c-select").change(function(){
 				//$("#country-pages").hide();
 				
 			}
-			console.log(data1.pages); 
-			console.log(country);
+			//console.log(data1.pages); 
+			//console.log(country);
 			$('#player-results > tbody').empty();
 			for (var i in country) {
 				//
 				player= country[i];
 				server = player.server.replace(/\*/g, ', ');
 				server = server.slice(0,-2);
-				console.log("second hit");
+				//console.log("second hit");
 				cRow = "<tr id='"+player.steam_id64+"'><td class='middle' style='overflow:hidden;max-width: 150px;'><a href='users.php?id="+player.steam_id64+"'>"+player.name_c+"</a></td><td class='middle'>"+player.city+" - "+player.region+"</td><td class='middle'>"+player.log_ons+"</td><td class='middle'>"+timeConverter(player.last_log_on)+"</td><td class='middle' style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
 				$('#player-results > tbody:last-child').append(cRow);
 			}
@@ -307,7 +307,7 @@ function sys_ban() {
 				$("#sys-count").text(count);
 				paginate(0,'sys-table','sys-pages-d');
 				sys_ban_table_id =sysbans.sys_bans_id;
-				console.log("ban table = "+sys_ban_table_id.length);
+				//console.log("ban table = "+sys_ban_table_id.length);
 				count = 0
 				$(sys_ban_table_id).each(function(i,row){
 					$("#sys-id-table").append(row);
@@ -354,7 +354,7 @@ function vac_ban() {
 			$("#vac-loader").show();
 		},
 		success: function (vacbans) {
-			console.log("process "+vacbans.exe_time);
+			//console.log("process "+vacbans.exe_time);
 			$("#vac-count").text(vacbans.vac_count);
 			vac_ban_table =vacbans.vac_bans;
 			$(vac_ban_table).each(function(i,row){
@@ -370,7 +370,7 @@ function vac_ban() {
 function general() {
 	action = 'general';
 	url = "plugins/stats_data.php?action="+action;
-	console.log(url+" general");
+	//console.log(url+" general");
 	$.ajax({ 
 		type: 'GET', 
 		url: url,
@@ -379,7 +379,7 @@ function general() {
 			//$("#vac-loader").show();
 		},
 		success: function (general) {
-			console.log(general);
+			//console.log(general);
 			$("#total-players").html(general.player_total);
 			$('#total_time').html(general.total_time);
 			$('#country').html(general.country);
@@ -451,13 +451,13 @@ $('body').click(function(e) {
   if ($(e.target).hasClass("user-id")) {
 	  id =  $(e.target).attr('id');
 	  url = "users.php?id="+id;
-	  console.log(url);
+	  //console.log(url);
 	  window.location.href=url;
 
   }
 });
 function search_table(haystack,needle) {
-	console.log("looking for "+needle);
+	//console.log("looking for "+needle);
 	found = false
 $('#'+haystack+' tr').each(function(){
         if($(this).find('td').eq(0).text() == needle){
