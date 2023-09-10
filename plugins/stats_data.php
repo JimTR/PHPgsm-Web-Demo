@@ -237,7 +237,7 @@ function system_bans() {
 		$x['id'][$ips]['last_log_on'] = date("d-m-Y",$system_ip['last_log_on']);
 	}
 	foreach ($x['id'] as $y) {
-		$id = $y['test'];
+		$id = $y['ips'];
 		if(isset($y['name'])) {
 			$name = $y['name'];
 			$name = "<a href='users.php?id=$id'>$name</a>";
