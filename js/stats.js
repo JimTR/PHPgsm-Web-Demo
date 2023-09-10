@@ -356,6 +356,7 @@ function vac_ban() {
 		success: function (vacbans) {
 			//console.log("process "+vacbans.exe_time);
 			$("#vac-count").text(vacbans.vac_count);
+			$("#g-vac-ban").text(vacbans.vac_count);
 			vac_ban_table =vacbans.vac_bans;
 			$(vac_ban_table).each(function(i,row){
 				//console.log(row);
