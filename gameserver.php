@@ -57,9 +57,9 @@ foreach ($players as $player) {
 		$user_link = "<a style='color:red;' href='users.php?id={$player['steam_id']}'>{$player['name_c']}</a>";
 	}
 	else {
-		$user_link = "<a href='users.php?id={$player['steam_id']}'>{$player['name_c']}</a>";
+		$user_link = "<a href='#'>{$player['name_c']}</a>"; // "<a href='users.php?id={$player['steam_id']}'>{$player['name_c']}</a>";
 	}
-	$player_rows .= "<tr><td>$user_link</td><td>{$player['country']}</td><td style='text-align:right;padding-right:7%;'>$online</td></tr>";
+	$player_rows .= "<tr><td id='{$player['steam_id']}'>$user_link</td><td>{$player['country']}</td><td style='text-align:right;padding-right:7%;'>$online</td></tr>";
 }
 $page['player_list'] = "$player_rows</tbody>";
 $this_server['server_update'] = date("d-m-Y H:i:s a",$this_server['server_update']);
@@ -94,6 +94,10 @@ $template->replace_vars($sidebar_data);
 $page['sidebar'] =$template->get_template();
 $template->load('templates/subtemplates/footer.html');
 $page['footer'] = $template->get_template();
+$template->load('templates/subtemplates/user-frame.html');
+$page['userframe'] = $template->get_template();
+$template->load('templates/subtemplates/alert.html');
+$page['alert'] = $template->get_template();
 $page['bserver'] = $bserver;
 $page['file_select'] = $file_select;
 $page['url'] = $url;

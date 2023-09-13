@@ -60,7 +60,7 @@
 								<td class="hidden pad_right"   id="cvar"><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> C Vars</button></td>
 								<td class="hidden pad_right"   id="console1"><a class="btn btn-primary" href="console.php?server=<!--#bserver#-->"><i class="bx bxs-terminal"></i> Console</a></td>
 								<td id="settings"  class="pad_right"><a class="btn btn-primary" href="settings.php?id=<!--#bserver#-->"><i class="ri-edit-2-line"> Settings</button></td>
-								<td class="pad_right"><button onclick="history.back();" type="button" class="btn btn-success">Go Back</button></td>
+								<td class="pad_right"><button onclick="force_back();" type="button" class="btn btn-success"><i class="fa-regular fa-hand-point-left"></i> Go Back</button></td>
 							</tr>
 						</table>
 						
@@ -85,7 +85,7 @@
 				
 				
 			</div>
-			<div class="col-lg-6">
+			<div class="col-lg-6" id="player">
 				<div class="card">
 					<div class="card-body"  id="player-div">
 						<h5 class="card-title">Players
@@ -223,7 +223,8 @@
      
            
   </main><!-- End #main -->
-
+	#userframe#
+	#alert#
  <!--#footer#-->
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -244,7 +245,7 @@
   
 <script>
 	var a_href = 0;
-	url = "<!--#url#-->";
+	url = "#url#";
 	var id='';
 	var path='';
 	var type='Source';
@@ -260,7 +261,7 @@
 			x = cmd.replace(option,newopt);
 			$("#vcmd").text(x);
 		}
-		id = "<!--#host_name#-->";
+		id = "#host_name#";
 		game = "<!--#bserver#-->"
 		server ="<!--#fname#-->";
 		port = 0;
@@ -270,15 +271,12 @@
 		//setInterval(players, 7000);
 		get_game(url,server,id);
 		setInterval(get_game,4000);
-		//alert("show table");
-		//$("#player-table").show();
-		//alert($(window).width());
 		width = $(window).width();
 		//if (width >1000) {
 			//$("body").addClass("toggle-sidebar");
 		//}
 		 paginate(0,'player-table','pages-d');
-		 
+		 //alert(referrer,false,"we came from");
 	});
 	
 </script>

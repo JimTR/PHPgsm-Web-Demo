@@ -186,7 +186,7 @@ $('#player').on('click','.tpButton', function(event) {
 		$("#steam_id").text(href);
 		$('#ipb').attr('value',ip)
 		$('#steam_idb').attr('value',href)
-		$('#ban_user').modal('show');
+		$('#user-frame').modal('show');
 	}
 });
 

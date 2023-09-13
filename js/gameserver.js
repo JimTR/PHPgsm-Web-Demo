@@ -383,26 +383,7 @@ $("#mod_settings").on("hidden.bs.modal", function () {
         
 });
     
-$('#fileview').change(function(){
-   console.log ("fileview changed");
-   alert ($('#fileview').val());
-});
 
-$('#sendcmd').on('submit', function(e) {
-	e.preventDefault();
-	$.ajax({
-		type: $(this).attr('method'),
-		url: $(this).attr('action'),
-		data: $(this).serialize(),
-		success: function(data) {
-			$('#ajax-response').html(data);
-			$("#ajax-response").show();
-			$('#text').val(""); 
-			$("#send").blur(); 
-			$('#ajax-response').delay(3000).fadeOut('slow');
-		}
-	});
-});
   	
 $('#quit').click(function() {
 	cmd = url+'/ajaxv2.php?action=version';
@@ -410,21 +391,6 @@ $('#quit').click(function() {
 	stop_server(); 
 });
 	
-$('#files').change(function(){
-	selected_value = $('#files').val()
-	console.log("triggerd change");
-	var sendurl = url+"/api.php?action=get_file&cmd=view&n="+selected_value;
-	$.ajax({
-		type: 'GET',
-		url: sendurl,
-		dataType: 'text',
-		success: function(data) {
-			$("#fileview").val(data);
-			var $textarea = $('#fileview');
-			$textarea.scrollTop(0);    
-		}
-	});
-});
 
 $('#startcmd').on('submit', function(e) {
 	e.preventDefault();
@@ -449,9 +415,6 @@ $('#toggle').click(function() {
 	$('#gameservers-nav').toggleClass('show');
 });
 
-$('input[name=gridRadios]').change, function() {
-	alert($(this).val());
-}
 
 $("#cnew").click(function() {
 	cmd =$("#scmd").val();
@@ -504,7 +467,7 @@ $('#disable-server').submit(function(e) {
 		data: formValues,
 		dataType: 'json',
 		success: function(data) {
-			console.clear();
+			//console.clear();
 			console.log (data); 
 			alert (data[0]);   
 			$('#disable-response').html(data[0]);
@@ -540,51 +503,6 @@ $('select').on('change', function() {
 	$("#vcmd").text(vcmd);
 });
 
-$('#save-file').click(function() {
-	console.log("saving file");
-	selected_value = $('#files').val();
-	console.log(selected_value);
-	var sendurl = url+"/api.php";
-	file = $('#fileview').html();
-	console.log(sendurl);
-    $.ajax({
-		type: 'POST',
-		url: sendurl,
-		dataType: 'text',
-		data: { 'import': file,
-		'action': 'get_file' ,
-		'cmd': 'save' ,
-		'n': selected_value },
-		success: function(data) {
-			console.log(data);
-			alert("data back"+data);
-			$("#fileview").html(data);
-			var $textarea = $('#fileview');
-			$textarea.scrollTop(0);
-			sendurl='';    
-		}
-	});
-}); 
-
-$('#map-update').on('submit', function(e) {
-	e.preventDefault();
-	murl = $(this).attr('action');
-	var formValues = $(this).serialize();
-	$.ajax({
-		type: $(this).attr('method'),
-		url: murl,
-		dataType: "json",
-		data: formValues,
-		success: function(data) {
-			 nc =  $("table input[type=checkbox]:checked").length-1;
-			 $("#cycle-count").html(nc);;
-			$("#map-response").html(data);
-			$("#map-response").show();
-			$('#map-response').delay(3000).fadeOut(1000); 
-
-		}
-	});
-});
 
 function formatBytes(bytes, decimals = 2) {
     if (!+bytes) return '0 Bytes'
@@ -598,47 +516,13 @@ function formatBytes(bytes, decimals = 2) {
     return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
 }
 
- function checkTotalCheckedBoxes(){
-	   var checked = 0;
-$("#table-wrapper" ).each(function( ) {
-  if(this.children.length === 3){ 
-
-	$(this.children).each(function() {
-        this.checked ? checked++ : null;      
-        $("input[name="+this.name+"]").parent().siblings().closest('.totalchecked')[0].innerText = (checked) + " selected"; 
-
-  	    });
-  }
-});
-alert (checked);
-return checked;
-}     
-$("input[type='checkbox']").on('change', function() {
-//$(document).on('change', 'checkbox', function() {
-	oid = this.id;
-	 if(this.checked) {
-      console.log ("checkbox is checked");
-    }
-    else {
-		console.log ("unchecked");
-		trid = $(this).closest('tr').attr('id'); 
-		 original = $(this).attr("orig");
-		 vcmd = $("#vcmd").text();
-		 cmd = $("#scmd").val();
-		 alert(vcmd);
-		 newopt='';
-		 cmd = cmd.replace(original,newopt);
-		 vcmd = vcmd.replace(original,newopt);
-		 $("#"+trid).remove();
-		 $("#scmd").val(cmd);
-		 $("#vcmd").text(vcmd);
-		 
-	}
-});
 $('body').click(function(e) {   
-  var $target = $(e.target); 4
-  //alert("clicked")
+  var $target = $(e.target); 
+ 
   //console.log($target);  
+   v = $(e.target).parent().parent().parent().attr('id');
+  //alert(v,true);
+  li = $(e.target).parent().parent().parent().parent().attr('id');
   if ($target.hasClass("pagination-page")) {
     // do something
     v = $(e.target).parent().parent().parent().attr('id');
@@ -674,4 +558,41 @@ $('body').click(function(e) {
     paginate(x, msgId,v);
     //rp(x, msgId,v);
   }
+  else {
+	  //alert("clicked an id "+li,false,"you  clicked something");
+	 if (li == "player-table") {
+		linkid  = $target.parent().attr('id')
+		//alert(linkid,true);	
+		player_click(linkid);
+	}
+  }
 });
+
+function player_click(id) {
+	//alert ("clicked 0n a row "+id,true,"row click");
+	loadIframe("ifrm", "frame.php?id="+id);	
+	//$('#name').attr('value',user)
+	//$('#ip').attr('value',ip)
+	//$('#logins').attr('value',login)
+	//$('#steam_id').attr('value',id)
+	//$("#steam_id").prop("href", "http://steamcommunity.com/profiles/"+id)
+	//$("#steam_id").text(id);
+	//$('#ipb').attr('value',ip);
+	//$('#steam_idb').attr('value',id);
+	//alert("about to show",true);
+	$('#user-frame').modal('show');
+	
+}
+function loadIframe(iframeName, url) {
+    var $iframe = $('#' + iframeName);
+    if ($iframe.length) {
+        $iframe.attr('src',url);
+        return false;
+    }
+    return true;
+}
+function closeIFrame(){
+     $('#user-frame').modal('hide');
+     //$('#myModal').modal('hide');
+
+}

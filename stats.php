@@ -47,6 +47,10 @@ $template->load('templates/subtemplates/sidebar.html'); //sidebar
 $template->replace_vars($sidebar_data);
 $page['sidebar'] = $template->get_template();
 $page['sidebar'] = str_replace("class=\"nav-link collapsed\" id=\"$module\" ","class=\"nav-link\"  id=\"users\" ",$page['sidebar']);
+$template->load('templates/subtemplates/alert.html');
+$page['alert'] = $template->get_template();
+$template->load('templates/subtemplates/user-frame.html');
+$page['userframe'] = $template->get_template();
 $template->load('templates/stats.html');
 $template->replace_vars($page);
 $template->publish();
@@ -88,9 +92,9 @@ function menu_bar() {
 		if (in_array("sys-bans",$ban_options)) {/*ystem_bans();*/$page['sys_ban_class'] ='';}
 		else { $page['sys_ban_class'] = 'style="display:none;"';}
 	}
-	if (in_array('search',$options)) {
+	/*if (in_array('search',$options)) {
 		$menu_bar .='<li class="nav-item"><a class="nav-link" href="users.php"><i class="fa-solid fa-magnifying-glass"></i> <span class="span-show">Search Players</span></a></li>';
-	}					
+	}*/					
 	$menu_bar.='</ul>';
 	$page['menu_bar'] = $menu_bar;				
 }

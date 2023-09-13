@@ -53,10 +53,10 @@
 					<tbody id="gd1"></tbody>
 				</table>
 			</div>
-			<div class="modal-footer <!--#button_class#-->">
+			<div class="modal-footer "style="display:inline-block">
 					<button id="ban" type="button" class="btn btn-danger" onclick="shutdiv('ban-user','ban_history');"><i class="fa-solid fa-user-slash"></i> Ban</button>
 					<button id="list-bans" style="display:none;" type="button" class="btn btn-warning" onclick="shutdiv('ban_history','ban-user');"><i class="fa-solid fa-file-waveform"></i> Ban History</button>
-					<!--<button id="go_back" type="button" class="btn btn-success">Go Back</button>-->
+					<button  type="button" class="btn btn-success" onclick="parent.closeIFrame();"><i class="fa-regular fa-hand-point-left"></i> Go Back</button>
 				</div>
 		</div>
 	</div>
@@ -78,8 +78,8 @@
 							<tbody id="ban-body"></tbody>
 						</table>
 				</div>
-			 <div class="modal-footer">
-                      <!--<button class="btn btn-secondary" onclick="$('#ban_history').hide()">Close</button>-->
+			 <div class="modal-footer" style="display:inline-block">
+                      <button class="btn btn-secondary" onclick="$('#ban_history').hide()">Close</button>
              </div>
                   </div>
                  </div>
@@ -128,6 +128,7 @@
 	<script src = "js/users.js"></script>
 	<script>
 		console.log("in frame "+history.length);
+		console.log( document.referrer);
 		//$("#list-bans").click(function(){
 			//$("#ban_history").show();
 		//}); 
