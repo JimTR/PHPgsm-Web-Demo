@@ -204,6 +204,8 @@ function displayData(userID) {
 			//console.log(head);
 			//console.log("end user data");
 			$('#un').html(user)
+			//parent.('#un').html(user);
+			$('#un', parent.document).html(user);
 			$('#un-b').html(user)
 			$('#ban-steam-id').val(userID);
 			$("#user-frame").attr("src","img/blank.png");

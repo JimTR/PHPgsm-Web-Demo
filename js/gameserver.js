@@ -570,7 +570,7 @@ $('body').click(function(e) {
 
 function player_click(id) {
 	//alert ("clicked 0n a row "+id,true,"row click");
-	loadIframe("ifrm", "frame.php?id="+id);	
+	loadIframe("ifrm", "frame.php?frame=user_frame&id="+id);	
 	//$('#name').attr('value',user)
 	//$('#ip').attr('value',ip)
 	//$('#logins').attr('value',login)

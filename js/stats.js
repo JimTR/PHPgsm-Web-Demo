@@ -1,6 +1,13 @@
  	var gdetail='';
- 	//var total_pages = 0;
-	//console.log("on load "+history.length);
+ 	$(document).ready(function() {
+		var pager_pos= 0;
+		general();
+		sb_ban();
+		sys_ban();
+		dup_page();
+		vac_ban();
+	});
+	
 	$('#sendcmd').on('submit', function(e) {
 		e.preventDefault();
 		var items='';
@@ -31,7 +38,7 @@
 					
 					$.each(player, function(i, item) {
 						var timestamp =  timeConverter(item.last_log_on);
-						gdetail = "<tr><td><a href='"+'users.php?id='+item.steam_id64+"'>"+item.name_c+"</a></td><td style='padding-left:2%;'><img  style='border:1px solid;width:40px;' src='"+item.flag+"' title='"+item.country+"'></td><td>"+timestamp+"</td><td><a href='http://steamcommunity.com/profiles/"+item.steam_id64+"' target='_blank'>"+item.steam_id64+"</a></td></tr>";
+						gdetail = "<tr><td><span class='player-link' id='"+item.steam_id64+"'>"+item.name_c+"</span></td><td style='padding-left:2%;'><img  style='border:1px solid;width:40px;' src='"+item.flag+"' title='"+item.country+"'></td><td>"+timestamp+"</td><td><a href='http://steamcommunity.com/profiles/"+item.steam_id64+"' target='_blank'>"+item.steam_id64+"</a></td></tr>";
 						$("#data_table").append(gdetail); 
 					});
 					paginate(0,'data_table','u-pages-d');
@@ -94,21 +101,24 @@ function comparer(index) {
 }
 
 function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
+
 function loadIframe(iframeName, url) {
     var $iframe = $('#' + iframeName);
+    //alert(url,true);
     if ($iframe.length) {
         $iframe.attr('src',url);
         return false;
     }
     return true;
 }
-$('.user-id').on("click",function(){
-	console.log ("length "+history.length);
+//$('.player-link').on("click",function(){
+//	console.log ("length "+history.length);
 //console.log( this.parent());
-  var usersid =  $(this).attr("id");
-   loadIframe("ifrm", "frame.php?id="+usersid);
-   $('#ban_user').modal('show');	
-});
+//  var usersid =  $(this).attr("id");
+ // alert("p link",true);
+ //  loadIframe("ifrm", "frame.php?frame=user_frame&id="+usersid);
+  // $('#ban_user').modal('show');	
+//});
 $("#c-select").change(function(){
 	$("#country-body").empty();
 	option = $('option:selected', this).attr('flag');
@@ -130,7 +140,7 @@ $("#c-select").change(function(){
         dataType: "json", 
         success: function (data1) {
 			// got data
-			//console.log(data1);
+			console.log(data1);
 			//alert("data back");
 			$("#c-rows").text(data1.rows); 
 			$("#online-time").text(data1.online);
@@ -166,7 +176,7 @@ $("#c-select").change(function(){
 				server = player.server.replace(/\*/g, ', ');
 				server = server.slice(0,-2);
 				//console.log("second hit");
-				cRow = "<tr id='"+player.steam_id64+"'><td class='middle' style='overflow:hidden;max-width: 150px;'><a href='users.php?id="+player.steam_id64+"'>"+player.name_c+"</a></td><td class='middle'>"+player.city+" - "+player.region+"</td><td class='middle'>"+player.log_ons+"</td><td class='middle'>"+timeConverter(player.last_log_on)+"</td><td class='middle' style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
+				cRow = "<tr id='"+player.steam_id64+"'><td class='middle' style='overflow:hidden;max-width: 150px;'><span class='player-link' id='"+player.steam_id64+"'>"+player.name_c+"</span></td><td class='middle'>"+player.city+" - "+player.region+"</td><td class='middle'>"+player.log_ons+"</td><td class='middle'>"+timeConverter(player.last_log_on)+"</td><td class='middle' style='overflow:hidden;max-width: 150px;'>"+server+"</td></tr>";
 				$('#player-results > tbody:last-child').append(cRow);
 			}
 			//alert ("paginate");
@@ -416,6 +426,7 @@ function general() {
 }
 $('body').click(function(e) {   
   var $target = $(e.target); 
+  //alert($target.attr('id'),true);
    if ($target.hasClass("pagination-page")) {
     // do something
     v = $(e.target).parent().parent().parent().attr('id');
@@ -449,12 +460,15 @@ $('body').click(function(e) {
     paginate(x, msgId,v,pp);
     //rp(x, msgId,v);
   }
-  if ($(e.target).hasClass("user-id")) {
+  if ($(e.target).hasClass("player-link")) {
+	  //alert($target.attr('id'),true);
 	  id =  $(e.target).attr('id');
-	  url = "users.php?id="+id;
+	  url = "frame.php?frame=user_frame&id="+id;
 	  //console.log(url);
-	  window.location.href=url;
-
+	  //alert ("frame.php?frame=user_frame&id="+id);	
+	  //window.location.href=url;
+	loadIframe("ifrm", url);
+	$('#user-frame').modal('show');
   }
 });
 function search_table(haystack,needle) {
