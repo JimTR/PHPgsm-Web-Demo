@@ -217,7 +217,7 @@ function system_bans() {
 		if(isset($y['name'])) {
 			$id = $y['steam_id'];
 			$name = $y['name'];
-			$name = "<a href='users.php?id=$id'>$name</a>";
+			$name = "<span class='player-link' id='$id'>$name</span>";
 			if($y['last_log_on'] == 0) {$logon = "-";}
 			else {$logon = $y['last_log_on'];}
 		}
@@ -240,7 +240,7 @@ function system_bans() {
 		$id = $y['id'];
 		if(isset($y['name'])) {
 			$name = $y['name'];
-			$name = "<a href='users.php?id=$id'>$name</a>";
+			$name = "<span class='player-link' id='$id'>$name</span>";
 			if($y['last_log_on'] == 0) {$logon = "-";}
 			else {$logon = $y['last_log_on'];}
 		}
