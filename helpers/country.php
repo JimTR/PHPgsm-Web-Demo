@@ -25,7 +25,7 @@ $sql = "SELECT players.name_c,players.steam_id64, sum(`game_time`) as total,play
 $p = $database->get_row($sql);
 //echo $p['name_c'];
 //$x =convertSecToTime($p['total']);
-$data['top_player'] = "<a href='users.php?id={$p['steam_id64']}'>{$p['name_c']}</a>";
+$data['top_player'] = "<span class='player-link' id='{$p['steam_id64']}'>{$p['name_c']}</span>";
 $data['top_player_time'] = convertSecToTime($p['total']) ; 
 //printr($p);
 echo json_encode($data,JSON_UNESCAPED_SLASHES);
