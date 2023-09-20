@@ -277,24 +277,14 @@
 						</div>
 						<div class="col-lg-12" style="margin-top:20px;text-align:right;"> 
 							<!-- add second button -->
-							<button  id="full-back" onclick="force_back();" type="button" class="btn btn-success <!--#button_class#-->">Go Back</button>
-							<button  id="go_back"  style="display:none;" type="button" class="btn btn-success <!--#button_class#-->">Go Back</button>
+							<button  id="full-back" onclick="force_back();" type="button" class="btn btn-success <!--#button_class#-->"><i class="fa-regular fa-hand-point-left"></i> Go Back</button>
+							<button  id="go_back"  style="display:none;" type="button" class="btn btn-success <!--#button_class#-->"><i class="fa-regular fa-hand-point-left"></i> Go Back</button>
 						</div>	
 					</div>
 				</div>
 			</div>
 			<!-- popup -->
-			<div class="modal fade" id="ban_user" tabindex="-1" aria-hidden="true" style="display: none;">
-                <div class="modal-dialog modal-dialog-centered modal-xl">
-					<div class="modal-content">
-						<div class="modal-header">
-							<!--<h5 id="user-title" class="card-title">User Information</h5>-->
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-                       <iframe  style="width:100%; height:80vh;" id="ifrm" id="ifrm" src="" frameborder="0" >Your browser doesn't support iframes.</iframe>
-					</div>
-                </div>
-            </div>
+			
 		</section>
 		#alert#
 		#userframe#
@@ -305,19 +295,5 @@
    <script src = "assets/js/main.js"></script>
   <script src = "js/stats.js"></script>
   <script>
-	 $(document).ready(function() {
-		var pager_pos= 0;
-		general();
-		//console.log("alert");
-		//alert ("done general",false,"information");
-		sb_ban();
-		//nativeAlert ("done sb");
-		sys_ban();
-		//alert("done sys");
-		dup_page();
-		//alert("done  dup");
-		vac_ban();
-		//alert("done vac");
-		
-	});
+	 
   </script>
