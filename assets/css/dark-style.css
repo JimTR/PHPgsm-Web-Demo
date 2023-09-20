@@ -1445,3 +1445,15 @@ a.invert:hover {
 	margin-top:10%;
 	}
 }
+.player-link{
+    color: #5080b3;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+
+.player-link:hover {
+  color: #717ff5;
+  text-decoration: none;
+  cursor: pointer;
+}

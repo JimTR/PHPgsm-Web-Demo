@@ -39,8 +39,8 @@ window.alert = function(message,show,title) {
   
 jQuery(document).ready(function(){
 var wSize = jQuery(window).width();
-console.log("in main js "+history.length);
-console.log(referrer);
+//console.log("in main js "+history.length);
+//console.log(referrer);
 if(wSize > 400) {
 //console.log(wSize);
 jQuery('body').addClass('toggle-sidebar');

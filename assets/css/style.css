@@ -1363,3 +1363,14 @@ a.invert:hover {
    display: none;
   }
 }
+
+.player-link {
+  color: #4154f1;
+  text-decoration: none;
+}
+
+.player-link:hover {
+  color: #717ff5;
+  text-decoration: none;
+  cursor: pointer;
+}
