@@ -109,7 +109,7 @@ function sb_bans() {
 		$id = $db_user['steam_id64'];
 		$key = array_search($id, array_column($bans, 'steam_id'));
 		$bans[$key]['last_log_on'] = date("d-m-Y",$db_user['last_log_on']);
-		$bans[$key]['name'] = "<a href='users.php?id=$id'>{$db_user['name_c']}</a>";
+		$bans[$key]['name'] = "<span class='player-link' id='$id'>{$db_user['name_c']}</span>";
 		$bans[$key]['server'] = $db_user['server'];
 	}
 	$line ='';
@@ -150,9 +150,9 @@ function vac_bans(){
 			$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['name_c']}</a>";
 		}
 		else {
-			$player_link = "<a href='users.php?id={$vac_ban['steam_id']}'>{$vac_ban['name_c']}</a>";
+			$player_link = "<span id='{$vac_ban['steam_id']}' class='player-link' >{$vac_ban['name_c']}</span>";
 		}
-		$output['vac_bans'] .= "<tr title='$title'><td style='width:45%;overflow:hidden;white-space: nowrap;'>$player_link</td><td>$last_ban</td><td>$last_logon</td></tr>";
+		$output['vac_bans'] .= "<tr title='$title'  ><td style='width:45%;overflow:hidden;white-space: nowrap;'>$player_link</td><td>$last_ban</td><td>$last_logon</td></tr>";
 	}
 	$time_end = microtime(true);
 	$output['exe_time'] = ($time_end - $time_start)/60;
@@ -274,13 +274,13 @@ function ip_dups() {
 			// add to the row
 			$i--;
 			$last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
-			$dup_table[$i]['name'] .="<div><div style='width:31%;float:left;clear:both;padding-bottom:1%;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></div><div style='width:19%;float:left;'>$last_login</div><div style='text-align:center;width: 37%;float:left;'>{$dup['log_ons']}</div><div style='width:11%;float:left;'>$bans</div></div>";
+			$dup_table[$i]['name'] .="<div><div style='width:31%;float:left;clear:both;padding-bottom:1%;'><span class='player-link' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</span></div><div style='width:19%;float:left;'>$last_login</div><div style='text-align:center;width: 37%;float:left;'>{$dup['log_ons']}</div><div style='width:11%;float:left;'>$bans</div></div>";
 			$i++;
 			continue;
 		}
 		$dup_table[$i]['ip'] = long2ip($dup['ip']);
 		$last_login = date("d-m-y  h:i:s a",$dup['last_log_on']);
-		$dup_table[$i]['name'] = "<div><div style='width:31%;float:left;padding-bottom:1%;'><a href='javascript:void(0)' class='user-id' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</a></div><div style='width:19%;float:left;padding-bottom:1%;'>$last_login</div><div style='text-align:center;width: 37%;float:left;padding-bottom:1%;'>{$dup['log_ons']}</div><div style='width:11%,float:left;'>$bans</div></div>"; 
+		$dup_table[$i]['name'] = "<div><div style='width:31%;float:left;padding-bottom:1%;'><span class='player-link' id='$id' title='Last Seen $last_login'>{$dup['name_c']}</span></div><div style='width:19%;float:left;padding-bottom:1%;'>$last_login</div><div style='text-align:center;width: 37%;float:left;padding-bottom:1%;'>{$dup['log_ons']}</div><div style='width:11%,float:left;'>$bans</div></div>"; 
 		$last_ip = $dup['ip'];
 		$i++;
 	}
@@ -304,11 +304,11 @@ function general () {
 	$output['total_time'] = convertSecToTime($stats['total_time']);
 	$sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as total_logins, players.steam_id64 as steam_id FROM `players` WHERE `players`.time_on_line = (SELECT MAX(time_on_line) FROM players)";
 	$stats = db->get_row($sql);
-	$output['time_online'] = "<a href='users.php?id={$stats['steam_id']}'>{$stats['user_name']}</a>";
+	$output['time_online'] = "<span class='player-link' id='{$stats['steam_id']}'>{$stats['user_name']}</span>";
 	$output['time_online_count'] = convertSecToTime($stats['play_time']);
 	$sql = "SELECT name_c as user_name,time_on_line as play_time, players.log_ons as total_logins, players.steam_id64 as steam_id FROM `players` WHERE `players`.log_ons = (SELECT MAX(log_ons) FROM players)";
 	$stats = db->get_row($sql);
-	$output['most_log_ons'] = "<a href='users.php?id={$stats['steam_id']}'>{$stats['user_name']}</a>";
+	$output['most_log_ons'] = "<span class='player-link' id='{$stats['steam_id']}'>{$stats['user_name']}</span>";
 	$output['log_on_count'] = $stats['total_logins'];
 	$sql = "SELECT servers.server_name,player_history.game as server_id,count(player_history.`game`) as total FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.`game` order by total desc limit 1;";
 	$stats = db->get_row($sql);
