@@ -58,9 +58,9 @@
             $('#swap-free').text(data.SwapFree); 
             mem_pc = parseFloat(data.MemAvailable) * 100 / parseFloat(data.MemTotal);
             mem_pc = mem_pc.toFixed(2);
-            swap_pc = parseFloat(data.SwapTotal) * 100 / parseFloat(data.SwapFree)-100;
+            swap_pc = parseFloat(data.SwapTotal_raw) * 100 / parseFloat(data.SwapFree_raw)-100;
             swap_pc = swap_pc.toFixed(2)
-            swap_total = parseFloat(data.SwapTotal);
+            swap_total = parseFloat(data.SwapTotal_raw);
             console.log("mem pc "+mem_pc);
             $('#u_mount').text(data.dir);
             $('#u_size').text(data.quota);
