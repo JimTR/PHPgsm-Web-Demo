@@ -67,21 +67,10 @@ $template->load('templates/subtemplates/sidebar.html'); //sidebar
 $template->replace_vars($sidebar_data);
 $page['sidebar'] =$template->get_template();
 $page['url'] = $we_are_here.'/ajax.php';
+$template->load('templates/subtemplates/alert.html');
+$page['alert'] = $template->get_template();
+$template->load('templates/subtemplates/user-frame.html');
+$page['userframe'] = $template->get_template();
 $template->load('templates/index.html');
 $template->replace_vars($page);
 $template->publish();
-//$database->disconnect();
-/*
-$members = json_decode(file_get_contents('https://discordapp.com/api/guilds/191581638629523456/widget.json'), true)['members'];
-foreach ($members as $member) {
-	if ($member['status'] == 'online') {
-		$online[] = $member;
-	}
-	else{ 
-		$offline[] = $member;
-	}
-}
-$membersCount= count($online);
-$total_members = count($offline)+$membersCount;
-echo "Number of members: $membersCount / $total_members".PHP_EOL;
-*/

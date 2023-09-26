@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
 include 'inc/master.inc.php';
 $build = "4605-162186749";
 $version = "1.000";
@@ -72,22 +75,22 @@ if (isset($uri['path'])) {$url .= $uri['path'];}
 	
 //echo $url;
 
-	$sdata = json_decode(geturl($url),true);
+	//$sdata = json_decode(geturl($url),true);
 	$sidebar_data['bmenu'] .='<li><a class="active" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
 	//print_r($sdata);
 	//die();
-	$sdata1= print_r($sdata,true);
+	//$sdata1= print_r($sdata,true);
 }
 else {
 	$sidebar_data['bmenu'] .='<li><a class="" href="baseserver.php?server='.$server['fname'].'"><i class="bi bi-server" style="font-size:12px;"></i>'.$server['fname'].'</a></li>';
 }
 }
-$x =intval($sdata['total_size_raw'])/1000000;
-$sdata['quota_pc'] = $x* (100/intval($sdata['quota_raw']));
+//$x =intval($sdata['total_size_raw'])/1000000;
+//$sdata['quota_pc'] = $x* (100/intval($sdata['quota_raw']));
 //$sdata['player_pc'] = round($sdata['used_slots']/$sdata['total_slots']*100,2);
 //if ($sdata['player_pc'] == 0) { $sdata['player_pc'] = 100;}
- if ($sdata['reboot'] == 'yes' ) {$sdata['rebooot'] = 'rebooot';}
-$data = print_r($sdata,true);
+ //if ($sdata['reboot'] == 'yes' ) {$sdata['rebooot'] = 'rebooot';}
+//$data = print_r($sdata,true);
 $sidebar_data['servers'] = 'Game Servers';
 $sidebar_data['base_servers'] = 'Base Servers';
 $page['title'] = "API Server $bserver";
@@ -102,16 +105,16 @@ $page['footer'] = $template->get_template();
 $page['bserver'] = $bserver;
 //$page['model_name'] = $sdata['model_name'];
 //$page['uptime'] = $sdata['boot_time'];
-$page['data'] = $data;
-$sdata1= print_r($sdata,true);
+//$page['data'] = $data;
+//$sdata1= print_r($sdata,true);
 //$page['url'] =dirname($_SERVER['PHP_SELF'])."/ajax.php?".$_SERVER['QUERY_STRING']."&module=baseserver&url=$url";
 $page['url'] = $url;
 //print_r($page);
-$sdata['g_pc'] = ($sdata['server_live_servers'] / $sdata['server_total_servers'])*100;
+//$sdata['g_pc'] = ($sdata['server_live_servers'] / $sdata['server_total_servers'])*100;
 $template->load('templates/baseserver.html');
 $template->replace_vars($page);
-$template->replace_vars($sdata);
+//$template->replace_vars($sdata);
 $template->publish();
-$database->disconnect();
+
 // background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 ?>
