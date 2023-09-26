@@ -1,0 +1,102 @@
+<!--
+   search_frame.html.html
+   
+   Copyright 2023 Jim Richardson <jim@phporyx.co.uk>
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+   
+   
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>Search Frame</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="generator" content="Geany 1.38" />
+	<meta http-equiv='cache-control' content='no-cache'>
+	<meta http-equiv='expires' content='0'>
+	<meta http-equiv='pragma' content='no-cache'>
+	#include#
+</head>
+
+<body>
+	<div style="display:none;" class="col-lg-6 pad" id="searchbox">
+		<h5 class="card-title"></h5>
+		<div id="user-id" style="display:none;"><!--#userid#--></div>
+		<form id="sendcmd" style="width:75%;float:left;" action="<!--#url#-->/search.php" method="get">
+			<div class="input-group">
+				<input class="form-control"name="text" type="text" id="text" size="70" placeholder="Player name">
+				<input type="hidden" id="action" name="action" value="search">
+				<label for="send" class="btn btn-info">Search<i class="bx bxs-send"></i></label>	   
+				<input class="hidden" type="submit" value="send" id="send">
+			</div>	
+			<div class="form-check" style="padding-left:6%;padding-top:1em;">
+				<input class="form-check-input" type="radio" name="type" id="gridRadios3" value="fuzzy" checked>
+				<label class="form-check-label" for="gridRadios3"  style="padding-right:6%;">Name</label>
+				<input class="form-check-input" type="radio" name="type" id="gridRadios1" value="id">
+				<label class="form-check-label" for="gridRadios1"  style="padding-right:6%;">Steam ID</label>
+				<input class="form-check-input" type="radio" name="type" id="gridRadios4" value="ip">
+				<label class="form-check-label" for="gridRadios4">IP</label>
+			</div>
+		</form>
+		<div style="clear:both;padding-top:1%;text-align:center;">
+			<button onclick="parent.closeIFrame(1);"  type="button" class="btn btn-success"><i class="fa-regular fa-hand-point-left"></i> Go Back</button>
+		</div>
+	</div>
+	<div class="modal fade" id="alert" tabindex="-1" aria-hidden="true" style="display: none; ">
+	<div class="modal-dialog modal-dialog-centered" >
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 id="alert-title" class="card-title" style="padding:0"></h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div id="alert-message" style="text-align:center;padding:2%;"></div>
+			<div class="modal-footer" style="display:block;text-align:center">
+	                      <button class="btn btn-info" data-bs-dismiss="modal">OK</button>
+        	     </div>
+
+		</div>
+             </div>
+	</div>
+</div>  
+<div class="col-lg-12" style="display:none;" id="results">
+	<h5 class="card-title" style="margin-left:1%;"></h5>
+	<div id="u-pages-d" style="display:none;"></div>
+	<!--<div class="table-wrapper" style="max-height:400px;" id="data_table-wrap">-->
+		<table class="table table-sml"  id="data_table">
+			<thead>
+				<th  style="width:25%;" class="table-header" >User</th>
+				<th  class="table-header" >Location</th>
+				<th class="table-header">Last Log On</th>
+				<th class="table-header">Profile Link</th>
+			</thead>
+			<tbody></tbody>	
+		</table>
+		<div style="padding: 1%;text-align: center;">
+			<button id="go_back" type="button" class="btn btn-success"><i class="fa-regular fa-hand-point-left"></i> Go Back</button>
+		</div>
+</div>
+</body>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src = "js/jquery.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src = "assets/js/main.js"></script>
+<script src = "js/search.js"></script>
+
+</html>

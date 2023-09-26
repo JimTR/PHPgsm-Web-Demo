@@ -56,7 +56,7 @@
 			<div class="modal-footer "style="display:inline-block">
 					<button id="ban" type="button" class="btn btn-danger" onclick="shutdiv('ban-user','ban_history');"><i class="fa-solid fa-user-slash"></i> Ban</button>
 					<button id="list-bans" style="display:none;" type="button" class="btn btn-warning" onclick="shutdiv('ban_history','ban-user');"><i class="fa-solid fa-file-waveform"></i> Ban History</button>
-					<button  type="button" class="btn btn-success" onclick="parent.closeIFrame();"><i class="fa-regular fa-hand-point-left"></i> Go Back</button>
+					<button  type="button" class="btn btn-success" id="go_back"><i class="fa-regular fa-hand-point-left"></i> Go Back</button> <!--onclick="parent.closeIFrame();"-->
 				</div>
 		</div>
 	</div>
@@ -127,6 +127,10 @@
 	<script src = "assets/js/main.js"></script>
 	<script src = "js/users.js"></script>
 	<script>
+		$(document).ready(function() {
+			//$("#ifrm", window.parent.document).height(document.body.scrollHeight);
+			alert (document.body.scrollHeight,true);
+		});
 		console.log("in frame "+history.length);
 		console.log( document.referrer);
 		//$("#list-bans").click(function(){
