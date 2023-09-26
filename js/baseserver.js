@@ -59,8 +59,9 @@
             mem_pc = parseFloat(data.MemAvailable) * 100 / parseFloat(data.MemTotal);
             mem_pc = mem_pc.toFixed(2);
             swap_pc = parseFloat(data.SwapTotal_raw) * 100 / parseFloat(data.SwapFree_raw)-100;
-            swap_free = data.SwapFree;
+            swap_free = data.SwapFree_raw;
             console.log("swap free "+swap_free);
+            console.log("swap total "+data.SwapTotal_raw);
             console.log ("swap pc before maths "+swap_pc);
             swap_pc = swap_pc.toFixed(2)
             swap_total = parseFloat(data.SwapTotal_raw);
