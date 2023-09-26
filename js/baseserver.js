@@ -59,9 +59,14 @@
             mem_pc = parseFloat(data.MemAvailable) * 100 / parseFloat(data.MemTotal);
             mem_pc = mem_pc.toFixed(2);
             swap_pc = parseFloat(data.SwapTotal_raw) * 100 / parseFloat(data.SwapFree_raw)-100;
+            swap_free = data.SwapFree;
+            console.log("swap free "+swap_free);
+            console.log ("swap pc before maths "+swap_pc);
             swap_pc = swap_pc.toFixed(2)
             swap_total = parseFloat(data.SwapTotal_raw);
             console.log("mem pc "+mem_pc);
+            console.log("swap total "+swap_total);
+            console.log("swap pc "+swap_pc);
             $('#u_mount').text(data.dir);
             $('#u_size').text(data.quota);
             $('#load_1').text(data.load_1_min_pc);
@@ -80,14 +85,15 @@
             if (data.reboot == 'Yes') {$('#reboot').addClass('rebooot');}
             else {$('#reboot').removeClass('rebooot');}
             // mem graphs
-            var tmem =Math.round(100-(parseInt(data.MemFree_raw)/parseInt(data.MemTotal_raw))*100)
+            var tmem =Math.round(100-(parseInt(data.MemFree)/parseInt(data.MemTotal))*100)
             //mem graph
             $('#tmem_pb').css('width',tmem+'%');
             $('#tmem_pbs').width($('#tmem_pb').parent().width());
             $("#tmem_pbs").html('Free ('+data.MemFree+')');
             changeClass( 'tmem_pb',tmem);
             //swap graph
-            var smem = Math.round(100-(parseInt(data.SwapFree_raw)/parseInt(data.SwapTotal_raw))*100);
+            var smem = Math.round(100-(parseInt(data.SwapTotal_raw)/parseInt(data.SwapFree_raw))*100);
+            console.log ("smem = "+smem);
             $('#smem_pb').css('width',smem+'%');
             $("#smem_pbs").html('Free ('+data.SwapFree+')');
             $('#smem_pbs').width($('#smem_pb').parent().width());
@@ -127,7 +133,7 @@
              changeClass('swap',swap_pc);
              $('#s-mem').css('width',mem_pc+'%');
              changeClass('s-mem',mem_pc,"reverse");
-             $('#swap_pbs').text(data.SwapFree+'/'+data.SwapTotal);
+             $('#swap_pbs').text(data.SwapFree+" available" );
              $('#mem-pbs').text(data.MemAvailable+'/'+data.MemTotal);
             // mem used graph
             //$('#mem_pbs').width($('#mem_pb').parent().width());
