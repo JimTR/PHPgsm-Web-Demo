@@ -11,8 +11,14 @@ var data="";
      value = "id";
      $("input[name=type][value=" + value + "]").prop('checked', true);
      $('#text').val(userID);
+      //alert($("#ifrm", parent.document).attr('inframe'),true);
+      if($("#ifrm", parent.document).attr('inframe') !== 'undefined') {
+		  console.log("attr set");
+	  }
+	  
      $('#sendcmd').submit();
      displayData(userID);
+    
 	return;
 });
 $( "#bans" ).click(function() {
@@ -76,29 +82,7 @@ $('#data_table').on('click','.tpButton', function(event) {
 	displayData(href);
 });
 	
-function timeConverter(UNIX_timestamp){
-	var a = new Date(UNIX_timestamp * 1000);
-	var months = ['January','Febuary','March','April','May','June','July','August','September','October','November','December'];
-	var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-	var year = a.getFullYear();
-	var month = months[a.getMonth()];
-	var day = weekday[a.getDay()];
-	var date = a.getDate();
-	var hour = a.getHours();
-	var timeOfDay = ( hour < 12 ) ? "am" : "pm"; 
-	currentHours = ( hour > 12 ) ? hour - 12 : hour;
-	var d = a.getDate();
-	var d1 =a.getHours();
-	var d = ('0'+d).slice(-2);
-	var m = a.getMonth()+1;
-	var m = ('0'+m).slice(-2);
-	var hour =('0'+hour).slice(-2);
-    var y = a.getFullYear();
-	var min = ('0'+a.getMinutes()).slice(-2);
-	var sec = a.getSeconds();
-	var time = d+ '-' + m + '-' + y + ' ' + hour + ':' + min ;
-	return time;
-}
+
 
 $( "#go_back" ).click (function() {
 	// need to do a history back
@@ -111,11 +95,26 @@ $( "#go_back" ).click (function() {
         $('#results').show();
 		$("#gd1").empty();
 		$("#gen").empty();
+		parent.closeIFrame();
 		gendetail="";
 		gdetail="";
 	}
 	else {
-		history.back();
+		 var attr = $("#ifrm", parent.document).attr('inframe');
+			if(typeof attr !== 'undefined' && attr !== false){ 
+			 // drop to results
+			 //alert("back to results",true);
+			 $('#frame-title', parent.document).html('Search');
+			 //$("#ifrm", parent.document). removeAttr("inframe"); 
+			 //alert($("#ifrm", parent.document).attr("inframe"),true);
+			 //window.location = $("#ifrm", parent.document).attr("inframe"); 
+			 history.back();
+		 }
+		 else{
+			//alert("we got history back",true);
+			parent.closeIFrame();
+			history.back();
+		}
 	}
 });	
 $('#sendcmd').change(function(){

@@ -302,17 +302,31 @@ function imgError(image) {
     return true;
 }
 	 
+function sclick() {
+	//alert("search clicked",false,"it worked");
+	$("#ifrm").attr("height", "30vh");
+	$("#ifrm").height("30vh"); 
+	$("#ifrm").attr("width", "50vw");
+	$("#frame-dialog").css("max-width", "40vw");
+	//$("#frame-dialog").max-width ("50vw");
+	$("#frame-title").html("Search");
+	url = "frame.php?frame=search_frame";
+	 console.log(url);
+	  //alert ("frame.php?frame=user_frame&id="+id);	
+	  //window.location.href=url;
+	loadIframe("ifrm", url);
+	$('#user-frame').modal('show');
+}
 
-
-$(document).on('click', '.p_count', function(){
-		game = this.id.substr(3);
-		game = "#"+game;
-		title = $(game+"-name").text();
-        $(game+"-secret").slideToggle()
-    });
-$("div").click(function() {
+//$(document).on('click', '.p_count', function(){
+//		game = this.id.substr(3);
+//		game = "#"+game;
+//		title = $(game+"-name").text();
+//        $(game+"-secret").slideToggle()
+//    });
+//$("div").click(function() {
 	
-	if(this.className == 'secret') {
-		$("#"+this.id).slideToggle();
-	}
-});
+//	if(this.className == 'secret') {
+//		$("#"+this.id).slideToggle();
+//	}
+//});

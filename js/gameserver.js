@@ -571,28 +571,6 @@ $('body').click(function(e) {
 function player_click(id) {
 	//alert ("clicked 0n a row "+id,true,"row click");
 	loadIframe("ifrm", "frame.php?frame=user_frame&id="+id);	
-	//$('#name').attr('value',user)
-	//$('#ip').attr('value',ip)
-	//$('#logins').attr('value',login)
-	//$('#steam_id').attr('value',id)
-	//$("#steam_id").prop("href", "http://steamcommunity.com/profiles/"+id)
-	//$("#steam_id").text(id);
-	//$('#ipb').attr('value',ip);
-	//$('#steam_idb').attr('value',id);
-	//alert("about to show",true);
 	$('#user-frame').modal('show');
 	
-}
-function loadIframe(iframeName, url) {
-    var $iframe = $('#' + iframeName);
-    if ($iframe.length) {
-        $iframe.attr('src',url);
-        return false;
-    }
-    return true;
-}
-function closeIFrame(){
-     $('#user-frame').modal('hide');
-     //$('#myModal').modal('hide');
-
 }

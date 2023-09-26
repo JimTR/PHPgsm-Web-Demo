@@ -170,7 +170,7 @@ $('#player').on('click','.tpButton', function(event) {
 	var ip = $("#"+href).find("td:eq(1)").attr("id");
 	var user = $("#"+href).find("td:first").text();
 	var login = $("#"+href).find("td:eq(0)").attr("log");
-	loadIframe("ifrm", "frame.php?id="+href);	
+	loadIframe("ifrm", "frame.php?frame=user_frame&id="+href);	
 	if(href) {
 		if(href == 'undefined') {
 			$('#error_action').text('Invalid User');

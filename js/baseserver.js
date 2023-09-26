@@ -1,5 +1,6 @@
  function base_servers(url) {
 	 // bring back base_server detail
+	 //console.log("base url "+url);
 	  $.ajax({ 
         type: 'POST', 
         url: url, 
@@ -12,15 +13,30 @@
             console.log(oldCookieValue);
             if ($('#level').text() == 'admin') {var level = 1;} 
             else { var level = 0;}
+            $('#server-id').text(data.server_id);
             $('#boot').text(data.boot_time);
             $('#model').text(data.model_name);
             $('#processors').text(data.processors);
             $('#cores').text(data.cpu_cores);
-            $('#speed').text(data.cpu_MHz);
+            $('#speed').text(data.cpu_MHz+" Mhz");
             $('#load').text(data.load_pc);
             $('#cache').text(data.cache_size);
             $('#ip').text(data.ips);
             $('#reboot').text(data.reboot);
+            $('#host').text(data.host);
+            $('#os').text(data.os);
+            $('#k_ver').text(data.k_ver);
+            $('#process').text(data.process);
+            $('#php').text(data.php);
+            $('#screen').text(data.screen);
+            $('#tmux').text(data.tmux);
+            $('#glibc').text(data.glibc);
+            $('#mysql').text(data.mysql);
+            $('#mysql').text(data.apache);
+            $('#curl').text(data.curl); 
+            $('#quotav').text(data.quotav);
+            $('#postfix').text(data.postfix); 
+            $('#git').text(data.git);
             $('#boot_filesystem').text(data.root_filesystem);
             if (level == 1) {
 				$('#root').removeClass('hidden');
@@ -38,8 +54,14 @@
             $('#memfree').text(data.MemFree);
             $('#memcached').text(data.Cached);
             $('#memactive').text(data.MemAvailable);
-            $('#swaptotal').text(data.SwapTotal);
-            $('#swapfree').text(data.SwapFree); 
+            $('#swap-total').text(data.SwapTotal);
+            $('#swap-free').text(data.SwapFree); 
+            mem_pc = parseFloat(data.MemAvailable) * 100 / parseFloat(data.MemTotal);
+            mem_pc = mem_pc.toFixed(2);
+            swap_pc = parseFloat(data.SwapTotal) * 100 / parseFloat(data.SwapFree)-100;
+            swap_pc = swap_pc.toFixed(2)
+            swap_total = parseFloat(data.SwapTotal);
+            console.log("mem pc "+mem_pc);
             $('#u_mount').text(data.dir);
             $('#u_size').text(data.quota);
             $('#load_1').text(data.load_1_min_pc);
@@ -96,11 +118,17 @@
             changeClass('gs_pb',gs_width);
             // disk used graph
             $("#ud_pb").attr('aria-valuemax',data.quota);
-            $("#ud_pbs").text(data.quota_size);
+            $("#ud_pbs").text(data.total_size);
             $('#ud_pbs').width($('#ud_pb').parent().width());
             $("#ud_pb").css('width',data.quota_pc+'%');
             //var rounded = Math.round(number * 10) / 10
              changeClass('ud_pb',data.quota_pc);
+             $('#swap').css('width',swap_pc+'%');
+             changeClass('swap',swap_pc);
+             $('#s-mem').css('width',mem_pc+'%');
+             changeClass('s-mem',mem_pc,"reverse");
+             $('#swap_pbs').text(data.SwapFree+'/'+data.SwapTotal);
+             $('#mem-pbs').text(data.MemAvailable+'/'+data.MemTotal);
             // mem used graph
             //$('#mem_pbs').width($('#mem_pb').parent().width());
             $("#mem_pbs").text(data.total_mem+'%');
@@ -131,14 +159,14 @@
 
  }
  
- function changeforeground(id,rate) {
+ function changeforeground(id,rate,reverse) {
 	 // change colours
-	 color = percentToRGB(rate);
+	 color = percentToRGB(rate,reverse);
 	 //console.log(id);
 	 $('#'+id).css('color',color);
  }
  
- function changeClass(id,rate) {
+ function changeClass(id,rate,reverse) {
 	
 if ( $( "#"+id ).length ) {	
      var classList = document.getElementById(id).className.split(/\s+/);
@@ -146,28 +174,48 @@ if ( $( "#"+id ).length ) {
 		if (classList[i] !== 'progress-bar') {
           $('#'+id).removeClass(classList[i]);
 		}
-		color = percentToRGB(rate);
+		console.log("id = "+id+" reverse = "+reverse);
+		color = percentToRGB(rate,reverse);
 		$('#'+id).css('background-color',color); 
 	}
 } 
 }
 
-function percentToRGB(percent) {
+function percentToRGB(percent,reverse) {
+	console.log("reverse = "+reverse);
     if (percent >= 100) {
         percent = 99
     }
     var r, g, b;
-    if (percent < 50) {
-        // green to yellow
-        r = Math.floor(255 * (percent / 50));
-        g = 255;
-    } 
-    else {
-        // yellow to red
-        r = 255;
-        g = Math.floor(255 * ((50 - percent % 50) / 50));
-    }
-    b = 0;
-    return "rgb(" + r + "," + g + "," + b + ")";
+    if(reverse !== 'reverse') {
+		if (percent < 50) {
+			// green to yellow
+			r = Math.floor(255 * (percent / 50));
+			g = 255;
+		} 
+		else {
+			// yellow to red
+			r = 255;
+			g = Math.floor(255 * ((50 - percent % 50) / 50));
+		}
+		b = 0;
+		return "rgb(" + r + "," + g + "," + b + ")";
+	}
+	else {
+		console.log("we should reverse with "+percent);
+		if (percent > 50) {
+			// green to yellow
+			r = Math.floor(255 * (percent / 50));
+			g = 255;
+		} 
+		else {
+			// yellow to red
+			r = 255;
+			g = Math.floor(255 * ((50 - percent % 50) / 50));
+		}
+		b = 0;
+		return "rgb(" + r + "," + g + "," + b + ")";
+	}
+		
 }
 // $.cookie('phpgsm_theme', id); // ready for theme change ?

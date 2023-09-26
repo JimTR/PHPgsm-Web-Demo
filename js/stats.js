@@ -85,13 +85,6 @@ $( "#go_back" ).click (function() {
 	gendetail="";
 	gdetail="";
 });	
-//$('th').click(function(){
-//	var table = $(this).parents('table').eq(0)
-//	var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
-//	this.asc = !this.asc
-//	if (!this.asc){rows = rows.reverse()}
-//		for (var i = 0; i < rows.length; i++){table.append(rows[i])}
-//})
 
 function comparer(index) {
     return function(a, b) {
@@ -102,23 +95,6 @@ function comparer(index) {
 
 function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
 
-function loadIframe(iframeName, url) {
-    var $iframe = $('#' + iframeName);
-    //alert(url,true);
-    if ($iframe.length) {
-        $iframe.attr('src',url);
-        return false;
-    }
-    return true;
-}
-//$('.player-link').on("click",function(){
-//	console.log ("length "+history.length);
-//console.log( this.parent());
-//  var usersid =  $(this).attr("id");
- // alert("p link",true);
- //  loadIframe("ifrm", "frame.php?frame=user_frame&id="+usersid);
-  // $('#ban_user').modal('show');	
-//});
 $("#c-select").change(function(){
 	$("#country-body").empty();
 	option = $('option:selected', this).attr('flag');
@@ -195,29 +171,6 @@ $("#c-select").change(function(){
 	$("#country-stats").show();
 	//alert("done");
 });
-function timeConverter(UNIX_timestamp){
-	var a = new Date(UNIX_timestamp * 1000);
-	var months = ['January','Febuary','March','April','May','June','July','August','September','October','November','December'];
-	var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-	var year = a.getFullYear();
-	var month = months[a.getMonth()];
-	var day = weekday[a.getDay()];
-	var date = a.getDate();
-	var hour = a.getHours();
-	var timeOfDay = ( hour < 12 ) ? "am" : "pm"; 
-	currentHours = ( hour > 12 ) ? hour - 12 : hour;
-	var d = a.getDate();
-	var d1 =a.getHours();
-	var d = ('0'+d).slice(-2);
-	var m = a.getMonth()+1;
-	var m = ('0'+m).slice(-2);
-	var hour =('0'+hour).slice(-2);
-    var y = a.getFullYear();
-	var min = ('0'+a.getMinutes()).slice(-2);
-	var sec = a.getSeconds();
-	var time = d+ '-' + m + '-' + y + ' ' + hour + ':' + min ;
-	return time;
-}
 
 $("#country").on('click','.page-link',function(){
 //your code here

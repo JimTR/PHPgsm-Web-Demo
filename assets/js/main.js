@@ -496,11 +496,7 @@ $('#switch').click(function()
             return false;
           }
 	}
-	function closeIFrame(){
-     $('#user-frame').modal('hide');
-     //$('#myModal').modal('hide');
-
-}
+	
  function force_back () {
 		 console.log("in gb1 "+history.length);
 		 new_history = history.length;
@@ -508,3 +504,42 @@ $('#switch').click(function()
 		 //history.back(start_history - 1)
 		  window.history.go(start_history - new_history - 1);
 	 }
+function timeConverter(UNIX_timestamp){
+	var a = new Date(UNIX_timestamp * 1000);
+	var months = ['January','Febuary','March','April','May','June','July','August','September','October','November','December'];
+	var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+	var year = a.getFullYear();
+	var month = months[a.getMonth()];
+	var day = weekday[a.getDay()];
+	var date = a.getDate();
+	var hour = a.getHours();
+	var timeOfDay = ( hour < 12 ) ? "am" : "pm"; 
+	currentHours = ( hour > 12 ) ? hour - 12 : hour;
+	var d = a.getDate();
+	var d1 =a.getHours();
+	var d = ('0'+d).slice(-2);
+	var m = a.getMonth()+1;
+	var m = ('0'+m).slice(-2);
+	var hour =('0'+hour).slice(-2);
+    var y = a.getFullYear();
+	var min = ('0'+a.getMinutes()).slice(-2);
+	var sec = a.getSeconds();
+	var time = d+ '-' + m + '-' + y + ' ' + hour + ':' + min ;
+	return time;
+}
+function loadIframe(iframeName, url) {
+    var $iframe = $('#' + iframeName);
+    if ($iframe.length) {
+        $iframe.attr('src',url);
+        return false;
+    }
+    return true;
+}
+function closeIFrame(parent){
+	if(parent) {
+		console.log("need to close from parent");
+	} 
+     $('#user-frame').modal('hide');
+     //$('#myModal').modal('hide');
+
+}
