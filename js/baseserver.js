@@ -56,7 +56,9 @@
             $('#memactive').text(data.MemAvailable);
             $('#swap-total').text(data.SwapTotal);
             $('#swap-free').text(data.SwapFree); 
-            mem_pc = parseFloat(data.MemAvailable) * 100 / parseFloat(data.MemTotal);
+            mem_pc = parseFloat(data.MemAvailable_raw) * 100 / parseFloat(data.MemTotal_raw);
+            //mem_pc =  ((parseFloat(data.MemAvailable_raw) - parseFloat(data.MemTotal_raw)) /parseFloat(data.MemAvailable_raw))*100 ;
+            //mem_pc +=100;
             mem_pc = mem_pc.toFixed(2);
             swap_pc = ((parseFloat(data.SwapTotal_raw) - parseFloat(data.SwapFree_raw)) /parseFloat(data.SwapTotal_raw))*100 ;
             swap_free = data.SwapFree_raw;
@@ -189,7 +191,7 @@ if ( $( "#"+id ).length ) {
 }
 
 function percentToRGB(percent,reverse) {
-	console.log("reverse = "+reverse);
+	//console.log("reverse = "+reverse);
     if (percent >= 100) {
         percent = 99
     }
@@ -209,7 +211,7 @@ function percentToRGB(percent,reverse) {
 		return "rgb(" + r + "," + g + "," + b + ")";
 	}
 	else {
-		console.log("we should reverse with "+percent);
+		//console.log("we should reverse with "+percent);
 		if (percent > 50) {
 			// green to yellow
 			r = Math.floor(255 * (percent / 50));
