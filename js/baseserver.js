@@ -133,8 +133,10 @@
             //var rounded = Math.round(number * 10) / 10
              changeClass('ud_pb',data.quota_pc);
              $('#swap').css('width',swap_pc+'%');
+             $('#swap-progress').attr("title",swap_pc+"% swap used");
              changeClass('swap',swap_pc);
              $('#s-mem').css('width',mem_pc+'%');
+             $('#mem-progress').attr("title",mem_pc+"% memory available");
              changeClass('s-mem',mem_pc,"reverse");
              $('#swap_pbs').text(data.SwapFree+" available" );
              $('#mem-pbs').text(data.MemAvailable+'/'+data.MemTotal);
