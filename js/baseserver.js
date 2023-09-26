@@ -58,7 +58,7 @@
             $('#swap-free').text(data.SwapFree); 
             mem_pc = parseFloat(data.MemAvailable) * 100 / parseFloat(data.MemTotal);
             mem_pc = mem_pc.toFixed(2);
-            swap_pc = (parseFloat(data.SwapTotal_raw) - parseFloat(data.SwapFree_raw)) /parseFloat(data.SwapTotal_raw) ;
+            swap_pc = ((parseFloat(data.SwapTotal_raw) - parseFloat(data.SwapFree_raw)) /parseFloat(data.SwapTotal_raw))*100 ;
             swap_free = data.SwapFree_raw;
             console.log("swap free "+swap_free);
             console.log("swap total "+data.SwapTotal_raw);
