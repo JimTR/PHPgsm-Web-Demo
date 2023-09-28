@@ -322,14 +322,14 @@ $(document).on("click",".baseserver", function () {
    var clickedBtnID = $(this).attr('id'); 
      //alert(clickedBtnID  ,true);
      linkUrl =  $(this).parent().attr('url');
-     alert (linkUrl,true); 
+     //alert (linkUrl,true); 
    $("#ifrm").attr("height", "70vh");
 	$("#ifrm").height("70vh"); 
 	$("#ifrm").attr("width", "90vw");
 	$("#frame-dialog").css("max-width", "90vw");
 	$("#frame-title").html("API Server "+clickedBtnID);
 	url = "frame.php?frame=base_frame&id="+clickedBtnID+"&url="+linkUrl;
-	alert('url to use ' + url,true,"button click");
+	//alert('url to use ' + url,true,"button click");
 	loadIframe("ifrm", url);
 	$('#user-frame').modal('show');
 });
