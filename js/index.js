@@ -339,3 +339,7 @@ $(document).on("click",".player-link", function () {
    return clickedBtnID;
    
 });
+$("#user-frame").on("hidden.bs.modal", function () {
+    // put your default event here
+    $('#ifrm').removeAttr("inframe");
+});
