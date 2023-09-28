@@ -1,6 +1,6 @@
  function base_servers(url) {
 	 // bring back base_server detail
-	 //console.log("base url "+url);
+	//console.log("base url "+url);
 	  $.ajax({ 
         type: 'POST', 
         url: url, 
@@ -40,10 +40,10 @@
             $('#boot_filesystem').text(data.root_filesystem);
             if (level == 1) {
 				$('#root').removeClass('hidden');
-				$('#user').removeClass('hidden');
+				//$('#user').removeClass('hidden');
 			}
 			else {
-				$('#user').removeClass('hidden');
+				//$('#user').removeClass('hidden');
 				$('#root').addClass('hidden');
 			}	
             $('#boot_mount').text(data.root_mount);
@@ -115,6 +115,8 @@
             $('#nginx').text(data.nginx);
             $('#quota').text(data.quotav);
             $('#postfix').text(data.postfix);
+            $('#root-fs').text(data.root_filesystem);
+            $('#home-fs').text(data.home_filesystem);
             var x =  parseFloat(data.total_size_raw.toFixed(2))/1000000;
              //var quota_pc = x* (100/parseFloat(data.quota));
              // game graph
@@ -135,6 +137,15 @@
              $('#swap').css('width',swap_pc+'%');
              $('#swap-progress').attr("title",swap_pc+"% swap used");
              changeClass('swap',swap_pc);
+             $('#quota-use').css('width',data.quota_pc+"%");
+              $('#quota-pbs').width($('#quota-progress').width());
+              quotaText = $.trim(data.quota_used)+"/"+data.quota+" - "+data.quota_pc+'% used';
+             $("#quota-pbs").text(quotaText);
+             changeClass('quota-use',data.quota_pc);
+             $('#root-use').css('width',data.root_pc);
+             changeClass('root-use',parseInt(data.root_pc));
+             rootText = $.trim(data.root_used)+"/"+data.root_size+" - "+data.root_pc+' used';
+             $("#root-pbs").text(rootText);
              $('#s-mem').css('width',mem_pc+'%');
              $('#mem-progress').attr("title",mem_pc+"% memory available");
              changeClass('s-mem',mem_pc,"reverse");

@@ -85,7 +85,7 @@ function online(url){
 					var general = data1[i];
 					//console.log(general);
 					var serverid = general.server_id;
-					href="<a href='baseserver.php?server="+serverid+"'>"+serverid+"</a>";
+					href="<span id='"+serverid+"' class = 'baseserver player-link'>"+serverid+"</span>"; //change this line
 					$("#"+serverid+"-p-name").html(href);
 					$("#"+serverid+"-up-time").html(general.uptime);
 					cpu = general.cpu_info;
@@ -317,16 +317,15 @@ function sclick() {
 	loadIframe("ifrm", url);
 	$('#user-frame').modal('show');
 }
-
-//$(document).on('click', '.p_count', function(){
-//		game = this.id.substr(3);
-//		game = "#"+game;
-//		title = $(game+"-name").text();
-//        $(game+"-secret").slideToggle()
-//    });
-//$("div").click(function() {
-	
-//	if(this.className == 'secret') {
-//		$("#"+this.id).slideToggle();
-//	}
-//});
+$(document).on("click",".baseserver", function () {
+   var clickedBtnID = $(this).attr('id'); 
+   $("#ifrm").attr("height", "70vh");
+	$("#ifrm").height("70vh"); 
+	$("#ifrm").attr("width", "90vw");
+	$("#frame-dialog").css("max-width", "90vw");
+	$("#frame-title").html("API Server "+clickedBtnID);
+	url = "frame.php?frame=base_frame&id="+clickedBtnID;
+	//alert('url to use ' + url,false,"button click");
+	loadIframe("ifrm", url);
+	$('#user-frame').modal('show');
+});
