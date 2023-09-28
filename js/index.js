@@ -87,6 +87,7 @@ function online(url){
 					var serverid = general.server_id;
 					href="<span id='"+serverid+"' class = 'baseserver player-link'>"+serverid+"</span>"; //change this line
 					$("#"+serverid+"-p-name").html(href);
+					$("#"+serverid+"-p-name").attr('url',general.server_url);
 					$("#"+serverid+"-up-time").html(general.uptime);
 					cpu = general.cpu_info;
 					//console.log(cpu);
