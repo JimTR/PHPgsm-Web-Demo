@@ -87,9 +87,15 @@ $('#sendcmd').on('submit', function(e) {
 			return;
 		} 
 		console.log(players);
-		$("#ifrm", parent.document).attr('inframe',$("#text").val());
-		
-        items = '<thead><th  style="width:25%;">User</th><th>Last Log On</th><th>Profile Link</th></thead>';
+		//$("#ifrm", parent.document).attr('inframe',$("#text").val());
+		if (pageInIframe()) {
+			console.log("page is in iframe");
+			items = '<thead><th  style="width:25%;">User</th><th>Location</th><th>Last Log On</th><th>Profile Link</th></thead>';
+		}
+		else {
+			items = '<thead><th  style="width:25%;">User</th><th>Last Log On</th><th>Profile Link</th></thead>';
+		}
+        
 		$.each(players, function(i, item) {
 			if (item.steam_id64 == uni) {return true;}
 			if(item.banned == 1) { 
@@ -99,14 +105,20 @@ $('#sendcmd').on('submit', function(e) {
 			console.log(item.name);
 			enc_name = item.name_c;
 			var last_log = timeConverter(item.last_log_on);
-			items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'" flag="'+item.flag+'"><a href="#">'+enc_name+'</a></td><td>'+last_log+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">'+item.steam_id64+'</a></td></tr>';
+			if (pageInIframe()) {
+				items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'"><a href="#">'+enc_name+'</a></td><td><img src="'+item.flag+'"/></td><td>'+last_log+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">'+item.steam_id64+'</a></td></tr>';
+			}
+			else {
+				items = items+'<tr  id="'+item.steam_id64+'"><td  class="tpButton" '+'ip="'+item.real_ip+'" flag="'+item.flag+'"><a href="#">'+enc_name+'</a></td><td>'+last_log+'</td><td><a href="http://steamcommunity.com/profiles/'+item.steam_id64+'" target="_blank">'+item.steam_id64+'</a></td></tr>';
+			}
 			uni = item.steam_id64;
 			return data;
 		});
 		$("#data_table").html(items);
 		if ($('#user-id').is(':empty')){
 			//alert("user-id is empty",true);
-			
+			console.log("set to "+ $("#text").val()); 
+			$("#ifrm", parent.document).attr('inframe',$("#text").val());
 			$('#ifrm', parent.document).attr("height", "60vh");
 			$("#ifrm", parent.document).height("60vh"); 
 			$('#ifrm', parent.document).attr("width", "100%");
@@ -166,3 +178,6 @@ $('#data_table').on('click','.tpButton', function(event) {
 	//$("#ifrm", parent.document).attr('inframe',url);
 	
 });
+function pageInIframe() {
+  return (window.location !== window.parent.location);
+}
