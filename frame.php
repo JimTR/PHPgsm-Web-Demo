@@ -11,11 +11,14 @@ $template->load($load);
 if ($frame_to_load == "base_frame") {
 	//die("base");
 	//http://localhost:80/ajaxv2.5/api.php?action=all&server=localhost
-	$id = "{$settings['url']}/api.php?action=all&server={$_GET['id']}";
+	$id = "{$_GET['url']}/api.php?action=all&server={$_GET['id']}";
 	$page['id'] =$id;
+	//die($id);
 }
-else{$page['id'] = $_GET['id'];}
-$page['url'] = $settings['url'];
+else{
+	$page['id'] = $_GET['id'];
+	$page['url'] = $settings['url'];
+}
 $template->replace_vars($page);
 $template->publish();
 

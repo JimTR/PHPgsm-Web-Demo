@@ -1,6 +1,7 @@
  function base_servers(url) {
 	 // bring back base_server detail
 	//console.log("base url "+url);
+	
 	  $.ajax({ 
         type: 'POST', 
         url: url, 
