@@ -225,6 +225,7 @@
 		console.log("in frame base frame "+history.length);
 		console.log( "#id#");
 		base_servers("#id#");
+		setInterval( function() { base_servers("#id#"); },5000);
 		//$("#list-bans").click(function(){
 			//$("#ban_history").show();
 		//}); 
