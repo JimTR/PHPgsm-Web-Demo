@@ -339,7 +339,20 @@ $(document).on("click",".player-link", function () {
    return clickedBtnID;
    
 });
+$(document).on("click",".p_count", function () {
+   var clickedBtnID = $(this).attr('id'); 
+    x= clickedBtnID.replace('gol','');
+   clickedBtnID=x+'-secret';
+   //alert("p_count click "+clickedBtnID  ,true);
+   $("#"+clickedBtnID).show();
+   return clickedBtnID;
+   
+});
 $("#user-frame").on("hidden.bs.modal", function () {
     // put your default event here
     $('#ifrm').removeAttr("inframe");
 });
+$(document).on("click",".secret", function () {
+   var clickedBtnID = $(this).attr('id'); 
+   $("#"+clickedBtnID).hide();
+ });

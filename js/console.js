@@ -8,6 +8,7 @@ var server='';
 $(document).ready(function() {
 	pagereferrer = document.referrer;
 	console.log('hit that '+pagereferrer);
+	$('#ifrm').attr("online",1);
 });
 	
 $( "#buttonr" ).click(function() {
@@ -185,7 +186,8 @@ $('#player').on('click','.tpButton', function(event) {
 		$("#steam_id").prop("href", "http://steamcommunity.com/profiles/"+href)
 		$("#steam_id").text(href);
 		$('#ipb').attr('value',ip)
-		$('#steam_idb').attr('value',href)
+		$('#steam_idb').attr('value',href);
+		$('#frame-title', parent.document).html('Details For '+user);
 		$('#user-frame').modal('show');
 	}
 });

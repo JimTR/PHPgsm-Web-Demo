@@ -63,6 +63,10 @@ $time = "1663578036";
         }
 	$page['sbox'] = $sbox;
 	//we need to fill the map select some how  
+	$template->load('templates/subtemplates/user-frame.html');
+	$page['userframe'] = $template->get_template();
+	$template->load('templates/subtemplates/alert.html');
+	$page['alert'] = $template->get_template();
 	$template->load('templates/console.html');
 	$page['display_server'] =$display_server;
 	$template->replace_vars($page);
