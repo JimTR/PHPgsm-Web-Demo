@@ -15,6 +15,12 @@ var data="";
       if($("#ifrm", parent.document).attr('inframe') !== 'undefined') {
 		  console.log("attr set");
 	  }
+	  if($("#ifrm", parent.document).attr('online') == 1) {
+		 console.log("in console mode "+$("#ifrm", parent.document).attr('online'));
+		 $('#sb-ban-tr').show();
+		 $('#sb-mute-tr').show();
+		 
+	  }
 	  
      $('#sendcmd').submit();
      displayData(userID);
@@ -203,10 +209,12 @@ function displayData(userID) {
 			//console.log(head);
 			//console.log("end user data");
 			$('#un').html(user)
+			$('#frame-title', parent.document).html('Details for '+user);
 			//parent.('#un').html(user);
 			$('#un', parent.document).html(user);
 			$('#un-b').html(user)
 			$('#ban-steam-id').val(userID);
+			$("#ban-user-id").val(user);
 			$("#user-frame").attr("src","img/blank.png");
 			$('#results').hide();	
 			$('#searchbox').hide();
@@ -329,7 +337,7 @@ function get_steam_data(user_id) {
 }	
 function shutdiv (open,close) {
 	//console.clear();
-	console.log("shut div open = "+open+" close = "+close);
+	//console.log("shut div open = "+open+" close = "+close);
 	//return
 	//if ( $("#"+).css('display') == 'none' || $(element).css("visibility") == "hidden"){
     // 'element' is hidden
@@ -339,6 +347,7 @@ function shutdiv (open,close) {
 		$('#'+close).hide();
 	}
 	$('#'+open).show();
+	window.scrollTo(0,0);
 }
 $('#quantity').change(function(){
 	//
@@ -376,15 +385,21 @@ $('#check-all').change(function() {
 	if ($( "#check-all" ).prop( "checked") == true ) {
 		console.log("checked");
 		$( "#sys-ban" ).prop( "checked", true );
+		$('#sys-ban').val(true);
 		$( "#sys-ban-ip" ).prop( "checked", true );
-		$( "#sb-ban" ).prop( "checked", true );
-		$( "#sb-mute" ).prop( "checked", true );
+		$('#sys-ban-ip').val(true);
+		if($("#sb-ban").is(":visible")) {
+			$( "#sb-ban" ).prop( "checked", true );
+			$( "#sb-mute" ).prop( "checked", true );
+		}
 	}
 	else{
 		console.log("not checked");
 		$( "#sys-ban" ).prop( "checked", false );
 		$( "#sys-ban-ip" ).prop( "checked", false );
-		$( "#sb-ban" ).prop( "checked", false );
-		$( "#sb-mute" ).prop( "checked", false );
+		if($("#sb-ban").is(":visible")) {
+			$( "#sb-ban" ).prop( "checked", false );
+			$( "#sb-mute" ).prop( "checked", false );
+		}
 	}
 }); 
