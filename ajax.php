@@ -109,7 +109,7 @@ switch ($module) {
 			$player_info[$i]['joined']= $player['first_log_on'];
 			$player_info[$i]['login'] = $player['last_log_on'];
 			$player_info[$i]['logins'] = $player['log_ons'];
-			$player_info[$i]['detail_link'] = "users.php?id={$player['steam_id64']}";
+			$player_info[$i]['detail_link'] = "frame.php?id={$player['steam_id64']}&frame=user_frame";
 			$player_info[$i]['uid'] = $player['steam_id64'];
 			$player_info[$i]['avatar'] = $steam_info['avatar']; 
 			$i++;
