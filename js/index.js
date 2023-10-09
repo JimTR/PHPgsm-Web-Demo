@@ -16,8 +16,10 @@ function index() {
 			$('#game_tot').text(data1.game_tot);
 			$('#player').text(data1.players);
 			$('#run_tot').text(data1.run_tot);
+			if ( data1.logins_today == undefined )  { data1.logins_today = '0';}
 			$('#logins_today').text(data1.logins_today);
 			$('#countries').text(data1.countries);
+			if (data1.country_top_today == null) { data1.country_top_today = "No Logins Today";}
 			$('#country_top_today').text(data1.country_top_today);
 			$('#country_top').text(data1.country_top);
 			$('#pop_country').text(data1.pop_country+" ("+data1.pop_time+")");
