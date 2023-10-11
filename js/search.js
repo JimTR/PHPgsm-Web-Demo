@@ -151,6 +151,7 @@ $( "#go_back" ).click (function() {
 	$('#ifrm', parent.document).attr("height", "26vh");
 	$("#ifrm", parent.document).height("26vh"); 
 	var attr = $("#ifrm", parent.document).attr('inframe');
+	//alert("removing "+attr,true);
 	if(typeof attr !== 'undefined' && attr !== false){$("#ifrm", parent.document). removeAttr('inframe');} 
 	$('#ifrm', parent.document).attr("width", "100%");
 	$("#ifrm", parent.document).width("100%");

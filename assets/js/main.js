@@ -347,7 +347,7 @@ $('#themeswitch').click(function()
 			}
 			location.reload();
 });
-$('#themeswitchp').click(function()
+function themeswitch()
  {
 	  var oldCookieValue = getCookie('phpgsm_theme');
        		
@@ -362,7 +362,7 @@ $('#themeswitchp').click(function()
 				break;
 			}
 			location.reload();
-});
+}
 $('#switch').click(function()
  {
 	 var oldCookieValue = getCookie('phpgsm_colour');
@@ -540,6 +540,21 @@ function closeIFrame(parent){
 		console.log("need to close from parent");
 	} 
      $('#user-frame').modal('hide');
+     function delay(time) {
+  return new Promise(resolve => setTimeout(resolve, time));
+}
+
+async function test() {
+  console.log('start timer');
+  await delay(1000);
+  $('#ifrm').attr("src","");
+     console.log($('#ifrm').attr("src")); 
+  console.log('after 1 second');
+}
+
+test();
+
+     
      //$('#myModal').modal('hide');
 
 }

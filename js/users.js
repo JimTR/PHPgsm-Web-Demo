@@ -117,9 +117,9 @@ $( "#go_back" ).click (function() {
 			 history.back();
 		 }
 		 else{
-			//alert("we got history back",true);
+			alert("we got history back",true);
 			parent.closeIFrame();
-			history.back();
+			//history.back();
 		}
 	}
 });	

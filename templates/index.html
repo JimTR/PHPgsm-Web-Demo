@@ -16,16 +16,14 @@
 	
 		<!--#include#-->
  	</head>
-
 	<body>
 		<!--#header#-->
 		<!--#sidebar#-->
 		<main id="main" class="main">
-			
 			<section class="section dashboard">
 				<div class="loader" id="active-load"></div>
 				<div style="text-align:center;">
-				<ul class="nav nav-tabs nav-tabs-bordered mini" id="borderedTab" role="tablist">
+					<ul class="nav nav-tabs nav-tabs-bordered mini" id="borderedTab" role="tablist">
 						<li class="nav-item" role="presentation">
 							<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true"><i class="fa-solid fa-igloo"></i> <span class="span-show">Home</span></button>
 						</li>
@@ -35,122 +33,191 @@
 						<li class="nav-item" role="presentation">
 							<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-contact" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="bx bx-world"></i> <span class="span-show">Countries</span></button>
 						</li>
-						<li class="nav-item" role="presentation">
+						<li class="nav-item " role="presentation">
 							<button class="nav-link" id="supported-games" data-bs-toggle="tab" data-bs-target="#bordered-games" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="ri-base-station-line"></i> <span class="span-show">Players</span></button>
 						</li>
 						<li class="nav-item" onclick="sclick()" style="cursor:pointer;"><span class="nav-link"><i class="fa-solid fa-magnifying-glass"></i> <span class="span-show">Search</span></span></li>
-						<li class="nav-item"><a class="nav-link" href="stats.php"><i class="fa-solid fa-chart-simple"></i> <span class="span-show">Statistics</span></a></li>
-						<!--<li class="nav-item"><a class="nav-link" href="logout.php"><i class="fa fa-fw fa-sign-out-alt text-danger" aria-hidden="true"></i> Log Out</a></li>-->
+						<li class="nav-item"  style="cursor:pointer">
+							<span  class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" aria-expanded="false">
+								<span class="d-none d-md-block dropdown-toggle ps-2">
+									<i class="fa-solid fa-chart-simple"></i> 
+									<span class="span-show " >Statistics</span>
+								</span>
+							</span><!-- End Profile Iamge Icon -->
+							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile" style="">
+								<li>
+									<span id = "general" section="general"  class="dropdown-item d-flex align-items-center stats">
+										<i class="fa-solid fa-clipboard"></i>
+										<span>General</span>
+									</span>
+								</li>
+								<li>
+									<span id = "user_list" class="dropdown-item d-flex align-items-center stats">
+										<i class="ri-base-station-line"></i>
+										<span>User Lists</span>
+									</span>
+								</li>
+								<li>
+									<span id = "country_list" class="dropdown-item d-flex align-items-center stats" >
+										<i class="bx bx-world"></i>
+										<span>Country Lists</span>
+									</span>
+								</li>
+								<li>
+									<span id = "linked_ip" class="dropdown-item d-flex align-items-center stats" >
+										<i class="fa-solid fa-link"></i>
+										<span>Linked IP's</span>
+									</span>
+								</li>
+								<li>
+									<span id = "ban_list" class="dropdown-item d-flex align-items-center stats">
+										<i class="fa-solid fa-user-slash"></i>
+										<span>User Bans</span>
+									</span>
+								</li>
+							</ul><!-- End Profile Dropdown Items -->
+						</li><!-- End Profile Nav -->
+						
+						<li class="nav-item" style="cursor:pointer"> 
+							<span  class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" aria-expanded="false">
+								<span class="d-none d-md-block dropdown-toggle ps-2">
+									<i class="fa-solid fa-gears"></i>
+									<span class="span-show " >Settings</span>
+								</span>
+							</span><!-- End Profile Iamge Icon -->
+							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+								<li>
+									<span id = "api-settings"  class="dropdown-item d-flex align-items-center stats">
+										<i class="bi bi-server"></i>
+										<span class="span-show">API Settings</span>
+									</span>
+								</li>
+								<li>
+									<span id = "panel-settings"  class="dropdown-item d-flex align-items-center stats">
+										<i class="fa-solid fa-wrench"></i>
+										<span class="span-show" href="#">Panel Settings</span>
+									</span>
+								</li>
+								<li>
+									<span id = "game-settings"  class="dropdown-item d-flex align-items-center stats">
+										<i class="fab fa-steam" aria-hidden="true"></i>
+										<span class="span-show" href="#">Game Settings</span>
+									</span>
+								</li>
+								<li onclick="themeswitch();" >
+									<span class="dropdown-item d-flex align-items-center stats" id="themeswitch" >
+										<i id="theme-icon" class="fa fa-fw fa-sun" aria-hidden="true"></i> 
+										<span class="span-show" >Switch Mode</span>
+									</span>	
+								</li>
+								<!-- <li><a href="#">JavaScript</a></li>-->
+							</ul>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="logout.php"><i class="fa fa-fw fa-sign-out-alt text-danger" aria-hidden="true"></i><span class="span-show "> Log Out</span></a></li>
 					</ul>
-					</div>				
-				<div class="card-body">
-					
-					<div class="tab-content pt-2" id="borderedTabContent">
-						<div class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
-							<section class="section">
-								<div class="row">
-									<div class="col-md-4">
-										<div class="card info-card revenue-card">
-											<div class="card-body">
-												<h5 class="card-title" style="margin-top:3%;">Player Stats</h5>
-												<table class="table">
-													<tr  class="no-border"><td>Online Players</td><td class="map-title" id="player"><//td></tr>
-													<tr  class="no-border"><td>Total Players</td><td class="map-title" id="player_tot"></td></tr>
-													<tr  class="no-border"><td>Logins Today</td><td class="map-title" id="logins_today"></td></tr>		
-													<tr  class="no-border"><td>Total Logins</td><td class="map-title" id="logins_tot"></td></tr>	
-												</table>
-											</div>
+				</div>
+			</div>				
+			<div class="card-body">
+				<div class="tab-content pt-2" id="borderedTabContent">
+					<div class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
+						<section class="section">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="card info-card revenue-card">
+										<div class="card-body">
+											<h5 class="card-title" style="margin-top:3%;">Player Stats</h5>
+											<table class="table">
+												<tr  class="no-border"><td>Online Players</td><td class="map-title" id="player"><//td></tr>
+												<tr  class="no-border"><td>Total Players</td><td class="map-title" id="player_tot"></td></tr>
+												<tr  class="no-border"><td>Logins Today</td><td class="map-title" id="logins_today"></td></tr>		
+												<tr  class="no-border"><td>Total Logins</td><td class="map-title" id="logins_tot"></td></tr>	
+											</table>
 										</div>
-										
 									</div>
-									<div class="col-md-4">
-										<div class="card info-card revenue-card">
-											<div class="card-body">
-												<h5 class="card-title" style="margin-top:3%;">Country Stats</h5>
-												<table class="table">
-													<tr  class="no-border"><td>Total Countries</td><td class="map-title" id="countries"></td></tr>
-													<tr  class="no-border"><td>Top Logins Today</td><td class="map-title" id="country_top_today"></td></tr>
-													<tr  class="no-border"><td>Top Logins Overall</td><td class="map-title" id="country_top"></td></tr>
-													<tr  class="no-border"><td>Most Played Country</td><td class="map-title" id="pop_country"></td></tr>
-												</table>	
-											</div>
-										</div>	
+								</div>
+								<div class="col-md-4">
+									<div class="card info-card revenue-card">
+										<div class="card-body">
+											<h5 class="card-title" style="margin-top:3%;">Country Stats</h5>
+											<table class="table">
+												<tr  class="no-border"><td>Total Countries</td><td class="map-title" id="countries"></td></tr>
+												<tr  class="no-border"><td>Top Logins Today</td><td class="map-title" id="country_top_today"></td></tr>
+												<tr  class="no-border"><td>Top Logins Overall</td><td class="map-title" id="country_top"></td></tr>
+												<tr  class="no-border"><td>Most Played Country</td><td class="map-title" id="pop_country"></td></tr>
+											</table>	
+										</div>
 									</div>	
-									<div class="col-md-4">
-										<div class="card info-card revenue-card">
-											<div class="card-body">
-												<h5 class="card-title" style="margin-top:3%;">Server Stats</h5>
-												<table class="table">
-													<tr  class="no-border"><td>Managed Servers</td><td class="map-title" id="game_tot"></td></tr>
-													<tr  class="no-border"><td>Online Servers</td><td class="map-title" id="run_tot"></td></tr>
-													<tr  class="no-border"><td>Most Popular</td><td class="map-title" id="most-played"></td></tr>
-													<tr  class="no-border"><td>Total In Game Time</td><td class="map-title" id="most-played-time"></td></tr>
-												</table>	
+								</div>	
+								<div class="col-md-4">
+									<div class="card info-card revenue-card">
+										<div class="card-body">
+											<h5 class="card-title" style="margin-top:3%;">Server Stats</h5>
+											<table class="table">
+												<tr  class="no-border"><td>Managed Servers</td><td class="map-title" id="game_tot"></td></tr>
+												<tr  class="no-border"><td>Online Servers</td><td class="map-title" id="run_tot"></td></tr>
+												<tr  class="no-border"><td>Most Popular</td><td class="map-title" id="most-played"></td></tr>
+												<tr  class="no-border"><td>Total In Game Time</td><td class="map-title" id="most-played-time"></td></tr>
+											</table>	
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4" id="parent-server"  >
+									<div class="card info-card revenue-card">
+										<div class="card-body">
+											<h5 class="card-title" style="margin-top:3%;" id="server-desc">API Server</h5>
+											<table class="table table-sml no-border">
+												<!--#server_body#-->
+											</table>	
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4" id="discord-server"  >
+									<div class="card info-card revenue-card">
+										<div class="card-body">
+											<h5 class="card-title" style="margin-top:3%;" id="">Discord Server</h5>
+											<div style="width:100%;text-align:center;">
+												<a href="https://discord.com/channels/191581638629523456/191581638629523456" target=”_blank”  title="Go To Discord">
+													<img id="disco-img" style="width:72%;" src="https://discordapp.com/api/guilds/191581638629523456/widget.png?style=banner3" alt="Discord Banner 2"/>
+												</a>	
 											</div>
 										</div>
 									</div>
-									
-									<div class="col-md-4" id="parent-server"  >
-										<div class="card info-card revenue-card">
-										<div class="card-body">
-										<h5 class="card-title" style="margin-top:3%;" id="server-desc">API Server</h5>
-										<table class="table table-sml no-border">
-											
-											<!--#server_body#-->
-										</table>	
-									</div>
-								</div>
-								</div>
-									
-								<div class="col-md-4" id="discord-server"  >
-										<div class="card info-card revenue-card">
-										<div class="card-body">
-										<h5 class="card-title" style="margin-top:3%;" id="">Discord Server</h5>
-										<div style="width:100%;text-align:center;">
-											<a href="https://discord.com/channels/191581638629523456/191581638629523456" target=”_blank”  title="Go To Discord">
-												<img id="disco-img" style="width:72%;" src="https://discordapp.com/api/guilds/191581638629523456/widget.png?style=banner3" alt="Discord Banner 2"/>
-											</a>	
-										</div>
-										<!--<iframe src="https://discord.com/widget?id=191581638629523456&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>-->
-									</div>
-								</div>
 								</div>
 								<div class="col-md-4" id="active-servers"  >
-										<div class="card info-card revenue-card">
+									<div class="card info-card revenue-card">
 										<div class="card-body">
-										<h5 class="card-title" style="margin-top:3%;">Active Servers</h5>
-										<table class="table table-sml no-border" id="xy">
-											<thead>
-											<th>Server </th>
-											<th style="text-align:center;">Player Count</th>
-											</thead>
-											<tbody id="dormant" style="border-top:0;"><tr><td colspan=2 style="text-align:center;font-weight:bold;">No Active Servers</td></tr></tbody>
-											
-											<!--#active_body#-->
-										</table>	
+											<h5 class="card-title" style="margin-top:3%;">Active Servers</h5>
+											<table class="table table-sml no-border" id="xy">
+												<thead>
+													<th>Server </th>
+													<th style="text-align:center;">Player Count</th>
+												</thead>
+												<tbody id="dormant" style="border-top:0;"><tr><td colspan=2 style="text-align:center;font-weight:bold;">No Active Servers</td></tr></tbody>
+												<!--#active_body#-->
+											</table>	
+										</div>
 									</div>
 								</div>
 							</div>
-								</div>		
-							</div>
-							<div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
-								<div class="row">
-									<!--#gd#-->
-								</div>
-							</div>
-									<div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
-										<div class="row">
-											<!--#country_data#-->  
-										</div>
-									</div>
-									<div class="tab-pane fade" id="bordered-games" role="tabpanel" aria-labelledby="contact-tab">
-										<div class="row">
-												<!--#fpd#-->  
-										
-										</div>
-									</div>
-								</div><!-- End Bordered Tabs -->
-							</div>
+						</section>			
+					</div>
+					<div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
+						<div class="row">
+							<!--#gd#-->
+						</div>
+					</div>
+					<div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
+						<div class="row">
+							<!--#country_data#-->  
+						</div>
+					</div>
+					<div class="tab-pane fade" id="bordered-games" role="tabpanel" aria-labelledby="contact-tab">
+						<div class="row">
+							<!--#fpd#-->  
+						</div>
+					</div>
+				</div><!-- End Bordered Tabs -->
+			</div>
 						</div>
 					</div>
 					<div class="row">

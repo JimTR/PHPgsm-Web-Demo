@@ -313,9 +313,15 @@ $(document).on("click",".uclick", function () {
 	$("#ifrm").height("70vh"); 
 	$("#ifrm").attr("width", "80vw");
 	$("#frame-dialog").css("max-width", "80vw");
+	$("#ifrm")[0].setAttribute("scrolling", "no");
 	loadIframe("ifrm", url);
 	$('#user-frame').modal('show');
 	
+});
+$(document).on("click",".stats", function () {
+	var id = this.id;
+	url = "frame.php?frame=stats_frame&id="+id;
+	console.log(url);
 });	 
 function sclick() {
 	//alert("search clicked",false,"it worked");
@@ -326,6 +332,7 @@ function sclick() {
 	//$("#frame-dialog").max-width ("50vw");
 	$("#frame-title").html("Search");
 	url = "frame.php?frame=search_frame";
+	$("#ifrm")[0].setAttribute("scrolling", "auto");
 	 console.log(url);
 	  //alert ("frame.php?frame=user_frame&id="+id);	
 	  //window.location.href=url;
@@ -337,12 +344,13 @@ $(document).on("click",".baseserver", function () {
      //alert(clickedBtnID  ,true);
      linkUrl =  $(this).parent().attr('url');
      //alert (linkUrl,true); 
-   $("#ifrm").attr("height", "70vh");
-	$("#ifrm").height("70vh"); 
+   $("#ifrm").attr("height", "80vh");
+	$("#ifrm").height("80vh"); 
 	$("#ifrm").attr("width", "90vw");
 	$("#frame-dialog").css("max-width", "90vw");
 	$("#frame-title").html("API Server "+clickedBtnID);
 	url = "frame.php?frame=base_frame&id="+clickedBtnID+"&url="+linkUrl;
+	$("#ifrm")[0].setAttribute("scrolling", "no");
 	//alert('url to use ' + url,true,"button click");
 	loadIframe("ifrm", url);
 	$('#user-frame').modal('show');
@@ -370,3 +378,11 @@ $(document).on("click",".secret", function () {
    var clickedBtnID = $(this).attr('id'); 
    $("#"+clickedBtnID).hide();
  });
+ //$(document).on("click",".btn-close",function (){
+	 //alert($('#ifrm').attr("src"),true); 
+	 //$('#ifrm').attr('src','');
+	 //$('#ifrm').attr('src', '');
+	 //alert("src should be empty",true);
+     //alert($('#ifrm').attr("src"),true); 
+     //closeIFrame();
+// });

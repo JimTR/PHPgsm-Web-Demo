@@ -1,0 +1,274 @@
+<!--
+   stats.html
+   
+   Copyright 2022 Jim Richardson <jim@noideersoftware.co.uk>
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+   
+   
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+		#include#
+	</head>
+	<body>
+		<section class="section">
+			<div class="col-lg12">
+				<div class="card">
+					<div class="card-body">
+						<div class="tab-content pt-2" id="borderedTabContent">
+							<div class="tab-pane fade " id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
+								<div class="row">
+								<div class="col-lg-6" id="stats" >
+									<h5 class="card-title" style="margin-left:1%;">General Statistics</h5>
+									<table class="table" id="general-data" style="display:none;">
+										<tr><td>Total Players</td><td id="total-players" colspan=2></td></tr>
+										<tr><td title="does not include current online players">Total In Game Time</td><td id="total_time" colspan=2></td></tr>
+										<tr><td>Top County</td><td id="country"></td><td id ="country_stat" title="logins / players"></td></tr>
+										<tr><td>Top Time Online</td><td id="time_online"></td><td id="time_online_count"></td></tr>
+										<tr><td>Top Logins</td><td id="most_log_ons"></td><td id="log_on_count"></td></tr>
+										<tr><td>Most logged into Server</td><td id="most_popular"></td><td  id="most_popular_count"></td></tr>
+										<tr><td>Most Played Server</td><td id="most_played"></td><td id="most_played_time"></td></tr>
+										<tr><td>Comms Bans</td><td colspan=2 id="comms_live"></td></tr>
+										<tr><td>Game Bans</td><td colspan=2 id="game_live"></td></tr>
+										<tr><td>Vac Bans</td><td colspan=2 id="g-vac-ban"></td></tr>
+									</table>
+								</div>
+								<div class="col-lg-6" id="game_list" >
+									<h5 class="card-title" style="margin-left:1%;">Server Use</h5>
+									<div class="table-wrapper" style="max-height:400px;">
+										<table class="table" id="game-list">
+											<thead>
+												<th class="table-header">Server Name</th>
+												<th class="table-header">In Game Time</th>
+												<th class="table-header">Players</th>
+											</thead>
+											
+										</table>
+									</div>	
+								</div>	
+							</div>
+							</div>
+							<div class="tab-pane fade show active" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
+								<div class="row">
+									<div class="col-lg-6" id="searchbox">
+										<h5 class="card-title" style="margin-left:1%;">Player Lists</h5>
+										<form id="sendcmd"  action="<!--#url#-->/api.php" method="get">
+											<input type="hidden" id="action" name="action" value="stats">
+											<table class="table">
+												<tr><td style="border-style:none vertical-align:middle;">Start Date</td><td style="border-style:none;"><input style="width:fit-content;" type="date" class="form-control" id="start" name="server"  value="" data-date-format="yyyy-mm-dd" ></td></tr>
+												<tr style="border-style:none;">
+													<td style="vertical-align:middle;border-style:none;">End Date</td>
+													<td style="border-top:0px;border-style:none;"><input style="width:fit-content;" type="date" class="form-control" id="finish" name="filter"  value ="" data-date-format="yyyy-mm-dd"  ></td>
+												</tr>
+												<tr style="border-top:0px;border-style:none;">
+													<td style="border-top:0px;border-style:none;" colspan=2>
+														<span style="margin-left:23%;">
+															<input class ="btn btn-primary" type ="submit" id="send" name="send" value ="Go"/>
+														</span>
+													</td>
+												</tr>
+											</table>	
+										</form>
+										
+										</div>	
+										<div class="col-lg-12" style="display:none;" id="results">
+											<h5 class="card-title" style="margin-left:1%;">Results</h5>
+											<p>Players for the period from <span id="starter"></span> to <span id="finisher"></span>  Total <span  id="count"></span></p> 
+											<div id="u-pages-d" style="display:none;"></div>
+											<div class="table-wrapper" style="max-height:400px;" id="data_table-wrap">
+												<table class="table table-sml"  id="data_table">
+													<thead>
+														<th  style="width:25%;" class="table-header" >User</th>
+														<th  class="table-header" >Location</th>
+														<th class="table-header">Last Log On</th>
+														<th class="table-header">Profile Link</th>
+													</thead>
+													<tbody id="u-tbody"></tbody>	
+												</table>
+											</div>
+										</div>
+									</div> <!-- row ?? -->
+								</div> <!-- after row -->	
+							<div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
+								<div class="row">
+									<div class="col-lg-3">
+										<h5 class="card-title" style="margin-left:1%;">Country Lists</h5>
+										<label for="country" style="padding-right:1%;">Select a Country</label>
+										<select name="country" id="c-select" style="width:65%;"></select>
+										<div id="country-stats" style="display:none;">
+											<table class="table" style="margin-top:5%;">
+												<tbody>
+													<tr><td>Total Players</td><td id="c-rows"></td></tr>
+													<tr><td>In Game</td><td id="online-time"></td></tr>
+													<tr><td>Top Player</td><td id="online-player"></td></tr>
+													<tr><td>Top Player Tiime</td><td id="online-player-time"></td></tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="col-lg-9" style="display:none;" id="country-results">
+										<h5 class="card-title">Results For <span id="country-name"></span></h5>
+										<div id="pages-p" style="display:none;"></div>
+										<div class="table-wrapper" style="max-height:400px;" id="player-results-wrap">
+											<table class="table"  id="player-results">
+												<thead>
+													<th class="table-header">Name</th>
+													<th class="table-header">Location</th>
+													<th class="table-header">Log ins</th>
+													<th class="table-header">Last Login</th>
+													<th class="table-header">Servers Played</th>
+												</thead>
+												<tbody id="country-body"></tbody>
+											</table>
+										</div>	
+										<!--<ul class="pagination" style="margin-top:1%;" id="country-pages"></ul>	-->
+									</div>
+									
+								</div>
+							</div>
+							<div class="tab-pane fade" id="bordered-games" role="tabpanel" aria-labelledby="contact-tab">
+								<div class="row">
+									<div class="col-lg-8" id="dup-div">
+										<h5 class="card-title" style="margin-left:1%;">Linked IP Addresses</h5>
+										<p><dummy class="card-title" id="dup-count"></dummy> accounts share IP addresses</p>
+										<div id="pages-d" style="display:none;"></div>
+										<div class="table-wrapper" id="dup-table-wrap">
+											
+										<table class="table" id="dup-table">
+											<thead>
+												<th class="table-header" style="width:10%;">IP Address</th>
+												<th class="table-header" style="width:29%;">Name</th>
+												<th class="table-header" style="width:24%;padding-left:1.5%;">Last Login</th>
+												<th class="table-header" style="width:10%;padding-left:4.5%;">Logins</th>
+												<th class="table-header" style="text-align:right;padding-right:3%;">Ban Status</th>
+											</thead>
+										</table>
+										</div>
+										
+									</div>
+									<div class="col-lg-4">
+											<div id="key" style="margin-top: 30%;border: 1px solid; padding: 1%;text-align: center;">
+												<table class="table no-border">
+													<th colspan=2>Ban Key</th>
+													<tr><td>Vac Ban</td><td><i class="fa-regular fa-circle-xmark" style="color:red;font-weight: 600;"></i></td></tr>
+													<tr><td>Source Ban</td><td><i class="fa-regular fa-circle-xmark" style="color:#9b4c08;font-weight: 600;"></i></td></tr>
+													<tr><td>System Ban IP</td><td><i class="fa-regular fa-circle-xmark" style="color:blue;font-weight: 600;"></i></td></tr>
+													<tr><td>System Ban ID</td><td><i class="fa-regular fa-circle-xmark" style="color:#325f6e;font-weight: 600;"></i></td></tr>
+												</table>
+											</div>
+											
+										</div>	  
+								</div>
+							</div>
+							<div class="tab-pane fade" id="bordered-bans" role="tabpanel" aria-labelledby="contact-tab">
+								<div class="row">
+									<h5 class="card-title" style="margin-left:1%;">Banned Users</h5>
+									 <label for="bans" style="width:fit-content;">Choose a ban catagory:</label>
+									<select name="bans" id="b-select" style="width:fit-content;">
+										<option value="vac-div">Vac Bans</option>
+										<option value="sb-div">Source Bans</option>
+										<option value="sys-div">System Bans (ip)</option>
+										<option value="sys-id-div">System Bans (id)</option>
+									</select>
+									<div class="col-lg-12" id="vac-div">
+										
+										<p class="card-title">Vac <dummy class="card-title" id="vac-count"></dummy> bans found</p>
+										<div id="v-pages-d" style="display:none;"></div>
+										<div class="table-wrapper" style="position:relative;min-height:67%;"  id="vac-table-wrap">
+											<div id= "vac-loader"  style="position:absolute;top:25%;text-align:center;width:100%;">
+												<div class="loader" style="margin-left:0;margin-top:0;left:44%;top:-14%;"></div>
+												<!--<img style="width:22%;" src="img/sp2.gif"></img>-->
+												<p style="position:absolute;margin-top:16%;width:100%;">Please Wait Loading Data</p>
+											</div>
+										<table class="table" id="vac-table" style="table-layout:fixed;">
+											<thead>
+												<th class="table-header" style="width:45%;">Name</th>
+												<th class="table-header" style="width:30%;">Last Ban</th>
+												<th class="table-header" >Last Login</th>
+											</thead>
+											
+											
+										</table>
+										</div>
+										</div>
+										<div class="col-lg-12" id="sb-div" style="display:none">
+										
+										<p class="card-title">Source <dummy class="card-title" id="sb-count"></dummy> bans found</p>
+										<div id="sb-pages-d" style="display:none;"></div>
+										<div class="table-wrapper" id="sb-table-wrap">
+										<table class="table" id="sb-table">
+											<thead>
+												<th class="table-header" style="width:45%;">Name</th>
+												<th class="table-header" style="width:30%;">Last Ban</th>
+												<th class="table-header" >Last Login</th>
+											</thead>
+										</table>
+										</div>
+										</div>
+										<div class="col-lg-12" id="sys-div" style="display:none">
+										
+										<p class="card-title">System IP <dummy class="card-title" id="sys-count"></dummy> bans found</p>
+										<div id="sys-pages-d" style="display:none;"></div>
+										<div class="table-wrapper" id="sys-table-wrap">
+										<table class="table" id="sys-table">
+											<thead>
+												<th class="table-header" style="width:10%;vertical-align:middle;">IP</th>
+												<th class="table-header" style="width:52%;text-align:center;">User Name (if known)</th>
+												<th class="table-header" style="text-align:center;">Last Login (if known)</th>
+											</thead>
+										</table>
+										</div>
+									</div>	
+									<div class="col-lg-12" id="sys-id-div" style="display:none">
+										
+										<p class="card-title">System ID <dummy class="card-title" id="sys-id-count"></dummy> bans found</p>
+										<div id="sys-id-pages-d" style="display:none;"></div>
+										<div class="table-wrapper" id="sys-id-table-wrap">
+										<table class="table" id="sys-id-table">
+											<thead>
+												<th class="table-header" style="width:10%;vertical-align:middle;">User ID</th>
+												<th class="table-header" style="width:52%;text-align:center;">User Name (if known)</th>
+												<th class="table-header" style="text-align:center;">Last Login (if known)</th>
+											</thead>
+										</table>
+										</div>
+									</div>	    
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-12" style="margin-top:20px;text-align:right;"> 
+							<!-- add second button -->
+							<button  id="full-back" onclick="force_back();" type="button" class="btn btn-success <!--#button_class#-->"><i class="fa-regular fa-hand-point-left"></i> Go Back</button>
+							<button  id="go_back"  style="display:none;" type="button" class="btn btn-success <!--#button_class#-->"><i class="fa-regular fa-hand-point-left"></i> Go Back</button>
+						</div>	
+					</div>
+				</div>
+			</div>
+			<!-- popup -->
+			
+		</section>
+		
+		
+	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <script src = "js/jquery.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script src = "assets/js/main.js"></script>
+  <script src = "js/stats.js"></script>
+  <script>
+	 
+  </script>

@@ -35,8 +35,9 @@
         <div class="col-lg-6">
 			<span id="level" style="display:none">admin</span>
           <div class="card"  style="background: transparent;padding-top: 1%;">
-            <div class="card-body table-wrapper" style="max-height:25vh;">
-             <h5 class="card-title" id="ctype" style="padding: 10px 0 0px 0;">Hardware</span></h5>
+            
+             <h5 class="card-title" id="ctype" style="padding: 1% 1%;">Hardware</span></h5>
+             <div class="card-body table-wrapper" style="max-height:32vh;">
               	<table class="table">
                         <tr><td>Uptime</td><td id="boot"></td></tr>
                         <tr><td>Reboot Required</td><td id="reboot" class=""></td></tr>
@@ -55,42 +56,11 @@
        
 
 
-<div class="card" style="background: transparent;">
-	<div class="card-body">
-		<h5 class="card-title">Memory</h5>
-		<table class="table">
-			<tr style="display:none;"><th style="width:20%;"></th><th style="width:20%;">Total</th><th style="width:20%;">Free</th><th style="width:20%;">Cached</th style="width:20%;"><th>Active</th></tr>
-			<tr style="display:none;">
-				<td style="width:20%;">Memory</td>
-				<td id="memtotal"></td>
-				<td id="memfree"></td>
-				<td  id ="memcached"></td>
-				<td  id ="memactive"></td>
-			</tr>
-			<tr>
-				<td style="width:20%;vertical-align:middle;">Available Memory</td>
-				<td style="padding:1%;" colspan=4>
-					<div id="mem-progress" class="progress" style="height:2rem;">
-						<div   id ="s-mem" class="progress-bar" role="progressbar"  aria-valuenow="" aria-valuemin="0" aria-valuemax="">
-							<div id="mem-pbs" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"></div> 
-						</div>
-				</td>
-			</tr>    
-			<tr>
-				<td style="width:20%;vertical-align:middle;">Used Swap</td>
-				<td style="padding:1%;" colspan=4>
-					<div id="swap-progress" class="progress" style="height:2rem;">
-						<div   id ="swap" class="progress-bar" role="progressbar"  aria-valuenow="" aria-valuemin="0" aria-valuemax="">
-							<div id="swap_pbs" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"></div> 
-						</div>
-				</td>
-			</tr>    
-		</table>
-	</div>
-	</div>
+
 	<div class="card" style="background: transparent;">
-		<div class="card-body table-wrapper" style="max-height:25vh;">
-			<h5 class="card-title" style="padding: 10px 0 0px 0;" >Software</h5>
+		
+			<h5 class="card-title" style="padding: 1% 1%;" >Software</h5>
+			<div class="card-body table-wrapper" style="max-height:32vh;">
 			<table class="table">
 				<tr><td style="width:20%;">Host Name</td><td id="host"></td></tr>
 				<tr><td>Server OS</td><td id="os"></td></tr>
@@ -116,7 +86,7 @@
 <div class="col-lg-6">
 	<div class="card" style="background: transparent;padding-top: 1%;">
 	<div class="card-body">
-		<h5 class="card-title" style="padding: 10px 0 0px 0;">Disk</h5>
+		<h5 class="card-title" style="padding: 1% 1%;">Disk</h5>
 		<table class="table">
 			<tbody id="root" class="hidden" style="border-top:0px;">
 				<tr style="display:none;"><td style="width:31%;"><b>Root File System</b></td><td id="root-fs"></td></tr>
@@ -155,7 +125,39 @@
 		</table>
      </div>
 </div>
-	
+	<div class="card" style="background: transparent;">
+	<div class="card-body">
+		<h5 class="card-title" style="padding: 1% 1%;">Memory</h5>
+		<table class="table">
+			<tr style="display:none;"><th style="width:20%;"></th><th style="width:20%;">Total</th><th style="width:20%;">Free</th><th style="width:20%;">Cached</th style="width:20%;"><th>Active</th></tr>
+			<tr style="display:none;">
+				<td style="width:20%;">Memory</td>
+				<td id="memtotal"></td>
+				<td id="memfree"></td>
+				<td  id ="memcached"></td>
+				<td  id ="memactive"></td>
+			</tr>
+			<tr>
+				<td style="width:20%;vertical-align:middle;">Available Memory</td>
+				<td style="padding:1%;" colspan=4>
+					<div id="mem-progress" class="progress" style="height:2rem;">
+						<div   id ="s-mem" class="progress-bar" role="progressbar"  aria-valuenow="" aria-valuemin="0" aria-valuemax="">
+							<div id="mem-pbs" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"></div> 
+						</div>
+				</td>
+			</tr>    
+			<tr>
+				<td style="width:20%;vertical-align:middle;">Used Swap</td>
+				<td style="padding:1%;" colspan=4>
+					<div id="swap-progress" class="progress" style="height:2rem;">
+						<div   id ="swap" class="progress-bar" role="progressbar"  aria-valuenow="" aria-valuemin="0" aria-valuemax="">
+							<div id="swap_pbs" style="color: rgb(0, 0, 0); font-weight: bold; text-align: center; width: 74% ;float:left;position:absolute;"></div> 
+						</div>
+				</td>
+			</tr>    
+		</table>
+	</div>
+	</div>
 
 	<div class="card" style="background: transparent;">
 		<div class="card-body">
@@ -222,8 +224,8 @@
 	<script src = "assets/js/main.js"></script>
 	<script src = "js/baseserver.js"></script>
 	<script>
-		console.log("in frame base frame "+history.length);
-		console.log( "#id#");
+		//console.log("in frame base frame "+history.length);
+		//console.log( "#id#");
 		base_servers("#id#");
 		setInterval( function() { base_servers("#id#"); },5000);
 		//$("#list-bans").click(function(){

@@ -137,7 +137,8 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 0;
 }
 .dropdown-menu .dropdown-item:hover {
-  background-color: #f6f9ff;
+  background-color: #F6FA00;
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {
