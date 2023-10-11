@@ -21,6 +21,11 @@ if ($frame_to_load == "base_frame") {
 	$page['id'] =$id;
 	//die($id);
 }
+//elseif ($frame_to_load == "stats_frame") {
+	//$id = "{$_GET['url']}/api.php?action=all&server={$_GET['id']}";
+	//die($id);
+//}
+	
 else{
 	$page['id'] = $_GET['id'];
 	$page['url'] = $settings['url'];
