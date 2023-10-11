@@ -321,7 +321,19 @@ $(document).on("click",".uclick", function () {
 $(document).on("click",".stats", function () {
 	var id = this.id;
 	url = "frame.php?frame=stats_frame&id="+id;
-	console.log(url);
+	title = id.replace('-',' ');
+	title= ucwords(title,true) ;
+	$("#ifrm").attr("height", "80vh");
+	$("#ifrm").height("80vh"); 
+	$("#ifrm").attr("width", "90vw");
+	$("#frame-dialog").css("max-width", "90vw");
+	$("#frame-title").html(title);
+	
+	//url = "frame.php?frame=base_frame&id="+clickedBtnID+"&url="+linkUrl;
+	$("#ifrm")[0].setAttribute("scrolling", "no");
+	//alert('url to use ' + url,true,"button click");
+	loadIframe("ifrm", url);
+	$('#user-frame').modal('show');
 });	 
 function sclick() {
 	//alert("search clicked",false,"it worked");
@@ -386,3 +398,10 @@ $(document).on("click",".secret", function () {
      //alert($('#ifrm').attr("src"),true); 
      //closeIFrame();
 // });
+function ucwords(str,force){
+  str=force ? str.toLowerCase() : str;  
+  return str.replace(/(\b)([a-zA-Z])/g,
+           function(firstLetter){
+              return   firstLetter.toUpperCase();
+           });
+}
