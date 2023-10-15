@@ -2,28 +2,16 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta content="width=device-width, initial-scale=1.0" name="viewport">
-	<title><!--#title#--></title>
-	<meta content="Steam Game Controler" name="description">
-	<meta content="" name="keywords">
-	<!-- Favicons -->
-	<link href="img/favicon.png" rel="icon">
-	<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-	<!-- Google Fonts -->
-	<link href="https://fonts.gstatic.com" rel="preconnect">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-	<!--#include#-->
+		<!--#include#-->
 </head>
 
 <body>
-	<!--#header#-->
-	<!--#sidebar#-->
+
 	<main id="main" class="main">
 		<div class="pagetitle">
 			<div style="float:right;width:5%;margin-top:-1%;"><img class="dark-img" style="float:right;width:100%;" src="<!--#logo#-->" /></div>
 			<div id="moddesc" style="float:right;padding-right:2%;padding-top:1%;"><!--#moddesc#--></div>
-			<h1 style="margin-top:2%;">Game Server Information</h1>
+			<!--<h1 style="margin-top:2%;">Game Server Information</h1>-->
 		</div>
 		
 		<section class="section">
@@ -223,9 +211,6 @@
      
            
   </main><!-- End #main -->
-	#userframe#
-	#alert#
- <!--#footer#-->
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
@@ -268,6 +253,7 @@
 		fetchlog(port,id,url);
 		setInterval(fetchlog, 2000);
 		players(port,id,url);
+		//setInterval(players, 7000);
 		get_game(url,server,id);
 		setInterval(get_game,4000);
 		width = $(window).width();
