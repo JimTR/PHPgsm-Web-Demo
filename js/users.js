@@ -96,6 +96,7 @@ $( "#go_back" ).click (function() {
 		console.log("go back");
 		$("#user-frame").attr("src","img/blank.png");
 		$("#user-avatar").attr("src","img/blank.png");
+		window.parent.$("#user-avatar").attr("src","");
 		$('#editor').hide();
         $('#searchbox').show();
         $('#results').show();
@@ -121,6 +122,7 @@ $( "#go_back" ).click (function() {
 		else if(typeof mod !== 'undefined' && mod !== false){ 
 				//alert("we got history back in a frame",true);
 				$('#frame-title', parent.document).html(mod);
+				window.parent.$("#user-avatar").hide();
 				history.back();
 		}
 		else {
@@ -309,6 +311,8 @@ function get_steam_data(user_id) {
 				$("#user-frame").show();
 			}
 			$("#user-avatar").attr("src",data.avatar);	
+			window.parent.$("#user-avatar").attr("src",data.avatar);
+			window.parent.$("#user-avatar").show();
 			$('#dta').append('<tr><td>Steam Status</td><td>'+data.status+'</td></tr>');
 			if (data.steam_date !== undefined) {
 				if($.isNumeric(data.steam_date)) {

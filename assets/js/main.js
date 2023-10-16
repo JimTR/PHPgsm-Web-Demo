@@ -548,6 +548,7 @@ function closeIFrame(parent){
 		// $('#user-frame').modal('hide');
 	} 
      $('#user-frame').modal('hide');
+     $("#user-avatar").hide();
      function delay(time) {
   return new Promise(resolve => setTimeout(resolve, time));
 }
