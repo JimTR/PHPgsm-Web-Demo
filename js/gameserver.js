@@ -110,6 +110,23 @@ function get_game() {
     });
 }
 
+$('#sendcmd').on('submit', function(e) {
+	e.preventDefault();
+	console.log( $(this).attr('action'));
+	$.ajax({
+		type: $(this).attr('method'),
+		url: $(this).attr('action'),
+		data: $(this).serialize(),
+		success: function(data) {
+			$('#ajax-response').html(data);
+			$("#ajax-response").show();
+			$('#text').val(""); 
+			$("#send").blur(); 
+			$('#ajax-response').delay(3000).fadeOut('slow');
+		}
+	});
+});
+
 function fetchlog() {
 	rows = 100;
 	cmd = url+'/api.php?action=console&server='+id+'&rows='+rows+'&output=json';

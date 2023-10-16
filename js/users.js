@@ -106,8 +106,9 @@ $( "#go_back" ).click (function() {
 		gdetail="";
 	}
 	else {
-		 var attr = $("#ifrm", parent.document).attr('inframe');
-			if(typeof attr !== 'undefined' && attr !== false){ 
+		 var inframe = $("#ifrm", parent.document).attr('inframe');
+		  var mod = $("#ifrm", parent.document).attr('mod');
+			if(typeof inframe !== 'undefined' && inframe !== false){ 
 			 // drop to results
 			 //alert("back to results",true);
 			 $('#frame-title', parent.document).html('Search');
@@ -116,10 +117,15 @@ $( "#go_back" ).click (function() {
 			 //window.location = $("#ifrm", parent.document).attr("inframe"); 
 			 history.back();
 		 }
-		 else{
-			alert("we got history back",true);
+		
+		else if(typeof mod !== 'undefined' && mod !== false){ 
+				//alert("we got history back in a frame",true);
+				$('#frame-title', parent.document).html(mod);
+				history.back();
+		}
+		else {
+			//alert("straight history back",true);
 			parent.closeIFrame();
-			//history.back();
 		}
 	}
 });	

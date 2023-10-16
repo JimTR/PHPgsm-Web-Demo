@@ -321,11 +321,36 @@ $(document).on("click",".uclick", function () {
 $(document).on("click",".stats", function () {
 	var id = this.id;
 	url = "frame.php?frame=stats_frame&id="+id;
+	switch(id) {
+		case "general":
+			// code block
+			id = "General Statistics";
+			break;
+		case "user-list":
+			id = "User Lists";
+			// code block
+			break;
+		case "country-list":
+			id = "Country Lists";
+			// code block
+			break;
+		case "linked-ip":
+			id = "Linked IP Addresses";
+			// code block
+			break;
+		case "ban-lists":
+			id = "Banned Users";
+			// code block
+			break;			
+		default:
+			// code block
+	}
 	title = id.replace('-',' ');
 	title= ucwords(title,true) ;
 	$("#ifrm").attr("height", "80vh");
 	$("#ifrm").height("80vh"); 
 	$("#ifrm").attr("width", "90vw");
+	$("#ifrm").attr("mod", title);
 	$("#frame-dialog").css("max-width", "90vw");
 	$("#frame-title").html(title);
 	

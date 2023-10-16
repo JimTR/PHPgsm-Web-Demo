@@ -414,14 +414,19 @@ $('body').click(function(e) {
     //rp(x, msgId,v);
   }
   if ($(e.target).hasClass("player-link")) {
-	  //alert($target.attr('id'),true);
+	  //alert("player link target "+$target.attr('id'),true);
 	  id =  $(e.target).attr('id');
+	  $inframe =$(window.parent.document).find("#ifrm");
 	  url = "frame.php?frame=user_frame&id="+id;
-	  //console.log(url);
-	  //alert ("frame.php?frame=user_frame&id="+id);	
-	  //window.location.href=url;
-	loadIframe("ifrm", url);
-	$('#user-frame').modal('show');
+	  console.log(url);
+	  if($inframe.attr("mod") !== undefined) {
+		//alert ("frame.php?frame=user_frame&id="+id,true);
+		$inframe.attr("src",url);
+	}	
+	 else{ 
+		loadIframe("ifrm", url);
+		$('#user-frame').modal('show');
+	}
   }
 });
 function search_table(haystack,needle) {

@@ -498,6 +498,11 @@ $('#switch').click(function()
 	}
 	
  function force_back () {
+	 inmod =$('#ifrm',parent.document).attr('mod');
+	 if (typeof inmod !== 'undefined' && inmod !== false) {
+		 parent.closeIFrame(1);
+		 return;
+	 }
 		 console.log("in gb1 "+history.length);
 		 new_history = history.length;
 		 console.log("start history = "+start_history); 
@@ -538,6 +543,9 @@ function loadIframe(iframeName, url) {
 function closeIFrame(parent){
 	if(parent) {
 		console.log("need to close from parent");
+		alert($("#user-frame", parent.document).attr("aria-hidden"));
+		$("#user-frame", parent.document).modal('hide');
+		// $('#user-frame').modal('hide');
 	} 
      $('#user-frame').modal('hide');
      function delay(time) {
@@ -548,13 +556,14 @@ async function test() {
   console.log('start timer');
   await delay(1000);
   $('#ifrm').attr("src","");
-     console.log($('#ifrm').attr("src")); 
-  console.log('after 1 second');
+  $('#ifrm').attr("mod","");
+	console.log('after 1 second');
 }
 
 test();
 
-     
-     //$('#myModal').modal('hide');
-
 }
+$('iframe').click(function(){
+   Id=$(this).attr('id');
+   alert(Id);
+ });
