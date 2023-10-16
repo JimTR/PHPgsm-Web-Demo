@@ -313,7 +313,7 @@ $(document).on("click",".uclick", function () {
 	$("#ifrm").height("70vh"); 
 	$("#ifrm").attr("width", "80vw");
 	$("#frame-dialog").css("max-width", "80vw");
-	$("#ifrm")[0].setAttribute("scrolling", "no");
+	$("#ifrm")[0].setAttribute("scrolling", "auto");
 	loadIframe("ifrm", url);
 	$('#user-frame').modal('show');
 	
