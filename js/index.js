@@ -355,7 +355,7 @@ $(document).on("click",".stats", function () {
 	$("#frame-title").html(title);
 	
 	//url = "frame.php?frame=base_frame&id="+clickedBtnID+"&url="+linkUrl;
-	$("#ifrm")[0].setAttribute("scrolling", "no");
+	//$("#ifrm")[0].setAttribute("scrolling", "no");
 	//alert('url to use ' + url,true,"button click");
 	loadIframe("ifrm", url);
 	$('#user-frame').modal('show');
