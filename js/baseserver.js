@@ -205,7 +205,7 @@ if ( $( "#"+id ).length ) {
 }
 
 function percentToRGB(percent,reverse) {
-	//console.log("reverse = "+reverse);
+	console.log("percent = "+percent);
     if (percent >= 100) {
         percent = 99
     }
@@ -240,6 +240,7 @@ function percentToRGB(percent,reverse) {
 			g = Math.floor(255 * ((50 - percent % 50) / 50));
 		}
 		b = 0;
+		//if (percent = 100 ) { r=0;}
 		return "rgb(" + r + "," + g + "," + b + ")";
 	}
 		
