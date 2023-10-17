@@ -205,10 +205,10 @@ if ( $( "#"+id ).length ) {
 }
 
 function percentToRGB(percent,reverse) {
-	console.log("percent = "+percent);
-    if (percent >= 100) {
-        percent = 99
-    }
+	//console.log("percent = "+percent);
+    //if (percent >= 100) {
+      //  percent = 99
+    //}
     var r, g, b;
     if(reverse !== 'reverse') {
 		 if (percent >= 100) {
@@ -229,9 +229,11 @@ function percentToRGB(percent,reverse) {
 	}
 	else {
 		//console.log("we should reverse with "+percent);
-		if (percent > 50) {
-			// green to yellow
+		if (percent >= 50) {
+			//console.log(" green to yellow");
+			
 			r = Math.floor(255 * (percent / 50));
+			console.log("r = "+r+" percent = "+percent);
 			g = 255;
 		} 
 		else {
@@ -240,7 +242,13 @@ function percentToRGB(percent,reverse) {
 			g = Math.floor(255 * ((50 - percent % 50) / 50));
 		}
 		b = 0;
-		//if (percent = 100 ) { r=0;}
+		if (percent > 99 ) {
+			//console.log("percent = "+percent+ " this should trigger at 100%"); 
+			r = 0;
+			 
+			//alert("setting r to zero",true);
+		}
+		//console.log ("r = "+r+" g = "+g+" b = "+b);
 		return "rgb(" + r + "," + g + "," + b + ")";
 	}
 		
