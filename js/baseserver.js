@@ -127,7 +127,7 @@
           
             var gs_width = parseInt(data.server_live_servers) / parseInt(data.server_total_servers)*100;
             $('#gs_pb').css('width',gs_width+'%');
-            changeClass('gs_pb',gs_width);
+            changeClass('gs_pb',gs_width,"reverse");
             // disk used graph
             $("#ud_pb").attr('aria-valuemax',data.quota);
             $("#ud_pbs").text(data.total_size);
