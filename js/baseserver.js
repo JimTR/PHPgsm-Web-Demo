@@ -211,6 +211,9 @@ function percentToRGB(percent,reverse) {
     }
     var r, g, b;
     if(reverse !== 'reverse') {
+		 if (percent >= 100) {
+        percent = 99
+    }
 		if (percent < 50) {
 			// green to yellow
 			r = Math.floor(255 * (percent / 50));
