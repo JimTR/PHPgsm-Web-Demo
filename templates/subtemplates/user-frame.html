@@ -1,9 +1,11 @@
 <div class="modal fade" id="user-frame" tabindex="-1" aria-hidden="true" style="display: none;">
 	<div id="frame-dialog" class="modal-dialog modal-dialog-centered" style="max-width:90%;">
 		<div class="modal-content">
-			<div class="modal-header" >
+			<div class="modal-header frame-header" >
 				<h5 id="frame-title" class="card-title" style="padding:0;font-size:18px; vertical-align:middle;margin-bottom: 0.1rem;">Details For <span style="font-size:18px;" id="un"></span></h5>
-				<img id="user-avatar"  style="width: 3%;margin-left: 1%;position: relative;margin-top: -0.5%;border-radius: 50%;display:none;" src="img/blank.png">
+				<a id = "steam-link" href="#" title = "View On Steam" target="_blank">
+					<img id="user-avatar"  style="width: 24%;margin-left: 5%;position: relative;margin-top: -5%;border-radius: 50%;display:none;" src="img/blank.png">
+				</a>
 				<button type="button" class="btn-close"  onclick="closeIFrame()" aria-label="Close"></button>
 			</div>
 			<div>

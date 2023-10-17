@@ -113,6 +113,7 @@ $( "#go_back" ).click (function() {
 			 // drop to results
 			 //alert("back to results",true);
 			 $('#frame-title', parent.document).html('Search');
+			 $("#user-avatar",parent.document).hide();
 			 //$("#ifrm", parent.document). removeAttr("inframe"); 
 			 //alert($("#ifrm", parent.document).attr("inframe"),true);
 			 //window.location = $("#ifrm", parent.document).attr("inframe"); 
@@ -122,7 +123,7 @@ $( "#go_back" ).click (function() {
 		else if(typeof mod !== 'undefined' && mod !== false){ 
 				//alert("we got history back in a frame",true);
 				$('#frame-title', parent.document).html(mod);
-				window.parent.$("#user-avatar").hide();
+				$("#user-avatar",parent.document).hide();
 				history.back();
 		}
 		else {
@@ -191,9 +192,10 @@ function displayData(userID) {
 			last_log_on =  timeConverter(gen_data.last_log_on);
 			if(typeof data.data.error == 'undefined') {
 				
-				
+				steam_href = 'http://steamcommunity.com/profiles/'+gen_data.steam_id64;
+				$("#steam-link",parent.document).attr("href",steam_href);
 				//$('#dta').append("<tr><td style='width:25%;'>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>");
-				$('#dta').append('<tr><td>Steam ID</td><td><a href=http://steamcommunity.com/profiles/'+gen_data.steam_id64+' target="_blank">'+gen_data.steam_id64+'</a></td></tr>');
+				$('#dta').append('<tr><td>Steam ID</td><td>'+gen_data.steam_id64+'</td></tr>');
 				$('#dta').append('<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;width:11%;"  src="'+gen_data.flag+'"></td></tr>');
 				$('#dta').append("<tr><td>Last Known IP</td><td>"+gen_data.real_ip+"</td></tr>");
 				$('#dta').append("<tr><td>First Log on</td><td>"+first_log_on+"</td></tr>");

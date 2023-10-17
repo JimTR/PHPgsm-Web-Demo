@@ -260,6 +260,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Close Button */
 .btn-close {
   background-size: 25%;
+  filter: invert(1);
+  background-color: #81839d;
 }
 .btn-close:focus {
   outline: 0;
@@ -1377,4 +1379,8 @@ a.invert:hover {
 }
 .pad{
 padding-left: 3%;
+}
+
+.frame-header{
+background-color: #F0F10A;
 }
