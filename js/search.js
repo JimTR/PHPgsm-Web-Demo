@@ -42,12 +42,12 @@ $('#sendcmd').on('submit', function(e) {
     e.preventDefault();
     var items='';
     var url = $(this).attr('action');
-    console.log("this is the url "+url);
+    //console.log("this is the url "+url);
      $("#data_table").html(items);
     var sndData = $('#sendcmd input').serialize();
-    console.log("what's this "+sndData);
+    //console.log("what's this "+sndData);
     returndata = $("#text").val();
-    console.log("full url " +returndata);
+    //console.log("full url " +returndata);
      $.ajax({
     type: $(this).attr('method'),
     url: $(this).attr('action'),
@@ -56,7 +56,7 @@ $('#sendcmd').on('submit', function(e) {
     dataType: "json",
     success:  function(data){
 		var noe = data.data.length;
-		console.log(noe);
+		//console.log(noe);
 		if (typeof(noe) == 'undefined') {
 			$('#results').hide();
 			//$('#error_action').text('Invalid Search');
@@ -68,7 +68,7 @@ $('#sendcmd').on('submit', function(e) {
 		}
         var uni= '';
         players = data.data;
-        console.log("player length "+players.length);
+        //console.log("player length "+players.length);
         if (players.length == 1) {
 			// just go to it
 			
@@ -102,7 +102,7 @@ $('#sendcmd').on('submit', function(e) {
 				console.log("banned "+item.name);
 				item.name_c = '<span style="text-decoration: line-through;">'+item.name_c+'</span>';
 			}
-			console.log(item.name);
+			//console.log(item.name);
 			enc_name = item.name_c;
 			var last_log = timeConverter(item.last_log_on);
 			if (pageInIframe()) {
@@ -134,7 +134,7 @@ $('#sendcmd').on('submit', function(e) {
  });
  $('#sendcmd').change(function(){
 	selected_value = $("input[name='type']:checked").val();
-	console.log(selected_value);
+	//console.log(selected_value);
 		switch(selected_value) {
 			case 'fuzzy':
 				$("#text").attr('placeholder','Enter User Name');

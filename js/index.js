@@ -85,7 +85,7 @@ function online(url){
 				
 				if( i =='general' ) {
 					var general = data1[i];
-					console.log(general);
+					//console.log(general);
 					var serverid = general.server_id;
 					href="<span id='"+serverid+"' class = 'baseserver player-link'>"+serverid+"</span>"; //change this line
 					$("#"+serverid+"-p-name").html(href);
@@ -309,8 +309,8 @@ $(document).on("click",".uclick", function () {
 	//url = this.attr("url");
 	var id = this.id;
 	url =$("#"+id).attr("url");
-	$("#ifrm").attr("height", "70vh");
-	$("#ifrm").height("70vh"); 
+	$("#ifrm").attr("height", "80vh");
+	$("#ifrm").height("80vh"); 
 	$("#ifrm").attr("width", "80vw");
 	$("#frame-dialog").css("max-width", "80vw");
 	$("#ifrm")[0].setAttribute("scrolling", "auto");

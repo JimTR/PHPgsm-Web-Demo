@@ -49,7 +49,7 @@ setcookie("redirect",$_SERVER['HTTP_REFFERER'],3600,'.');
 //die();
     if(!empty($_POST['username']))
     {
-		print_r($_POST);
+		//print_r($_POST);
 	     //die();
         if($Auth->login($_POST['username'], $_POST['password']))
         {
@@ -60,9 +60,31 @@ setcookie("redirect",$_SERVER['HTTP_REFFERER'],3600,'.');
         }
         else
         {
-			die ('no user name');
-            $Error = "You have entered an incorrect username/password combination.<br> Please try again. ";
-           
+			//die ('no user name');
+			$template->load('templates/subtemplates/footer.html');
+			$page['footer'] = $template->get_template();
+			$template->load('templates/subtemplates/header.html');
+			$page['header'] = $template->get_template();
+            $page['error'] = "display:block";
+            switch($_COOKIE['phpgsm_theme']) {
+			case light:
+				$template->load('templates/subtemplates/light-include.html');
+				$page['include']= $template->get_template();
+				break;
+			case dark:
+				$template->load('templates/subtemplates/dark-include.html');
+                                $page['include']= $template->get_template();
+                                break;
+			default:
+				$template->load('templates/subtemplates/light-include.html');
+                                $page['include']= $template->get_template();
+                                break;
+   		 }
+		//print_r($page);
+		$page['error'] = "display:block;";
+		$template->load('templates/login.html');
+		$template->replace_vars($page);    
+		$template->publish();
            
 	   }
 		
@@ -96,6 +118,7 @@ $page['header'] = $template->get_template();
                                 break;
    		 }
 //print_r($page);
+	$page['error'] = "display:none;";
 	$template->load('templates/login.html');
 	$template->replace_vars($page);    
    

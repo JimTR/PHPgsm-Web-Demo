@@ -1287,7 +1287,7 @@ a.invert:hover {
 }
 
 .dark-cpu {
-  display: none;
+ /* display: none;*/
 }
 
 .panel { 
@@ -1383,4 +1383,7 @@ padding-left: 3%;
 
 .frame-header{
 background-color: #6495ED;
+}
+.darker {
+  background-color: #9da8b3;
 }
