@@ -43,7 +43,7 @@ var wSize = jQuery(window).width();
 //console.log(referrer);
 if(wSize > 400) {
 //console.log(wSize);
-jQuery('body').addClass('toggle-sidebar');
+//jQuery('body').addClass('toggle-sidebar');
 sessionStorage.clear();	
 updateClock();
 setInterval('updateClock()', 1000);
