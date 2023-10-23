@@ -569,6 +569,20 @@ h1, h2, h3, h4, h5, h6 {
     left: -300px;
   }
 }
+@media (max-width: 1199px) {
+  .toggle-sidebar .sidebar { 
+    left: 0;
+  }
+}
+@media (min-width: 1200px) {
+  .toggle-sidebar #main, .toggle-sidebar #footer {
+    margin-left: 0;
+  }
+  .toggle-sidebar .sidebar {
+    left: 0px;
+  }
+}
+
 .sidebar-nav .nav-link.collapsed {
  color: #cccccc;
  /* background: #fff;*/ 
