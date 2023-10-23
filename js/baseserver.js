@@ -79,6 +79,7 @@
             changeforeground('load_1',parseInt(data.load_1_min_pc));
 			changeforeground('load_10',parseInt(data.load_10_min_pc));
 			changeforeground('load_15',parseInt(data.load_15_min_pc));
+			$('#load-outer').show();
             if (data.hypervisor_vendor !==undefined){
 				//console.log(data.hypervisor_vendor);
 				$('#ctype').text(data.hypervisor_vendor);

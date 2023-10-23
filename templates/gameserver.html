@@ -51,19 +51,20 @@
 						</table>
 						<hr style="height:0px;margin-top:-1px;"/>
 						<!--<h5 class="card-title" style="padding:0">Controls</h5>-->
+						<div class=" table-wrapper">
 						<table>
 							<tr style="border-bottom: 12px solid transparent;">
-								<td class="hidden pad_right"   id="stop_server"><button id="stop_serverd" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> Stop</button></td>
-								<td class="hidden pad_right"   id="start_server"><button class="btn btn-success"  onclick="start_server()"><i class="far fa-play-circle"></i> Start</button></td>
-								<td class="hidden pad_right"   id="restart_server"><button class="btn btn-warning" onclick="restart_server()"><i class="ri-restart-line"></i> Restart</button></td>
-								<td class="hidden pad_right"   id="join_server"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->">Join</a></button></td>
-								<td class="hidden pad_right"   id="cvar"><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> C Vars</button></td>
-								<td class="hidden pad_right"   id="console1"><a class="btn btn-primary" href="console.php?server=<!--#bserver#-->"><i class="bx bxs-terminal"></i> Console</a></td>
-								<td id="settings"  class="pad_right"><a class="btn btn-primary" href="settings.php?id=<!--#bserver#-->"><i class="ri-edit-2-line"> Settings</button></td>
-								<td class="pad_right"><button onclick="force_back();" type="button" class="btn btn-success"><i class="fa-regular fa-hand-point-left"></i> Go Back</button></td>
+								<td class="hidden pad_right"   id="stop_server"><button id="stop_serverd" title="Stop Server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> <span class="span-show">Stop</span></button></td>
+								<td class="hidden pad_right"   id="start_server"><button class="btn btn-success"  onclick="start_server()"><i class="far fa-play-circle"></i> <span class="span-show">Start</span></button></td>
+								<td class="hidden pad_right"   id="restart_server"><button class="btn btn-warning" onclick="restart_server()"><i class="ri-restart-line"></i> <span class="span-show">Restart</span></button></td>
+								<td class="hidden pad_right"   id="join_server"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->"><span class="span-show">Join</span></a></button></td>
+								<td class="hidden pad_right"   id="cvar"><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> <span class="span-show">C Vars</span></button></td>
+								<td class="hidden pad_right"   id="console1"><a class="btn btn-primary" href="console.php?server=<!--#bserver#-->"><i class="bx bxs-terminal"></i> <span class="span-show">Console</span></a></td>
+								<td id="settings"  class="pad_right"><a class="btn btn-primary" href="settings.php?id=<!--#bserver#-->"><i class="ri-edit-2-line"> <span class="span-show">Settings</span></button></td>
+								<td class="pad_right"><button onclick="force_back();" type="button" class="btn btn-success"><i class="fa-regular fa-hand-point-left"></i> <span class="span-show">Go Back</span></button></td>
 							</tr>
 						</table>
-						
+						</div>
 						<h5 class="card-title" id="showlog" style="cursor:pointer;padding:0;">Send Command</h5>
 						<div id ="log"  class="gameserver_log gameserver-cmd"></div>
 						<div style="width:100%;">

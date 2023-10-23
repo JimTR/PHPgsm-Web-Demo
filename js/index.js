@@ -320,7 +320,8 @@ $(document).on("click",".uclick", function () {
 });
 $(document).on("click",".stats", function () {
 	var id = this.id;
-	url = "frame.php?frame=stats_frame&id="+id;
+	if (isMobile()){url = "baseserver.php?server="+id;}
+	else {url = "frame.php?frame=stats_frame&id="+id;}
 	switch(id) {
 		case "general":
 			// code block
@@ -386,11 +387,17 @@ $(document).on("click",".baseserver", function () {
 	$("#ifrm").attr("width", "90vw");
 	$("#frame-dialog").css("max-width", "90vw");
 	$("#frame-title").html("API Server "+clickedBtnID);
-	url = "frame.php?frame=base_frame&id="+clickedBtnID+"&url="+linkUrl;
-	$("#ifrm")[0].setAttribute("scrolling", "no");
-	//alert('url to use ' + url,true,"button click");
-	loadIframe("ifrm", url);
-	$('#user-frame').modal('show');
+	if (isMobile()){ 
+		url= "baseserver.php?server="+clickedBtnID;
+		 window.location = url;
+	}
+	else {
+		url = "frame.php?frame=base_frame&id="+clickedBtnID+"&url="+linkUrl;
+		$("#ifrm")[0].setAttribute("scrolling", "no");
+		//alert('url to use ' + url,true,"button click");
+		loadIframe("ifrm", url);
+		$('#user-frame').modal('show');
+	}
 });
 $(document).on("click",".player-link", function () {
    var clickedBtnID = $(this).parent().attr('url'); 

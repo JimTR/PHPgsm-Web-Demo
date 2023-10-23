@@ -22,7 +22,7 @@
 		<main id="main" class="main">
 			<section class="section dashboard">
 				<div class="loader" id="active-load"></div>
-				<div style="text-align:center;">
+				<div  class="span-show" style="text-align:center;">
 					<ul class="nav nav-tabs nav-tabs-bordered mini" id="borderedTab" role="tablist">
 						<li class="nav-item" role="presentation">
 							<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true"><i class="fa-solid fa-igloo"></i> <span class="span-show">Home</span></button>
@@ -39,7 +39,7 @@
 						<li class="nav-item" onclick="sclick()" style="cursor:pointer;"><span class="nav-link"><i class="fa-solid fa-magnifying-glass"></i> <span class="span-show">Search</span></span></li>
 						<li class="nav-item"  style="cursor:pointer">
 							<span  class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" aria-expanded="false">
-								<span class="d-none d-md-block dropdown-toggle ps-2">
+								<span class="d-md-block dropdown-toggle ps-2">
 									<i class="fa-solid fa-chart-simple"></i> 
 									<span class="span-show " >Statistics</span>
 								</span>
@@ -80,7 +80,7 @@
 						
 						<li class="nav-item" style="cursor:pointer"> 
 							<span  class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" aria-expanded="false">
-								<span class="d-none d-md-block dropdown-toggle ps-2">
+								<span class="d-md-block dropdown-toggle ps-2">
 									<i class="fa-solid fa-gears"></i>
 									<span class="span-show " >Settings</span>
 								</span>
@@ -89,31 +89,31 @@
 								<li>
 									<span id = "api-settings"  class="dropdown-item d-flex align-items-center stats">
 										<i class="bi bi-server"></i>
-										<span class="span-show">API Settings</span>
+										<span>API Settings</span>
 									</span>
 								</li>
 								<li>
 									<span id = "panel-settings"  class="dropdown-item d-flex align-items-center stats">
 										<i class="fa-solid fa-wrench"></i>
-										<span class="span-show" href="#">Panel Settings</span>
+										<span href="#">Panel Settings</span>
 									</span>
 								</li>
 								<li>
 									<span id = "game-settings"  class="dropdown-item d-flex align-items-center stats">
 										<i class="fab fa-steam" aria-hidden="true"></i>
-										<span class="span-show" href="#">Game Settings</span>
+										<span  href="#">Game Settings</span>
 									</span>
 								</li>
 								<li onclick="themeswitch();" >
 									<span class="dropdown-item d-flex align-items-center stats" id="themeswitch" >
 										<i id="theme-icon" class="fa fa-fw fa-sun" aria-hidden="true"></i> 
-										<span class="span-show" >Switch Mode</span>
+										<span>Switch Mode</span>
 									</span>	
 								</li>
 								<!-- <li><a href="#">JavaScript</a></li>-->
 							</ul>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="logout.php"><i class="fa fa-fw fa-sign-out-alt text-danger" aria-hidden="true"></i><span class="span-show "> Log Out</span></a></li>
+						<li class="nav-item span-show"><a class="nav-link" href="logout.php"><i class="fa fa-fw fa-sign-out-alt text-danger" aria-hidden="true"></i><span class="span-show "> Log Out</span></a></li>
 					</ul>
 				</div>
 			</div>				
