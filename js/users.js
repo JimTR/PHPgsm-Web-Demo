@@ -323,7 +323,22 @@ function get_steam_data(user_id) {
 			
 			if(data.status == null ) {data.status = "Private Profile";}
 			if (data.profile_state == "" || data.profile_state == null) {data.status ="Profile Not Set Up";}
-			$('#dta').append('<tr><td>Steam Status</td><td>'+data.status+'</td></tr>');
+			if (data.profile_state == null) {data.profile_state='';}
+			switch (data.profile_state) {
+				case null:
+					data.profile_state="";
+				break;
+				case "friendsonly":
+					data.profile_state =" (Friends Only)";
+					break;
+				case "public":
+					data.profile_state =" (Public)";
+					break;
+				case "private":
+					data.profile_state=" (Private)";
+					break;	
+			}
+			$('#dta').append('<tr><td>Steam Status</td><td>'+data.status+data.profile_state+'</td></tr>');
 			if (data.steam_date !== undefined) {
 				if($.isNumeric(data.steam_date)) {
 					console.log("date is a number");
