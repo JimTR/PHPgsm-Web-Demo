@@ -321,7 +321,7 @@ function get_steam_data(user_id) {
 			window.parent.$("#user-avatar").attr("src",data.avatar);
 			window.parent.$("#user-avatar").show();
 			
-			if(data.status == null) {data.status = "Private Profile";}
+			if(data.status == null ) {data.status = "Private Profile";}
 			if (data.profile_state == "" || data.profile_state == null) {data.status ="Profile Not Set Up";}
 			$('#dta').append('<tr><td>Steam Status</td><td>'+data.status+'</td></tr>');
 			if (data.steam_date !== undefined) {
@@ -330,7 +330,7 @@ function get_steam_data(user_id) {
 					data.steam_date =timeConverter(data.steam_date);
 					data.steam_date = data.steam_date.replace('00:00', '');
 				}
-				if(data.status !== "Private Profile" && data.status !== "Profile Not Set Up" ) {
+				if(data.status !== "Private Profile" && data.status !== "Profile Not Set Up"  && data.profile_state == "Private") {
 					$('#dta').append('<tr><td>Steam Member Since</td><td>'+data.steam_date+'</td></tr>');
 				}
 			}
