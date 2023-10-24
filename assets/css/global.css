@@ -233,3 +233,9 @@
 .sidebar-nav .nav-link:hover i {
   color: #4154f1;
 }
+
+@media (min-width: 768px) {
+  .mobile-display{
+    display: none;
+  }
+}

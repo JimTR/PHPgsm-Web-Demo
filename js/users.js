@@ -329,13 +329,13 @@ function get_steam_data(user_id) {
 					data.profile_state="";
 				break;
 				case "friendsonly":
-					data.profile_state =" (Friends Only)";
+					data.profile_state =" Profile Friends Only";
 					break;
 				case "public":
-					data.profile_state =" (Public)";
+					data.profile_state =" Profile Public";
 					break;
 				case "private":
-					data.profile_state=" (Private)";
+					data.profile_state=" Profile Private";
 					break;	
 			}
 			$('#dta').append('<tr><td>Steam Status</td><td>'+data.status+data.profile_state+'</td></tr>');

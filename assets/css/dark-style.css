@@ -36,7 +36,7 @@ h1, h2, h3, h4, h5, h6 {
 # Main
 --------------------------------------------------------------*/
 #main {
-  margin-top: 1.8%;
+  margin-top: 38px;
   padding: 20px 30px;
   transition: all 0.3s;
 }
@@ -1399,4 +1399,14 @@ a.invert:hover {
   color: #717ff5;
   text-decoration: none;
   cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .mobile-display{
+    display: none;
+  }
+}
+
+.darker {
+ background: #2F2F2F;
 }

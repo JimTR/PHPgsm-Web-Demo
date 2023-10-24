@@ -20,14 +20,14 @@
 	<!--#header#-->
 	<!--#sidebar#-->
 	<main id="main" class="main">
-		<div class="pagetitle">
+		<div class="span-show" style="margin-top:-3%;">
 			<div style="float:right;width:5%;margin-top:-1%;"><img class="dark-img" style="float:right;width:100%;" src="<!--#logo#-->" /></div>
 			<div id="moddesc" style="float:right;padding-right:2%;padding-top:1%;"><!--#moddesc#--></div>
-			<h1 style="margin-top:2%;">Game Server Information</h1>
+			<h4 style="margin-top:2%;">Game Server Information</h4>
 		</div>
 		
 		<section class="section">
-		<div class="row" style="clear:both;padding-top:1%;">
+		<div class="row" style="clear:both;padding-top:1%">
 			<div class="col-lg-6">
 				<div class="card">
 					<div class="card-body">
@@ -57,7 +57,7 @@
 								<td class="hidden pad_right"   id="stop_server"><button id="stop_serverd" title="Stop Server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> <span class="span-show">Stop</span></button></td>
 								<td class="hidden pad_right"   id="start_server"><button class="btn btn-success"  onclick="start_server()"><i class="far fa-play-circle"></i> <span class="span-show">Start</span></button></td>
 								<td class="hidden pad_right"   id="restart_server"><button class="btn btn-warning" onclick="restart_server()"><i class="ri-restart-line"></i> <span class="span-show">Restart</span></button></td>
-								<td class="hidden pad_right"   id="join_server"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->"><span class="span-show">Join</span></a></button></td>
+								<td class="hidden pad_right span-show"   id="join_server"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->"><span class="span-show">Join</span></a></button></td>
 								<td class="hidden pad_right"   id="cvar"><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> <span class="span-show">C Vars</span></button></td>
 								<td class="hidden pad_right"   id="console1"><a class="btn btn-primary" href="console.php?server=<!--#bserver#-->"><i class="bx bxs-terminal"></i> <span class="span-show">Console</span></a></td>
 								<td id="settings"  class="pad_right"><a class="btn btn-primary" href="settings.php?id=<!--#bserver#-->"><i class="ri-edit-2-line"> <span class="span-show">Settings</span></button></td>
