@@ -322,7 +322,7 @@ function get_steam_data(user_id) {
 			window.parent.$("#user-avatar").show();
 			
 			if(data.status == null) {data.status = "Private Profile";}
-			if (data.status == "undefined") {data.status ="Profile Not set Up";}
+			if (data.profile_state == null) {data.status ="Profile Not set Up";}
 			$('#dta').append('<tr><td>Steam Status</td><td>'+data.status+'</td></tr>');
 			if (data.steam_date !== undefined) {
 				if($.isNumeric(data.steam_date)) {
