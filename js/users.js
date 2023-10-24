@@ -172,6 +172,7 @@ function displayData(userID) {
 				//console.log("found "+noe+" records");
 			}	
 			players = data.data;
+			console.log(players);
 			$.each(players, function(i, item) {
 				if (item.server_name == null) {
 					console.log ("server no longer managed");
@@ -179,7 +180,7 @@ function displayData(userID) {
 				else {
 					//console.log(item.server_name+" is valid");
 					var timestamp =  timeConverter(item.last_play);
-					$('#dta1').append("<tr><td style='width:335px;'>"+item.server_name+"</td><td style='text-align:right;padding-right:7%;'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='padding-left:4%;'>"+item.game_time+"</td></tr>");
+					$('#dta1').append("<tr><td style='width:335px;'>"+item.server_name+"</td><td style='text-align:center'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='padding-left:4%;'>"+item.game_time+"</td></tr>");
 				}	
 				man=item.name_c;
 			});
