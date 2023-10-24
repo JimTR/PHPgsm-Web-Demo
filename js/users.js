@@ -207,7 +207,7 @@ function displayData(userID) {
 				//'some+multi+word+string'.replace(/\+/g, ' ');
 				if (aka != null){
 					aka = aka.replace(/,\s*$/, "");
-					$('#dta').append("<tr><td style='vertical-align:middle;'>Played as</td><td><div class='table-wrapper'>"+aka+"</div></td></tr>");
+					$('#dta').append("<tr><td style='vertical-align:middle;'>Played as</td><td><div class='table-wrapper' style='min-height:20px;max-height:40px;'>"+aka+"</div></td></tr>");
 				}
 			}
 			else {
