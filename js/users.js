@@ -312,10 +312,10 @@ function get_steam_data(user_id) {
 				$("#user-frame").attr("src",data.avatar_frame);
 				$("#user-frame").show();
 			}
-			if (data.avatar == "") {
-				console.log("no avatar");
+			if (!isUrlValid(data.avatar)) {
 				data.avatar = "https://avatars.cloudflare.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg";
 			}
+			
 			$("#user-avatar").attr("src",data.avatar);	
 			
 			window.parent.$("#user-avatar").attr("src",data.avatar);
