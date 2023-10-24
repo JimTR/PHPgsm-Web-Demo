@@ -330,7 +330,7 @@ function get_steam_data(user_id) {
 					data.steam_date =timeConverter(data.steam_date);
 					data.steam_date = data.steam_date.replace('00:00', '');
 				}
-				if(data.status !== "Private Profile" && data.status !== "Profile Not Set Up"  && data.profile_state == "private") {
+				if(data.status !== "Private Profile" && data.status !== "Profile Not Set Up"  && data.profile_state == "public") {
 					$('#dta').append('<tr><td>Steam Member Since</td><td>'+data.steam_date+'</td></tr>');
 				}
 			}
