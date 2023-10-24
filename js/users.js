@@ -207,7 +207,7 @@ function displayData(userID) {
 				//'some+multi+word+string'.replace(/\+/g, ' ');
 				if (aka != null){
 					aka = aka.replace(/,\s*$/, "");
-					$('#dta').append("<tr><td style='vertical-align:middle;'>Played as</td><td>"+aka+"</td></tr>");
+					$('#dta').append("<tr><td style='vertical-align:middle;'>Played as</td><td><div class='table-wrapper'>"+aka+"</div></td></tr>");
 				}
 			}
 			else {
@@ -320,6 +320,9 @@ function get_steam_data(user_id) {
 			
 			window.parent.$("#user-avatar").attr("src",data.avatar);
 			window.parent.$("#user-avatar").show();
+			
+			if(data.status == null) {data.status = "Private Profile";}
+			if (data.status == "undefined") {data.status ="Profile Not set Up";}
 			$('#dta').append('<tr><td>Steam Status</td><td>'+data.status+'</td></tr>');
 			if (data.steam_date !== undefined) {
 				if($.isNumeric(data.steam_date)) {
@@ -327,7 +330,9 @@ function get_steam_data(user_id) {
 					data.steam_date =timeConverter(data.steam_date);
 					data.steam_date = data.steam_date.replace('00:00', '');
 				}
-				$('#dta').append('<tr><td>Steam Member Since</td><td>'+data.steam_date+'</td></tr>');
+				if(data.status !== "Private Profile") {
+					$('#dta').append('<tr><td>Steam Member Since</td><td>'+data.steam_date+'</td></tr>');
+				}
 			}
 			if (data.ban_desc !== undefined) {
 				$('#dta').append('<tr><td>Steam Bans</td><td style="color:red;">'+data.ban_desc+'</td></tr>');
