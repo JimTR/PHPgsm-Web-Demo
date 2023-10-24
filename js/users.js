@@ -306,13 +306,18 @@ function get_steam_data(user_id) {
 		url: url,
 		dataType: "json",
 		success:function(data){
-			//console.log(data);
+			console.log(data);
 			if (data.avatar_frame !== undefined) {
 				console.log("framed image");
 				$("#user-frame").attr("src",data.avatar_frame);
 				$("#user-frame").show();
 			}
+			if (data.avatar == "") {
+				console.log("no avatar");
+				data.avatar = "https://avatars.cloudflare.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg";
+			}
 			$("#user-avatar").attr("src",data.avatar);	
+			
 			window.parent.$("#user-avatar").attr("src",data.avatar);
 			window.parent.$("#user-avatar").show();
 			$('#dta').append('<tr><td>Steam Status</td><td>'+data.status+'</td></tr>');
