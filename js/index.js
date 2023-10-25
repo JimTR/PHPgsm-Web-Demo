@@ -304,6 +304,12 @@ function imgError(image) {
     image.src = "img/unknown.png";
     return true;
 }
+$(document).on("click",".mobile-link", function () {
+	var id = $(this).attr("tab");
+	 activeTab(id);
+	
+	
+});	
 $(document).on("click",".uclick", function () {
 	// user click
 	//url = this.attr("url");

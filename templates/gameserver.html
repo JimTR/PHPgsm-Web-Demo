@@ -20,10 +20,10 @@
 	<!--#header#-->
 	<!--#sidebar#-->
 	<main id="main" class="main">
-		<div class="span-show" style="margin-top:-3%;">
-			<div style="float:right;width:5%;margin-top:-1%;"><img class="dark-img" style="float:right;width:100%;" src="<!--#logo#-->" /></div>
-			<div id="moddesc" style="float:right;padding-right:2%;padding-top:1%;"><!--#moddesc#--></div>
-			<h4 style="margin-top:2%;">Game Server Information</h4>
+		<div class="span-show">
+			<div style="float:right;width:5%;"><img style="float:right;width:53%;" src="#logo#" /></div>
+			<div id="moddesc" style="float:right;padding-top:0.7%;"><!--#moddesc#--></div>
+			<h5>Game Server Information</h5>
 		</div>
 		
 		<section class="section">
@@ -33,9 +33,9 @@
 					<div class="card-body">
 						<h5 class="card-title">Status <span id="status" class="card-title" style="font-size:18px;font-weight: 500;"></span></h5>
 						<table style="width:100%;" class="table">
+							<tr><td>Host Name</td><td id="hostname"></td></tr>
 							<tr><td>Started</td><td id="start"></td></tr>
 							<tr><td>Steam ID</td><td id="steamid"></td></tr>
-							<tr><td>Host Name</td><td id="hostname"></td></tr>
 							<tr><td>Players Online</td><td id="players"></td></tr>
 							<tr><td>Bots Online</td><td id="bots"></td></tr>
 							<tr><td>Max Players</td><td id="maxplayers"></td></tr>
@@ -51,28 +51,26 @@
 						</table>
 						<hr style="height:0px;margin-top:-1px;"/>
 						<!--<h5 class="card-title" style="padding:0">Controls</h5>-->
-						<div class=" table-wrapper">
-						<table>
-							<tr style="border-bottom: 12px solid transparent;">
-								<td class="hidden pad_right"   id="stop_server"><button id="stop_serverd" title="Stop Server" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> <span class="span-show">Stop</span></button></td>
-								<td class="hidden pad_right"   id="start_server"><button class="btn btn-success"  onclick="start_server()"><i class="far fa-play-circle"></i> <span class="span-show">Start</span></button></td>
-								<td class="hidden pad_right"   id="restart_server"><button class="btn btn-warning" onclick="restart_server()"><i class="ri-restart-line"></i> <span class="span-show">Restart</span></button></td>
-								<td class="hidden pad_right span-show"   id="join_server"><button type="button" class="btn btn-primary"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->"><span class="span-show">Join</span></a></button></td>
-								<td class="hidden pad_right"   id="cvar"><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> <span class="span-show">C Vars</span></button></td>
-								<td class="hidden pad_right"   id="console1"><a class="btn btn-primary" href="console.php?server=<!--#bserver#-->"><i class="bx bxs-terminal"></i> <span class="span-show">Console</span></a></td>
-								<td id="settings"  class="pad_right"><a class="btn btn-primary" href="settings.php?id=<!--#bserver#-->"><i class="ri-edit-2-line"> <span class="span-show">Settings</span></button></td>
-								<td class="pad_right"><button onclick="force_back();" type="button" class="btn btn-success"><i class="fa-regular fa-hand-point-left"></i> <span class="span-show">Go Back</span></button></td>
-							</tr>
-						</table>
+						<div class="table-wrapper" style="text-align:center">
+							<div class="btn-group" role="group" aria-label="Basic example">
+								<button class="hidden btn btn-danger"  id="stop_server" type="button" data-bs-toggle="modal" data-bs-target="#quit_game"><i class="bi bi-exclamation-octagon"></i> <span class="span-show">Stop</span></button>
+								<button class="hidden btn btn-success"  id="start_server" type="button" onclick="start_server()"><i class="far fa-play-circle"></i> <span class="span-show">Start</span></button>
+								<button class="hidden btn btn-warning" id="restart_server" type="button" onclick="restart_server()"><i class="ri-restart-line"></i> <span class="span-show">Restart</span></button>
+								<button class="hidden btn btn-secondary" id="join_server" type="button"><i class="fa fa-gamepad"></i> <a style="color:#fff;" href="<!--#join_link#-->"><span class="span-show">Join</span></a></button>
+								<button class="hidden btn btn-info" id="cvar" type="button" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"><i class="ri-booklet-line"></i> <span class="span-show">C Vars</span></button>
+								<button class="hidden btn btn-success" id="console1" style="background-color:purple;border-color:purple;"><a style="color:#ffffff;" href="console.php?server=#bserver#"><i class="bx bxs-terminal"></i> <span class="span-show">Console</span></a></button>
+								<button class="btn btn-primary" type="button"><a style="color:#ffffff;" href="settings.php?id=#bserver#"><i class="ri-edit-2-line"></i> <span class="span-show">Settings</span></a></button>
+								<button onclick="force_back();" type="button" class="btn btn-success"><i class="fa-regular fa-hand-point-left"></i> <span class="span-show">Go Back</span></button>
+							</div>                           
 						</div>
 						<h5 class="card-title" id="showlog" style="cursor:pointer;padding:0;">Send Command</h5>
 						<div id ="log"  class="gameserver_log gameserver-cmd"></div>
 						<div style="width:100%;">
-							<form id="sendcmd"  style ="width:100%;float:left;padding-top:2%;" action="<!--#url#-->/api.php" method="get">
+							<form id="sendcmd"  style ="width:100%;float:left;padding-top:2%;" action="#url#/api.php" method="get">
 								<div class="input-group">
 									<input type="text" class="form-control" placeholder="Enter Server Command" name="text" id="text">
 									<input type="hidden" id="action" name="action" value="exe_tmux">
-									<input type="hidden" id="server" name="server" value="<!--#host_name#-->">
+									<input type="hidden" id="server" name="server" value="#host_name#">
 									<input type="hidden" id="cmd" name="cmd" value="c">
 									<input type="hidden" id="key" name="key" value="{$key}">
 									<input  type="submit" id="send"  class="hidden" value="do this">

@@ -1,6 +1,12 @@
  	var gdetail='';
  	$(document).ready(function() {
 		var pager_pos= 0;
+		var now = new Date();
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+		var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+		$('#start').val(today);
+		$("#finish").val(today);
 		general();
 		sb_ban();
 		sys_ban();
