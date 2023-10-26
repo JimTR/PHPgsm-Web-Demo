@@ -11,7 +11,7 @@ var data="";
      value = "id";
      $("input[name=type][value=" + value + "]").prop('checked', true);
      $('#text').val(userID);
-      //alert($("#ifrm", parent.document).attr('inframe'),true);
+     $("#ifrm", parent.document).css('height',"80vh");
       if($("#ifrm", parent.document).attr('inframe') !== 'undefined') {
 		  console.log("attr set");
 	  }
