@@ -12,16 +12,41 @@
 		sys_ban();
 		dup_page();
 		vac_ban();
+		return_data = $("#ifrm",parent.document).attr("return-to");
+		current_mod = $("#ifrm",parent.document).attr("mod");
+		console.log("current mod = "+current_mod);
+		if(typeof return_data !== "undefined" && return_data !=="" && current_mod =="User Lists" ) {
+			console.log("returning to "+return_data);
+			$("#frame-dialog",parent.document).css("maxWidth","40vw");
+			$("#ifrm", parent.document).css("height","65vh");
+			$( "#sendcmd" ).trigger( "submit" )
+		}
+		else {
+			console.log("mangle iframe ?");
+			if(current_mod == "User Lists") {
+				$("#frame-dialog",parent.document).css("maxWidth","40vw");
+				$("#ifrm", parent.document).css("height","27vh");
+			}
+		}
 	});
 	
 	$('#sendcmd').on('submit', function(e) {
 		e.preventDefault();
+		return_data = $("#ifrm",parent.document).attr("return-to");
+		if(typeof return_data !== "undefined" && return_data !=="") {
+			//console.log("returning to "+return_data);
+			sndData = return_data;
+		}
+		else {
+			var sndData = $('#sendcmd input').serialize();
+		}
 		var items='';
 		var url = $(this).attr('action');
 		$("#u-tbody").empty();
-		var sndData = $('#sendcmd input').serialize();
+		//var sndData = $('#sendcmd input').serialize();
 		//console.log(url)
 		//console.log(sndData);
+		//$("#ifrm",parent.document).attr("return",sndData);
 		$.ajax({
 			type: $(this).attr('method'),
 			url: url,
@@ -40,6 +65,8 @@
 					$('#count').html(data.count);
 					$('#starter').html(data.start);
 					$('#finisher').html(data.finish);
+					$("#ifrm",parent.document).attr("return-to",sndData);
+					$("#ifrm", parent.document).css("height","65vh");
 					player = data.results;
 					
 					$.each(player, function(i, item) {
@@ -87,6 +114,8 @@ $( "#go_back" ).click (function() {
 	$("#u-tbody").empty();
 	$("#gen").empty();
 	$("#go_back").hide();
+	$("#ifrm",parent.document).attr("return-to","");
+	$("#ifrm", parent.document).css("height","27vh");
 	$("#full-back").show();
 	gendetail="";
 	gdetail="";
