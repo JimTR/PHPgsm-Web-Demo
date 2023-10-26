@@ -570,6 +570,10 @@ async function test() {
   await delay(1000);
   $('#ifrm').attr("src","");
   $('#ifrm').attr("mod","");
+  $("#steam-link").hide();
+  $("#steam-link").attr("href","#");
+  $("#user-avatar").attr("src","img/blank.png");
+  $("#ifrm").attr("return-to","");
 	console.log('after 1 second');
 }
 
