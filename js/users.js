@@ -113,15 +113,16 @@ $( "#go_back" ).click (function() {
 			 // drop to results
 			 //alert("back to results",true);
 			 $('#frame-title', parent.document).html('Search');
-			 $("#user-avatar",parent.document).hide();
-			 //$("#ifrm", parent.document). removeAttr("inframe"); 
-			 //alert($("#ifrm", parent.document).attr("inframe"),true);
-			 //window.location = $("#ifrm", parent.document).attr("inframe"); 
+			 $("#steam-link",parent.document).hide();
+			 $("#user-avatar",parent.document).attr("src","img/blank.png");
 			 history.back();
 		 }
 		
-		else if(typeof mod !== 'undefined' && mod !== false){ 
-				//alert("we got history back in a frame",true);
+		else if(typeof mod !== 'undefined' && mod !== false){
+				if(mod =="") {
+					parent.closeIFrame();
+				}
+				//alert("we got history back in a frame mod ="+mod,true);
 				$('#frame-title', parent.document).html(mod);
 				$("#user-avatar",parent.document).hide();
 				history.back();
@@ -149,6 +150,7 @@ $('#sendcmd').change(function(){
 
 function displayData(userID) {
 	//console.clear();
+	$("#frame-dialog",parent.document).css("maxWidth","80vw");
 	var url = $('#sendcmd').attr('action')+"?action=search&type=id&text="+userID;
 	var user = ''; // $("#"+userID).find("td:first").text();
 	$("#searchbox").hide();
@@ -195,6 +197,7 @@ function displayData(userID) {
 				
 				steam_href = 'http://steamcommunity.com/profiles/'+gen_data.steam_id64;
 				$("#steam-link",parent.document).attr("href",steam_href);
+				$("#steam-link",parent.document).show();
 				//$('#dta').append("<tr><td style='width:25%;'>Steam Id</td><td>"+gen_data.steam_id2+"</td></tr>");
 				$('#dta').append('<tr><td>Steam ID</td><td>'+gen_data.steam_id64+'</td></tr>');
 				$('#dta').append('<tr><td>Country</td><td>'+gen_data.country+'<img style="padding-left:5%;width:11%;"  src="'+gen_data.flag+'"></td></tr>');
