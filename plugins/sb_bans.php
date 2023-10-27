@@ -23,10 +23,32 @@
  */ if (!defined('DOC_ROOT')) {
     	define('DOC_ROOT', realpath(dirname(__FILE__) . '/../'));
     }
+if(isset($_GET['debug'])) {
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+	define('debug',true);
+}
+
 include DOC_ROOT.'/inc/master.inc.php';
-$sql = "select * from sb_bans";
-$x = db2->get_results($sql);
-echo json_encode($x);
+
+if(isset($_GET)) {$input = $_GET;}
+else{ $input =$_POST;}
+//print_r($input);
+//die();
+$steam_id = new SteamID($input['steam_id']);
+$input['correct_id'] = $steam_id->RenderSteam2();
+$input['steam_3'] = $steam_id->RenderSteam3();
+$input['uid'] = str_replace("STEAM_1","STEAM_0",$input['correct_id']);
+$input['url'] = "http://localhost/ajaxv2.5/api.php?action=exe_tmux&cmd=c&text=sm_ban {$input['steam_user']} {$input['quantity']} {$input['ban_reason']}&server=fofserver";
+echo "{$input['url']}<br>";
+$ajax = geturl($input['url']);
+echo "$ajax<br>";
+die();
+$input['ajax'] = $ajax; 
+$sql = "select * from players where steam_id64='{$input['steam_id']}'";
+//$input['x'] = db->get_results($sql);
+echo json_encode($input);
 
 //foreach ($x as $y){
 	//print_r($y);
@@ -38,17 +60,3 @@ $ip = $_SERVER['REMOTE_ADDR'];
   //  (UNIX_TIMESTAMP(),?,?,?,?,(UNIX_TIMESTAMP() + ?),?,?,?,?)"
  //   );
 
-echo  '<script src = "../js/jquery.js"></script>';
-echo ' <script src = "../assets/js/main.js"></script>';
-echo '<script>
-	 $(document).ready(function() {
-	 var ip ="'.$ip.'"
-	  x = validateIP(ip);
-	 if (x == true) { console.log(ip+" is valid");}
-	  else { console.log(ip+" is no good");}
-		console.log("system ready for banning cheating bastards");
-		//console.log(ip+" "+x);
-		
-		
-	});
-  </script>';

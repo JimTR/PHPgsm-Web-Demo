@@ -58,13 +58,17 @@
 				</div>
 			</div>
 			<div class="modal-footer "style="display:inline-block">
-					<button id="ban" type="button" class="btn btn-danger" onclick="shutdiv('ban-user','ban_history');"><i class="fa-solid fa-user-slash"></i> Ban</button>
-					<button id="list-bans" style="display:none;" type="button" class="btn btn-warning" onclick="shutdiv('ban_history','ban-user');"><i class="fa-solid fa-file-waveform"></i> Ban History</button>
-					<button  type="button" class="btn btn-success" id="go_back"><i class="fa-regular fa-hand-point-left"></i> Go Back</button><!--onclick="parent.closeIFrame();"-->
+				<div id="cmd_buttons">
+					<div class="btn-group" role="group" aria-label="Basic example">
+						<button id="ban" type="button" class="btn btn-danger" onclick="shutdiv('ban-user','frame-popup');"><i class="fa-solid fa-user-slash"></i> Ban</button>			
+						<button id="list-bans" style="display:none;" type="button" class="btn btn-warning" onclick="shutdiv('ban_history','frame-popup');"><i class="fa-solid fa-file-waveform"></i> Ban History</button>
+						<button id="extend-steam"  type="button" class="btn btn-primary" style="display:none;"  onclick="shutdiv('steam-profile','frame-popup');"><i class="fab fa-steam"></i> Steam Profile</button> <!--style="display:none;"-->
+						<button  type="button" class="btn btn-success" id="go_back"><i class="fa-regular fa-hand-point-left"></i> Go Back</button><!--onclick="parent.closeIFrame();"-->
+					</div>
 				</div>
+			</div>
 		</div>
-	</div>
-	<div class="frame-popup" id="ban_history"  style="top:15vh; width:80%;">
+	<div class="frame-popup" id="ban_history"  style="top:15vh; width:80%;z-index:1000;">
                 <div class="">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -82,8 +86,29 @@
 							<tbody id="ban-body"></tbody>
 						</table>
 				</div>
-			 <div class="modal-footer" style="display:inline-block">
+				<div class="modal-footer" style="display:inline-block">
                       <button class="btn btn-secondary" onclick="$('#ban_history').hide()">Close</button>
+             </div>
+             </div>
+                 </div>
+                 </div>
+				<div class="frame-popup" id="steam-profile"  style="top:2vh; width:80%;z-index:1000;">
+                <div class="">
+                  <div class="modal-content" style="height:90vh;">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Steam Profile <span id="s-user">user ?</span></h5>
+                      <button type="button" class="btn-close"  aria-label="Close" onclick="$('#steam-profile').hide()"></button>
+                    </div>
+                    <div class="modal-body">
+						<div class="table-wrapper">
+						<table id="s-profile" class="table">
+							
+							<tbody id=""></tbody>
+						</table>
+						</div>
+				</div>
+			 <div class="modal-footer" style="display:inline-block">
+                      <button class="btn btn-secondary" onclick="$('#steam-profile').hide()">Close</button>
              </div>
                   </div>
                  </div>

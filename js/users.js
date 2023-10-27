@@ -159,7 +159,7 @@ function displayData(userID) {
 	$("#user-avatar").attr("src","img/blank.png");
 	$("#ban-body").empty();
 	players = data.text;
-	//console.log(url);
+	console.log(url);
 	//console.log(user);
 	$.ajax({
 		type: 'GET',
@@ -328,6 +328,7 @@ function get_steam_data(user_id) {
 			if(data.status == null ) {data.status = "Private Profile";}
 			if (data.profile_state == "" || data.profile_state == null) {data.status ="Profile Not Set Up";}
 			if (data.profile_state == null) {data.profile_state='';}
+			
 			switch (data.profile_state) {
 				case null:
 					data.profile_state="";
@@ -337,6 +338,44 @@ function get_steam_data(user_id) {
 					break;
 				case "public":
 					data.profile_state ="Public";
+					$("#extend-steam").show();
+					try {
+						s_data = $.parseJSON(data.full_data);
+						console.log(s_data);
+						//console.log(s_data.summary);
+						//console.log(s_data.realname);
+						isObject = s_data.realname instanceof Object;
+						if(typeof s_data.steamID != "undefined")  {$("#s-user").text(s_data.steamID);}
+						if(typeof s_data.realname != "undefined" &&  !isObject)  {$("#s-profile").append("<tr><td>Real Name<td><td>"+s_data.realname+"</td></tr>");}
+						else {$("#s-profile").append("<tr><td>Real Name<td><td>Not Disclosed</td></tr>");}
+						isObject = s_data.location instanceof Object;
+						if(typeof s_data.location != "undefined" && !isObject)  {$("#s-profile").append("<tr><td>Location<td><td>"+s_data.location+"</td></tr>");}
+						else {$("#s-profile").append("<tr><td>Location<td><td>Not Disclosed</td></tr>");}
+						if(typeof s_data.summary != "undefined")  {$("#s-profile").append("<tr><td>Summary<td><td>"+s_data.summary+"</td></tr>");}
+						if(typeof s_data.groups != "undefined") { 
+							//console.log("we have groups");
+							$("#s-profile").append("<tr><td colspan=4>User Groups</td></tr>");
+							groups = s_data.groups.group;
+							$.each(groups, function(key,group) {
+								console.log(group.groupName);
+								if(typeof group.groupName != "undefined")  {
+									$("#s-profile").append("<tr><td style='vertical-align:middle;'><img src='"+group.avatarIcon+"'/>&nbsp"+group.groupName+"<td><td>"+group.summary+"</td><td>"+group.memberCount+"</tr>");
+								}
+							});
+							console.log(groups);
+						}
+						else{console.log("no groups");}
+					}
+				catch (e) {
+					alert('cannot load data because: '+e,false,"Data Error");
+					$("#extend-steam").hide();
+				};
+                   
+					//s_data = $.parseJSON(data.full_data);
+					
+					//console.log(s_data.groups);
+					
+					//console.log(s_data.location);
 					break;
 				case "private":
 					data.profile_state="Private";
@@ -385,10 +424,7 @@ function shutdiv (open,close) {
 	//if ( $("#"+).css('display') == 'none' || $(element).css("visibility") == "hidden"){
     // 'element' is hidden
 //}
-	if($("#"+close).is(":visible")) {
-		console.log("window open");
-		$('#'+close).hide();
-	}
+$(".frame-popup").hide();
 	$('#'+open).show();
 	window.scrollTo(0,0);
 }

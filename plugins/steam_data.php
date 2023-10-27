@@ -34,6 +34,7 @@
 	$xml=file_get_contents("https://steamcommunity.com/profiles/$id?xml=1");
 	$xml   = simplexml_load_string($xml,"SimpleXMLElement", LIBXML_NOCDATA);
 	$user = json_decode(json_encode((array) $xml), true);
+	$full_data = db->escape(json_encode((array) $xml));
 	foreach ($user as $k => $v) {
 		if(is_array($v)) {
 			$extra[$k] = $v;
@@ -82,6 +83,8 @@
 			$where['steam_id'] = $user_data['steam_id'];
 			unset($new_data['steam_id']);
 			unset($new_data['name_c']);
+			$new_data['full_data'] = $full_data;
+			//die($full_data);
 			db->update('steam_data',$new_data,$where); 
 			
 			if ($user['onlineState'] == 'in-game') {$new_data['game'] = $user['stateMessage'];}
@@ -139,6 +142,7 @@
 		if(isset($sp['steam_xp'])) {$new_data['steam_xp'] = $sp['steam_xp'];}
 		if(isset($sp['ban_ts'])) {$new_data['last_ban'] = $sp['ban_ts'];}
 		if(isset($sp['steam_ban'])) {$new_data['ban_desc'] = $sp['steam_ban'];}
+		$new_data['full_data'] = $full_data;
 		$in = db->insert('steam_data',$new_data); // now add it
 		if ($user['onlineState'] == 'in-game') {$new_data['game'] = $user['stateMessage'];}
 		else {$new_data['status'] = $user['stateMessage'];}
