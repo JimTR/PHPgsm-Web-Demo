@@ -328,7 +328,8 @@ function get_steam_data(user_id) {
 			if(data.status == null ) {data.status = "Private Profile";}
 			if (data.profile_state == "" || data.profile_state == null) {data.status ="Profile Not Set Up";}
 			if (data.profile_state == null) {data.profile_state='';}
-			console.log("logging full data"+data);
+			console.log("logging full data");
+			consle.log(data);
 			switch (data.profile_state) {
 				case null:
 					data.profile_state="";
