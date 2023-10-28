@@ -85,7 +85,7 @@ function online(url){
 				
 				if( i =='general' ) {
 					var general = data1[i];
-					//console.log(general);
+					console.log(general);
 					var serverid = general.server_id;
 					href="<span id='"+serverid+"' class = 'baseserver player-link'>"+serverid+"</span>"; //change this line
 					$("#"+serverid+"-p-name").html(href);
