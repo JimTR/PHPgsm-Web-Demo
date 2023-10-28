@@ -332,7 +332,7 @@ function get_steam_data(user_id) {
 			console.log("profile set to "+data.profile_state);
 			profile = $.trim(data.profile_state);
 			console.log("profile now "+profile);
-			switch (data.profile_state) {
+			switch (profile) {
 				case null:
 					data.profile_state="";
 				break;
@@ -340,6 +340,7 @@ function get_steam_data(user_id) {
 					data.profile_state ="Friends Only";
 					break;
 				case "public":
+					console.log("Hit public");
 					data.profile_state ="Public";
 					$("#extend-steam").show();
 					try {
