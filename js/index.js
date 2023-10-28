@@ -139,7 +139,7 @@ function online(url){
 					$("td#player_row_"+j).parent().replaceWith(tr);   
 					//console.log(tr);
 				}
-				console.log(data1(i);
+				console.log(data1(i));
 			for (var j in data1[i]) {
 				// we have the individal server
 				if (typeof serverlength === 0) {
