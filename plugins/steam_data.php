@@ -109,7 +109,7 @@
 			unset($user_data['last_update']);
 			unset($user_data['steam_id']);
 			$user_data['steam_date'] = date("d M, Y",$user_data['steam_date']);
-			$user_data['full_data'] = $full_data;
+			//$user_data['full_data'] = $full_data;
 			foreach ($user_data as $k=> $v) {
 				if(is_null($v)) { unset ($user_data[$k]);}
 			}
