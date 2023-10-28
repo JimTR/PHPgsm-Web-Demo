@@ -329,7 +329,7 @@ function get_steam_data(user_id) {
 			if (data.profile_state == "" || data.profile_state == null) {data.status ="Profile Not Set Up";}
 			if (data.profile_state == null) {data.profile_state='';}
 			console.log("logging full data");
-			console.log(data);
+			console.log("profile set to "+data.profile_state);
 			switch (data.profile_state) {
 				case null:
 					data.profile_state="";
