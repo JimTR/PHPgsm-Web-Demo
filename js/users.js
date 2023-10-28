@@ -330,6 +330,8 @@ function get_steam_data(user_id) {
 			if (data.profile_state == null) {data.profile_state='';}
 			console.log("logging full data");
 			console.log("profile set to "+data.profile_state);
+			profile = $.trim(data.profile_state);
+			console.log("profile now "+profile);
 			switch (data.profile_state) {
 				case null:
 					data.profile_state="";
