@@ -139,6 +139,7 @@ function online(url){
 					$("td#player_row_"+j).parent().replaceWith(tr);   
 					//console.log(tr);
 				}
+				console.log(data1(i);
 			for (var j in data1[i]) {
 				// we have the individal server
 				if (typeof serverlength === 0) {
@@ -147,8 +148,8 @@ function online(url){
 				}   
 				var server = data1[i][j]; // got server id
 				var server_id = j;	
-				//if (server.running == 1 ) {
-				//} 
+				if (server.running == 1 ) {
+				} 
 			}
 			//console.log(player_tots);
 			if(typeof player_tots != 'undefined'){
@@ -385,7 +386,7 @@ function sclick() {
 }
 $(document).on("click",".baseserver", function () {
    var clickedBtnID = $(this).attr('id'); 
-     //alert(clickedBtnID  ,true);
+     alert(clickedBtnID  ,true);
      linkUrl =  $(this).parent().attr('url');
      alert (linkUrl,true); 
    $("#ifrm").attr("height", "80vh");
