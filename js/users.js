@@ -304,7 +304,7 @@ function displayData(userID) {
 
 function get_steam_data(user_id) {
 	 var url = "plugins/steam_data.php?id="+user_id;
-	 //console.log("into steam data with "+url);
+	 console.log("into steam data with "+url);
 	 $.ajax({
 		type: 'GET',
 		url: url,
