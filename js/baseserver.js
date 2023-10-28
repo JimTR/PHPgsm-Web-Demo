@@ -8,10 +8,10 @@
         dataType: "json", 
         success: function (data) {
 			var server_id = data.server_id; 
-            console.log(data);
+            //console.log(data);
             //document.cookie = "favorite_food=tripe; SameSite=None; Secure";
             var oldCookieValue = getCookie('phpgsm_theme');
-            console.log(oldCookieValue);
+            //console.log(oldCookieValue);
             if ($('#level').text() == 'admin') {var level = 1;} 
             else { var level = 0;}
             $('#server-id').text(data.server_id);
@@ -63,14 +63,14 @@
             mem_pc = mem_pc.toFixed(2);
             swap_pc = ((parseFloat(data.SwapTotal_raw) - parseFloat(data.SwapFree_raw)) /parseFloat(data.SwapTotal_raw))*100 ;
             swap_free = data.SwapFree_raw;
-            console.log("swap free "+swap_free);
-            console.log("swap total "+data.SwapTotal_raw);
-            console.log ("swap pc before maths "+swap_pc);
+            //console.log("swap free "+swap_free);
+            //console.log("swap total "+data.SwapTotal_raw);
+            //console.log ("swap pc before maths "+swap_pc);
             swap_pc = swap_pc.toFixed(2)
             swap_total = parseFloat(data.SwapTotal_raw);
-            console.log("mem pc "+mem_pc);
-            console.log("swap total "+swap_total);
-            console.log("swap pc "+swap_pc);
+            //console.log("mem pc "+mem_pc);
+            //console.log("swap total "+swap_total);
+            //console.log("swap pc "+swap_pc);
             $('#u_mount').text(data.dir);
             $('#u_size').text(data.quota);
             $('#load_1').text(data.load_1_min_pc);
@@ -98,7 +98,7 @@
             changeClass( 'tmem_pb',tmem);
             //swap graph
             var smem = Math.round(100-(parseInt(data.SwapTotal_raw)/parseInt(data.SwapFree_raw))*100);
-            console.log ("smem = "+smem);
+            //console.log ("smem = "+smem);
             $('#smem_pb').css('width',smem+'%');
             $("#smem_pbs").html('Free ('+data.SwapFree+')');
             $('#smem_pbs').width($('#smem_pb').parent().width());
@@ -198,7 +198,7 @@ if ( $( "#"+id ).length ) {
 		if (classList[i] !== 'progress-bar') {
           $('#'+id).removeClass(classList[i]);
 		}
-		console.log("id = "+id+" reverse = "+reverse);
+		//console.log("id = "+id+" reverse = "+reverse);
 		color = percentToRGB(rate,reverse);
 		$('#'+id).css('background-color',color); 
 	}
@@ -234,7 +234,7 @@ function percentToRGB(percent,reverse) {
 			//console.log(" green to yellow");
 			
 			r = Math.floor(255 * (percent / 50));
-			console.log("r = "+r+" percent = "+percent);
+			//console.log("r = "+r+" percent = "+percent);
 			g = 255;
 		} 
 		else {

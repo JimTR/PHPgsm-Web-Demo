@@ -387,7 +387,7 @@ $(document).on("click",".baseserver", function () {
    var clickedBtnID = $(this).attr('id'); 
      //alert(clickedBtnID  ,true);
      linkUrl =  $(this).parent().attr('url');
-     //alert (linkUrl,true); 
+     alert (linkUrl,true); 
    $("#ifrm").attr("height", "80vh");
 	$("#ifrm").height("80vh"); 
 	$("#ifrm").attr("width", "90vw");
@@ -400,7 +400,7 @@ $(document).on("click",".baseserver", function () {
 	else {
 		url = "frame.php?frame=base_frame&id="+clickedBtnID+"&url="+linkUrl;
 		$("#ifrm")[0].setAttribute("scrolling", "no");
-		//alert('url to use ' + url,true,"button click");
+		alert('url to use ' + url,true,"button click");
 		loadIframe("ifrm", url);
 		$('#user-frame').modal('show');
 	}

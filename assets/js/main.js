@@ -566,7 +566,7 @@ function closeIFrame(parent){
 }
 
 async function test() {
-  console.log('start timer');
+  //console.log('start timer');
   await delay(1000);
   $('#ifrm').attr("src","");
   $('#ifrm').attr("mod","");
@@ -574,7 +574,7 @@ async function test() {
   $("#steam-link").attr("href","#");
   $("#user-avatar").attr("src","img/blank.png");
   $("#ifrm").attr("return-to","");
-	console.log('after 1 second');
+	//console.log('after 1 second');
 }
 
 test();
