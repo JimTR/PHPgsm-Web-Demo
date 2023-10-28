@@ -371,7 +371,7 @@ function get_steam_data(user_id) {
 						else{console.log("no groups");}
 					}
 				catch (e) {
-					alert('cannot load data because: '+e,false,"Data Error");
+					alert('cannot load data because: '+e,true);
 					$("#extend-steam").hide();
 				};
                    
