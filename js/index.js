@@ -147,8 +147,8 @@ function online(url){
 				}   
 				var server = data1[i][j]; // got server id
 				var server_id = j;	
-				if (server.running == 1 ) {
-				} 
+				//if (server.running == 1 ) {
+				//} 
 			}
 			//console.log(player_tots);
 			if(typeof player_tots != 'undefined'){
