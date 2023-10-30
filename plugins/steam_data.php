@@ -34,7 +34,7 @@
 	$xml=file_get_contents("https://steamcommunity.com/profiles/$id?xml=1");
 	$xml   = simplexml_load_string($xml,"SimpleXMLElement", LIBXML_NOCDATA);
 	$user = json_decode(json_encode((array) $xml), true);
-	$full_data = db->escape(json_encode((array) $xml));
+	$full_data = db->escape(json_encode((array) $xml,true));
 	foreach ($user as $k => $v) {
 		if(is_array($v)) {
 			$extra[$k] = $v;
@@ -86,7 +86,7 @@
 			$new_data['full_data'] = $full_data;
 			//die($full_data);
 			db->update('steam_data',$new_data,$where); 
-			
+			$new_data['else'] ="false";
 			if ($user['onlineState'] == 'in-game') {$new_data['game'] = $user['stateMessage'];}
 			else {$new_data['status'] = $user['stateMessage'];}
 			if (isset($server_name ) and $server_name !== false) {$new_data['game'] .=" $server_name"; }
@@ -122,7 +122,9 @@
 			}
 			
 			
-			//print_r($user_data);	
+			//print_r($user_data);
+			$user_data['else'] = "set";	
+			$new_data['full_data'] = $full_data;
 			echo json_encode($user_data);
 			exit;
 		}

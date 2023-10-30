@@ -344,6 +344,7 @@ function get_steam_data(user_id) {
 					data.profile_state ="Public";
 					$("#extend-steam").show();
 					try {
+						console.log(data);
 						s_data = $.parseJSON(data.full_data);
 						console.log(s_data);
 						//console.log(s_data.summary);
@@ -372,7 +373,11 @@ function get_steam_data(user_id) {
 					}
 				catch (e) {
 					alert('cannot load data because: '+e,true);
-					$("#extend-steam").hide();
+					
+					//console.log(data.full_data);
+					//console.log($.parseJSON(JSON.stringify(data.full_data)));
+					//$("#extend-steam").hide();
+					document.location.reload();
 				};
                    
 					//s_data = $.parseJSON(data.full_data);
