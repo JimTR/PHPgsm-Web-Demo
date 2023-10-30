@@ -371,14 +371,13 @@ function get_steam_data(user_id) {
 						}
 						else{console.log("no groups");}
 					}
-				catch (e) {
-					alert('cannot load data because: '+e,true);
-					
-					//console.log(data.full_data);
-					//console.log($.parseJSON(JSON.stringify(data.full_data)));
-					//$("#extend-steam").hide();
-					document.location.reload();
-				};
+					catch (e) {
+						//alert('cannot load data because: '+e,true);
+						//console.log(data.full_data);
+						//console.log($.parseJSON(JSON.stringify(data.full_data)));
+						//$("#extend-steam").hide();
+						document.location.reload();
+					};
                    
 					//s_data = $.parseJSON(data.full_data);
 					
