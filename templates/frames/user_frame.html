@@ -1,8 +1,8 @@
 <head>
 	 <!--#include#-->
 </head>
-<body class="card">
-	<div id="editor" class="col-lg-12 card" style="padding:1%;">
+<body>
+	<div id="editor" class="col-lg-12 card" style="padding:1%;height:100vh;">
 		<div id="user-id" style="display:none;"><!--#id#--></div>
 		<form id="sendcmd" style="display:none;" action="<!--#url#-->/search.php" method="get">
 			<div class="input-group">
@@ -94,20 +94,53 @@
                  </div>
 				<div class="frame-popup" id="steam-profile"  style="top:2vh; width:80%;z-index:1000;">
                 <div class="">
-                  <div class="modal-content" style="height:90vh;">
+                  <div class="modal-content" style="max-height:90vh;">
                     <div class="modal-header">
                       <h5 class="modal-title">Steam Profile <span id="s-user">user ?</span></h5>
                       <button type="button" class="btn-close"  aria-label="Close" onclick="$('#steam-profile').hide()"></button>
                     </div>
                     <div class="modal-body">
-						<div class="table-wrapper">
-						<table id="s-profile" class="table">
+						<div class="">
+						<table id="s-profile" class="table no-border">
 							
 							<tbody id=""></tbody>
 						</table>
+						<div class="accordion" id="accordionExample">
+                <div class="no-border" >
+                  <h2 class="accordion-header" id="group-a">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                      <span class="card-title" style="margin-bottom:0;padding:0;">User Groups</span>
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+                    <div class="accordion-body">
+						<div class="table-wrapper" style="max-height:210px;">
+							<table id="groups" class="table" style="table-layout:fixed;">
+								<thead>
+									<th>Group</th><th style="width:50%;">Description</th><th>Members</th>
+								</thead>
+							</table>
+						</div>	
+                    </div>
+                  </div>
+                </div>
+                <div class="no-border">
+                  <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                       <span class="card-title" style="margin-bottom:0;padding:0;">Recent Activity</span>
+                    </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <strong>This Section </strong> is not populated.
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
 						</div>
 				</div>
-			 <div class="modal-footer" style="display:inline-block">
+			 <div class="modal-footer" style="display:inline-block;border-top:0">
                       <button class="btn btn-secondary" onclick="$('#steam-profile').hide()">Close</button>
              </div>
                   </div>

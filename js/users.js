@@ -12,6 +12,7 @@ var data="";
      $("input[name=type][value=" + value + "]").prop('checked', true);
      $('#text').val(userID);
      $("#ifrm", parent.document).css('height',"80vh");
+     $("iframe",parent.document)[0].setAttribute("scrolling", "no");
       if($("#ifrm", parent.document).attr('inframe') !== 'undefined') {
 		  console.log("attr set");
 	  }
@@ -24,7 +25,7 @@ var data="";
 	  
      $('#sendcmd').submit();
      displayData(userID);
-    
+    //alert ($("body").height(),true)
 	return;
 });
 $( "#bans" ).click(function() {
@@ -115,6 +116,7 @@ $( "#go_back" ).click (function() {
 			 $('#frame-title', parent.document).html('Search');
 			 $("#steam-link",parent.document).hide();
 			 $("#user-avatar",parent.document).attr("src","img/blank.png");
+			  $("iframe",parent.document)[0].setAttribute("scrolling", "yes");
 			 history.back();
 		 }
 		
@@ -351,25 +353,35 @@ function get_steam_data(user_id) {
 						//console.log(s_data.realname);
 						isObject = s_data.realname instanceof Object;
 						if(typeof s_data.steamID != "undefined")  {$("#s-user").text(s_data.steamID);}
-						if(typeof s_data.realname != "undefined" &&  !isObject)  {$("#s-profile").append("<tr><td>Real Name<td><td>"+s_data.realname+"</td></tr>");}
-						else {$("#s-profile").append("<tr><td>Real Name<td><td>Not Disclosed</td></tr>");}
+						if(typeof s_data.realname != "undefined" &&  !isObject)  {$("#s-profile").append("<tr><td style='width:10%;'>Real Name</td><td >"+s_data.realname+"</td></tr>");}
+						else {$("#s-profile").append("<tr><td style='width:10%;'>Real Name</td><td>Not Disclosed</td></tr>");}
 						isObject = s_data.location instanceof Object;
-						if(typeof s_data.location != "undefined" && !isObject)  {$("#s-profile").append("<tr><td>Location<td><td>"+s_data.location+"</td></tr>");}
-						else {$("#s-profile").append("<tr><td>Location<td><td>Not Disclosed</td></tr>");}
-						if(typeof s_data.summary != "undefined")  {$("#s-profile").append("<tr><td>Summary<td><td>"+s_data.summary+"</td></tr>");}
+						if(typeof s_data.location != "undefined" && !isObject)  {$("#s-profile").append("<tr><td>Location</td><td>"+s_data.location+"</td></tr>");}
+						else {$("#s-profile").append("<tr><td>Location</td><td>Not Disclosed</td></tr>");}
+						if(typeof s_data.summary != "undefined")  {$("#s-profile").append("<tr><td>Summary</td><td>"+s_data.summary+"</td></tr>");}
 						if(typeof s_data.groups != "undefined") { 
 							//console.log("we have groups");
-							$("#s-profile").append("<tr><td colspan=4>User Groups</td></tr>");
 							groups = s_data.groups.group;
+							groupCount = 0;
+							//console.log("Group Count = "+groups.length());
 							$.each(groups, function(key,group) {
 								console.log(group.groupName);
 								if(typeof group.groupName != "undefined")  {
-									$("#s-profile").append("<tr><td style='vertical-align:middle;'><img src='"+group.avatarIcon+"'/>&nbsp"+group.groupName+"<td><td>"+group.summary+"</td><td>"+group.memberCount+"</tr>");
+									$("#groups").append("<tr><td><img src='"+group.avatarIcon+"'/>&nbsp"+group.groupName+"</td><td>"+group.summary+"</td><td>"+group.memberCount+"</td></tr>");
+									groupCount++;
 								}
 							});
-							console.log(groups);
+							console.log(groupCount);
+							if (groupCount == 0) {
+								$("#s-profile").append("<tr><td>Groups</td><td>None Defined</td></tr>");
+								$("#group-a").hide();
+							}
 						}
-						else{console.log("no groups");}
+						else{
+							console.log("no groups");
+							$("#s-profile").append("<tr><td>Groups</td><td>None Defined</td></tr>");
+							$("#group-a").hide();
+						}
 					}
 					catch (e) {
 						//alert('cannot load data because: '+e,true);
