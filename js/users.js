@@ -370,6 +370,7 @@ function get_steam_data(user_id) {
 									$("#groups").append("<tr><td><img src='"+group.avatarIcon+"'/>&nbsp"+group.groupName+"</td><td>"+group.summary+"</td><td>"+group.memberCount+"</td></tr>");
 									groupCount++;
 								}
+								$("#group-count").text("("+groupCount+")");
 							});
 							console.log(groupCount);
 							if (groupCount == 0) {
