@@ -18,13 +18,19 @@ function index() {
 			$('#run_tot').text(data1.run_tot);
 			if ( data1.logins_today == undefined )  { data1.logins_today = '0';}
 			$('#logins_today').text(data1.logins_today);
+			$('#p-stats').hide();
+			$('#p-table').show();
 			$('#countries').text(data1.countries);
 			if (data1.country_top_today == null) { data1.country_top_today = "No Logins Today";}
 			$('#country_top_today').text(data1.country_top_today);
 			$('#country_top').text(data1.country_top);
 			$('#pop_country').text(data1.pop_country+" ("+data1.pop_time+")");
+			$('#c-stats').hide();
+			$('#c-table').show();
 			$('#most-played').text(data1.most_played);
 			$('#most-played-time').text(data1.total_time);
+			$('#s-stats').hide();
+			$('#s-table').show();
 			playerInfo = data1.player_info;
 			//console.log(playerInfo);
 			for (var i in playerInfo) {
@@ -230,11 +236,15 @@ function online(url){
 				});
 				$("#dormant").hide();
 				$("#active-load").hide();
+				$('#a-stats').hide();
+				$('#a-table').show();
 				$("#a"+serverid).html(online_servers);
 			}
 			else {
 				$("#a"+serverid).empty();
 				$("#active-load").hide();
+				$('#a-stats').hide();
+				$('#a-table').show();
 				rowCount = $('#xy tr').length;
 				//console.log("server Count = "+serverCount+" row count = "+rowCount);
 				if(rowCount == 2  ) {$("#dormant").show();}
