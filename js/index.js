@@ -240,7 +240,7 @@ function online(url){
 				$('#a-table').show();
 				if ($("#a"+serverid).length > 0){
 					$("#a"+serverid).html(online_servers);
-					console.log("we have element"); 
+					//console.log("we have element"); 
 				}
 				else {
 					console.log("no element");
