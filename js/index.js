@@ -91,7 +91,7 @@ function online(url){
 				
 				if( i =='general' ) {
 					var general = data1[i];
-					console.log(general);
+					//console.log(general);
 					var serverid = general.server_id;
 					href="<span id='"+serverid+"' class = 'baseserver player-link'>"+serverid+"</span>"; //change this line
 					$("#"+serverid+"-p-name").html(href);
@@ -238,9 +238,24 @@ function online(url){
 				$("#active-load").hide();
 				$('#a-stats').hide();
 				$('#a-table').show();
-				$("#a"+serverid).html(online_servers);
+				if ($("#a"+serverid).length > 0){
+					$("#a"+serverid).html(online_servers);
+					console.log("we have element"); 
+				}
+				else {
+					console.log("no element");
+				}
 			}
 			else {
+				if ($("#a"+serverid).length > 0){
+					$("#a"+serverid).html(online_servers);
+					//console.log("we have element"); 
+				}
+				else {
+					console.log("no element");
+					var tbody = "<tbody id='"+"a"+serverid+"' />";
+					$("#xy").append(tbody);
+				}
 				$("#a"+serverid).empty();
 				$("#active-load").hide();
 				$('#a-stats').hide();
