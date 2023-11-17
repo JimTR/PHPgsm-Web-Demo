@@ -80,42 +80,38 @@
 						
 						<li class="nav-item" style="cursor:pointer"> 
 							<span  class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" aria-expanded="false">
-								<span class="d-md-block dropdown-toggle ps-2">
-									<i class="fa-solid fa-gears"></i>
-									<span class="span-show " >Settings</span>
-								</span>
-							</span><!-- End Profile Iamge Icon -->
-							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-								<li>
-									<span id = "api-settings"  class="dropdown-item d-flex align-items-center stats">
-										<i class="bi bi-server"></i>
-										<span>API Settings</span>
-									</span>
-								</li>
-								<li>
-									<span id = "panel-settings"  class="dropdown-item d-flex align-items-center stats">
-										<i class="fa-solid fa-wrench"></i>
-										<span href="#">Panel Settings</span>
-									</span>
-								</li>
-								<li>
-									<span id = "game-settings"  class="dropdown-item d-flex align-items-center stats">
-										<i class="fab fa-steam" aria-hidden="true"></i>
-										<span  href="#">Game Settings</span>
-									</span>
-								</li>
-								<li onclick="themeswitch();" >
-									<span class="dropdown-item d-flex align-items-center stats" id="themeswitch" >
-										<i id="theme-icon" class="fa fa-fw fa-sun" aria-hidden="true"></i> 
-										<span>Switch Mode</span>
-									</span>	
-								</li>
-								<!-- <li><a href="#">JavaScript</a></li>-->
+								<span class="d-md-block dropdown-toggle ps-2"><i class="fa-solid fa-gears"></i><span class="span-show " > Settings</span></span>
+							</span>
+							<ul id="util" class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+								<li><span id = "api-settings"  class="dropdown-item d-flex align-items-center stats"><i class="bi bi-server"></i><span> API Settings</span></span></li>
+								<li><span id = "panel-settings"  class="dropdown-item d-flex align-items-center stats"><i class="fa-solid fa-wrench"></i><span href="#"> Panel Settings</span></span></li>
+								<li><span id = "game-settings"  class="dropdown-item d-flex align-items-center stats"><i class="fab fa-steam" aria-hidden="true"></i><span  href="#"> Game Settings</span></span></li>
+								<li onclick="themeswitch();" ><span class="dropdown-item d-flex align-items-center stats" id="themeswitch" ><i id="theme-icon" class="fa fa-fw fa-sun" aria-hidden="true"></i><span> Switch Mode</span></span></li>
 							</ul>
 						</li>
-						<li class="nav-item span-show"><a class="nav-link" href="logout.php"><i class="fa fa-fw fa-sign-out-alt text-danger" aria-hidden="true"></i><span class="span-show "> Log Out</span></a></li>
-					</ul>
+						<li id="utils" class="nav-item" style="cursor:pointer"> 
+							<span  class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" aria-expanded="false">
+								<span class="d-md-block dropdown-toggle ps-2"><i class="fa-solid fa-mask-ventilator"></i><span class="span-show " > Utilities</span></span>
+							</span>
+							<ul id="util1" class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+								
+								<li class="nav-item">
+								
+								   <span  id="sp1" class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" aria-expanded="false">
+									<span id="sp2" class="dropdown-toggle"><i class="bx bxl-steam"></i><span class="span-show " > Game Servers </span></span>
+								</span>
+									<ul id="submenu"  test="closed" class="dropdown-menu dropdown-submenu "><!--#pulldown#--></ul>
+								<li class="nav-item span-show"><a class="nav-link" id="console" href="console.php"><i class="bx bxs-terminal"></i><span class="show-span"> Console</span></a></li> 
+							<li class="nav-item"><a class="nav-link collapsed"  id="updates" href="updates.php"><i class="fas fa-download"></i><span> Updates</span></a></li>
+							</li>
+							
+							</ul>
+							
+							<li class="nav-item span-show"><a class="nav-link" href="logout.php"><i class="fa fa-fw fa-sign-out-alt text-danger" aria-hidden="true"></i><span class="span-show "> Log Out</span></a></li>
+						</li>
+					
 				</div>
+		
 			</div>				
 			<div class="card-body">
 				<div class="tab-content pt-2" id="borderedTabContent">
@@ -288,7 +284,38 @@
 				setInterval( function() { online(val); }, 5000 );
 			});
 		});
+	$('.dropdown-menu span.dropdown-toggle').on('click', function(e) {
+  if (!$("#submenu").hasClass('show')) {
+   		//alert("menu open",true);
+		$("#submenu").attr("test","closed");
+		$("#submenu").removeClass('show');
 		
+	//}
+	
+    //console.log("remove show");
+  }
+  else{
+		//alert("we need to show",true);
+		//alert("before"+$("#submenu").attr("test"),true);
+		 $("#submenu").attr("test","open");
+		$("#submenu").addClass('show');
+		//alert("after"+$("#submenu").attr("test"),true);
+		//return;
+		}
+  //alert($("#submenu").attr("test"),true);
+  //$("#submenu").attr("test","open");
+  
+  //$("#submenu").toggleClass('show');
+
+
+  //$(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+    //$('.dropdown-submenu .show').removeClass('show');
+    //console.log("remove sub show");
+  //});
+
+
+  return false;
+});
 	</script>
 	</body>
 </html>

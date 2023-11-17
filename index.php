@@ -74,4 +74,5 @@ $template->load('templates/subtemplates/user-frame.html');
 $page['userframe'] = $template->get_template();
 $template->load('templates/index.html');
 $template->replace_vars($page);
+$template->replace_vars($sidebar_data);
 $template->publish();

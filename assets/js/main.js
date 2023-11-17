@@ -43,6 +43,7 @@ jQuery(document).ready(function(){
 		sessionStorage.clear();	
 		updateClock();
 		interval = setInterval('updateClock()', 1000);
+		$("#side-bar").hide();
 	}
 	else {
 		$(".bi-bell").parent().parent().css({"padding-right": "10%", "display": "inline"});

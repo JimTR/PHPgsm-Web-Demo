@@ -80,17 +80,17 @@ function online(url){
 		url: url,
 		type: 'post',
 		dataType: "json" ,
-		success: function(xml,status){
+		success: function(data,status){
 			var ptot= 0;
 			var online_has_players = {};
 			var ps = '';
-			var data1 = xml;
-			for (var i in data1) {
+			//var data = xml;
+			for (var i in data) {
 				var fname = i; // got the base server
 				//console.log(fname);
 				
 				if( i =='general' ) {
-					var general = data1[i];
+					var general = data[i];
 					//console.log(general);
 					var serverid = general.server_id;
 					href="<span id='"+serverid+"' class = 'baseserver player-link'>"+serverid+"</span>"; //change this line
@@ -123,7 +123,7 @@ function online(url){
 						}
 					} 
 				}
-				if (i =='top_players') {var top_players=data1[i];}
+				if (i =='top_players') {var top_players=data[i];}
 				//console.log(country_data);
 				for (var j in country_data) {
 					//console.log(country_data[j]['test']);
@@ -146,13 +146,13 @@ function online(url){
 					//console.log(tr);
 				}
 				//console.log(data1(i));
-			for (var j in data1[i]) {
+			for (var j in data[i]) {
 				// we have the individal server
 				if (typeof serverlength === 0) {
 					//console.log('server not set');
 					return;
 				}   
-				var server = data1[i][j]; // got server id
+				var server = data[i][j]; // got server id
 				var server_id = j;	
 				if (server.running == 1 ) {
 				} 
@@ -167,9 +167,9 @@ function online(url){
 				$('#run_tot').text(player_tots.run_tot);
 			}
 			
-			for (var j in data1[i]) {
+			for (var j in data[i]) {
 				if (typeof serverlength === 0) {return;}   
-				var server = data1[i][j]; // got server id
+				var server = data[i][j]; // got server id
 				
 				var server_id = j;	
 				if (server.running == 1 ) {
@@ -238,25 +238,25 @@ function online(url){
 				$("#active-load").hide();
 				$('#a-stats').hide();
 				$('#a-table').show();
-				if ($("#a"+serverid).length > 0){
-					$("#a"+serverid).html(online_servers);
+				if (isElement("active-"+serverid)){
+					$("#active-"+serverid).html(online_servers);
 					//console.log("we have element"); 
 				}
 				else {
-					console.log("no element");
+					console.log("no element in if");
 				}
 			}
 			else {
-				if ($("#a"+serverid).length > 0){
-					$("#a"+serverid).html(online_servers);
+				if (isElement("active-"+serverid)){
+					$("#active-"+serverid).html(online_servers);
 					//console.log("we have element"); 
 				}
 				else {
-					console.log("no element");
-					var tbody = "<tbody id='"+"a"+serverid+"' />";
+					console.log("no element in else");
+					var tbody = "<tbody id='"+"active-"+serverid+"' />";
 					$("#xy").append(tbody);
 				}
-				$("#a"+serverid).empty();
+				$("#active-"+serverid).empty();
 				$("#active-load").hide();
 				$('#a-stats').hide();
 				$('#a-table').show();
@@ -268,10 +268,10 @@ function online(url){
   },
     fail: function() {
 		 alert('Failed');
-    },
-	complete:function(data,data1){
-		sessionStorage.setItem(url, "value");
-	}
+    }
+	//complete:function(data,data1){
+		//sessionStorage.setItem(url, "value");
+	//}
   });
 }
 function timeConverter(UNIX_timestamp){
@@ -468,4 +468,11 @@ function ucwords(str,force){
            function(firstLetter){
               return   firstLetter.toUpperCase();
            });
+}
+function isElement(element) {
+	// return  element status
+	if ($("#"+element).length > 0){
+		return true;
+	}
+	return false;	
 }
