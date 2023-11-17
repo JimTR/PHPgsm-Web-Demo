@@ -146,7 +146,7 @@ foreach ($servers as $server) {
         if(!$server['enabled']) {
              $sidebar_data['smenu'] .='<li><a class="" href="'.$href.'" style="text-decoration: line-through;"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
              //<li><a class="dropdown-item" href="#">Submenu item 2</a></li>
-             $sidebar_data['pulldown'] .="<li><a class='dropdown-item' href='$href'><img style='width:16px;' src='{$server['logo']}'>&nbsp;{$server['server_name']}&nbsp;</a></li>";
+             $sidebar_data['pulldown'] .="<li><a class='dropdown-item' href='$href' style='text-decoration: line-through;'><img style='width:16px;' src='{$server['logo']}'>&nbsp;{$server['server_name']}&nbsp;</a></li>";
              continue;
        }
 	
