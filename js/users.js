@@ -358,7 +358,7 @@ function get_steam_data(user_id) {
 						isObject = s_data.location instanceof Object;
 						if(typeof s_data.location != "undefined" && !isObject)  {$("#s-profile").append("<tr><td>Location</td><td>"+s_data.location+"</td></tr>");}
 						else {$("#s-profile").append("<tr><td>Location</td><td>Not Disclosed</td></tr>");}
-						if(typeof s_data.summary != "undefined")  {$("#s-profile").append("<tr><td>Summary</td><td>"+s_data.summary+"</td></tr>");}
+						if(typeof s_data.summary != "undefined")  {$("#s-profile").append("<tr><td>Summary</td><td><div class='table-wrapper' style='min-height:120px;max-height:140px;'>"+s_data.summary+"</div></td></tr>");}
 						if(typeof s_data.groups != "undefined") { 
 							//console.log("we have groups");
 							groups = s_data.groups.group;
