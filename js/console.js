@@ -155,7 +155,7 @@ $('#sendcmd').on('submit', function(e) {
 	 var text = $("#sendcmd input[name=text]").val();
 	 var hasSpace = $("#sendcmd input[name=text]").val().indexOf(' ')>=0;
 	 if(hasSpace){
-		console.log("has space");
+		//console.log("has space");
 		$("#sendcmd input[name=text]").val('"'+text+'"');
 	}
 	$.ajax({
