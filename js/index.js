@@ -75,7 +75,7 @@ function game_server(url,server) {
 }
 function online(url){
      var timer =sessionStorage.getItem(url);
-     //console.log("enter online with "+url);
+     console.log("enter online with "+url);
 	 $.ajax({
 		url: url,
 		type: 'post',
@@ -91,7 +91,7 @@ function online(url){
 				
 				if( i =='general' ) {
 					var general = data[i];
-					//console.log(general);
+					console.log(general);
 					var serverid = general.server_id;
 					href="<span id='"+serverid+"' class = 'baseserver player-link'>"+serverid+"</span>"; //change this line
 					$("#"+serverid+"-p-name").html(href);
