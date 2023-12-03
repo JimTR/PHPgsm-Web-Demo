@@ -152,12 +152,12 @@ function players() {
 $('#sendcmd').on('submit', function(e) {
 	e.preventDefault();
 	console.log( $(this).attr('action'));
-	 text = $("#sendcmd input[name=text]").val();
-	 console.log("text = "+text);
-	 if (text.startsWith("say ")) {
-		 console.log("text starts with say");
-		 $("#sendcmd input[name=text]").val('"'+text+'"');
-	 }
+	 var text = $("#sendcmd input[name=text]").val();
+	 var hasSpace = $("#sendcmd input[name=text]").val().indexOf(' ')>=0;
+	 if(hasSpace){
+		console.log("has space");
+		$("#sendcmd input[name=text]").val('"'+text+'"');
+	}
 	$.ajax({
 		type: $(this).attr('method'),
 		url: $(this).attr('action'),
