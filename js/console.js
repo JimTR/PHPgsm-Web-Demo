@@ -151,17 +151,27 @@ function players() {
 
 $('#sendcmd').on('submit', function(e) {
 	e.preventDefault();
-	console.log( $(this).attr('action'));
+	//console.log( $(this).attr('action'));
 	 var text = $("#sendcmd input[name=text]").val();
 	 var hasSpace = $("#sendcmd input[name=text]").val().indexOf(' ')>=0;
 	 if(hasSpace){
 		//console.log("has space");
-		$("#sendcmd input[name=text]").val('"'+text+'"');
+		j =  unserialize($(this).serialize());
+		j.text = "%22"+j.text+"%22";
+		items='';
+		$.each(j, function(i, item) {
+			items = items+i+"="+item+"&";
+		});
+		sndData = items.replace(/&\s*$/, "");
 	}
+	else {
+		sndData = $(this).serialize();
+	}
+	//console.log("data to send "+sndData);
 	$.ajax({
 		type: $(this).attr('method'),
 		url: $(this).attr('action'),
-		data: $(this).serialize(),
+		data: sndData,
 		success: function(data) {
 			$('#ajax-response').html(data);
 			$("#ajax-response").show();
@@ -291,3 +301,13 @@ function loadIframe(iframeName, url) {
 $('#ban_user').on('show', function () {
       $('.modal-body',this).css({width:'auto',height:'auto', 'max-height':'100%'});
 });
+
+function unserialize(serialize) {
+	let obj = {};
+	serialize = serialize.split('&');
+	for (let i = 0; i < serialize.length; i++) {
+		thisItem = serialize[i].split('=');
+		obj[decodeURIComponent(thisItem[0])] = decodeURIComponent(thisItem[1]);
+	};
+	return obj;
+};
