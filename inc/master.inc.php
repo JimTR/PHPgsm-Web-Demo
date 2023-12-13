@@ -152,7 +152,7 @@ foreach ($servers as $server) {
 	
 	if (isset($bserver[1]) and  $bserver[1] == $server['host_name'] ) {$class = 'active';} else {$class='';}
 	$sidebar_data['smenu'] .='<li><a class="'.$class.'" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
-	$sidebar_data['pulldown'] .="<li><a class='dropdown-item' href='$href'><img style='width:16px;' src='{$server['logo']}'>&nbsp;{$server['server_name']}&nbsp;</a></li>";
+	if($server['running'] == 0){$sidebar_data['pulldown'] .="<li><a class='dropdown-item' href='$href'><img style='width:16px;' src='{$server['logo']}'>&nbsp;{$server['server_name']}&nbsp;</a></li>";}
 }
 
 $sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `fname` ASC";
