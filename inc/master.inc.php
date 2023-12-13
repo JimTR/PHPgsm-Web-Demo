@@ -145,16 +145,21 @@ foreach ($servers as $server) {
         $href = 'gameserver.php?server='.$server['host_name'];
         if(!$server['enabled']) {
              $sidebar_data['smenu'] .='<li><a class="" href="'.$href.'" style="text-decoration: line-through;"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
-             //<li><a class="dropdown-item" href="#">Submenu item 2</a></li>
              $sidebar_data['pulldown'] .="<li><a class='dropdown-item' href='$href' style='text-decoration: line-through;'><img style='width:16px;' src='{$server['logo']}'>&nbsp;{$server['server_name']}&nbsp;</a></li>";
              continue;
        }
 	
 	if (isset($bserver[1]) and  $bserver[1] == $server['host_name'] ) {$class = 'active';} else {$class='';}
 	$sidebar_data['smenu'] .='<li><a class="'.$class.'" href="'.$href.'"><img style="width:16px;" src="'.$server['logo'].'">&nbsp;'.$server['server_name'].'&nbsp;</a></li>';
-	if($server['running'] == 0){$sidebar_data['pulldown'] .="<li><a class='dropdown-item' href='$href'><img style='width:16px;' src='{$server['logo']}'>&nbsp;{$server['server_name']}&nbsp;</a></li>";}
+	
+	if($server['running'] == 0){
+		if(empty($sidebar_data['pulldown'])) {
+			$sidebar_data['pulldown'] = '<span  id="sp1" class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" aria-expanded="false"><span id="sp2" class="dropdown-toggle"><i class="fa-solid fa-screwdriver-wrench"></i><span class="span-show " > Offline Servers </span></span></span>';
+			$sidebar_data['pulldown'] .= "<ul id='submenu'  test='closed' class='dropdown-menu dropdown-submenu ' style='max-height:50vh;overflow:auto;'>";
+		}
+		$sidebar_data['pulldown'] .="<li><a class='dropdown-item' href='$href'><img style='width:16px;' src='{$server['logo']}'>&nbsp;{$server['server_name']}&nbsp;</a></li>";}
 }
-
+if(!empty($sidebar_data['pulldown'])) {$sidebar_data['pulldown'] .= "</ul>";}
 $sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `fname` ASC";
 $base_servers = $database->get_results($sql);
 $page['server_body']='';
