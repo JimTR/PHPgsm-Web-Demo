@@ -178,7 +178,11 @@ $('#sendcmd').on('submit', function(e) {
 			$('#text').val(""); 
 			$("#send").blur(); 
 			$('#ajax-response').delay(3000).fadeOut('slow');
-		}
+		},
+		error: function(xhr, status, error) {
+		var err = eval("(" + xhr.responseText + ")");
+		alert(err.Message,true);
+}
 	});
 });
 
