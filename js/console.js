@@ -69,7 +69,7 @@ $( "#close" ).click(function() {
 });
 		
 function fetchlog() {
-	rows = 100;
+	//rows = 200;
 	cmd = url+'/api.php?action=console&server='+id+'&rows='+rows;
 	var items='';
     $.ajax({
