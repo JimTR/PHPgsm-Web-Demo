@@ -180,8 +180,8 @@ $('#sendcmd').on('submit', function(e) {
 			$('#ajax-response').delay(3000).fadeOut('slow');
 		},
 		error: function(xhr, status, error) {
-		var err = eval("(" + xhr.responseText + ")");
-		alert(err.Message,true);
+		//var err = eval("(" + xhr.responseText + ")");
+		alert(xhr.responseText,true);
 }
 	});
 });
