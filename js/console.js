@@ -151,7 +151,7 @@ function players() {
 
 $('#sendcmd').on('submit', function(e) {
 	e.preventDefault();
-	//console.log( $(this).attr('action'));
+	console.log( $(this).attr('action'));
 	 var text = $("#sendcmd input[name=text]").val();
 	 var hasSpace = $("#sendcmd input[name=text]").val().indexOf(' ')>=0;
 	 if(hasSpace){
@@ -167,7 +167,7 @@ $('#sendcmd').on('submit', function(e) {
 	else {
 		sndData = $(this).serialize();
 	}
-	//console.log("data to send "+sndData);
+	console.log("data to send "+sndData);
 	$.ajax({
 		type: $(this).attr('method'),
 		url: $(this).attr('action'),
