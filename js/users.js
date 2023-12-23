@@ -358,8 +358,22 @@ function get_steam_data(user_id) {
 						isObject = s_data.location instanceof Object;
 						if(typeof s_data.location != "undefined" && !isObject)  {$("#s-profile").append("<tr><td>Location</td><td>"+s_data.location+"</td></tr>");}
 						else {$("#s-profile").append("<tr><td>Location</td><td>Not Disclosed</td></tr>");}
-						if(s_data.summary =="No information given.") {$("#s-profile").append("<tr><td>Summary</td><td>"+s_data.summary+"</td></tr>");}
-						else if(typeof s_data.summary != "undefined")  {$("#s-profile").append("<tr><td>Summary</td><td><div class='table-wrapper' style='min-height:4vh;max-height:15vh;'>"+s_data.summary+"</div></td></tr>");}
+						//if(s_data.summary =="No information given.") {$("#s-profile").append("<tr><td>Summary</td><td>"+s_data.summary+"</td></tr>");}
+						//else if(typeof s_data.summary != "undefined")  {
+							
+							console.log("length = "+s_data.summary.length);
+							var ks = s_data.summary.split("<br>");
+							console.log(ks.length);
+							if(ks.length > 1){
+								console.log("more than i line");
+								//$("#s-profile").append("<tr><td>Summary</td><td><div class='table-wrapper' style='min-height:4vh;max-height:15vh;'>"+s_data.summary+"</div></td></tr>");
+								$("#summary-body").html(s_data.summary);
+								$("#summary").toggle();
+							}
+							else {
+								$("#s-profile").append("<tr><td>Summary</td><td>"+s_data.summary+"</td></tr>");
+							}	
+						//}
 						if(typeof s_data.groups != "undefined") { 
 							//console.log("we have groups");
 							groups = s_data.groups.group;

@@ -414,8 +414,8 @@ $(document).on("click",".baseserver", function () {
      //alert(clickedBtnID  ,true);
      linkUrl =  $(this).parent().attr('url');
      //alert (linkUrl,true); 
-   $("#ifrm").attr("height", "80vh");
-	$("#ifrm").height("80vh"); 
+   $("#ifrm").attr("height", "85vh");
+	$("#ifrm").height("85vh"); 
 	$("#ifrm").attr("width", "90vw");
 	$("#frame-dialog").css("max-width", "90vw");
 	$("#frame-title").html("API Server "+clickedBtnID);

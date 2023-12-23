@@ -29,26 +29,23 @@
 	 <!--#include#-->
 </head>
 
-<body class="darker">
+<body>
 	<section class="section">
       <div class="row">
         <div class="col-lg-6" style="padding-top:1%;padding-left:2%;">
 			<span id="level" style="display:none">admin</span>
 			
-          <div class="card darker"  "padding-top: 1%;">
+          <div class="card "  "padding-top: 1%;">
               <h5 class="card-title" id="ctype" style="padding: 2% 0 0 2%;">Hardware</span></h5>    
-             <div class="card-body table-wrapper" style="max-height:32vh;">
+             <div class="card-body table-wrapper" style="max-height:40vh;">
               	<table class="table">
-                        <tr><td>Uptime</td><td id="boot"></td></tr>
-                        <tr><td>Reboot Required</td><td id="reboot" class=""></td></tr>
-                        <tr class="dark-cpu"><td>CPU Load</td><td><span id="load-outer" style="display:none;"><span id="load_1" class="bold"></span> (1 Min) <span id="load_10" class="bold"></span> (10 Mins) <span id="load_15" class="bold"></span> (15 Mins)</span></td></tr>
-						<!--<tr class="light-cpu"><td>CPU Load</td><td id="load"></td></tr>-->
-                        <tr><td>IP Address(es)</td><td id="ip"></td></tr>
-						<tr><td style="width:32%;">CPU Model</td><td id="model"></td></tr>
-						<tr><td>CPU Processors</td><td id="processors"></td></tr>
-						<tr><td>CPU Speed</td><td  id="speed"></td></tr>
-						
-						<tr><td>CPU Cache</td><td id = "cache"></td></tr>
+					<tr><td>Uptime</td><td id="boot"></td></tr>
+					<tr class="dark-cpu"><td>CPU Load</td><td><span id="load-outer" style="display:none;"><span id="load_1" class="bold"></span> (1 Min) <span id="load_10" class="bold"></span> (10 Mins) <span id="load_15" class="bold"></span> (15 Mins)</span></td></tr>
+					<tr><td>IP Address(es)</td><td id="ip"></td></tr>
+					<tr><td style="width:32%;">CPU Model</td><td id="model"></td></tr>
+					<tr><td>CPU Processors/Cores</td><td id="processors"></td></tr>
+					<tr><td>CPU Speed</td><td  id="speed"></td></tr>
+					<tr><td>CPU Cache</td><td id = "cache"></td></tr>
 				</table>
             </div>
           </div>
@@ -57,13 +54,14 @@
 
 
 
-	<div class="card darker" >
+	<div class="card " >
 		
-			<h5 class="card-title" style="padding: 1% 1%;" >Software</h5>
-			<div class="card-body table-wrapper" style="max-height:32vh;">
+			<h5 class="card-title" style="padding: 2% 0 0 2%;" >Software</h5>
+			<div class="card-body table-wrapper" style="max-height:40vh;">
 			<table class="table">
 				<tr><td style="width:20%;">Host Name</td><td id="host"></td></tr>
 				<tr><td>Server OS</td><td id="os"></td></tr>
+				<tr><td>Reboot Required</td><td id="reboot" class=""></td></tr>
 				<tr><td>Kernel Version</td><td id="k_ver"></td></tr>
 				<tr><td>Processes</td><td id="process"></td></tr>
 				<tr><td>PHP Version</td><td id="php"></td></tr>
@@ -84,9 +82,9 @@
 </div>	
 
 <div class="col-lg-6" style="padding-top:1%;padding-right:2%;">
-	<div class="card darker" >
+	<div class="card " >
 	<div class="card-body">
-		<h5 class="card-title" style="padding: 1% 1%;">Disk</h5>
+		<h5 class="card-title" style="padding: 2% 0 0 2%;">Disk</h5>
 		<table class="table">
 			<tbody id="root" class="hidden" style="border-top:0px;">
 				<tr style="display:none;"><td style="width:31%;"><b>Root File System</b></td><td id="root-fs"></td></tr>
@@ -125,9 +123,9 @@
 		</table>
      </div>
 </div>
-	<div class="card darker">
+	<div class="card ">
 	<div class="card-body">
-		<h5 class="card-title" style="padding: 1% 1%;">Memory</h5>
+		<h5 class="card-title" style="padding: 2% 0 0 2%;">Memory</h5>
 		<table class="table">
 			<tr style="display:none;"><th style="width:20%;"></th><th style="width:20%;">Total</th><th style="width:20%;">Free</th><th style="width:20%;">Cached</th style="width:20%;"><th>Active</th></tr>
 			<tr style="display:none;">
@@ -159,9 +157,9 @@
 	</div>
 	</div>
 
-	<div class="card darker" >
+	<div class="card " >
 		<div class="card-body">
-			<h5 class="card-title">Game Server Statistics</h5>
+			<h5 class="card-title" style="padding: 2% 0 0 2%;">Game Server Statistics</h5>
 			<table class="table">
 				<tr>
 					<td class="middle" style="width:20%;">Online Servers</td>
