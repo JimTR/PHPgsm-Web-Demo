@@ -17,7 +17,7 @@
             $('#server-id').text(data.server_id);
             $('#boot').text(data.boot_time);
             $('#model').text(data.model_name);
-            $('#processors').text(data.processors+" / "+data.cpu_cores);
+            $('#processors').text(data.processors+" / "+data.cores);
             $('#cores').text(data.cpu_cores);
             $('#speed').text(data.cpu_MHz+" Mhz");
             $('#load').text(data.load_pc);
