@@ -137,7 +137,7 @@ $( "#go_back" ).click (function() {
 });	
 $('#sendcmd').change(function(){
 	selected_value = $("input[name='type']:checked").val();
-	console.log(selected_value);
+	
 		switch(selected_value) {
 			case 'fuzzy':
 				$("#text").attr('placeholder','Enter User Name');
@@ -168,6 +168,7 @@ function displayData(userID) {
 		url: url,
 		dataType: "json",
 		success:function(data){
+			$("#gd1").empty();
 			var noe = data.data.length;
 			if(typeof noe == 'undefined') {
 				console.log('no history');
@@ -182,7 +183,7 @@ function displayData(userID) {
 					console.log ("server no longer managed");
 				}
 				else {
-					//console.log(item.server_name+" is valid");
+					console.log(item.server_name+" is valid");
 					var timestamp =  timeConverter(item.last_play);
 					$('#dta1').append("<tr><td style='width:335px;'>"+item.server_name+"</td><td style='text-align:center'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='padding-left:4%;'>"+item.game_time+"</td></tr>");
 				}	
@@ -190,6 +191,8 @@ function displayData(userID) {
 			});
 			$('#dta1').append( "<tr><td  class='card-title'><h6  class='card-title' style='padding:0;'>Overall Time on Line</h6></td><td>&nbsp;</td><td >&nbsp;</td><td style='padding-left:4%;vertical-align:top;'>"+data.time_on_line+"</td></tr>");
 			//console.log(data);
+			$("#gen").empty();
+			
 			gen_data = players[0];
 			head = data;
 			user = gen_data.name_c;
@@ -224,6 +227,7 @@ function displayData(userID) {
 			//console.log("start user data");
 			//console.log(head);
 			//console.log("end user data");
+			$("#list-bans").hide();
 			$('#un').html(user)
 			$('#frame-title', parent.document).html('Details for '+user);
 			//parent.('#un').html(user);
@@ -294,7 +298,7 @@ function displayData(userID) {
 				others ='';
 				//console.log("found more than one");
 				$.each(head.outer_ip, function(i,item) {
-					others += '<a href="users.php?id='+item.steam_id+'">'+item.name+"</a>, ";
+					others += '<a class="in-frame-user" href="users.php?id='+item.steam_id+'">'+item.name+"</a>, ";
 				});
 				$("#dta").append('<tr><td>Users on this ip</td><td>'+others.slice(0,-2)+'</td></tr>');
 			}
@@ -328,7 +332,10 @@ function get_steam_data(user_id) {
 			window.parent.$("#user-avatar").show();
 			
 			if(data.status == null ) {data.status = "Private Profile";}
-			if (data.profile_state == "" || data.profile_state == null) {data.status ="Profile Not Set Up";}
+			if (data.profile_state == "" || data.profile_state == null) {
+				data.status ="Profile Not Set Up"; 
+				$("#extend-steam").hide();
+			}
 			if (data.profile_state == null) {data.profile_state='';}
 			console.log("logging full data");
 			console.log("profile set to "+data.profile_state);
@@ -518,3 +525,18 @@ $('#check-all').change(function() {
 		}
 	}
 }); 
+$(".in-frame-user").click(function(e){
+	 e.preventDefault();
+	console.log("clicked another user");
+});
+$(document).on('click', '.in-frame-user', function(e){
+     e.preventDefault();
+	console.log("clicked another user (doc)");
+	href = $(this).attr("href");
+	console.log ("href = "+href);
+	suffix = href.match(/\d+/);
+	console.log("suffix = "+suffix);
+	//$("#ifrm", parent.document).attr('src', href);
+	//$("#gen").empty();
+	displayData(suffix);
+    });
