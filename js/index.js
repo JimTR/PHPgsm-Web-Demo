@@ -42,7 +42,8 @@ function index() {
 				$("#player"+i+"-map").html(player.map);
 				$("#player"+i+"-joined").html(player.joined);
 				$("#player"+i+"-avatar1").attr("src",player.avatar);
-				$("#player"+i+"-link").attr("url",player.detail_link);
+				//$("#player"+i+"-link").attr("url",player.detail_link);
+				$("#player"+i+"-link").attr("onclick","iclick('"+player.detail_link+"')");
 			}
 		},
         complete:function(data1){
@@ -394,7 +395,7 @@ $(document).on("click",".stats", function () {
 	$('#user-frame').modal('show');
 });	 
 function sclick() {
-	//alert("search clicked",false,"it worked");
+	//alert("search clicked with ",false,"it worked");
 	$("#ifrm").attr("height", "30vh");
 	$("#ifrm").height("30vh"); 
 	$("#ifrm").attr("width", "50vw");
@@ -408,6 +409,15 @@ function sclick() {
 	  //window.location.href=url;
 	loadIframe("ifrm", url);
 	$('#user-frame').modal('show');
+}
+function iclick(url) {
+	loadIframe("ifrm", url);
+    $("#ifrm").attr("height", "80vh");
+	$("#ifrm").height("80vh"); 
+	$("#ifrm").attr("width", "80vw");
+	$("#frame-dialog").css("max-width", "80vw");
+	$("#ifrm")[0].setAttribute("scrolling", "auto");
+    $('#user-frame').modal('show');
 }
 $(document).on("click",".baseserver", function () {
    var clickedBtnID = $(this).attr('id'); 
@@ -431,9 +441,10 @@ $(document).on("click",".baseserver", function () {
 		$('#user-frame').modal('show');
 	}
 });
+
 $(document).on("click",".player-link", function () {
    var clickedBtnID = $(this).parent().attr('url'); 
-   //alert(clickedBtnID  ,true);
+   //alert("player-link "+clickedBtnID  ,true);
    return clickedBtnID;
    
 });
