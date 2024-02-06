@@ -27,7 +27,7 @@ function get_game() {
 				var serverd = data.responseJSON.server;
 				var people = serverd.players;
 				var vdf = serverd.vdf_data;
-				//console.log(serverd);
+				console.log(serverd);
 				offline = 1;
 			}	
 			var items = '';
@@ -73,8 +73,8 @@ function get_game() {
 			else {
 				//console.log ('got to html mangle');
 				$('#status').text(serverd.online);
-				$('#mem').text(serverd.mem+"%");
-				$('#cpu').text(serverd.cpu+"%");
+				$('#mem').html("<b>"+serverd.mem+"%</b>");
+				$('#cpu').html("<b>"+serverd.cpu+"%</b>");
 				$('#gametags').text(serverd.GameTags);
 				$('#hostname').text(serverd.HostName);
 				$('#map').text(serverd.Map);
@@ -82,15 +82,16 @@ function get_game() {
 				$('#bots').text(serverd.Bots);
 				$('#maxplayers').text(serverd.MaxPlayers);
 				$('#items').html(items);
-				$('#secure').text(serverd.Secure);
+				$('#secure').html('<b>'+serverd.Secure+"</b>");
 				$('#steamid').text(serverd.SteamID);
-				$('#gameid').text(serverd.GameID);
+				$('#gameid').html("<b>"+serverd.GameID+"</b>");
 				$('#maxplayers').text(serverd.MaxPlayers);
 				$('#start').text(date_format(serverd.starttime));
 				$('#update').text(date_format(serverd.server_update));
-				$('#build').text(serverd.Version);
-				$('#server_id').text(serverd.server_id);
+				$('#build').html("<b>"+serverd.Version+"</b>");
+				$('#server_id').html("<b>"+serverd.server_id+"</b>");
 				$('#player-tot').text(serverd.player_tot);
+				$('#location').html(serverd.location);
 				$('#moddesc').text(serverd.ModDesc);
 				$('#stop_server').removeClass('hidden');
 				$('#restart_server').removeClass('hidden');

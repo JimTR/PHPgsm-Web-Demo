@@ -21,8 +21,7 @@
 	<!--#sidebar#-->
 	<main id="main" class="main">
 		<div class="span-show">
-			<div style="float:right;width:5%;"><img style="float:right;width:53%;" src="#logo#" /></div>
-			<div id="moddesc" style="float:right;padding-top:0.7%;"><!--#moddesc#--></div>
+						
 			<h5>Game Server Information</h5>
 		</div>
 		
@@ -31,23 +30,57 @@
 			<div class="col-lg-6">
 				<div class="card">
 					<div class="card-body">
-						<h5 class="card-title">Status <span id="status" class="card-title" style="font-size:18px;font-weight: 500;"></span></h5>
+						<h5 class="card-title">Status <span id="status" class="card-title" style="font-size:18px;font-weight: 500;"></span><img style="float:right;width:4%;" src="#logo#" /><span id="moddesc" style="float:right;padding-top:0.7%;margin-right:1%;"></span></h5>
 						<table style="width:100%;" class="table">
-							<tr><td>Host Name</td><td id="hostname"></td></tr>
-							<tr><td>Started</td><td id="start"></td></tr>
-							<tr><td>Steam ID</td><td id="steamid"></td></tr>
-							<tr><td>Players Online</td><td id="players"></td></tr>
-							<tr><td>Bots Online</td><td id="bots"></td></tr>
-							<tr><td>Max Players</td><td id="maxplayers"></td></tr>
-							<tr><td>Client Software ID</td><td id="gameid"></td></tr>
-							<tr><td>Server Software ID</td><td id="server_id"></td></tr>
-							<tr><td>Server Version</td><td id="build"></td></tr>
-							<tr><td>VAC Secure</td><td id="secure"></td></tr>
-							<tr><td>CPU use</td><td id="cpu"></td></tr>
-							<tr><td>Memory use</td><td id="mem"></td></tr>
+							<tr><td>Host Name</td><td><span id="hostname"></span><span style="margin-left:2%;">Steam ID <span id="steamid"></span></span></td></tr>
+							<tr><td>Game Tags</td><td id="gametags"></td></tr>
+							<tr><td>History </td><td>Started <span id="start"></span>
+							<span style="margin-left:2%;">Last Update <span id="update"></span></span>
+							</td></tr>
+							<!--<tr><td>Steam ID</td><td id="steamid"></td></tr>-->
+							<tr>
+								<td>Stats</td>
+								<td>Players 
+									<span id="players"></span>
+									<span style="margin-left:2%;">Bots <span id="bots"></span></span>
+									<span style="margin-left:2%;">Max <span id="maxplayers"></span></span>
+									<span style="margin-left:2%;">Today <span id="player-tot"></span></span>
+								</td>
+							</tr>
+							
+							
+							<tr>
+								<td>Software</td>
+								<td>Client ID 
+									<span id="gameid"></span>
+									<span style="margin-left:2%;">Server 
+										<span id="server_id"></span>
+									</span>
+									<span style="margin-left:2%;">Version 
+										<span id="build"></span>
+									</span>
+									<span style="margin-left:2%;">Secure 
+										<span id="secure"></span>
+									</span>
+								</td>
+							</tr>
+							<tr>
+								<td>Resource</td>
+								<td>CPU 
+									<span id="cpu"></span>
+									<span style="margin-left:2%;">Memory 
+										<span id="mem"></span>
+									</span>	
+								</td>
+							</tr>
+							<!--<tr><td>Memory use</td><td id="mem"></td></tr>
 							<tr><td>Players Today</td><td id="player-tot"></td></tr>
-							<tr><td>Game Tags</td><td id="gametags"><!--#gametags#--></td></tr>
-							<tr><td>Last Update</td><td id="update"></td></tr>
+							<tr><td>Game Tags</td><td id="gametags"></td></tr>
+							<tr><td>Last Update</td><td id="update"></td></tr>-->
+							<tr><td>Instance Folder</td><td><span id="location"></span> ( <span id="disk_space"></span> )</td></tr>
+							<!--<tr><td>Instance Size</td><td id="disk_space"></td></tr>-->
+							<tr><td>Install Folder</td><td><span id="install_dir"></span> ( <span id="install_size"></span> )</td></tr>
+							<!--<tr><td>Install Size</td><td id="install_size"></td></tr>-->
 						</table>
 						<hr style="height:0px;margin-top:-1px;"/>
 						<!--<h5 class="card-title" style="padding:0">Controls</h5>-->
@@ -106,14 +139,12 @@
 					</div>
 				</div> 
 				
-	<div class="card">
+	<div class="card" style="display:none;">
             <div class="card-body">
               <h5 class="card-title">Disk Usage</h5>
                 <table class="table">
-					<tr><td style="width:45%;">Instance Folder</td><td id="location"><!--#location#--></td></tr>
-					<tr><td>Instance Size</td><td id="disk_space"><!--#disk_space#--></td></tr>
-					<tr><td>Install Folder</td><td id="install_dir"><!--#install_dir#--></td></tr>
-					<tr><td>Install Size</td><td id="install_size"><!--#install_size#--></td></tr>
+					
+					
                  </table>
             </div>
           </div>
