@@ -69,10 +69,12 @@ function get_game() {
 				$('#join_server').addClass('hidden');
 				$('#console').addClass('hidden');
 				$('#send').prop('disabled', true);
+				$("#server-logo").attr("src",serverd.logo);
 			}
 			else {
 				//console.log ('got to html mangle');
 				$('#status').text(serverd.online);
+				$("#server-logo").attr("src",serverd.logo);
 				$('#mem').html("<b>"+serverd.mem+"%</b>");
 				$('#cpu').html("<b>"+serverd.cpu+"%</b>");
 				$('#gametags').text(serverd.GameTags);
