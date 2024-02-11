@@ -314,3 +314,11 @@
   /*background: #b30000;*/
   background: #e3dc0b; 
 }
+.console-attacker{
+  color: #0b6e25;
+  font-weight: bold;
+}
+.console-victim {
+  color: #FFA500;
+  font-weight: bold;
+}
