@@ -7,7 +7,7 @@ var host= '';
 var server='';
 $(document).ready(function() {
 	pagereferrer = document.referrer;
-	console.log('hit that '+pagereferrer);
+	//console.log('hit that '+pagereferrer);
 	$('#ifrm').attr("online",1);
 });
 	
@@ -69,8 +69,9 @@ $( "#close" ).click(function() {
 });
 		
 function fetchlog() {
-	//rows = 200;
-	cmd = url+'/api.php?action=console&server='+id+'&rows='+rows;
+	rows = 200;
+	cmd = url+'/api.php?action=console&server='+id ;//+'&rows='+rows;
+	//console.log(cmd);
 	var items='';
     $.ajax({
 		type: 'GET',
@@ -90,9 +91,7 @@ function fetchlog() {
 			items = items+item;
 		});
 		var element = document.getElementById("log");
-		if (element.scrollHeight - element.scrollTop === element.clientHeight){
-			var bottom = true;
-		}
+		if (element.scrollHeight - element.scrollTop === element.clientHeight){var bottom = true;}
 		else {
 			var bottom =false;
 		}
@@ -110,31 +109,56 @@ function players() {
 	var items='';
 	var cerror=false;
 	cmd = url+'/api.php?action=viewserver&server='+id;
+	//console.log(cmd);
 	$.ajax({
-		statusCode: {
-			500: function() {
-				console.log("Script exhausted");
-			}
-		},
-		type: 'GET',
-        url: cmd,
+		//statusCode: {
+			//500: function() {
+				//console.log("Script exhausted");
+			//}
+		//},
+		url: cmd,
+		type: 'post',
         dataType: "json",
         success: function (data) {
+			//data1 = data;
+			//JSON.parse(data1)
+			//console.log(data1+"success");
         },
         complete:function(data){
 			info = data.responseJSON.info;
 			player = data.responseJSON.players;
+			realplayers = info.real_players;
 			if(typeof(info.Map) == 'undefined') {
 				console.log('no map !');
 				return 0;
 			}
-			else {
-				$('#player_title').html('Current Map&nbsp;'+info.Map);
-			}
-			if(typeof(player) == "null") { 
-				console.log('returning empty from players function');
+			else {$('#player_title').html('Current Map&nbsp;'+info.Map);}
+			
+			if (realplayers == 0) {
+				//console.log("no Current players (x)");
+				$("#no-players").show();
+				$("#offline-map").html(info.Map);
+				if($("#server-select").is(":hidden")){
+					//$("#no-players").css('PaddingTop', '10px');​
+					$( "#no-players" ).css( "padding", "1%" );
+					$( "#log" ).css( "margin-top", "0%" );
+					
+				}
+				else {
+					$( "#log" ).css( "margin-top", "3%" );
+				}
+				if ($("#player").is(":visible")) {
+					$("#player").hide();
+					$("#log-wrapper").addClass('col-lg-12').removeClass('col-lg-6');
+				}
 				return 0;
-			} 
+				}
+			//console.log("players on line (x)");
+			if ($("#player").is(":hidden")){
+				$("#player").show();
+				$("#no-players").hide();
+				$("#log-wrapper").addClass('col-lg-6').removeClass('col-lg-12');
+			}
 			$.each(player, function(i, item) {
 				items = items+'<tr id="'+item.steam_id+'" style="width:100%;"><td style="width:50%;overflow:hidden;white-space: nowrap;" title="'+item.Name+' ('+item.steam_id+')" class="tpButton" log="'+item.logons+'">'+item.Name+'</td><td  class="span-show" style="text-align:center;" title="'+item.country+'" id="'+item.ip+'"><img class="flag" '+item.flag+'/></td><td  style="text-align:center;">'+item.Frags+'</td><td class="span-show" style="text-align:right;padding-right:4%;">'+item.TimeF+'</td></tr>';
 			});
