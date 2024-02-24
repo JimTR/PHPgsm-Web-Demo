@@ -44,10 +44,11 @@
 
 <section class="section">
 	 <div class="row">
-        <div class="col-lg-6">
+        <div id="log-wrapper" class="col-lg-12">
           <div class="card">
             <div class="card-body">
 				<h5 class="card-title" style="font-size:14px;display:none;" id="server-select"><span style="padding-right:1%;">Choose Server</span><select id="servers"><!--#sbox#--></select></h5>
+				<div id ="no-players" style="padding-bottom:1%;display:none;">Current Map :<span id="offline-map" style ="padding-left:1%;font-weight:bold;"></span><span style="padding-left:2%;font-weight:bold">Currently, there are no players online</span></div>
 				<div id="log"  class="console-log"></div>
 				<form id="sendcmd" action="/api.php" method="get">
 				<div class="input-group">
@@ -75,7 +76,7 @@
 			</div>		
 		</div>
 	</div>		
-		<div id="player" class="col-lg-6">
+		<div id="player" class="col-lg-6" style="display:none">
 			<div class="card">
 				<div class="card-body">		
 					<div class="card-title" style="text-align:center;font-size:14px;" id="player_title">Choose Game</div>
@@ -83,7 +84,7 @@
 							<table class="table table-sml" id="players_table" style="table-layout: fixed;">
 								<thead>
 									<tr style="padding-bottom:6px;" style="width:100%">
-										<th  class="table-header" style="width:50%;">Name</th>
+										<th  class="table-header" style="width:50%;">Player</th>
 										<th  class="table-header span-show" style="text-align:center;">Location</th>
 										<th  class="table-header" style="text-align:center;">Score</th>
 										<th  class="table-header span-show" style="padding-left:2%;">Time</th>
@@ -237,7 +238,7 @@
    <script src = "assets/js/main.js"></script>
    <script src = "js/console.js"></script>
 <script>
-rows = 200;	
+//rows = 200;	
  $(document).ready(function() {
     
      searchParams = new URLSearchParams(window.location.search)
@@ -247,6 +248,7 @@ rows = 200;
 		 $('#servers>option[id="' + server + '"]').prop('selected', true);
 		 $("#servers").trigger("change");
 		 history.replaceState({}, null, "console.php");
+		
 		 return;
 	}
 	

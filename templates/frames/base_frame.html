@@ -39,13 +39,13 @@
               <h5 class="card-title" id="ctype" style="padding: 2% 0 0 2%;">Hardware</span></h5>    
              <div class="card-body table-wrapper" style="max-height:40vh;">
               	<table class="table">
-					<tr><td>Uptime</td><td id="boot"></td></tr>
-					<tr class="dark-cpu"><td>CPU Load</td><td><span id="load-outer" style="display:none;"><span id="load_1" class="bold"></span> (1 Min) <span id="load_10" class="bold"></span> (10 Mins) <span id="load_15" class="bold"></span> (15 Mins)</span></td></tr>
-					<tr><td>IP Address(es)</td><td id="ip"></td></tr>
-					<tr><td style="width:32%;">CPU Model</td><td id="model"></td></tr>
-					<tr><td>CPU Processors/Cores</td><td id="processors"></td></tr>
-					<tr><td>CPU Speed</td><td  id="speed"></td></tr>
-					<tr><td>CPU Cache</td><td id = "cache"></td></tr>
+					<tr><td>Uptime</td><td id="boot" class="bold"></td></tr>
+					<tr class="dark-cpu "><td>CPU Load</td><td><span id="load-outer" class="bold" style="display:none;"><span id="load_1" class="bold"></span> (1 Min) <span id="load_10" class="bold"></span> (10 Mins) <span id="load_15" class="bold"></span> (15 Mins)</span></td></tr>
+					<tr><td>IP Address(es)</td><td class="bold" id="ip"></td></tr>
+					<tr><td style="width:32%;">CPU Model, Processors/Cores</td><td class="bold"><span id="model"></span>,&nbsp;<span  id="processors"></span></td></tr>
+					<!--<tr><td>CPU Processors/Cores</td><td id="processors"></td></tr>-->
+					<tr><td>CPU Speed</td><td class="bold" id="speed"></td></tr>
+					<tr><td>CPU Cache</td><td class="bold" id = "cache"></td></tr>
 				</table>
             </div>
           </div>
@@ -61,7 +61,7 @@
 			<table class="table">
 				<tr><td style="width:20%;">Host Name</td><td id="host"></td></tr>
 				<tr><td>Server OS</td><td id="os"></td></tr>
-				<tr><td>Reboot Required</td><td id="reboot" class=""></td></tr>
+				<tr><td>Reboot Required</td><td id="reboot" class="bold"></td></tr>
 				<tr><td>Kernel Version</td><td id="k_ver"></td></tr>
 				<tr><td>Processes</td><td id="process"></td></tr>
 				<tr><td>PHP Version</td><td id="php"></td></tr>
@@ -107,7 +107,7 @@
 				<tr style="display:none;" id="u_fs"><td><b>Home File System</b></td><td id="home-fs"></td></tr>
 				<tr style="display:none;"><td style="width:31%;">Home Folder</td><td id="u_mount"></td></tr>
 				<tr>
-					<td class="middle" style="width:20%;">Quota Use</td>
+					<td class="middle" style="width:20%;">User Allocation</td>
 					<td class="middle" style="padding:1%;">
 						<div id="quota-progress" class="progress" style="height:2rem;">
 							<div id= "quota-use" class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="">
