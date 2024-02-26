@@ -90,16 +90,19 @@ function fetchlog() {
 			$.each(data.responseJSON, function(i, item) {
 			items = items+item;
 		});
-		var element = document.getElementById("log");
+		element = document.getElementById("log");
 		if (element.scrollHeight - element.scrollTop === element.clientHeight){var bottom = true;}
-		else {
-			var bottom =false;
+		else {var bottom = false;}
+		hidden_items = $("#hidden-log").text();
+		items_len = items.length;
+		hidden_len = hidden_items.length;
+		if(hidden_len ==0) {$("#hidden-log").text(items);} 
+		if (hidden_len == items_len) { return;}
+		console.log("changing items");
+		$("#log").html(items); // log the new entries
+			$("#hidden-log").text(items); // update the hidden text
+		if (bottom == true) {element.scrollTop = element.scrollHeight;}
 		}
-		$("#log").html(items);
-			if (bottom == true) {
-     			element.scrollTop = element.scrollHeight;
-			}
-         }
     });
 
 };
@@ -145,7 +148,7 @@ function players() {
 					
 				}
 				else {
-					$( "#log" ).css( "margin-top", "3%" );
+					$( "#log" ).css( "margin-top", "0%" );
 				}
 				if ($("#player").is(":visible")) {
 					$("#player").hide();
@@ -160,7 +163,7 @@ function players() {
 				$("#log-wrapper").addClass('col-lg-6').removeClass('col-lg-12');
 			}
 			$.each(player, function(i, item) {
-				items = items+'<tr id="'+item.steam_id+'" style="width:100%;"><td style="width:50%;overflow:hidden;white-space: nowrap;" title="'+item.Name+' ('+item.steam_id+')" class="tpButton" log="'+item.logons+'">'+item.Name+'</td><td  class="span-show" style="text-align:center;" title="'+item.country+'" id="'+item.ip+'"><img class="flag" '+item.flag+'/></td><td  style="text-align:center;">'+item.Frags+'</td><td class="span-show" style="text-align:right;padding-right:4%;">'+item.TimeF+'</td></tr>';
+				items = items+'<tr id="'+item.steam_id+'" style="width:100%;"><td style="width:50%;overflow:hidden;white-space: nowrap;vertical-align:middle;" title="'+item.Name+' ('+item.steam_id+')" class="tpButton" log="'+item.logons+'">'+item.Name+'</td><td  class="span-show" style="text-align:center;" title="'+item.country+'" id="'+item.ip+'"><img class="flag" '+item.flag+'/></td><td  style="text-align:center;">'+item.Frags+'</td><td class="span-show" style="text-align:right;padding-right:4%;">'+item.TimeF+'</td></tr>';
 			});
 			$("#pbody").html(items);
 			items='';
