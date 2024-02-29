@@ -269,6 +269,8 @@ function online(url){
 			}
 			else {
 				//console.log("this should be off");
+				rowCount = $('#xy tr').length;
+				console.log("active rows "+rowCount);
 				$("#dormant").show();
 				$("#xy").hide();
 			}
