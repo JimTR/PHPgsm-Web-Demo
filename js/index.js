@@ -243,12 +243,18 @@ function online(url){
 			var count = $('#'+serverid+"-active").children('tr').length;
 			ols = 0;
 			console.log("count = "+count+" rowCount = "+rowCount);
+			thisbody = serverid+"-active"
+			$("#"+thisbody).empty();
 			if (ptot >0 ) {
-				thisbody = "#"+serverid+"-active"
 				
-				//$(thisbody).hide();
 				//alert("empty tbody "+thisbody,true);
-				online_servers = "<tbody id='"+thisbody+"'>";
+				if( $('#'+thisbody).length ) {
+					// it exists
+					console.log ("we have the body "+thisbody);
+				}
+				else{
+					online_servers = "<tbody id='"+thisbody+"'>";
+				}
 				$.each( online_has_players, function( key, value ) {
 					ServerData = value.split(",");
 					thisServer = "#"+ServerData[1]+"-row";
