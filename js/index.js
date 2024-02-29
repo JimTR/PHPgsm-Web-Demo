@@ -271,7 +271,7 @@ function online(url){
 				//console.log("this should be off");
 				rowCount = $('#xy tr').length;
 				console.log("active rows "+rowCount);
-				if (rowCount ==1){
+				if (rowCount ==0){
 					$("#dormant").show();
 					$("#xy").hide();
 				}
