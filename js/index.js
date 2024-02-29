@@ -238,17 +238,18 @@ function online(url){
 				}					
 			}
 			online_servers= "";
-			$("#active-server").empty();
+			
 			var rowCount = $('#xy tr').length;
 			var count = $('#'+serverid).children('tr').length;
 			ols = 0;
 			if (ptot >0 ) {
+				$("#active-server").empty();
 				//key = jQuery.parse( '"'+key+'"' );
 				$.each( online_has_players, function( key, value ) {
 					ServerData = value.split(",");
 					sname = $("#"+ServerData[1]+"-name").text();
 					//console.log(sname+"  should be "+ServerData[1]+" key = "+key);
-					online_servers += "<tr title ='open console' class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+sname+"</a></td><td style='text-align:center;'>"+ServerData[0]+"</td></tr>"; 
+					online_servers += "<tr id ='"+ServerData[1]+"title ='open console' class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+sname+"</a></td><td style='text-align:center;'>"+ServerData[0]+"</td></tr>"; 
 				});
 				ols = online_servers.length;
 				console.log("ptot = "+ptot+" online_servers = "+ols+" "+online_servers);
