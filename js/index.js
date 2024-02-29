@@ -269,10 +269,12 @@ function online(url){
 			}
 			else {
 				//console.log("this should be off");
-				//rowCount = $('#xy tr').length;
+				rowCount = $('#xy tr').length;
 				console.log("active rows "+rowCount);
-				$("#dormant").show();
-				$("#xy").hide();
+				if (rowCount ==1){
+					$("#dormant").show();
+					$("#xy").hide();
+				}
 			}
 		}
 		$("#a-stats").hide();
