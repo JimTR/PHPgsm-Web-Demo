@@ -244,9 +244,9 @@ function online(url){
 			ols = 0;
 			console.log("count = "+count+" rowCount = "+rowCount);
 			thisbody = serverid+"-active"
-			$("#"+thisbody).empty();
+			
 			if (ptot >0 ) {
-				
+				$("#"+thisbody).empty();
 				//alert("empty tbody "+thisbody,true);
 				if( $('#'+thisbody).length ) {
 					// it exists
@@ -275,8 +275,10 @@ function online(url){
 			}
 			else {
 				//console.log("this should be off");
+				$("#"+thisbody).remove();
 				rowCount = $('#xy tr').length;
-				console.log("active rows "+rowCount);
+				console.log("active rows "+rowCount+" current body "+thisbody );
+				
 				if (rowCount == 0){
 					$("#dormant").show();
 					$("#xy").hide();
