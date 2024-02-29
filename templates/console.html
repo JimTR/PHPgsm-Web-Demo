@@ -49,9 +49,9 @@
             <div class="card-body">
 				<h5 class="card-title" style="font-size:14px;display:none;" id="server-select"><span style="padding-right:1%;">Choose Server</span><select id="servers"><!--#sbox#--></select></h5>
 				<div id ="no-players" style="padding-bottom:1%;display:none;">Current Map :<span id="offline-map" style ="padding-left:1%;font-weight:bold;"></span><span style="padding-left:1%;font-weight:bold">Currently, there are no players online</span></div>
-				<div id="log"  class="console-log"></div>
+				<div id="log"  class="console-log" style="display:none;"></div>
 				<div id="hidden-log" style="display:none"></div>
-				<form id="sendcmd" action="/api.php" method="get">
+				<form id="sendcmd" action="/api.php" method="get" style="display:none;">
 				<div class="input-group">
 					<input class="form-control"name="text" type="text" id="text" size="50" placeholder="Enter Server Command">
 					<input type="hidden" id="action" name="action" value="exe_tmux">

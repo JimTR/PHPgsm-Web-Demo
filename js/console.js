@@ -29,8 +29,7 @@ $("#rules").click(function() {
 });	
 
 $("#servers").change(function(){
-	$("#cmd_buttons").show();	
-	if(!typeof(logi) == 'undefined') {	
+		if(!typeof(logi) == 'undefined') {	
 		clearInterval(logi); // stop old stuff
 		clearInterval(playi);
 	}
@@ -99,6 +98,7 @@ function fetchlog() {
 		if(hidden_len ==0) {$("#hidden-log").text(items);} 
 		if (hidden_len == items_len) { return;}
 		console.log("changing items");
+		if($("#log").is(":hidden")){$("#log").show();$("#sendcmd").show();$("#cmd_buttons").show();}
 		$("#log").html(items); // log the new entries
 			$("#hidden-log").text(items); // update the hidden text
 		if (bottom == true) {element.scrollTop = element.scrollHeight;}

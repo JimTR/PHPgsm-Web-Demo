@@ -1,3 +1,16 @@
+$(document).ready(function(){
+		console.log("origin is "+origin);
+         Notification.requestPermission().then((result) => {
+                 console.log(result);
+        });
+        askNotificationPermission();
+        const img = "img/logo.png";
+        const text = `Your on the index page `;
+        const notification = new Notification('Game Server Manager', { body: text, icon: img});
+        //sleep(1000);
+        //Notification.close;
+});
+
 function index() {
 	// read data use simular to loading the index file
 	if (serverCount >1) {$("#server-desc").text("API Servers");}
@@ -225,8 +238,10 @@ function online(url){
 				}					
 			}
 			online_servers= "";
+			$("#active-server").empty();
 			var rowCount = $('#xy tr').length;
 			var count = $('#'+serverid).children('tr').length;
+			ols = 0;
 			if (ptot >0 ) {
 				//key = jQuery.parse( '"'+key+'"' );
 				$.each( online_has_players, function( key, value ) {
@@ -235,37 +250,21 @@ function online(url){
 					//console.log(sname+"  should be "+ServerData[1]+" key = "+key);
 					online_servers += "<tr title ='open console' class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+sname+"</a></td><td style='text-align:center;'>"+ServerData[0]+"</td></tr>"; 
 				});
+				ols = online_servers.length;
+				console.log("ptot = "+ptot+" online_servers = "+ols+" "+online_servers);
+				$("#xy").append(online_servers);
 				$("#dormant").hide();
-				$("#active-load").hide();
-				$('#a-stats').hide();
-				$('#a-table').show();
-				if (isElement("active-"+serverid)){
-					$("#active-"+serverid).html(online_servers);
-					//console.log("we have element"); 
-				}
-				else {
-					console.log("no element in if");
-				}
+				$('#xy').show();
+				
 			}
 			else {
-				if (isElement("active-"+serverid)){
-					$("#active-"+serverid).html(online_servers);
-					//console.log("we have element"); 
-				}
-				else {
-					console.log("no element in else");
-					var tbody = "<tbody id='"+"active-"+serverid+"' />";
-					$("#xy").append(tbody);
-				}
-				$("#active-"+serverid).empty();
-				$("#active-load").hide();
-				$('#a-stats').hide();
-				$('#a-table').show();
-				rowCount = $('#xy tr').length;
-				//console.log("server Count = "+serverCount+" row count = "+rowCount);
-				if(rowCount == 2  ) {$("#dormant").show();}
+				//console.log("this should be off");
+				$("#dormant").show();
+				$("#xy").hide();
 			}
 		}
+		$("#a-stats").hide();
+		$("#a-table").show();
   },
     fail: function() {
 		 alert('Failed');
