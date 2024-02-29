@@ -48,6 +48,7 @@ jQuery(document).ready(function(){
 	else {
 		$(".bi-bell").parent().parent().css({"padding-right": "10%", "display": "inline"});
 	}
+	
 });
 
 $( window ).resize(function() {
@@ -530,3 +531,24 @@ function activeTab(tab){
 	$("#"+tab).addClass("active show");
 	$("body").removeClass("toggle-sidebar");
 };
+
+function askNotificationPermission() {
+  // Check if the browser supports notifications
+  if (!("Notification" in window)) {
+    console.log("This browser does not support notifications.");
+    return;
+  }
+  Notification.requestPermission().then((permission) => {
+    // set the button to shown or hidden, depending on what the user answers
+    //notificationBtn.style.display = permission === "granted" ? "none" : "block";
+	//alert(permission,true);
+  });
+}
+ function sleep(num) {
+        let now = new Date();
+        let stop = now.getTime() + num;
+        while(true) {
+            now = new Date();
+            if(now.getTime() > stop) return;
+        }
+    }
