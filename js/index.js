@@ -285,6 +285,7 @@ function online(url){
 				}
 			}
 		}
+		$("#xy").delay(1000).fadeIn();
 		$("#a-stats").hide();
 		$("#a-table").show();
   },
