@@ -286,10 +286,10 @@ function online(url){
 			else {
 				
 				console.log("this should be off for "+thisbody+" count = "+count);
-				//if(count==0){
+				if(count==0){
 					$("#"+thisbody).remove();
 					console.log("no rows for "+thisbody);
-				//}
+				}
 				rowCount = $('#xy tr').length;
 				console.log("active rows "+rowCount+" in table ");
 				if (rowCount == 0){
