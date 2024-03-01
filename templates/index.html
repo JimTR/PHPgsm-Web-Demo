@@ -209,8 +209,8 @@
 									<div class="card info-card revenue-card">
 										<div class="card-body">
 											<h5 class="card-title" style="margin-top:3%;" id="">About PHPgsm</h5><hr style="margin:0;"/>
-											<div style="width:91%;margin:auto;">
-													PHPgsm is a game server manager for steam (source mod) games
+											<div style="width:91%;margin:auto;margin-top:1rem;">
+													PHPgsm is a game server manager for steam (source mod) games, documentation is <a href = "https://phporyx.co.uk/forumdisplay.php?fid=7">here</a>
 											</div>
 										</div>
 									</div>
@@ -277,14 +277,9 @@
 	<script src="assets/js/main.js"></script>
 	<script src="js/index.js"></script>
 	<script>
-		const servers = [<!--#jsa#-->];
-		var url = "";
-		var jim = '';
+		const servers = [#jsa#];
 		var origin   = window.location.href;
 		origin = origin.replace(/\/[^\/]+$/,"");
-		//orgin = origin.substring(0, origin.lastIndexOf("/") - 1);
-		
-		console.log("what goes on ? "+origin);
 		var serverCount =servers.length;
 		$(document).ready(function(){
 			sessionStorage.clear();
