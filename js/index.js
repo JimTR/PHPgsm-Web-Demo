@@ -248,6 +248,8 @@ function online(url){
 			if (ptot >0 ) {
 				//$("#"+thisbody).empty();
 				//console.log("empty tbody "+thisbody);
+				bodylength = $("#"+thisbody).length;
+				console.log("bodylength = "+bodylength);
 				if( $('#'+thisbody).length >0 ) {console.log ("we have the body "+thisbody); addedBody= false;}
 				else{online_servers = "<tbody id='"+thisbody+"'>"; 
 					addedbody = true;
