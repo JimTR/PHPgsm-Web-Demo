@@ -246,8 +246,8 @@ function online(url){
 			thisbody = serverid+"-active"
 			
 			if (ptot >0 ) {
-				$("#"+thisbody).empty();
-				console.log("empty tbody "+thisbody);
+				//$("#"+thisbody).empty();
+				//console.log("empty tbody "+thisbody);
 				if( $('#'+thisbody).length >0 ) {console.log ("we have the body "+thisbody); addedBody= false;}
 				else{online_servers = "<tbody id='"+thisbody+"'>"; 
 					addedbody = true;
