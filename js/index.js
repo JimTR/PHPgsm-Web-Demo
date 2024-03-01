@@ -251,16 +251,15 @@ function online(url){
 				//console.log("empty tbody "+thisbody);
 				bodylength = $("#"+thisbody).length;
 				$("#"+thisbody).empty();
-				console.log("bodylength = "+bodylength);
-				if( $('#'+thisbody).length >0 ) {console.log ("we have the body "+thisbody); addedBody= false;}
+				console.log("emptying "+thisbody);
+				if( $('#'+thisbody).length >0 ) {addedBody= false;}
 				else{online_servers = "<tbody id='"+thisbody+"' style='border:none;'>"; //<tr><td colspan='2'>Active server for "+serverid+"</td></tr>"; 
 					addedbody = true;
-					console.log("we added the body "+thisbody); 
 				}
 				$.each( online_has_players, function( key, value ) {
 					ServerData = value.split(",");
 					thisServer = "#"+ServerData[1]+"-row";
-					console.log("we need to remove "+thisServer);
+					//console.log("we need to remove "+thisServer);
 					$(thisServer).remove();
 					sname = $("#"+ServerData[1]+"-name").text();
 					//console.log(sname+"  should be "+ServerData[1]+" key = "+key);
@@ -268,17 +267,17 @@ function online(url){
 				});
 				if(addedbody == true) {
 					online_servers +="</tbody>";
-					console.log("we closed the body "+thisbody);
+					//console.log("we closed the body "+thisbody);
 				}
 				ols = online_servers.length;
 				console.log("ptot = "+ptot+" online_servers = "+ols+" "+online_servers);
 				if (addedbody == true) {
 					$("#xy").append(online_servers);
-					console.log("appending "+thisbody+" to xy");
+					//console.log("appending "+thisbody+" to xy");
 				}
 				else {
 					$("#"+thisbody).append(online_servers);
-					console.log("appending row to "+thisbody);
+					//console.log("appending row to "+thisbody);
 				}
 				$("#dormant").hide();
 				$("#xy").show();
@@ -292,7 +291,7 @@ function online(url){
 					console.log("no rows for "+thisbody);
 				}
 				rowCount = $('#xy tr').length;
-				console.log("active rows "+rowCount+" in table ");
+				//console.log("active rows "+rowCount+" in table ");
 				if (rowCount == 0){
 					$("#dormant").show();
 					$("#xy").hide();
