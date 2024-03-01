@@ -249,7 +249,7 @@ function online(url){
 				if(count==0){
 					console.log("returning empty from "+thisbody);
 					return
-				);
+				}
 				$("#"+thisbody).empty();
 				//alert("empty tbody "+thisbody,true);
 				if( $('#'+thisbody).length ) {console.log ("we have the body "+thisbody); addedBody= false;}
