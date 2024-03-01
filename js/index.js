@@ -250,9 +250,10 @@ function online(url){
 				//$("#"+thisbody).empty();
 				//console.log("empty tbody "+thisbody);
 				bodylength = $("#"+thisbody).length;
+				$("#"+thisbody).show();
 				console.log("bodylength = "+bodylength);
 				if( $('#'+thisbody).length >0 ) {console.log ("we have the body "+thisbody); addedBody= false;}
-				else{online_servers = "<tbody id='"+thisbody+"'><tr><td colspan='2'>Active server for "+serverid+"</td></tr>"; 
+				else{online_servers = "<tbody id='"+thisbody+"'>"; //<tr><td colspan='2'>Active server for "+serverid+"</td></tr>"; 
 					addedbody = true;
 					console.log("we added the body "+thisbody); 
 				}
@@ -286,8 +287,8 @@ function online(url){
 			else {
 				
 				console.log("this should be off for "+thisbody+" count = "+ptot);
-				if(count==0){
-					$("#"+thisbody).hide();
+				if(ptot==0){
+					$("#"+thisbody).empty();
 					console.log("no rows for "+thisbody);
 				}
 				rowCount = $('#xy tr').length;
