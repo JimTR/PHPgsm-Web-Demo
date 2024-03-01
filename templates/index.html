@@ -293,7 +293,7 @@
 			setInterval( function() { index(); },5000);
 			$.each( servers, function( i, val ) {
 				//console.log(val);
-				setInterval( function() { online(val); }, 5000 );
+				setInterval( function() { online(val); }, 10000 );
 			});
 		});
 	$('.dropdown-menu span.dropdown-toggle').on('click', function(e) {
