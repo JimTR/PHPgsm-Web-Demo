@@ -243,7 +243,7 @@ function online(url){
 			//$("#xy").empty();
 			var rowCount = $('#xy tr').length;
 			var count = $('#'+serverid+"-active").children('tr').length;
-			console.log("count = "+count+" rowCount = "+rowCount);
+			//console.log("count = "+count+" rowCount = "+rowCount);
 			thisbody = serverid+"-active"
 			
 			if (ptot >0 ) {
