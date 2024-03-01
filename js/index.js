@@ -246,14 +246,13 @@ function online(url){
 			thisbody = serverid+"-active"
 			
 			if (ptot >0 ) {
-				if(count==0){
-					console.log("returning empty from "+thisbody);
-					//return
-				}
 				$("#"+thisbody).empty();
-				//alert("empty tbody "+thisbody,true);
+				console.log("empty tbody "+thisbody);
 				if( $('#'+thisbody).length ) {console.log ("we have the body "+thisbody); addedBody= false;}
-				else{online_servers = "<tbody id='"+thisbody+"'>"; addedbody = true;}
+				else{online_servers = "<tbody id='"+thisbody+"'>"; 
+					addedbody = true;
+					console.log("we added the body "+thisbody); 
+				}
 				$.each( online_has_players, function( key, value ) {
 					ServerData = value.split(",");
 					thisServer = "#"+ServerData[1]+"-row";
@@ -263,10 +262,20 @@ function online(url){
 					//console.log(sname+"  should be "+ServerData[1]+" key = "+key);
 					online_servers += "<tr id ='"+ServerData[1]+"-row' title ='open console' class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+sname+"</a></td><td style='text-align:center;'>"+ServerData[0]+"</td></tr>"; 
 				});
-				if(addedbody == true) {online_servers +="</tbody>";}
+				if(addedbody == true) {
+					online_servers +="</tbody>";
+					console.log("we closed the body "+thisbody);
+				}
 				ols = online_servers.length;
 				console.log("ptot = "+ptot+" online_servers = "+ols+" "+online_servers);
-				$("#xy").append(online_servers);
+				if (addedbody == true) {
+					$("#xy").append(online_servers);
+					console.log("appending "+thisbody+" to xy");
+				}
+				else {
+					$("#"+thisbody).append(online_servers);
+					console.log("appending row to "+thisbody);
+				}
 				$("#dormant").hide();
 				$('#active-server').show();
 				$("#xy").show();
