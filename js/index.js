@@ -253,7 +253,7 @@ function online(url){
 				$("#"+thisbody).show();
 				console.log("bodylength = "+bodylength);
 				if( $('#'+thisbody).length >0 ) {console.log ("we have the body "+thisbody); addedBody= false;}
-				else{online_servers = "<tbody id='"+thisbody+"'>"; //<tr><td colspan='2'>Active server for "+serverid+"</td></tr>"; 
+				else{online_servers = "<tbody id='"+thisbody+"' style='border:none;'>"; //<tr><td colspan='2'>Active server for "+serverid+"</td></tr>"; 
 					addedbody = true;
 					console.log("we added the body "+thisbody); 
 				}
