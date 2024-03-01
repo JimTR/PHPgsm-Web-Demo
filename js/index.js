@@ -273,8 +273,12 @@ function online(url){
 				
 			}
 			else {
+				
 				//console.log("this should be off");
-				$("#"+thisbody).remove();
+				if(count==0){
+					$("#"+thisbody).remove();
+					console.log("no rows for "+thisbody);
+				}
 				rowCount = $('#xy tr').length;
 				console.log("active rows "+rowCount+" current body "+thisbody );
 				
