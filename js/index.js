@@ -285,9 +285,9 @@ function online(url){
 			}
 			else {
 				
-				console.log("this should be off for "+thisbody+" count = "+count);
+				console.log("this should be off for "+thisbody+" count = "+ptot);
 				if(count==0){
-					$("#"+thisbody).remove();
+					$("#"+thisbody).hide();
 					console.log("no rows for "+thisbody);
 				}
 				rowCount = $('#xy tr').length;
