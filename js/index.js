@@ -237,11 +237,12 @@ function online(url){
 					$('#'+server_id).hide(); // hide the server
 				}					
 			}
-			online_servers= "";
+			online_servers = "";
+			addedbody = false;
+			ols = 0;
 			//$("#xy").empty();
 			var rowCount = $('#xy tr').length;
 			var count = $('#'+serverid+"-active").children('tr').length;
-			ols = 0;
 			console.log("count = "+count+" rowCount = "+rowCount);
 			thisbody = serverid+"-active"
 			
@@ -258,7 +259,7 @@ function online(url){
 				$.each( online_has_players, function( key, value ) {
 					ServerData = value.split(",");
 					thisServer = "#"+ServerData[1]+"-row";
-					//console.log("we need to remove "+thisServer);
+					console.log("we need to remove "+thisServer);
 					$(thisServer).remove();
 					sname = $("#"+ServerData[1]+"-name").text();
 					//console.log(sname+"  should be "+ServerData[1]+" key = "+key);
@@ -279,20 +280,18 @@ function online(url){
 					console.log("appending row to "+thisbody);
 				}
 				$("#dormant").hide();
-				$('#active-server').show();
 				$("#xy").show();
 				
 			}
 			else {
 				
-				//console.log("this should be off");
-				if(count==0){
+				console.log("this should be off");
+				//if(count==0){
 					$("#"+thisbody).remove();
 					console.log("no rows for "+thisbody);
-				}
+				//}
 				rowCount = $('#xy tr').length;
-				console.log("active rows "+rowCount+" current body "+thisbody );
-				
+				console.log("active rows "+rowCount+" in table ");
 				if (rowCount == 0){
 					$("#dormant").show();
 					$("#xy").hide();
