@@ -248,7 +248,7 @@ function online(url){
 			if (ptot >0 ) {
 				if(count==0){
 					console.log("returning empty from "+thisbody);
-					return
+					//return
 				}
 				$("#"+thisbody).empty();
 				//alert("empty tbody "+thisbody,true);
