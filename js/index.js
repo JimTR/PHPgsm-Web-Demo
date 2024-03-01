@@ -248,13 +248,8 @@ function online(url){
 			if (ptot >0 ) {
 				$("#"+thisbody).empty();
 				//alert("empty tbody "+thisbody,true);
-				if( $('#'+thisbody).length ) {
-					// it exists
-					console.log ("we have the body "+thisbody);
-				}
-				else{
-					online_servers = "<tbody id='"+thisbody+"'>";
-				}
+				if( $('#'+thisbody).length ) {console.log ("we have the body "+thisbody); addedBody= false;}
+				else{online_servers = "<tbody id='"+thisbody+"'>"; addedbody = true;}
 				$.each( online_has_players, function( key, value ) {
 					ServerData = value.split(",");
 					thisServer = "#"+ServerData[1]+"-row";
@@ -264,7 +259,7 @@ function online(url){
 					//console.log(sname+"  should be "+ServerData[1]+" key = "+key);
 					online_servers += "<tr id ='"+ServerData[1]+"-row' title ='open console' class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+sname+"</a></td><td style='text-align:center;'>"+ServerData[0]+"</td></tr>"; 
 				});
-				online_servers +="</tbody>";
+				if(addedbody == true) {online_servers +="</tbody>";}
 				ols = online_servers.length;
 				console.log("ptot = "+ptot+" online_servers = "+ols+" "+online_servers);
 				$("#xy").append(online_servers);
@@ -285,7 +280,7 @@ function online(url){
 				}
 			}
 		}
-		$("#xy").delay(1000).fadeIn();
+		//$("#xy").delay(1000).fadeIn();
 		$("#a-stats").hide();
 		$("#a-table").show();
   },
