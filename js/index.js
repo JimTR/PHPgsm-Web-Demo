@@ -1,15 +1,15 @@
 $(document).ready(function(){
-		//console.log("origin is "+origin);
-         Notification.requestPermission().then((result) => {
-                 //console.log(result);
-        });
-        askNotificationPermission();
-        img = "img/logo.png";
-        text = `Your on the index page `;
-        notification = new Notification('Game Server Manager', { body: text, icon: img});
-        //sleep(1000);
-        //Notification.close;
-});
+	/*Notification.requestPermission().then((result) => {
+		//console.log(result);
+		//if (result !== "granted") {
+			//askNotificationPermission();
+		}
+	});
+	
+	img = "img/logo.png";
+	text = `Your on the index page `;
+	notification = new Notification('Game Server Manager', { body: text, icon: img});*/
+ });
 
 function index() {
 	// read data use simular to loading the index file

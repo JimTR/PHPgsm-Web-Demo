@@ -553,3 +553,12 @@ function askNotificationPermission() {
             if(now.getTime() > stop) return;
         }
     }
+    function file_get_contents(filename) {
+		$.get(filename, function(data,sucess) { 
+			console.log(sucess);
+			return data;
+			
+    });
+    console.log("dropped out");
+}
+
