@@ -1,12 +1,12 @@
 $(document).ready(function(){
-		console.log("origin is "+origin);
+		//console.log("origin is "+origin);
          Notification.requestPermission().then((result) => {
-                 console.log(result);
+                 //console.log(result);
         });
         askNotificationPermission();
-        const img = "img/logo.png";
-        const text = `Your on the index page `;
-        const notification = new Notification('Game Server Manager', { body: text, icon: img});
+        img = "img/logo.png";
+        text = `Your on the index page `;
+        notification = new Notification('Game Server Manager', { body: text, icon: img});
         //sleep(1000);
         //Notification.close;
 });
@@ -89,7 +89,7 @@ function game_server(url,server) {
 }
 function online(url){
      var timer =sessionStorage.getItem(url);
-     console.log("enter online with "+url);
+     //console.log("enter online with "+url);
 	 $.ajax({
 		url: url,
 		type: 'post',
@@ -105,14 +105,13 @@ function online(url){
 				
 				if( i =='general' ) {
 					var general = data[i];
-					console.log(general);
+					//console.log(general);
 					var serverid = general.server_id;
 					href="<span id='"+serverid+"' class = 'baseserver player-link'>"+serverid+"</span>"; //change this line
 					$("#"+serverid+"-p-name").html(href);
 					$("#"+serverid+"-p-name").attr('url',general.server_url);
 					$("#"+serverid+"-up-time").html(general.uptime);
 					cpu = general.cpu_info;
-					//console.log(cpu);
 					title = '';
 					if(cpu.reboot  == "Yes") { 
 						title += "Warning - This server&#39;s parent needs rebooting";
@@ -157,158 +156,123 @@ function online(url){
 					var td_last_logon = '<td>'+top_players[j]['last_log_on']+'</td></tr>';
 					var tr = td_title+td_first_logon+td_logons+td_last_logon;
 					$("td#player_row_"+j).parent().replaceWith(tr);   
-					//console.log(tr);
 				}
-				//console.log(data1(i));
-			for (var j in data[i]) {
-				// we have the individal server
-				if (typeof serverlength === 0) {
-					//console.log('server not set');
-					return;
-				}   
-				var server = data[i][j]; // got server id
-				var server_id = j;	
-				if (server.running == 1 ) {
-				} 
-			}
-			//console.log(player_tots);
-			if(typeof player_tots != 'undefined'){
-				$('#player_tot').text(player_tots.player_tot);
-				$('#tplayers').text(data1.general.total_players);
-				$('#logins_tot').text(player_tots.tot_logins);
-				$('#tcountries').text(player_tots.countries);
-				$('#tinstalled').text(player_tots.game_tot);
-				$('#run_tot').text(player_tots.run_tot);
-			}
-			
-			for (var j in data[i]) {
-				if (typeof serverlength === 0) {return;}   
-				var server = data[i][j]; // got server id
 				
-				var server_id = j;	
-				if (server.running == 1 ) {
-					var playern = server.Players;
-					
-					$('#pl'+server_id).html(playern); 
-					$("#"+server_id).show();
-					var logo  = server.logo;
-					if (typeof server.Players === "undefined") {server.Players = 0;}   
-					$("#img"+server_id).attr("src",logo);
-					$('#cmap'+server_id).html(server.Map);
-					 esc = server.server_name.replace("\\", "");
-					 server.server_name= esc;
-					$('#host'+server_id).html(server.server_name);
-					$('#gdate'+server_id).html(server.r_time);
-					real_players = server.Players-server.Bots;
-					if(real_players >0) {
-						key = server.HostName;
-						online_has_players[key] = real_players+","+server.host_name;
-					}
-					ptot +=real_players;
-					
-					$('#gol'+server_id).html(real_players+'/'+server.max_players);
-					$('#pt'+server_id).html(server.player_tot);
-					if (server.Players ==0 ) {
-						//console.log ('should be nowt '+server.Players);
-						$("#"+server_id+"-secret").slideUp();
-						$('#'+server_id+"-secret").css('cursor','default');  
-						
-						$('#gol'+server_id).removeClass("p_count").addClass("map-title");
-					}
-					else if (server.Players >0) {
-						if (typeof server.players === "undefined") {
-							//console.log('no need players array not set '+server.server_name);
-							return;
-						}   
-						$('#op1'+server_id).css('cursor','pointer');
-						$('#gol'+server_id).removeClass("map-title").addClass('p_count');
-						$("#"+server_id+"-playerbody").empty();
-						var players = $.map(server.players, function(value, index) { return [value]; });
-						//var players = players.sort((b, a) => (a.Frags > b.Frags) ? 1 : -1)
-						
-						for (p in players) {
-							newRowContent='<tr style="font-size:14px;" class="p-name"><td style="width:50% !important;"><i >'+players[p].Name+'</i></td><td style="text-align:right;width:15%;" >'+players[p].Frags+'</td><td style=text-align:right;padding-right:3%;width:20%" class="p_time">'+players[p].TimeF+'</td></tr>'; 
-							$("#"+server_id+"-playerbody").append(newRowContent);
+				for (var j in data[i]) {
+					// we have the individal server
+					if (typeof serverlength === 0) {
+						//console.log('server not set');
+						return;
+					}   
+					var server = data[i][j]; // got server id
+					var server_id = j;	
+					if (server.running == 1 ) {
+					} 
+				}
+				//console.log(player_tots);
+				if(typeof player_tots != 'undefined'){
+					$('#player_tot').text(player_tots.player_tot);
+					$('#tplayers').text(data1.general.total_players);
+					$('#logins_tot').text(player_tots.tot_logins);
+					$('#tcountries').text(player_tots.countries);
+					$('#tinstalled').text(player_tots.game_tot);
+					$('#run_tot').text(player_tots.run_tot);
+				}
+			
+				for (var j in data[i]) {
+					if (typeof serverlength === 0) {return;}   
+					var server = data[i][j]; // got server id
+					var server_id = j;	
+					if (server.running == 1 ) {
+						var playern = server.Players;
+						$('#pl'+server_id).html(playern); 
+						$("#"+server_id).show();
+						var logo  = server.logo;
+						if (typeof server.Players === "undefined") {server.Players = 0;}   
+						$("#img"+server_id).attr("src",logo);
+						$('#cmap'+server_id).html(server.Map);
+						esc = server.server_name.replace("\\", "");
+						server.server_name= esc;
+						$('#host'+server_id).html(server.server_name);
+						$('#gdate'+server_id).html(server.r_time);
+						real_players = server.Players-server.Bots;
+						if(real_players >0) {
+							key = server.HostName;
+							online_has_players[key] = real_players+","+server.host_name;
+						}
+						ptot +=real_players;
+						$('#gol'+server_id).html(real_players+'/'+server.max_players);
+						$('#pt'+server_id).html(server.player_tot);
+						if (server.Players ==0 ) {
+							//console.log ('should be nowt '+server.Players);
+							$("#"+server_id+"-secret").slideUp();
+							$('#'+server_id+"-secret").css('cursor','default');  
+							$('#gol'+server_id).removeClass("p_count").addClass("map-title");
+						}
+						else if (server.Players >0) {
+							if (typeof server.players === "undefined") {
+								//console.log('no need players array not set '+server.server_name);
+								return;
+							}   
+							$('#op1'+server_id).css('cursor','pointer');
+							$('#gol'+server_id).removeClass("map-title").addClass('p_count');
+							$("#"+server_id+"-playerbody").empty();
+							var players = $.map(server.players, function(value, index) { return [value]; });
+							for (p in players) {
+								newRowContent='<tr style="font-size:14px;" class="p-name"><td style="width:50% !important;"><i >'+players[p].Name+'</i></td><td style="text-align:right;width:15%;" >'+players[p].Frags+'</td><td style=text-align:right;padding-right:3%;width:20%" class="p_time">'+players[p].TimeF+'</td></tr>'; 
+								$("#"+server_id+"-playerbody").append(newRowContent);
+							}
 						}
 					}
-					
+					else {$('#'+server_id).hide(); } // hide the server output					
 				}
-				else {
-					$('#'+server_id).hide(); // hide the server
-				}					
-			}
-			online_servers = "";
-			addedbody = false;
-			ols = 0;
-			//$("#xy").empty();
-			var rowCount = $('#xy tr').length;
-			var count = $('#'+serverid+"-active").children('tr').length;
-			//console.log("count = "+count+" rowCount = "+rowCount);
-			thisbody = serverid+"-active"
-			
-			if (ptot >0 ) {
-				//$("#"+thisbody).empty();
-				//console.log("empty tbody "+thisbody);
-				bodylength = $("#"+thisbody).length;
-				$("#"+thisbody).empty();
-				console.log("emptying "+thisbody);
-				if( $('#'+thisbody).length >0 ) {addedBody= false;}
-				else{online_servers = "<tbody id='"+thisbody+"' style='border:none;'>"; //<tr><td colspan='2'>Active server for "+serverid+"</td></tr>"; 
-					addedbody = true;
-				}
-				$.each( online_has_players, function( key, value ) {
-					ServerData = value.split(",");
-					thisServer = "#"+ServerData[1]+"-row";
-					//console.log("we need to remove "+thisServer);
-					$(thisServer).remove();
-					sname = $("#"+ServerData[1]+"-name").text();
-					//console.log(sname+"  should be "+ServerData[1]+" key = "+key);
-					online_servers += "<tr id ='"+ServerData[1]+"-row' title ='open console' class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+sname+"</a></td><td style='text-align:center;'>"+ServerData[0]+"</td></tr>"; 
-				});
-				if(addedbody == true) {
-					online_servers +="</tbody>";
-					//console.log("we closed the body "+thisbody);
-				}
-				ols = online_servers.length;
-				console.log("ptot = "+ptot+" online_servers = "+ols+" "+online_servers);
-				if (addedbody == true) {
-					$("#xy").append(online_servers);
-					//console.log("appending "+thisbody+" to xy");
-				}
-				else {
-					$("#"+thisbody).append(online_servers);
-					//console.log("appending row to "+thisbody);
-				}
-				$("#dormant").hide();
-				$("#xy").show();
-				
-			}
-			else {
-				
-				console.log("this should be off for "+thisbody+" count = "+ptot);
-				if(ptot==0){
+				online_servers = "";
+				addedbody = false;
+				ols = 0;
+				var rowCount = $('#xy tr').length;
+				var count = $('#'+serverid+"-active").children('tr').length;
+				//console.log("count = "+count+" rowCount = "+rowCount);
+				thisbody = serverid+"-active"
+				if (ptot >0 ) {
+					bodylength = $("#"+thisbody).length;
 					$("#"+thisbody).empty();
-					console.log("no rows for "+thisbody);
+					console.log("emptying "+thisbody);
+					if( $('#'+thisbody).length >0 ) {addedBody= false;}
+					else{
+						online_servers = "<tbody id='"+thisbody+"' style='border:none;'>"; //<tr><td colspan='2'>Active server for "+serverid+"</td></tr>"; 
+						addedbody = true;
+					}
+					$.each( online_has_players, function( key, value ) {
+						ServerData = value.split(",");
+						thisServer = "#"+ServerData[1]+"-row";
+						//console.log("we need to remove "+thisServer);
+						$(thisServer).remove();
+						sname = $("#"+ServerData[1]+"-name").text();
+						online_servers += "<tr id ='"+ServerData[1]+"-row' title ='open console' class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+sname+"</a></td><td style='text-align:center;'>"+ServerData[0]+"</td></tr>"; 
+					});
+					if(addedbody == true) {online_servers +="</tbody>";}
+					ols = online_servers.length;
+					if (addedbody == true) {$("#xy").append(online_servers);}
+					else {$("#"+thisbody).append(online_servers);}
+					$("#dormant").hide();
+					$("#xy").show();
 				}
-				rowCount = $('#xy tr').length;
-				//console.log("active rows "+rowCount+" in table ");
-				if (rowCount == 0){
-					$("#dormant").show();
-					$("#xy").hide();
+				else {
+					if(ptot==0){$("#"+thisbody).empty();	}
+					rowCount = $('#xy tr').length;
+					if (rowCount == 0){
+						$("#dormant").show();
+						$("#xy").hide();
+					}
 				}
 			}
+			$("#a-stats").hide();
+			$("#a-table").show();
+		},
+		fail: function() {
+			alert('Failed');
 		}
-		//$("#xy").delay(1000).fadeIn();
-		$("#a-stats").hide();
-		$("#a-table").show();
-  },
-    fail: function() {
-		 alert('Failed');
-    }
-	//complete:function(data,data1){
-		//sessionStorage.setItem(url, "value");
-	//}
-  });
+	});
 }
 function timeConverter(UNIX_timestamp){
 	var a = new Date(UNIX_timestamp * 1000);

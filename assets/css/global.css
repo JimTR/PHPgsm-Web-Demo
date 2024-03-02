@@ -362,3 +362,9 @@
 	display: table-row-group;
 }
 /* end div tables */
+.card-icons{
+color : cadetblue;
+float : right;
+font-size : xx-large;
+margin-top : -2%;
+}

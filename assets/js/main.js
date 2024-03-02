@@ -540,8 +540,9 @@ function askNotificationPermission() {
   }
   Notification.requestPermission().then((permission) => {
     // set the button to shown or hidden, depending on what the user answers
-    //notificationBtn.style.display = permission === "granted" ? "none" : "block";
+    //NotificationBtn.style.display = permission === "granted" ? "none" : "block";
 	//alert(permission,true);
+	return permission;
   });
 }
  function sleep(num) {
