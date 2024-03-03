@@ -822,6 +822,9 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 95px;
 }
 
+.no-boarder>:not(:first-child) {
+    border-top: 0px solid currentColor;
+}
 /* Recent Sales */
 .dashboard .recent-sales {
   font-size: 14px;
