@@ -56,6 +56,9 @@
 .no-border>:not(:first-child) {
     border-top: 0px solid currentColor;
 }	
+.noborder:last-child {
+  border: 2px solid orange;
+}
 
 .loader {
   border: 10px solid red;
