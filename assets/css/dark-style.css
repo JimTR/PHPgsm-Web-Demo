@@ -236,11 +236,11 @@ h1, h2, h3, h4, h5, h6 {
   color: #CCCD0A;
   font-family: "Poppins", sans-serif;
 }
-.card-title span {
+/*.card-title span {
   color: #899bbd;
   font-size: 14px;
   font-weight: 400;
-}
+}*/
 
 .card-body {
   padding: 0 20px 20px 20px;
@@ -1409,4 +1409,9 @@ a.invert:hover {
 
 .darker {
  background: #2F2F2F;
+}
+
+.phpgsm-logo {
+margin-top : -3%;
+float : right;
 }

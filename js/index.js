@@ -374,6 +374,9 @@ $(document).on("click",".stats", function () {
 		case "ban-lists":
 			id = "Banned Users";
 			// code block
+			break;
+		case "theme-switch":
+			alert("changing theme !",true);	
 			break;			
 		default:
 			// code block

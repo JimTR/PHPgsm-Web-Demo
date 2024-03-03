@@ -368,3 +368,7 @@ float : right;
 font-size : xx-large;
 margin-top : -2%;
 }
+
+.no-border {
+border : none;
+}
