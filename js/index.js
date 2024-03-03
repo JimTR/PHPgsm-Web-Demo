@@ -239,7 +239,7 @@ function online(url){
 					//console.log("emptying "+thisbody);
 					if( $('#'+thisbody).length >0 ) {addedBody= false;}
 					else{
-						online_servers = "<tbody id='"+thisbody+"' style='border:none;'>"; //<tr><td colspan='2'>Active server for "+serverid+"</td></tr>"; 
+						online_servers = "<tbody id='"+thisbody+"' class='no-border'>"; //<tr><td colspan='2'>Active server for "+serverid+"</td></tr>"; 
 						addedbody = true;
 					}
 					$.each( online_has_players, function( key, value ) {
