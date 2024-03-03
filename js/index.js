@@ -236,7 +236,7 @@ function online(url){
 				if (ptot >0 ) {
 					bodylength = $("#"+thisbody).length;
 					$("#"+thisbody).empty();
-					console.log("emptying "+thisbody);
+					//console.log("emptying "+thisbody);
 					if( $('#'+thisbody).length >0 ) {addedBody= false;}
 					else{
 						online_servers = "<tbody id='"+thisbody+"' style='border:none;'>"; //<tr><td colspan='2'>Active server for "+serverid+"</td></tr>"; 
