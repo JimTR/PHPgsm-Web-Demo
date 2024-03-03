@@ -1,3 +1,4 @@
+
 /**
 * Template Name: NiceAdmin - v2.2.0
 * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -822,7 +823,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 95px;
 }
 
-.no-boarder>:not(:first-child) {
+.no-border>:not(:first-child) {
     border-top: 0px solid currentColor;
 }
 /* Recent Sales */
