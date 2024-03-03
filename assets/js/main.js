@@ -562,3 +562,19 @@ function askNotificationPermission() {
     console.log("dropped out");
 }
 
+onDragStart = function(ev) {
+  //...
+console.log("drag start");
+}
+
+drop_handler = function(ev) {
+  ev.preventDefault();
+  ev.target.appendChild(document.getElementById("drag-box"));
+  console.log("drop handler");
+}
+
+dragover_handler = function(ev) {
+  ev.preventDefault();
+  ev.dataTransfer.dropEffect = "move";
+  console.log("moving");
+}

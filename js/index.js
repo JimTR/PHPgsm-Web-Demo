@@ -489,3 +489,15 @@ function isElement(element) {
 	}
 	return false;	
 }
+
+$("#active-servers").draggable({ 
+            start: function (event, ui) { 
+                //$(this).css("background-color", "green"); 
+                //$(this).css("color", "white") ;
+                console.log("on the move");
+            },
+            stop: function (event, ui) { 
+                //$(this).css("color", "blue"); 
+                console.log("finish move");
+            } 
+        }); 
