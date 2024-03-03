@@ -780,9 +780,7 @@ h1, h2, h3, h4, h5, h6 {
 .dashboard .recent-sales .dataTable-bottom {
   padding: 10px 0 0 0;
 }
-.table>:not(:first-child) {
-    border-top: 0px solid currentColor;
-}
+
 /* Top Selling */
 .dashboard .top-selling {
   font-size: 14px;
