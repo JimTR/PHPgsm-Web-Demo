@@ -114,8 +114,8 @@
 				<div class="tab-content pt-2" id="borderedTabContent">
 					<div class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
 						<section class="section">
-							<div class="row" id="drag-box">
-								<div class="col-md-4">
+							<div class="row dragContainer">
+								<div class="col-md-4" id="option1" draggable="true">
 									<div class="card info-card revenue-card">
 										<div class="card-body" style="min-height:27vh;">
 											
@@ -132,7 +132,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-4"  draggable="true">
 									<div class="card info-card revenue-card">
 										<div class="card-body" style="min-height:27vh;">
 											<h5 class="card-title" style="margin-top:1%;">Country Stats<i class="bx bx-world card-icons"></i></h5><hr style="margin:0;"/>
@@ -148,7 +148,7 @@
 										</div>
 									</div>	
 								</div>	
-								<div class="col-md-4">
+								<div class="col-md-4" draggable="true">
 									<div class="card info-card revenue-card">
 										<div class="card-body" style="min-height:27vh;">
 											<h5 class="card-title" style="margin-top:1%;">Server Stats<i class="fab fa-steam card-icons"></i></h5><hr style="margin:0;"/>
@@ -164,7 +164,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-md-4" id="parent-server"  >
+								<div class="col-md-4" id="parent-server"  draggable="true">
 									<div class="card info-card revenue-card">
 										<div class="card-body" style="min-height:22vh">
 											<h5 class="card-title" style="margin-top:1%;"><span  id="server-desc" class="card-title">API Server</span><i class="bi bi-server card-icons"></i></h5><hr style="margin:0;"/>
@@ -198,7 +198,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-md-4" id="about">
+								<div class="col-md-4" draggable="true">
 									<div class="card info-card revenue-card">
 										<div class="card-body">
 											<h5 class="card-title" style="margin-top:1%;" id="">About PHPgsm<img src="img/logo.png" alt=""  class="phpgsm-logo"></h5><hr style="margin:0;"/>
@@ -268,7 +268,7 @@
 	<script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
 	
 	<script src = "js/jquery.js"></script>
-	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="js/drag-drop-swap.js" type="text/javascript"></script>
 	<script src="assets/js/main.js"></script>
 	<script src="js/index.js"></script>
 	<script>
