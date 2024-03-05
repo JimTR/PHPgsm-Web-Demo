@@ -1398,3 +1398,6 @@ background-color: #6495ED;
 margin-top : -4%;
 float : right;
 }
+.active-server-height{
+max-height : 17vh;
+}

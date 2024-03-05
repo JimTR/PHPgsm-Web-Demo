@@ -275,26 +275,10 @@ function getCookie(cname) {
   }
   return "poo";
 }
-$('#themeswitch').click(function()
- {
-	  var oldCookieValue = getCookie('phpgsm_theme');
-       		
-		switch (oldCookieValue) {
-			case '411811':
-				console.log('dark to light');
-				setCookie('phpgsm_theme', '1297820',30);
-				break;
-			case '1297820':
-				console.log('light to dark');
-				setCookie('phpgsm_theme', '411811',30);
-				break;
-			}
-			location.reload();
-});
 function themeswitch()
  {
 	  var oldCookieValue = getCookie('phpgsm_theme');
-       		
+       		//alert("hit themeswitch",true);
 		switch (oldCookieValue) {
 			case '411811':
 				console.log('dark to light');
@@ -305,6 +289,9 @@ function themeswitch()
 				setCookie('phpgsm_theme', '411811',30);
 				break;
 			}
+			//alert("about to reload",true);
+			 //url= window.location.href;
+			//window.location.href(url);
 			location.reload();
 }
 $('#switch').click(function()
