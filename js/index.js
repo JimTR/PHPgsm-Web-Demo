@@ -9,6 +9,7 @@ $(document).ready(function(){
 	img = "img/logo.png";
 	text = `Your on the index page `;
 	notification = new Notification('Game Server Manager', { body: text, icon: img});*/
+	
  });
 
 function index() {
@@ -68,6 +69,8 @@ function index() {
 
 function game_server(url,server) {
 	// get game server info
+	
+	alert("show menu hidden",true);
 	$.ajax({ 
         type: 'GET', 
         url: url, 
@@ -273,6 +276,8 @@ function online(url){
 			$("#a-table").show();
 			$("#drag-box").show();
 			$("#active-load").hide();
+			//alert("show menu bar",true);
+			$("#menu-bar").show();
 		},
 		fail: function() {
 			alert('Failed');
