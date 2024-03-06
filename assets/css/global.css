@@ -70,7 +70,7 @@
   animation: spin 2s linear infinite;
   position: absolute;
   margin-left: 45vw;
-  margin-top: 30vh;
+ /* margin-top: 30vh;*/
   z-index: 2000;
 
 }
@@ -377,4 +377,9 @@ margin-top : -2%;
 
 .no-border {
 border : none;
+}
+
+.active-load{
+height : 60vh;
+width : 100%;
 }

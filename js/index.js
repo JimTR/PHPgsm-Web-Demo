@@ -89,6 +89,7 @@ function game_server(url,server) {
 }
 function online(url){
      var timer =sessionStorage.getItem(url);
+     
      //console.log("enter online with "+url);
 	 $.ajax({
 		url: url,
@@ -270,6 +271,8 @@ function online(url){
 			}
 			$("#a-stats").hide();
 			$("#a-table").show();
+			$("#drag-box").show();
+			$("#active-load").hide();
 		},
 		fail: function() {
 			alert('Failed');

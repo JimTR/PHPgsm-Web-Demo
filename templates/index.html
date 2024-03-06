@@ -21,7 +21,7 @@
 		<!--#sidebar#-->
 		<main id="main" class="main">
 			<section class="section dashboard">
-				<div class="loader" id="active-load" style="display:none;"></div>
+				
 				<div  class="span-show" style="text-align:center;">
 					<ul class="nav nav-tabs nav-tabs-bordered mini" id="borderedTab" role="tablist">
 						<li class="nav-item" role="presentation">
@@ -111,6 +111,13 @@
 		
 			</div>				
 			<div class="card-body">
+				<div  id="active-load"  class="active-load">
+					<div style="text-align:center;width:100%;">
+						<img style="position: relative;margin-top:15vh;" src="img/logo.256x256.png"></img>
+						<div class="loader" style="position:relative;margin-top:-20vh;"></div>
+						<div style="position: relative;text-align:center;width:100%;margin-top:10vh;"><h3 class="card-title">Loading Please wait</h3></div>
+					</div>
+				</div>
 				<div class="tab-content pt-2" id="borderedTabContent">
 					<div class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
 						<section class="section">
@@ -286,7 +293,7 @@
 			//sessionStorage.clear();
 			div = localStorage.getItem('card-order');
 			if( div !== null){$("#drag-box").html(div);}
-			$("#drag-box").show();
+			
 			$('#dashboard').toggleClass("collapsed");
 			index();
 			setInterval( function() { index(); },5000);
