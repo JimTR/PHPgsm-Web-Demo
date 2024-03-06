@@ -247,8 +247,10 @@ function online(url){
 						thisServer = "#"+ServerData[1]+"-row";
 						//console.log("we need to remove "+thisServer);
 						$(thisServer).remove();
-						sname = $("#"+ServerData[1]+"-name").text();
-						online_servers += "<tr id ='"+ServerData[1]+"-row' title ='open console "+sname+"' class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+sname+"</a></td><td  title='players online' style='text-align:center;'>"+ServerData[0]+"</td></tr>"; 
+						sname =  $("#"+ServerData[1]+"-name").text();
+						stname =  escapeHtml($("#"+ServerData[1]+"-name").text());
+						//console.log(sname);
+						online_servers += "<tr id ='"+ServerData[1]+"-row'  title ='open console "+stname+"' class='"+ServerData[1]+"'><td><a href='console.php?server="+ServerData[1]+"'>"+sname+"</a></td><td  title='players online' style='text-align:center;'>"+ServerData[0]+"</td></tr>"; 
 					});
 					if(addedbody == true) {online_servers +="</tbody>";}
 					ols = online_servers.length;

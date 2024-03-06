@@ -549,22 +549,10 @@ function askNotificationPermission() {
     console.log("dropped out");
 }
 
-onDragStart = function(ev) {
-  //...
-console.log("drag start");
+function read_storage() {
+	return JSON.parse(JSON.stringify(localStorage));
 }
 
-drop_handler = function(ev) {
-  ev.preventDefault();
-  ev.target.appendChild(document.getElementById("drag-box"));
-  console.log("drop handler");
-}
-
-dragover_handler = function(ev) {
-  ev.preventDefault();
-  ev.dataTransfer.dropEffect = "move";
-  console.log("moving");
-}
 function escapeHtml(text) {
     'use strict';
     return text.replace(/[\"&'\/<>]/g, function (a) {

@@ -95,14 +95,15 @@ DragContainer.prototype.handleEvent = function(event) {
   if (event.type == 'drop' && this.draggingItem != null) {
     if (this.type == 'swap') {
 		if(this.draggingItem.className !== event.target.className) {
-			alert("you can not drop here " +this.draggingItem.className+" / "+ event.target.className);
+			alert("you can not drop here " +this.draggingItem.className+" / "+ event.target.className,true);
 			
 		}
 		 let newValue = event.target.closest('div').querySelector('.col-md-4');
 		//alert(newValue);
       this.draggingItem.innerHTML = event.target.innerHTML;
-       console.log("drop in "+event.target.className);
-      console.log(" html "+this.draggingItem.innerHTML);
+       //console.log("drop in "+event.target.className);
+      //console.log(" html "+this.draggingItem.innerHTML);
+      //alert(index,true);
       event.target.innerHTML = event.dataTransfer.getData('text/html');
     } else if (this.type == 'reorder') {
       console.log('reorder');
@@ -113,6 +114,8 @@ DragContainer.prototype.handleEvent = function(event) {
   if (event.type == 'dragend' || event.type == 'drop') {
     this.items.removeClass('js-active');
     $(event.target).css("border",'none');
+    //alert( $("#drag-box").html());
+     localStorage.setItem('card-order',$("#drag-box").html());
     this.draggingItem = null;
   }
 }
