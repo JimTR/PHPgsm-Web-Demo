@@ -565,3 +565,12 @@ dragover_handler = function(ev) {
   ev.dataTransfer.dropEffect = "move";
   console.log("moving");
 }
+function escapeHtml(text) {
+    'use strict';
+    return text.replace(/[\"&'\/<>]/g, function (a) {
+        return {
+            '"': '&quot;', '&': '&amp;', "'": '&#39;',
+            '/': '&#47;',  '<': '&lt;',  '>': '&gt;'
+        }[a];
+    });
+}
