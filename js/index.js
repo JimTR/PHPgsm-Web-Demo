@@ -278,6 +278,7 @@ function online(url){
 			$("#active-load").hide();
 			//alert("show menu bar",true);
 			$("#menu-bar").show();
+			$("#header-wrapper").show();
 		},
 		fail: function() {
 			alert('Failed');
