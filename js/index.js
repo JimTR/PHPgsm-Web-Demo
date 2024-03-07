@@ -276,8 +276,7 @@ function online(url){
 			$("#a-table").show();
 			$("#drag-box").show();
 			$("#active-load").hide();
-			//alert("show menu bar",true);
-			$("#menu-bar").show();
+			if(!isMobile()) {$("#menu-bar").show();}
 			$("#header-wrapper").show();
 		},
 		fail: function() {

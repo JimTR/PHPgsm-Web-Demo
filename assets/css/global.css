@@ -383,3 +383,10 @@ border : none;
 height : 60vh;
 width : 100%;
 }
+
+.active-servers {
+font-weight : bold;
+text-align : center;
+display : none;
+margin-top : 16%;
+}
