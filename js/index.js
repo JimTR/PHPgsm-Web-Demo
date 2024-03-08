@@ -357,6 +357,7 @@ $(document).on("click",".uclick", function () {
 	$("#frame-dialog").css("max-width", "80vw");
 	$("#ifrm")[0].setAttribute("scrolling", "auto");
 	loadIframe("ifrm", url);
+	console.log("is this the frame bug");
 	$('#user-frame').modal('show');
 	
 });
@@ -385,11 +386,13 @@ $(document).on("click",".stats", function () {
 			id = "Banned Users";
 			// code block
 			break;
-		case "theme-switch":
-			alert("changing theme !",true);	
+		case "themeswitch":
+			//alert("changing theme !",true);	
+			return;
 			break;			
 		default:
-			// code block
+			console.log("using "+id);
+			return;
 	}
 	title = id.replace('-',' ');
 	title= ucwords(title,true) ;
@@ -402,7 +405,7 @@ $(document).on("click",".stats", function () {
 	
 	//url = "frame.php?frame=base_frame&id="+clickedBtnID+"&url="+linkUrl;
 	//$("#ifrm")[0].setAttribute("scrolling", "no");
-	//alert('url to use ' + url,true,"button click");
+	alert('url to use ' + url,true,"button click");
 	loadIframe("ifrm", url);
 	$('#user-frame').modal('show');
 });	 

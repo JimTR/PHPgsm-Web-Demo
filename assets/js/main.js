@@ -48,7 +48,9 @@ jQuery(document).ready(function(){
 	else {
 		$(".bi-bell").parent().parent().css({"padding-right": "10%", "display": "inline"});
 	}
-	
+	$('[data-toggle="tooltip"]').tooltip()
+	searchParams = new URLSearchParams(window.location.search)
+	if (searchParams.has('reset')) {localStorage.removeItem('card-order');}
 });
 
 $( window ).resize(function() {
@@ -278,16 +280,18 @@ function getCookie(cname) {
 function themeswitch()
  {
 	  var oldCookieValue = getCookie('phpgsm_theme');
-       		//alert("hit themeswitch",true);
+       		//alert("hit themeswitch "+oldCookieValue,true);
 		switch (oldCookieValue) {
-			case '411811':
+			case "411811":
 				console.log('dark to light');
 				setCookie('phpgsm_theme', '1297820',30);
 				break;
-			case '1297820':
+			case "1297820":
 				console.log('light to dark');
 				setCookie('phpgsm_theme', '411811',30);
 				break;
+			default:
+					console.log("switching to "+oldCookieValue);
 			}
 			//alert("about to reload",true);
 			 //url= window.location.href;
@@ -561,4 +565,7 @@ function escapeHtml(text) {
             '/': '&#47;',  '<': '&lt;',  '>': '&gt;'
         }[a];
     });
+}
+function showSettings() {
+	console.log("show settings");
 }

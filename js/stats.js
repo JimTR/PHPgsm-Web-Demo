@@ -22,11 +22,14 @@
 			$( "#sendcmd" ).trigger( "submit" )
 		}
 		else {
-			console.log("mangle iframe ?");
+			console.log("mangle iframe ? "+current_mod);
 			if(current_mod == "User Lists") {
 				$("#frame-dialog",parent.document).css("maxWidth","40vw");
 				$("#ifrm", parent.document).css("height","27vh");
 			}
+			else{
+				console.log("should we even show a frame ?");
+			}	
 		}
 	});
 	
