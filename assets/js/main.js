@@ -50,7 +50,10 @@ jQuery(document).ready(function(){
 	}
 	$('[data-toggle="tooltip"]').tooltip()
 	searchParams = new URLSearchParams(window.location.search)
-	if (searchParams.has('reset')) {localStorage.removeItem('card-order');}
+	if (searchParams.has('reset')) {
+		localStorage.removeItem('card-order');
+		 history.replaceState({}, null, "index.php");
+	}
 });
 
 $( window ).resize(function() {
