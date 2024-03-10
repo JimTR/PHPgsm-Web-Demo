@@ -298,7 +298,7 @@
 			
 			$('#dashboard').toggleClass("collapsed");
 			//index();
-			//setInterval( function() { index(); },5000);
+			setInterval( function() { index(); },5000);
 			$.each( servers, function( i, val ) {
 				//console.log(val);
 				setInterval( function() { online(val); }, 5000 );
