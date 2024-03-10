@@ -217,7 +217,7 @@
 										<div class="card-body" style="min-height:27vh;">
 											<h5 class="card-title">About PHPgsm<img src="img/logo.png" alt=""  class="phpgsm-logo"></h5><hr style="margin:0;"/>
 											<div style="width:91%;margin:auto;margin-top:1rem;"> 
-													PHPgsm is a game server manager API for steam (source mod) games, online documentation is found  <a href = "https://phporyx.co.uk/forumdisplay.php?fid=7">here</a>.<br>This site is using software that demonstrates the usage of the PHPgsm API, while functionable it is only a demostration.
+													PHPgsm is a game server manager API for steam (source mod) games, online documentation is found  <a href = "https://phporyx.co.uk/docs">here</a>.<br>This site is using software that demonstrates the usage of the PHPgsm API, while functionable it is only a demostration.
 											</div>
 										</div>
 									</div>
@@ -297,8 +297,8 @@
 			if( div !== null){$("#drag-box").html(div);}
 			
 			$('#dashboard').toggleClass("collapsed");
-			index();
-			setInterval( function() { index(); },5000);
+			//index();
+			//setInterval( function() { index(); },5000);
 			$.each( servers, function( i, val ) {
 				//console.log(val);
 				setInterval( function() { online(val); }, 5000 );

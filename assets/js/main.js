@@ -54,6 +54,8 @@ jQuery(document).ready(function(){
 		localStorage.removeItem('card-order');
 		 history.replaceState({}, null, "index.php");
 	}
+	var oldCookieValue = getCookie('phpgsm_theme');
+	if (oldCookieValue == "1297820") {$("#theme-icon").toggleClass('fa-sun fa-moon');}	
 });
 
 $( window ).resize(function() {

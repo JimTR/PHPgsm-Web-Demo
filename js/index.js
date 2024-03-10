@@ -14,7 +14,7 @@ $(document).ready(function(){
 
 function index() {
 	// read data use simular to loading the index file
-	if (serverCount >1) {$("#server-desc").text("API Servers");}
+	
 	//console.log("in index ");
      $.ajax({ 
         type: 'GET', 
@@ -92,7 +92,7 @@ function game_server(url,server) {
 }
 function online(url){
      var timer =sessionStorage.getItem(url);
-     
+     if (serverCount >1) {$("#server-desc").text("API Servers");}
      //console.log("enter online with "+url);
 	 $.ajax({
 		url: url,
@@ -337,7 +337,7 @@ function timeDifference(current, previous) {
 
 function imgError(image) {
     image.onerror = "";
-    image.src = "img/unknown.png";
+    image.src = "img/worldwide.png";
     return true;
 }
 $(document).on("click",".mobile-link", function () {
