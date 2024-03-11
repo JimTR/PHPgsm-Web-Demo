@@ -274,7 +274,7 @@
 		#alert#
 		#userframe#
 	</main>
-	<!--#footer#-->
+	#footer#
 	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 	<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
 	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -288,14 +288,14 @@
 	<script src="js/index.js"></script>
 	<script>
 		const servers = [#jsa#];
-		var origin   = window.location.href;
+		origin   = window.location.href;
 		origin = origin.replace(/\/[^\/]+$/,"");
-		var serverCount =servers.length;
+		serverCount = servers.length;
 		$(document).ready(function(){
 			div = localStorage.getItem('card-order');
 			if( div !== null){$("#drag-box").html(div);}
 			$('#dashboard').toggleClass("collapsed");
-			setInterval( function() { index(); },10000);
+			setInterval( function() { index(); },7000);
 			$.each( servers, function( i, val ) {setInterval( function() { online(val); }, 10000 );});
 		});
 		$('.dropdown-menu span.dropdown-toggle').on('click', function(e) {
