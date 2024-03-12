@@ -111,7 +111,7 @@ function online(url){
 					var general = data[i];
 					//console.log(general);
 					var serverid = general.server_id;
-					//$('#player').text(general.server_players);
+					$('#player').text(general.total_players);
 					href="<span id='"+serverid+"' class = 'baseserver player-link'>"+serverid+"</span>"; //change this line
 					$("#"+serverid+"-p-name").html(href);
 					$("#"+serverid+"-p-name").attr('url',general.server_url);
