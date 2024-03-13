@@ -61,12 +61,16 @@ function online(url){
 						console.log ("undefined with "+url);
 					}
 					else{	
-						$('#player_tot').text(general.players.player_tot);}
+						$('#player_tot').text(general.players.player_tot);
+						$('#game_tot').text(general.players.game_tot);
+						$('#run_tot').text(general.players.run_tot);
+						$('#logins_tot').text(general.players.tot_logins);
+					}
 					$('#logins_today').text(general.todays_players);
-					$('#logins_tot').text(general.players.tot_logins);
+					
 					$("#most-played-time").text(general.most_played_time); 
-					$('#game_tot').text(general.players.game_tot);
-					$('#run_tot').text(general.players.run_tot);
+					//$('#game_tot').text(general.players.game_tot);
+					//$('#run_tot').text(general.players.run_tot);
 					$('#p-stats').hide();
 					$('#p-table').show();
 					href="<span id='"+serverid+"' class = 'baseserver player-link'>"+serverid+"</span>"; //change this line
