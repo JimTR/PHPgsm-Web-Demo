@@ -104,9 +104,11 @@ $template->load(DOC_ROOT.'/templates/subtemplates/header.html');
 $page['header'] = $template->get_template();
  $Auth = new Auth ();
 $user = $Auth->getAuth(); // get the user
+define ("user_data",$user);
+//log_to(DOC_ROOT."/inc.log",user_data->username);
 if($user->loggedIn()) {
 	
-		//set the sidebar option to logout;
+		// update the user  data
 		$user_data = array (
 		'user_id' => $user->id,
 		'user_name' => $user->username,
