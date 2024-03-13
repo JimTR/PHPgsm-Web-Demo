@@ -12,6 +12,61 @@ $(document).ready(function(){
 	
  });
 
+function index() {
+	// read data use simular to loading the index file
+	
+	//console.log("in index ");
+     $.ajax({ 
+        type: 'GET', 
+        url: 'ajax.php', 
+        data    : { module: 'index' },
+        dataType: "json", 
+        success: function (data1) {
+			// got data
+			//alert(data1);
+			//console.log(data1);
+			$('#player_tot').text(data1.player_tot);
+			$('#logins_tot').text(data1.tot_logins);
+			$('#game_tot').text(data1.game_tot);
+			$('#player').text(data1.players);
+			$('#run_tot').text(data1.run_tot);
+			if ( data1.logins_today == undefined )  { data1.logins_today = '0';}
+			$('#logins_today').text(data1.logins_today);
+			$('#p-stats').hide();
+			$('#p-table').show();
+			$('#countries').text(data1.countries);
+			if (data1.country_top_today == null) { data1.country_top_today = "No Logins Today";}
+			$('#country_top_today').text(data1.country_top_today);
+			$('#country_top').text(data1.country_top);
+			$('#pop_country').text(data1.pop_country+" ("+data1.pop_time+")");
+			$('#c-stats').hide();
+			$('#c-table').show();
+			$('#most-played').text(data1.most_played);
+			$('#most-played-time').text(data1.total_time);
+			$('#s-stats').hide();
+			$('#s-table').show();
+			playerInfo = data1.player_info;
+			//console.log(playerInfo);
+			for (var i in playerInfo) {
+				player= playerInfo[i];
+				//console.log(player);
+				$("#player"+i+"-login").html(player.login);
+				$("#player"+i+"-logins").html(player.logins);
+				$("#player"+i+"-name").html(player.name);
+				$("#player"+i+"-map").html(player.map);
+				$("#player"+i+"-joined").html(player.joined);
+				$("#player"+i+"-avatar1").attr("src",player.avatar);
+				//$("#player"+i+"-link").attr("url",player.detail_link);
+				$("#player"+i+"-link").attr("onclick","iclick('"+player.detail_link+"')");
+			}
+		},
+        complete:function(data1){
+			 durl = $("#disco-img").attr("src");
+			$("#disco-img").removeAttr("src").attr("src", durl); // update discord
+		}
+    });
+}
+
 function game_server(url,server) {
 	// get game server info
 	
@@ -38,7 +93,7 @@ function game_server(url,server) {
 function online(url){
      var timer =sessionStorage.getItem(url);
      if (serverCount >1) {$("#server-desc").text("API Servers");}
-     console.log("enter online with "+url);
+     //console.log("enter online with "+url);
 	 $.ajax({
 		url: url,
 		type: 'post',
@@ -56,24 +111,7 @@ function online(url){
 					var general = data[i];
 					//console.log(general);
 					var serverid = general.server_id;
-					$('#player').text(general.total_players);
-					if (typeof general.players === 'undefined') {
-						console.log ("undefined with "+url);
-					}
-					else{	
-						$('#player_tot').text(general.players.player_tot);
-						$('#game_tot').text(general.players.game_tot);
-						$('#run_tot').text(general.players.run_tot);
-						$('#logins_tot').text(general.players.tot_logins);
-						$("#countries").text(general.players.countries);
-					}
-					$('#logins_today').text(general.todays_players);
-					
-					$("#most-played-time").text(general.most_played_time); 
-					//$('#game_tot').text(general.players.game_tot);
-					//$('#run_tot').text(general.players.run_tot);
-					$('#p-stats').hide();
-					$('#p-table').show();
+					//$('#player').text(general.server_players);
 					href="<span id='"+serverid+"' class = 'baseserver player-link'>"+serverid+"</span>"; //change this line
 					$("#"+serverid+"-p-name").html(href);
 					$("#"+serverid+"-p-name").attr('url',general.server_url);
@@ -97,17 +135,6 @@ function online(url){
 					}
 					$("#"+serverid+"-reboot").html(cpu.reboot);
 					$("#"+serverid+"-load").html(cpu.load_pc);
-					if (typeof general.country_data === 'undefined') {
-						console.log ("undefined with "+url);
-					}
-					else{	
-						$("#country-top").text(general.country_data[0].country);
-						$("#country-top-today").text(general.top_country_today);
-						$('#pop-country').text(general.pop_country+" ("+general.pop_time+")");
-						$('#most-played').text(general.top_server);
-					}
-					$("#c-table").show();
-					$("#c-stats").hide();
 					for (g in general) {
 						if( g =='country_data') {
 							var country_data = general['country_data'];  
@@ -115,7 +142,9 @@ function online(url){
 					} 
 				}
 				if (i =='top_players') {var top_players=data[i];}
+				//console.log(country_data);
 				for (var j in country_data) {
+					//console.log(country_data[j]['test']);
 					$("#country-"+j+"-name").text(country_data[j]['country']);
 					$("#country-"+j+"-flag").attr("src",country_data[j]['flag']);
 					$("#country-"+j+"-logins").text(country_data[j]['logins']);
@@ -125,15 +154,13 @@ function online(url){
 					
 				}
 				for (var j in  top_players) {
-					player = "#"+j;
-					$(player+"-name").text(top_players[j]['name']);
-					$(player+"-avatar1").attr("src",top_players[j]['avatar']);
-					$(player+"-link").attr("onclick","iclick('frame.php?id="+top_players[j]['steam_id']+"&frame=user_frame')");
-					plocation = "<img  style='vertical-align:middle;' src='"+top_players[j]['flag']+"'onerror='imgError(this);'/>&nbsp;"+top_players[j]['country'];
-					$(player+"-map").html(plocation);
-					$(player+"-joined").text(top_players[j]['first_log_on']);
-					$(player+"-login").text(top_players[j]['last_log_on']);
-					$(player+"-logins").text(top_players[j]['log_ons']);
+					// read in players
+					var td_title = '<tr id="playerrow_'+j+'" title ="'+top_players[j]['country']+'"><td id="player_row_'+j+'"><img src="'+top_players[j]['flag']+'" style ="width:5%;vertical-align: middle;">&nbsp;&nbsp;'+top_players[j]['name']+'</td>';
+					var td_first_logon = '<td>'+top_players[j]['first_log_on']+'</td>';
+					var td_logons = '<td>'+top_players[j]['log_ons']+'</td>';
+					var td_last_logon = '<td>'+top_players[j]['last_log_on']+'</td></tr>';
+					var tr = td_title+td_first_logon+td_logons+td_last_logon;
+					$("td#player_row_"+j).parent().replaceWith(tr);   
 				}
 				
 				for (var j in data[i]) {
@@ -148,19 +175,15 @@ function online(url){
 					} 
 				}
 				//console.log(player_tots);
-				if(typeof player_tots === 'undefined'){
-				}
-				else{
+				if(typeof player_tots != 'undefined'){
 					$('#player_tot').text(player_tots.player_tot);
 					$('#tplayers').text(data1.general.total_players);
 					$('#logins_tot').text(player_tots.tot_logins);
 					$('#tcountries').text(player_tots.countries);
 					$('#tinstalled').text(player_tots.game_tot);
 					$('#run_tot').text(player_tots.run_tot);
-				}	
 				}
-				$('#s-stats').hide();
-				$('#s-table').show();
+			
 				for (var j in data[i]) {
 					if (typeof serverlength === 0) {return;}   
 					var server = data[i][j]; // got server id
@@ -383,7 +406,7 @@ $(document).on("click",".stats", function () {
 	
 	//url = "frame.php?frame=base_frame&id="+clickedBtnID+"&url="+linkUrl;
 	//$("#ifrm")[0].setAttribute("scrolling", "no");
-	//alert('url to use ' + url,true,"button click");
+	alert('url to use ' + url,true,"button click");
 	loadIframe("ifrm", url);
 	$('#user-frame').modal('show');
 });	 
