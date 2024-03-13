@@ -77,6 +77,8 @@ switch ($module) {
 		}
 		$qstat['players']= $page['players'];
 		$sql = "SELECT game as server,count(*) as today FROM player_history WHERE FROM_UNIXTIME(last_play,'%Y-%m-%d') = CURDATE() group by game";
+		//SELECT `country`,country_code, count(*) as today FROM players WHERE FROM_UNIXTIME(last_log_on,"%Y-%m-%d") = CURDATE() group by country_code order by today desc limit 1;
+
 		$todays_players = $database->get_results($sql);   
 		foreach ($todays_players as $x) {$qstat['logins_today'] += $x['today'];}
 		$sql = 'SELECT `country`,country_code, count(*) as today FROM players WHERE FROM_UNIXTIME(last_log_on,"%Y-%m-%d") = CURDATE() group by country_code order by today desc;';
@@ -102,7 +104,7 @@ switch ($module) {
 			if ($player['first_log_on'] >0 ) {$player['first_log_on'] = time2str($player['first_log_on']);	}
 			else {$player['first_log_on'] = 'N/A';}
 			$c_code = trim(strtolower($player['country_code']));
-			if ($c_code =="") {$img_src="img/unknown.png";}
+			if ($c_code =="") {$img_src="img/worldwide.png";}
 			else {$img_src= "https://ipdata.co/flags/$c_code.png";}	
 			$player_info[$i]['name'] = $playerN2;
 			$player_info[$i]['map'] = "<img style='vertical-align: middle;' src='$img_src' onerror='imgError(this);'/> {$player['country']}";
@@ -123,12 +125,12 @@ switch ($module) {
 		//$page['player_total'] = $stats[0]['player_count'];
 		$qstat['total_time'] = convertSecToTime($stats[0]['total_time']);
 		
-		$sql = $sql = "SELECT country,count(*) as player_count,sum(log_ons) as login_count, sum(time_on_line) as time  from players group by `country` order by time DESC;";
-		$bc = $database->get_results($sql);
+		$sql =  "SELECT country,count(*) as player_count,sum(log_ons) as login_count, sum(time_on_line) as time  from players group by `country` order by time DESC limit 1;";
+		$bc = $database->get_row($sql);
 		//print_r($bc);
 		//die();
-		$qstat['pop_country'] = $bc[0]['country'];
-		$qstat['pop_time'] = convertSecToTime($bc[0]['time']);
+		$qstat['pop_country'] = $bc['country'];
+		$qstat['pop_time'] = convertSecToTime($bc['time']);
 		//die(print_r($qstat));
 		$sql = "SELECT servers.server_name,player_history.`game`,sum(player_history.`game_time`) as full_time FROM `player_history` left join servers on player_history.game= servers.host_name group by player_history.game ORDER BY `full_time` DESC limit 10";
 		$stats = $database->get_results($sql);
@@ -141,6 +143,7 @@ switch ($module) {
 		
 		
 		echo json_encode($qstat);
+		//printr($qstat,true);
 		break;
 		
 		case 'gameserver' :
