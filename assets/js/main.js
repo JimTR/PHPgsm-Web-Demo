@@ -40,7 +40,8 @@ window.alert = function(message,show,title) {
   
 jQuery(document).ready(function(){
 	if(!isMobile()) {
-		sessionStorage.clear();	
+		sessionStorage.clear();
+		console.log("starting clock");	
 		updateClock();
 		interval = setInterval('updateClock()', 1000);
 		$("#side-bar").hide();
@@ -74,7 +75,7 @@ $( window ).resize(function() {
 	}
    var width = $(window).width();
    var height = $(window).height();
-   //console.log( 'Browser Window width : '+width + ' , height : ' + height );
+   console.log( 'Browser Window width : '+width + ' , height : ' + height );
 });
 
 function updateClock ()

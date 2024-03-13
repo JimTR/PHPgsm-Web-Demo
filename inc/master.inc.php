@@ -173,7 +173,8 @@ foreach ($base_servers as $server) {
 	$uri = parse_url($server['url']);
 	$url = $uri['scheme']."://".$uri['host'].':'.$server['port'];
 	if(isset($uri['path'])) {$url .= "/".$uri['path'];}
-	$page['jsa'] .= '"'.$url.'/api.php?action=game_detail&server='.$server['fname'].'",';
+	if($server['master']){$page['jsa'] .= '"'.$url.'/api.php?action=game_detail&server='.$server['fname'].'",';}
+	else {$page['jsa'] .= '"'.$url.'/api.php?action=game_detail&filter=nogeneral&server='.$server['fname'].'",';}
 }
 //if (str_ends_with(rtrim($jsa), ',') {$jsa = rtrim($jsa,",");} 
 $sidebar_data['servers'] = 'Game Servers';
