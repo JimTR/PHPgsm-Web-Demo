@@ -57,7 +57,11 @@ function online(url){
 					//console.log(general);
 					var serverid = general.server_id;
 					$('#player').text(general.total_players);
-					if (typeof general.players.player_tot != 'undefined') {$('#player_tot').text(general.players.player_tot);}
+					if (typeof general.players.player_tot === 'undefined') {
+						console.log ("undefined with "+url);
+					}
+					else{	
+						$('#player_tot').text(general.players.player_tot);}
 					$('#logins_today').text(general.todays_players);
 					$('#logins_tot').text(general.players.tot_logins);
 					$("#most-played-time").text(general.most_played_time); 
