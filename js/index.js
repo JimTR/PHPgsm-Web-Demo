@@ -57,7 +57,7 @@ function online(url){
 					//console.log(general);
 					var serverid = general.server_id;
 					$('#player').text(general.total_players);
-					if (typeof general.players.player_tot === 'undefined') {
+					if (typeof general.players === 'undefined') {
 						console.log ("undefined with "+url);
 					}
 					else{	
