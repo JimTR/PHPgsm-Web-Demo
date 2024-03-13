@@ -97,11 +97,15 @@ function online(url){
 					}
 					$("#"+serverid+"-reboot").html(cpu.reboot);
 					$("#"+serverid+"-load").html(cpu.load_pc);
-					
-					$("#country-top").text(general.country_data[0].country);
-					$("#country-top-today").text(general.top_country_today);
-					$('#pop-country').text(general.pop_country+" ("+general.pop_time+")");
-					$('#most-played').text(general.top_server);
+					if (typeof general.country_data === 'undefined') {
+						console.log ("undefined with "+url);
+					}
+					else{	
+						$("#country-top").text(general.country_data[0].country);
+						$("#country-top-today").text(general.top_country_today);
+						$('#pop-country').text(general.pop_country+" ("+general.pop_time+")");
+						$('#most-played').text(general.top_server);
+					}
 					$("#c-table").show();
 					$("#c-stats").hide();
 					for (g in general) {
