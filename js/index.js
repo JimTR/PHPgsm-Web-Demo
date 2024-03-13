@@ -65,6 +65,7 @@ function online(url){
 						$('#game_tot').text(general.players.game_tot);
 						$('#run_tot').text(general.players.run_tot);
 						$('#logins_tot').text(general.players.tot_logins);
+						$("#countries").text(general.players.countries);
 					}
 					$('#logins_today').text(general.todays_players);
 					
@@ -96,7 +97,7 @@ function online(url){
 					}
 					$("#"+serverid+"-reboot").html(cpu.reboot);
 					$("#"+serverid+"-load").html(cpu.load_pc);
-					$("#countries").text(general.players.countries);
+					
 					$("#country-top").text(general.country_data[0].country);
 					$("#country-top-today").text(general.top_country_today);
 					$('#pop-country').text(general.pop_country+" ("+general.pop_time+")");
