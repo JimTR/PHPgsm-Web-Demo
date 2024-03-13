@@ -148,13 +148,16 @@ function online(url){
 					} 
 				}
 				//console.log(player_tots);
-				if(typeof player_tots != 'undefined'){
+				if(typeof player_tots === 'undefined'){
+				}
+				else{
 					$('#player_tot').text(player_tots.player_tot);
 					$('#tplayers').text(data1.general.total_players);
 					$('#logins_tot').text(player_tots.tot_logins);
 					$('#tcountries').text(player_tots.countries);
 					$('#tinstalled').text(player_tots.game_tot);
 					$('#run_tot').text(player_tots.run_tot);
+				}	
 				}
 				$('#s-stats').hide();
 				$('#s-table').show();
