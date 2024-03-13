@@ -36,9 +36,9 @@ function index() {
 			$('#p-table').show();
 			$('#countries').text(data1.countries);
 			if (data1.country_top_today == null) { data1.country_top_today = "No Logins Today";}
-			$('#country_top_today').text(data1.country_top_today);
-			$('#country_top').text(data1.country_top);
-			$('#pop_country').text(data1.pop_country+" ("+data1.pop_time+")");
+			$('#country-top-today').text(data1.country_top_today);
+			$('#country-top').text(data1.country_top);
+			$('#pop-country').text(data1.pop_country+" ("+data1.pop_time+")");
 			$('#c-stats').hide();
 			$('#c-table').show();
 			$('#most-played').text(data1.most_played);
