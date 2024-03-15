@@ -155,22 +155,16 @@ function online(url){
 					// read in players
 					playerId = "#"+j;
 					player_data = top_players[j];
-					console.log(playerId);
-					console.log(player_data); 
-				$(playerId+"-login").html(player_data.last_log_on);
-				$(playerId+"-avatar1").attr("src",player_data.avatar);
-				$(playerId+"-name").html(player_data.name);
-				$(playerId+"-joined").html(player_data.first_log_on);
-				$(playerId+"-logins").html(player_data.log_ons);
-				country = "<img src='"+player_data.flag+"' onerror='imgError(this);'/>&nbsp;"+player_data.country;
-				$(playerId+"-map").html(country);
-				$(playerId+"-link").attr("onclick","iclick('frame.php?id="+player_data.steam_id+"&frame=user_frame')");
-				/*
-				onclick="iclick('frame.php?id=76561198112017378&frame=user_frame')"
-				$("#player"+i+"-map").html(player.map);
-				
-				*/
-					
+					//console.log(playerId);
+					//console.log(player_data); 
+					$(playerId+"-login").html(player_data.last_log_on);
+					$(playerId+"-avatar1").attr("src",player_data.avatar);
+					$(playerId+"-name").html(player_data.name);
+					$(playerId+"-joined").html(player_data.first_log_on);
+					$(playerId+"-logins").html(player_data.log_ons);
+					country = "<img src='"+player_data.flag+"' onerror='imgError(this);'/>&nbsp;"+player_data.country;
+					$(playerId+"-map").html(country);
+					$(playerId+"-link").attr("onclick","iclick('frame.php?id="+player_data.steam_id+"&frame=user_frame')");
 				}
 				
 				for (var j in data[i]) {
