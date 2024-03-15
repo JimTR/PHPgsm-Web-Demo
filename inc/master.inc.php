@@ -162,7 +162,7 @@ foreach ($servers as $server) {
 		$sidebar_data['pulldown'] .="<li><a class='dropdown-item' href='$href'><img style='width:16px;' src='{$server['logo']}'>&nbsp;{$server['server_name']}&nbsp;</a></li>";}
 }
 if(!empty($sidebar_data['pulldown'])) {$sidebar_data['pulldown'] .= "</ul>";}
-$sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `fname` ASC";
+$sql = "select * from base_servers where `enabled` = 1 and `extraip` = 0 ORDER BY `master` DESC, `fname` ASC";
 $base_servers = $database->get_results($sql);
 $page['server_body']='';
 foreach ($base_servers as $server) {
@@ -173,10 +173,10 @@ foreach ($base_servers as $server) {
 	$uri = parse_url($server['url']);
 	$url = $uri['scheme']."://".$uri['host'].':'.$server['port'];
 	if(isset($uri['path'])) {$url .= "/".$uri['path'];}
-	//if($server['master']){
+	if($server['master']){
 		$page['jsa'] .= '"'.$url.'/api.php?action=game_detail&server='.$server['fname'].'",';
-	//}
-	//else {$page['jsa'] .= '"'.$url.'/api.php?action=game_detail&filter=nogeneral&server='.$server['fname'].'",';}
+	}
+	else {$page['jsa'] .= '"'.$url.'/api.php?action=game_detail&filter=nogeneral&server='.$server['fname'].'",';}
 }
 //if (str_ends_with(rtrim($jsa), ',') {$jsa = rtrim($jsa,",");} 
 $sidebar_data['servers'] = 'Game Servers';

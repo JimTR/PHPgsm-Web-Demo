@@ -134,9 +134,9 @@
 											</div>
 											<table id="p-table" class="table no-border" style="display:none;">
 												<tr  title="Players online now"><td>Online</td><td class="map-title"><span  id="player"></span><//td></tr>
-												<tr  title="Total number of Players that have logged in"><td>Total</td><td class="map-title" ><span id="player_tot"></span></td></tr>
-												<tr  title="Total number of Players that have logged in today"><td>Today</td><td class="map-title"><span id="logins_today"></span></td></tr>		
-												<tr  title="Total game logins"><td>Total</td><td class="map-title" ><span id="logins_tot"  ></span></td></tr>	
+												<tr  title="Total number of Players that have logged in today"><td>Today</td><td class="map-title"><span id="logins-today"></span></td></tr>		
+												<tr  title="Total number of Players that have logged in"><td>Player Total</td><td class="map-title" ><span id="player-tot"></span></td></tr>
+												<tr  title="Total game logins"><td>Game Logins</td><td class="map-title" ><span id="logins-tot"  ></span></td></tr>	
 											</table>
 											
 										</div>
@@ -217,7 +217,7 @@
 										<div class="card-body" style="min-height:27vh;">
 											<h5 class="card-title">About PHPgsm<img src="img/logo.png" alt=""  class="phpgsm-logo"></h5><hr style="margin:0;"/>
 											<div style="width:91%;margin:auto;margin-top:1rem;"> 
-													PHPgsm is a game server manager API for steam (source mod) games, online documentation is found  <a href = "https://phporyx.co.uk/docs">here</a>.<br>This site is using software that demonstrates the usage of the PHPgsm API, while functionable it is only a demostration.
+													PHPgsm is a game server manager API for steam (source mod) games, online documentation is found  <a href = "https://phporyx.co.uk/docs">here</a>.<br>This site is using software that demonstrates the usage of the PHPgsm API, while functionable it is only a demonstration.
 											</div>
 										</div>
 									</div>
@@ -288,25 +288,23 @@
 	<script src="js/index.js"></script>
 	<script>
 		const servers = [#jsa#];
-		console.log(servers);
 		origin   = window.location.href;
 		origin = origin.replace(/\/[^\/]+$/,"");
 		serverCount = servers.length;
 		$(document).ready(function(){
-			console.log("doc ready");
+			
 			div = localStorage.getItem('card-order');
 			if( div !== null){
 				$("#drag-box").html(div);
 				console.log("load cards");
 			}
-			//$('#dashboard').toggleClass("collapsed");
-			index();
+			
 			$.each(servers, function( index, value ) {
 				console.log( index + ": " + value );
 				online(value);
 				setInterval( function() { online(value); }, 5000 );
 			});
-			//$.each( servers, function( i, val ) {setInterval( function() { online(val); }, 5000 );}) ;
+			
 		});
 		$('.dropdown-menu span.dropdown-toggle').on('click', function(e) {
 			if (!$("#submenu").hasClass('show')) {

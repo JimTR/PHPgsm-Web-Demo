@@ -118,6 +118,27 @@ function online(url){
 						}
 					} 
 				}
+				if(typeof general.players != 'undefined') {
+				$('#player-tot').text(general.players.player_tot);
+				$('#logins-tot').text(general.players.tot_logins);
+				$('#game_tot').text(general.players.game_tot);
+				$('#player').text(general.total_players);
+				$('#run_tot').text(general.players.run_tot);
+				if ( general.todays_players == undefined )  { general.todays_players = '0';}
+				$('#logins-today').text(general.todays_players);
+				$('#p-stats').hide();
+				$('#p-table').show();
+				$('#countries').text(general.players.countries);
+				$('#country-top-today').text(general.top_country_today);
+				$('#country-top').text(general.pop_country);
+				$('#pop-country').text(general.pop_country+" ("+general.pop_time+")");
+				$('#c-stats').hide();
+				$('#c-table').show();
+				$('#most-played').text(general.top_server);
+				$('#most-played-time').text(general.most_played_time);
+				$('#s-stats').hide();
+				$('#s-table').show();
+				}
 				if (i =='top_players') {var top_players=data[i];}
 				//console.log(country_data);
 				for (var j in country_data) {
@@ -132,12 +153,24 @@ function online(url){
 				}
 				for (var j in  top_players) {
 					// read in players
-					var td_title = '<tr id="playerrow_'+j+'" title ="'+top_players[j]['country']+'"><td id="player_row_'+j+'"><img src="'+top_players[j]['flag']+'" style ="width:5%;vertical-align: middle;">&nbsp;&nbsp;'+top_players[j]['name']+'</td>';
-					var td_first_logon = '<td>'+top_players[j]['first_log_on']+'</td>';
-					var td_logons = '<td>'+top_players[j]['log_ons']+'</td>';
-					var td_last_logon = '<td>'+top_players[j]['last_log_on']+'</td></tr>';
-					var tr = td_title+td_first_logon+td_logons+td_last_logon;
-					$("td#player_row_"+j).parent().replaceWith(tr);   
+					playerId = "#"+j;
+					player_data = top_players[j];
+					console.log(playerId);
+					console.log(player_data); 
+				$(playerId+"-login").html(player_data.last_log_on);
+				$(playerId+"-avatar1").attr("src",player_data.avatar);
+				$(playerId+"-name").html(player_data.name);
+				$(playerId+"-joined").html(player_data.first_log_on);
+				$(playerId+"-logins").html(player_data.log_ons);
+				country = "<img src='"+player_data.flag+"' onerror='imgError(this);'/>&nbsp;"+player_data.country;
+				$(playerId+"-map").html(country);
+				$(playerId+"-link").attr("onclick","iclick('frame.php?id="+player_data.steam_id+"&frame=user_frame')");
+				/*
+				onclick="iclick('frame.php?id=76561198112017378&frame=user_frame')"
+				$("#player"+i+"-map").html(player.map);
+				
+				*/
+					
 				}
 				
 				for (var j in data[i]) {
@@ -383,7 +416,7 @@ $(document).on("click",".stats", function () {
 	
 	//url = "frame.php?frame=base_frame&id="+clickedBtnID+"&url="+linkUrl;
 	//$("#ifrm")[0].setAttribute("scrolling", "no");
-	alert('url to use ' + url,true,"button click");
+	//alert('url to use ' + url,true,"button click");
 	loadIframe("ifrm", url);
 	$('#user-frame').modal('show');
 });	 
