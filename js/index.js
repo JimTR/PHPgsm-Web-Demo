@@ -130,7 +130,7 @@ function online(url){
 				$('#p-table').show();
 				$('#countries').text(general.players.countries);
 				$('#country-top-today').text(general.top_country_today);
-				$('#country-top').text(general.pop_country);
+				$('#country-top').text(general.top_country);
 				$('#pop-country').text(general.pop_country+" ("+general.pop_time+")");
 				$('#c-stats').hide();
 				$('#c-table').show();
