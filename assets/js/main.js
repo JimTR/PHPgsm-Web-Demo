@@ -575,3 +575,6 @@ function escapeHtml(text) {
 function showSettings() {
 	console.log("show settings");
 }
+function clear_console() {
+	console.clear();
+}
