@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta content="width=device-width, initial-scale=1.0" name="viewport">
-		<title><!--#page-title#--></title>
+		<title>{$page-title}</title>
 		<meta content="" name="description">
 		<meta content="" name="keywords">
 		<!-- Favicons -->
@@ -12,100 +12,90 @@
 		<!-- Google Fonts -->
 		<link href="https://fonts.gstatic.com" rel="preconnect">
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-		<!--#include#-->
+		{$include}
 	</head>
 	<body>
-		<!--#header#-->
-		<!--#sidebar#-->
+		{$header}
+		{$sidebar}
 		<main id="main" class="main">
 			<div class="pagetitle">
-				<h1><!--#page-title#--></h1>
-				<!--<nav>
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="index.php">Home</a></li>
-						<li class="breadcrumb-item active"><!--#page-title#--><!--</li>
-					</ol>
-				</nav>-->
+				<h1>{$page-title}</h1>
 			</div><!-- End Page Title -->
 		<section class="section">
 			<div class="col-lg12">
 				<div class="card">
 					<div class="card-body">
-				<div class="row">
-				<div style="display:none;" class="col-lg-6" id="searchbox">
-					<h5 class="card-title">Search Players</h5>
-					<div id="user-id" style="display:none;"><!--#userid#--></div>
-					<form id="sendcmd" style="float:left;" action="<!--#url#-->/search.php" method="get">
-						<div class="input-group">
-							<input class="form-control"name="text" type="text" id="text" size="70" placeholder="Player name, steam id or IP">
-							<input type="hidden" id="action" name="action" value="search">
-							<label for="send" class="btn btn-info">Search<i class="bx bxs-send"></i></label>	   
-							<input class="hidden" type="submit" value="send" id="send">
-						</div>	
-						<div class="form-check" style="padding-top:1em;">
-							<input class="form-check-input" type="radio" name="type" id="gridRadios3" value="fuzzy" checked>
-							<label class="form-check-label" for="gridRadios3"  style="padding-right:10%;">Name</label>
-							<input class="form-check-input" type="radio" name="type" id="gridRadios1" value="id">
-							<label class="form-check-label" for="gridRadios1"  style="padding-right:10%;">Steam ID</label>
-							<input class="form-check-input" type="radio" name="type" id="gridRadios4" value="ip">
-							<label class="form-check-label" for="gridRadios4">IP</label>
-						</div>
-					</form>
-					<div style="clear:both;padding-top:1%;">
-						<button onclick="history.back();"  type="button" class="btn btn-success"><i class="fa-regular fa-hand-point-left"></i> Go Back</button>
-				</div>
-				</div>
-				<div class="col-lg-6" style="display:none;" id="results">
-					<h5 class="card-title">Results</h5>
-					<div class="table-wrapper" style="max-height:200px;">
-					<table class="table table-sml" style="position: relative;">
-						<thead>
-							<tr style="padding-bottom:6px;">
-								<th class="table-header" >User</th>
-								<th class="table-header">Last Log On</th>
-								<th class="table-header">Profile Link</th>
-							</tr>
-						</thead>	
-						<tbody id="data_table">
-							<tr><td>hello</td><td>there</td></tr>
-						</tbody>
-					</table>
-					</div>
-				 </div> <!-- end row 1 -->
-			<!-- new row -->
-			<div id="editor" class="col-lg-12" style="display:none">
-				<h5 class="card-title">Details For <span id="un"></span></h5>
-				<img id="user-avatar" style="width:16vw;position:absolute;left:68vw;top:1%;border-radius:50%;" src="img/blank.png">
-				<div class="row">
-					<div class="col-lg-6">
-						<h5>General Details</h5>
-					
-					<table id="dta" class="table"><thead><th style="width:21%;"></th><th></th></thead><tbody id="gen"></tbody></table>
-				</div>
-				<div class="col-lg-6">
-					<h5>Server History</h5>
-					<table id="dta1" class="table">
-						<thead>
-							<tr style="padding-bottom:6px;">
-								<th>Server</th>
-								<th style="text-align:left;">Log ons</th>
-								<th style="text-align:left;">Last Log on</th>
-								<th style="text-align:left;">Time On Line</th>
-							</tr>
-						</thead>	
-						<tbody id="gd1"></tbody></table>
-				</div>
-				</div>
-				<div class="modal-footer <!--#button_class#-->">
-					<button id="ban" type="button" class="btn btn-danger"><i class="fa-solid fa-user-slash"></i> Ban</button>
-					<button id="bans" type="button" class="btn btn-warning"><i class="fa-solid fa-file-waveform"></i> Ban History</button>
-					<button id="go_back" type="button" class="btn btn-success"><i class="fa-regular fa-hand-point-left"></i> Go Back</button>
-				</div>
-				
-			</div>
-			</div> <!-- card-body -->
-			</div> <!-- card -->
-			</div>	
+						<div class="row">
+							<div style="display:none;" class="col-lg-6" id="searchbox">
+								<h5 class="card-title">Search Players</h5>
+								<div id="user-id" style="display:none;">{$userid}</div>
+								<form id="sendcmd" style="float:left;" action="<!--#url#-->/search.php" method="get">
+									<div class="input-group">
+										<input class="form-control"name="text" type="text" id="text" size="70" placeholder="Player name, steam id or IP">
+										<input type="hidden" id="action" name="action" value="search">
+										<label for="send" class="btn btn-info">Search<i class="bx bxs-send"></i></label>	   
+										<input class="hidden" type="submit" value="send" id="send">
+									</div>	
+									<div class="form-check" style="padding-top:1em;">
+										<input class="form-check-input" type="radio" name="type" id="gridRadios3" value="fuzzy" checked>
+										<label class="form-check-label" for="gridRadios3"  style="padding-right:10%;">Name</label>
+										<input class="form-check-input" type="radio" name="type" id="gridRadios1" value="id">
+										<label class="form-check-label" for="gridRadios1"  style="padding-right:10%;">Steam ID</label>
+										<input class="form-check-input" type="radio" name="type" id="gridRadios4" value="ip">
+										<label class="form-check-label" for="gridRadios4">IP</label>
+									</div>
+								</form>
+								<div style="clear:both;padding-top:1%;">
+									<button onclick="history.back();"  type="button" class="btn btn-success"><i class="fa-regular fa-hand-point-left"></i> Go Back</button>
+								</div>
+							</div>
+							<div class="col-lg-6" style="display:none;" id="results">
+								<h5 class="card-title">Results</h5>
+								<div class="table-wrapper" style="max-height:200px;">
+									<table class="table table-sml" style="position: relative;">
+										<thead>
+											<tr style="padding-bottom:6px;">
+												<th class="table-header" >User</th>
+												<th class="table-header">Last Log On</th>
+												<th class="table-header">Profile Link</th>
+											</tr>
+										</thead>	
+										<tbody id="data_table"></tbody>
+									</table>
+								</div>
+							</div> <!-- end row 1 -->
+							<div id="editor" class="col-lg-12" style="display:none">
+								<h5 class="card-title">Details For <span id="un"></span></h5>
+								<img id="user-avatar" style="width:16vw;position:absolute;left:68vw;top:1%;border-radius:50%;" src="img/blank.png">
+								<div class="row">
+									<div class="col-lg-6">
+										<h5>General Details</h5>
+										<table id="dta" class="table"><thead><th style="width:21%;"></th><th></th></thead><tbody id="gen"></tbody></table>
+									</div>
+									<div class="col-lg-6">
+										<h5>Server History</h5>
+										<table id="dta1" class="table">
+											<thead>
+												<tr style="padding-bottom:6px;">
+													<th>Server</th>
+													<th style="text-align:left;">Log ons</th>
+													<th style="text-align:left;">Last Log on</th>
+													<th style="text-align:left;">Time On Line</th>
+												</tr>
+											</thead>	
+											<tbody id="gd1"></tbody>
+										</table>
+									</div>
+								</div>
+								<div class="modal-footer <!--#button_class#-->">
+									<button id="ban" type="button" class="btn btn-danger"><i class="fa-solid fa-user-slash"></i> Ban</button>
+									<button id="bans" type="button" class="btn btn-warning"><i class="fa-solid fa-file-waveform"></i> Ban History</button>
+									<button id="go_back" type="button" class="btn btn-success"><i class="fa-regular fa-hand-point-left"></i> Go Back</button>
+								</div>
+							</div>
+						</div> <!-- card-body -->
+					</div> <!-- card -->
+				</div>	
 			</section>
 	</main>
 	<div class="modal fade" id="error" tabindex="-1" aria-hidden="true" style="display: none;">
@@ -142,13 +132,11 @@
 							<tbody id="ban-body"></tbody>
 						</table>
 				</div>
-			 <div class="modal-footer">
-                      <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-             </div>
-                  </div>
-                 </div>
-                 </div>                          
-  <!--#footer#-->
+				<div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+			</div>
+		</div>
+	</div>                          
+{$footer}
  <!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

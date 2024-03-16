@@ -1,76 +1,23 @@
 $(document).ready(function(){
-	/*Notification.requestPermission().then((result) => {
-		//console.log(result);
-		//if (result !== "granted") {
-			//askNotificationPermission();
-		}
+	origin   = window.location.href;
+	origin = origin.replace(/\/[^\/]+$/,"");
+	serverCount = servers.length;
+	div = localStorage.getItem('card-order');
+	if( div !== null){
+		$("#drag-box").html(div);
+		console.log("load cards");
+	}
+	$.each(servers, function( index, value ) {
+		//console.log( index + ": " + value );
+		online(value);
+		setInterval( function() { online(value); }, 5000 );
 	});
-	
-	img = "img/logo.png";
-	text = `Your on the index page `;
-	notification = new Notification('Game Server Manager', { body: text, icon: img});*/
-	
- });
-
-function index() {
-	// read data use simular to loading the index file
-	
-	//console.log("in index ");
-     $.ajax({ 
-        type: 'GET', 
-        url: 'ajax.php', 
-        data    : { module: 'index' },
-        dataType: "json", 
-        success: function (data1) {
-			// got data
-			//alert(data1);
-			//console.log(data1);
-			$('#player_tot').text(data1.player_tot);
-			$('#logins_tot').text(data1.tot_logins);
-			$('#game_tot').text(data1.game_tot);
-			$('#player').text(data1.players);
-			$('#run_tot').text(data1.run_tot);
-			if ( data1.logins_today == undefined )  { data1.logins_today = '0';}
-			$('#logins_today').text(data1.logins_today);
-			$('#p-stats').hide();
-			$('#p-table').show();
-			$('#countries').text(data1.countries);
-			if (data1.country_top_today == null) { data1.country_top_today = "No Logins Today";}
-			$('#country-top-today').text(data1.country_top_today);
-			$('#country-top').text(data1.country_top);
-			$('#pop-country').text(data1.pop_country+" ("+data1.pop_time+")");
-			$('#c-stats').hide();
-			$('#c-table').show();
-			$('#most-played').text(data1.most_played);
-			$('#most-played-time').text(data1.total_time);
-			$('#s-stats').hide();
-			$('#s-table').show();
-			playerInfo = data1.player_info;
-			//console.log(playerInfo);
-			for (var i in playerInfo) {
-				player= playerInfo[i];
-				//console.log(player);
-				$("#player"+i+"-login").html(player.login);
-				$("#player"+i+"-logins").html(player.logins);
-				$("#player"+i+"-name").html(player.name);
-				$("#player"+i+"-map").html(player.map);
-				$("#player"+i+"-joined").html(player.joined);
-				$("#player"+i+"-avatar1").attr("src",player.avatar);
-				//$("#player"+i+"-link").attr("url",player.detail_link);
-				$("#player"+i+"-link").attr("onclick","iclick('"+player.detail_link+"')");
-			}
-		},
-        complete:function(data1){
-			 durl = $("#disco-img").attr("src");
-			$("#disco-img").removeAttr("src").attr("src", durl); // update discord
-		}
-    });
-}
+});
 
 function online(url){
      var timer =sessionStorage.getItem(url);
      if (serverCount >1) {$("#server-desc").text("API Servers");}
-     //console.log("enter online with "+url);
+     console.log("enter online with "+url);
 	 $.ajax({
 		url: url,
 		type: 'post',
@@ -129,8 +76,9 @@ function online(url){
 				$('#p-stats').hide();
 				$('#p-table').show();
 				$('#countries').text(general.players.countries);
+				if (general.top_country_today == null) { general.top_country_today = "No Logins Today";}
 				$('#country-top-today').text(general.top_country_today);
-				$('#country-top').text(general.top_country);
+				$('#country-top').text(general.country_data[0].country);
 				$('#pop-country').text(general.pop_country+" ("+general.pop_time+")");
 				$('#c-stats').hide();
 				$('#c-table').show();
@@ -392,8 +340,8 @@ $(document).on("click",".stats", function () {
 			// code block
 			break;
 		case "themeswitch":
-			//alert("changing theme !",true);	
-			return;
+			alert("changing theme !",true);
+			themeswitch();	
 			break;			
 		default:
 			console.log("using "+id);
@@ -508,4 +456,21 @@ function isElement(element) {
 	return false;	
 }
 
+window.onunload = function() {
+    alert('jscript Bye.',true);
+}
+$(window).unload(function(){
+  alert('jquery Bye.',true);
+});
 
+$('.dropdown-menu span.dropdown-toggle').on('click', function(e) {
+	if (!$("#submenu").hasClass('show')) {
+		$("#submenu").attr("test","closed");
+		$("#submenu").removeClass('show');
+	}
+	else{
+		$("#submenu").attr("test","open");
+		$("#submenu").addClass('show');
+	}
+	return false;
+});

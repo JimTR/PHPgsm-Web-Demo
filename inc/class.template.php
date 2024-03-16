@@ -47,6 +47,8 @@ class Template {
 		*/ 
 		$this->template = str_replace("<!--#$var#-->", $content, $this->template);
         $this->template = str_replace("#$var#", $content, $this->template);
+        $this->template = str_replace("{\$$var}", $content, $this->template);
+         
 
    }
 
@@ -130,6 +132,8 @@ class Template {
 				 }
 			 $this->template = str_replace("<!--#$k#-->", $v, $this->template); // adds hidden stuff
 			 $this->template = str_replace("#$k#", $v, $this->template);
+			 $this->template = str_replace("{\$$k}", $v, $this->template);
+			 $this->template = preg_replace('/({\$\S+})/', '', $this->template); // remove invalid 
 		 } 
 	 }
 	 

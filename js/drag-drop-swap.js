@@ -64,21 +64,21 @@ DragContainer.prototype.handleEvent = function(event) {
   if (event.type == 'dragstart') {
     this.draggingItem = event.target;
     event.dataTransfer.setData('text/html', this.draggingItem.innerHTML);
-    console.log( this.draggingItem.innerHTML);
-    console.log(this.draggingItem.className);
+    //console.log( this.draggingItem.innerHTML);
+    //console.log(this.draggingItem.className);
   }
   
   if (event.type == 'dragover' && this.draggingItem != event.target) {
-	  console.log(this.draggingItem.className);
+	  //console.log(this.draggingItem.className);
 	  if(this.draggingItem.className !== event.target.className) {
-			console.log("you can not drop here " +this.draggingItem.className+" / "+ event.target.className);
+			//console.log("you can not drop here " +this.draggingItem.className+" / "+ event.target.className);
 			return;
 			
 		}
 		else if (this.draggingItem.className === event.target.className) {
 			//$t.addClass('js-active');
 			$(event.target).css("border",'1px solid green');
-			console.log("we have a target");
+			//console.log("we have a target");
 		}
     // Preventing the default action _enables_ drop. Because JS APIs.
     if (event.preventDefault) {

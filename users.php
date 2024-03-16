@@ -46,6 +46,7 @@ if(isset($_GET['id'])) {
 $sidebar_data['servers'] = 'Game Servers';
 $sidebar_data['base_servers'] = 'Base Servers';
 $page['title'] = "User Editor";
+$page['userid'] = '';
 $template->load('templates/subtemplates/header.html'); // load header
 $template->replace_vars($header_vars);
 $page['header'] = $template->get_template();

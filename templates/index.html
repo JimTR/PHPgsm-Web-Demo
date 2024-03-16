@@ -14,12 +14,12 @@
 		<link href="https://fonts.gstatic.com" rel="preconnect">
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 	
-		<!--#include#-->
+		{$include}
  	</head>
 	<body>
 		<div id ="header-wrapper" style="display:none;">
-		<!--#header#-->
-		<!--#sidebar#-->
+		{$header}
+		{$sidebar}
 		</div>
 		<main id="main" class="main">
 			<section class="section dashboard">
@@ -226,19 +226,13 @@
 						</section>			
 					</div>
 					<div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
-						<div class="row">
-							<!--#gd#-->
-						</div>
+						<div class="row">{$gd}</div>
 					</div>
 					<div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
-						<div class="row">
-							<!--#country_data#-->  
-						</div>
+						<div class="row">{$country_data}</div>
 					</div>
 					<div class="tab-pane fade" id="bordered-games" role="tabpanel" aria-labelledby="contact-tab">
-						<div class="row">
-							<!--#fpd#-->  
-						</div>
+						<div class="row">{$fpd}</div>
 					</div>
 					</div>
 				</div><!-- End Bordered Tabs -->
@@ -281,42 +275,11 @@
 	<script src="assets/vendor/chart.js/chart.min.js"></script>
 	<script src="assets/vendor/quill/quill.min.js"></script>
 	<script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-	
 	<script src = "js/jquery.js"></script>
 	<script src="js/drag-drop-swap.js" type="text/javascript"></script>
 	<script src="assets/js/main.js"></script>
+	<script>const servers = [{$jsa}];</script>
 	<script src="js/index.js"></script>
-	<script>
-		const servers = [#jsa#];
-		origin   = window.location.href;
-		origin = origin.replace(/\/[^\/]+$/,"");
-		serverCount = servers.length;
-		$(document).ready(function(){
-			
-			div = localStorage.getItem('card-order');
-			if( div !== null){
-				$("#drag-box").html(div);
-				console.log("load cards");
-			}
-			
-			$.each(servers, function( index, value ) {
-				console.log( index + ": " + value );
-				online(value);
-				setInterval( function() { online(value); }, 5000 );
-			});
-			
-		});
-		$('.dropdown-menu span.dropdown-toggle').on('click', function(e) {
-			if (!$("#submenu").hasClass('show')) {
-				$("#submenu").attr("test","closed");
-				$("#submenu").removeClass('show');
-			}
-			else{
-				$("#submenu").attr("test","open");
-				$("#submenu").addClass('show');
-			}
-			return false;
-		});
-	</script>
+	
 	</body>
 </html>
