@@ -12,6 +12,7 @@ $(document).ready(function(){
 		online(value);
 		setInterval( function() { online(value); }, 5000 );
 	});
+	setInterval( function() { clear_console(); }, 300000 );
 });
 
 function online(url){
