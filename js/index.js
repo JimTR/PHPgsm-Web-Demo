@@ -342,8 +342,9 @@ $(document).on("click",".stats", function () {
 			// code block
 			break;
 		case "themeswitch":
-			alert("changing theme !",true);
-			themeswitch();	
+			//alert("changing theme !",true);
+			//themeswitch();
+			return	
 			break;			
 		default:
 			console.log("using "+id);
