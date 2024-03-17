@@ -393,5 +393,7 @@ width : 100%;
 font-weight : bold;
 text-align : center;
 display : none;
-margin-top : 16%;
+margin : auto;
+margin-top : 10%;
+width : 70%;
 }

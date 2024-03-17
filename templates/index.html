@@ -88,7 +88,7 @@
 								<li><span id = "panel-settings"  class="dropdown-item d-flex align-items-center stats"><i class="fa-solid fa-wrench"></i><span href="#"> Panel Settings</span></span></li>
 								
 								  
-									#pulldown#
+									{$pulldown}
 							
 							</li>
 								<li id="theme-switch" onclick="themeswitch();" ><span class="dropdown-item d-flex align-items-center stats" id="themeswitch" ><i id="theme-icon" class="fa fa-fw fa-sun" aria-hidden="true"></i><span> Switch Mode</span></span></li>
@@ -128,7 +128,7 @@
 									<div class="card info-card revenue-card">
 										<div class="card-body" style="min-height:27vh;">
 											
-											<h5 class="card-title">Player Stats<i class="ri-base-station-line card-icons" ></i></h5><hr style="margin:0;"/>
+											<h5 class="card-title">Players<i class="ri-base-station-line card-icons" ></i></h5><hr style="margin:0;"/>
 											<div id="p-stats"  style="width:100%;text-align:center;position:absolute;top:48%;">
 											<div class="spinner-border text-danger" style="border-right-color:green;" role="status"><span class="visually-hidden">Loading...</span></div>
 											</div>
@@ -145,12 +145,12 @@
 								<div class="col-md-4"  draggable="true">
 									<div class="card info-card revenue-card">
 										<div class="card-body" style="min-height:27vh;">
-											<h5 class="card-title">Country Stats<i class="bx bx-world card-icons"></i></h5><hr style="margin:0;"/>
+											<h5 class="card-title">Countries<i class="bx bx-world card-icons"></i></h5><hr style="margin:0;"/>
 											<div id="c-stats"  style="width:100%;text-align:center;position:absolute;top:48%;">
 											<div class="spinner-border text-danger" style="border-right-color:green;" role="status"><span class="visually-hidden">Loading...</span></div>
 											</div>
 											<table id = "c-table" class="table no-border" style="display:none;">
-												<tr><td>Countries</td><td class="map-title" id="countries"></td></tr>
+												<tr><td>Total</td><td class="map-title" id="countries"></td></tr>
 												<tr><td>Top Today</td><td class="map-title" id="country-top-today"></td></tr>
 												<tr><td>Top Overall</td><td class="map-title" id="country-top"></td></tr>
 												<tr><td>Most Played</td><td class="map-title" id="pop-country"></td></tr>
@@ -161,7 +161,7 @@
 								<div class="col-md-4" draggable="true">
 									<div class="card info-card revenue-card">
 										<div class="card-body" style="min-height:27vh;">
-											<h5 class="card-title">Server Stats<i class="fab fa-steam card-icons"></i></h5><hr style="margin:0;"/>
+											<h5 class="card-title">Game Servers<i class="fab fa-steam card-icons"></i></h5><hr style="margin:0;"/>
 											<div id="s-stats"  style="width:100%;text-align:center;position:absolute;top:48%;">
 											<div class="spinner-border text-danger" style="border-right-color:green;" role="status"><span class="visually-hidden">Loading...</span></div>
 											</div>
@@ -204,9 +204,10 @@
 								<div class="col-md-4" id="active-servers"  draggable="true" >
 									<div class="card info-card revenue-card">
 										<div class="card-body" style="min-height:27vh;">
-											<h5 class="card-title">Active Servers<i class="fa-solid fa-plug card-icons"></i></h5><hr style="margin:0;"/>
+											<h5 class="card-title">Active Game Servers<i class="fa-solid fa-plug card-icons"></i></h5><hr style="margin:0;"/>
+											<div id="dormant" class="active-servers">No Active Servers</div>
 											<div class="table-wrapper active-server-height">
-												<div id="dormant" class="active-servers">No Active Servers</div>
+												
 												<table class="table table-sml no-border" id="xy" style="display:none"></table>	
 											</div>
 										</div>	
@@ -215,7 +216,7 @@
 								<div class="col-md-4" draggable="true">
 									<div class="card info-card revenue-card">
 										<div class="card-body" style="min-height:27vh;">
-											<h5 class="card-title">About PHPgsm<img src="img/logo.png" alt=""  class="phpgsm-logo"></h5><hr style="margin:0;"/>
+											<h5 class="card-title">About<img src="img/logo.png" alt=""  class="phpgsm-logo"></h5><hr style="margin:0;"/>
 											<div style="width:91%;margin:auto;margin-top:1rem;"> 
 													PHPgsm is a game server manager API for steam (source mod) games, online documentation is found  <a href = "https://phporyx.co.uk/docs">here</a>.<br>This site is using software that demonstrates the usage of the PHPgsm API, while functionable it is only a demonstration.
 											</div>
