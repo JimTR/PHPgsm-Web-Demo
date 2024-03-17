@@ -12,13 +12,14 @@ $(document).ready(function(){
 		online(value);
 		setInterval( function() { online(value); }, 5000 );
 	});
-	setInterval( function() { clear_console(); }, 300000 );
+	
 });
 
 function online(url){
      var timer =sessionStorage.getItem(url);
      if (serverCount >1) {$("#server-desc").text("API Servers");}
-     console.log("enter online with "+url);
+     ticker = new Date(Date.now()) ;
+     console.log(ticker+": enter online with "+url);
 	 $.ajax({
 		url: url,
 		type: 'post',

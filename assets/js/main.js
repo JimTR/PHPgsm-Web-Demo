@@ -41,6 +41,7 @@ window.alert = function(message,show,title) {
 jQuery(document).ready(function(){
 	if(!isMobile()) {
 		sessionStorage.clear();
+		setInterval( function() { clear_console(); }, 30000 );
 		//console.log("starting clock");	
 		updateClock();
 		interval = setInterval('updateClock()', 1000);
