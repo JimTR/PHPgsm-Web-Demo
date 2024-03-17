@@ -78,6 +78,7 @@ $template->replace("jsa",$page['jsa']);
 $template->replace("country_data",$page['country_data']);
 $template->replace("gd",$page['gd']);
 $template->replace("fpd",$page['fpd']);
+$template->replace("header",$page['header']);
 $template->replace_vars($page);
 $template->replace_vars($sidebar_data);
 $template->publish();
