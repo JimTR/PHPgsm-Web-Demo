@@ -139,6 +139,7 @@ $sidebar_data['bmenu'] = '';
 $sidebar_data['smenu'] = '';
 $sidebar_data['pulldown'] = '';
 $page['jsa'] = '';
+$page['refresh'] = $settings['refresh'];
 $bserver = explode('=',$_SERVER['QUERY_STRING']);
 //print_r($bserver);
 $servers = $database->get_results($sql);

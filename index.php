@@ -74,6 +74,7 @@ $template->load('templates/subtemplates/user-frame.html');
 $page['userframe'] = $template->get_template();
 $template->load('templates/index.html');
 //echo $page['jsa'];
+$template->replace("refresh",$page['refresh'] );
 $template->replace("pulldown",$sidebar_data['pulldown'] );
 $template->replace("sidebar",$page['sidebar']);
 $template->replace("jsa",$page['jsa']);
