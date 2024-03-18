@@ -1,25 +1,27 @@
 $(document).ready(function(){
 	origin   = window.location.href;
 	origin = origin.replace(/\/[^\/]+$/,"");
-	serverCount = servers.length;
+	
 	div = localStorage.getItem('card-order');
 	if( div !== null){
 		$("#drag-box").html(div);
 		console.log("load cards");
 	}
-	$.each(servers, function( index, value ) {
-		//console.log( index + ": " + value );
-		online(value);
-		setInterval( function() { online(value); }, 5000 );
-	});
-	
+	if (typeof servers != 'undefined'){
+		serverCount = servers.length;
+		$.each(servers, function( index, value ) {
+			//console.log( index + ": " + value );
+			online(value);
+			setInterval( function() { online(value); }, 5000 );
+		});
+	}
 });
 
 function online(url){
      var timer =sessionStorage.getItem(url);
      if (serverCount >1) {$("#server-desc").text("API Servers");}
      ticker = new Date(Date.now()) ;
-     console.log(ticker+": enter online with "+url);
+     console.log(ticker+": enter online with "+url+" ("+refresh+")");
 	 $.ajax({
 		url: url,
 		type: 'post',
