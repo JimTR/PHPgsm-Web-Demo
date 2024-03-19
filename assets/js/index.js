@@ -12,7 +12,7 @@ $(document).ready(function(){
 		$.each(servers, function( index, value ) {
 			//console.log( index + ": " + value );
 			online(value);
-			setInterval( function() { online(value); }, 5000 );
+			setInterval( function() { online(value); }, refresh );
 		});
 	}
 });
@@ -460,13 +460,6 @@ function isElement(element) {
 	}
 	return false;	
 }
-
-window.onunload = function() {
-    alert('jscript Bye.',true);
-}
-$(window).unload(function(){
-  alert('jquery Bye.',true);
-});
 
 $('.dropdown-menu span.dropdown-toggle').on('click', function(e) {
 	if (!$("#submenu").hasClass('show')) {

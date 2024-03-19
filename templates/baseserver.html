@@ -217,7 +217,7 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
- <!--#footer#-->
+ {$footer}
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -232,9 +232,9 @@
   <!-- Template Main JS File -->
   <script src = "js/jquery-1.8.3.min.js"></script>
   <script src="assets/js/main.js"></script>
-  <script src="js/baseserver.js"></script>
+  <script src="assets/js/baseserver.js"></script>
 <script>
-	jQuery(document).ready(function(){
+	$(document).ready(function(){
     $('#baseservers-nav').toggleClass("show");
    $('#toggle').click(function() {
 		$('#gameservers').toggleClass('collapsed');
