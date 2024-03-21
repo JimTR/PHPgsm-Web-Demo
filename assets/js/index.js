@@ -365,6 +365,7 @@ $(document).on("click",".stats", function () {
 	//$("#ifrm")[0].setAttribute("scrolling", "no");
 	//alert('url to use ' + url,true,"button click");
 	loadIframe("ifrm", url);
+	console.log("back from frame load");
 	$('#user-frame').modal('show');
 });	 
 function sclick() {

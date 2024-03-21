@@ -1,5 +1,6 @@
  	var gdetail='';
  	$(document).ready(function() {
+		//alert("starting stats.js",true);
 		var pager_pos= 0;
 		var now = new Date();
 		var day = ("0" + now.getDate()).slice(-2);
@@ -12,9 +13,10 @@
 		sys_ban();
 		dup_page();
 		vac_ban();
+		//alert("done functions",true);
 		return_data = $("#ifrm",parent.document).attr("return-to");
 		current_mod = $("#ifrm",parent.document).attr("mod");
-		console.log("current mod = "+current_mod);
+		//alert ("current mod = "+current_mod,true);
 		if(typeof return_data !== "undefined" && return_data !=="" && current_mod =="User Lists" ) {
 			console.log("returning to "+return_data);
 			$("#frame-dialog",parent.document).css("maxWidth","40vw");
@@ -22,10 +24,11 @@
 			$( "#sendcmd" ).trigger( "submit" )
 		}
 		else {
-			console.log("mangle iframe ? "+current_mod);
+			//alert("mangle iframe ? "+current_mod,true);
 			if(current_mod == "User Lists") {
+				console.log("is this what you are looking for ?");
 				$("#frame-dialog",parent.document).css("maxWidth","40vw");
-				$("#ifrm", parent.document).css("height","27vh");
+				$("#ifrm", parent.document).css("height","30vh");
 			}
 			else{
 				console.log("should we even show a frame ?");
@@ -118,7 +121,7 @@ $( "#go_back" ).click (function() {
 	$("#gen").empty();
 	$("#go_back").hide();
 	$("#ifrm",parent.document).attr("return-to","");
-	$("#ifrm", parent.document).css("height","27vh");
+	$("#ifrm", parent.document).css("height","30vh");
 	$("#full-back").show();
 	gendetail="";
 	gdetail="";
