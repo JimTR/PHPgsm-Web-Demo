@@ -40,12 +40,13 @@
              <div class="card-body table-wrapper" style="max-height:40vh;">
               	<table class="table">
 					<tr><td>Uptime</td><td id="boot" class="bold"></td></tr>
+					<tr style="display:none;"><td>Reboot Required</td><td id="reboot" class="bold"></td></tr>
 					<tr class="dark-cpu "><td>CPU Load</td><td><span id="load-outer" class="bold" style="display:none;"><span id="load_1" class="bold"></span> (1 Min) <span id="load_10" class="bold"></span> (10 Mins) <span id="load_15" class="bold"></span> (15 Mins)</span></td></tr>
 					<tr><td>IP Address(es)</td><td class="bold" id="ip"></td></tr>
 					<tr><td style="width:32%;">CPU Model, Processors/Cores</td><td class="bold"><span id="model"></span>,&nbsp;<span  id="processors"></span></td></tr>
 					<!--<tr><td>CPU Processors/Cores</td><td id="processors"></td></tr>-->
-					<tr><td>CPU Speed</td><td class="bold" id="speed"></td></tr>
-					<tr><td>CPU Cache</td><td class="bold" id = "cache"></td></tr>
+					<tr><td>CPU Speed, Cache</td><td class="bold"><span id="speed"></span>,&nbsp;<span id="cache"></span></td></tr>
+					<!--<tr><td>CPU Cache</td><td class="bold" id = "cache"></td></tr>-->
 				</table>
             </div>
           </div>
@@ -57,11 +58,10 @@
 	<div class="card " >
 		
 			<h5 class="card-title" style="padding: 2% 0 0 2%;" >Software</h5>
-			<div class="card-body table-wrapper" style="max-height:40vh;">
+			<div class="card-body table-wrapper" style="max-height:42vh;">
 			<table class="table">
 				<tr><td style="width:20%;">Host Name</td><td id="host" class="bold"></td></tr>
 				<tr><td>Server OS</td><td id="os" class="bold"></td></tr>
-				<tr><td>Reboot Required</td><td id="reboot" class="bold"></td></tr>
 				<tr><td>Kernel Version</td><td id="k_ver" class="bold"></td></tr>
 				<tr><td>Processes</td><td id="process" class="bold"></td></tr>
 				<tr><td>PHP Version</td><td id="php" class="bold"></td></tr>

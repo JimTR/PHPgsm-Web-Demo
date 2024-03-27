@@ -163,7 +163,7 @@ function online(url){
 						}
 						ptot +=real_players;
 						$('#gol'+server_id).html(real_players+'/'+server.max_players);
-						$('#pt'+server_id).html(server.player_tot);
+						$('#pt'+server_id).html("<span class='p_count'>"+server.players_today+"</span>/"+server.player_tot);
 						if (server.Players ==0 ) {
 							//console.log ('should be nowt '+server.Players);
 							$("#"+server_id+"-secret").slideUp();

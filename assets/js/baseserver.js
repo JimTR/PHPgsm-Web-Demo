@@ -87,8 +87,13 @@
             var qpc_rounded = Math.round(data.quota_pc * 10) / 10
             $('#u_used').text(data.quota_used+' ('+qpc_rounded+'%)');
             $('#u_free').text(data.quota_free);
-            if (data.reboot == 'Yes') {$('#reboot').addClass('rebooot');}
-            else {$('#reboot').removeClass('rebooot');}
+            if (data.reboot == 'Yes'){
+				$('#reboot').addClass('rebooot');
+				$('#reboot').parent().show();
+			}
+            else {
+				$('#reboot').parent().hide();
+			}
             // mem graphs
             var tmem =Math.round(100-(parseInt(data.MemFree)/parseInt(data.MemTotal))*100)
             //mem graph
