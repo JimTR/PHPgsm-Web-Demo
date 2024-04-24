@@ -179,7 +179,13 @@ function players() {
 $('#sendcmd').on('submit', function(e) {
 	e.preventDefault();
 	console.log( $(this).attr('action'));
-	 var text = $("#sendcmd input[name=text]").val();
+	var text = $("#sendcmd input[name=text]").val().toLowerCase();
+	if(text == "disconnect") {
+		$("#alert-close").focus();
+		alert("The  command  '"+text+"' has been disabled",false,"Invalid Command");
+		$('#text').val("");
+		return;
+	}
 	 var hasSpace = $("#sendcmd input[name=text]").val().indexOf(' ')>=0;
 	 if(hasSpace){
 		//console.log("has space");
