@@ -56,6 +56,25 @@ jQuery(document).ready(function(){
 		localStorage.removeItem('card-order');
 		 history.replaceState({}, null, "index.php");
 	}
+	if(searchParams.has('tab')) {
+		mytab = searchParams.get('tab');
+		console.log ("has tab "+mytab);
+		switch (mytab) {
+			case "1":
+				var someTabTriggerEl = document.querySelector('#profile-tab');
+				var tab = new bootstrap.Tab(someTabTriggerEl);
+				tab.show();
+				break;
+			case "2":
+				var someTabTriggerEl = document.querySelector('#contact-tab');
+				var tab = new bootstrap.Tab(someTabTriggerEl);
+				tab.show();
+			case "3":
+				var someTabTriggerEl = document.querySelector('#supported-games');
+				var tab = new bootstrap.Tab(someTabTriggerEl);
+				tab.show();
+		}	
+	}
 	var oldCookieValue = getCookie('phpgsm_theme');
 	if (oldCookieValue == "1297820") {$("#theme-icon").toggleClass('fa-sun fa-moon');}	
 });

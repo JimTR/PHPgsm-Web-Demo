@@ -10,7 +10,7 @@ $(document).ready(function(){
 	if (typeof servers != 'undefined'){
 		serverCount = servers.length;
 		$.each(servers, function( index, value ) {
-			//console.log( index + ": " + value );
+			console.log( index + ": " + value );
 			online(value);
 			setInterval( function() { online(value); }, refresh );
 		});
@@ -114,7 +114,7 @@ function online(url){
 					$(playerId+"-name").html(player_data.name);
 					$(playerId+"-joined").html(player_data.first_log_on);
 					$(playerId+"-logins").html(player_data.log_ons);
-					country = "<img src='"+player_data.flag+"' onerror='imgError(this);'/>&nbsp;"+player_data.country;
+					country = "<div><img src='"+player_data.flag+"' onerror='imgError(this);'/><span style='margin-left:2%;'>"+player_data.country+"</span></div>";
 					$(playerId+"-map").html(country);
 					$(playerId+"-link").attr("onclick","iclick('frame.php?id="+player_data.steam_id+"&frame=user_frame')");
 				}
@@ -229,12 +229,14 @@ function online(url){
 					}
 				}
 			}
+			$("#active-load").hide();
+			$("#header-wrapper").show();
 			$("#a-stats").hide();
 			$("#a-table").show();
 			$("#drag-box").show();
-			$("#active-load").hide();
+			$("#borderedTabContent").show();
 			if(!isMobile()) {$("#menu-bar").show();}
-			$("#header-wrapper").show();
+			history.replaceState({}, null, "index.php");
 		},
 		fail: function() {
 			alert('Failed');
@@ -472,4 +474,9 @@ $('.dropdown-menu span.dropdown-toggle').on('click', function(e) {
 		$("#submenu").addClass('show');
 	}
 	return false;
+});
+$("#borderedTab li ").click(function() {
+	//
+	id = $(this).attr("id");
+	console.log("tab clicked "+id);
 });

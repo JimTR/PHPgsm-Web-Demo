@@ -633,9 +633,9 @@ h1, h2, h3, h4, h5, h6 {
 --------------------------------------------------------------*/
 /* Filter dropdown */
 .dashboard .filter {
-  position: absolute;
-  right: 0px;
-  top: 15px;
+  position: relative;
+  padding-right: 2%;
+  padding-top: 3%;
 }
 .dashboard .filter .icon {
   color: #aab7cf;
@@ -662,7 +662,9 @@ h1, h2, h3, h4, h5, h6 {
 .dashboard .filter .dropdown-item {
   padding: 8px 15px;
 }
-
+.dropdown-menu .show{
+  inset: 1px auto auto -6px;
+}
 /* Info Cards */
 .dashboard .info-card {
   padding-bottom: 10px;
