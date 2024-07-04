@@ -114,7 +114,7 @@ function online(url){
 					$(playerId+"-name").html(player_data.name);
 					$(playerId+"-joined").html(player_data.first_log_on);
 					$(playerId+"-logins").html(player_data.log_ons);
-					country = "<div style='overflow:hidden;'><img src='"+player_data.flag+"' onerror='imgError(this);'/><span style='margin-left:2%;'>"+player_data.country+"</span></div>";
+					country = "<div style='overflow:hidden;'><img src='"+player_data.flag+"' onerror='imgError(this);'/><span style='padding-left:3%;'>"+player_data.country+"</span></div>";
 					$(playerId+"-map").html(country);
 					$(playerId+"-link").attr("onclick","iclick('frame.php?id="+player_data.steam_id+"&frame=user_frame')");
 				}
