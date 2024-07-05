@@ -93,6 +93,7 @@ function get_game() {
 				$('#build').html("<b>"+serverd.Version+"</b>");
 				$('#server_id').html("<b>"+serverd.server_id+"</b>");
 				$('#player-tot').text(serverd.player_tot);
+				$('#player-today').text(serverd.players_today);
 				$('#location').html(serverd.location);
 				$('#moddesc').text(serverd.ModDesc);
 				$('#stop_server').removeClass('hidden');
