@@ -39,8 +39,8 @@ window.alert = function(message,show,title) {
 
   
 jQuery(document).ready(function(){
-	current_path = window.location.pathname.split('/').pop();
-	console.log(current_path);
+	//current_path = window.location.pathname.split('/').pop();
+	//console.log(current_path);
 	if(!isMobile()) {
 		sessionStorage.clear();
 		setInterval( function() { clear_console(); }, 30000 );
