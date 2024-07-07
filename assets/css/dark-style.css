@@ -1290,7 +1290,7 @@ a.invert:hover {
   line-height:1;
 }
 
-.tabe tbody, td, tfoot, th, thead, tr {
+.table tbody, td, tfoot, th, thead, tr {
     border-color: inherit;
     border-style: none;
     border-width: 0;
@@ -1420,7 +1420,5 @@ float : right;
 .active-server-height{
 max-height : 15.7vh;
 }
-.detail-item {
-color: #CCCD0A !important;
-}
+
 
