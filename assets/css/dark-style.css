@@ -1420,5 +1420,14 @@ float : right;
 .active-server-height{
 max-height : 15.7vh;
 }
+<<<<<<< Updated upstream
+.detail-item {
+color: #CCCD0A !important;
+}
 
+=======
 
+.detail-item {
+color: #CCCD0A;
+}
+>>>>>>> Stashed changes
