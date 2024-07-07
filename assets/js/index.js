@@ -480,3 +480,7 @@ $("#borderedTab li ").click(function() {
 	id = $(this).attr("id");
 	console.log("tab clicked "+id);
 });
+$("#util li ").click(function(){
+	id = $(this).attr("id");
+	console.log("tab clicked "+id);
+});	

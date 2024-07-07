@@ -39,6 +39,8 @@ window.alert = function(message,show,title) {
 
   
 jQuery(document).ready(function(){
+	current_path = window.location.pathname.split('/').pop();
+	console.log(current_path);
 	if(!isMobile()) {
 		sessionStorage.clear();
 		setInterval( function() { clear_console(); }, 30000 );
@@ -46,8 +48,10 @@ jQuery(document).ready(function(){
 		updateClock();
 		interval = setInterval('updateClock()', 1000);
 		$("#side-bar").hide();
+		
 	}
 	else {
+		//we have a mobile
 		$(".bi-bell").parent().parent().css({"padding-right": "10%", "display": "inline"});
 	}
 	$('[data-toggle="tooltip"]').tooltip()

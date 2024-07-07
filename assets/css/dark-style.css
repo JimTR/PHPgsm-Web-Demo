@@ -1420,3 +1420,7 @@ float : right;
 .active-server-height{
 max-height : 15.7vh;
 }
+.detail-item {
+color: #CCCD0A !important;
+}
+
