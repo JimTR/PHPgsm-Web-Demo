@@ -146,7 +146,8 @@ function online(url){
 					var server_id = j;	
 					if (server.running == 1 ) {
 						var playern = server.Players;
-						$('#pl'+server_id).html(playern); 
+						$('#pl'+server_id).html(playern);
+						$('#time-online'+server_id).html(server.game_time); 
 						$("#"+server_id).show();
 						var logo  = server.logo;
 						if (typeof server.Players === "undefined") {server.Players = 0;}   
