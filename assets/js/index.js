@@ -101,7 +101,7 @@ function online(url){
 					$("#country-"+j+"-players_total").text(country_data[j]['players']);
 					$("#country-"+j+"-players_today").text(country_data[j]['today']);
 					$("#country-"+j+"-percent").text(country_data[j]['percent']);
-					
+					$("#country-"+j+"-time").text(country_data[j]['time']);
 				}
 				for (var j in  top_players) {
 					// read in players
