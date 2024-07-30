@@ -48,7 +48,7 @@ for($i=0; $i<12; $i++) {
 
 $page['fpd'] = '';
 
-for($i=0; $i<9; $i++){
+for($i=0; $i<12; $i++){
 	$template->load('templates/subtemplates/player_card.html');
 	$steam_info['uid'] = "player$i";
 	$template->replace_vars($steam_info);
