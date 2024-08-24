@@ -22,7 +22,7 @@
             $('#speed').text(data.cpu_MHz+" Mhz");
             $('#load').text(data.load_pc);
             $('#cache').text(data.cache_size);
-            $('#ip').text(data.ips);
+            $('#ip').html("Local "+data.ips+"<div style='padding-top:8px'>External "+data.ipv4+", "+data.ipv6+"</div>");
             $('#reboot').text(data.reboot);
             $('#host').text(data.host);
             $('#os').text(data.os);
