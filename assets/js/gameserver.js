@@ -94,6 +94,7 @@ function get_game() {
 				$('#server_id').html("<b>"+serverd.server_id+"</b>");
 				$('#player-tot').text(serverd.player_tot);
 				$('#player-today').text(serverd.players_today);
+				$('#time-online').text(serverd.game_time);
 				$('#location').html(serverd.location);
 				$('#moddesc').text(serverd.ModDesc);
 				$('#stop_server').removeClass('hidden');
