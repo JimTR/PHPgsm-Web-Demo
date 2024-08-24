@@ -164,7 +164,8 @@ function online(url){
 							online_has_players[key] = real_players+","+server.host_name;
 						}
 						ptot +=real_players;
-						$('#gol'+server_id).html(real_players+' /  '+server.max_players);
+						max_players = server.max_players.toString();
+						$('#gol'+server_id).html(real_players+'/ '+max_players.trim());
 						$('#pt'+server_id).html("<span>"+server.players_today+"</span> out of  "+addCommas(server.player_tot));
 						if (server.Players ==0 ) {
 							//console.log ('should be nowt '+server.Players);
