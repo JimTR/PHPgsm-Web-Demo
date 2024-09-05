@@ -185,11 +185,11 @@ function displayData(userID) {
 				else {
 					console.log(item.server_name+" is valid");
 					var timestamp =  timeConverter(item.last_play);
-					$('#dta1').append("<tr><td style='width:335px;'>"+item.server_name+"</td><td style='text-align:center'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='text-align:right;padding-left:4%;'>"+item.game_time+"</td></tr>");
+					$('#dta1').append("<tr><td>"+item.server_name+"</td><td style='text-align:center'>"+item.log_ons+"</td><td>"+timestamp+"</td><td style='text-align:right;'>"+item.game_time+"</td></tr>");
 				}	
 				man=item.name_c;
 			});
-			$('#dta1').append( "<tr><td  class='card-title'><h6  class='card-title' style='padding:0;'>Overall Time on Line</h6></td><td>&nbsp;</td><td colspan='2' style='text-align:right;padding-left:4%;vertical-align:top;'>"+data.time_on_line+"</td></tr>");
+			$('#dta1').append( "<tr><td  class='card-title'><h6  class='card-title' style='padding:0;'>Overall Time on Line</h6></td><td>&nbsp;</td><td colspan='2' style='text-align:right;'>"+data.time_on_line+"</td></tr>");
 			//console.log(data);
 			$("#gen").empty();
 			
