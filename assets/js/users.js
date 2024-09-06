@@ -211,12 +211,27 @@ function displayData(userID) {
 				$('#dta').append("<tr><td>Latest Log on</td><td>"+last_log_on+"</td></tr>");
 				//aka =JSON.parse('"'+gen_data.aka+'"');
 				aka = gen_data.aka;
-				//console.log("aka = "+aka);
-				aka.replace(/\//g, '-')
+				arr = gen_data.aka.split(',');
+				aka_list = $("#aka-list").empty();
+				//aka_list.attr('id',"test");
+				
+				t = $('#aka-list').clone().attr('id', 'test').css("display","block");
+          
+				for(var i = 0; i<arr.length; i++){
+					
+					console.log(arr[i]);
+					aka_list.append($("<option/>").attr('value',i).text(arr[i]));
+					t.append($("<option/>").attr('value',i).text(arr[i]));
+				}
+				console.log(t);
+				
+				//console.log("aka = "+arr);
+				//aka.replace(/\//g, '-')
 				//'some+multi+word+string'.replace(/\+/g, ' ');
-				if (aka != null){
-					aka = aka.replace(/,\s*$/, "");
-					$('#dta').append("<tr><td style='vertical-align:middle;'>Played as</td><td><div class='table-wrapper' style='min-height:20px;max-height:40px;'>"+aka+"</div></td></tr>");
+				if (arr.length >1){
+					//aka = aka.replace(/,\s*$/, "");
+					$('#dta').append("<tr><td style='vertical-align:middle;'>Played as</td><td><div class='table-wrapper' id='x' style='min-height:20px;max-height:40px;'></div></td></tr>");
+					$('#x').append(t);
 				}
 			}
 			else {
