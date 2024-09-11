@@ -24,7 +24,7 @@
             $('#cache').text(data.cache_size);
             if (typeof data.ipv4 === 'undefined') {
 				$('#ip').html("<span class='white'>Local </span>"+data.ips);
-			{
+			}
 			else{	
 				$('#ip').html("<span class='white'>Local </span>"+data.ips+"<div style='padding-top:8px'><span class='white'>External </span>"+data.ipv4+"<span class='white'>, </span>"+data.ipv6+"</div>");
 			}
