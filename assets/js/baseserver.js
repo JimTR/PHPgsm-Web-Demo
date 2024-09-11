@@ -22,7 +22,12 @@
             $('#speed').text(data.cpu_MHz+" Mhz");
             $('#load').text(data.load_pc);
             $('#cache').text(data.cache_size);
-            $('#ip').html("Local "+data.ips+"<div style='padding-top:8px'>External "+data.ipv4+", "+data.ipv6+"</div>");
+            if (typeof data.ipv4 === 'undefined') {
+				$('#ip').html("<span class='white'>Local </span>"+data.ips);
+			{
+			else{	
+				$('#ip').html("<span class='white'>Local </span>"+data.ips+"<div style='padding-top:8px'><span class='white'>External </span>"+data.ipv4+"<span class='white'>, </span>"+data.ipv6+"</div>");
+			}
             $('#reboot').text(data.reboot);
             $('#host').text(data.host);
             $('#os').text(data.os);

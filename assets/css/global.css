@@ -394,3 +394,8 @@ margin : auto;
 margin-top : 10%;
 width : 70%;
 }
+
+.white {
+color : #ccc;
+font-weight: normal;
+}
