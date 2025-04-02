@@ -116,6 +116,7 @@ if($user->loggedIn()) {
 		'start_time' => time(),
 		'nid' => $user->nid  
 		) ;
+		die(print_r($user_data));
 		if ($database->get_row('select * from allowed_users where user_id = '.$user->id)) {
 			$where = array('user_id' => $user->id);
 			unset($user_data['user_id']);
