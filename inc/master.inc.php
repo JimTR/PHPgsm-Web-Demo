@@ -108,11 +108,11 @@ define ("user_data",$user);
 //log_to(DOC_ROOT."/inc.log",user_data->username);
 if($user->loggedIn()) {
 	
-		// update the user  data
+		// update the user  data change  the ip to allow ipv6
 		$user_data = array (
 		'user_id' => $user->id,
 		'user_name' => $user->username,
-		'ip' =>  ip2long($_SERVER['REMOTE_ADDR']),
+		'ip' =>  inet_pton($_SERVER['REMOTE_ADDR']),
 		'start_time' => time(),
 		'nid' => $user->nid  
 		) ;
