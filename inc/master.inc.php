@@ -116,7 +116,7 @@ if($user->loggedIn()) {
 		'start_time' => time(),
 		'nid' => $user->nid  
 		) ;
-		die(print_r($user_data));
+		//die(print_r($user_data));
 		if ($database->get_row('select * from allowed_users where user_id = '.$user->id)) {
 			$where = array('user_id' => $user->id);
 			unset($user_data['user_id']);
@@ -124,6 +124,7 @@ if($user->loggedIn()) {
 		} 
 		else {
 			$database->insert('allowed_users',$user_data);
+			die();
 		}
    	}
    	elseif (basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']) !== 'login.php') {
