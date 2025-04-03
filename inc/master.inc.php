@@ -112,7 +112,7 @@ if($user->loggedIn()) {
 		$user_data = array (
 		'user_id' => $user->id,
 		'user_name' => $user->username,
-		'ip' =>  inet_pton($_SERVER['REMOTE_ADDR']),
+		'ip' =>  $_SERVER['REMOTE_ADDR'],
 		'start_time' => time(),
 		'nid' => $user->nid  
 		) ;
