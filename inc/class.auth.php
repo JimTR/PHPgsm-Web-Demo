@@ -61,7 +61,7 @@ $time = "1639128588";
             $hashed_password = self::hashedPassword($password);
             //$database = new db;
             $row = $database->get_Row("SELECT * FROM users WHERE username = '" . $username . "' AND password = '" . $hashed_password."'");
-            print_r($row);
+            log_to("auth.log",print_r($row,true)."\n");
             if(!$row) {
                 return false;
             }
@@ -272,39 +272,26 @@ $time = "1639128588";
         private function attemptCookieLogin()
         {
             
-			if(!isset($_COOKIE['phpgsm']))
-			{ 
-				return false;
-			}
+			if(!isset($_COOKIE['phpgsm']))	{ return false;}
             
              //global $database;
 			 $nid = $_COOKIE["phpgsm"]; // get the user
-			 //die($nid);
-            // We SELECT * so we can load the full user record into the user DBObject later (no longer used 20-10-14)
-            
-            $row = db->get_Row('SELECT * FROM users WHERE nid = "' . $nid.'"');
-            if($row === false)
-                return false;
-            
-             foreach ($row as $key => $val) {
-				 if (!is_int($key)){
-					$this->$key = $val;
-					}
-				}
-				 $cookie_options = array (
+			 $row = db->get_Row('SELECT * FROM users WHERE nid = "' . $nid.'"');
+            if($row === false){return false;}
+            foreach ($row as $key => $val) {if (!is_int($key)){$this->$key = $val;}}
+			$cookie_options = array (
                 'expires' => $this->expiryDate,
                 'path' => '/',
                 'domain' => '.', // leading dot for compatibility or use subdomain
                 'secure' => true,     // or false
                 'httponly' => true,    // or false
                 'samesite' => 'Lax' // None || Lax  || Strict
-                );
-                //print_r($cookie_options);
-		//echo "user = ".$this->id.'<br>';
+            );
             setcookie("userid",$row['id'],$cookie_options);
             setcookie("phpgsm",$nid,$cookie_options);
-             $update = array( 'currentip' => $this->currentip); // update last movement
-			 $update_where = array( 'id' => $row['id']);
+             $update[ 'currentip'] = getip(); // update last ip
+             $update['last_logon'] =  time();
+             $update_where = array( 'id' => $row['id']);
 			 db->update( 'users', $update, $update_where, 1 );
 			 //$database->disconnect();
             //$_SESSION['userid'] = $row['id'];

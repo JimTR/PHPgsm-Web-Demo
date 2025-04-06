@@ -978,15 +978,12 @@ function log_to ($file,$info)
 	}
 function getip()
 	{
-		if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)){
-            return  $_SERVER["HTTP_X_FORWARDED_FOR"];  
-        }else if (array_key_exists('REMOTE_ADDR', $_SERVER)) { 
-            return $_SERVER["REMOTE_ADDR"]; 
-        }else if (array_key_exists('HTTP_CLIENT_IP', $_SERVER)) {
-            return $_SERVER["HTTP_CLIENT_IP"]; 
-        }else if (array_key_exists('HTTP_X_REAL_IP', $_SERVER)) {
-			return $_SERVER ['HTTP_X_REAL_IP'];}
-			return "Unknown";  
+		log_to("auth.log","get IP found {$_SERVER['REMOTE_ADDR']}");
+		if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)){return  $_SERVER["HTTP_X_FORWARDED_FOR"];}
+		else if (array_key_exists('REMOTE_ADDR', $_SERVER)) {return $_SERVER["REMOTE_ADDR"];}
+		else if (array_key_exists('HTTP_CLIENT_IP', $_SERVER)) {return $_SERVER["HTTP_CLIENT_IP"];}
+		else if (array_key_exists('HTTP_X_REAL_IP', $_SERVER)) {return $_SERVER ['HTTP_X_REAL_IP'];}
+		return "Unknown";  
 		 
 	}
 function page_stats($lines,$queries,$start)
