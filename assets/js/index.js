@@ -29,7 +29,7 @@ function online(url){
 		success: function(data,status){
 			if(data == "session failed"){
 				console.log("the session failed");
-				exit;
+				return;
 			}
 			var ptot= 0;
 			var online_has_players = {};
