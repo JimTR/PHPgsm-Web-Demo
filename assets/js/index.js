@@ -27,8 +27,10 @@ function online(url){
 		type: 'post',
 		dataType: "json" ,
 		success: function(data,status){
-			console.log(data);
-			if(data == "session failed"){console.log("the session failed");}
+			if(data == "session failed"){
+				console.log("the session failed");
+				exit;
+			}
 			var ptot= 0;
 			var online_has_players = {};
 			var ps = '';
