@@ -618,7 +618,9 @@ function noSession(){
 	// show the session gone 
 	var dt = new Date();
 	var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-	//if(!$("#expire").html() = ""){return;}
+	if($("#expire").html() == ""){
 	$("#expire").html(time);
 	 $('#session-expired').modal('show');
+ }
+ return;
  }
