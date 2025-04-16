@@ -613,3 +613,8 @@ function addCommas(nStr) {
     }
     return x1 + x2;
 }
+
+function noSession(){
+	// show the session gone 
+	 $('#session-expired').modal('show');
+ }
