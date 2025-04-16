@@ -29,6 +29,7 @@ function online(url){
 		success: function(data,status){
 			if(data == "session failed"){
 				console.log("the session failed");
+				 $('#session-expired').modal('show');
 				return;
 			}
 			var ptot= 0;
