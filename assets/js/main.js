@@ -616,5 +616,8 @@ function addCommas(nStr) {
 
 function noSession(){
 	// show the session gone 
+	var dt = new Date();
+	var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+	$("#expire").html(time);
 	 $('#session-expired').modal('show');
  }
