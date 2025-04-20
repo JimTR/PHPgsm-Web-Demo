@@ -83,7 +83,11 @@ function fetchlog() {
 			}
 		},
         success: function (data) {
-		
+		if(data == "session failed"){
+				console.log("the session failed");
+				 noSession();
+				return;
+			}
         },
         complete:function(data){
 			$.each(data.responseJSON, function(i, item) {
