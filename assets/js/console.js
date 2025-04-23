@@ -127,9 +127,11 @@ function players() {
 		type: 'post',
         dataType: "json",
         success: function (data) {
-			//data1 = data;
-			//JSON.parse(data1)
-			//console.log(data1+"success");
+			if(data == "session failed"){
+				console.log("the session failed");
+				 noSession();
+				return;
+			}
         },
         complete:function(data){
 			info = data.responseJSON.info;
