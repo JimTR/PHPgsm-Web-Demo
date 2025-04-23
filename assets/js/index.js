@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	origin   = window.location.href;
 	origin = origin.replace(/\/[^\/]+$/,"");
-	
+	//alert($.cookie("phpgsm"));
 	div = localStorage.getItem('card-order');
 	if( div !== null){
 		$("#drag-box").html(div);
