@@ -8,7 +8,15 @@ var nativeAlert = window.alert;
 var interval;
 var current_path = window.location.pathname.split('/').pop();
 	console.log(current_path);
-	console.log(getUrlVars()["tab"]);
+	tabStop = getUrlVars()["tab"];
+	console.log(tabStop);
+	if (typeof tabStop === "undefined") {
+		console.log ("adding tab id");
+		addParameter("tab", "0");
+		var urls = window.location.href;
+		console.log(urls);
+		//urls.setQuery("tab", "0");
+	}
 window.alert = function(message,show,title) {
 		//console.log("alert triggered");
 		//console.log("message = "+message);
@@ -46,10 +54,10 @@ jQuery(document).ready(function(){
 	if(!isMobile()) {
 		sessionStorage.clear();
 		setInterval( function() { clear_console(); }, 30000 );
-		$("#menu-bar").show();
-		$("#header-wrapper").show();
-		$("#drag-box").show();
-			$("#borderedTabContent").show();
+		//$("#menu-bar").show();
+		//$("#header-wrapper").show();
+		//$("#drag-box").show();
+		//$("#borderedTabContent").show();
 		updateClock();
 		interval = setInterval('updateClock()', 1000);
 		$("#side-bar").hide();
@@ -72,20 +80,41 @@ jQuery(document).ready(function(){
 			case "1":
 				var someTabTriggerEl = document.querySelector('#profile-tab');
 				var tab = new bootstrap.Tab(someTabTriggerEl);
+				$("#menu-bar").show();
+				$("#header-wrapper").show();
 				tab.show();
 				break;
 			case "2":
 				var someTabTriggerEl = document.querySelector('#contact-tab');
 				var tab = new bootstrap.Tab(someTabTriggerEl);
-				//setTimeout(tab);
+				$("#menu-bar").show();
+				$("#header-wrapper").show();
 				tab.show();
 				break;
 			case "3":
 				var someTabTriggerEl = document.querySelector('#supported-games');
 				var tab = new bootstrap.Tab(someTabTriggerEl);
+				$("#menu-bar").show();
+				$("#header-wrapper").show();
 				tab.show();
+				break;
+			default:
+					console.log("doing default");
+					$("#active-load").hide();
+					$("#drag-box").show();
+					$("#menu-bar").show();
+					$("#header-wrapper").show();
 		}	
+		
 	}
+	else {
+		console.log("doing else");
+		$("#active-load").hide();
+		$("#drag-box").show();
+		$("#menu-bar").show();
+		$("#header-wrapper").show();
+	}	
+		
 	var oldCookieValue = getCookie('phpgsm_theme');
 	if (oldCookieValue == "1297820") {$("#theme-icon").toggleClass('fa-sun fa-moon');}	
 });
@@ -787,4 +816,16 @@ function pollVisibility(element) {
     } else {
         setTimeout(pollVisibility, 500);
     }
+}
+
+function addParameter(param, value)
+{
+    var regexp = new RegExp("(\\?|\\&)" + param + "\\=([^\\&]*)(\\&|$)");
+    if (regexp.test(document.location.search)) 
+        return (document.location.search.toString().replace(regexp, function(a, b, c, d)
+        {
+                return (b + param + "=" + value + d);
+        }));
+    else 
+        return document.location.search+ param + "=" + value;
 }
