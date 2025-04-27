@@ -5,11 +5,13 @@ var path='';
 var type='Source';
 var host= '';
 var server='';
+$("#active-load").hide();
 $(document).ready(function() {
 	pagereferrer = document.referrer;
 	//console.log('hit that '+pagereferrer);
 	$('#ifrm').attr("online",1);
 	$(".row").css("display", "flex");
+	
 });
 	
 $( "#buttonr" ).click(function() {

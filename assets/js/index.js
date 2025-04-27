@@ -32,6 +32,7 @@ function online(url){
 				 noSession();
 				return;
 			}
+			console.log("hit success at "+ticker);
 			var ptot= 0;
 			var online_has_players = {};
 			var ps = '';

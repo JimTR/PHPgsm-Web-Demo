@@ -66,8 +66,8 @@
    -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
   position: relative;
-  margin-left: 45vw;
-  margin-top: -20vh;
+  margin-left: 48vw;
+  margin-top: -23vh;
   z-index: 2000;
 
 }
