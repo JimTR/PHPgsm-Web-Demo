@@ -2,10 +2,98 @@
 	<div class="d-flex align-items-center justify-content-between">
 		<i id="side-bar" style="padding-right:10px;" class="bi bi-list toggle-sidebar-btn"></i>
 		<a href="index.php" class="logo d-flex align-items-center" title="Goto Dashboard"><img src="img/logo.png" alt=""><span class="d-none d-lg-block">PHPgsm</span></a>
+		
 	</div><!-- End Logo -->
-	<div  class="header-nav ms-auto logo" >
+	<div  id="menu-bar" class="span-show" style="text-align:center;display:none;margin-left:-7%;">
+		<!-- need to fix this show we get proper links -->
+					<ul class="nav nav-tabs nav-tabs-bordered mini" id="borderedTab" role="tablist">
+						<li class="nav-item" role="presentation">
+							<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true"><i class="fa-solid fa-igloo"></i> <span class="span-show">Home</span></button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><i class="fab fa-steam"></i> <span class="span-show">Online Servers</span></button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-contact" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="bx bx-world"></i> <span class="span-show">Countries</span></button>
+						</li>
+						<li class="nav-item " role="presentation">
+							<button class="nav-link" id="supported-games" data-bs-toggle="tab" data-bs-target="#bordered-games" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="ri-base-station-line"></i> <span class="span-show">Players</span></button>
+						</li>
+						<li class="nav-item" onclick="sclick()" style="cursor:pointer;"><span class="nav-link"><i class="fa-solid fa-magnifying-glass"></i> <span class="span-show">Search</span></span></li>
+						<li class="nav-item"  style="cursor:pointer">
+							<span  class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" aria-expanded="false">
+								<span class="d-md-block dropdown-toggle ps-2">
+									<i class="fa-solid fa-chart-simple"></i> 
+									<span class="span-show " >Statistics</span>
+								</span>
+							</span><!-- End Profile Iamge Icon -->
+							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile" style="">
+								<li>
+									<span id = "general" section="general"  class="dropdown-item d-flex align-items-center stats">
+										<i class="fa-solid fa-clipboard"></i>
+										<span>General</span>
+									</span>
+								</li>
+								<li>
+									<span id = "user-list" class="dropdown-item d-flex align-items-center stats">
+										<i class="ri-base-station-line"></i>
+										<span>User Lists</span>
+									</span>
+								</li>
+								<li>
+									<span id = "country-list" class="dropdown-item d-flex align-items-center stats" >
+										<i class="bx bx-world"></i>
+										<span>Country Lists</span>
+									</span>
+								</li>
+								<li>
+									<span id = "linked-ip" class="dropdown-item d-flex align-items-center stats" >
+										<i class="fa-solid fa-link"></i>
+										<span>Linked IP's</span>
+									</span>
+								</li>
+								<li>
+									<span id = "ban-lists" class="dropdown-item d-flex align-items-center stats">
+										<i class="fa-solid fa-user-slash"></i>
+										<span>User Bans</span>
+									</span>
+								</li>
+							</ul><!-- End Profile Dropdown Items -->
+						</li><!-- End Profile Nav -->
+						
+						<li id="settings" class="nav-item" style="cursor:pointer"> 
+							<span  class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" aria-expanded="false">
+								<span class="d-md-block dropdown-toggle ps-2"><i class="fa-solid fa-gears"></i><span class="span-show " > Settings</span></span>
+							</span>
+							<ul id="setting" class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile" style="width:9%;">
+								<li><span id = "api-settings"  class="dropdown-item d-flex align-items-center stats"><i class="bi bi-server"></i><span> API Settings</span></span></li>
+								<li><span id = "panel-settings"  class="dropdown-item d-flex align-items-center stats"><i class="fa-solid fa-wrench"></i><span href="#"> Panel Settings</span></span></li>
+								
+								  
+									{$pulldown}
+							
+							</li>
+								<li id="theme-switch" onclick="themeswitch();" ><span class="dropdown-item d-flex align-items-center stats" id="themeswitch" ><i id="theme-icon" class="fa fa-fw fa-sun" aria-hidden="true"></i><span> Switch Mode</span></span></li>
+							</ul>
+						</li>
+						<li id="utils" class="nav-item" style="cursor:pointer"> 
+							<span  class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" aria-expanded="false">
+								<span class="d-md-block dropdown-toggle ps-2"><i class="fa-solid fa-mask-ventilator"></i><span class="span-show " > Utilities</span></span>
+							</span>
+							<ul id="util1" class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+								
+							
+							<li class="nav-item span-show"><a class="nav-link" id="console" href="console.php"><i class="bx bxs-terminal"></i><span class="show-span"> Console</span></a></li> 
+							    <li class="nav-item"><a class="nav-link collapsed"  id="updates" href="updates.php"><i class="fas fa-download"></i><span> Updates</span></a></li>
+							</ul>
+							
+							<li class="nav-item span-show"><a class="nav-link" href="logout.php"><i class="fa fa-fw fa-sign-out-alt text-danger" aria-hidden="true"></i><span class="span-show "> Log Out</span></a></li>
+						</li>
+					
+				</div>
+	<div  class="header-nav ms-auto logo" style ="width:22%;margin-right:1%;">
 		<div id ="clock"  class="clock"></div>
-		<div class="clock">
+		<div style="margin-right:2%;float:right;">
 			<a class="" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-bell"></i></a>
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" style="">
 				<li class="dropdown-header">You have No new notifications<a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2" style="font-size:14px;color:#ffffff;">View all</span></a></li>
@@ -62,4 +150,6 @@
                   </div>
                 </div>
               </div>
-              
+              #alert#
+		#userframe#
+		
