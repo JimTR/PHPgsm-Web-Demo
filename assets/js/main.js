@@ -6,6 +6,9 @@
 */
 var nativeAlert = window.alert;
 var interval;
+var current_path = window.location.pathname.split('/').pop();
+	console.log(current_path);
+	console.log(getUrlVars()["tab"]);
 window.alert = function(message,show,title) {
 		//console.log("alert triggered");
 		//console.log("message = "+message);
@@ -39,12 +42,11 @@ window.alert = function(message,show,title) {
 
   
 jQuery(document).ready(function(){
-	//current_path = window.location.pathname.split('/').pop();
-	//console.log(current_path);
+	
 	if(!isMobile()) {
 		sessionStorage.clear();
 		setInterval( function() { clear_console(); }, 30000 );
-		//console.log("starting clock");	
+		$("#menu-bar").show();
 		updateClock();
 		interval = setInterval('updateClock()', 1000);
 		$("#side-bar").hide();
@@ -72,7 +74,9 @@ jQuery(document).ready(function(){
 			case "2":
 				var someTabTriggerEl = document.querySelector('#contact-tab');
 				var tab = new bootstrap.Tab(someTabTriggerEl);
+				//setTimeout(tab);
 				tab.show();
+				break;
 			case "3":
 				var someTabTriggerEl = document.querySelector('#supported-games');
 				var tab = new bootstrap.Tab(someTabTriggerEl);
@@ -623,3 +627,161 @@ function noSession(){
  }
  return;
  }
+function sclick() {
+	//alert("search clicked with ",false,"it worked");
+	$("#ifrm").attr("height", "30vh");
+	$("#ifrm").height("30vh"); 
+	$("#ifrm").attr("width", "50vw");
+	$("#frame-dialog").css("max-width", "40vw");
+	//$("#frame-dialog").max-width ("50vw");
+	$("#frame-title").html("Search");
+	url = "frame.php?frame=search_frame";
+	$("#ifrm")[0].setAttribute("scrolling", "auto");
+	 console.log(url);
+	  //alert ("frame.php?frame=user_frame&id="+id);	
+	  //window.location.href=url;
+	loadIframe("ifrm", url);
+	$('#user-frame').modal('show');
+}
+$(document).on("click",".baseserver", function () {
+   var clickedBtnID = $(this).attr('id'); 
+     //alert(clickedBtnID  ,true);
+     linkUrl =  $(this).parent().attr('url');
+     //alert (linkUrl,true); 
+   $("#ifrm").attr("height", "85vh");
+	$("#ifrm").height("85vh"); 
+	$("#ifrm").attr("width", "90vw");
+	$("#frame-dialog").css("max-width", "90vw");
+	$("#frame-title").html("API Server "+clickedBtnID);
+	if (isMobile()){ 
+		url= "baseserver.php?server="+clickedBtnID;
+		 window.location = url;
+	}
+	else {
+		url = "frame.php?frame=base_frame&id="+clickedBtnID+"&url="+linkUrl;
+		$("#ifrm")[0].setAttribute("scrolling", "no");
+		alert('url to use ' + url,true,"button click");
+		loadIframe("ifrm", url);
+		$('#user-frame').modal('show');
+	}
+});
+$(document).on("click",".stats", function () {
+	var id = this.id;
+	if (isMobile()){url = "baseserver.php?server="+id;}
+	else {url = "frame.php?frame=stats_frame&id="+id;}
+	switch(id) {
+		case "general":
+			// code block
+			id = "General Statistics";
+			break;
+		case "user-list":
+			id = "User Lists";
+			// code block
+			break;
+		case "country-list":
+			id = "Country Lists";
+			// code block
+			break;
+		case "linked-ip":
+			id = "Linked IP Addresses";
+			// code block
+			break;
+		case "ban-lists":
+			id = "Banned Users";
+			// code block
+			break;
+		case "themeswitch":
+			//alert("changing theme !",true);
+			//themeswitch();
+			return	
+			break;			
+		default:
+			console.log("using "+id);
+			return;
+	}
+	title = id.replace('-',' ');
+	title= ucwords(title,true) ;
+	$("#ifrm").attr("height", "80vh");
+	$("#ifrm").height("80vh"); 
+	$("#ifrm").attr("width", "90vw");
+	$("#ifrm").attr("mod", title);
+	$("#frame-dialog").css("max-width", "90vw");
+	$("#frame-title").html(title);
+	
+	//url = "frame.php?frame=base_frame&id="+clickedBtnID+"&url="+linkUrl;
+	//$("#ifrm")[0].setAttribute("scrolling", "no");
+	//alert('url to use ' + url,true,"button click");
+	loadIframe("ifrm", url);
+	console.log("back from frame load");
+	$('#user-frame').modal('show');
+});	 
+function ucwords(str,force){
+  str=force ? str.toLowerCase() : str;  
+  return str.replace(/(\b)([a-zA-Z])/g,
+           function(firstLetter){
+              return   firstLetter.toUpperCase();
+           });
+}
+$( "#home-tab" ).click (function() {
+	console.log("home-tab clicked "+current_path);
+	switch (current_path){
+		case "index.php":
+		return;
+		break;
+		default:
+		window.location = "index.php";
+	}
+});
+$("#profile-tab").click(function(){
+	switch (current_path){
+		case "index.php":
+		return;
+		break;
+		default:
+		window.location = "index.php?tab=1";
+	}
+});
+$("#contact-tab").click(function(){
+	switch (current_path){
+		case "index.php":
+		return;
+		break;
+		default:
+		window.location = "index.php?tab=2";
+	}
+});
+$("#supported-games").click(function(){
+	switch (current_path){
+		case "index.php":
+		return;
+		break;
+		default:
+		window.location = "index.php?tab=3";
+	}
+});
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+//setTimeout(function(element) {
+	//console.log(element);
+  //$("#"+element).hide();    
+//}, 3000);
+//pollVisibility(element);
+
+function pollVisibility(element) {
+	console.log("poll "+element);
+    if (!$("#active-load").is(":visible")) {
+        $("#"+element).show();
+    } else {
+        setTimeout(pollVisibility, 500);
+    }
+}

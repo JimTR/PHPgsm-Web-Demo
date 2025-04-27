@@ -237,7 +237,10 @@ function online(url){
 					}
 				}
 			}
-			$("#active-load").hide();
+			$("#active-load").hide(); // hide the spinning wheel
+			//$('.row').show();
+			$(".row").css("display", "flex");
+			console.log("showing .row");
 			$("#header-wrapper").show();
 			$("#a-stats").hide();
 			$("#a-table").show();
@@ -328,72 +331,7 @@ $(document).on("click",".uclick", function () {
 	$('#user-frame').modal('show');
 	
 });
-$(document).on("click",".stats", function () {
-	var id = this.id;
-	if (isMobile()){url = "baseserver.php?server="+id;}
-	else {url = "frame.php?frame=stats_frame&id="+id;}
-	switch(id) {
-		case "general":
-			// code block
-			id = "General Statistics";
-			break;
-		case "user-list":
-			id = "User Lists";
-			// code block
-			break;
-		case "country-list":
-			id = "Country Lists";
-			// code block
-			break;
-		case "linked-ip":
-			id = "Linked IP Addresses";
-			// code block
-			break;
-		case "ban-lists":
-			id = "Banned Users";
-			// code block
-			break;
-		case "themeswitch":
-			//alert("changing theme !",true);
-			//themeswitch();
-			return	
-			break;			
-		default:
-			console.log("using "+id);
-			return;
-	}
-	title = id.replace('-',' ');
-	title= ucwords(title,true) ;
-	$("#ifrm").attr("height", "80vh");
-	$("#ifrm").height("80vh"); 
-	$("#ifrm").attr("width", "90vw");
-	$("#ifrm").attr("mod", title);
-	$("#frame-dialog").css("max-width", "90vw");
-	$("#frame-title").html(title);
-	
-	//url = "frame.php?frame=base_frame&id="+clickedBtnID+"&url="+linkUrl;
-	//$("#ifrm")[0].setAttribute("scrolling", "no");
-	//alert('url to use ' + url,true,"button click");
-	loadIframe("ifrm", url);
-	console.log("back from frame load");
-	$('#user-frame').modal('show');
-});	 
-function sclick() {
-	//alert("search clicked with ",false,"it worked");
-	$("#ifrm").attr("height", "30vh");
-	$("#ifrm").height("30vh"); 
-	$("#ifrm").attr("width", "50vw");
-	$("#frame-dialog").css("max-width", "40vw");
-	//$("#frame-dialog").max-width ("50vw");
-	$("#frame-title").html("Search");
-	url = "frame.php?frame=search_frame";
-	$("#ifrm")[0].setAttribute("scrolling", "auto");
-	 console.log(url);
-	  //alert ("frame.php?frame=user_frame&id="+id);	
-	  //window.location.href=url;
-	loadIframe("ifrm", url);
-	$('#user-frame').modal('show');
-}
+
 function iclick(url) {
 	loadIframe("ifrm", url);
     $("#ifrm").attr("height", "80vh");
@@ -403,28 +341,7 @@ function iclick(url) {
 	$("#ifrm")[0].setAttribute("scrolling", "auto");
     $('#user-frame').modal('show');
 }
-$(document).on("click",".baseserver", function () {
-   var clickedBtnID = $(this).attr('id'); 
-     //alert(clickedBtnID  ,true);
-     linkUrl =  $(this).parent().attr('url');
-     //alert (linkUrl,true); 
-   $("#ifrm").attr("height", "85vh");
-	$("#ifrm").height("85vh"); 
-	$("#ifrm").attr("width", "90vw");
-	$("#frame-dialog").css("max-width", "90vw");
-	$("#frame-title").html("API Server "+clickedBtnID);
-	if (isMobile()){ 
-		url= "baseserver.php?server="+clickedBtnID;
-		 window.location = url;
-	}
-	else {
-		url = "frame.php?frame=base_frame&id="+clickedBtnID+"&url="+linkUrl;
-		$("#ifrm")[0].setAttribute("scrolling", "no");
-		//alert('url to use ' + url,true,"button click");
-		loadIframe("ifrm", url);
-		$('#user-frame').modal('show');
-	}
-});
+
 
 $(document).on("click",".player-link", function () {
    var clickedBtnID = $(this).parent().attr('url'); 
@@ -457,13 +374,7 @@ $(document).on("click",".secret", function () {
      //alert($('#ifrm').attr("src"),true); 
      //closeIFrame();
 // });
-function ucwords(str,force){
-  str=force ? str.toLowerCase() : str;  
-  return str.replace(/(\b)([a-zA-Z])/g,
-           function(firstLetter){
-              return   firstLetter.toUpperCase();
-           });
-}
+
 function isElement(element) {
 	// return  element status
 	if ($("#"+element).length > 0){
@@ -486,9 +397,9 @@ $('.dropdown-menu span.dropdown-toggle').on('click', function(e) {
 $("#borderedTab li ").click(function() {
 	//
 	id = $(this).attr("id");
-	console.log("tab clicked "+id);
+	console.log("bt tab clicked "+id);
 });
 $("#util li ").click(function(){
 	id = $(this).attr("id");
-	console.log("tab clicked "+id);
+	console.log("util tab clicked "+id);
 });	
