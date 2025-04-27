@@ -47,6 +47,9 @@ jQuery(document).ready(function(){
 		sessionStorage.clear();
 		setInterval( function() { clear_console(); }, 30000 );
 		$("#menu-bar").show();
+		$("#header-wrapper").show();
+		$("#drag-box").show();
+			$("#borderedTabContent").show();
 		updateClock();
 		interval = setInterval('updateClock()', 1000);
 		$("#side-bar").hide();

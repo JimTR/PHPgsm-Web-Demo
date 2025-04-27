@@ -238,9 +238,7 @@ function online(url){
 				}
 			}
 			$("#active-load").hide(); // hide the spinning wheel
-			//$('.row').show();
 			$(".row").css("display", "flex");
-			console.log("showing .row");
 			$("#header-wrapper").show();
 			$("#a-stats").hide();
 			$("#a-table").show();
