@@ -401,5 +401,5 @@ font-weight: normal;
 }
 
 .row {
-display : none;
+display : flex;
 }
