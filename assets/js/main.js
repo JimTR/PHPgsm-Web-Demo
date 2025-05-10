@@ -50,7 +50,17 @@ window.alert = function(message,show,title) {
 
   
 jQuery(document).ready(function(){
-	
+	//console.log( "the base url in main is "+base_url);	
+	//console.log("the server url is "+url);
+	/*response = file_get_contents(base_url);
+	if(response == "session failed"){
+		console.log("the session failed");
+		noSession();
+		return;
+	}
+	else {console.log("all good");}*/
+	setInterval( function() { checkSession(base_url); }, 3000 );
+	console.log("interval set for checkSession");
 	if(!isMobile()) {
 		sessionStorage.clear();
 		setInterval( function() { clear_console(); }, 30000 );
@@ -116,7 +126,8 @@ jQuery(document).ready(function(){
 	}	
 		
 	var oldCookieValue = getCookie('phpgsm_theme');
-	if (oldCookieValue == "1297820") {$("#theme-icon").toggleClass('fa-sun fa-moon');}	
+	if (oldCookieValue == "1297820") {$("#theme-icon").toggleClass('fa-sun fa-moon');}
+	
 });
 
 $( window ).resize(function() {
@@ -612,11 +623,13 @@ function askNotificationPermission() {
     }
     function file_get_contents(filename) {
 		$.get(filename, function(data,sucess) { 
-			console.log(sucess);
-			return data;
+			console.log("in f_g_c "+data+" with "+filename);
+			//return data;
+			checkSession("",data);
 			
     });
-    console.log("dropped out");
+    //return data;
+    //console.log("why dropped out?");
 }
 
 function read_storage() {
@@ -828,4 +841,17 @@ function addParameter(param, value)
         }));
     else 
         return document.location.search+ param + "=" + value;
+}
+function checkSession(b,response){
+	// check the session is running
+	//console.log("in check with "+base_url);
+	console.log("b = "+b);
+	if(b !==""){r = file_get_contents(b);}
+	console.log("The response is "+response);
+	if(response == "session failed"){
+		console.log("the session failed");
+		noSession();
+		return;
+	}
+	else { console.log("all good in check");}
 }

@@ -24,6 +24,7 @@ function online(url){
      console.log(ticker+": enter online with "+url+" ("+refresh+")");
 	 $.ajax({
 		url: url,
+		async: true,
 		type: 'post',
 		dataType: "json" ,
 		success: function(data,status){
