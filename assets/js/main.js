@@ -847,7 +847,7 @@ function checkSession(b,response){
 	console.log("in check with "+base_url);
 	console.log("b = "+b);
 	$.get(b, function(data,sucess) { 
-			console.log("in f_g_c "+data+" with "+filename);
+			console.log("in f_g_c "+data+" with "+b);
 			//return data;
 			//checkSession("",data);
 			console.log("The response is "+response);
