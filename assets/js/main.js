@@ -623,7 +623,7 @@ function askNotificationPermission() {
     }
     function file_get_contents(filename) {
 		$.get(filename, function(data,sucess) { 
-			console.log("in f_g_c "+data+" with "+filename);
+			//console.log("in f_g_c "+data+" with "+filename);
 			//return data;
 			checkSession("",data);
 			
@@ -844,7 +844,7 @@ function addParameter(param, value)
 }
 function checkSession(b,response){
 	// check the session is running
-	//console.log("in check with "+base_url);
+	console.log("in check with "+base_url);
 	console.log("b = "+b);
 	if(b !==""){r = file_get_contents(b);}
 	console.log("The response is "+response);
