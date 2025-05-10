@@ -845,12 +845,9 @@ function addParameter(param, value)
 function checkSession(b,response){
 	// check the session is running
 	console.log("in check with "+base_url);
-	console.log("b = "+b);
-	$.getJSON(b, function(data,sucess) { 
-			console.log("in f_g_c "+data+" with "+b);
-			//return data;
-			//checkSession("",data);
-			console.log("The response is "+data);
+	//console.log("b = "+b);
+	$.getJSON(base_url, function(data,sucess) { 
+		console.log("The response is "+data);
 		if(data == "session failed"){
 			console.log("the session failed");
 			noSession();
