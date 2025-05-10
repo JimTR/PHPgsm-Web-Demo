@@ -11,7 +11,7 @@ var current_path = window.location.pathname.split('/').pop();
 	tabStop = getUrlVars()["tab"];
 	console.log(tabStop);
 	if (typeof tabStop === "undefined") {
-		console.log ("adding tab id");
+		//console.log ("adding tab id");
 		addParameter("tab", "0");
 		var urls = window.location.href;
 		console.log(urls);
@@ -118,7 +118,7 @@ jQuery(document).ready(function(){
 		
 	}
 	else {
-		console.log("doing else");
+		//console.log("doing else");
 		$("#active-load").hide();
 		$("#drag-box").show();
 		$("#menu-bar").show();
