@@ -28,7 +28,8 @@ if ($frame_to_load == "base_frame") {
 	
 else{
 	$page['id'] = $_GET['id'];
-	$page['url'] = $settings['url'];
+	//echo $page['url'];
+	//$page['url'] = $settings['url'];
 }
 $template->replace_vars($page);
 $template->publish();
