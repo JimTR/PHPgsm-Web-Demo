@@ -850,13 +850,13 @@ function checkSession(b,response){
 			console.log("in f_g_c "+data+" with "+b);
 			//return data;
 			//checkSession("",data);
-			console.log("The response is "+response);
-		if(response == "session failed"){
+			console.log("The response is "+data);
+		if(data == "session failed"){
 			console.log("the session failed");
 			noSession();
 			return;
 		}
-		else if(typeof response == "undefined"){
+		else if(typeof data == "undefined"){
 			console.log ("response is undefined");
 		}
 		else { console.log("all good in check");}
