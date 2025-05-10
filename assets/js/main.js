@@ -859,7 +859,7 @@ function checkSession(b,response){
 		else if(typeof data == "undefined"){
 			console.log ("response is undefined");
 		}
-		else { console.log("all good in check");}
+		else if (data =="OK") { console.log("all good in check");}
 	});
 }
 	//if(b !==""){r = file_get_contents(b);}
