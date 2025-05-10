@@ -45,6 +45,7 @@ $_POST    = fix_slashes($_POST);
 $_GET     = fix_slashes($_GET);
 $_REQUEST = fix_slashes($_REQUEST);
 $_COOKIE  = fix_slashes($_COOKIE);
+
 if(!isset($_COOKIE['phpgsm_colour'])) {
 	$arr_cookie_options = array (
 		'expires' => time() + 60*60*24*30,
@@ -55,6 +56,7 @@ if(!isset($_COOKIE['phpgsm_colour'])) {
 		'samesite' => 'Lax' // None || Lax  || Strict
 	);
 	setcookie('phpgsm_colour', "main", $arr_cookie_options);
+	
 }
        if (!isset($_COOKIE['phpgsm_theme'])) {
 		$arr_cookie_options = array (
@@ -88,6 +90,8 @@ $template->load(DOC_ROOT.'/templates/subtemplates/footer.html');
 $page['footer'] = $template->get_template();
 $template->load(DOC_ROOT.'/templates/subtemplates/header.html');
 $page['header'] = $template->get_template();
+$page['url'] = "{$settings['url']}/session.php";
+echo "{$page['url']}<br>";
  $Auth = new Auth ();
 $user = $Auth->getAuth(); // get the user
 define ("user_data",$user);

@@ -66,7 +66,7 @@ $page['header'] = $template->get_template();
 $template->load('templates/subtemplates/sidebar.html'); //sidebar
 $template->replace_vars($sidebar_data);
 $page['sidebar'] =$template->get_template();
-$page['url'] = $we_are_here.'/ajax.php';
+//$page['url'] = $we_are_here.'/ajax.php';
 $page['uri'] = $we_are_here;
 $template->load('templates/subtemplates/alert.html');
 $page['alert'] = $template->get_template();

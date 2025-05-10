@@ -44,7 +44,7 @@ $time = "1663578036";
 	$template->load('templates/subtemplates/header.html');
 	$page['header'] = $template->get_template();
 	$template->load('templates/subtemplates/footer.html');
-	$page['url'] = $we_are_here.'/ajax.php';
+	//$page['url'] = $we_are_here.'/session.php';
 	$page['footer'] = $template->get_template();
 	$template->load('templates/subtemplates/sidebar.html');
 	$template->replace_vars($sidebar_data);
