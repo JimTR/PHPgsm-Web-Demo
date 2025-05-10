@@ -846,7 +846,7 @@ function checkSession(b,response){
 	// check the session is running
 	console.log("in check with "+base_url);
 	console.log("b = "+b);
-	$.get(b, function(data,sucess) { 
+	$.getJSON(b, function(data,sucess) { 
 			console.log("in f_g_c "+data+" with "+b);
 			//return data;
 			//checkSession("",data);
