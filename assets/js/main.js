@@ -623,7 +623,7 @@ function askNotificationPermission() {
     }
     function file_get_contents(filename) {
 		$.get(filename, function(data,sucess) { 
-			//console.log("in f_g_c "+data+" with "+filename);
+			console.log("in f_g_c "+data+" with "+filename);
 			//return data;
 			checkSession("",data);
 			
@@ -846,15 +846,21 @@ function checkSession(b,response){
 	// check the session is running
 	console.log("in check with "+base_url);
 	console.log("b = "+b);
-	if(b !==""){r = file_get_contents(b);}
-	console.log("The response is "+response);
-	if(response == "session failed"){
-		console.log("the session failed");
-		noSession();
-		return;
-	}
-	else if(typeof response == "undefined"){
-		console.log ("response is undefined");
-	}
-	else { console.log("all good in check");}
+	$.get(b, function(data,sucess) { 
+			console.log("in f_g_c "+data+" with "+filename);
+			//return data;
+			//checkSession("",data);
+			console.log("The response is "+response);
+		if(response == "session failed"){
+			console.log("the session failed");
+			noSession();
+			return;
+		}
+		else if(typeof response == "undefined"){
+			console.log ("response is undefined");
+		}
+		else { console.log("all good in check");}
+	});
 }
+	//if(b !==""){r = file_get_contents(b);}
+	
