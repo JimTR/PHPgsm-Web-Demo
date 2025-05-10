@@ -853,7 +853,7 @@ function checkSession(b,response){
 		noSession();
 		return;
 	}
-	elseif(typeof response == "undefined"){
+	else if(typeof response == "undefined"){
 		console.log ("response is undefined");
 	}
 	else { console.log("all good in check");}
