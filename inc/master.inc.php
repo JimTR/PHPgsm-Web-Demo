@@ -91,7 +91,6 @@ $page['footer'] = $template->get_template();
 $template->load(DOC_ROOT.'/templates/subtemplates/header.html');
 $page['header'] = $template->get_template();
 $page['url'] = "{$settings['url']}/session.php";
-echo "{$page['url']}<br>";
  $Auth = new Auth ();
 $user = $Auth->getAuth(); // get the user
 define ("user_data",$user);
