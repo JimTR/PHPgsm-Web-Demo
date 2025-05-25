@@ -148,10 +148,10 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title">Session Expired</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
                     </div>
                     <div class="modal-body">
-                      <div style="text-align: center;">Your session has expired ! (<span id="expire"></span>)</div>
+                      <div style="text-align: center;">Your session has expired ! <br><span id="expire"></span></div>
                     </div>
                     <div class="modal-footer" style="border-top:0;">
                      <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
@@ -164,6 +164,6 @@
               #alert#
 		#userframe#
 		<script>
-				base_url = "#url#";
-				//console.log("the url is "+url);
+				const base_url = "#url#";
+				console.log("the url is "+base_url);
 		</script>
