@@ -3,7 +3,7 @@ function get_game() {
 	//console.log(url);
 	var offline = 0;
 	cmd = url+'/api.php?action=game_detail&server='+server+'&filter='+game;
-	//console.log (cmd);
+	console.log (cmd);
 	$.ajax({
 		type: 'GET',
 		url: cmd,
@@ -209,6 +209,7 @@ function date_format( timestamp) {
 function start_server() {
 	//starts the server
 	cmd = url+'/api.php?action=exe_tmux&server='+id+'&cmd=s';
+	console.log(cmd);
 	$.get(cmd, function(data, status){
 	if(status == "success" ) {
 		//$("#"+id).blur();
