@@ -6,6 +6,8 @@
 */
 var nativeAlert = window.alert;
 var interval;
+var inframe = false;
+var isInIframe = (window.location != window.parent.location) ? true : false;
 var current_path = window.location.pathname.split('/').pop();
 	console.log(current_path);
 	tabStop = getUrlVars()["tab"];
@@ -59,8 +61,15 @@ jQuery(document).ready(function(){
 		return;
 	}
 	else {console.log("all good");}*/
-	setInterval( function() { checkSession(base_url); }, 3000 );
-	console.log("interval set for checkSession");
+	//console.log("pl setting "+$(this).parent().length);
+	//alert(" var set inframe = "+ isInIframe,true);
+    //else {console.log("base");}
+	//if (document. referrer !== '') {console.log(document.referrer);}
+	if(!isInIframe){
+		setInterval( function() { checkSession(base_url); }, 3000 );
+		console.log("interval set for checkSession");
+		//alert (base_url);
+	}
 	if(!isMobile()) {
 		sessionStorage.clear();
 		setInterval( function() { clear_console(); }, 30000 );
@@ -545,6 +554,8 @@ function timeConverter(UNIX_timestamp){
 	return time;
 }
 function loadIframe(iframeName, url) {
+	//alert("inframe = "+inframe,false);
+	inframe= true;
     var $iframe = $('#' + iframeName);
     if ($iframe.length) {
         $iframe.attr('src',url);
@@ -561,6 +572,7 @@ function closeIFrame(parent){
 	} 
      $('#user-frame').modal('hide');
      $("#user-avatar").hide();
+     inframe = false;
      function delay(time) {
   return new Promise(resolve => setTimeout(resolve, time));
 }
@@ -673,7 +685,7 @@ function noSession(){
  return;
  }
 function sclick() {
-	//alert("search clicked with ",false,"it worked");
+	alert("search clicked with ",false,"it worked");
 	$("#ifrm").attr("height", "30vh");
 	$("#ifrm").height("30vh"); 
 	$("#ifrm").attr("width", "50vw");
@@ -844,8 +856,14 @@ function addParameter(param, value)
 }
 function checkSession(b,response){
 	// check the session is running
-	console.log("in check with "+b);
-	//console.log("b = "+b);
+	
+	//console.log("in check with "+b);
+	if( b.indexOf( "session.php" ) == -1 ){
+		b +="/session.php";
+	}
+	
+	//console.log("inframe = "+inframe);
+	//if(inframe == true){return;}
 	$.getJSON(b, function(data,sucess) { 
 		console.log("The response is "+data);
 		if(data == "session failed"){
@@ -859,5 +877,3 @@ function checkSession(b,response){
 		//else if (data =="OK") { console.log("all good in check");}
 	});
 }
-	//if(b !==""){r = file_get_contents(b);}
-	
