@@ -1,3 +1,6 @@
+img {
+    clip-path: circle();
+}	
 .map-response {
     margin-top: 30vh;
     position: fixed;
